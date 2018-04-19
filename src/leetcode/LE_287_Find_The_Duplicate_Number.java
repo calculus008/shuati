@@ -56,6 +56,8 @@ public class LE_287_Find_The_Duplicate_Number {
      *
      *  Check LE_142_Linked_List_Cycle_II
      *
+     *  https://segmentfault.com/a/1190000003817671
+     *
      */
     public int findDuplicate(int[] nums) {
         int slow = nums[0];
