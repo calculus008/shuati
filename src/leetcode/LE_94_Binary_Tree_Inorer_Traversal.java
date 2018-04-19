@@ -8,7 +8,7 @@ import java.util.Stack;
  * Created by yuank on 3/8/18.
  */
 public class LE_94_Binary_Tree_Inorer_Traversal {
-    /*
+    /**
         Given a binary tree, return the inorder traversal of its nodes' values.
 
         For example:
@@ -32,14 +32,14 @@ public class LE_94_Binary_Tree_Inorer_Traversal {
 
     //Recursive version
     //Time and Space : O(n)
-    public static List<Integer> inorderTraversal1(TreeNode root) {
+    public static List<Integer> inorderTraversal1(leetcode.TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
         helper(root, res);
         return res;
     }
 
-    public static void helper(TreeNode root, List<Integer> res) {
+    public static void helper(leetcode.TreeNode root, List<Integer> res) {
         if (root == null) return;
         helper(root.left, res);
         res.add(root.val);
@@ -48,11 +48,11 @@ public class LE_94_Binary_Tree_Inorer_Traversal {
 
     //Iterative Version
     //Time and Space : O(n)
-    public static List<Integer> inorderTraversal(TreeNode root) {
+    public static List<Integer> inorderTraversal(leetcode.TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
 
-        Stack<TreeNode> stack = new Stack<>();
+        Stack<leetcode.TreeNode> stack = new Stack<>();
         TreeNode cur = root;
         while (cur != null || !stack.isEmpty()) {
             while (cur != null) {
