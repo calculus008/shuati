@@ -36,7 +36,7 @@ public class LE_286_Walls_And_Gates {
         for (int i = 0; i < m ; i++) {
             for (int j = 0; j < n; j++) {
                 /**
-                 Key : start from door, NOT from room
+                 !!!Key : start from door, NOT from room
                  */
                 if (rooms[i][j] == 0) {
                     helper(rooms, i , j, 0);
@@ -47,10 +47,14 @@ public class LE_286_Walls_And_Gates {
 
     public void helper(int[][] rooms, int i, int j, int distance) {
         /**
-         Key : "rooms[i][j] < distance"
+         !!!Key : "rooms[i][j] < distance"
          */
         if (i < 0 || i >= rooms.length || j < 0 || j >= rooms[0].length || rooms[i][j] < distance) return;
 
+        /**
+         * Another plus for this solution : Since we keep updating the distance for each room, we don't
+         * need to mark a room as already visited and later recover it.
+         */
         rooms[i][j] = distance;
         helper(rooms, i + 1, j, distance + 1);
         helper(rooms, i - 1, j, distance + 1);
