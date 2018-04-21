@@ -30,9 +30,11 @@ public class LE_289_Game_Of_Life {
 
     /**
      Time : O(mn), Space : O(1)
+
      We can solve it by using extra space to remember intermediate value. (We can't just update cell with new state value since it will impact the decision for other cells)
 
-     To solve it in space O(1), the clever way is to use bit operation. The idea is that we can save both the old and new state value in the same integer number of each cell. We know that there are only 2 valid values in board at the begining - 0 and 1:
+     To solve it in space O(1), the clever way is to use bit operation. The idea is that we can save both the old and new state value
+     in the same integer number of each cell. We know that there are only 2 valid values in board at the beginning - 0 and 1:
 
      live : 01
      dead : 00
@@ -50,11 +52,13 @@ public class LE_289_Game_Of_Life {
      live -> dead : 01 -> 01
      dead -> dead : 00 -> 00
 
-     First round of pass will calculating number of living neighbours by reading the the right most bit of the value.
+     First round of pass will calculate number of living neighbours by reading the the right most bit of the value.
      Plus 2 if the new state is "live", do nothing if new state is "dead".
 
      Then with another round of pass in board, we shift each number 1 bit to the right to get the correct new state value.
      */
+
+
     public void gameOfLife(int[][] board) {
         if (board == null || board.length == 0 || board[0].length == 0) return;
 

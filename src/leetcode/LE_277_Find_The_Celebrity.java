@@ -22,7 +22,8 @@ public class LE_277_Find_The_Celebrity {
     public int findCelebrity(int n) {
         int candidate = 0;
         for (int i = 0; i < n; i++) {
-            //Since celebrity knows no none, so if the following check is true, then we know current candidate is not celebrity, we change candidate to i
+            //Since celebrity knows no none, so if the following check is true, then we know current candidate is not celebrity,
+            // we change candidate to i
             if (knows(candidate, i)) {
                 candidate = i;
             }
