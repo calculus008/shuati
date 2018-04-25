@@ -21,7 +21,9 @@ public class UnionFindSet {
         parents = new int[n + 1];
         ranks = new int[n + 1];
 
+        //!!! each node points to itself in the beginning
         for (int i = 0; i < parents.length; i++) {
+            parents[i] = i;
             ranks[i] = 1;
         }
     }

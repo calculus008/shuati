@@ -40,6 +40,8 @@ public class LE_547_Friend_Circles {
          If M[i][j] = 1, then M[j][i] = 1.
 
         Medium
+
+        Same as LE_323 Number of Connected Components in Undirected Graph
      */
 
 
