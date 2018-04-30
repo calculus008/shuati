@@ -33,6 +33,7 @@ public interface LE_304_Range_Sum_Query_2D_Immutable {
     class NumMatrix {
         int[][] sums;
 
+        //Time : O(mn)
         public NumMatrix(int[][] matrix) {
             if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return;
 
@@ -49,6 +50,7 @@ public interface LE_304_Range_Sum_Query_2D_Immutable {
             }
         }
 
+        //Time : O(1)
         public int sumRegion(int row1, int col1, int row2, int col2) {
             int r1 = Math.min(row1, row2);
             int r2 = Math.max(row1, row2);
