@@ -7,7 +7,8 @@ public class LE_329_Longest_Increasing_Path_In_A_Matrix {
     /**
          Given an integer matrix, find the length of the longest increasing path.
 
-         From each cell, you can either move to four directions: left, right, up or down. You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
+         From each cell, you can either move to four directions: left, right, up or down.
+         You may NOT move diagonally or move outside of the boundary (i.e. wrap-around is not allowed).
 
          Example 1:
 
