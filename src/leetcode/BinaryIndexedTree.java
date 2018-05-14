@@ -30,9 +30,6 @@ package leetcode;
  * These contain the sums of values 11, 9–12, and 1–16, respectively.
  * The maximum number of elements which may need to be updated is limited by the number of bits in the size of the array.
  *
- *
- *
- *
  * Also called Fenwick tree, solve the problem of improving time complexity of calculating range sum
  *  1.O(logn) for update and query
  *  2.Update and query forms different trees
