@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Created by yuank on 7/20/16.
  */
 public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
-    /*
+    /**
         Given a string, find the length of the longest substring T that contains at most k distinct characters.
 
         For example, Given s = “eceba” and k = 2,
