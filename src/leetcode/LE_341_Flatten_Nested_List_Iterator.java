@@ -78,6 +78,11 @@ public class LE_341_Flatten_Nested_List_Iterator {
          Solution 2
 
          Use iterator, a better solution
+
+        Key Insights:
+        The stack only stores iterator, it does not store NestedInteger, therefore we need to have another global variable "current"
+        to save the current number. NOTICE, "current" is an Integer type object, so we can set it to null to tell the current status
+        of the number.
      **/
     public class NestedIterator1 implements Iterator<Integer> {
         Stack<Iterator<NestedInteger>> stack = new Stack<>();
@@ -100,12 +105,13 @@ public class LE_341_Flatten_Nested_List_Iterator {
         @Override
         public boolean hasNext() {
             while (!stack.isEmpty() && current == null) {
-                Iterator<NestedInteger> top = stack.peek();
-                if (!top.hasNext()) {
-                    stack.pop();
+                Iterator<NestedInteger> top = stack.peek();//!!! peek(), NOT pop()
+                if (!top.hasNext()) {//the list is empty
+                    stack.pop();//remove iterator of the empty list
                     continue;
                 }
 
+                //After last if, we know top.hasNext() == true. Then we can use top.next() here.
                 NestedInteger n = top.next();
                 if (n.isInteger()) {
                     current = n.getInteger();
