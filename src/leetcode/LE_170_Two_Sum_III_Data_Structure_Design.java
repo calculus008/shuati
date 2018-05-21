@@ -6,7 +6,7 @@ import java.util.*;
  * Created by yuank on 3/22/18.
  */
 public class LE_170_Two_Sum_III_Data_Structure_Design {
-    /*
+    /**
         Design and implement a TwoSum class. It should support the following operations: add and find.
 
         add - Add the number to an internal data structure.
@@ -19,7 +19,7 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
      */
 
     public class TwoSum1 {
-        // Solution 1 : add O(1), find )(n)
+        // Solution 1 : add O(1), find O(n)
         private Map<Integer, Integer> map;
 
         public TwoSum1() {
