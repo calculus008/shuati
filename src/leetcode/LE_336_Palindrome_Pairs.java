@@ -26,8 +26,8 @@ public class LE_336_Palindrome_Pairs {
      */
 
     /**
-     Time  : O(n * (m ^ 2)), n - length of words[i], m - length of each word
-     Space : O(k), k - number of pairs ???
+         Time  : O(n * (m ^ 2)), n - length of words[i], m - length of each word
+         Space : O(k), k - number of pairs ???
      **/
     public List<List<Integer>> palindromePairs(String[] words) {
         List<List<Integer>> res = new ArrayList<>();
