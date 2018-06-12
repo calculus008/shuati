@@ -54,7 +54,8 @@ public class LI_841_String_Replace {
                 [],
               ]
 
-
+        Recommended Solution:
+        https://www.jiuzhang.com/solution/string-replace/
      */
 
     public String stringReplace(String[] a, String[] b, String s) {
