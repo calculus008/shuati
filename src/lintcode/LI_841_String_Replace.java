@@ -71,6 +71,7 @@ public class LI_841_String_Replace {
         for (int i = 0; i < s.length(); i++) {
             list.add(new ArrayList<Integer>());
         }
+
         // Calculate all the possible replacements on each string position
         for (int i = 0; i < a.length; i++) {
             int index = 0;
