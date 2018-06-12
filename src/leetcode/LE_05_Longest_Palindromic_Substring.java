@@ -24,6 +24,8 @@ public class LE_05_Longest_Palindromic_Substring {
      */
 
     //Time : O(n ^ 2), Space : O(n ^ 2)
+
+
     //Solution 1 : Expand left and right, 枚举中心轴
      String res = "";
      public String longestPalindrome1(String s) {
@@ -43,9 +45,16 @@ public class LE_05_Longest_Palindromic_Substring {
              right++;
          }
 
-         String temp = s.substring(left + 1, right);
-         if (temp.length() > res.length()) {
-             res = temp;
+//         String temp = s.substring(left + 1, right);
+//         if (temp.length() > res.length()) {
+//             res = temp;
+//         }
+
+         left++;
+         right--;
+
+         if (right - left + 1 > res.length()) {
+             res = s.substring(left, right + 1);
          }
      }
 
