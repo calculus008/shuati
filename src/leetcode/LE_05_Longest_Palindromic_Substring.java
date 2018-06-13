@@ -63,6 +63,9 @@ public class LE_05_Longest_Palindromic_Substring {
         if (s == null || s.length() == 0) return s;
 
         int n = s.length();
+        /**
+         * !!!dp is boolean
+         */
         boolean dp[][] = new boolean[n][n];
         // dp[0][0] = true;
         String res = "";
