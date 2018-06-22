@@ -57,12 +57,12 @@ public class LE_51_N_Queens {
         }
     }
 
-    private boolean isValid(int[] queues, int row) {
+    private boolean isValid(int[] queens, int row) {
         for (int i = 0; i < row; i++) {
-            if (queues[i] == queues[row]) {//ith row has the same column value as current row
+            if (queens[i] == queens[row]) {//ith row has the same column value as current row
                 return false;
-            } else if(Math.abs(queues[i] - queues[row]) == Math.abs(i - row)) {//the simpliest way of checking diagno duplicates
-                // queues[i] - queues[row] : col1 - col2
+            } else if(Math.abs(queens[i] - queens[row]) == Math.abs(i - row)) {//the simpliest way of checking diagno duplicates
+                // queens[i] - queens[row] : col1 - col2
                 // i - row : row1 - row2
                 //如果两点的行之差(绝对值)等于列之差(绝对值) 那两点就在同一对角线上
                 return false;
