@@ -34,4 +34,40 @@ public class LE_162_Find_Peak_Element {
 
         return end;
     }
+
+
+    /**
+     Key insights"
+     1.Fiond mid, 4 possible cases for relationship between mid and its left and right neighbors.
+         1. \
+            \
+
+         2.  /\
+
+         3.  /
+            /
+
+         4. \/
+
+     2.For input, it increases at the beginning and decreases at the end.
+     */
+    public int findPeak_JiuZhang(int[] A) {
+        int start = 0;
+        int end = A.length - 1;
+
+        while (start + 1 < end) {
+            int mid = (end - start) / 2 + start;
+            if (A[mid] > A[mid + 1]) {//Case #1 an #2, since we know the array increases first and decreas at the end, so we discard the 2nd half, move to first half
+                end = mid;
+            } else {//since adjacent elements not equal, Case #3 and #4
+                start = mid + 1;
+            }
+        }
+
+        if (A[start] > A[end]) {
+            return start;
+        }
+
+        return end;
+    }
 }

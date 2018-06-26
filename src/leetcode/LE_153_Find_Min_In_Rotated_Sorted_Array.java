@@ -34,4 +34,35 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
 
         return nums[end];
     }
+
+    /**
+     * Use what condition to make OOOOXXXX
+     *
+     * For X : X <= nums[nums.length - 1]
+     */
+
+    public int findMin_JiuZhang(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        int start = 0;
+        int end = nums.length - 1;
+        int target = nums[nums.length - 1];
+
+        while (start + 1 < end) {
+            int mid = (end - start) / 2 + start;
+            if (nums[mid] <= target) {
+                end = mid;
+            } else {
+                start = mid;
+            }
+        }
+
+        if (nums[start] <= target) {
+            return nums[start];
+        } else {
+            return nums[end];
+        }
+    }
 }
