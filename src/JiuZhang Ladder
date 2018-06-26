@@ -8,3 +8,13 @@ LE_516_Longest_Palindromic_Subsequence
 LI_841_String_Replace
 LI_594_StrStr_2 (O(n+m))
 
+2.Binary Search
+LE_33_Search_In_Rotated_Sorted_Array         (lint 62)
+LE_81_Search_In_Rotated_Sorted_Array_II
+LE_278_First_Bad_Version                     (lint 74)
+LE_153_Find_Min_In_Rotated_Sorted_Array
+LE_154_Find_Min_In_Rotated_Sorted_Array_II
+LE_278_First_Bad_Version                     (lint 74)
+LE_162_Find_Peak_Element                     (lint 75)
+LI_585_Maximum_Number_In_Mountain_Sequence
+LI_458_Last_Position_Of_Target
