@@ -13,13 +13,16 @@ public class LE_516_Longest_Palindromic_Subsequence {
          "bbbab"
          Output:
          4
+
          One possible longest palindromic subsequence is "bbbb".
+
          Example 2:
          Input:
 
          "cbbd"
          Output:
          2
+
          One possible longest palindromic subsequence is "bb".
 
          Medium
