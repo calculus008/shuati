@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/6/18.
  */
 public class LE_81_Search_In_Rotated_Sorted_Array_II {
-    /*
+    /**
         Follow up for "Search in Rotated Sorted Array":
         What if duplicates are allowed?
 

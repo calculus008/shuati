@@ -4,19 +4,23 @@ package leetcode;
  * Created by yuank on 3/5/18.
  */
 public class LE_75_Set_Colors {
-    /*
-        Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue.
+    /**
+        Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent,
+        with the colors in the order red, white and blue.
 
         Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
 
         Note:
         You are not suppose to use the library's sort function for this problem.
+
+        So called "Dutch Flag" problem, can also be used for 3 way partition : https://en.wikipedia.org/wiki/Dutch_national_flag_problem#Pseudocode
      */
 
-
-    //Time: O(n), Space : O(1)
-    //left : final location of the end of 0,
-    //right : final location of the start of 1
+    /**
+        Time: O(n), Space : O(1)
+        left : final location of the end of 0,
+        right : final location of the start of 1
+    **/
     public static void sortColors(int[] nums) {
         if(nums == null || nums.length == 0) return;
 

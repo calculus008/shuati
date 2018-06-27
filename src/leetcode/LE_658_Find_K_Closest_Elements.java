@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by yuank on 6/27/18.
  */
@@ -25,7 +28,7 @@ public class LE_658_Find_K_Closest_Elements {
          https://www.jiuzhang.com/solution/find-k-closest-elements/#tag-highlight
 
          找到最后一个 < target 的位置，然后从这个位置开始用两根指针向两边走来获得最后最接近的 k 个整数。
-         时间复杂度 O(logn + k)O(logn+k)
+         时间复杂度 O(logn + k), Space : O(k)
      **/
     public int[] kClosestNumbers(int[] A, int target, int k) {
         int left = findLowerClosest(A, target);
@@ -85,5 +88,18 @@ public class LE_658_Find_K_Closest_Elements {
         }
 
         return -1;
+    }
+
+    /**
+     * Solution 2
+     * Time  : O(nlogn)
+     * Space : O(k)
+     */
+
+    public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
+        Collections.sort(arr, (a,b) -> a == b ? a - b : Math.abs(a-x) - Math.abs(b-x));
+        arr = arr.subList(0, k); //!!!subList()
+        Collections.sort(arr);
+        return arr;
     }
 }

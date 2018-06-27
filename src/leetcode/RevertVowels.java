@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 /**
  * Created by yuank on 6/9/16.
  */
@@ -35,12 +37,47 @@ public class RevertVowels {
         return new String(c);
     }
 
+    private static int[] maxValue(int[] nums, int k) {
+        int n = nums.length;
+        int[] res = new int[k];
+        for (int i = 0, j = 0; i < n; i++) {
+            /**
+             if we don't have "n - i > k - j":
+
+             Input:
+             [6,7]
+             [6,0,4]
+             5
+
+             Output:
+             [7,6,4,0,0]
+             Expected:
+             [6,7,6,0,4]
+             **/
+
+            while (n - i > k - j && j > 0 && res[j - 1] < nums[i]) {
+                System.out.println(j + "--");
+                j--;
+            }
+            if (j < k) { //!!! "j < k"
+                res[j++] = nums[i];
+            }
+
+            System.out.println(Arrays.toString(res));
+        }
+
+        return res;
+    }
+
     public static void main(String [] args)
     {
-        String s="hello";
+//        String s="hello";
+//
+//        String s1 = reverseVowels(s);
+//        System.out.println(s1);
 
-        String s1 = reverseVowels(s);
-        System.out.println(s1);
+        int[] input = {4, 3, 6, 2, 5, 3};
+        maxValue(input, 3);
     }
 
     public int strStr(String haystack, String needle) {
