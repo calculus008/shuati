@@ -4,17 +4,17 @@ package leetcode;
  * Created by yuank on 2/26/18.
  */
 public class LE_34_Search_For_A_Range {
-    /*
-    Given an array of integers sorted in ascending order, find the starting and ending position of a given target value.
+    /**
+        Given an array of integers sorted in ascending order, find the starting and ending position of a given target value.
 
-    Your algorithm's runtime complexity must be in the order of O(log n).
+        Your algorithm's runtime complexity must be in the order of O(log n).
 
-    If the target is not found in the array, return [-1, -1].
+        If the target is not found in the array, return [-1, -1].
 
-    For example,
-    Given [5, 7, 7, 8, 8, 10] and target value 8,
-    return [3, 4].
-     */
+        For example,
+        Given [5, 7, 7, 8, 8, 10] and target value 8,
+        return [3, 4].
+     **/
 
     //https://www.youtube.com/watch?v=pZ7ypg3mU64&list=PLvyIyKZVcfAlKHPFECFxlkG7jOvD64r9V&index=9
 
@@ -24,7 +24,9 @@ public class LE_34_Search_For_A_Range {
         }
 
         int start = findFirst(nums, target);
+        //!!!
         if (start == -1) return new int[]{-1, -1};
+
         int end = findLast(nums, target);
 
         return new int[]{start, end};
