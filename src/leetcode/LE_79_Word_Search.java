@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/5/18.
  */
 public class LE_79_Word_Search {
-    /*
+    /**
         Given a 2D board and a word, find if the word exists in the grid.
 
         The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
@@ -20,7 +20,7 @@ public class LE_79_Word_Search {
         word = "ABCCED", -> returns true,
         word = "SEE", -> returns true,
         word = "ABCB", -> returns false.
-     */
+     **/
 
     public boolean exist(char[][] board, String word) {
         if (board == null || board.length == 0 || board[0].length == 0 || word == null || word.length() == 0) return false;
@@ -40,9 +40,10 @@ public class LE_79_Word_Search {
     }
 
     public boolean helper(char[][] board, String word, int i, int j, int idx) {
-        //!!!This line must be the first line to execute (must before the logic checking boundary of i, j).
-        //Otherwise, it will fail for case like "[[a]], 'a'" : first char match, then to all 4 directions, they are all
-        //out of boundary, so it returns false.
+        /**!!!This line must be the first line to execute (must before the logic checking boundary of i, j).
+              Otherwise, it will fail for case like "[[a]], 'a'" : first char match, then to all 4 directions, they are all
+              out of boundary, so it returns false.
+         **/
         if (idx >= word.length()) return true; // use ">=" also works
 
         if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return false;
