@@ -50,6 +50,37 @@ public class LE_74_Search_In_2D_Matrix {
         return false;
     }
 
+    //Binary Search Solution using JiuZhang template
+    public boolean searchMatrix_JiuZhang(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int start = 0;
+        int end = m * n - 1;
+
+        while (start + 1 < end) {
+            int mid = start + (end - start) / 2;
+            int val = matrix[mid / n][mid % n];
+            if (target == val) {
+                return true;
+            } else if (target > val) {
+                start = mid;
+            } else {
+                end = mid;
+            }
+        }
+
+        if (matrix [start / n][start % n] == target ||
+                matrix[end /n][end % n] == target) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
         Follow up question:
         If the condition is that values in row and column both increase("The first integer of each row is greater than the FIRST integer of the previous row"),
