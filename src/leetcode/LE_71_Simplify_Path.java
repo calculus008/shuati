@@ -18,13 +18,15 @@ public class LE_71_Simplify_Path {
         if (null == path || path.length() == 0) return path;
 
         Stack<String> stack = new Stack<>();
-        for (String token : path.split("/")) {
+        for (String token : path.split("/+")) {
             if (token.equals("") || token.equals(".")) continue;
 
-            //!!! Remember, can't do 'if(!stack.isEmpty() && !stack.isEmpty())", reason:
-            //    For case "/../", token is "..", stack is empty, so we should do nothing. But if we use logic "if" logc above,
-            //    ".." will be pushed to stack, which is wrong.
-            if (token.equals("src")) {
+            /**
+            !!! Remember, can't do 'if(token.equals("..") && !stack.isEmpty())", reason:
+                For case "/../", token is "..", stack is empty, so we should do nothing. But if we use logc above,
+                ".." will be pushed to stack when stack is not empty, which is wrong.
+             **/
+            if (token.equals("..")) {
                 if (!stack.isEmpty()) {
                     stack.pop();
                 }
