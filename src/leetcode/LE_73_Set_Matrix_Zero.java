@@ -4,19 +4,20 @@ package leetcode;
  * Created by yuank on 3/5/18.
  */
 public class LE_73_Set_Matrix_Zero {
-    /*
+    /**
         Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it IN PLACE.
      */
 
 
-
-//    Use first row and first column as markers.
-//    if matrix[i][j] = 0, mark respected row and col marker = 0; indicating
-//    that later this respective row and col must be marked 0;
-//    And because you are altering first row and column,
-//    you need to  have two variables to track their own status.
-//    So, for ex, if any one of the first row is 0, fr = 0,
-//    and at the end set all first row to 0;
+    /**
+        Use first row and first column as markers.
+        if matrix[i][j] = 0, mark respected row and col marker = 0;
+        indicating that later this respective row and col must be marked 0;
+        And because you are altering first row and column,
+        you need to have two variables to track their own status.
+        So, for example, if any one of the first row is 0, row = 0,
+        and at the end set all first row to 0;
+     **/
 
     //Time : O(m * n), Space : O(1)
     public static void setZeroes(int[][] matrix) {
