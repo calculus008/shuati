@@ -21,13 +21,19 @@ public class LE_76_Min_Window_Substring
 
     //Very Important
 
-    /*
+    /**
+     Sliding Window :
+     1.First move right side of the window to include all required chars in the window (expand)
+     2.Move left side, as long as all required chars in window, keep moving,
+       record start index and length of window each step (in order to retrieve it at the end (shrink).
+
           A D O B E C O D E B A N C
           j         i
             j                 i
                     j         i
                      j            i
                             j     i
+
      */
 
 
@@ -53,6 +59,14 @@ public class LE_76_Min_Window_Substring
                     from = j;
                     minLen = i - j + 1;
                 }
+
+                /**
+                  This while is for sliding window step 2 - shrink the window.This step check if any of the required chars is missing
+                  in the window, once "total++" executes, while loop will stop.
+
+                  Since we already did  "count[s.charAt(i)]--" in the first step (expand), for chars that are not required, its count
+                  value will not exceed 0 (initial value before for loop is 0, here, just add back the value that has been subtracted)
+                 */
                 if (++count[s.charAt(j++)] > 0) total++;
             }
         }
