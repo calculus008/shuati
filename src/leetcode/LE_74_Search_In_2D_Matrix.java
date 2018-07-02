@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/5/18.
  */
 public class LE_74_Search_In_2D_Matrix {
-    /*
+    /**
         Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
 
         Integers in each row are sorted from left to right.
@@ -19,12 +19,14 @@ public class LE_74_Search_In_2D_Matrix {
           [23, 30, 34, 50]
         ]
         Given target = 3, return true.
-     */
+     **/
 
-    //Solution: Binary Search
-    // Convert matrix[x][y] to array: a[col * x + y]
-    // Convert a[k] to matrix : matrix[a / col][a % col]
-    //Time : O(log(n * m)), Space : O(1)
+    /**
+        Solution: Binary Search
+        Convert matrix[x][y] to array: a[col * x + y]
+        Convert a[k] to matrix : matrix[a / col][a % col]
+        Time : O(log(n * m)), Space : O(1)
+     **/
     public boolean searchMatrix1(int[][] matrix, int target) {
         //!!!
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return false;
@@ -48,11 +50,12 @@ public class LE_74_Search_In_2D_Matrix {
         return false;
     }
 
-
-    //Follow up question:
-    //If the condition is that values in row and column both increase("The first integer of each row is greater than the FIRST integer of the previous row"),
-    //find another solution.
-    //Solution 1: Time : O(n + m).
+    /**
+        Follow up question:
+        If the condition is that values in row and column both increase("The first integer of each row is greater than the FIRST integer of the previous row"),
+        find another solution.
+        Solution 1: Time : O(n + m).
+     **/
     public static boolean searchMatrix2(int[][] matrix, int target) {
         int n = matrix.length;
         if(n == 0)
