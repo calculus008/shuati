@@ -59,4 +59,14 @@ public class LI_254_Drop_Eggs {
             return (int)end;
         }
     }
+
+
+    public int dropEggs2(int n) {
+        long ans = 0;
+        for (int i = 1; ; ++i) {
+            ans += (long)i;
+            if (ans >= (long)n)
+                return i;
+        }
+    }
 }
