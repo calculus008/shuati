@@ -25,6 +25,14 @@ public class LI_437_Copy_Books {
          Hard
      */
 
+    /**
+     * Binary Search
+     *
+     * Time : O(n * log(sum)), n is length of pages, sum is total pages number
+     * @param pages
+     * @param k
+     * @return
+     */
     public int copyBooks(int[] pages, int k) {
         if (pages == null || pages.length == 0) {
             return 0;
@@ -70,7 +78,6 @@ public class LI_437_Copy_Books {
             }
         }
 
-//        count++;//!!!
         return count;
     }
 }
