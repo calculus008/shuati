@@ -28,6 +28,12 @@ LI_254_Drop_Eggs
 LI_38_Search_A_2D_Matrix_II
 LI_459_Closest_Number_In_Sorted_Array
 LI_462_Total_Occurrence_Of_Target
+LI_235_Prime_Factorization
 LE_34_Search_For_A_Range                     (lint 61)
 LE_74_Search_In_2D_Matrix                    (lint 28)
 LE_29_Divide_Two_Integers                    (lint 414)
+LE_302_Smallest_Rectangle_Enclosing_Black_Pixels  (lint 600)
+
+LE_644_Maximum_Average_Subarray_II           (lint 617)
+LI_183_Wood_Cut
+LI_437_Copy_Books
