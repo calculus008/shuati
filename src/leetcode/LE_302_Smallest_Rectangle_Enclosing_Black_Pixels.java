@@ -25,6 +25,10 @@ public class LE_302_Smallest_Rectangle_Enclosing_Black_Pixels {
          Time : O(mlogn + nlogm)
          Space : O(1)
 
+         https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/discuss/75127/C++JavaPython-Binary-Search-solution-with-explanation?page=3
+
+         "Imagine we project the 2D array to the bottom axis with the rule "if a column has any black pixel it's projection is black otherwise white"."
+
          Key - "The black pixels are connected, i.e., there is only one black region"
 
          There are only '1' and '0' in image.
