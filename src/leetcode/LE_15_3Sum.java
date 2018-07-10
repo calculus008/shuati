@@ -25,6 +25,11 @@ public class LE_15_3Sum {
         LE_259
      */
 
+    /**
+     * Time : O(n ^ 2)
+     * @param nums
+     * @return
+     */
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
 
