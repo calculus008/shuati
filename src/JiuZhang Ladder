@@ -1,4 +1,4 @@
-1.
+1.String
 LE_05_Longest_Palindromic_Substring
 LE_28_Implementing_Strstr
 LE_125_Valid_Palindrome
@@ -37,3 +37,13 @@ LE_302_Smallest_Rectangle_Enclosing_Black_Pixels  (lint 600)
 LE_644_Maximum_Average_Subarray_II           (lint 617)
 LI_183_Wood_Cut
 LI_437_Copy_Books
+
+3.Two Pointers
+LE_125_Valid_Palindrome
+LE_680_Valid_Palindrome_II
+LE_01_Two_Sum
+LE_167_Two_Sum_II_Array_Is_Sorted            (lint 608)
+LE_170_Two_Sum_III_Data_Structure_Design     (lint 607)
+LI_587_Two_Sum_Unique_Pairs
+LE_15_3Sum                                   (lint 57)
+LE_611_Valid_Triangle_Number                 (lint 382)
