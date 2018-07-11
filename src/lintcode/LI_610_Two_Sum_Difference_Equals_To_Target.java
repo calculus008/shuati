@@ -162,7 +162,7 @@ public class LI_610_Two_Sum_Difference_Equals_To_Target {
                 j++;
             }
             /**
-             * 两个指针同相而行!!!
+             * 两个指针同相而行，先移动j, 指向第一个使得 nums[j] - nums[i] >= |target| 的下标 j
              */
             while (j < n && pairs[j].num - pairs[i].num < target) {
                 j++;
@@ -178,6 +178,10 @@ public class LI_610_Two_Sum_Difference_Equals_To_Target {
                 }
                 return indexs;
             }
+
+            /**
+             * 如果没有找到答案，继续for loop, 增加i,
+             */
         }
         return indexs;
     }
