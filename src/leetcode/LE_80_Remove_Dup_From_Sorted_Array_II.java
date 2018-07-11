@@ -29,6 +29,9 @@ public class LE_80_Remove_Dup_From_Sorted_Array_II {
             action should happen.
          **/
         for (int i = 2; i < nums.length; i++) {
+            /**
+             * "nums[i] != nums[count - 2]", it is nums[count - 2], NOT nums[i - 2] !!!!!!
+             */
             if (nums[i] != nums[count - 2]) {
                 nums[count++] = nums[i];
             }
