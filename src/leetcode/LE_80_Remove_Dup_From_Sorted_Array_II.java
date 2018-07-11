@@ -21,17 +21,25 @@ public class LE_80_Remove_Dup_From_Sorted_Array_II {
 
         int count = 2;
 
-        //when nums[i] == nums[count - 2], count stays the same, i will increase 1 in for loop.
-        //It means, i always keeps moving to the element. Only when i gets to the element that
-        //is not the same value as nums[count - 2], we put that value into nums[count] to replace its orignal value, then
-        //count move forward by 1. In other words, count stays at the location where the replacement
-        //action should happen.
+        /**
+            when nums[i] == nums[count - 2], count stays the same, i will increase 1 in for loop.
+            It means, i always keeps moving to the element. Only when i gets to the element that
+            is not the same value as nums[count - 2], we put that value into nums[count] to replace its orignal value, then
+            count move forward by 1. In other words, count stays at the location where the replacement
+            action should happen.
+         **/
         for (int i = 2; i < nums.length; i++) {
             if (nums[i] != nums[count - 2]) {
                 nums[count++] = nums[i];
             }
         }
 
+        /**
+         * Even though count points to the next location, but since it is index (0 based),
+         * so it happens to be the right value to be returned at the end.
+         *
+         * For example : [1,1,1,2,2,3], when exit for loop, count value is 5, it is the correct count of total elements.
+         */
         return count;
     }
 }
