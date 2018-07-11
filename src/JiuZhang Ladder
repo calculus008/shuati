@@ -39,11 +39,19 @@ LI_183_Wood_Cut
 LI_437_Copy_Books
 
 3.Two Pointers
-LE_125_Valid_Palindrome
-LE_680_Valid_Palindrome_II
+LE_125_Valid_Palindrome                      (lint 415)
+LE_680_Valid_Palindrome_II                   (lint 891)
 LE_01_Two_Sum
 LE_167_Two_Sum_II_Array_Is_Sorted            (lint 608)
 LE_170_Two_Sum_III_Data_Structure_Design     (lint 607)
 LI_587_Two_Sum_Unique_Pairs
 LE_15_3Sum                                   (lint 57)
+LE_16_3Sum_Closest                           (lint 533)
 LE_611_Valid_Triangle_Number                 (lint 382)
+LE_259_3Sum_Smaller                          (lint 59)
+LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
+LI_604_Window_Sum
+LI_521_Remove_Duplicate_Numbers_In_Array     (leet 26)
+LE_26_Remove_Dup_From_Sorted_Array           (lint 521)
+LE_80_Remove_Dup_From_Sorted_Array_II        (lint 101)
+LI_610_Two_Sum_Difference_Equals_To_Target
