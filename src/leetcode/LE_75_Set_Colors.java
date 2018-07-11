@@ -19,14 +19,14 @@ public class LE_75_Set_Colors {
     /**
         Time: O(n), Space : O(1)
         left : final location of the end of 0,
-        right : final location of the start of 1
+        right : final location of the start of 2
     **/
     public static void sortColors(int[] nums) {
         if(nums == null || nums.length == 0) return;
 
         int left = 0;
-        int right = nums.length - 1;
         int index = 0;
+        int right = nums.length - 1;
 
         while (index <= right) {
             if (nums[index] == 0) {
