@@ -47,7 +47,11 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
     }
 
     public class TwoSum2 {
-        //Solution 2 : add O(n), find O(1), Better for find
+        /**
+            Solution 2 : add O(n), find O(1), Better for find
+            用两个set， 一个存所有可能的sum，一个存数本身。
+            TLE
+         **/
         private Set<Integer> num = new HashSet<>();
         private Set<Integer> sum = new HashSet<>();
 
@@ -60,6 +64,11 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
             if (num.contains(number)) {
                 sum.add(number * 2);
             } else {
+                /**
+                 * 1.注意Iterator的用法 ： "Iterator<Inreger>"
+                 *
+                 * 2.set用的是"contains", 不是“containsKey"
+                 */
                 Iterator<Integer> it = num.iterator();
                 while (it.hasNext()) {
                     sum.add(it.next() + number);
@@ -71,6 +80,47 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
 
         public boolean find(int value) {
             return sum.contains(value);
+        }
+    }
+
+    public class TwoSum3 {
+        /**
+         * 双指针。add操作时间复杂度一般情况下为O(1)。find操作时间复杂度O(nlogn)。n为已加入的元素个数。
+         */
+
+        ArrayList<Integer> nums = new ArrayList<>();
+
+        public void add(int number) {
+            // write your code here
+            nums.add(number);
+        }
+
+        /*
+         * @param value: An integer
+         * @return: Find if there exists any pair of numbers which sum is equal to the value.
+         */
+        public boolean find(int value) {
+            Collections.sort(nums);
+
+            /**
+             * Or
+                 int start = 0;
+                 int end = nums.size() - 1;
+
+                 while (start < end) {
+                 ...
+                 }
+             */
+            for (int i = 0, j = nums.size() - 1; i < j;) {
+                if (nums.get(i) + nums.get(j) == value) {
+                    return true;
+                } else if (nums.get(i) + nums.get(j) < value) {
+                    i++;
+                } else {
+                    j--;
+                }
+            }
+            return false;
         }
     }
 }
