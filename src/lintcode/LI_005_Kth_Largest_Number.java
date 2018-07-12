@@ -53,4 +53,45 @@ public class LI_005_Kth_Largest_Number {
         }
         return nums[j + 1];
     }
+
+    //Version that does not need to calcualte k when recurssing
+    public int kthLargestElement1(int k, int[] nums) {
+        // write your code here
+        return quickSelect1(nums, 0, nums.length - 1, k - 1);
+    }
+
+    private int quickSelect1(int[] nums, int start, int end, int k) {
+        if (start >= end) {
+            return nums[start];
+        }
+
+        int left = start;
+        int right= end;
+        int pivot = nums[(left + right) / 2];
+
+        while (left <= right) {
+            while (left <= right && nums[left] > pivot) {
+                left++;
+            }
+            while (left <= right && nums[right] < pivot) {
+                right--;
+            }
+            if (left <= right) {
+                int tmp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = tmp;
+
+                left++;
+                right--;
+            }
+        }
+
+        if (right >= k && right >= start) {
+            return quickSelect1(nums, start, right, k);
+        } else if (left <= k && left <= end) {
+            return quickSelect1(nums, left, end, k);
+        } else {
+            return nums[k];
+        }
+    }
 }
