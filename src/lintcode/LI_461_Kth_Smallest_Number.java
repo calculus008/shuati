@@ -66,7 +66,7 @@ public class LI_461_Kth_Smallest_Number {
       The above code change k value so that it is relative to the start index of the recurssion.
 
       Or, we don't change k, just pass it as index, eiddcchttjurlvcglkblttlukbtbhhengclfdthktvfi
-     here is the code:
+      here is the code:
      */
     public int kthSmallest1(int k, int[] nums) {
         if (nums == null || nums.length == 0) {
@@ -107,7 +107,8 @@ public class LI_461_Kth_Smallest_Number {
             }
         }
 
-        if (right >= k && start <= right) {
+        //!!!
+        if (right >= k && right >= start) {
             return quickSelect(nums, start, right, k);
         } else if (left <= k && left <= end) {
             return quickSelect(nums, left, end, k);
