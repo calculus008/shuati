@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
  * Created by yuank on 4/8/18.
  */
 public class LE_215_Kth_Largest_Element_In_Array {
-    /*
+    /**
         Find the kth largest element in an unsorted array.
         Note that it is the kth largest element in the sorted order, not the kth distinct element.
         For example,
@@ -14,10 +14,12 @@ public class LE_215_Kth_Largest_Element_In_Array {
 
         Note:
         You may assume k is always valid, 1 ≤ k ≤ array's length.
-     */
+     **/
 
-    //Solution 1 : use min heap.
-    //Time : O(nlogk), Space : O(k)
+    /**
+        Solution 1 : use min heap.
+        Time : O(nlogk), Space : O(k)
+     **/
     public int findKthLargest1(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int i = 0; i < nums.length; i++) {
@@ -30,6 +32,9 @@ public class LE_215_Kth_Largest_Element_In_Array {
         return pq.peek();
     }
 
+    /**
+     * For Quick Select solution, refer to LI_005_Kth_Largest_Number
+     */
     //Solution 2 : Quick Select
     //Time : O(n)  Space : O(1)
     /*
