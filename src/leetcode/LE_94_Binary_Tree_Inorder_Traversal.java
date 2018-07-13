@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * Created by yuank on 3/8/18.
  */
-public class LE_94_Binary_Tree_Inorer_Traversal {
+public class LE_94_Binary_Tree_Inorder_Traversal {
     /**
         Given a binary tree, return the inorder traversal of its nodes' values.
 
