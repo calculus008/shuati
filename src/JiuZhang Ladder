@@ -8,7 +8,7 @@ LE_516_Longest_Palindromic_Subsequence
 LI_841_String_Replace
 LI_594_StrStr_2 (O(n+m))
 
-
+====================================================
 
 2.Binary Search
 LE_33_Search_In_Rotated_Sorted_Array         (lint 62)
@@ -78,3 +78,9 @@ LE_215_Kth_Largest_Element_In_Array          (lint 5)     QuickSelect
 LI_461_Kth_Smallest_Number
 LI_031_Partition_Array
 LI_894_Pancake_Sorting
+
+====================================================
+
+4.BFS and Topological Sort
+LE_200_Number_Of_Islands                     (lint 433)
+LE_102_Binary_Tree_Level_Order_Traversal     (lint 69)
