@@ -73,4 +73,78 @@ public class LE_133_Clone_Graph {
         }
         return new ArrayList<>(set);
     }
+
+    /**Solution 3 : from JiuZhang, one step BFS
+     */
+    public UndirectedGraphNode cloneGraph_JiuZhang_1(UndirectedGraphNode node) {
+        if (node == null) return null;
+
+        HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
+        Queue<UndirectedGraphNode> queue = new LinkedList<>();
+        queue.offer(node);
+
+        while (!queue.isEmpty()) {
+            UndirectedGraphNode cur = queue.poll();
+            if (!map.containsKey(cur)) {
+                map.put(cur, new UndirectedGraphNode(cur.label));
+            }
+
+            UndirectedGraphNode curCopy = map.get(cur);
+            for (UndirectedGraphNode neighbor : cur.neighbors) {
+                if (!map.containsKey(neighbor)) {
+                    map.put(neighbor, new UndirectedGraphNode(neighbor.label));
+                    /**
+                     * If the node is not in map yet, it is not processed.
+                     * Put it in queue, add its entry in map
+                     *!!!Add original node, not the copy
+                     **/
+                    queue.offer(neighbor);
+                }
+
+                curCopy.neighbors.add(map.get(neighbor));
+            }
+        }
+
+        return map.get(node);
+    }
+
+    /**
+     * Solution 4, same as Solution 3, only difference is to use label as key in map (since the question garunteed
+     * label is unique)
+     *   BFS + HashMap
+         Time : O(nm)，Space : O(n)
+
+         1.用queue存放已经复制好但复制品node还没添加neighbor的node。
+         2.Map放对应label的复制品node。
+         3.做queue的BFS，每次从queue和map拿到一个原node和对应的复制品node，创建neighbors中还没有复制品的node，
+         将新创建的node放入queue。这样保证queue不会重复。(!!!)
+         4.创建新node的条件是map里面没有对应的label，这个条件与限定放入queue的规则一样。
+         5.最后返回map中node对应label的node复制品。
+     */
+
+    public UndirectedGraphNode cloneGraph_JiuZhang_2(UndirectedGraphNode node) {
+        if(node == null){
+            return null;
+        }
+
+        Map<Integer, UndirectedGraphNode> map = new HashMap<>();
+        Queue<UndirectedGraphNode> queue = new LinkedList<>();
+        queue.offer(node);
+        map.put(node.label, new UndirectedGraphNode(node.label));
+
+        while(!queue.isEmpty()){
+            UndirectedGraphNode cur = queue.poll();
+            UndirectedGraphNode curCopy = map.get(cur.label);
+
+            for(UndirectedGraphNode neighbor : cur.neighbors){
+                if(!map.containsKey(neighbor.label)){
+                    UndirectedGraphNode newNode = new UndirectedGraphNode(neighbor.label);
+                    queue.offer(neighbor);
+                    map.put(newNode.label, newNode);
+                }
+                curCopy.neighbors.add(map.get(neighbor.label));
+            }
+        }
+        return map.get(node.label);
+    }
 }
