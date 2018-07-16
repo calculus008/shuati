@@ -1,5 +1,10 @@
 package leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
+import common.Coordinate;
+
 /**
  * Created by yuank on 3/24/18.
  */
@@ -25,8 +30,9 @@ public class LE_200_Number_Of_Islands {
         00011
         Answer: 3
      */
-
-    //Time and Space : O(m * n)
+    /**
+        Solution 1: DFS, Time and Space : O(m * n)
+     **/
     public int numIslands(char[][] grid) {
         if (grid == null || grid.length == 0) return 0;
 
@@ -52,46 +58,71 @@ public class LE_200_Number_Of_Islands {
          * 千万别忘了这一步!!!
          */
         grid[x][y] = '0';
+
         helper(grid, x + 1, y);
         helper(grid, x - 1, y);
         helper(grid, x, y + 1);
         helper(grid, x, y - 1);
     }
 
+
+    /**
+     * Solution 2 : BFS, preferred. DFS has the danger of stack overflow if recursion depth is too big
+     */
     public int numIslands_JiuZhang(boolean[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0) {
             return 0;
         }
 
-        int m = grid.length;
-        int n = grid[0].length;
-        int res = 0;
+        int n = grid.length;
+        int m = grid[0].length;
+        int islands = 0;
 
-        for (int i = 0 ; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 if (grid[i][j]) {
-                    helper(grid, i, j, m, n);
-                    res++;
+                    markByBFS(grid, i, j);
+                    islands++;
                 }
             }
         }
 
-        return res;
+        return islands;
     }
 
-    private void helper(boolean[][] grid, int x, int y, int m, int n) {
-        if (x > m - 1 || x < 0 || y > n - 1 || y < 0 || !grid[x][y]) {
-            return;
-        }
+    private void markByBFS(boolean[][] grid, int x, int y) {
+        // magic numbers!
+        int[] directionX = {0, 1, -1, 0};
+        int[] directionY = {1, 0, 0, -1};
 
-        /**
-         * 千万别忘了这一步!!!
-         */
+        Queue<Coordinate> queue = new LinkedList<>();
+
+        queue.offer(new Coordinate(x, y));
         grid[x][y] = false;
 
-        helper(grid, x + 1, y, m, n);
-        helper(grid, x, y + 1, m ,n);
-        helper(grid, x - 1, y, m ,n);
-        helper(grid, x, y - 1, m ,n);
+        while (!queue.isEmpty()) {
+            Coordinate coor = queue.poll();
+            for (int i = 0; i < 4; i++) {
+                Coordinate adj = new Coordinate(
+                        coor.x + directionX[i],
+                        coor.y + directionY[i]
+                );
+                if (!inBound(adj, grid)) {
+                    continue;
+                }
+                if (grid[adj.x][adj.y]) {
+                    grid[adj.x][adj.y] = false;
+                    queue.offer(adj);
+                }
+            }
+        }
     }
+
+    private boolean inBound(Coordinate coor, boolean[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+
+        return coor.x >= 0 && coor.x < n && coor.y >= 0 && coor.y < m;
+    }
+
 }
