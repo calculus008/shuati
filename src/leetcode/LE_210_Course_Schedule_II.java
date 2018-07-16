@@ -1,5 +1,6 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -7,7 +8,7 @@ import java.util.Queue;
  * Created by yuank on 3/26/18.
  */
 public class LE_210_Course_Schedule_II {
-    /*
+    /**
         There are a total of n courses you have to take, labeled from 0 to n - 1.
 
         Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
@@ -69,5 +70,55 @@ public class LE_210_Course_Schedule_II {
 
         //!!!
         return k == numCourses ? res : new int[0];
+    }
+
+    /**
+     * Similar to LE_207_Course_Schedule, 1st TLE for large input data set.
+     *
+     * This solution works because it builds the neighbors list (neighbours[])
+     * so that we don't need to iterate through all input data to update neighbors in degree
+     */
+    public int[] findOrder_JiuZhang(int numCourses, int[][] prerequisites) {
+        int[] res = new int[numCourses];
+        int[] indegree = new int[numCourses];
+        int count = 0;
+
+        /**
+         * define as generic ArrayList array
+         */
+        ArrayList[] neighbors = new ArrayList[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            neighbors[i] = new ArrayList<>();
+        }
+
+        for (int[] pair : prerequisites) {
+            indegree[pair[0]]++;
+            neighbors[pair[1]].add(pair[0]);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                queue.offer(i);
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+            res[count++] = cur;
+
+            /**
+             * cast as ArrayList for Integer
+             */
+            ArrayList<Integer> neighbours = neighbors[cur];
+            for (int neighbour : neighbours) {
+                indegree[neighbour]--;
+                if (indegree[neighbour] == 0) {
+                    queue.offer(neighbour);
+                }
+            }
+        }
+
+        return count == numCourses ? res : new int[]{};
     }
 }
