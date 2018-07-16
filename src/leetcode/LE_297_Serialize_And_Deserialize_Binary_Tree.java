@@ -37,8 +37,6 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
 
     /**
      * Solution 1 : Iterative, BFS
-     * @param root
-     * @return
      */
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
@@ -50,10 +48,17 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
 
         while (!queue.isEmpty()) {
             TreeNode cur = queue.poll();
+
+            /**
+             * !!!
+             * Must write this way, if cur == null, append, then continue
+             * otherwise, "cur.left" will run into null pointer exception.
+             **/
             if (cur == null) {
                 sb.append("null ");
                 continue;
             }
+
             sb.append(cur.val + " ");
             queue.offer(cur.left);
             queue.offer(cur.right);
@@ -67,11 +72,14 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
         if (data.equals("")) return null;//!!!
 
         String[] str = data.split(" ");
-        TreeNode root = new TreeNode(Integer.parseInt(str[0]));
+        TreeNode root = new TreeNode(Integer.parseInt(str[0])); /** Integer.parseInt(str[0]) !!! **/
 
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
 
+        /**
+         * str array gets the token, queue ensures tree structure
+         */
         for (int i = 1; i < str.length; i++) {
             TreeNode cur = queue.poll();
             if (!str[i].equals("null")) {
@@ -113,16 +121,21 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize1(String data) {
-        //No need to use Deque, declare it as LinkedList is ok
-        //Queue interface does not have "addAll" method
-        Deque<String> q = new LinkedList<>();
-        //!!!
+        /**
+             1.No need to use Deque, declare it as LinkedList is ok, Queue interface does not have "addAll" method.
+             2.Notice, the type of queue is "String" (compared with BFS solution using "TreeNode") since decode
+               method already made the string follow BT structure.
+         **/
+        Queue<String> q = new LinkedList<>();
+        /**
+         * !!!"Arrays.asList"
+         */
         q.addAll(Arrays.asList(data.split(" ")));
 
         return decode(q);
     }
 
-    private TreeNode decode(Deque<String> q) {
+    private TreeNode decode(Queue<String> q) {
         if(q.isEmpty()) return null;
 
         String s = q.remove();
@@ -136,4 +149,17 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
 
         return node;
     }
+
+    /**
+     * syntax error made:
+     *
+     * length() for String
+     * length for Array
+     *
+     * "equals"
+     *
+     * mis-matched number of parenthesis
+     *
+     * Arrays.asList, NOT Arrays.toList
+     */
 }
