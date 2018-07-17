@@ -189,4 +189,59 @@ public class LE_127_Word_Ladder {
 
         return neighbors;
     }
+
+    /**
+     * Bi-direction BFS, 34 ms
+     */
+    public int ladderLength_3(String beginWord, String endWord, List<String> wordAsList) {
+        if (!wordAsList.contains(endWord)) return 0;
+
+        int l = beginWord.length();
+        Set<String> wordList = new HashSet<String>(wordAsList);
+        Set<String> start = new HashSet<String>();
+        Set<String> end = new HashSet<String>();
+        int length = 0;
+
+        start.add(beginWord);
+        end.add(endWord);
+
+        while (!start.isEmpty() && !end.isEmpty()) {
+            length++;
+
+            //use the samller set, balance the sets on 2 ends
+            if (start.size() > end.size()) {
+                Set<String> temp = new HashSet<>();
+                temp = start;
+                start = end;
+                end = temp;
+            }
+
+            Set<String> next = new HashSet<String>();
+
+            for (String word : start) {
+                char[] wordArray = word.toCharArray();
+                for (int i = 0; i < l; i++) {
+                    char old = wordArray[i];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        wordArray[i] = c;
+                        String str = String.valueOf(wordArray);
+                        if (end.contains(str))
+                            return length + 1;
+                        if (wordList.contains(str)) {
+                            next.add(str);
+                            wordList.remove(str);
+                        }
+                    }
+                    wordArray[i] = old;
+                }
+            }
+
+            start = next;
+            // Set<String> temp1 = new HashSet<>();
+            // temp1 = start;
+            // start = next;
+            // next = temp1;
+        }
+        return 0;
+    }
 }
