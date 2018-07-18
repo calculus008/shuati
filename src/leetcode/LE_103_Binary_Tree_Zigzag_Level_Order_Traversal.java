@@ -45,7 +45,17 @@ public class LE_103_Binary_Tree_Zigzag_Level_Order_Traversal {
             for (int i = 0; i < size; i++) {
                 TreeNode cur = q.poll();
 
-                //!!!
+                /**
+                 * !!!
+                 * Doing zig zag by changing the sequence of adding it to list based on flag x (change for each level)
+                 * Note : The sequence of adding node to queue is always left first , then right. Zig Zag output has
+                 *        nothing to do with the logic here. In other words, the logic form of the level in queue
+                 *        is always left to right, we only switch sequence when we output it to list.
+                 *
+                 *        If we change the sequence of adding node to queue, the whole order of the nodes will be
+                 *        scrambled and can not be recovered.
+                 *
+                 */
                 if (x) {
                     list.add(cur.val);
                 } else {
