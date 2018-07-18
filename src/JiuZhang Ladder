@@ -86,6 +86,7 @@ LI_894_Pancake_Sorting
 LE_200_Number_Of_Islands                     (lint 433)
 LE_102_Binary_Tree_Level_Order_Traversal     (lint 69)
 LE_107_Binary_Tree_Level_Order_Traversal_II  (lint 70)
+LI_611_Knight_Shortest_Path
 
 LI_127_Topological_Sorting
 LE_207_Course_Schedule                       (lint 615)
@@ -99,3 +100,4 @@ LE_127_Word_Ladder
 LI_120_Word_Ladder
 LE_126_Word_Ladder_II
 LI_121_Word_Ladder_II
+
