@@ -49,13 +49,22 @@ public class LI_178_Graph_Valid_Tree {
         Set<Integer> hash = new HashSet<>();
 
         queue.offer(0);
+
+        /**
+         * !!! 千万不能忘
+         */
         hash.add(0);
+
         while (!queue.isEmpty()) {
             int node = queue.poll();
             for (Integer neighbor : graph.get(node)) {
+                /**
+                 * !!! 千万不能忘
+                 */
                 if (hash.contains(neighbor)) {
                     continue;
                 }
+
                 hash.add(neighbor);
                 queue.offer(neighbor);
             }
@@ -79,5 +88,50 @@ public class LI_178_Graph_Valid_Tree {
         }
 
         return graph;
+    }
+
+    public boolean validTree_myversion(int n, int[][] edges) {
+        if (n == 0) return false;
+
+        if (edges.length != n - 1 ) return false;
+
+        Set<Integer> visited = new HashSet<>();
+        HashMap<Integer, Set<Integer>> map = new HashMap<>();
+        Queue<Integer> q = new LinkedList<>();
+
+        q.offer(0);
+        visited.add(0);//!!!
+
+        map = buildGraph(edges);
+
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            if (!map.containsKey(cur)) {
+                continue;
+            }
+
+            for (int i : map.get(cur)) {
+                if (visited.contains(i)) {//!!!
+                    continue;
+                }
+
+                visited.add(i);
+                q.offer(i);
+            }
+        }
+
+        return visited.size() == n;
+    }
+
+    public HashMap<Integer, Set<Integer>> buildGraph(int[][] edges) {
+        HashMap<Integer, Set<Integer>> map = new HashMap<>();
+        for (int[] e : edges) {
+            map.putIfAbsent(e[0], new HashSet<>());
+            map.putIfAbsent(e[1], new HashSet<>());
+            map.get(e[0]).add(e[1]);
+            map.get(e[1]).add(e[0]);
+        }
+
+        return map;
     }
 }
