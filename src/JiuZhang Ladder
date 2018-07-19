@@ -104,4 +104,9 @@ LI_121_Word_Ladder_II
 LI_242_Convert_BinaryTree_To_Linked_Lists_By_Depth
 LE_103_Binary_Tree_Zigzag_Level_Order_Traversal  (line 71)
 
+LI_531_Six_Degrees
 LI_598_Zombie_In_Matrix
+LI_618_Search_Graph_Nodes
+LI_178_Graph_Valid_Tree
+LI_431_Connected_Component
+LI_624_Remove_Substrings
