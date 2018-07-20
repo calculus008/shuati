@@ -42,8 +42,8 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
 
         int m = grid.length;
         int n = grid[0].length;
-        int[][] dist = new int[m][n];
-        int[][] nums = new int[m][n];
+        int[][] dist = new int[m][n]; //For empty land, sum of distance to all buildings it can reach
+        int[][] nums = new int[m][n]; //For empty land, how many builds it can reach
         int buildingCount = 0;
 
         for (int i = 0; i < m; i++) {
@@ -61,7 +61,7 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
                 /**
                  * Valid cells are :
                  * 1.empty (0)
-                 * 2.Can be reached from all buildings
+                 * 2.Can be reached from all buildings !!!
                  * 3.Distance to all buildings are not zero
                  */
                 if (grid[i][j] == 0 && nums[i][j] == buildingCount && dist[i][j] != 0) {
@@ -79,6 +79,11 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
         boolean[][] visited = new boolean[m][n];
         queue.offer(new int[]{row, col});
         int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        /**
+         * For BFS, each level means distance plus 1, so we have to start from a building, not empty land,
+         * since we can't add 1 to distance when starting from empty land, we simply don't know where
+         * is destination.
+         */
         int distance = 0;
 
         while (!queue.isEmpty()) {
