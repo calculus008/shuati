@@ -54,7 +54,9 @@ public class LI_005_Kth_Largest_Number {
         return nums[j + 1];
     }
 
-    //Version that does not need to calcualte k when recurssing
+    /**
+     * Version that does not need to calculate k when recurssing
+     */
     public int kthLargestElement1(int k, int[] nums) {
         // write your code here
         return quickSelect1(nums, 0, nums.length - 1, k - 1);
