@@ -84,6 +84,7 @@ LI_894_Pancake_Sorting
 4.BFS and Topological Sort
 
 LE_200_Number_Of_Islands                     (lint 433)
+LE_305_Number_Of_Islands_II                  (lint 434)  (Union Find)
 LE_102_Binary_Tree_Level_Order_Traversal     (lint 69)
 LE_107_Binary_Tree_Level_Order_Traversal_II  (lint 70)
 LI_611_Knight_Shortest_Path
@@ -110,3 +111,6 @@ LI_618_Search_Graph_Nodes
 LI_178_Graph_Valid_Tree
 LI_431_Connected_Component
 LI_624_Remove_Substrings
+
+LI_794_Sliding_Puzzle_II
+LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II)
