@@ -32,8 +32,12 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
 
      */
 
-    //Time and Space : O(n)
-     /*
+     /**
+        Time and Space : O(n)
+
+        Preorderd的变形， instead of cur->left->right, it goes cur->right->left.
+        It goes right side first, save right side nodes in stack, then recover it later.
+
         Solution 1: Recursion
         All nodes are linked in "right" field, "left" field points to null. It requries that root first linked to left subtree in preorder sequence,
         then link to right substree in preorder sequence. Therefore we recurse to right side first, using stack provided in recursion
