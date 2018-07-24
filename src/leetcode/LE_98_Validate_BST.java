@@ -1,12 +1,12 @@
 package leetcode;
 
+import java.util.Stack;
+
 /**
  * Created by yuank on 3/9/18.
  */
 public class LE_98_Validate_BST {
-    /*
-        Given a binary tree, determine if it is a valid binary search tree (BST).
-
+    /**
         Assume a BST is defined as follows:
 
         The left subtree of a node contains only nodes with keys less than the node's key.
@@ -24,7 +24,11 @@ public class LE_98_Validate_BST {
         Binary tree [1,2,3], return false.
      */
 
-    //Time and Space : O(n)
+    /**
+     * Solution
+     * Divide and Conquer
+     * Time and Space : O(n)
+     */
     public static boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         return helper(root, null, null);
@@ -37,4 +41,64 @@ public class LE_98_Validate_BST {
         if (max != null && root.val >= max) return false;
         return (helper(root.left, min, root.val) && helper(root.right, root.val, max));
     }
+
+    /**
+     * Solution 2
+     * Same as Solution 1, use long type to prevent overflow
+     */
+    public boolean isValidBST2_JiuZhang(TreeNode root) {
+        return divConq(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean divConq(TreeNode root, long min, long max){
+        if (root == null){
+            return true;
+        }
+
+        if (root.val <= min || root.val >= max){
+            return false;
+        }
+
+        return divConq(root.left, min, root.val) && divConq(root.right, root.val, max);
+    }
+
+    /**
+     * Solution 3
+     * 采用非递归（Non-recursion / Iteration）版本的遍历法, 时间复杂度O(n)O(n)
+     */
+    public boolean isValidBST3_JiuZhang(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (root != null) {
+            stack.push(root);
+            root = root.left;
+        }
+
+        TreeNode lastNode = null;
+        while (!stack.isEmpty()) {
+            // compare to last node
+            TreeNode node = stack.peek();
+            if (lastNode != null && lastNode.val >= node.val) {
+                return false;
+            }
+            lastNode = node;
+
+            // move to next
+            if (node.right == null) {
+                node = stack.pop();
+                while (!stack.isEmpty() && stack.peek().right == node) {
+                    node = stack.pop();
+                }
+            } else {
+                node = node.right;
+                while (node != null) {
+                    stack.push(node);
+                    node = node.left;
+                }
+            }
+        }
+
+        return true;
+    }
+
 }

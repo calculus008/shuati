@@ -35,8 +35,14 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
      /**
         Time and Space : O(n)
 
-        Preorderd的变形， instead of cur->left->right, it goes cur->right->left.
-        It goes right side first, save right side nodes in stack, then recover it later.
+        Postorderd的变形， instead of left->right->cur, it goes right->left->cur.
+        It goes right side first, save right side nodes in system stack. Then it links from back to start (goes backwards)
+
+           2
+          / \
+        3   4
+
+        Preorde r: 2 -> 3 -> 4, reverse it : 4 -> 3 -> 2, so it is postorder but visit right side first
 
         Solution 1: Recursion
         All nodes are linked in "right" field, "left" field points to null. It requries that root first linked to left subtree in preorder sequence,
@@ -69,8 +75,15 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
         pre = root;
     }
 
-    //Solution 2 : Iterative
-    /*
+    /**
+     * Solution 2 : Iterative
+     *
+     * Use a stack, first go to right side, so nodes in right substree will be saved at the bottom of the stack
+     * and will be linked at the later stage (after left substree is processed).
+     *
+     * Difference from Solution 1 :
+     * It links from start to end.
+     *
                  1
                 / \
                2   5
@@ -86,7 +99,7 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
                  6          5     1 -> 2 -> 3 -> 4 -> 5 -> 6
                             6
 
-    */
+    **/
 
     public void flatten2(TreeNode root) {
         if (root == null) return;
