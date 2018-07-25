@@ -11,7 +11,7 @@ Query understand :
 
 Select Ads
   Inverted index
-  Forward index - key : adid, value : ad info
+  Forward index - key : Ad Id, value : Ad info
   Relevance score - Naive : percentage of matching key words
                     Learning to rank : use human to label, then do supervised learning with more features : ctr, impressions etc
                     Relevance feature : look up features extracted from click logs and store in key-value store
@@ -19,10 +19,10 @@ Select Ads
   pClick - "Clickability", probability of click or estimated CTR
            Given {query, ad, user context}, determine its "clickability"
            A classification problem using supervised learning where label is 1:click and 0:not click
-           pclick traning diagram (machine learning)
+           pClick training diagram (machine learning)
 
 Filter Ads
-  Filter out ads with extremlhy low Relevance score and pClick
+  Filter out ads with extremely low Relevance score and pClick
   Filter out ads with price lower than minReservePrice
 
 Rank Ads
@@ -34,6 +34,6 @@ Select Top K Ads
   Select by Rank Score
 
 Pricing and Allocate Ads
-  CPC : (next quality socre / current quality socre) * next bid price + 0.01
+  CPC : (next quality score / current quality score) * next bid price + 0.01
   Allocate : mainline or sidebar
              category based threshold mainlineReservePrice and minReservePrice
