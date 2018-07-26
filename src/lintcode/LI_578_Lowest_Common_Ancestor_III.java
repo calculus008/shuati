@@ -7,16 +7,6 @@ import leetcode.TreeNode;
  */
 
 //For Solution 3
-class ResultType {
-    public boolean a_exist, b_exist;
-    public TreeNode node;
-    ResultType(boolean a, boolean b, TreeNode n) {
-        a_exist = a;
-        b_exist = b;
-        node = n;
-    }
-}
-
 public class LI_578_Lowest_Common_Ancestor_III {
     /**
          Given the root and two nodes in a Binary Tree. Find the lowest common ancestor(LCA) of the two nodes.
@@ -158,6 +148,17 @@ public class LI_578_Lowest_Common_Ancestor_III {
      * Solution 3
      * With ResultType
      */
+
+    class ResultType {
+        public boolean a_exist, b_exist;
+        public TreeNode node;
+        ResultType(boolean a, boolean b, TreeNode n) {
+            a_exist = a;
+            b_exist = b;
+            node = n;
+        }
+    }
+
     public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode A, TreeNode B) {
         // write your code here
         ResultType rt = helper3(root, A, B);
