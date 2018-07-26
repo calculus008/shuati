@@ -160,7 +160,6 @@ public class LI_578_Lowest_Common_Ancestor_III {
     }
 
     public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode A, TreeNode B) {
-        // write your code here
         ResultType rt = helper3(root, A, B);
         if (rt.a_exist && rt.b_exist)
             return rt.node;
