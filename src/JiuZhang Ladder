@@ -114,3 +114,46 @@ LI_624_Remove_Substrings
 
 LI_794_Sliding_Puzzle_II
 LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II)
+
+====================================================
+
+5.Binary Tree & Tree-based DFS
+
+A.二叉树上求值，求路径 (Maximum / Minimum / Average / Sum / Paths)
+LI_596_Minimum_Subtree
+LE_257_Binary_Tree_Paths                     (lint 480)
+LE_110_Balanced_Binary_Tree                  (lint 93)
+LE_270_Closest_BST_Value                     (lint 900)
+LE_236_Lowest_Common_Ancestor_Of_BT          (lint 88)   (assume LCA exists)
+LI_578_Lowest_Common_Ancestor_III                        (LCA may not exist)
+LE_235_Lowest_Common_Ancestor_Of_BST
+
+B.二叉树结构变化
+LE_114_Flatten_Binary_Tree_To_LinkedList     (lint 453)
+
+C.BST
+LE_230_Kth_Smallest_Element_In_BST           (lint 902) **
+LE_98_Validate_BST                           (lint 95)
+LE_173_Binary_Search_Tree_Iterator           (lint 86)
+LE_272_Closest_BST_Value_II                  (lint 901)
+
+Optional
+LE_94_Binary_Tree_Inorder_Traversal          (lint 67)
+LE_145_Binary_Tree_Postorder_Traversal       (lint 68)
+LE_144_Binary_Tree_Preorder_Traversal        (lint 66)
+LE_104_Max_Depth_Of_Binary_Tree              (lint 97)
+LE_111_Min_Depth_Of_Binary_Tree              (lint 155)
+LI_597_Subtree_With_Maximum_Average
+LI_474_Lowest_Common_Ancestor_II                         (with parent pointer)
+
+LI_246_Binary_Tree_Path_Sum_II                           (find sum path start/end any where)
+LE_124_Binary_Tree_Max_Path_Sum              (lint 94)   (find max sum of all paths)
+LI_475_Binary_Tree_Maximum_Path_Sum_II
+
+LE_285_Inorder_Successor_In_BST                          (revisit in 高频题班)
+LI_448_Inorder_Successor_In_BST
+LI_915_Inorder_Predecessor_In_BST
+
+LE_298_Binary_Tree_Longest_Consecutive_Sequence     (lint 595)
+LE_549_Binary_Tree_Longest_Consecutive_Sequence_II  (lint 614)
+LI_619_Binary_Tree_Longest_Consecutive_Sequence_III
