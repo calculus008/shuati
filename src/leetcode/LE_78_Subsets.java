@@ -98,8 +98,11 @@ public class LE_78_Subsets {
             results.add(subset);
 
             for (int i = 0; i < nums.length; i++) {
+                /**
+                 * 每次在cur上加一个元素 - 先deep copy，然后加。再把新的list加入res.
+                 */
                 if (subset.size() == 0 || subset.get(subset.size() - 1) < nums[i]) {
-                    List<Integer> nextSubset = new LinkedList<Integer>(subset);
+                    List<Integer> nextSubset = new LinkedList<Integer>(subset); //!!!Deep copy here
                     nextSubset.add(nums[i]);
                     queue.offer(nextSubset);
                 }
@@ -114,7 +117,6 @@ public class LE_78_Subsets {
      * @param nums
      * @return
      */
-
     public List<List<Integer>> subsets3_JiuZhang(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();
         int n = nums.length;
@@ -131,8 +133,8 @@ public class LE_78_Subsets {
             List<Integer> subset = new ArrayList<Integer>();
             for (int j = 0; j < n; j++) {
                 // check whether the jth digit in i's binary representation is 1
-                if ((i & (1 << j)) != 0) {
-                    subset.add(nums[j]);
+                if ((i & (1 << j)) != 0) {//!!! "!=0", NOT "==1"
+                    subset.add(nums[j]);//!!! nums[j], NOT nums[i]
                 }
             }
             result.add(subset);
