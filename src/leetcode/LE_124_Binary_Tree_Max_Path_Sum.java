@@ -52,6 +52,8 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
                              return : (15 + 9) + 3 = 27
 
             Return value in each recursion has nothing to do with "res"
+
+            Compare with LI_475_Binary_Tree_Maximum_Path_Sum_II (path only start from root)
     */
 
 

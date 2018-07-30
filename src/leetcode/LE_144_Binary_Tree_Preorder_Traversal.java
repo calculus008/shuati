@@ -54,9 +54,9 @@ public class LE_144_Binary_Tree_Preorder_Traversal {
         stack.push(root);    //PUSH!!!
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
+            res.add(cur.val);
             if (cur.right != null) stack.push(cur.right);
             if (cur.left != null) stack.push(cur.left);
-            res.add(cur.val);
         }
         return res;
     }

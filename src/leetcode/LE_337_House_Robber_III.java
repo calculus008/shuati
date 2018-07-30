@@ -20,6 +20,7 @@ public class LE_337_House_Robber_III {
          \   \
          3   1
          Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
+
          Example 2:
              3
             / \
@@ -37,8 +38,9 @@ public class LE_337_House_Robber_III {
          Time  : O(n)
          Space : O(n)
 
-         1 : Rob
-         0 : Not Rob
+         index      State
+           1    :   Rob
+           0    :   Not Rob
 
          For any node N:
          Rob      max val = left Child (0) + right child (1) + N.val
@@ -50,6 +52,9 @@ public class LE_337_House_Robber_III {
         return Math.max(res[0], res[1]);
     }
 
+    /**
+     * Postorder
+     */
     private int[] helper(TreeNode root) {
         if (root == null) return new int[2];
 

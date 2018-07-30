@@ -21,14 +21,15 @@ public class LE_94_Binary_Tree_Inorder_Traversal {
         return [1,3,2].
      */
 
-
-    //LE_94  Inorder
-    //LE_144 Preorder
-    //LE_145 Postorder
-    //LE_102 Levelorder
-    //LE_107 Levelorder II
-    //LE_103 Levelorder Zigzag
-    //LE_314 Verticalorder
+    /**
+        LE_94  Inorder
+        LE_144 Preorder
+        LE_145 Postorder
+        LE_102 Levelorder
+        LE_107 Levelorder II
+        LE_103 Levelorder Zigzag
+        LE_314 Verticalorder
+     **/
 
     //Recursive version
     //Time and Space : O(n)
@@ -52,10 +53,14 @@ public class LE_94_Binary_Tree_Inorder_Traversal {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
 
-        Stack<leetcode.TreeNode> stack = new Stack<>();
+        Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = root;
+
+        //while 之前，不push
+        //"||", NOT "&&"
         while (cur != null || !stack.isEmpty()) {
             while (cur != null) {
+                //push cur, not cur.left
                 stack.push(cur);
                 cur = cur.left;
             }

@@ -1,13 +1,15 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
  * Created by yuank on 3/30/18.
  */
 public class LE_230_Kth_Smallest_Element_In_BST {
-    /*
+    /**
         Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
 
         Note:
@@ -26,8 +28,10 @@ public class LE_230_Kth_Smallest_Element_In_BST {
        of deleting a node smaller than the kth element.
      */
 
-    //Solution 1 : DFS inorder traversal
-    //Time and Space : O(n)
+    /**
+        Solution 1 : DFS inorder traversal
+        Time and Space : O(n)
+     **/
     private int count;
     private int res;
 
@@ -49,7 +53,9 @@ public class LE_230_Kth_Smallest_Element_In_BST {
         helper(root.right);
     }
 
-    //Solution 2 : DFS inorder iterative
+    /**
+        Solution 2 : DFS inorder iterative
+     **/
     public int kthSmallest2(TreeNode root, int k) {
         Stack<TreeNode> st = new Stack<>();
 
@@ -72,7 +78,9 @@ public class LE_230_Kth_Smallest_Element_In_BST {
         return -1; // never hit if k is valid
     }
 
-    //Solution 3 : Time : O(k), Space : O(k)
+    /**
+     * Solution 3 : Time : O(k), Space : O(k)
+     */
     public int kthSmallest3(TreeNode root, int k) {
         ArrayList<Integer> buffer = new ArrayList<Integer>();
         inorderSearch(root, buffer, k);
@@ -88,6 +96,83 @@ public class LE_230_Kth_Smallest_Element_In_BST {
         if(node.right != null){
             inorderSearch(node.right, buffer, k);
         }
+    }
+
+    /**
+     *  Solution 4
+     *  时间复杂度 O(n) 最好最坏都是。
+        算法思想类似于 Quick Select。
+        这个算法的好处是，如果多次查询的话，给每个节点统计儿子个数这个过程只需要做一次。查询可以很快。
+     */
+    public int kthSmallest4_JiuZhang(TreeNode root, int k) {
+        Map<TreeNode, Integer> numOfChildren = new HashMap<>();
+        countNodes(root, numOfChildren);
+        return quickSelectOnTree(root, k, numOfChildren);
+    }
+
+    /**
+        Count total number of nodes
+     */
+    private int countNodes(TreeNode root, Map<TreeNode, Integer> numOfChildren) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = countNodes(root.left, numOfChildren);
+        int right = countNodes(root.right, numOfChildren);
+        numOfChildren.put(root, left + right + 1);
+        return left + right + 1;
+    }
+
+    private int quickSelectOnTree(TreeNode root, int k, Map<TreeNode, Integer> numOfChildren) {
+        if (root == null) {
+            return -1;
+        }
+
+        int left = root.left == null ? 0 : numOfChildren.get(root.left);
+        if (left >= k) {
+            return quickSelectOnTree(root.left, k, numOfChildren);
+        }
+
+        if (left + 1 == k) {
+            return root.val;
+        }
+
+        return quickSelectOnTree(root.right, k - left - 1, numOfChildren);
+    }
+
+    /**
+         Solution 5
+         使用 Binary Search Tree Iterator 的方式（可以参考 binary search tree iterator 那个题）
+         用 stack，从第一个点开始，走 k-1 步，就是第 k 个点了。
+         时间复杂度是 O(h + k), h 是树的高度。
+     */
+    public int kthSmallest5_JiuZhang(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+
+        while (root != null) {
+            stack.push(root);
+            root = root.left;
+        }
+
+        for (int i = 0; i < k - 1; i++) {
+            TreeNode node = stack.peek();
+
+            if (node.right == null) {
+                node = stack.pop();
+                while (!stack.isEmpty() && stack.peek().right == node) {
+                    node = stack.pop();
+                }
+            } else {
+                node = node.right;
+                while (node != null) {
+                    stack.push(node);
+                    node = node.left;
+                }
+            }
+        }
+
+        return stack.peek().val;
     }
 
 }

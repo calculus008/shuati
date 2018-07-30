@@ -76,20 +76,18 @@ public class LE_133_Clone_Graph {
 
     /**Solution 3 : from JiuZhang, one step BFS
      */
-    public UndirectedGraphNode cloneGraph_JiuZhang_1(UndirectedGraphNode node) {
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         if (node == null) return null;
 
         HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
         Queue<UndirectedGraphNode> queue = new LinkedList<>();
         queue.offer(node);
+        map.put(node, new UndirectedGraphNode(node.label));
 
         while (!queue.isEmpty()) {
             UndirectedGraphNode cur = queue.poll();
-            if (!map.containsKey(cur)) {
-                map.put(cur, new UndirectedGraphNode(cur.label));
-            }
-
             UndirectedGraphNode curCopy = map.get(cur);
+
             for (UndirectedGraphNode neighbor : cur.neighbors) {
                 if (!map.containsKey(neighbor)) {
                     map.put(neighbor, new UndirectedGraphNode(neighbor.label));
@@ -138,9 +136,8 @@ public class LE_133_Clone_Graph {
 
             for(UndirectedGraphNode neighbor : cur.neighbors){
                 if(!map.containsKey(neighbor.label)){
-                    UndirectedGraphNode newNode = new UndirectedGraphNode(neighbor.label);
                     queue.offer(neighbor);
-                    map.put(newNode.label, newNode);
+                    map.put(neighbor.label, new UndirectedGraphNode(neighbor.label));
                 }
                 curCopy.neighbors.add(map.get(neighbor.label));
             }

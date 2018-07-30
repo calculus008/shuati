@@ -64,7 +64,7 @@ public class LE_98_Validate_BST {
 
     /**
      * Solution 3
-     * 采用非递归（Non-recursion / Iteration）版本的遍历法, 时间复杂度O(n)O(n)
+     * 采用非递归（Non-recursion / Iteration）版本的遍历法, 时间复杂度O(n)
      */
     public boolean isValidBST3_JiuZhang(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();
