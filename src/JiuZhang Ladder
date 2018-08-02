@@ -207,13 +207,13 @@ LE_272_Closest_BST_Value_II
 LE_99_Recover_BST
 
 Hard By Importance
-Very Important
+1.Very Important
 LE_116_Populating_Next_Right_Pointers_In_Each_Node
 LE_117_Populating_Next_Right_Pointers_In_Each_Node_II
-LE_314_Binary_Tree_Vertical_Order_Traversal              (***)
+LE_314_Binary_Tree_Vertical_Order_Traversal              (lint 651, 高频班题）
 LE_96_Unique_BST                                         (DP)
 
-Low Frequency
+2.Low Frequency, less important
 LE_156_Binary_Tree_Upside_Down
 LE_114_Flatten_Binary_Tree_To_LinkedList
 LE_255_Verify_Preorder_Sequence_In_BST
@@ -226,3 +226,10 @@ LE_331_Verify_Preorder_Serialization_Of_A_Binary_Tree
 
 ====================================================
 
+6.基于组合的DFS
+LE_78_Subsets                                             (lint 17)
+LE_90_Subsets_II                                          (lint 18)
+LE_39_Combination_Sum                                     (lint 135)
+LE_40_Combination_SUM_II                                  (lint 153)
+LE_77_Combinations                                        (lint 152)
+LE_131_Palindrome_Partition                               (lint 136)
