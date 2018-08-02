@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/17/18.
  */
 public class LE_132_Palindrome_Partition_II {
-    /*
+    /**
         Given a string s, partition s such that every substring of the partition is a palindrome.
 
         Return the minimum cuts needed for a palindrome partitioning of s.
@@ -13,7 +13,7 @@ public class LE_132_Palindrome_Partition_II {
         Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
      */
 
-    /*
+    /**
         DP
         Time : O(n ^ 2)
         Space : O(n ^ 2)

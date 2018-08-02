@@ -54,7 +54,7 @@ public class LE_131_Palindrome_Partition {
         int left = 0;
         int right = s.length() - 1;
         while (left < right) {
-            if (s.charAt(left++) != s.charAt(right--)) {//Don't forget "left++" and "right--"!!!
+            if (s.charAt(left++) != s.charAt(right--)) {//!!!Don't forget "left++" and "right--"!!!
                 return false;
             }
         }
@@ -85,7 +85,7 @@ public class LE_131_Palindrome_Partition {
              */
             String cur = s.substring(startIdx, i + 1);
 
-            if (isPalindrome(cur)) {
+            if (isPalindrome2(cur)) {
                 temp.add(cur);
                 helper2(s, res, i + 1, temp);
                 temp.remove(temp.size() - 1);
@@ -93,7 +93,7 @@ public class LE_131_Palindrome_Partition {
         }
     }
 
-    private boolean isPalindrome22(String s) {
+    private boolean isPalindrome2(String s) {
         int start = 0, end = s.length() - 1;
         while (start < end) {
             if (s.charAt(start) != s.charAt(end)) {
@@ -111,6 +111,8 @@ public class LE_131_Palindrome_Partition {
      * Solution 3
      * 优化的解法 : pre-processing, 用"getIsPalindrome()"(DP)在一个二维数组中记录下s中palindrome的状态，
      *            这样，就不用每次运行"isPalindrome()"做判断了。
+     *
+     *            参考LE_132_Palindrome_Partition_II
      */
     List<List<String>> results;
     boolean[][] isPalindrome;
@@ -149,6 +151,24 @@ public class LE_131_Palindrome_Partition {
         for (int i = n - 3; i >= 0; i--) {
             for (int j = i + 2; j < n; j++) {
                 isPalindrome[i][j] = isPalindrome[i + 1][j - 1] && s.charAt(i) == s.charAt(j);
+            }
+        }
+    }
+
+
+    /**
+     * Another version of getPalindrome(), use logic from LE_132_Palindrome_Partition_II, Time : O(n ^ 2)
+     * @param s
+     */
+    private void getIsPalindrome_1(String s) {
+        int n = s.length();
+        isPalindrome = new boolean[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= i; j++) {
+                if (s.charAt(i) == s.charAt(j) && (i - j < 2 || isPalindrome[j + 1][i - 1])) {
+                    isPalindrome[j][i] = true;
+                }
             }
         }
     }
