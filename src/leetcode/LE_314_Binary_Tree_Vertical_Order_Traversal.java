@@ -31,6 +31,7 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
          [20],
          [7]
          ]
+
          Given binary tree [3,9,8,4,0,1,7],
                  3
                 /\
@@ -47,6 +48,7 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
          [8],
          [7]
          ]
+
          Given binary tree [3,9,8,4,0,1,7,null,null,null,2,5] (0's right child is 2 and 1's left child is 5),
                  3
                 /\

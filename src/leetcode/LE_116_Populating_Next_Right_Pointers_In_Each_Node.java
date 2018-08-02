@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/13/18.
  */
 public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
-    /*
+    /**
         Given a binary tree
 
             struct leetcode.TreeLinkNode {
@@ -40,11 +40,17 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
     public static void connect1(TreeLinkNode root) {
         if (root == null) return;
 
+        /**
+         * 题意保证只要有一个child不为null,另一个也一定不为null.
+         * 只有叶子节点例外。
+         */
         if (root.left != null) {
             root.left.next = root.right;
         }
 
-        //!!!root.right != null
+        /**
+         * !!!root.right != null
+         */
         if (root.next != null && root.right != null) {
             root.right.next = root.next.left;
         }
@@ -60,7 +66,9 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
         while (start != null) {
             TreeLinkNode cur = start;
 
-            //process each level
+            /**
+             * process each LEVEL
+             */
             while (cur != null) {
                 if (cur.left != null) {
                     cur.left.next = cur.right;
@@ -73,7 +81,9 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
                 cur = cur.next;
             }
 
-            //move to the next level
+            /**
+             * move to the next level
+             */
             start = start.left;
         }
     }

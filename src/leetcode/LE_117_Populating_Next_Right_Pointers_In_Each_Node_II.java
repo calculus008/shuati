@@ -53,11 +53,12 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
         TreeLinkNode head = null;  //记住每个连接层的第一个元素，在遍历完当前连接层后回到head,以便往下一层走。
         TreeLinkNode cur = root;
 
-        //每个循环实际上涉及两层：
-        //cur所在的层可以叫移动层，这里next连接已经在上一个循环中完成,在当前循环中以next链接从左往右移动。
-        //当前循环中做连接处理的是在cur的children那层(下一层), 可以叫连接层。
-        //每次循环后，当前连接层成为下个循环中的移动层。
-
+        /**
+            每个循环实际上涉及两层：
+            cur所在的层可以叫移动层，这里next连接已经在上一个循环中完成,在当前循环中以next链接从左往右移动。
+            当前循环中做连接处理的是在cur的children那层(下一层), 可以叫连接层。
+            每次循环后，当前连接层成为下个循环中的移动层。
+         **/
         while (cur != null) {
             while (cur != null) {
                 //对当前node的左右chilren以同样的逻辑处理。
@@ -78,7 +79,9 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
                     pre = cur.right;
                 }
 
-                //左右chilren都处理完之后再移动到下一个node.
+                /**
+                 * 左右chilren都处理完之后再移动到下一个node.
+                 */
                 cur = cur.next;
             }
 

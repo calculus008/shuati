@@ -37,9 +37,36 @@ public class LE_77_Combinations {
             return;
         }
 
+        /**
+         * !!! "i <= n", here is "n" is the last number, it is not the index of an array!!!
+         */
         for (int i = start; i <= n; i++) {
             temp.add(i);
             helper(res, temp, n, k - 1, i + 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+
+    public List<List<Integer>> combine2_JiuZhang(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (n <= 0 || k <= 0) {
+            return res;
+        }
+
+        //pass k, not k - 1
+        helper2(n, k, 1, res, new ArrayList<>());
+        return res;
+    }
+
+    private void helper2(int n, int k, int start, List<List<Integer>> res, List<Integer> temp) {
+        if (temp.size() == k) {//!!! different from solution 1.
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for (int i = start; i <= n; i++) {
+            temp.add(i);
+            helper2(n, k, i + 1, res, temp);
             temp.remove(temp.size() - 1);
         }
     }
