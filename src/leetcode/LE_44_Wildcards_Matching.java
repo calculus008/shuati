@@ -85,8 +85,8 @@ public class LE_44_Wildcards_Matching {
                 match = sp;
                 pp++;
 
-                System.out.println("star, sp="+sp+", pp="+pp+", match="+match);
-            } else if (star != -1) {
+                System.out.println("star, start=" + star + " sp="+sp+", pp="+pp+", match="+match);
+            } else if (star != -1) {//已经见过*了
                 //move to the one nex to '*' in p
                 pp = star + 1;
                 match++;
@@ -114,11 +114,46 @@ public class LE_44_Wildcards_Matching {
         System.out.println(isMatch("aaaa", "***a"));
     }
 
+    /**
+     * same algorithm, use different variable names
+     */
+    public boolean isMatch1(String s, String p) {
+        if(s == null || p == null) return false;
+
+        /**
+         * sm : marker on s
+         * pm : marker on p, save the last index so far that has '*' ('star' in first version)
+         */
+        int sp = 0, pp = 0, sm = 0, pm = -1;
+        while (sp < s.length()) {
+            if (pp < p.length() && (s.charAt(sp) == p.charAt(pp) || p.charAt(pp) == '?')) {
+                sp++;
+                pp++;
+            } else if (pp < p.length() && p.charAt(pp) == '*') {
+                pm = pp;
+                sm = sp;
+                pp++;
+            } else if (pm != -1) {
+                pp = pm + 1;
+                sm++;
+                sp = sm;
+            } else {
+                return false;
+            }
+        }
+
+        while (pp < p.length() && p.charAt(pp) == '*') {
+            pp++;
+        }
+
+        return pp == p.length();
+    }
 
     /**
      * Solution 2
      * 使用深度优先搜索 + 记忆化的版本。
      * 用一个二维的 boolean 数组来当记忆化数组，记录 s 从 sIndex 开始的后缀 能够匹配上 p 从 pIndex 开始的后缀
+     * Time : O(n ^ 2) (or O(m * n)?)
      */
     public boolean isMatch2_JiuZhang(String s, String p) {
         if (s == null || p == null) {
@@ -175,6 +210,76 @@ public class LE_44_Wildcards_Matching {
                 return false;
             }
         }
+        return true;
+    }
+
+
+    /**
+     * Same as Soltuion 2, written by myself
+     */
+
+    public boolean isMatch2_me(String s, String p) {
+        if (s == null || p == null) {
+            return false;
+        }
+
+        boolean[][] visited = new boolean[s.length()][p.length()];
+        boolean[][] mem = new boolean[s.length()][p.length()];
+
+        return helper(s, 0, p, 0, visited, mem);
+    }
+
+    private boolean helper(String s, int sIdx, String p, int pIdx, boolean[][] visited, boolean[][] mem) {
+        if (pIdx == p.length()) {
+            return sIdx == s.length();
+        }
+
+        if (sIdx == s.length()) {
+            return isAllStar(p, pIdx);
+        }
+
+        if (visited[sIdx][pIdx]) {
+            return mem[sIdx][pIdx];
+        }
+
+        boolean match = false;
+        char sChar = s.charAt(sIdx);
+        char pChar = p.charAt(pIdx);
+
+        if (pChar == '*') {
+            /**
+             * case 1 : '*' matches 1 or more chars, bypass the first char in s, recurse
+             * case 2 : '*' is used as empty char, move one poistion in p.
+             */
+            match = helper(s, sIdx + 1, p, pIdx, visited, mem)
+                    || helper(s, sIdx, p, pIdx + 1, visited, mem);
+        } else {
+            /**
+             * !!! Must have 'isMatch' here
+             */
+            match = isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx + 1, visited, mem);
+        }
+
+        visited[sIdx][pIdx] = true;
+        mem[sIdx][pIdx] = match;
+
+        return match;
+    }
+
+    private boolean isMatch(char c1, char c2) {
+        if (c1 == c2 || c2 == '?') {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isAllStar(String p, int pIdx) {
+        for (int i = pIdx; i < p.length(); i++) {
+            if (p.charAt(i) != '*') {
+                return false;
+            }
+        }
+
         return true;
     }
 }
