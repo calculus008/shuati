@@ -6,8 +6,10 @@ import java.util.*;
  * Created by yuank on 3/16/18.
  */
 public class LE_139_Word_Break {
-    /*
-        Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words. You may assume the dictionary does not contain duplicate words.
+    /**
+        Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
+        determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+        You may assume the dictionary does not contain duplicate words.
 
         For example, given
         s = "leetcode",
@@ -16,8 +18,10 @@ public class LE_139_Word_Break {
         Return true because "leetcode" can be segmented as "leet code".
      */
 
-    //Solution 1 : DP
-    /*
+
+    /**
+     * Solution 1 : DP
+
        i一直往右移动，i每移动一次，j就从0走到i,或者当发现dp[i]为TRUE,break.
        "leet", "code"
         开始：
@@ -47,21 +51,25 @@ public class LE_139_Word_Break {
         boolean[] dp = new boolean[n + 1];
         dp[0] = true;
 
-        //!!! "i <=n"
+        //!!! "i = 1", "i <= n"
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j < i; j++) {
+                //!!!s.substring(j, i)
                 if (dp[j] && wordDict.contains(s.substring(j, i))) {
                     dp[i] = true;
-                    break;
+                    break;//!!!
                 }
             }
         }
 
-        return dp[n];
+        return dp[n];//!!!
     }
 
 
-    //Solution 2 : Recurssion with cache. Slower solution, takes 36 ms.
+    /**
+     Solution 2 : Recurssion with cache. Slower solution, takes 36 ms.
+                  AC at leetcode, but MLE(Memory Limit Exceed) at Lintcode (139)
+     */
      public boolean wordBreak1(String s, List<String> wordDict) {
          Set<String> dict = new HashSet<>(wordDict);
          Map<String, Boolean> cache = new HashMap<>();
@@ -80,20 +88,20 @@ public class LE_139_Word_Break {
 
          if(wordDict.contains(s)) {
              cache.put(s, true);
-             return true;
+             return true;//!!! #1 diff from 140
          }
 
          for(int i=1; i<s.length(); i++) {
              String l = s.substring(0, i);
              String r = s.substring(i);
 
-             if(isValid(l, wordDict, cache) && wordDict.contains(r)) {
+             if(isValid(l, wordDict, cache) && wordDict.contains(r)) {//!!! #2 diff from 140
                  cache.put(s, true);
-                 return true;
+                 return true;//!!! #3 diff from 140
              }
          }
 
          cache.put(s, false);
-         return false;
+         return false;//!!! #4 diff from 140
      }
 }

@@ -6,7 +6,7 @@ import java.util.*;
  * Created by yuank on 3/16/18.
  */
 public class LE_140_Word_Break_II {
-    /*
+    /**
         Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
         add spaces in s to construct a sentence where each word is a valid dictionary word.
         You may assume the dictionary does not contain duplicate words.
@@ -20,8 +20,16 @@ public class LE_140_Word_Break_II {
         A solution is ["cats and dog", "cat sand dog"].
      */
 
-    /*
+    /**
+        Divide and Conquer
+        https://www.youtube.com/watch?v=JqOIRBC0_9c&t=539s
+        https://zxi.mytechroad.com/blog/leetcode/leetcode-140-word-break-ii/
 
+        Time complexity: O(2^n)
+
+        Space complexity: O(2^n)
+
+        Example:
         c a t s a n d d o g
 
         try splitting s into two part at each position : l and r
@@ -37,6 +45,12 @@ public class LE_140_Word_Break_II {
         c a t s a n d d o | g
     */
 
+    /**
+     * Solution 1 : DP
+     * @param s
+     * @param wordDict
+     * @return
+     */
     public List<String> wordBreak(String s, List<String> wordDict) {
         return helper(s, new HashSet<String>(wordDict), new HashMap<>());
     }
@@ -44,9 +58,9 @@ public class LE_140_Word_Break_II {
     List<String> helper(String s, Set<String> dict, HashMap<String, List<String>> cache) {
         if (cache.containsKey(s)) return cache.get(s);
 
-        List<String> res = new ArrayList<>();
+        List<String> cur = new ArrayList<>();
         if (dict.contains(s)) {
-            res.add(s);
+            cur.add(s);
         }
 
         for (int i = 1; i < s.length(); i++) {
@@ -54,15 +68,16 @@ public class LE_140_Word_Break_II {
             String r = s.substring(i);
 
             if (dict.contains(r)) {
+                //!!! helper(l, , ), "l", NOTS "2"!!!
                 List<String> words = helper(l, dict, cache);
                 for (String word : words) {
-                    res.add(word + " " + r);
+                    cur.add(word + " " + r);
                 }
             }
         }
 
-        cache.put(s, res);
-        return res;
+        cache.put(s, cur);
+        return cur;
     }
-
 }
+
