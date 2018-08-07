@@ -98,7 +98,6 @@ public class LI_683_Word_Break_III {
             if(dict.contains(prefix)){
                 String suffix = s.substring(i);
 
-                //???
                 res = res + dfs(suffix, dict);
             }
         }

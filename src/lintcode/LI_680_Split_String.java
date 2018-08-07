@@ -47,13 +47,14 @@ public class LI_680_Split_String {
             temp.remove(temp.size() - 1);
         }
 
-//        for (int j = 1; j < 3; j ++){
-//            if (startIdx + j <= s.length()) {
-//                temp.add(s.substring(startIdx, startIdx + j));
-//                helper(s, startIdx + j, res, temp);
-//                temp.remove(temp.size() - 1);
-//            }
-//        }
+        /** Or
+            for (int i = 1; i <= 2 && startIdx + i <= s.length(); i++) {
+                String cur = s.substring(startIdx, startIdx + i);
+                temp.add(cur);
+                helper(s, startIdx + i, res, temp);
+                temp.remove(temp.size() - 1);
+            }
+         **/
     }
 
 }
