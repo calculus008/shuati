@@ -44,7 +44,65 @@ public class LE_139_Word_Break {
         Space : O(1)
     */
 
-    public boolean wordBreak(String s, List<String> wordDict) {
+    /**
+     * Best solution, DP
+     *
+     */
+    public boolean wordBreak(String s, Set<String> dict) {
+        if (s == null || s.length() == 0) {
+            return true;
+        }
+
+        int n = s.length();
+        // 长度为n的单词 有n + 1个切割点 比如: _l_i_n_t_
+        boolean[] dp = new boolean[n + 1];
+        // 当s长度为0时
+        dp[0] = true;
+        //find the max length of the word in dict
+        int max = getMaxLen(dict);
+
+        /**
+         * The key improvement from wordBreak2 is in inner loop,
+         * inner loop j is looping for the length of the max length of words in dict,
+         * hence it no longer needs to loop, in worst case, from 0 to the length of s.
+         * It only needs to loop from 1 to the max length of the words in dict and
+         * avoids the possibility of MLE when s is huge.
+         *
+         * Key changes :
+         * 1.for (int j = 1; j <= max && j <= i; j++)
+         * 2.dp[i - j]
+         * 3.s.substring(i - j, i)
+         *
+
+         */
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= max && j <= i; j++) {
+                if (dp[i - j] && dict.contains(s.substring(i - j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+
+        return dp[n];
+
+    }
+
+    private int getMaxLen(Set<String> dict) {
+        int max = 0;
+        for (String word : dict) {
+            max = Math.max(max, word.length());
+        }
+        return max;
+    }
+
+
+    /**
+     * This solution MLE on lintcode for the case that given s is very large
+     *
+     * Here dp[i] means if chars from idx 0 to i -1 can be broken into valid words
+     */
+    public boolean wordBreak2(String s, List<String> wordDict) {
         if (s == null || s.length() == 0) return false;
 
         int n = s.length();
@@ -70,7 +128,7 @@ public class LE_139_Word_Break {
      Solution 2 : Recurssion with cache. Slower solution, takes 36 ms.
                   AC at leetcode, but MLE(Memory Limit Exceed) at Lintcode (139)
      */
-     public boolean wordBreak1(String s, List<String> wordDict) {
+     public boolean wordBreak3(String s, List<String> wordDict) {
          Set<String> dict = new HashSet<>(wordDict);
          Map<String, Boolean> cache = new HashMap<>();
 

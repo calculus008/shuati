@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yuank on 3/8/18.
  */
 public class LE_93_Restore_IP_Addresses {
-    /*
+    /**
         Given a string containing only digits, restore it by returning all possible valid IP address combinations.
 
         For example:
@@ -80,6 +80,41 @@ public class LE_93_Restore_IP_Addresses {
             sb.setLength(n);
         }
     }
+
+    //My DFS
+    public List<String> restoreIpAddresses_my(String s) {
+        List<String> res = new ArrayList<>();
+        if (s == null || s.length() < 4) {
+            return res;
+        }
+
+        helper(s, res, new StringBuilder(), 0, 0);
+        return res;
+    }
+
+    private void helper(String s, List<String> res, StringBuilder sb, int start, int count) {
+        if (count > 4) return;
+
+        if (start == s.length() && count == 4) {
+            res.add(sb.toString());
+            return;
+        }
+
+        int len = sb.length();
+
+        for (int i = 1; i <= 3 && start + i <= s.length(); i++) {
+            String temp = s.substring(start, start + i);
+
+            if ((temp.charAt(0) == '0' && temp.length() > 1) || (temp.length() == 3 && Integer.parseInt(temp) > 255)) {
+                continue;
+            }
+
+            sb.append(temp).append(count == 3 ? "" : ".");
+            helper(s, res, sb, start + i, count + 1);
+            sb.setLength(len);
+        }
+    }
+
 
     //Use String, 5 ms
     public static void helper2(List<String> res, String s, int idx, int count, String ret) {

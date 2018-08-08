@@ -159,13 +159,13 @@ public class LE_10_Regular_Expression_Matching {
 
         /**
             consider 'a*' as a bundle
-            case 1 : See 'a*' as empty, jump 2 positions and recurse
-            case 2 : See if 'a*' matches multiple chars in s - chars at sIdx and pIdx match (both are 'a'),
+            case 1 : See if 'a*' matches multiple chars in s - chars at sIdx and pIdx match (both are 'a'),
                      move on to the next one in s, recurse.
+            case 2 : See 'a*' as empty, jump 2 positions and recurse
          **/
         if (pIdx + 1 < p.length() && p.charAt(pIdx + 1) == '*') {
-            match = helper(s, sIdx, p, pIdx + 2, visited, mem)
-                    || (isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx, visited, mem));
+            match = (isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx, visited, mem)
+                    || helper(s, sIdx, p, pIdx + 2, visited, mem));
         } else {
             match = isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx + 1, visited, mem);
         }

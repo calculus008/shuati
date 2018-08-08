@@ -110,4 +110,73 @@ public class LE_301_Remove_Invalid_Parentheses {
 
         return l == 0;
     }
+
+    /**
+     * my version
+     */
+    public List<String> removeInvalidParentheses2(String s) {
+        List<String> res = new ArrayList<>();
+        if (s == null || s.length() == 0) {//!!! end condition
+            res.add("");
+            return res;
+        }
+
+        int[] invalid = getInvalid(s);
+        helper(s, res, 0, invalid[0], invalid[1]);
+        return res;
+    }
+
+    private void helper2(String s, List<String> res, int pos, int left, int right) {
+        if (left == 0 && right == 0)  {
+            if (isValid2(s)) {
+                res.add(s);
+            }
+            return;
+        }
+
+        for (int i = pos; i < s.length(); i++) {//!!! for loop
+            if (i != pos && s.charAt(i) == s.charAt(i - 1)) {//remove duplicates
+                continue;
+            }
+
+            char c = s.charAt(i);
+            if (c == '(' || c == ')') {
+                //!!! use sb only for remove a char, each changed String is passed in params and it's not changed, so no need to do recovery
+                StringBuilder sb = new StringBuilder(s);
+                sb.deleteCharAt(i);
+                String temp = sb.toString();
+
+                if (c == ')' && right > 0) {
+                    helper2(temp, res, i, left, right - 1);
+                }
+
+                if (c == '(' && left > 0) {
+                    helper2(temp, res, i, left - 1, right);
+                }
+            }
+        }
+    }
+
+    private int[] getInvalid(String s) {
+        int[] res = new int[2];
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                res[0]++;
+            } else if (c == ')') {
+                if (res[0] == 0) {
+                    res[1]++;
+                } else {
+                    res[0]--;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private boolean isValid2(String s) {
+        int[] res = getInvalid(s);
+        return res[0] == 0 && res[1] == 0;
+    }
+
 }

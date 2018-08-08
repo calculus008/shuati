@@ -56,8 +56,10 @@ public class LE_140_Word_Break_II {
     }
 
     List<String> helper(String s, Set<String> dict, HashMap<String, List<String>> cache) {
+        //cache containsKey
         if (cache.containsKey(s)) return cache.get(s);
 
+        //dict contains
         List<String> cur = new ArrayList<>();
         if (dict.contains(s)) {
             cur.add(s);
@@ -68,7 +70,7 @@ public class LE_140_Word_Break_II {
             String r = s.substring(i);
 
             if (dict.contains(r)) {
-                //!!! helper(l, , ), "l", NOTS "2"!!!
+                //!!! helper(l, , ), "l", NOT "r"!!!
                 List<String> words = helper(l, dict, cache);
                 for (String word : words) {
                     cur.add(word + " " + r);
