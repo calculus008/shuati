@@ -51,7 +51,7 @@ public class LE_31_NextPermutation {
         1 2 2 1 1 3 3 4 5
               i       j
 
-     https://leetcode.com/problems/next-permutation/solution/
+        https://leetcode.com/problems/next-permutation/solution/
      **/
 
     public int[] nextPermutation(int[] nums) {
