@@ -237,7 +237,23 @@ LE_44_Wildcards_Matching                                  (lint 192)
 LE_10_Regular_Expression_Matching                         (lint 154)
 LE_140_Word_Break_II                                      (lint 582)
 
-LE_139_Word_Break                                         (lint 107)
+LE_139_Word_Break                                         (lint 107)   (***)
 LI_680_Split_String
 LI_570_Find_The_Missing_Number_II
 LI_652_Factorization
+LE_93_Restore_IP_Addresses                                (lint 426)
+LE_22_Generate_Parentheses                                (lint 427)
+LE_301_Remove_Invalid_Parentheses                         (lint 780)   (***)
+
+====================================================
+
+7.基于排列、图的DFS
+LE_46_Permutation                                         (lint 15)
+LE_47_Permutation_II                                      (lint 16)
+LE_31_NextPermutation                                     (lint 52)
+LE_51_N_Queens                                            (lint 33)
+LE_52_N_Quees_II                                          (lint 34)
+
+Related:
+LI_211_String_Permutation
+LE_290_Word_Pattern
