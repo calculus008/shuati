@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yuank on 2/28/18.
  */
 public class LE_47_Permutation_II {
-    /*
+    /**
         Given a collection of numbers that might contain duplicates, return all possible unique permutations.
 
         For example,
@@ -20,35 +20,47 @@ public class LE_47_Permutation_II {
         ]
      */
 
-    public static List<List<Integer>> permuteUnique(int[] nums) {
+    public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
-        if (null == nums || nums.length == 0) return res;
+        if (nums == null) {
+            return res;
+        }
 
-        //!!!
         Arrays.sort(nums);
-
-        helper(nums, new boolean[nums.length], new ArrayList<Integer>(), res);
+        helper(nums, res, new ArrayList<>(), new boolean[nums.length]);
         return res;
     }
 
-    //O(n * n!)
-    private static void helper(int[] nums, boolean[] used, List<Integer> temp, List<List<Integer>> res) {
+    private void helper(int[] nums, List<List<Integer>> res, List<Integer> temp, boolean[] visited) {
         if (temp.size() == nums.length) {
             res.add(new ArrayList<>(temp));
             return;
         }
 
         for (int i = 0; i < nums.length; i++) {
+            if (visited[i]) {
+                continue;
+            }
+
             /**
-            !!! "!used[i-1]" - this value has been tried for current location (used[i-1] has been set back to false after used for current location)
-            */
-            if (used[i] || (i > 0 && nums[i] == nums[i-1] && !used[i-1])) continue;
+             * For duplicates, we just need to choose one of them as "representative",
+             * the rule we use is to choose the first one (after sort).
+             *
+             * nums[i] == nums[i - 1] : only compare its previous neighbour
+             * i > 0                  : make sure "nums[i - 1]" not out of index boundary.
+             * !visited[i - 1]        : since we always choose the first one as "representative",
+             *                          now with identical char at i and i - 1, the previous one is not used,
+             *                          therefore it is invalid case, just continue.
+             */
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
+                continue;
+            }
 
             temp.add(nums[i]);
-            used[i] = true;
-            helper(nums, used, temp, res);
-            used[i] = false;
+            visited[i] = true;
+            helper(nums, res, temp, visited);
             temp.remove(temp.size() - 1);
+            visited[i] = false;
         }
     }
 }

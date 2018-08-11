@@ -53,11 +53,12 @@ public class LE_51_N_Queens {
                 //OK, column i works for row pos, move on to the next row (pos + 1)
                 helper(res, queens, pos + 1);
             }
-            //queens[pos] will be updated each loop, so no need to recover its value as normal backtracking logic does
+            //!!!queens[pos] will be updated each loop, so no need to recover its value as normal backtracking logic does
         }
     }
 
     private boolean isValid(int[] queens, int row) {
+        //!!! "i < row"
         for (int i = 0; i < row; i++) {
             if (queens[i] == queens[row]) {//ith row has the same column value as current row
                 return false;

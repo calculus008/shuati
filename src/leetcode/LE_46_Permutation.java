@@ -22,7 +22,42 @@ public class LE_46_Permutation {
         ]
      */
 
-    //Time : O(n!), Space : O(n)
+    /**
+        Solution 1 : use visited[] to tell if current number is in the sequence.
+     */
+    public List<List<Integer>> permute_JiuZhang(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null) {
+            return res;
+        }
+
+        helper(nums, res, new ArrayList<>(), new boolean[nums.length]);
+        return res;
+    }
+
+    private void helper(int[] nums, List<List<Integer>> res, List<Integer> temp, boolean[] visited) {
+        if (temp.size() == nums.length) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+
+        //!!! start from 0
+        for (int i = 0; i < nums.length; i++) {
+            //!!! use visited[]
+            if (visited[i])  {
+                continue;
+            }
+
+            temp.add(nums[i]);
+            visited[i] = true;
+            helper(nums, res, temp, visited);
+            temp.remove(temp.size() - 1);
+            visited[i] = false;
+        }
+    }
+
+
+    //Solution 2, Time : O(n!), Space : O(n)
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         if (null == nums || nums.length == 0) return res;
@@ -46,7 +81,7 @@ public class LE_46_Permutation {
         }
     }
 
-    //O(n!)
+    //Solution 3 : O(n!)
     private void helper1(int[] nums, int start, List<List<Integer>> res) {
         if (start == nums.length) {
             List<Integer> list = new ArrayList<>();
