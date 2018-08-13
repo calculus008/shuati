@@ -2,6 +2,7 @@ package leetcode;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -53,7 +54,9 @@ public class LE_291_Word_Pattern_II {
         // pattern character does not exist in the map
         for (int k = i; k < str.length(); k++) {//try in str, find which substring mapping with c can work out
             String cur = str.substring(i, k + 1);
-            // use a hash set to avoid duplicate matches, if character a matches string "red", then character b cannot be used to match "red", if duplicate matches is allowed, we can remove the logic of HashSet
+            // !!!use a hash set to avoid duplicate matches, if character "a" matches string "red",
+            // then character "b" cannot be used to match "red", if duplicate matches is allowed,
+            // we can remove the logic of HashSet
             if (set.contains(cur)) continue;
 
             map.put(c, cur);
@@ -66,6 +69,53 @@ public class LE_291_Word_Pattern_II {
         }
 
         // we've tried our best but still no luck
+        return false;
+    }
+
+    //My version with same logic
+    public boolean wordPatternMatch_my(String pattern, String str) {
+        if (pattern == null || str == null) return false;
+
+        Map<Character, String> map = new HashMap<>();
+        Set<String> set = new HashSet<>();
+        return helper(pattern, str, 0, 0, map, set);
+    }
+
+    private boolean helper(String pattern, String str, int i, int j, Map<Character, String> map, Set<String> set) {
+        if (i == pattern.length() && j == str.length()) return true;
+        if (i == pattern.length() || j == str.length()) return false;
+
+        char c = pattern.charAt(i);
+        if (map.containsKey(c)) {
+            String s = map.get(c);
+            if (str.startsWith(s, j)) {
+                return helper(pattern, str, i + 1, j + s.length(), map, set);
+            } else {/**!!!**/
+                return false;
+            }
+        }
+
+        for (int k = j; k < str.length(); k++) {
+            String t = str.substring(j, k + 1);
+            if (set.contains(t)) {
+                continue;
+            }
+
+            set.add(t);
+            map.put(c, t);
+            /**
+             !!! return or not return? 不是直接返回 helper() 的返回值，
+             要先判断，如果helper()返回true, 则返回true, 如果返回false,
+             则回复set和map里的状态，继续回溯。
+             **/
+            if (helper(pattern, str, i + 1, j + t.length(), map, set)) {
+                return true;
+            } else {
+                set.remove(t);
+                map.remove(c);
+            }
+        }
+
         return false;
     }
 }
