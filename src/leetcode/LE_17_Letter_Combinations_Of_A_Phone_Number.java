@@ -25,6 +25,9 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
          your answer could be in any order you want.
 
          Medium
+
+         Follow up :
+         如果有一个词典(Dictionary)，要求组成的单词都是词典里的，如何优化?  Trie or Hash
      */
 
     /**
