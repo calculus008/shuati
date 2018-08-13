@@ -250,10 +250,19 @@ LE_301_Remove_Invalid_Parentheses                         (lint 780)   (***)
 7.基于排列、图的DFS
 LE_46_Permutation                                         (lint 15)
 LE_47_Permutation_II                                      (lint 16)
-LE_31_NextPermutation                                     (lint 52)
+LI_010_String_Permutation_II
+LE_31_NextPermutation                                     (lint 52, 190)
+LI_51_Previous_Permutation
 LE_51_N_Queens                                            (lint 33)
 LE_52_N_Quees_II                                          (lint 34)
+LE_681_Next_Closest_Time                                  (lint 862)
+LE_17_Letter_Combinations_Of_A_Phone_Number               (lint 425)
+LE_212_Word_Search_II                                     (lint 132)
+LE_291_Word_Pattern_II                                    (lint 829)
+LE_126_Word_Ladder_II                                     (lint 121)
 
 Related:
 LI_211_String_Permutation
 LE_290_Word_Pattern
+LI_197_Permutation_Index
+LI_198_Permutation_Index_II
