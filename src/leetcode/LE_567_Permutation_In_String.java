@@ -23,7 +23,7 @@ public class LE_567_Permutation_In_String {
          The input strings only contain lower case letters.
          The length of both given strings is in range [1, 10,000].
 
-         Same as LE_438
+         Same as LE_438_Find_All_Anagrams_In_A_String
 
          Medium
      */
