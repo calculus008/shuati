@@ -143,7 +143,7 @@ public class LE_126_Word_Ladder_II {
             for (char ch = 'a'; ch <= 'z'; ch++) {
                 if (ch != crt.charAt(i)) {
                     String expanded = crt.substring(0, i) + ch
-                            + crt.substring(i + 1);
+                              + crt.substring(i + 1);
                     if (dict.contains(expanded)) {
                         expansion.add(expanded);
                     }

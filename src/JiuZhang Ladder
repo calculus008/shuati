@@ -160,70 +160,6 @@ LE_298_Binary_Tree_Longest_Consecutive_Sequence     (lint 595)
 LE_549_Binary_Tree_Longest_Consecutive_Sequence_II  (lint 614)
 LI_619_Binary_Tree_Longest_Consecutive_Sequence_III
 
--------------------
-From Edward's Tree Problem list
-
-Basic
-LE_144_Binary_Tree_Preorder_Traversal
-LE_94_Binary_Tree_Inorder_Traversal
-LE_145_Binary_Tree_Postorder_Traversal
-LE_102_Binary_Tree_Level_Order_Traversal
-
-Preorder
-LE_100_Same_Tree
-LE_101_Symmetric_Tree
-LE_226_Invert_Binary_Tree
-LE_257_Binary_Tree_Paths
-LE_112_Path_Sum
-LE_113_Path_Sum_II
-LE_129_Sum_Root_To_Leaf_Numbers
-LE_298_Binary_Tree_Longest_Consecutive_Sequence
-LE_111_Min_Depth_Of_Binary_Tree
-
-Postorder
-LE_104_Max_Depth_Of_Binary_Tree
-LE_110_Balanced_Binary_Tree
-LE_124_Binary_Tree_Max_Path_Sum                          (***)
-LE_250_Count_Univalue_Subtrees
-LE_366_Find_Leaves_Of_Binary_Tree
-LE_337_House_Robber_III
-
-BFS
-LE_107_Binary_Tree_Level_Order_Traversal_II
-LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
-LE_199_Binary_Tree_Right_Side_View                       (***)
-
-BFS
-LE_98_Validate_BST
-LE_235_Lowest_Common_Ancestor_Of_BST
-LE_236_Lowest_Common_Ancestor_Of_BT
-LE_108_Convert_Sorted_Array_To_BST                       (***)
-LE_109_Convert_Sorted_List_To_BST
-LE_173_Binary_Search_Tree_Iterator
-LE_230_Kth_Smallest_Element_In_BST
-LE_285_Inorder_Successor_In_BST
-LE_270_Closest_BST_Value
-LE_272_Closest_BST_Value_II
-LE_99_Recover_BST
-
-Hard By Importance
-1.Very Important
-LE_116_Populating_Next_Right_Pointers_In_Each_Node
-LE_117_Populating_Next_Right_Pointers_In_Each_Node_II
-LE_314_Binary_Tree_Vertical_Order_Traversal              (lint 651, 高频班题）
-LE_96_Unique_BST                                         (DP)
-
-2.Low Frequency, less important
-LE_156_Binary_Tree_Upside_Down
-LE_114_Flatten_Binary_Tree_To_LinkedList
-LE_255_Verify_Preorder_Sequence_In_BST
-LE_333_Largest_BST_Subtree
-LE_222_Count_Complete_Tree_Nodes
-LE_105_Construct_Binary_Tree_From_Preorder_Inorder
-LE_106_Construct_Binary_Tree_From_Postorder_Inorder
-LE_95_Unique_BST_II
-LE_331_Verify_Preorder_Serialization_Of_A_Binary_Tree
-
 ====================================================
 
 6.基于组合的DFS
@@ -266,3 +202,7 @@ LI_211_String_Permutation
 LE_290_Word_Pattern
 LI_197_Permutation_Index
 LI_198_Permutation_Index_II
+
+====================================================
+
+8.数据结构：栈，队列，哈希表，堆
