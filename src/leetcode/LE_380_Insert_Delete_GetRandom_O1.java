@@ -3,6 +3,7 @@ package leetcode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by yuank on 8/17/18.
