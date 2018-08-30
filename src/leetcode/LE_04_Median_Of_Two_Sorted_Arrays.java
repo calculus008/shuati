@@ -68,9 +68,9 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
             double r2 = m2==n2*2? Integer.MAX_VALUE:nums2[m2/2];
 
             if(l1 > r2) { //means there are too many big elemts on the left side of nums1, we need to move to left in nums1
-                high = m1-1;
+                high = m1 - 1;
             } else if(l2 > r1) {//means there are too many big elements on the left side of nums2, we need to move right in nums1
-                low = m1+1;
+                low = m1 + 1;
             } else {
                 return (Math.max(l1, l2) + Math.min(r1, r2))/2;
             }
