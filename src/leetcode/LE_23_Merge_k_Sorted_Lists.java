@@ -20,9 +20,12 @@ public class LE_23_Merge_k_Sorted_Lists {
          Output: 1->1->2->3->4->4->5->6
      */
 
+    /**
+     * Time : O(nlogk), n - number of lists, k - length of list
+     * **/
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
-        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a, b) -> a.val - b.val); //!!!"<>"
 
         ListNode dummy = new ListNode(0);
         ListNode cur = dummy;

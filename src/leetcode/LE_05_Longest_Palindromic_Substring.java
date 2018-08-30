@@ -23,8 +23,9 @@ public class LE_05_Longest_Palindromic_Substring {
         Output: "bb"
      */
 
-    //Time : O(n ^ 2), Space : O(n ^ 2)
-
+    /**
+     * Time : O(n ^ 2), Space : O(n ^ 2)
+     */
 
     //Solution 1 : Expand left and right, 枚举中心轴
      String res = "";
