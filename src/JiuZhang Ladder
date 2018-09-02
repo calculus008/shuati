@@ -211,10 +211,13 @@ LE_346_Moving_Average_From_Data_Stream
 LE_225_Implement_Stack_Using_Queues
 LI_494_Implement_Stack_By_Two_Queues
 LE_387_First_Unique_Character_In_A_String (*)
-658. Find K Closest Elements
-LE_347_Top_K_Frequent_Elements
+LI_612_K_Closest_Points
+LE_347_Top_K_Frequent_Elements                            (lint 544)
+LI_544_Top_K_Largest_Numbers
 LE_23_Merge_k_Sorted_Lists
 LE_232_Implement_Queue_Using_Stacks
 LE_264_Ugly_Number_II
 LE_146_LRU_Cache
 LI_209_First_Unique_Character_In_A_String
+LE_346_Moving_Average_From_Data_Stream                    (lint 642)
+LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
