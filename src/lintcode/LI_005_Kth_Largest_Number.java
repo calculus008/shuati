@@ -55,7 +55,7 @@ public class LI_005_Kth_Largest_Number {
     }
 
     /**
-     * Version that does not need to calculate k when recurssing
+     * Version that does not need to calculate k when doing recursion
      */
     public int kthLargestElement1(int k, int[] nums) {
         // write your code here
