@@ -25,7 +25,9 @@ public class LE_30_SubstrConactWords {
         Hard
      */
 
-    //Solution 1 : O(n ^ 2)
+    /**
+     * Solution 1 : Time : O(n ^ 2), brutal force
+     **/
     public List<Integer> findSubstring(String s, String[] words) {
         List<Integer> res = new ArrayList<>();
         if (s == null || s.length() == 0) return res;
@@ -60,7 +62,9 @@ public class LE_30_SubstrConactWords {
         return res;
     }
 
-    //Solution 2 : Two map solution
+    /**
+     * Solution 2 : Two map solution, Time : O(n ^ 2)
+     * */
     public ArrayList<Integer> findSubstring2(String S, String[] L) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         HashMap<String, Integer> toFind = new HashMap<String, Integer>();
@@ -153,6 +157,69 @@ public class LE_30_SubstrConactWords {
                     seen.clear();
                     count = 0;
                     l = j + len;//l records start index of current sliding window
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
+        Solution 4
+        Best Solution. Same sliding window algorithm as Solution 3. Always updating seen and count++ at the same time,
+        so avoid confusing statement like "if (seen.get(first) < need.get(first))"
+
+        It also run faster, 21 ms. Solution 3 is 206 ms
+     */
+    public List<Integer> findSubstring4(String s, String[] words) {
+        List<Integer> ans = new ArrayList<>();
+        if (words == null || words.length == 0 || s == null || s.length() == 0) return ans;
+
+        final Map<String, Integer> need = new HashMap<>();
+        for (final String word : words) {
+            need.put(word, need.getOrDefault(word, 0) + 1);
+        }
+        final int n = s.length();
+        final int num = words.length;
+        final int len = words[0].length();
+
+        for (int i = 0; i < len; i++) {
+            int l = i, count = 0;
+            final Map<String, Integer> seen = new HashMap<>();
+
+            //!!! "j <= n - len", last idx : n - 1, therefore (n - 1) - len + 1 = n - len
+            for (int j = i; j <= n - len; j += len) {
+                final String word = s.substring(j, j + len);
+                if (need.containsKey(word)) {
+                    if (seen.getOrDefault(word, 0) < need.get(word)) {
+                        seen.put(word, seen.getOrDefault(word, 0) + 1);
+                        count++;
+                    } else {
+                        while (seen.get(word) >= need.get(word)) {
+                            String first = s.substring(l, l += len);
+                            seen.put(first, seen.get(first) - 1);
+                            count--;
+                        }
+
+                        seen.put(word, seen.getOrDefault(word, 0) + 1);
+                        count++;
+                    }
+
+                    if (count == num) {
+                        ans.add(l);
+
+                        //move sliding window starting point
+                        count--;
+                        String first = s.substring(l, l += len);
+                        seen.put(first, seen.get(first) - 1);
+                    }
+                } else {
+                    /**
+                     * 每次发现不在词典里的词，重新开始找，清空seen和count,
+                     * 把sliding window的起点移到下一个词。
+                     */
+                    seen.clear();
+                    count = 0;
+                    l = j + len;//l records start (or left) index of current sliding window
                 }
             }
         }

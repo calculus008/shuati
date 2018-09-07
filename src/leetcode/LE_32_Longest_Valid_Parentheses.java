@@ -6,12 +6,13 @@ import java.util.Stack;
  * Created by yuank on 2/26/18.
  */
 public class LE_32_Longest_Valid_Parentheses {
-    /*
-    Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+    /**
+         Given a string containing just the characters '(' and ')',
+         find the length of the longest valid (well-formed) parentheses substring.
 
-    For "(()", the longest valid parentheses substring is "()", which has length = 2.
+         For "(()", the longest valid parentheses substring is "()", which has length = 2.
 
-    Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
+         Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
      */
 
     public int longestValidParentheses(String s) {
@@ -23,13 +24,14 @@ public class LE_32_Longest_Valid_Parentheses {
             if (s.charAt(i) == '(') {
                 stack.push(i);
             } else {
-                //The idea is simple, we only update the result (max) when we find a “pair”.
-                //If we find a pair. We throw this pair away and see how big the gap is between current and previous invalid.
-                //Key : the length is current idx minus previous invalid idx
-                //Example : idx  0 1 2 3 4 5 6
-                //               ) ) ) ( ( ) )
-                //First match pair is idx 4 and 5, length is 5 - 3 = 2, next match is 3 and 6, length is 6 - 2 = 4
-
+                /**
+                    The idea is simple, we only update the result (max) when we find a “pair”.
+                    If we find a pair. We throw this pair away and see how big the gap is between current and previous invalid.
+                    Key : the length is current idx minus previous invalid idx
+                    Example : idx  0 1 2 3 4 5 6
+                                   ) ) ) ( ( ) )
+                    First match pair is idx 4 and 5, length is 5 - 3 = 2, next match is 3 and 6, length is 6 - 2 = 4
+                 */
                 stack.pop();
 
                 if (stack.isEmpty()) {

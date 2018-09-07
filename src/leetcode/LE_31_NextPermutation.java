@@ -38,16 +38,18 @@ public class LE_31_NextPermutation {
         After the first while loop:
         1 2 1 5 4 3 3 2 1
             * i
+               <----------
 
-        After the second while loop:
+        After the second while loop: !!!find the smallest number between num[i,n-1] that is larger than num[i-1]
         1 2 1 5 4 3 3 2 1
             * i       j
+               <----------
 
         Swap nums[i-i] and nums[j]:
         1 2 2 5 4 3 3 1 1
             * i       j
 
-        Reverse from i - result , the smallest number bigger than the given number
+        Reverse from i - result, the smallest number bigger than the given number
         1 2 2 1 1 3 3 4 5
               i       j
 
@@ -67,7 +69,7 @@ public class LE_31_NextPermutation {
             i--;
         }
 
-        if (i != 0) {
+        if (i != 0) {//!!!
             int j = len - 1;
             while (nums[j] <= nums[i - 1]) {
                 j--;
@@ -75,7 +77,7 @@ public class LE_31_NextPermutation {
 
             /**
              !!! swap index i - 1 and j, not i and j
-             swap it withthe smallest number between num[i,n-1] that is larger than num[i-1].
+             swap it with the smallest number between num[i,n-1] that is larger than num[i-1].
              For example, original number is 121543321, we want to swap the '1' at position 2 with '2' at position 7.
                                                *    *
              **/
