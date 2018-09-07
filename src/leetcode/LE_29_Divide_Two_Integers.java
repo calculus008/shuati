@@ -53,6 +53,34 @@ public class LE_29_Divide_Two_Integers {
         }
     }
 
+    /**
+     * 8 / 2
+     *
+     * a = 8, b = 2
+     *
+     * sum = 2,  multiple = 1
+     *
+     * sum = 4,  multiple = 2
+     *
+     * return 2 + 2
+     * ------------
+     *
+     * a = 8 - 4 = 4, b = 2
+     *
+     * sum = 2
+     * multiple = 1
+     *
+     * sum = 4
+     * multiple = 2
+     *
+     * return 2 + 0
+     * ------------
+     *
+     * a = 4 - 4 = 0, b = 2
+     *
+     * return 0
+     *
+     */
     public long divide(long a, long b) {
         if (a < b) return 0;
         long sum = b;
@@ -64,5 +92,26 @@ public class LE_29_Divide_Two_Integers {
         }
 
         return multiple + divide(a - sum, b);
+    }
+
+    //Solution 2 : use bit operation
+    public int divide2(int dividend, int divisor) {
+        if (divisor == 0 || dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
+
+        int res = 0;
+        int sign = (dividend < 0) ^ (divisor < 0) ? -1 : 1;
+        long dvd = Math.abs((long) dividend);
+        long dvs = Math.abs((long) divisor);
+
+        while (dvs <= dvd) {
+            long temp = dvs, mul = 1;
+            while (dvd >= temp << 1) {
+                temp <<= 1;
+                mul <<= 1;
+            }
+            dvd -= temp;
+            res += mul;
+        }
+        return sign == 1 ? res : -res;
     }
 }
