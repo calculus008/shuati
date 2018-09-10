@@ -63,7 +63,7 @@ public class LI_545_Top_K_Largest_Numbers_II {
          */
         public List<Integer> topk() {
             /**
-             * !!! 关键：用Iterator遍历qp,因为我们不能用poll()把元素拿出来，
+             * !!! 关键：用Iterator遍历pq, 因为我们不能用poll()把元素拿出来，
              *           要保留在pq中。
              * **/
             List<Integer> res = new ArrayList<>();

@@ -43,7 +43,7 @@ public class LI_209_First_Unique_Character_In_A_String {
      * set : chars appear more than once.
      * map : record previous node for each node in linked list. Simulate a double linked list.
      *
-     * By maintaining this logic, fist unique char is always at the head of linked list (dummy.next.val)
+     * By maintaining this logic, first unique char is always at the head of linked list (dummy.next.val)
      *
      * We can also use double linked list like in LRU to do this.
      *
