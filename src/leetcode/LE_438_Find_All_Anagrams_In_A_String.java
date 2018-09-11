@@ -57,13 +57,22 @@ public class LE_438_Find_All_Anagrams_In_A_String {
             m2[c - 'a']++;
         }
 
+        /**
+         * Sliding window, each time move one out of the window and add one to the window
+         */
         for (int i = 0; i < l1; i++) {
             if (i >= l2) {
+                /**
+                 * move the first one in window out
+                 */
                 m1[s.charAt(i - l2) - 'a']--;
             }
+            /**
+             * add new one to window
+             */
             m1[s.charAt(i) - 'a']++;
 
-            if (Arrays.equals(m1, m2)) {
+            if (Arrays.equals(m1, m2)) {//!!! "Arrays.equals"
                 /**
                  * 是要加开始的下标！！！
                  */

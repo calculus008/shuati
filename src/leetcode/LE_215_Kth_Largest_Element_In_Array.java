@@ -19,6 +19,13 @@ public class LE_215_Kth_Largest_Element_In_Array {
     /**
         Solution 1 : use min heap.
         Time : O(nlogk), Space : O(k)
+
+        !!!
+        Under normal condition, Solution 2 (quick select) is better (O(n)).
+        If "N is much larger than k", headp solution is better :
+            1.quick select只是期望是O(N), 并不是真正意义上的O(N)
+            2.N 远大于k，说明logk的复杂度很小，我们可以采用Nlogk复杂度的算法。
+        https://www.jiuzhang.com/qa/4260/
      **/
     public int findKthLargest1(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
