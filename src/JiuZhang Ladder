@@ -221,3 +221,14 @@ LE_146_LRU_Cache
 LI_209_First_Unique_Character_In_A_String
 LE_346_Moving_Average_From_Data_Stream                    (lint 642)
 LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
+LE_23_Merge_k_Sorted_Lists                                (lint 104)
+
+LI_545_Top_K_Largest_Numbers_II
+LI_486_Merge_K_Sorted_Arrays
+LI_685_First_Unique_Number_In_Stream
+LI_613_High_Five
+LE_128_Longest_Consecutive_Sequence                       (lint 124)
+
+LE_251_Flatten_2D_Vector                                  (lint 601)
+LE_281_Zigzag_Iterator                                    (lint 540)
+LE_339_Nested_List_Weight_Sum                             (lint 551)

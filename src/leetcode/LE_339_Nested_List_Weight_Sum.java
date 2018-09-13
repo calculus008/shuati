@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by yuank on 5/18/18.
@@ -72,6 +70,37 @@ public class LE_339_Nested_List_Weight_Sum {
                 }
             }
             depth++;
+        }
+
+        return res;
+    }
+
+    /**
+     * Solution 3, iterative using Iterator, the same logic as LE_341_Flatten_Nested_List_Iterator
+     */
+    public int depthSum(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.size() == 0) return 0;
+
+        Stack<Iterator<NestedInteger>> stack = new Stack<>();
+        stack.push(nestedList.iterator());
+        int res = 0;
+        int level = 1;
+
+        while (!stack.isEmpty()) {
+            Iterator<NestedInteger> top = stack.peek();
+            if (!top.hasNext()) {
+                stack.pop();
+                level--;
+                continue;
+            }
+
+            NestedInteger n = top.next();
+            if (n.isInteger()) {
+                res += level * n.getInteger();
+            } else {
+                stack.push(n.getList().iterator());
+                level++;
+            }
         }
 
         return res;

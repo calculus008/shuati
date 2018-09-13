@@ -47,13 +47,20 @@ public class LE_281_Zigzag_Iterator {
 
         public int next() {
             Iterator cur = list.removeFirst();
-            int res = (Integer) cur.next(); //!!!"(Integer)"
+            int res = (Integer) cur.next(); //!!!"(Integer)"!!!
+
+            /**
+             * this check ensures "hasNext()" logic works
+             */
             if (cur.hasNext()) {
                 list.add(cur);
             }
             return res;
         }
 
+        /**
+         * !!! "!"  "!list.isEmpty()"
+         */
         public boolean hasNext() {
             return !list.isEmpty();
         }
