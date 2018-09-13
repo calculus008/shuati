@@ -133,28 +133,31 @@ public class LE_394_Decode_String {
     /**
      * Solution 2 : DFS
      * */
-    private int pos = 0;
+    int pos = 0;
     public String decodeStringDFS(String s) {
         StringBuilder sb = new StringBuilder();
         String num = "";
-        for (int i = pos; i < s.length(); i++) {
-            if (s.charAt(i) != '[' && s.charAt(i) != ']' && !Character.isDigit(s.charAt(i))) {
-                sb.append(s.charAt(i));
-            } else if (Character.isDigit(s.charAt(i))) {
-                num += s.charAt(i);
-            } else if (s.charAt(i) == '[') {
-                pos = i + 1;
+
+        for (int i = pos; i < s.length(); i++) {//!!!"i = pos"
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                num += c;
+            } else if(c == '[') {
+                pos = i + 1;//!!!
                 String next = decodeStringDFS(s);
-                for (int n = Integer.valueOf(num); n > 0; n--) {
+                for (int j = 0; j < Integer.valueOf(num); j++) {
                     sb.append(next);
                 }
-                num = "";
+                num = "";//!!!
                 i = pos;
-            } else if (s.charAt(i) == ']') {
+            } else if(c == ']') {
                 pos = i;
                 return sb.toString();
+            } else {
+                sb.append(c);
             }
         }
+
         return sb.toString();
     }
 }
