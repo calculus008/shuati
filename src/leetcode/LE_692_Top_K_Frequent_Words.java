@@ -65,4 +65,36 @@ public class LE_692_Top_K_Frequent_Words {
 
         return res;
     }
+
+    //Same algorithm, return String[]
+    public String[] topKFrequentWords2(String[] words, int k) {
+        int len = words.length;
+        String[] res = new String[k];
+
+        PriorityQueue<String>[] bucket = new PriorityQueue[len + 1];
+        Map<String, Integer>  map = new HashMap<>();
+
+        for (String word : words) {
+            map.put(word, map.getOrDefault(word, 0) + 1);
+        }
+
+        for (String key : map.keySet()) {
+            int num = map.get(key);
+            if (bucket[num] == null) {
+                bucket[num] = new PriorityQueue<>();
+            }
+            bucket[num].offer(key);
+        }
+
+        for (int i = len, j = 0; i >= 0 && j < k; i--) {
+            if (bucket[i] != null) {
+                while (bucket[i].size() != 0 && j < k) {
+                    res[j] = bucket[i].poll();
+                    j++;
+                }
+            }
+        }
+
+        return res;
+    }
 }

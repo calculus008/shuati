@@ -43,6 +43,10 @@ public class LI_685_First_Unique_Number_In_Stream {
      * 这样做的好处是在删除和加入的时候不用处理pre和next为null的情况。
      *
      * set记录出现过两次以上的数。
+     *
+     * 相比教育LRU:
+     * 1.这里不用移动node(moveToTail()), 只需要addToTail(), removeNode().
+     * 2.实际用了3种data structure: HashMap, Double LinkedList and HashSet(记录出现过两次以上的数)
      */
     public class Solution1 {
         class DListNode {

@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by yuank on 8/28/18.
@@ -149,4 +150,104 @@ public class LE_146_LRU_Cache {
         }
     }
 
+    /**
+     * Solution 2 , a more streamlined version from Solution 1
+     *
+     * Key
+     * 1.Map + Double Linked List
+     * 2.New node added to tail, used node (get or set) move to tail
+     * 3.LRU node is always the one pointed by head (head.next)
+     * 4.DLL structure : head <=> n1 <=> n2 <=> n3 <=> tail
+     * 5.When move node to tail, it's important to remember it has two actions:
+     *   remove node from its current location
+     *   add node to tail
+     *   So moveToTail() = removeNode() + addNodeToTail()
+     * 6.When capacity is full, remove LRU from head:
+     *   removeNode(head.next)
+     * 7.ListNode class must have "key" field, it is used when removing entry from map when capacity is full:
+     *   "map.remove(head.next.key);"
+     * 8.Notice in set(), two places we need to update "map" and DLL at the same time:
+     *   a.Add new node if KV pair is not in current data structure:
+     *             "  map.put(key, node);
+     *                addNodeToTail(node); "
+     *
+     *   b.Remove node when capacity is full:
+     *             "  map.remove(head.next.key);
+     *                removeHead();  "
+     *
+     */
+    public class LRUCache2 {
+        class ListNode{
+            int val, key;
+            ListNode pre, next;
+
+            public ListNode(int key, int val) {
+                this.key = key;
+                this.val = val;
+            }
+        }
+
+        Map<Integer, ListNode> map;
+        int capacity;
+        ListNode head = new ListNode(-1, -1);
+        ListNode tail = new ListNode(-1, -1);
+
+        public LRUCache2(int capacity) {
+            this.capacity = capacity;
+            map = new HashMap<>();
+            head.next = tail;
+            tail.pre = head;
+        }
+
+        private void removeNode(ListNode node) {
+            node.pre.next = node.next;
+            node.next.pre = node.pre;
+        }
+
+        private void addNodeToTail(ListNode node) {
+            node.next = tail;
+            node.pre = tail.pre;
+            tail.pre.next = node;
+            tail.pre = node;
+        }
+
+        private void moveToTail(ListNode node) {
+            removeNode(node);
+            addNodeToTail(node);
+        }
+
+        private void removeHead() {
+            removeNode(head.next);
+        }
+
+        public int get(int key) {
+            if (!map.containsKey(key)) {
+                return -1;
+            }
+
+            ListNode node = map.get(key);
+            int res = node.val;
+            moveToTail(node);
+
+            return res;
+        }
+
+        public void set(int key, int value) {
+            if (map.containsKey(key)) {
+                ListNode node = map.get(key);
+                node.val = value;
+                moveToTail(node);
+                return;
+            }
+
+            if (map.size() >= capacity) {
+                map.remove(head.next.key); //!!! The only place "key" field in ListNode class is used
+                removeHead();
+            }
+
+            ListNode node = new ListNode(key, value);
+            map.put(key, node);
+            addNodeToTail(node);
+        }
+    }
 }
