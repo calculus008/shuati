@@ -4,8 +4,9 @@ package leetcode;
  * Created by yuank on 3/4/18.
  */
 public class LE_64_Min_Path_Sum {
-    /*
-        Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
+    /**
+        Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right
+        which minimizes the sum of all numbers along its path.
 
         Note: You can only move either down or right at any point in time.
 

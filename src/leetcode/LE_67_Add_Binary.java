@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/4/18.
  */
 public class LE_67_Add_Binary {
-    /*
+    /**
         Given two binary strings, return their sum (also a binary string).
 
         For example,

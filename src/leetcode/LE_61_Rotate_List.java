@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/4/18.
  */
 public class LE_61_Rotate_List {
-    /*
+    /**
         Given a list, rotate the list to the right by k places, where k is non-negative.
 
         Example:
@@ -25,7 +25,11 @@ public class LE_61_Rotate_List {
         }
 
         runner.next = head;
-        //!!! i starts at "1", head already points to the first element.
+        /**
+        !!! i starts at "1", head already points to the first element.
+        !!! k % len
+            走到要新的head的前一个
+         **/
         for (int i = 1; i < len - k % len; i++) {
             head = head.next;
         }
