@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yuank on 3/3/18.
  */
 public class LE_60_Permutation_Sequence {
-    /*
+    /**
         The set [1,2,3,…,n] contains a total of n! unique permutations.
 
         By listing and labeling all of the permutations in order,
@@ -24,11 +24,14 @@ public class LE_60_Permutation_Sequence {
         Note: Given n will be between 1 and 9 inclusive.
      */
 
-    /*   Time and Space : O(n)
-         n = 4, k = 18
-
-         list : 1 2 3 4
-         k = 18 - 1 = 17
+    /**  Time and Space : O(n)
+     *   n digits, total number of permutation is n!.
+     *   For 4 digits, the first digit k / 3!, then k %= 3!, then keep going...
+     *   Just notice we need to subtract 1 from k when calculating since list and array are zero based,
+     *   therefore, we need to adjust.
+     *
+     *   Given: n = 4, k = 18
+     *   [1,2,3,4], 18 / 3! = 3, 3rd in [1,2,3,4] is 3
 
          In for loop:6
          i = 4,   k = 17, index = 17 / (4-1)! = 2, k = 17 % 3! = 5 => list : 1, 2, 3, 4, at index "2", value is "3", remove "3" from list - 1, 2, 4
@@ -39,7 +42,6 @@ public class LE_60_Permutation_Sequence {
          Answer : "3421"
 
     */
-
 
     public static String getPermutation(int n, int k) {
         //factoria table
@@ -55,7 +57,7 @@ public class LE_60_Permutation_Sequence {
             list.add(i);
         }
 
-        k--; //zero basec calculation
+        k--; //!!!zero base calculation
         StringBuilder sb = new StringBuilder();
         for (int i = n; i > 0; i--) {
             int index = k / fact[i - 1];

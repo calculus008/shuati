@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yuank on 3/2/18.
  */
 public class LE_54_Sprial_Matrix {
-    /*
+    /**
         Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
 
         For example,
@@ -21,7 +21,7 @@ public class LE_54_Sprial_Matrix {
         You should return [1,2,3,6,9,8,7,4,5].
      */
 
-    public List<Integer> spiralOrder(int[][] matrix) {
+    public List<Integer> spiralOrder1(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return res;
@@ -63,7 +63,7 @@ public class LE_54_Sprial_Matrix {
         return res;
     }
 
-    public List<Integer> spiralOrder1(int[][] matrix) {
+    public List<Integer> spiralOrder2(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
         if(null == matrix || matrix.length == 0) return result;
 
