@@ -46,17 +46,35 @@ public class LE_72_Edit_Distance {
 
         d(2, 2) = 1 + d(1, 1)
         edit("ab", "ac") = 1 + edit("a", "a") <- replace "b" with "c" in str1﻿
+
+
+        Another way to understand the transition formula:
+                   i
+         s1 :  xxxxa
+         s2 :  xxxab      chars at i and j - 1 are equal, so add "b" in s1, then : dp[i][j] = dp[i][j - 1] + 1 :
+                   j
+
+                   i
+         s1 :  xxxab
+         s2 :  xxxad    chars at i - 1 and j - 1 are equal, so replace "b" at i in s1 with "d", then : dp[i][j] = dp[i - 1 ][j - 1] + 1 :
+                   j
+
+                   i
+         s1 :  xxxac
+         s2 :  xxxxa    chars at i - 1 and j are equal, so remove "c" from s1, then : dp[i][j] = dp[i - 1 ][j] + 1 :
+                   j
      **/
 
 /**
     "0" at dp[0]0] represents empty string, the init process is using delete action, for example : abcd, i=0, "a", one delete to get to "";
     i=1, "ab", two deletes to get to "";....
 
-           a b c d
-        0  1 2 3 4
-     a  1  0 1 2 3
-     e  2  1 1 2 3
-     f  3  2 2 2 3
+          | a b c d
+        0 | 1 2 3 4
+ --------------------
+     a  1 | 0 1 2 3
+     e  2 | 1 1 2 3
+     f  3 | 2 2 2 3
  **/
 
     public static int minDistance(String word1, String word2) {
