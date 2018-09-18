@@ -23,7 +23,7 @@ public class LE_71_Simplify_Path {
 
             /**
             !!! Remember, can't do 'if(token.equals("..") && !stack.isEmpty())", reason:
-                For case "/../", token is "..", stack is empty, so we should do nothing. But if we use logc above,
+                For case "/../", token is "..", stack is empty, so we should do nothing. But if we use logic above,
                 ".." will be pushed to stack when stack is not empty, which is wrong.
              **/
             if (token.equals("..")) {
