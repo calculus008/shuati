@@ -10,7 +10,7 @@ import java.util.List;
  * Created by yuank on 3/3/18.
  */
 public class LE_56_Merge_Intervals {
-    /*
+    /**
         Given a collection of intervals, merge all overlapping intervals.
 
         For example,
@@ -39,6 +39,7 @@ public class LE_56_Merge_Intervals {
             //!!! "<= 1", "return intervals"
             if (intervals == null || intervals.size() <= 1) return intervals;
 
+            //!!!
             Collections.sort(intervals, (a, b) -> a.start - b.start);
             int start = intervals.get(0).start;
             int end = intervals.get(0).end;
