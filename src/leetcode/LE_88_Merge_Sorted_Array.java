@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/7/18.
  */
 public class LE_88_Merge_Sorted_Array {
-    /*
+    /**
         Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
 
         Note:
