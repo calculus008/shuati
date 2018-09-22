@@ -77,7 +77,7 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
             } else if (nums1[i] > nums2[j]) {
                 j++;
             } else {
-                res.add(nums1[i]);
+                res.add(nums1[i]);//in LE_349是往set里加（因为不要重复的数字），此处是往list里加。
                 i++;
                 j++;
             }
@@ -93,7 +93,7 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
     }
 
     /**
-     Follow up:
+     !!!Follow up:
      1.What if the given array is already sorted? How would you optimize your algorithm?
        Use solution 2 (without sorting)
 
