@@ -200,6 +200,8 @@ LE_126_Word_Ladder_II                                     (lint 121)
 Related:
 LI_211_String_Permutation
 LE_290_Word_Pattern
+
+LE_60_Permutation_Sequence
 LI_197_Permutation_Index
 LI_198_Permutation_Index_II
 
@@ -229,9 +231,42 @@ LI_685_First_Unique_Number_In_Stream
 LI_613_High_Five
 LE_128_Longest_Consecutive_Sequence                       (lint 124)
 
+Iterators
 LE_251_Flatten_2D_Vector                                  (lint 601)
 LE_281_Zigzag_Iterator                                    (lint 540)
 LE_339_Nested_List_Weight_Sum                             (lint 551)
 LE_394_Decode_String                                      (lint 575)
 LE_692_Top_K_Frequent_Words                               (lint 471)
 LE_460_LFU_Cache                                          (lint 24)
+
+Similar Questions
+LE_146_LRU_Cache
+LE_460_LFU_Cache
+LI_685_First_Unique_Number_In_Stream
+LI_209_First_Unique_Character_In_A_String
+
+
+Sliding Window
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_30_SubstrConactWords
+LE_76_Min_Window_Substring
+LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
+LE_209_Minimum_Size_Subarray_Sum
+LE_239_Sliding_Window_Maximum
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
+LE_346_Moving_Average_From_Data_Stream
+LE_438_Find_All_Anagrams_In_A_String
+LE_567_Permutation_In_String
+
+
+9.数据结构：区间、数组、矩阵和树状数组
+LE_56_Merge_Intervals
+LE_57_Insert_Interval
+LI_839_Merge_Two_Sorted_Interval_Lists
+LE_88_Merge_Sorted_Array                                  (lint 64)
+LI_577_Merge_K_Sorted_Interval_Lists
+LI_486_Merge_K_Sorted_Arrays
+LE_349_Intersection_Of_Two_Arrays                         (lint 547)
+LE_350_Intersection_Of_Two_Arrays_II
+LI_138_Subarray_Sum
+LE_311_Sparse_Matrix_Multiplication                       (lint 654)

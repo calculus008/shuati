@@ -95,7 +95,7 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
     /**
      !!!Follow up:
      1.What if the given array is already sorted? How would you optimize your algorithm?
-       Use solution 2 (without sorting)
+       Use solution 2 (without sorting), Time : O(m + n)
 
      2.What if nums1's size is small compared to nums2's size? Which algorithm is better?
        Use  solution 1, run through nums1 and put in HashMap, ??
