@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/6/18.
  */
 public class LE_83_Remove_Dup_From_SortedList {
-    /*
+    /**
         Given a sorted linked list, delete all duplicates such that each element appear only once.
 
         For example,
