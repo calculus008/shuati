@@ -38,8 +38,6 @@ public class LE_895_Maximum_Frequency_Stack {
          pop() -> returns 4.
          The stack becomes [5,7].
 
-
-
          Note:
 
          Calls to FreqStack.push(int x) will be such that 0 <= x <= 10^9.
@@ -50,10 +48,60 @@ public class LE_895_Maximum_Frequency_Stack {
 
          Hard
      */
+
     /**
      * https://zxi.mytechroad.com/blog/desgin/leetcode-895-maximum-frequency-stack/
      *
-     * Map and List Solution
+     * Map and List of Stacks Solution, O(1) for both push() and pop()
+     *
+     * 1.Use HashMap to keep track frequency
+     * 2.Bucket sorting - use list of "buckets", each bucket saves element with the same frequency
+     * 3.Break tie - "the element closest to the top of the stack is removed and returned."
+     *   Therefore, we use Stack as an individual bucket
+     * 4.Compare with LE_460_LFU_Cache, when doing push(), we don't need to remove element from current bucket (a stack),
+     *   just push it into the next bucket.
+     * 5.Be careful with bucket index, it starts as '0', while it maps to 1. So the mapping : frequency - 1 = idx
+     * 6.Since it acts as a stack, so if a bucket becomes empty after a pop(), we just remove that bucket,
+     *   by doing this, we don't need to keep an variable to track the current max frequency, we simply use
+     *   "buckets.size()", the current max frequency is buckets.size(), its index is "buckets.size() - 1".
+     * 7.By definition, it's a max frequency stack, so the buckets are continuous, the following case won't happen:
+     *
+     *      buckets
+     *      4 : 5
+     *      3 : null
+     *      2 : 5, 7
+     *      1 : 5, 7, 4
+     *
+     * 8."It is guaranteed that FreqStack.pop() won't be called if the stack has zero elements"
+     *    so no need to worry about this case.
+     *
+     *
+     * Example :
+     * [5,7,5,7,4,5]
+     *
+     * After 6 push():
+     * buckets
+     * 3 : 5
+     * 2 : 5, 7
+     * 1 : 5, 7, 4
+     *
+     * pop() : 5
+     * buckets
+     * 2 : 5, 7
+     * 1 : 5, 7, 4
+     *
+     * pop() : 7
+     * buckets
+     * 2 : 5
+     * 1 : 5, 7, 4
+     *
+     * pop() : 5
+     * buckets
+     * 1 : 5, 7, 4
+     *
+     * pop() : 4
+     * buckets
+     * 1 : 5, 7
      */
     class FreqStack {
         Map<Integer, Integer> map;
@@ -94,6 +142,46 @@ public class LE_895_Maximum_Frequency_Stack {
             if (freq == 0) {
                 map.remove(res);
             } else {
+                map.put(res, freq);
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * same solution, simplify code in push()
+     */
+    class FreqStack2 {
+        HashMap<Integer, Integer> map;
+        List<Stack<Integer>> buckets;
+
+        public FreqStack2() {
+            map = new HashMap<>();
+            buckets = new ArrayList<>();
+        }
+
+        public void push(int x) {
+            int freq = map.getOrDefault(x, 0) + 1;
+            map.put(x, freq);
+
+            if (freq - 1 >= buckets.size()) {
+                buckets.add(new Stack<>());
+            }
+            buckets.get(freq - 1).push(x);
+        }
+
+        public int pop() {
+            int idx = buckets.size() - 1;
+            int res = buckets.get(idx).pop();
+            if (buckets.get(idx).size() == 0) {
+                buckets.remove(idx);
+            }
+
+            int freq = map.get(res) - 1;
+            if (freq == 0) {
+                map.remove(res);
+            } else{
                 map.put(res, freq);
             }
 
