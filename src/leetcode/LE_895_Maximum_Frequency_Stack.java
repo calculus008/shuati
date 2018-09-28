@@ -58,8 +58,12 @@ public class LE_895_Maximum_Frequency_Stack {
      * 2.Bucket sorting - use list of "buckets", each bucket saves element with the same frequency
      * 3.Break tie - "the element closest to the top of the stack is removed and returned."
      *   Therefore, we use Stack as an individual bucket
-     * 4.Compare with LE_460_LFU_Cache, when doing push(), we don't need to remove element from current bucket (a stack),
-     *   just push it into the next bucket.
+     * 4.Compare with LE_460_LFU_Cache:
+     *   a.when doing push(), we don't need to remove element from current bucket (a stack),
+     *     just push it into the next bucket.
+     *   b.This is not a cache, so no need to worry about capacity (evict element when capacity is full)
+     *   c.No need to keep updating current min or max index (see #6)
+     *
      * 5.Be careful with bucket index, it starts as '0', while it maps to 1. So the mapping : frequency - 1 = idx
      * 6.Since it acts as a stack, so if a bucket becomes empty after a pop(), we just remove that bucket,
      *   by doing this, we don't need to keep an variable to track the current max frequency, we simply use
