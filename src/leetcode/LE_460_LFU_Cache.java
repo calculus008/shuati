@@ -9,10 +9,13 @@ import java.util.Map;
  */
 public class LE_460_LFU_Cache {
     /**
-         Design and implement a data structure for Least Frequently Used (LFU) cache. It should support the following operations: get and put.
+         Design and implement a data structure for Least Frequently Used (LFU) cache.
+         It should support the following operations: get and put.
 
          get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-         put(key, value) - Set or insert the value if the key is not already present. When the cache reaches its capacity, it should invalidate the least frequently used item before inserting a new item. For the purpose of this problem, when there is a tie (i.e., two or more keys that have the same frequency), the least recently used key would be evicted.
+         put(key, value) - Set or insert the value if the key is not already present. When the cache reaches its capacity,
+         it should invalidate the least frequently used item before inserting a new item. For the purpose of this problem,
+         when there is a tie (i.e., two or more keys that have the same frequency), the least recently used key would be evicted.
 
          Follow up:
          Could you do both operations in O(1) time complexity?
@@ -21,23 +24,59 @@ public class LE_460_LFU_Cache {
 
          LFUCache cache = new LFUCache(2)
 
-        cache.put(1, 1);
-        cache.put(2, 2);
-        cache.get(1);       // returns 1
-        cache.put(3, 3);    // evicts key 2
-        cache.get(2);       // returns -1 (not found)
-        cache.get(3);       // returns 3.
-        cache.put(4, 4);    // evicts key 1.
-        cache.get(1);       // returns -1 (not found)
-        cache.get(3);       // returns 3
-        cache.get(4);       // returns 4
+            cache.put(1, 1);
+            cache.put(2, 2);
+            cache.get(1);       // returns 1
+            cache.put(3, 3);    // evicts key 2
+            cache.get(2);       // returns -1 (not found)
+            cache.get(3);       // returns 3.
+            cache.put(4, 4);    // evicts key 1.
+            cache.get(1);       // returns -1 (not found)
+            cache.get(3);       // returns 3
+            cache.get(4);       // returns 4
 
-        Hard
+         Hard
      */
 
     /**
      * Solution 1 : 3 HashMap + LinkedHashSet
      * O(1) for get() and put()
+     *
+     * 3 HashMap
+     * 1."valueMap" : save KV pair, used for getting value for a given key,
+     *                also for checking if a key exists int current cache.
+     * 2."freMap"   : record frequency of each key
+     * 3."bucket"   : Key for this HashMap is frequency, value is a LinkedHashMap, acts as a bucket,
+     *                each bucket saves the elements which have the same frequency.
+     *
+     *                As the question states:
+     *
+     *                "when there is a tie (i.e., two or more keys that have the same frequency),
+     *                the least recently used key would be evicted"
+     *
+     *                "there is a tie" means multiple elements have the same frequency, so they are in
+     *                the same bucket.
+     *
+     *                "the least RECENTLY used key would be evicted", so we need to tell the appearing
+     *                order of the element in the same bucket. LinkedHashSet serves this purpose.
+     *                Always evict the first element in bucket referenced by "minFreq", it is O(1)
+     *
+     * An alternative is to create an element class which value and frequency, then we just need one
+     * HashMap to save value and frequency (combine "valueMap" and "freMap"). You need to write more
+     * code for it, so the 3 HashMap is simpler.
+     *
+     * 4.Coordinate update on all 3 maps, used in both "get()" and "put()". Each call to "get()" and
+     *   "put()" means the frequency should be updated.
+     *
+     *   For a given key
+     *   a.Get frequency from "freqMap", plus one, update its value in "freqMap"
+     *   b.Check in "bucket" if the new freqency exists, if not, create a new bucket for it in "bucket"
+     *   c.Remove key from old bucket, add to new bucket.
+     *   d.Update minFreq
+     *
+     * 5.Since we have capacity limit, when capacity is full, need to evict element in "put()".
+     *   Always evict the first element in bucket referenced by "minFreq".
+     *
      */
     class LFUCache {
         int capacity;

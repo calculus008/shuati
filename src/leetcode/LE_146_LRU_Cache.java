@@ -43,14 +43,6 @@ public class LE_146_LRU_Cache {
          One particularity about the double linked list that I implemented is that I create a pseudo head and tail
          to mark the boundary, so that we don't need to check the NULL node during the update.
          This makes the code more concise and clean, and also it is good for the performance as well.
-
-         The problem can be solved with a hashtable that keeps track of the keys and its values in the double linked list.
-         One interesting property about double linked list is that the node can remove itself without other reference.
-         In addition, it takes constant time to add and remove nodes from the head or tail.
-
-         One particularity about the double linked list that I implemented is that I create a pseudo head and tail
-         to mark the boundary, so that we don't need to check the NULL node during the update. This makes the code
-         more concise and clean, and also it is good for the performance as well.
      **/
 
     class LRUCache {

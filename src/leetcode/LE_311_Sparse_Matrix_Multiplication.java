@@ -268,7 +268,7 @@ public class LE_311_Sparse_Matrix_Multiplication {
     }
 
     /**
-     * My version, similar to Solution4
+     * My version, similar to Solution4,
      */
     public class Solution5 {
         class Element{
