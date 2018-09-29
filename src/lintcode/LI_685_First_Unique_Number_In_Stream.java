@@ -23,7 +23,7 @@ public class LI_685_First_Unique_Number_In_Stream {
      */
 
     /**
-     * A variation from LRU
+     * A variation from LE_146_LRU_Cache and LI_209_First_Unique_Character_In_A_String
      *
      * 对于任何一个num, 有3种状态
      * 1 从未出现过
@@ -44,7 +44,7 @@ public class LI_685_First_Unique_Number_In_Stream {
      *
      * set记录出现过两次以上的数。
      *
-     * 相比教育LRU:
+     * 相比教LRU:
      * 1.这里不用移动node(moveToTail()), 只需要addToTail(), removeNode().
      * 2.实际用了3种data structure: HashMap, Double LinkedList and HashSet(记录出现过两次以上的数)
      */
@@ -119,9 +119,9 @@ public class LI_685_First_Unique_Number_In_Stream {
     /**
      * Solution 2 : use LinkedHashSet (Java impl of double linked list)
      * Use LinkedHashSet to keep track of unique elements and keep the order.
-     * If uniques already has the number, remove it from uniques and add to dupes.
-     * If dupes has the number, it means the number has been removed from uniques.
-     * So I do nothing about it.Otherwise, the number is unique at the moment, add it to uniques.
+     * If "uniques" already has the number, remove it from "uniques" and add to "dupes".
+     * If dupes has the number, it means the number has been removed from "uniques".
+     * So I do nothing about it. Otherwise, the number is unique at the moment, add it to "uniques".
      */
     public class Solution2 {
         /**

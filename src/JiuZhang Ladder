@@ -239,14 +239,14 @@ LE_394_Decode_String                                      (lint 575)
 LE_692_Top_K_Frequent_Words                               (lint 471)
 LE_460_LFU_Cache                                          (lint 24)
 
-Similar Questions
+#Design Questions
 LE_146_LRU_Cache
 LE_460_LFU_Cache
+LE_895_Maximum_Frequency_Stack
 LI_685_First_Unique_Number_In_Stream
 LI_209_First_Unique_Character_In_A_String
 
-
-Sliding Window
+#Sliding Window
 LE_03_Longest_Substring_Without_Repeating_Characters
 LE_30_SubstrConactWords
 LE_76_Min_Window_Substring
@@ -270,3 +270,5 @@ LE_349_Intersection_Of_Two_Arrays                         (lint 547)
 LE_350_Intersection_Of_Two_Arrays_II
 LI_138_Subarray_Sum
 LE_311_Sparse_Matrix_Multiplication                       (lint 654)
+LI_944_Maximum_Submatrix
+LE_04_Median_Of_Two_Sorted_Arrays                         (lint 65)

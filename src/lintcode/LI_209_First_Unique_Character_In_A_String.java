@@ -47,6 +47,8 @@ public class LI_209_First_Unique_Character_In_A_String {
      *
      * We can also use double linked list like in LRU to do this.
      *
+     * Or use LinkedHashSet, refer to Solution 2 in LI_685_First_Unique_Number_In_Stream
+     *
      */
     class ListCharNode {
         public char val;
