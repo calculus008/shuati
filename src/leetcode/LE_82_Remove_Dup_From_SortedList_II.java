@@ -17,7 +17,9 @@ public class LE_82_Remove_Dup_From_SortedList_II {
      *
     \    Exampl 1 :
          dummy->1->2->3->3->4->4->5
-           p
+           p    |  |
+            p.next |
+                p.next.next
 
          dummy->1->2->3->3->4->4->5
                 p
