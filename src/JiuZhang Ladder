@@ -268,12 +268,21 @@ LI_577_Merge_K_Sorted_Interval_Lists
 LI_486_Merge_K_Sorted_Arrays
 LE_349_Intersection_Of_Two_Arrays                         (lint 547)
 LE_350_Intersection_Of_Two_Arrays_II
+
 LI_138_Subarray_Sum
+LI_139_Subarray_Sum_Closest
+LE_325_Maximum_Size_Subarray_Sum_Equals_k
+
 LE_311_Sparse_Matrix_Multiplication                       (lint 654)
 LE_53_Max_Subarray                                        (lint 41)
 LI_944_Maximum_Submatrix
+
 LE_04_Median_Of_Two_Sorted_Arrays                         (lint 65)
 LI_931_Median_Of_K_Sorted_Arrays
+
+LE_303_Range_Sum_Query_Immutable
+LE_21_Merge_Two_Sorted_Lists
+
 
 #Binary Indexed Tree
 LE_307_Range_Sum_Query_Mutable                            (lint 840)

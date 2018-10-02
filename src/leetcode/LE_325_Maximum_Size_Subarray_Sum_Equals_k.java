@@ -44,6 +44,7 @@ public class LE_325_Maximum_Size_Subarray_Sum_Equals_k {
                 res = Math.max(res, i - map.get(sum - k));
             }
 
+            //!!!保证max length, 后面出现的不覆盖前面出现的。
             if (!map.containsKey(sum)) {
                 map.put(sum, i);
             }
