@@ -83,6 +83,7 @@ public class LE_315_Count_Of_Smaller_Numbers_After_Self {
      *
      * Similar problem : LE_315_Count_Of_Smaller_Numbers_After_Self
      *                   LE_307_Range_Sum_Query_Mutable
+     *                   LI_532_Reverse_Pairs (跟这道题几乎完全一样，只是换了种问法)
      *
      * The tricky part is how to switch from a number array to use BIT. The keys :
      *

@@ -278,4 +278,7 @@ LI_931_Median_Of_K_Sorted_Arrays
 #Binary Indexed Tree
 LE_307_Range_Sum_Query_Mutable                            (lint 840)
 LE_315_Count_Of_Smaller_Numbers_After_Self                (lint 1297)
+LI_249_Count_Of_Smaller_Number_Before_Itself
 LE_308_Range_Sum_Query_2D_Mutable                         (lint 817)
+LI_532_Reverse_Pairs
+LE_493_Reverse_Pairs
