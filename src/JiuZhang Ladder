@@ -277,12 +277,21 @@ LE_349_Intersection_Of_Two_Arrays                         (lint 547)
 LE_350_Intersection_Of_Two_Arrays_II                      (lint 548)
 LI_793_Intersection_Of_Arrays
 
-#Subarray-SubMatrix
+#Subarray
 LI_138_Subarray_Sum
-LI_139_Subarray_Sum_Closest
+LI_404_Subarray_Sum_II                                      *
+LI_139_Subarray_Sum_Closest                                 *
 LE_325_Maximum_Size_Subarray_Sum_Equals_k
 LE_311_Sparse_Matrix_Multiplication                       (lint 654)
-LE_53_Max_Subarray                                        (lint 41)
+LE_53_Maximum_Subarray                                    (lint 41)
+LI_42_Maximum_Subarray_II                                   *
+LI_43_Maximum_Subarray_III                                  *
+LI_620_Maximum_Subarray_IV                                  *
+LI_45_Maximum_Subarray_Difference                           *
+LE_643_Maximum_Average_Subarray_I
+LE_644_Maximum_Average_Subarray_II
+
+#Submatrix
 LI_944_Maximum_Submatrix
 LI_405_Submatrix_Sum
 
@@ -300,3 +309,4 @@ LI_249_Count_Of_Smaller_Number_Before_Itself
 LE_308_Range_Sum_Query_2D_Mutable                         (lint 817)
 LI_532_Reverse_Pairs
 LE_493_Reverse_Pairs
+

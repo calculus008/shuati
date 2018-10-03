@@ -3,7 +3,7 @@ package leetcode;
 /**
  * Created by yuank on 3/2/18.
  */
-public class LE_53_Max_Subarray {
+public class LE_53_Maximum_Subarray {
     /*
         Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
 
