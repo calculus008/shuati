@@ -4,15 +4,22 @@ package leetcode;
  * Created by yuank on 3/14/18.
  */
 public class LE_123_Best_Time_To_Buy_And_Sell_Stock_III {
-    /*
+    /**
         Say you have an array for which the ith element is the price of a given stock on day i.
 
-        Design an algorithm to find the maximum profit. You may complete at most TWO transactions.
+        Design an algorithm to find the maximum profit.
+        You may complete at most TWO transactions.
 
         Note:
-        You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+        You may not engage in multiple transactions at the same time
+        (ie, you must sell the stock before you buy again).
      */
 
+    /**
+     * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/135704/Detail-explanation-of-DP-solution
+     *
+     *
+     */
     public static int maxProfit(int[] prices) {
         if (prices == null || prices.length < 2) return 0;
 
@@ -27,5 +34,19 @@ public class LE_123_Best_Time_To_Buy_And_Sell_Stock_III {
             buy1 = Math.max(buy1, -price);
         }
         return sell2;
+    }
+
+    public int maxProfit2(int[] prices) {
+        int buyOne = Integer.MAX_VALUE;
+        int SellOne = 0;
+        int buyTwo = Integer.MAX_VALUE;
+        int SellTwo = 0;
+        for(int p : prices) {
+            buyOne = Math.min(buyOne, p);
+            SellOne = Math.max(SellOne, p - buyOne);
+            buyTwo = Math.min(buyTwo, p - SellOne);//!!!
+            SellTwo = Math.max(SellTwo, p - buyTwo);
+        }
+        return SellTwo;
     }
 }

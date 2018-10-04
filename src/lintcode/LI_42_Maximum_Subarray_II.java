@@ -48,6 +48,7 @@ public class LI_42_Maximum_Subarray_II {
         int minSum = 0;
         int max = Integer.MIN_VALUE;
 
+        //-------->
         for(int i = 0; i < size; i++){
             sum += nums.get(i);
             max = Math.max(max, sum - minSum);
@@ -59,6 +60,7 @@ public class LI_42_Maximum_Subarray_II {
         minSum = 0;
         max = Integer.MIN_VALUE;
 
+        //<---------
         for(int i = size - 1; i >= 0; i--){
             sum += nums.get(i);
             max = Math.max(max, sum - minSum);

@@ -4,13 +4,17 @@ package leetcode;
  * Created by yuank on 3/2/18.
  */
 public class LE_53_Maximum_Subarray {
-    /*
-        Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+    /**
+        Find the contiguous subarray within an array (containing at least one number)
+        which has the largest sum.
 
         For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
         the contiguous subarray [4,-1,2,1] has the largest sum = 6.
      */
 
+    /**
+     * Solution 1
+     */
     public static int maxSubArray1(int[] nums) {
         int[] dp = new int[nums.length];
         dp[0] = nums[0];
@@ -25,7 +29,10 @@ public class LE_53_Maximum_Subarray {
         return res;
     }
 
-    public static int maxSubArray(int[] nums) {
+    /**
+     * Solution 2
+     */
+    public static int maxSubArray2(int[] nums) {
         int res = nums[0];
         int sum = nums[0];
 
@@ -41,6 +48,6 @@ public class LE_53_Maximum_Subarray {
 
     public static void main(String[] args) {
         int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
-        maxSubArray(nums);
+        maxSubArray2(nums);
     }
 }

@@ -54,6 +54,7 @@ public class LI_45_Maximum_Subarray_Difference {
         int leftMax = 0;
         int rightMin = 0;
         int rightMax = 0;
+
         for (int i = 1; i < nums.length; i++) {
             leftMin = Math.min(leftMin, leftSum);
             leftMax = Math.max(leftMax, leftSum);

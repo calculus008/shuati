@@ -33,7 +33,7 @@ public class LI_620_Maximum_Subarray_IV {
         int sum = 0;
         int minSum = 0;
         int max = Integer.MIN_VALUE;
-        int preSum = 0;
+        int preSum = 0;//2nd pointer starts from begining
 
         for (int i = 0; i < k; i++) {
             sum += nums[i];
@@ -45,6 +45,8 @@ public class LI_620_Maximum_Subarray_IV {
             preSum += nums[i - k];
             minSum = Math.min(minSum, preSum);
         }
+
+        //!!! one more to deal with after loop ends
         return Math.max(max, sum - minSum);
     }
 }

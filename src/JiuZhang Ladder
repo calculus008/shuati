@@ -261,8 +261,8 @@ LE_567_Permutation_In_String
 
 9.数据结构：区间、数组、矩阵和树状数组
 #Intervals
-LE_56_Merge_Intervals                                    (lint 156)
-LE_57_Insert_Interval                                    (lint 30)
+LE_56_Merge_Intervals                                     (lint 156)
+LE_57_Insert_Interval                                     (lint 30)
 LI_577_Merge_K_Sorted_Interval_Lists
 
 #Merge
@@ -282,18 +282,27 @@ LI_138_Subarray_Sum
 LI_404_Subarray_Sum_II                                      *
 LI_139_Subarray_Sum_Closest                                 *
 LE_325_Maximum_Size_Subarray_Sum_Equals_k
-LE_311_Sparse_Matrix_Multiplication                       (lint 654)
 LE_53_Maximum_Subarray                                    (lint 41)
 LI_42_Maximum_Subarray_II                                   *
-LI_43_Maximum_Subarray_III                                  *
+LI_43_Maximum_Subarray_III                                  ***
 LI_620_Maximum_Subarray_IV                                  *
 LI_45_Maximum_Subarray_Difference                           *
-LE_643_Maximum_Average_Subarray_I
-LE_644_Maximum_Average_Subarray_II
+LE_643_Maximum_Average_Subarray_I                         (lint 868)
+LE_644_Maximum_Average_Subarray_II                        (lint 617)
+LE_318_Maximum_Product_Of_Word_Lengths
+LE_152_Maximum_Product_Subarray                           (lint 191)
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock                    (lint 149)
+LE_122_Best_Time_To_Buy_And_Sell_Stock_II                 (lint 150)
+LE_123_Best_Time_To_Buy_And_Sell_Stock_III                (lint 151)
+LE_188_Best_Time_To_Buy_And_Sell_Stock_IV                 (lint 393)
+LE_309_Best_Time_To_Buy_And_Sell_Stock_With_Cooldown      (lint 995)
+LE_714_Best_Time_To_Buy_And_Sell_Stock_With_Transaction_Fee  (lint 1000)
 
 #Submatrix
 LI_944_Maximum_Submatrix
 LI_405_Submatrix_Sum
+LE_311_Sparse_Matrix_Multiplication                       (lint 654)
 
 #Median
 LE_04_Median_Of_Two_Sorted_Arrays                         (lint 65)

@@ -41,7 +41,7 @@ public class LI_139_Subarray_Sum_Closest {
             return new int[]{0,0};
         }
 
-        // general
+        //Same code as in LI_138_Subarray_Sum
         Map<Integer, Integer> map = new HashMap<>();
         int[] prefixSum = new int[nums.length + 1];
         int sum = 0;
@@ -59,8 +59,10 @@ public class LI_139_Subarray_Sum_Closest {
             prefixSum[i + 1] = sum;
         }
 
+        //!!!
         Arrays.sort(prefixSum);
 
+        //打擂台找最小
         int minDiff = Integer.MAX_VALUE;
         int left = 0, right = 0;
 
@@ -72,10 +74,10 @@ public class LI_139_Subarray_Sum_Closest {
             }
         }
         if (map.get(left) < map.get(right)) {
-            results[0] = map.get(left) + 1;
+            results[0] = map.get(left) + 1;//!!! " + 1"
             results[1] = map.get(right);
         } else {
-            results[0] = map.get(right) + 1;
+            results[0] = map.get(right) + 1;//!!! " + 1"
             results[1] = map.get(left);
         }
         return results;

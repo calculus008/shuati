@@ -7,7 +7,7 @@ public class LI_404_Subarray_Sum_II {
     /**
          Given an integer array, find a subarray where the sum of numbers is in a given interval.
          Your code should return the number of possible answers.
-         (The element in the array should be positive)
+         (The element in the array should be positive)!!!
 
          Example
          Given [1,2,3,4] and interval = [1,3], return 4. The possible answers are:
@@ -39,13 +39,31 @@ public class LI_404_Subarray_Sum_II {
         int[] prefixSum = new int[A.length + 1];
         prefixSum[0] = 0;
 
+        /**
+         * 由于“The element in the array should be positive”，
+         * 处理后的prefixSum[]是递增的，也就是sorted.
+         */
         for (int i = 1; i < prefixSum.length; i++) {
             prefixSum[i] = prefixSum[i - 1] + A[i - 1];
         }
 
+        /**
+         * Get the number of subarrays s1 whose sum is bigger than start - 1,
+         * get the number of subarrays s2 whose sum is bigger than end,
+         * then s1 - s2 is the number of subarrays whose sum is in [start, end]
+         */
         return getLarger(prefixSum, start - 1) - getLarger(prefixSum, end);
     }
 
+    /**
+     * In sources[], for index i and j (i < j), find number of pairs of i and j
+     * that sources[j] - sources[i] > target.
+     *
+     * Or in other words, find number of subarrays whose sum is bigger than target.
+     *
+     * We can use two pointers or binary search on sources[] because it is sorted
+     * by definition.
+     */
     private int getLarger(int[] sources, int target) {
         int left = 0, right = 1;
         int count = 0;
@@ -67,36 +85,41 @@ public class LI_404_Subarray_Sum_II {
     /**
      * Solution 2
      *
+     * Difference from Solution 1 is to use binary search in find().
+     *
      */
+    public int subarraySumII_2(int[] A, int start, int end) {
+        int len = A.length;
+        for (int i = 1; i < len; ++i)
+            A[i] += A[i - 1];
+
+        int cnt = 0;
+        for (int i = 0; i < len; ++i) {
+            //case for a valid subarray starts at index 0
+            if (A[i] >= start && A[i] <= end) {
+                cnt++;
+            }
+
+            int l = A[i] - end;
+            int r = A[i] - start;
+            cnt += find(A, i, r + 1) - find(A, i, l);
+        }
+        return cnt;
+    }
+
     int find(int[] A, int len, int value) {
-        if (len-1 >= 0 && A[len-1] < value )
+        if (len - 1 >= 0 && A[len - 1] < value)
             return len;
 
-        int l = 0, r = len-1, ans = 0;
+        int l = 0, r = len - 1, ans = 0;
         while (l <= r) {
             int mid = (l + r) / 2;
             if (value <= A[mid]) {
                 ans = mid;
                 r = mid - 1;
-            }  else
+            } else
                 l = mid + 1;
         }
         return ans;
-    }
-
-    public int subarraySumII_2(int[] A, int start, int end) {
-        int len = A.length;
-        for (int i = 1; i <len; ++i)
-            A[i] += A[i-1];
-
-        int cnt = 0;
-        for (int i = 0; i < len; ++i) {
-            if (A[i] >= start && A[i] <= end)
-                cnt ++;
-            int l = A[i] - end;
-            int r = A[i] - start;
-            cnt += find(A, i, r+1) - find(A, i, l);
-        }
-        return cnt;
     }
 }
