@@ -319,3 +319,6 @@ LE_308_Range_Sum_Query_2D_Mutable                         (lint 817)
 LI_532_Reverse_Pairs
 LE_493_Reverse_Pairs
 
+#Design
+LE_380_Insert_Delete_GetRandom_O1
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
