@@ -134,4 +134,52 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
         }
     }
 
+    /**
+     * Solution 3
+     * Same as Solution2 in LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
+     * Time  : O(klogk)
+     * Space : O(k + mn)
+     */
+    public class Solution3 {
+
+        class Element{
+            int x, y, val;
+            public Element(int x, int y, int val) {
+                this.x = x;
+                this.y = y;
+                this.val = val;
+            }
+        }
+
+        public int kthSmallestSum(int[] A, int[] B, int k) {
+            if (A == null && B == null) return 0;
+
+            //!!! Never forget to add comparator lambda here
+            PriorityQueue<Element> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
+            pq.offer(new Element(0, 0, A[0] + B[0]));
+
+            //!!! Define 2D array
+            boolean[][] visited = new boolean[A.length][B.length];
+            int[][] dir = new int[][] {{1, 0}, {0, 1}};
+
+            while (k > 1 && !pq.isEmpty()) {
+                Element e = pq.poll();
+                k--;
+
+                for (int i = 0; i < 2; i++) {
+                    int a = e.x + dir[i][0];
+                    int b = e.y + dir[i][1];
+
+                    //!!!Check array boundary
+                    if (a < A.length && b < B.length && !visited[a][b]) {
+                        pq.offer(new Element(a, b, A[a] + B[b]));
+                        visited[a][b] = true;
+                    }
+                }
+            }
+
+            return pq.poll().val;
+        }
+    }
+
 }

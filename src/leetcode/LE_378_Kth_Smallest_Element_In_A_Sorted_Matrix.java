@@ -80,8 +80,8 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
     /**
      * Solution 2
      *
-     * Time  : O(klog(min(m,n,k)))
-     * Space : O(min(m,n,k) + mn)
+     * Time  : O(klogk)
+     * Space : O(k + mn)
      *
      * 其实是利用优先级队列做BFS，搜索直到第k小，对于
      * [

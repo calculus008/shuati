@@ -212,4 +212,77 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             return nums.get(index).number;
         }
     }
+
+    /**
+     * Solution 3
+     * Same as Solutin 2, my version
+     */
+    class RandomizedCollection3 {
+        /**
+         * Element has both value and the index or location in the list retrieved from
+         * HashMap by value.
+         *
+         * We save it in list, the purpose:
+         * When doing remove(), use it to find the location to update in the HashMap list
+         * when we move the end element to overwrite the to be deleted element in list.
+         */
+        class Element {
+            int idx, val;
+            public Element(int idx, int val) {
+                this.idx = idx;
+                this.val = val;
+            }
+        }
+
+        HashMap<Integer, List<Integer>> map;
+        List<Element> list;
+        java.util.Random rand = new java.util.Random();
+
+
+        /** Initialize your data structure here. */
+        public RandomizedCollection3() {
+            map = new HashMap<>();
+            list = new ArrayList<>();
+        }
+
+        /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+        public boolean insert(int val) {
+            boolean ret = false;
+            if (!map.containsKey(val)) {
+                map.put(val, new ArrayList<>());
+                ret = true;
+            }
+
+            list.add(new Element(map.get(val).size(), val));
+            map.get(val).add(list.size() - 1);
+
+            return ret;
+        }
+
+        /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+        public boolean remove(int val) {
+            if(!map.containsKey(val)) {
+                return false;
+            }
+
+            int targetIdx = map.get(val).remove(map.get(val).size() - 1);
+            if (targetIdx < list.size() - 1) {
+                Element e = list.get(list.size() - 1);
+                list.set(targetIdx, e);
+                map.get(e.val).set(e.idx, targetIdx);//!!! list.set(idx,value)
+            }
+            list.remove(list.size() - 1);
+
+            if (map.get(val).size() == 0) {
+                map.remove(val);
+            }
+
+            return true;
+        }
+
+        /** Get a random element from the collection. */
+        public int getRandom() {
+            return list.get(rand.nextInt(list.size())).val; //!!! ".val"
+        }
+    }
 }
