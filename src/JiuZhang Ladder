@@ -320,5 +320,10 @@ LI_532_Reverse_Pairs
 LE_493_Reverse_Pairs
 
 #Design
-LE_380_Insert_Delete_GetRandom_O1
-LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
+
+
+Advanced
+1.LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix          (lint 401)
+
