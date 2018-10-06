@@ -325,6 +325,9 @@ LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
 
 
 Advanced
-1.LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix          (lint 401)
-2.LE_373_Find_K_Pairs_With_Smallest_Sums                  (lint 465)
+LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix          (lint 401)
+LE_373_Find_K_Pairs_With_Smallest_Sums                  (lint 465)
+LI_543_Kth_Largest_In_N_Arrays
+LI_005_Kth_Largest_Number
+LI_461_Kth_Smallest_Number
 
