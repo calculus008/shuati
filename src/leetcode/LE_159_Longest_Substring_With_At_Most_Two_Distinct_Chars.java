@@ -7,12 +7,14 @@ import java.util.Map;
  * Created by yuank on 3/20/18.
  */
 public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
-    /*
+    /**
         Given a string, find the length of the longest substring T that contains at most 2 distinct characters.
 
         For example, Given s = “eceba”,
 
         T is "ece" which its length is 3.
+
+        LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
      */
 
     //Time and Space : O(n)

@@ -30,7 +30,13 @@ public class LE_03_Longest_Substring_Without_Repeating_Characters {
          Median
      */
 
-    public int lengthOfLongestSubstring(String s) {
+    /**
+     *   Solution 1
+         使用一个hashset和双指针配合即可。
+         相当于开一个start和end的窗口，每次遍历s的字母，如果set里没有，加进去并把当前的end定在这个字母位置，得到长度。
+         如果set里有了这个字母，则要移动窗口头指针，不断提出移出窗口的字母，直到i位置的字母不在set里出现，得到新窗口。
+     */
+    public int lengthOfLongestSubstring1(String s) {
         if (s == null || s.length() == 0) return 0;
 
         int n = s.length();
@@ -48,6 +54,28 @@ public class LE_03_Longest_Substring_Without_Repeating_Characters {
                 res = Math.max(res, end - start + 1);
                 end++;
             }
+        }
+
+        return res;
+    }
+
+    /**
+     * Solution 2
+     * 套用九章Sliding Window模版
+     */
+    public int lengthOfLongestSubstrings2(String s) {
+        if (s == null || s.length() == 0) return 0;
+
+        int res = Integer.MIN_VALUE;
+        char[] map = new char[256];
+
+        for (int i = 0, j = 0; i < s.length(); i++) {
+            map[s.charAt(i)]++;
+            while(map[s.charAt(i)] > 1) {
+                map[s.charAt(j)]--;
+                j++;
+            }
+            res = Math.max(res, i - j + 1);
         }
 
         return res;

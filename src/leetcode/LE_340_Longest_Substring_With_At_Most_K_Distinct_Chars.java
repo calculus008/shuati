@@ -14,8 +14,8 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
         T is "ece" which its length is 3.
      */
 
-    //Sliding Window, Same as LE_159
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+    //Sliding Window, Same as LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
+    public int lengthOfLongestSubstringKDistinct1(String s, int k) {
         if(null == s || k <=0 )
             return 0;
 
@@ -47,6 +47,70 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
         return max;
     }
 
+    /**
+     * Solution 2
+     * Use HashMap wth JiuZhang sliding window template
+     */
+    public int lengthOfLongestSubstringKDistinct2(String s, int k) {
+        if (s == null || s.length() == 0) return 0;
+
+        int res = Integer.MIN_VALUE;
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0, j = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+
+            while (map.size() > k) {
+                char c1 = s.charAt(j);
+                j++;
+                int val = map.get(c1) - 1;
+
+                if (val == 0) {
+                    map.remove(c1);
+                } else {
+                    map.put(c1, val);
+                }
+            }
+
+            res = Math.max(res, i - j + 1);
+        }
+
+        return res;
+    }
+
+    /**
+     * Solution 3
+     * Same Sliding window algorithm, use int[] as map and iterate through char array "chars",
+     * fasted running time on lintcode
+     */
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        if (s == null || s.length() == 0) return 0;
+
+        int res = Integer.MIN_VALUE;
+        int[] map = new int[256];
+        int count = 0;
+        char[] chars = s.toCharArray();
+
+        for (int i = 0, j = 0; i < chars.length; i++) {
+            if (map[chars[i]] == 0) {
+                count++;
+            }
+            map[chars[i]]++;
+
+            while (count > k) {
+                map[chars[j]]--;
+                if (map[chars[j]] == 0) {
+                    count--;
+                }
+                j++;
+            }
+
+            res = Math.max(res, i - j + 1);
+        }
+
+        return res;
+    }
 
 
 }

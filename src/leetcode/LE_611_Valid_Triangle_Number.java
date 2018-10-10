@@ -24,20 +24,36 @@ public class LE_611_Valid_Triangle_Number {
          The integers in the given array are in the range of [0, 1000].
 
          Medium
+
+         LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
      */
 
     //Time : O(n), Space : O(1)
     public int triangleNumber(int[] nums) {
+        /**
+         * 1.Must sort
+         */
         Arrays.sort(nums);
         int n = nums.length;
         int count = 0;
 
+        /**
+         * 2.当前的for循环确定3条边中最长的那条(nums[i])
+         */
         for (int i = n - 1; i >= 2; i--) {
             int l = 0;
+
+            /**
+             * 3.当最长的边确定后，找其他两条边，
+             *   在已经排好序的数组中，这两条边的上边界是nums[i-1]
+             */
             int r = i - 1;
             while (l < r) {
                 if (nums[l] + nums[r] > nums[i]) {
                     count += r - l;
+                    /**
+                     * 4.上边界下移，继续找
+                     */
                     r--;
                 } else {
                     l++;

@@ -3,7 +3,7 @@ package leetcode;
 /**
  * Created by yuank on 3/11/18.
  */
-public class LE_76_Min_Window_Substring
+public class LE_76_Minimum_Window_Substring
 {
     /**
         Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
@@ -92,5 +92,43 @@ public class LE_76_Min_Window_Substring
         }
 
         return minLen == Integer.MAX_VALUE ? "" : s.substring(from, from + minLen);
+    }
+
+    public String minWindow2(String source , String target) {
+        if (source == null || target == null || source.length() == 0 || target.length() == 0) {
+            return "";
+        }
+
+        int total = target.length();
+        int[] count = new int[256];
+        int start = 0;
+        int minLen = Integer.MAX_VALUE;
+
+        for (char c : target.toCharArray()) {
+            count[c]++;
+        }
+
+        char[] s = source.toCharArray();
+        for (int i = 0, j = 0; i < s.length; i++) {
+            if (count[s[i]] > 0) {//!!!
+                total--;
+            }
+            count[s[i]]--;
+
+            while (total == 0) {
+                if (minLen > i - j + 1) {
+                    start = j;
+                    minLen = i - j + 1;
+                }
+
+                count[s[j]]++;
+                if (count[s[j]] > 0) {
+                    total++;
+                }
+                j++;//!!!
+            }
+        }
+
+        return minLen == Integer.MAX_VALUE ? "" : source.substring(start, start + minLen);
     }
 }

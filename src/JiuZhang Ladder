@@ -245,6 +245,9 @@ LE_460_LFU_Cache
 LE_895_Maximum_Frequency_Stack
 LI_685_First_Unique_Number_In_Stream
 LI_209_First_Unique_Character_In_A_String
+LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
+LE_676_Implement_Magic_Dictionary
 
 #Sliding Window
 LE_03_Longest_Substring_Without_Repeating_Characters
@@ -319,15 +322,30 @@ LE_308_Range_Sum_Query_2D_Mutable                         (lint 817)
 LI_532_Reverse_Pairs
 LE_493_Reverse_Pairs
 
-#Design
-LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
-LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
-
-
 Advanced
-LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix          (lint 401)
-LE_373_Find_K_Pairs_With_Smallest_Sums                  (lint 465)
+#Kth Largest/Smallest
+LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix            (lint 401)
+LE_373_Find_K_Pairs_With_Smallest_Sums                    (lint 465)
 LI_543_Kth_Largest_In_N_Arrays
-LI_005_Kth_Largest_Number
 LI_461_Kth_Smallest_Number
+LI_005_Kth_Largest_Number
 
+#Sliding Window
+LI_406_Minimum_Size_Subarray_Sum
+LE_209_Minimum_Size_Subarray_Sum
+LE_03_Longest_Substring_Without_Repeating_Characters      (lint 384)
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars    (lint 386)
+LE_76_Minimum_Window_Substring                            (lint 32)
+LE_611_Valid_Triangle_Number                              (lint 382) ***
+LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
+
+#Union Find
+UnionFindSet
+UnionFindWithCount
+UnionFindSetString
+LI_589_Connecting_Graph
+LI_590_Connecting_Graph_II
+LI_591_Connecting_Graph_III
+LI_178_Graph_Valid_Tree
+LE_261_Graph_Valid_Tree
+LE_200_Number_Of_Islands                                  (lint 433)

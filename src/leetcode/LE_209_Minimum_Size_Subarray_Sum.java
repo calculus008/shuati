@@ -4,8 +4,9 @@ package leetcode;
  * Created by yuank on 3/26/18.
  */
 public class LE_209_Minimum_Size_Subarray_Sum {
-    /*
-        Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s.
+    /**
+        Given an array of n positive integers and a positive integer s,
+        find the minimal length of a contiguous subarray of which the sum ≥ s.
         If there isn't one, return 0 instead.
 
         For example, given the array [2,3,1,2,4,3] and s = 7,
