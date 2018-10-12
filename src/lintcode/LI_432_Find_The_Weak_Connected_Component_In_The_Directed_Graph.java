@@ -2,6 +2,7 @@ package lintcode;
 
 import common.DirectedGraphNode;
 import common.UnionFindInMap;
+import common.UnionFindInMap1;
 
 import java.util.*;
 
@@ -34,20 +35,16 @@ public class LI_432_Find_The_Weak_Connected_Component_In_The_Directed_Graph {
 
     /**
      * Different from LE_323_Number_Of_Connected_Components_In_Undirected_Graph
-     * 1.Output is the node in each connected component, not just the number of connected component
+     *
+     * 1.Output is the nodes in each connected component, not just the number of connected component
      * 2.Label for each node is not just positive integers, it can be negative,
-     *   therefore we need to use UnionFindInMap
+     *   therefore we need to use UnionFindInMap1, which use HashMap as "parents" internally
      */
     public List<List<Integer>> connectedSet2(ArrayList<DirectedGraphNode> nodes) {
         List<List<Integer>> res = new ArrayList<>();
         if (nodes == null || nodes.size() == 0) return res;
 
-        HashSet<Integer> set = new HashSet<>();
-        for (DirectedGraphNode node : nodes) {
-            set.add(node.label);
-        }
-
-        UnionFindInMap uf = new UnionFindInMap(set);
+        UnionFindInMap1 uf = new UnionFindInMap1();
 
         for (DirectedGraphNode node : nodes) {
             for (DirectedGraphNode neighbor : node.neighbors) {
@@ -55,18 +52,17 @@ public class LI_432_Find_The_Weak_Connected_Component_In_The_Directed_Graph {
             }
         }
 
-        Map<Integer, Set<Integer>> map = new HashMap<>();
+        Map<Integer, TreeSet<Integer>> map = new HashMap<>();
         for (DirectedGraphNode node : nodes) {
             int id= uf.query(node.label);
             if (!map.containsKey(id)) {
-                map.put(id, new HashSet<>());
+                map.put(id, new TreeSet<>());
             }
             map.get(id).add(node.label);
         }
 
-        for (Set<Integer> value : map.values()) {
+        for (TreeSet<Integer> value : map.values()) {
             List<Integer> s = new ArrayList(value);
-            Collections.sort(s);
             res.add(s);
         }
 

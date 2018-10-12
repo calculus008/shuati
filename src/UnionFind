@@ -1,0 +1,129 @@
+#Union Find
+UnionFindSet
+UnionFindWithCount
+UnionFindSetString
+UnionFindWithCount1
+UnionFindInMap
+LE_547_Friend_Circles
+LI_589_Connecting_Graph
+LI_590_Connecting_Graph_II
+LI_591_Connecting_Graph_III
+LE_684_Redundant_Connection
+LE_685_Redundant_Connection_II
+LI_178_Graph_Valid_Tree
+LE_261_Graph_Valid_Tree
+LE_200_Number_Of_Islands                                  (lint 433)
+LE_305_Number_Of_Islands_II                               (lint 434)
+LE_130_Surrounded_Regions                                 (lint 477)
+LE_323_Number_Of_Connected_Components_In_Undirected_Graph
+LI_432_Find_The_Weak_Connected_Component_In_The_Directed_Graph
+LE_721_Accounts_Merge                                     (lint 1070)
+LE_737_Sentence_Similarity_II
+LI_629_Minimum_Spanning_Tree
+
+UF find or query (path compression), assume "parents" (in the form of int array or HashMap) is already initialized.
+
+/**
+    None reursive on int array
+    For this version, path compression is not finished in one find(), each time find() is called, some paths are compressed
+**/
+public int find(int x) {
+    while (parents[x] != x) {
+        parents[x] = parents[parents[x]];
+        x = parents[x];
+    }
+    return x;
+}
+
+/**
+    Recursive on int array
+    find(4) -> find(3) -> find(2) -> find(1)
+x      4         3         2          1   parents[1] == 1, return 1
+                                               |
+                          p[2] = 1    <--------
+                          return 1
+                             |
+                p[3] = 1<----
+                return 1
+                  |
+      p[4] = 1<----
+      return 1
+
+**/
+public int find(int x) {
+    if (parents[x] != x) {
+        parents[x] = find(parents[x]);
+    }
+
+    return parents[x];
+}
+
+Or
+
+public in find(int x) {
+    if (parents[x] == x {
+        return x;
+    }
+
+    return parents[x] = find(parents[x]);
+}
+
+//None recursive on HashMap, input can be Integer or String
+public int find(String x) {
+    /**
+     * First, find root
+     */
+    int root = parents.get(x);
+    while (root != parents.get(root)) {
+        root = parents.get(root);
+    }
+
+    /**
+     * Do path compression
+     */
+    int temp = -1;
+    while (x != parents.get(x)) {
+        temp = parents.get(x);
+        parents.put(x, root);
+        x = temp;
+    }
+    return root;
+}
+
+//Recursive on HashMap
+private String find(String x) {
+    if (!x.equals(parents.get(x))) {
+        parents.put(x, find(parents.get(x)));
+    }
+
+    return parents.get(x);
+}
+
+Start
+HashMap
+4 -> 3
+3 -> 2
+2 -> 1
+1 -> 1
+
+  find("4") -> find("3") -> find("2") -> find("1")
+x    4           3            2             1      parents.get("1") == 1, return 1
+                       parents.get("2") == 1, return 1
+          parents.get("2") == 1, return 1
+ parents.get("4") == 1, return 1
+
+Start
+HashMap
+4 -> 1
+3 -> 1
+2 -> 1
+1 -> 1
+
+1.If we have a UFS class and use it, the initial size is the max possible number of nodes, no need to be the exact.
+2.For some cases, we don't need to UFS class, just put find() and union() method in solution class.
+3.Merge by rank is less important, can be ignored
+4.If UFS need to track how many sets in UFS, add count and setCount/getCount. Do "count--" in union()
+
+
+
+

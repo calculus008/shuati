@@ -1,0 +1,135 @@
+第四章 BFS与拓扑排序
+
+什么时候使用宽搜
+
+如下的一些场景是使用宽度优先搜索的常见场景：
+
+图的遍历 Traversal in Graph
+图的遍历，比如给出无向连通图(Undirected Connected Graph)中的一个点，找到这个图里的所有点。这就是一个常见的场景。
+LintCode 上的 Clone Graph 就是一个典型的练习题。
+
+更细一点的划分的话，这一类的问题还可以分为：
+
+层级遍历 Level Order Traversal
+由点及面 Connected Component
+拓扑排序 Topological Sorting
+层级遍历，也就是说我不仅仅需要知道从一个点出发可以到达哪些点，还需要知道这些点，分别离出发点是第几层遇到的，比如 Binary Tree Level Order Traversal 就是一个典型的练习题。
+
+由点及面，前面已经提到。
+
+拓扑排序，让我们在后一节中展开描述。
+
+最短路径 Shortest Path in Simple Graph
+最短路径算法有很多种，BFS 是其中一种，但是他有特殊的使用场景，即必须是在简单图中求最短路径。
+大部分简单图中使用 BFS 算法时，都是无向图。当然也有可能是有向图，但是在面试中极少会出现。
+
+什么是简单图（Simple Graph）？
+即，图中每条边长度都是1（或边长都相同）。
+
+有很多种方法可以存储一个图，最常用的莫过于：
+
+邻接矩阵
+邻接表
+而邻接矩阵因为耗费空间过大，我们通常在工程中都是使用邻接表作为图的存储结构。
+
+    邻接矩阵 Adjacent Matrix
+
+        [
+            [1,0,0,1],
+            [0,1,1,0],
+            [0,1,1,0],
+            [1,0,0,1]
+        ]
+        例如上图表示0号点和3号点有连边。1号点和2号店有连边。
+        当然，每个点和自己也是默认有连边的。
+        图中的 0 表示不连通，1 表示连通。
+        我们也可以用一个更具体的整数值来表示连边的长度。
+        邻接矩阵我们可以直接用一个二维数组表示，如int[][] matrix;。这种数据结构因为耗费 O(n^2) 的空间，所以在稀疏图上浪费很大，因此并不常用。
+
+    邻接表 (Adjacent List)
+
+        [
+            [1],
+            [0,2,3],
+            [1],
+            [1]
+        ]
+        这个图表示 0 和 1 之间有连边，1 和 2 之间有连边，1 和 3 之间有连边。即每个点上存储自己有哪些邻居（有哪些连通的点）。
+        这种方式下，空间耗费和边数成正比，可以记做 O(m)，m代表边数。m最坏情况下虽然也是 O(n^2)，但是邻接表的存储方式大部分情况下会比邻接矩阵更省空间。
+
+        自定义邻接表
+        可以用自定义的类来实现邻接表
+
+        class DirectedGraphNode {
+        int label;
+        List<DirectedGraphNode> neighbors;
+        ...
+        }
+        其中 neighbors 表示和该点连通的点有哪些。
+
+        使用 Map 和 Set（面试时）
+        也可以使用 HashMap 和 HashSet 搭配的方式来存储邻接表
+
+        Map<T, Set<T>> = new HashMap<Integer, HashSet<Integer>>();
+        其中 T 代表节点类型。通常可能是整数(Integer)。
+        这种方式虽然没有上面的方式更加直观和容易理解，但是在面试中比较节约代码量。
+        而自定义的方法，更加工程化，所以在面试中如果时间不紧张题目不难的情况下，推荐使用自定义邻接表的方式。
+
+拓扑排序   LI_127_Topological_Sorting
+
+宽度优先搜索的模板
+
+宽度优先搜索有很多种实现方法，这里为了大家记忆方便和教学的方便，我们只介绍最实用的一种方法，即使用一个队列的方法。
+这种方法也根据 BFS 时的需求不同，有两个版本，即需要分层遍历的版本和不需要分层遍历的版本。
+
+什么时候需要分层遍历？
+如果问题需要你区分开不同层级的结果信息，如 二叉树的分层遍历 Binary Tree Level Order Traversal
+简单图最短路径问题，如 单词接龙 Word Ladder
+
+无需分层遍历的宽度优先搜索
+    // T 指代任何你希望存储的类型
+    Queue<T> queue = new LinkedList<>();
+    Set<T> set = new HashSet<>();
+
+    set.add(start);
+    queue.offer(start);
+    while (!queue.isEmpty()) {
+        T head = queue.poll();
+        for (T neighbor : head.neighbors) {
+            if (!set.contains(neighbor)) {
+                set.add(neighbor);
+                queue.offer(neighbor);
+            }
+        }
+    }
+    上述代码中：
+
+    neighbor 表示从某个点 head 出发，可以走到的下一层的节点。
+    set 存储已经访问过的节点（已经丢到 queue 里去过的节点）
+    queue 存储等待被拓展到下一层的节点
+    set 与 queue 是一对好基友，无时无刻都一起出现，往 queue 里新增一个节点，就要同时丢到 set 里。
+
+需要分层遍历的宽度搜先搜索
+    // T 指代任何你希望存储的类型
+    Queue<T> queue = new LinkedList<>();
+    Set<T> set = new HashSet<>();
+
+    set.add(start);
+    queue.offer(start);
+    while (!queue.isEmpty()) {
+        int size = queue.size();
+        for (int i = 0; i < size; i++) {
+            T head = queue.poll();
+            for (T neighbor : head.neighbors) {
+                if (!set.contains(neighbor)) {
+                    set.add(neighbor);
+                    queue.offer(neighbor);
+                }
+            }
+        }
+    }
+    上述代码中：
+
+    size = queue.size() 是一个必须的步骤。如果在 for 循环中使用 for (int i = 0; i < queue.size(); i++) 会出错，
+    因为 queue.size() 是一个动态变化的值。所以必须先把当前层一共有多少个节点存在局部变量 size 中，
+    才不会把下一层的节点也在当前层进行扩展。

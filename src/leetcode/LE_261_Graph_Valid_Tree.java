@@ -1,5 +1,7 @@
 package leetcode;
 
+import common.UnionFindSet;
+
 /**
  * Created by yuank on 4/23/18.
  */

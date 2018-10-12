@@ -1,5 +1,7 @@
 package leetcode;
 
+import common.UnionFindSet;
+
 import java.util.HashSet;
 import java.util.Set;
 

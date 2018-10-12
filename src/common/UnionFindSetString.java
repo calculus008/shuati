@@ -1,4 +1,4 @@
-package leetcode;
+package common;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +19,16 @@ public class UnionFindSetString {
         return true;
     }
 
+    /**
+     * Actually we don't need to 2nd param "boolean create", if given word is
+     * not in keyset, we just do "parents.put(word, word)".
+     *
+     * "Put in find" : save the work for caller to loop through some data
+     * structure just to init HashMap in UFS.
+     *
+     * See LI_629_Minimum_Spanning_Tree
+     *
+     */
     public String find(String word, boolean create) {
         if (!parents.containsKey(word)) {
             if (!create) {

@@ -1,6 +1,7 @@
 package leetcode;
 
 import common.Point;
+import common.UnionFindWithCount;
 import common.UnionFindWithCount1;
 
 import java.util.ArrayList;
