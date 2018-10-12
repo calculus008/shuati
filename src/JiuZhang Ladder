@@ -343,9 +343,21 @@ LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
 UnionFindSet
 UnionFindWithCount
 UnionFindSetString
+UnionFindWithCount1
+UnionFindInMap
+LE_547_Friend_Circles
 LI_589_Connecting_Graph
 LI_590_Connecting_Graph_II
 LI_591_Connecting_Graph_III
+LE_684_Redundant_Connection
+LE_685_Redundant_Connection_II
 LI_178_Graph_Valid_Tree
 LE_261_Graph_Valid_Tree
 LE_200_Number_Of_Islands                                  (lint 433)
+LE_305_Number_Of_Islands_II                               (lint 434)
+LE_130_Surrounded_Regions                                 (lint 477)
+LE_323_Number_Of_Connected_Components_In_Undirected_Graph
+LI_432_Find_The_Weak_Connected_Component_In_The_Directed_Graph
+LE_721_Accounts_Merge                                     (lint 1070)
+LE_737_Sentence_Similarity_II
+LI_629_Minimum_Spanning_Tree

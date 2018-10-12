@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import common.Coordinate;
+import common.UnionFindWithCount1;
 
 /**
  * Created by yuank on 3/24/18.
@@ -139,45 +140,6 @@ public class LE_200_Number_Of_Islands {
      *   convert 2D to 1D : idx = i * n + y
      */
     public class Solution {
-        class UnionFindWithCount {
-            int count;
-            int[] parents;
-
-            public UnionFindWithCount(int size) {
-                count = 0;
-                parents = new int[size + 1];
-
-                for (int i = 0; i < parents.length; i++) {
-                    parents[i] = i;
-                }
-            }
-
-            public void union(int a, int b) {
-                int root_a = query(a);
-                int root_b = query(b);
-                if (root_a == root_b) return;
-
-                parents[root_b] = root_a;
-                count--;
-            }
-
-            public int query(int x) {
-                if (parents[x] != x) {
-                    parents[x] = query(parents[x]);
-                }
-
-                return parents[x];
-            }
-
-            public int getCount() {
-                return count;
-            }
-
-            public void setCount(int n) {
-                count = n;
-            }
-        }
-
         int m;
         int n;
 
@@ -187,7 +149,7 @@ public class LE_200_Number_Of_Islands {
             m = grid.length;
             n = grid[0].length;
 
-            UnionFindWithCount uf = new UnionFindWithCount(m * n);
+            UnionFindWithCount1 uf = new UnionFindWithCount1(m * n);
 
             int total = 0;
             for (int i = 0; i < m; i++) {
@@ -246,7 +208,7 @@ public class LE_200_Number_Of_Islands {
             int n = grid.length;
             int m = grid[0].length;
             int total = 0;
-            UnionFindWithCount uf = new UnionFindWithCount(n * m);
+            UnionFindWithCount1 uf = new UnionFindWithCount1(n * m);
 
             int[] offsetX = new int[]{0, -1};
             int[] offsetY = new int[]{-1, 0};

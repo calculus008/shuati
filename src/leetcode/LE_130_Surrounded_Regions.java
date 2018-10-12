@@ -1,10 +1,12 @@
 package leetcode;
 
+import common.UnionFindWithCount1;
+
 /**
  * Created by yuank on 3/15/18.
  */
 public class LE_130_Surrounded_Regions {
-    /*
+    /**
         Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
 
         A region is captured by flipping all 'O's into 'X's in that surrounded region.
@@ -22,7 +24,9 @@ public class LE_130_Surrounded_Regions {
         X O X X
      */
 
-    //Space and Time : O(m * n)
+    /** Solution 1
+     *  Space and Time : O(m * n)
+     **/
 
     public static void solve(char[][] board) {
         if (board == null || board.length == 0) return;
@@ -30,10 +34,12 @@ public class LE_130_Surrounded_Regions {
         int m = board.length;
         int n = board[0].length;
 
-        //'O'只可能在四条边上才不能被'X'包围，而且所有和这个边上的'O'相邻的‘O'也不是被‘X'包围的。
-        //所以:
-        //1.遍历每一条边，找'O'，然后以它为起点进行DFS，把所有找到的相邻的'O'设置为'1'.
-        //2.遍历整个矩阵，把所有还存在的'O'设置为'X',把'1'还原成'O'
+        /**
+            'O'只可能在四条边上才不能被'X'包围，而且所有和这个边上的'O'相邻的‘O'也不是被‘X'包围的。
+            所以:
+            1.遍历每一条边，找'O'，然后以它为起点进行DFS，把所有找到的相邻的'O'设置为'1'.
+            2.遍历整个矩阵，把所有还存在的'O'设置为'X',把'1'还原成'O'
+        **/
 
         for (int i = 0; i < n; i++) {
             if (board[0][i] == 'O') {
@@ -79,5 +85,73 @@ public class LE_130_Surrounded_Regions {
         helper(board, i - 1, j);
         helper(board, i, j + 1);
         helper(board, i, j - 1);
+    }
+
+    /**
+     * Solution 2
+     * Union Find
+     * Time and Space : O(m * n)
+     *
+     */
+    public class Solution {
+        public void surroundedRegions(char[][] board) {
+            if (board == null || board.length == 0 || board[0].length == 0) return;
+
+            int m = board.length;
+            int n = board[0].length;
+            int total = m * n;
+            int[][] dir = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+            UnionFindWithCount1 uf = new UnionFindWithCount1(total);
+
+            /**
+             * First loop, use UnionFind to separate 'O' cells on the outside
+             * and the 'O' inside.
+             */
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (board[i][j] == 'X') continue;
+
+                    if (i == 0 || i == m - 1 || j == 0 || j == n - 1) {
+                        /**
+                         * Each outside 'O' cell is unioned with id value m * n.
+                         * Based on union by rank logic in union(), parent ID is always
+                         * the one with larger value, so this set of cells will all have
+                         * parent ID as m * n (or "total")
+                         */
+                        uf.union(i * n + j, total);
+                    } else {
+                        for (int k = 0; k < dir.length; k++) {
+                            int nextX = i + dir[k][0];
+                            int nextY = j + dir[k][1];
+
+                            /**
+                             * !!! Must check the value for newly calculated location
+                             */
+                            if (board[nextX][nextY] == 'O') {
+                                /**
+                                 * For inside 'O' cells, union current one with 'O' cells
+                                 * in its 4 neighbours. Their parent ID will be smaller
+                                 * than m * n. So they are in different set.
+                                 */
+                                uf.union(i * n + j, nextX * n + nextY);
+                            }
+                        }
+                    }
+                }
+            }
+
+            /**
+             * Second loop, convert the inside 'O' cells to 'X'
+             */
+            for (int i = 1; i < m - 1; i++) {
+                for (int j = 1; j < n - 1; j++) {
+                    if (board[i][j] == 'O') {
+                        if (uf.query(i * n + j) != total) {
+                            board[i][j] = 'X';
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -1,5 +1,8 @@
 package leetcode;
 
+import common.Point;
+import common.UnionFindWithCount1;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -56,7 +59,7 @@ public class LE_305_Number_Of_Islands_II {
      * Solution 1 : A partial Union Find Solution
      *
      *  Key :
-     *  1.Conert 2D position to a 1D index;
+     *  1.Convert 2D position to a 1D index;
      *  2.Each time we add a land in a cell, check its 4 neigbhours, if the neightour is also a land and it is not merged with the
      *  current one, do merge. Keep count of the connected components
      *
@@ -158,6 +161,87 @@ public class LE_305_Number_Of_Islands_II {
         }
 
         return res;
+    }
+
+
+    /**
+     * Solution 3
+     * UnionFind
+     * Use the same Union Find class "UnionFindWithCount1" as LE_200_Number_Of_Islands
+     *
+     * Time  : O(m * n + L) (L is length of operators)
+     * Space : O(m * n)
+     *
+     * Delta of number of islands for each operator:
+     *
+     * 1 (flip one cell to true or add one island) - number of merging with existing islands with 4 possible neighbours
+     *
+     * So the range of delta is -3 to 1.
+     *
+     */
+    public class Solution {
+        public List<Integer> numIslands2(int n, int m, Point[] operators) {
+            List<Integer> res = new ArrayList<>();
+            if (operators == null || operators.length == 0) return res;
+
+            //init grid since it's not provided in input params
+            boolean[][] grid = new boolean[n][m];
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    grid[i][j] = false;
+                }
+            }
+
+            UnionFindWithCount1 uf = new UnionFindWithCount1(n * m);
+
+            for (Point operator : operators) {
+                int x = operator.x, y = operator.y;
+
+                /**
+                 * !!!if given coordinate is not valid or cell value
+                 * is already true, bypass the union step
+                 * 如果要把已经是岛的地方再次变成岛，则无需有任何操作
+                 * **/
+                if (isValid(x, y, grid) && !grid[x][y]) {
+                    grid[x][y] = true;
+
+                    /**
+                     * !!!we are adding one land, so increase count in uf here,
+                     * union() method will take care of decreasing count when merge
+                     **/
+                    uf.setCount(uf.getCount() + 1);
+
+                    int[][] dir = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+                    for (int k = 0; k < dir.length; k++) {
+                        int nextX = x + dir[k][0];
+                        int nextY = y + dir[k][1];
+
+                        /**
+                         * "grid[nextX][nextY]"  !!! Only do union() if the valid
+                         * neighbour is TRUE
+                         **/
+                        if (isValid(nextX, nextY, grid) && grid[nextX][nextY]) {
+                            uf.union(getIdx(x, y, m), getIdx(nextX, nextY, m));
+                        }
+                    }
+                }
+
+                res.add(uf.getCount());
+            }
+
+            return res;
+        }
+
+
+        private boolean isValid(int x, int y, boolean[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+            return (x >= 0 && x < m && y >= 0 && y < n);
+        }
+
+        private int getIdx(int x, int y, int n) {
+            return x * n + y;
+        }
     }
 
 }
