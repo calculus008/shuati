@@ -4,12 +4,14 @@ package leetcode;
  * Created by yuank on 3/27/18.
  */
 public class LE_211_Add_And_Search_Word {
-    /*
+    /**
         Design a data structure that supports the following two operations:
 
         void addWord(word)
         bool search(word)
-        search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.
+
+        search(word) can search a literal word or a regular expression string containing only
+        letters a-z or .. A . means it can represent any one letter.
 
         For example:
 
@@ -20,8 +22,14 @@ public class LE_211_Add_And_Search_Word {
         search("bad") -> true
         search(".ad") -> true
         search("b..") -> true
+
         Note:
         You may assume that all words are consist of lowercase letters a-z.
+     */
+
+    /**
+     * Time  : O(n), n is word length
+     * Space : O(Number of Words * word length * 26)
      */
 
     private TrieNode root;
@@ -33,8 +41,6 @@ public class LE_211_Add_And_Search_Word {
     }
 
     /** Adds a word into the data structure. */
-    //Time : O(n), n is word length
-    //Space : O(Number of Words * word length * 26)
     public void addWord(String word) {
         if (word == null || word.length() == 0) return;
 
@@ -76,4 +82,79 @@ public class LE_211_Add_And_Search_Word {
             return temp != null && helper(word, start + 1, temp);
         }
     }
+
+
+    /**
+     * LintCode 473
+     */
+    public class WordDictionary {
+        class TrieNode {
+            TrieNode[] children;
+            boolean isWord;
+
+            public TrieNode() {
+                children = new TrieNode[26];
+                isWord = false;
+            }
+        }
+
+        TrieNode root;
+
+        public WordDictionary() {
+            root = new TrieNode();
+        }
+
+        public void addWord(String word) {
+            if (word == null || word.length() == 0) return;
+
+            TrieNode cur = root;
+            for (int i = 0; i < word.length(); i++) {
+                int idx = word.charAt(i) - 'a';
+                if (cur.children[idx] == null) {
+                    cur.children[idx] = new TrieNode();
+                }
+                cur = cur.children[idx];
+            }
+
+            cur.isWord = true;
+        }
+
+
+        /*
+         * @param word: A string
+         * @return: if the word is in the trie.
+         */
+        public boolean search(String word) {
+            if (word == null || word.length() == 0) return false;
+
+            return helper(word, 0, root);
+        }
+
+        //DFS
+        private boolean helper(String word, int start, TrieNode cur) {
+            if (start == word.length()) {
+                return cur.isWord;
+            }
+
+            char c = word.charAt(start);
+            if (c == '.') {
+                for (TrieNode child : cur.children) {
+                    if (child != null && helper(word, start + 1, child)) {
+                        return true;
+                    }
+                }
+            } else {
+                int idx = c - 'a';
+                TrieNode child = cur.children[idx];
+
+                if (child != null && helper(word, start + 1, child)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+    }
+
 }

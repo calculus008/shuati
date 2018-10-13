@@ -350,7 +350,7 @@ LI_589_Connecting_Graph
 LI_590_Connecting_Graph_II
 LI_591_Connecting_Graph_III
 LE_684_Redundant_Connection
-LE_685_Redundant_Connection_II
+LE_685_Redundant_Connection_II                              **
 LI_178_Graph_Valid_Tree
 LE_261_Graph_Valid_Tree
 LE_200_Number_Of_Islands                                  (lint 433)
@@ -361,3 +361,12 @@ LI_432_Find_The_Weak_Connected_Component_In_The_Directed_Graph
 LE_721_Accounts_Merge                                     (lint 1070)
 LE_737_Sentence_Similarity_II
 LI_629_Minimum_Spanning_Tree
+
+#Trie
+LE_208_Implement_Trie                                     (lint 442)
+LE_211_Add_And_Search_Word                                (lint 473)
+LI_559_Trie_Service
+
+
+#Matrix, DFS
+LI_778_Pacific_Atlantic_Water_Flow

@@ -1,25 +1,26 @@
-package leetcode;
+package common;
 
 /**
- * Created by yuank on 3/26/18.
+ * Created by yuank on 10/12/18.
  */
-public class LE_208_Implement_Trie {
-    /**
-        Implement a trie (Prefix Tree) with insert, search, and startsWith methods.
+public class Trie {
+    class TrieNode {
+        TrieNode[] children;
+        boolean isWord;
 
-        Note:
-        You may assume that all inputs are consist of lowercase letters a-z.
-     */
+        public TrieNode() {
+            children = new TrieNode[26];
+            isWord = false;
+        }
+    }
 
-    //A simplified version of LE_208
-    private TrieNode root;
+    TrieNode root;
 
-    /** Initialize your data structure here. */
-    public LE_208_Implement_Trie() {
+    public Trie() {
         root = new TrieNode();
     }
 
-    /** Inserts a word into the trie. */
+
     public void insert(String word) {
         if (word == null || word.length() == 0) return;
 
@@ -31,37 +32,45 @@ public class LE_208_Implement_Trie {
             }
             cur = cur.children[idx];
         }
+
         cur.isWord = true;
-        cur.word = word;
     }
 
-    /** Returns if the word is in the trie. */
+    /*
+     * @param word: A string
+     * @return: if the word is in the trie.
+     */
     public boolean search(String word) {
         if (word == null || word.length() == 0) return false;
 
-        TrieNode temp = root;
+        TrieNode cur = root;
         for (int i = 0; i < word.length(); i++) {
             int idx = word.charAt(i) - 'a';
-            if (temp.children[idx] == null) {
+            if (cur.children[idx] == null) {
                 return false;
             }
-            temp = temp.children[idx];
+            cur = cur.children[idx];
         }
-        return temp.isWord;
+
+        return cur.isWord;
     }
 
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+    /*
+     * @param prefix: A string
+     * @return: if there is any word in the trie that starts with the given prefix.
+     */
     public boolean startsWith(String prefix) {
         if (prefix == null || prefix.length() == 0) return false;
 
-        TrieNode temp = root;
+        TrieNode cur = root;
         for (int i = 0; i < prefix.length(); i++) {
             int idx = prefix.charAt(i) - 'a';
-            if (temp.children[idx] == null) {
+            if (cur.children[idx] == null) {
                 return false;
             }
-            temp = temp.children[idx];
+            cur = cur.children[idx];
         }
+
         return true;
     }
 }
