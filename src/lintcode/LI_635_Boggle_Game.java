@@ -28,6 +28,80 @@ public class LI_635_Boggle_Game {
          Hard
      */
 
+    /**
+     * 用Trie + DFS找每一个word的每一个字母。如果当前字母是word的最后一个单词，
+     * 则我们找到了一个完整的字母，那么在当前占用状态下重扫board查找更多单词；
+     * 否则我们继续寻找下一个字母。
+     *
+     * 这类题目是要在search()中做特殊处理，所以不能用原封不动地用Trie class.
+     * 需要的是借用root和insert(),主要的工作实际上是根据题意在search的逻辑
+     * 上做文章。
+     *
+     * 关键 ：
+     * 1.每次找到一个word, 从root位置开始递归搜索，这时，没有把访问过的位置设置为FALSE，
+     *   也就意味着，这些位置是被“站住“了。从此往下的递归就不能再考虑这些位置了，也就是
+     *   满足题意“the words can not overlap in the same position”。
+     * 2.每次从找到word的分支返回时，要将当前下一层找到的词去掉，因为反回后执行“visited[i][j] = false“，
+     *   被去掉的词正是在这些位置，所以要更新res以反应当前的正确状态。
+     * 3.也因此，res在运行中是动态增长和减少的，需要打擂台记录其最大size,这才是本题要的答案。
+     *
+     * Example :
+     *           [
+     *            ['a', 'b', 'c'],
+     *            ['d', 'e', 'f'],
+     *            ['g', 'h', 'i']
+     *           ]
+     *
+     *           {"abc","defi","gh"}
+     *
+             set visited[0][0] as TRUE
+             set visited[0][1] as TRUE
+             set visited[0][2] as TRUE
+             [abc]
+             set visited[1][0] as TRUE
+             set visited[1][1] as TRUE
+             set visited[1][2] as TRUE
+             set visited[2][2] as TRUE
+             [abc, defi]
+             set visited[2][0] as TRUE
+             set visited[2][1] as TRUE
+             [abc, defi, gh]
+             return [abc, defi]
+             set visited[2][0] as FALSE
+             return [abc]
+             set visited[1][2] as FALSE
+             set visited[1][1] as FALSE
+             set visited[1][0] as FALSE
+             set visited[2][0] as TRUE
+             set visited[2][0] as FALSE
+             return []
+             set visited[0][1] as FALSE
+             set visited[0][0] as FALSE
+
+             set visited[1][0] as TRUE
+             set visited[1][1] as TRUE
+             set visited[1][2] as TRUE
+             set visited[2][2] as TRUE
+             [defi]
+             set visited[0][0] as TRUE
+             set visited[0][1] as TRUE
+             set visited[0][2] as TRUE
+             [defi, abc]
+             set visited[2][0] as TRUE
+             set visited[2][1] as TRUE
+             [defi, abc, gh]
+             return [defi, abc]
+             set visited[2][0] as FALSE
+             return [defi]
+             set visited[0][1] as FALSE
+             set visited[0][0] as FALSE
+             set visited[2][0] as TRUE
+             set visited[2][0] as FALSE
+             return []
+             set visited[1][2] as FALSE
+             set visited[1][1] as FALSE ...
+     *
+     */
     public class Solution {
         class TrieNode {
             TrieNode[] children;
