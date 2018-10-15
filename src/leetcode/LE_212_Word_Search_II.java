@@ -26,7 +26,7 @@ public class LE_212_Word_Search_II {
 
     /**
      * Solution 1
-     * Trie + DFS, Time : O(m * n * leetcode.TrieNode), Space : O(leetcode.TrieNode)
+     * Trie + DFS, Time : O(m * n * TrieNode), Space : O(TrieNode)
      **/
     class TrieNode {
         TrieNode[] next = new TrieNode[26]; //!!! TrieNode数组
@@ -111,7 +111,6 @@ public class LE_212_Word_Search_II {
 
         int m = board.length;
         int n = board[0].length;
-        boolean[][] visited = new boolean[m][n];
 
         Map<String, Boolean> map = buildMap(words);
         Set<String> set = new HashSet<>();
@@ -231,4 +230,105 @@ public class LE_212_Word_Search_II {
         }
         return true;
     }
+
+    /**
+     * Another form of Trie + DFS solution
+     * Difference from Solution 1 : use "insert()" from Tire class
+     * to populate Trie (instead of using "buildTrieTree()"
+     */
+    public class Solution {
+        class TrieNode {
+            TrieNode[] children;
+            String word;
+
+            public TrieNode() {
+                children = new TrieNode[26];
+                word = null;
+            }
+        }
+
+        TrieNode root;
+
+        private void insert(String word) {
+            if (word == null || word.length() == 0) return;
+
+            TrieNode cur = root;
+            for (int i = 0; i < word.length(); i++) {
+                int idx = word.charAt(i) - 'a';
+                if (cur.children[idx] == null) {
+                    cur.children[idx] = new TrieNode();
+                }
+                cur = cur.children[idx];
+            }
+
+            cur.word = word;
+        }
+
+        public List<String> wordSearchII(char[][] board, List<String> words) {
+            List<String> res = new ArrayList<>();
+            if (board == null || board.length == 0 || board[0].length == 0 || words == null || words.size() == 0) return res;
+
+            root = new TrieNode();
+            for (String word : words) {
+                insert(word);
+            }
+
+            for (int i = 0; i < board.length ; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    dfs(board, res, root, i, j);
+                }
+            }
+
+            return res;
+        }
+
+        private void dfs(char[][] board, List<String> res, TrieNode cur, int i, int j) {
+            /**
+             * check if i and j is out of boundary
+             */
+            if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) {
+                return;
+            }
+
+            /**
+             * check if it is visited and if target char exists in Trie
+             */
+            char c = board[i][j];
+            int idx = c - 'a';
+            if (c == '#' || cur.children[idx] == null) {
+                return;
+            }
+
+            /**
+             * !!!
+             * Must move to children before checking "cur.word".
+             * It is the first thing to do after validating input params!!!
+             *
+             * The call to dfs() starts from root, if we don't move
+             * to root's children here, then check cur.word will be meaningless
+             * since root never stores a word. If "a" is valid word, then
+             * you can't add "a" to res if you check cur.children while cur
+             * is root.
+             * !!!
+             */
+            cur = cur.children[idx];
+
+            if (cur.word != null) {
+                res.add(cur.word);
+                /**
+                 * Another way to prevent duplicates in res (list)
+                 * Or put word in a HashSet, then convert set to list at the end
+                 */
+                cur.word = null;
+            }
+
+            board[i][j] = '#';
+            dfs(board, res, cur, i + 1, j);
+            dfs(board, res, cur, i, j + 1);
+            dfs(board, res, cur, i - 1, j);
+            dfs(board, res, cur, i, j - 1);
+            board[i][j] = c;
+        }
+    }
+
 }
