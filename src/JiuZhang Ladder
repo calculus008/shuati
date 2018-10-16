@@ -261,6 +261,7 @@ LE_346_Moving_Average_From_Data_Stream
 LE_438_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
 
+====================================================
 
 9.数据结构：区间、数组、矩阵和树状数组
 #Intervals
@@ -322,7 +323,9 @@ LE_308_Range_Sum_Query_2D_Mutable                         (lint 817)
 LI_532_Reverse_Pairs
 LE_493_Reverse_Pairs
 
-Advanced
+Advanced Algorithm
+1.Follow Up Questions
+
 #Kth Largest/Smallest
 LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix            (lint 401)
 LE_373_Find_K_Pairs_With_Smallest_Sums                    (lint 465)
@@ -339,6 +342,12 @@ LE_76_Minimum_Window_Substring                            (lint 32)
 LE_611_Valid_Triangle_Number                              (lint 382) ***
 LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
 
+#Matrix, DFS
+LI_778_Pacific_Atlantic_Water_Flow
+
+====================================================
+
+2.Data Structure I - Union Find & Trie
 #Union Find
 UnionFindSet
 UnionFindWithCount
@@ -366,7 +375,16 @@ LI_629_Minimum_Spanning_Tree
 LE_208_Implement_Trie                                     (lint 442)
 LE_211_Add_And_Search_Word                                (lint 473)
 LI_559_Trie_Service
+LE_79_Word_Search                                         (lint 123)
+LE_212_Word_Search_II                                     (lint 132)
+LI_635_Boggle_Game                                                   ***
+LE_425_Word_Squares                                       (lint 634) **
 
+====================================================
 
-#Matrix, DFS
-LI_778_Pacific_Atlantic_Water_Flow
+3.Data Structure II - Stack, Deque, Heap
+#Heap
+LE_42_Trapping_Rain_Water                                 (lint 363)
+LE_407_Trapping_Rain_Water_II                             (lint 364)
+LE_295_Find_Median_From_Data_Stream                       (lint 81)
+LE_239_Sliding_Window_Maximum                             (lint 362)

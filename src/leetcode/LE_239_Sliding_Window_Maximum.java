@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
  * Created by yuank on 4/6/18.
  */
 public class LE_239_Sliding_Window_Maximum {
-    /*
+    /**
         Given an array nums, there is a sliding window of size k which is moving from the very left of the array to the very right.
         You can only see the k numbers in the window. Each time the sliding window moves right by one position.
 
@@ -32,7 +32,7 @@ public class LE_239_Sliding_Window_Maximum {
         Could you solve it in linear time?
      */
 
-        /*
+    /**
       https://www.youtube.com/watch?v=2SXqBsTR6a8&t=6s
 
       Brutal Force : Time : O((n - k + 1) * k), worst case O(n ^ 2), space : O(1)
@@ -130,7 +130,7 @@ public class LE_239_Sliding_Window_Maximum {
     }
 
 
-    //Solution 3 : Heap. Time : O(nlogk), Space : O(k)
+    //Solution 3 : Heap. Time : O(n ^ 2), Space : O(k)
     public int[] maxSlidingWindow3(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
             return nums;
@@ -146,6 +146,10 @@ public class LE_239_Sliding_Window_Maximum {
                 int idx = i - k + 1;
                 res[i - k + 1] = pq.peek();
                 //!!! Use remove to delete an object from pq.
+                /**
+                 * PriorityQueue.remove() is O(n). If we want to achieve logn for remove(),
+                 * need to implement Hash Heap, Java lib does not supply one.
+                 **/
                 pq.remove(nums[i - k + 1]);
             }
         }

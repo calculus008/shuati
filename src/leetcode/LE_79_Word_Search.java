@@ -51,6 +51,12 @@ public class LE_79_Word_Search {
         if (board[i][j] == word.charAt(idx)) {
             //!!! set current cell with '#' if matched. It saves us from using a boolean matrix to track which cells are visted
             char c = board[i][j];
+            /**
+             * !!!
+             * Set '#' to visited position in original 2D array, save the space for visited[][],
+             * also, once it is set to '#', checking if the position is visited can be combined into
+             * "if (board[i][j] == word.charAt(idx))".
+             */
             board[i][j] = '#';
 
             idx++;

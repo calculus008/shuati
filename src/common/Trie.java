@@ -20,7 +20,6 @@ public class Trie {
         root = new TrieNode();
     }
 
-
     public void insert(String word) {
         if (word == null || word.length() == 0) return;
 
