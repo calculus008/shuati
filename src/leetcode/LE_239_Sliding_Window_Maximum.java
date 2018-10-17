@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Created by yuank on 4/6/18.
@@ -151,6 +149,74 @@ public class LE_239_Sliding_Window_Maximum {
                  * need to implement Hash Heap, Java lib does not supply one.
                  **/
                 pq.remove(nums[i - k + 1]);
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Solution using Deque and return type is list (instead of array)
+     * Example:
+     *
+     *  idx   0 1 2 3 4
+     * Input [1,2,7,7,2]
+     *
+     * i = 0
+     * dq  : 0
+     * res : []
+     *
+     * i = 1
+     * dq  : 1
+     * res : []
+     *
+     * i = 2
+     * dq  : 2
+     * res : [nums[2]]
+     * (i - k + 1 = 0)<> (dq.peekFirst() == 2)
+     *
+     * i = 3
+     * dq = 2, 3
+     * res : [nums[2], nums[3]]
+     * (i - k + 1 = 1)<> (dq.peekFirst() == 2)
+     *
+     * i = 4
+     * dq = 2, 3, 4
+     * res : [nums[2], nums[2], nums[2]]
+     * (i - k + 1 = 2) == (dq.peekFirst() == 2), remove first element
+     * dq = 3, 4
+     */
+    public List<Integer> maxSlidingWindow4(int[] nums, int k) {
+        List<Integer> res = new ArrayList<>();
+        if (nums == null || nums.length == 0 || k == 0) return res;
+
+        Deque<Integer> dq = new LinkedList<>();
+
+        //i tracks the index of the element that will come into sliding window
+        for (int i = 0; i < nums.length; i++) {
+            while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {
+                dq.pollLast();
+            }
+            dq.offerLast(i);
+
+            /**
+                meaning we already fill up the window
+
+                !!! ">= 0"
+
+                Moving sliding window is 2 actions
+                1.add a new element at the right side
+                2.remove the element at the left side
+
+                Here we actually remove the left side first, then
+                in the NEXT loop, add the new one on the right.
+             **/
+            if (i - k + 1 >= 0) {
+                res.add(nums[dq.peekFirst()]);
+
+                if ((i - k + 1) == dq.peekFirst()) {
+                    dq.pollFirst();
+                }
             }
         }
 

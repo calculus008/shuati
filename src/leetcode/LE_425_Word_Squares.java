@@ -79,8 +79,24 @@ public class LE_425_Word_Squares {
 
     /**
      * Solution 1
-     * Use HashMap to get the list of words that share the given common prefix
-     * Time  : O()
+     * Use HashMap to get the list of words that share the given common prefix.
+     **
+     * 较为简短的DFS算法，不需要用到Trie。
+     * 先将所有的prefixes存到Map中，然后在DFS中根据prefix来查询下一个可以被放在square中的词。
+     * 当square中包含的词数目达到正确的size时，加入进res中
+     *
+     * 整体思路是：
+     * 从给的单词列表中依次拿出一个单词来，作为word squares的头单词，然后根据当前的单词，
+     * 找到word squares中下一个单词的前缀， 然后再找到相应的单词，分别进行尝试， 依次尝试下去所以相当于有两类尝试 :
+     *
+     *   第一部分的尝试是在给的单词列表中，挨个找到word square打头的单词，即以当前单词打头；
+     *   第二部分的尝试是，基于已经选定的打头单词，接下来word square中应该放哪些单词才能使整个结果构成合法的word square.
+     *
+     * 这就是为什么有两个dfs出现。每一种尝试，就是一次dfs.每次对应的dfs,都需要backtracking把错误的尝试删除掉，再继续进行新一轮的尝试。
+     * 在一开始选定了第一个打头单词之后，调用Dfs的时候，temp.size()值是1， 而不是0.
+     * Trie和map都可以存储前缀和单词的关系， 哪个写起来顺手就写哪个。hashmap的版本相对写起来简单轻巧。
+     *
+     * Time  : O(n!) ???
      * Space : O(n * l)
      */
     public class Solution1 {
@@ -159,7 +175,7 @@ public class LE_425_Word_Squares {
      * https://leetcode.com/problems/word-squares/discuss/91333/Explained.-My-Java-solution-using-Trie-126ms-1616
      *
      * Main logic is the same as Solution1, the only difference is that it stores prefix in Trie.
-     *Call findByPrefix() in Trie class to get list of of words that share the given common prefix
+     * Call findByPrefix() in Trie class to get list of of words that share the given common prefix
      *
      * Compare with HashMap, Trie saves space, Time complexcity is the same.
      * Implementing Trie takes time, so if not required, use HashMap saves time.

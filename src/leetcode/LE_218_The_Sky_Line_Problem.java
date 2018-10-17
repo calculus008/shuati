@@ -41,7 +41,7 @@ public class LE_218_The_Sky_Line_Problem {
      */
 
     /**
-         Very Important.
+        Very Important.
 
         扫描线(Line Sweep)
         关键的规律 ：
@@ -52,6 +52,12 @@ public class LE_218_The_Sky_Line_Problem {
 
     /**
      * Solution 1 : Heap, Time : O(n ^ 2), Space : O(n)
+     *
+     * PriorityQueue.remove() takes O(n), if we want to optimize it, need to use HashHeap,
+     * which uses HashMap to track each element in heap, then do swap and sift up/down
+     * it takes o(logn). Just need to understand its mechanism. A reference implementation
+     * from JiuZhang:
+     * https://github.com/awangdev/LintCode/blob/master/Java/HashHeap.java
      **/
     public List<int[]> getSkyline1(int[][] buildings) {
         List<int[]> res = new ArrayList<>();
