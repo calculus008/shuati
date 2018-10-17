@@ -388,3 +388,5 @@ LE_42_Trapping_Rain_Water                                 (lint 363)
 LE_407_Trapping_Rain_Water_II                             (lint 364)
 LE_295_Find_Median_From_Data_Stream                       (lint 81)
 LE_239_Sliding_Window_Maximum                             (lint 362)
+LI_360_Sliding_Window_Median
+LE_480_Sliding_Window_Median
