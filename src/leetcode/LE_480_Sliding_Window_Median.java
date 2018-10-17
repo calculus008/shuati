@@ -1,7 +1,10 @@
 package leetcode;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
+import java.util.function.Supplier;
 
 /**
  * Created by yuank on 10/17/18.
@@ -47,7 +50,7 @@ public class LE_480_Sliding_Window_Median {
      * 1.return type is int[]
      * 2.test cases show that we need to handle int value overflow
      */
-    public double[] medianSlidingWindow(int[] nums, int k) {
+    public double[] medianSlidingWindow1(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k == 0) return new double[]{};
 
         double[] res = new double[nums.length - k + 1];
@@ -83,6 +86,125 @@ public class LE_480_Sliding_Window_Median {
             //get median
             if (i - k + 1 >= 0) {
                 res[j] = k % 2 == 0 ? (small.peek() + large.peek()) / 2.0 : large.peek();
+                j++;
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Solution 2
+     * 2 TreeSet
+     * Time : O(nlogk)
+     */
+    public double[] medianSlidingWindow2(int[] nums, int k) {
+        Comparator<Integer> comparator = (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
+        TreeSet<Integer> left = new TreeSet<>(comparator.reversed());
+        TreeSet<Integer> right = new TreeSet<>(comparator);
+
+        Supplier<Double> median = (k % 2 == 0) ?
+                () -> ((double) nums[left.first()] + nums[right.first()]) / 2 :
+                () -> (double) nums[right.first()];
+
+        // balance lefts size and rights size (if not equal then right will be larger by one)
+        Runnable balance = () -> { while (left.size() > right.size()) right.add(left.pollFirst()); };
+
+        double[] result = new double[nums.length - k + 1];
+
+        //fill the first window
+        for (int i = 0; i < k; i++) left.add(i);
+
+        balance.run();
+        result[0] = median.get();
+
+        for (int i = k, r = 1; i < nums.length; i++, r++) {
+            // remove tail of window from either left or right
+            if(!left.remove(i - k)) right.remove(i - k);
+
+            // add next num, this will always increase left size
+            right.add(i);
+            left.add(right.pollFirst());
+
+            // rebalance left and right, then get median from them
+            balance.run();
+            result[r] = median.get();
+        }
+
+        return result;
+    }
+
+    /**
+     * Solution 3
+     * Use 2 TreeSet, adapt to similar flow as in Solution 1
+     * Time : O(nlogk)
+     * Space : O(n)
+     *
+     * Best Solution
+     */
+    public double[] medianSlidingWindow3(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k == 0) return new double[]{};
+
+        double[] res = new double[nums.length - k + 1];
+
+        /**
+         * !!!
+         * This is the key trick for using TreeSet. Instead of saving value, we save index for nums
+         * in TreeSet, since index is unique, we can save them in a set.
+         *
+         * This Comparator tells TreeSet to sort based on the values in nums by using indexed saved in
+         * the set.
+         *
+         * To break ties in our Tree Set comparator we compare the index.
+         *
+         * "comparator.reversed()"
+         */
+        Comparator<Integer> comparator = (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
+        TreeSet<Integer> small = new TreeSet<>(comparator.reversed());
+        TreeSet<Integer> large = new TreeSet<>(comparator);
+
+        int l = 0;
+        int j = 0;
+
+        /**
+         * Overall action for each window to get median
+         * 1.Remove left
+         * 2.Add right
+         * 3.Balance between large and small
+         * 4.Calculate median
+         */
+        for (int i = 0; i < nums.length; i++) {
+            /**
+             * When arrive at index k, the window is full, we need to remove element from left side
+             */
+            if (i >= k) {
+                /**
+                 * TreeSet.remove() returns false if the value is not in current set!
+                 * It takes O(logk)
+                 */
+                if (!small.remove(l)) {
+                    large.remove(l);
+                }
+                l++;
+            }
+
+
+            large.add(i);
+            small.add(large.pollFirst());
+            if (small.size() > large.size()) {//can also use "while"
+                large.add(small.pollFirst());
+            }
+
+            /**
+             * Execute one loop before the logic of removing element at the beginning of the loop
+             */
+            if (i >= k - 1) {
+                /**
+                 * Use long to avoid overflow
+                 *
+                 * TreeSet.first()
+                 */
+                res[j] = (k % 2 == 0 ? ((long)nums[small.first()] + (long)nums[large.first()]) / 2.0 : (long)nums[large.first()]);
                 j++;
             }
         }

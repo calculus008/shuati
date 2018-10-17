@@ -1,8 +1,7 @@
 package lintcode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * Created by yuank on 10/17/18.
@@ -40,7 +39,7 @@ public class LI_360_Sliding_Window_Median {
      * The extra operation for this problemn is how to remove left side element when sliding window
      * moves to the right.
      *
-     * Time : O(n ^ 2), since PriorityQueue.remove() takes O(n), in order to achieve O(nlogn),
+     * Time : O(n * k), since PriorityQueue.remove() takes O(n), in order to achieve O(nlogn),
      *        need to use Hash Heap
      * Space : O(n)
      */
@@ -84,4 +83,6 @@ public class LI_360_Sliding_Window_Median {
 
         return res;
     }
+
+
 }
