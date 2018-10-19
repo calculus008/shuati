@@ -34,7 +34,10 @@ public class LE_394_Decode_String {
      *
      *  To get number of token in "[]", we need to keep it until to the deepest level, Stack should be used.
      *
-     *  Example : 3[2[ad]3[pf]]xyz
+     *  Each '[]' indicates a new level of extraction. However, the repetition number is the one that right
+     *  proceeds the '[]'. That's why we need to use Stack to save the number. It is saved for later usage.
+     *
+     *  Example : 3[2[ab]3[pf]]xyz
      *
      *  c == '3'
      *  s1  s2   res = ""
@@ -92,27 +95,54 @@ public class LE_394_Decode_String {
      *
      */
     public String expressionExpand(String s) {
+        /**
+         * s1 is used to save num in each level
+         */
         Stack<Integer> s1 = new Stack<>();
+        /**
+         * s2 is used to save string in each level
+         */
         Stack<String> s2 = new Stack<>();
 
         int i = 0;
         int len = s.length();
+        /**
+         * "res" is like the work table of the current level,
+         * save to stack s2 and set to "" when go to tne next level.
+         * "save and clean table".
+         *
+         * "res" is only used to save none digit char
+         */
         String res = "";
 
         while (i < len) {
             char c = s.charAt(i);
             if (Character.isDigit(c)) {
+                /**
+                 * assemble number for next level
+                 */
                 int num = 0;
                 while (i < len && Character.isDigit(s.charAt(i))) {
                     num = num * 10  + s.charAt(i) - '0';
                     i++;
                 }
+                /** push number **/
                 s1.push(num);
             } else if (c == '[') {
+                /**
+                 * '[' means the start of the next level, save the current one to s2.
+                 */
+                /** push String **/
                 s2.push(res);//!!!
                 res = "";//!!!
                 i++;
             } else if (c == ']') {
+                /**
+                 * ']' means the end of the current level, append current level
+                 * to the one saved in s1.
+                 *
+                 * Double pop : pop number and String from both stacks
+                 */
                 StringBuilder temp = new StringBuilder(s2.pop());//!!!
                 int num = s1.pop();
                 for (int j = 0; j < num; j++) {
@@ -121,6 +151,9 @@ public class LE_394_Decode_String {
                 res = temp.toString();
                 i++;
             } else {
+                /**
+                 * assemble string in current level
+                 */
                 res += c;
                 i++;
             }
@@ -133,12 +166,19 @@ public class LE_394_Decode_String {
     /**
      * Solution 2 : DFS
      * */
+    /**
+     * Init global vriable pos to pass process start position between recursion calls.
+     * has to be init here.
+     */
     int pos = 0;
     public String decodeStringDFS(String s) {
         StringBuilder sb = new StringBuilder();
         String num = "";
 
-        for (int i = pos; i < s.length(); i++) {//!!!"i = pos"
+        /**
+         * !!!"i = pos"
+         */
+        for (int i = pos; i < s.length(); i++) {
             char c = s.charAt(i);
             if (Character.isDigit(c)) {
                 num += c;
@@ -149,9 +189,13 @@ public class LE_394_Decode_String {
                     sb.append(next);
                 }
                 num = "";//!!!
-                i = pos;
-            } else if(c == ']') {
-                pos = i;
+                /**
+                 * now pos has bee changed in the returned recusion call
+                 * and points to the location of matching ']'
+                 */
+                i = pos;                // <-|  pass pos param between recursion calls
+            } else if(c == ']') {       //   |
+                pos = i;                //___|
                 return sb.toString();
             } else {
                 sb.append(c);

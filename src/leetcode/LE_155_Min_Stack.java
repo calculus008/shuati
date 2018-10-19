@@ -6,7 +6,7 @@ import java.util.Stack;
  * Created by yuank on 3/19/18.
  */
 public class LE_155_Min_Stack {
-    /*
+    /**
         Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
 
         push(x) -- Push element x onto stack.
@@ -65,7 +65,7 @@ public class LE_155_Min_Stack {
     //Solution 2 : one stack
     class MinStack2{
 
-        /*
+        /**
             用min保存当前最小值，push时只要x小于当前min值，先压入min, 再压入x, 然后改变min值。就是说，保留上一个min值，以便在pop时恢复那个min值。
 
             3 5 0 -1 -1 4 -1

@@ -390,3 +390,16 @@ LE_295_Find_Median_From_Data_Stream                       (lint 81)
 LE_239_Sliding_Window_Maximum                             (lint 362)
 LI_360_Sliding_Window_Median
 LE_480_Sliding_Window_Median
+
+#Stack
+LI_126_Max_Tree
+LE_84_Largest_Rectangle_In_Histogram                      (lint 122)
+LE_85_Max_Rectangle                                       (lint 510)
+LE_155_Min_Stack                                          (lint 12)
+LI_126_Max_Tree
+LE_394_Decode_String                                      (lint 575)
+LE_224_Basic_Calculator                                   (lint 978)
+LE_227_Basic_Calculator_II                                (lint 980)
+LE_772_Basic_Calculator_III                               (lint 849, 368)
+LE_981_Basic_Calculator_IV                                (lint 981)
+LE_150_Evaluate_Reverse_Polish_Notation

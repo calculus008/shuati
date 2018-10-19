@@ -6,10 +6,11 @@ import java.util.Stack;
  * Created by yuank on 3/29/18.
  */
 public class LE_224_Basic_Calculator {
-    /*
+    /**
         Implement a basic calculator to evaluate a simple expression string.
 
-        The expression string may contain open ( and closing parentheses ), the plus + or minus sign -, non-negative integers and empty spaces .
+        The expression string may contain open ( and closing parentheses ),
+        the plus + or minus sign -, non-negative integers and empty spaces .
 
         You may assume that the given expression is always valid.
 
@@ -19,16 +20,25 @@ public class LE_224_Basic_Calculator {
         "(1+(4+5+2)-3)+(6+8)" = 23
      */
 
-    //Very Important
-    //Time and Space : O(n)
-    /*
+
+    /**
+     *  Very Important
+        Time and Space : O(n)
+     eiddcchttjurhrgrgklfrdgtdhuujiblbbdjiekulnvn
+
         1.Use Stack
         2.Only valid input char : non-negative integers, +, -, ' ', (, )
         3.Only operation is plus, for "-", treat it as negative number.
      */
-    public int calculate(String s) {
+    public int calculate1(String s) {
         if (null == s || s.length() == 0) return 0;
 
+        /**
+         * In fact, we need to save both operator and number.
+         * Normally we need 2 stack, one for number, one for operator.
+         * But since we only have '+' and '-', so we only save sign of
+         * int type (1 or -1), therefore we only use one stack.
+         */
         Stack<Integer> stack = new Stack<>();
         int res = 0;
         int len = s.length();
@@ -62,6 +72,44 @@ public class LE_224_Basic_Calculator {
             }
         }
 
+        return res;
+    }
+
+    /**
+     *  Use 2 stacks, one for number, one for operator
+     */
+    public int calculate2(String s) {
+        Stack<Integer> s1 = new Stack<>();//number
+        Stack<Character> s2 = new Stack<>();//operator
+
+        int res = 0;
+        char op = '+';//只有‘+’和‘-’，同级运算，可以不考虑优先级的问题。
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)){
+                int num = c - '0';
+                while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                    num = num * 10 + s.charAt(i + 1) - '0';
+                    i++;
+                }
+                // res += sign * num;
+                res += op == '+' ? num : -num;
+            } else if (c == '-' || c == '+') {
+                op = c;
+            } else if (c == '(') {
+                /**
+                 实际上是模拟递归，把要保留的元素压入各自的栈，然后把这些元素清空或清零。
+                 这样下一层的处理就有了clean slate.
+                 **/
+                s1.push(res);
+                s2.push(op);
+                res = 0;
+                op = '+';//!!!
+            } else if (c == ')') {
+                res = (s2.pop() == '+' ? res : -res) + s1.pop();
+            }
+        }
         return res;
     }
 }

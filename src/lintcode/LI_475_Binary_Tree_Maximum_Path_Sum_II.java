@@ -22,8 +22,13 @@ public class LI_475_Binary_Tree_Maximum_Path_Sum_II {
          Easy
      */
 
-    /** Compare with :*
-     *  LE_124_Binary_Tree_Max_Path_Sum
+    /**
+     *  For this problem, the path has to start from root.
+     *
+     *  Compare with :
+     *  LE_124_Binary_Tree_Max_Path_Sum, the path does not need to
+     *  start from root
+     *
      **/
     public int maxPathSum2(TreeNode root) {
         if (root == null) {

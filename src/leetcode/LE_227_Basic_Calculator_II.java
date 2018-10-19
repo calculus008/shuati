@@ -6,7 +6,7 @@ import java.util.Stack;
  * Created by yuank on 4/4/18.
  */
 public class LE_227_Basic_Calculator_II {
-    /*
+    /**
         Implement a basic calculator to evaluate a simple expression string.
 
         The expression string contains only non-negative integers, +, -, *, / operators and empty spaces .
@@ -22,7 +22,7 @@ public class LE_227_Basic_Calculator_II {
      */
 
     //Stack solution, Time and Space : O(n)
-    /*
+    /**
         3*2 + 4 - 5/2
 
       3  curVal = 0, sign = '+', stack :
@@ -156,6 +156,105 @@ public class LE_227_Basic_Calculator_II {
         System.out.println("res=" + res);
 
         return res;
+    }
+
+    /**
+     * 因为没有括号，只有加减乘除， 所以：
+     * 1.取出数字，根据当前的操作符，对乘除，运算优先，从stack中取出一个数，和当前数计算，将结果压入stack.
+     * 2.遇到操作符号，记下当前的操作符。
+     *
+     * 关键 ：因为乘除优先，计算乘除，结果入栈。对加减，分别入栈正数和负数。最后，所有元素处栈并想加。
+     */
+    public int calculate3(String s) {
+        if (s == null || s.length() == 0) return 0;
+
+        int res = 0;
+        int n = s.length();
+        Stack<Integer> stack = new Stack<>();
+        char op = '+';
+
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                int num = 0;
+                while (i < n && Character.isDigit(s.charAt(i)) ) {
+                    num = num * 10 + s.charAt(i) - '0';
+                    i++;
+                }
+
+                if (op == '+') {
+                    stack.push(num);
+                } else if (op == '-') {
+                    stack.push(-num);
+                } else if (op == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (op == '/') {
+                    stack.push(stack.pop() / num);
+                }
+
+                i--;
+            } else if (c == '+' || c == '-' || c == '*' || c == '/') {
+                op = c;
+            }
+        }
+
+        for (int number : stack) {
+            res += number;
+        }
+
+        return res;
+    }
+
+    /**
+     * Use eval(), like LE_772_Basic_Calculator_III
+     *
+     * No parentheses, so no extra level to "recurse". No need to save operator in a separate stack
+     */
+    public int calculate4(String s) {
+        if (s == null || s.length() == 0) return 0;
+
+        int res = 0;
+        int n = s.length();
+        Stack<Integer> stack = new Stack<>();
+        char op = '+';
+
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                int num = 0;
+                while (i < n && Character.isDigit(s.charAt(i)) ) {
+                    num = num * 10 + s.charAt(i) - '0';
+                    i++;
+                }
+
+                stack.push(eval(op, num, stack));
+
+                i--;
+            } else if (c == '+' || c == '-' || c == '*' || c == '/') {
+                op = c;
+            }
+        }
+
+        for (int number : stack) {
+            res += number;
+        }
+
+        return res;
+    }
+
+    private int eval(char sign, int num, Stack<Integer> stack) {
+        int ret = 0;
+        if (sign == '+') {
+            ret = num;
+        } else if (sign == '-') {
+            ret = -num;
+        } else if (sign == '*') {
+            ret = stack.pop() * num;
+        } else if (sign == '/') {
+            ret = stack.pop() / num;
+        }
+
+        return ret;
     }
 
     public static void main(String[] args) {

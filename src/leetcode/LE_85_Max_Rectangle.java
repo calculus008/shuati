@@ -7,8 +7,9 @@ import java.util.Stack;
  * Created by yuank on 3/7/18.
  */
 public class LE_85_Max_Rectangle {
-    /*
-        Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+    /**
+        Given a 2D binary matrix filled with 0's and 1's,
+        find the largest rectangle containing only 1's and return its area.
 
         For example, given the following matrix:
 
@@ -63,9 +64,13 @@ public class LE_85_Max_Rectangle {
     //Time: O(m *n), Space : O(n)
     //https://leetcode.com/problems/maximal-rectangle/discuss/29054/Share-my-DP-solution
 
-    /*
-        Let the maximal rectangle area at row i and column j be computed by [right(i,j) - left(i,j)]*height(i,j).All the 3 variables left, right, and height can be determined by the information from previous row, and also information from the current row
+    /**
+        Let the maximal rectangle area at row i and column j be computed by
+        [right(i,j) - left(i,j)]*height(i,j).All the 3 variables left, right, and height can be determined
+        by the information from previous row, and also information from the current row
+
         Transition equations:
+
          left(i,j) = max(left(i-1,j), cur_left), cur_left can be determined from the current row
          right(i,j) = min(right(i-1,j), cur_right), cur_right can be determined from the current row
          height(i,j) = height(i-1,j) + 1, if matrix[i][j]==‘1’;
