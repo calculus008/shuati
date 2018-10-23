@@ -30,13 +30,13 @@ public class LE_300_Longest_Increasing_Subsequence {
      思路
      在1,3,5,2,8,4,6这个例子中，当到6时，我们一共可以有四种
      (1)不同长度
-     (2)且保证该升序序列在同长度升序序列中末尾最小
-     的升序序列
+     (2)且保证该升序序列在同长度升序序列中末尾最小的升序序列
 
      1
      1,2
      1,3,4
      1,3,5,6
+
      这些序列都是未来有可能成为最长序列的候选人。这样，每来一个新的数，我们便按照以下规则更新这些序列
 
      1.如果nums[i]比所有序列的末尾都大，或等于最大末尾，说明有一个新的不同长度序列产生，我们把最长的序列复制一个，并加上这个nums[i]。
@@ -57,7 +57,7 @@ public class LE_300_Longest_Increasing_Subsequence {
 
      0
      1,2
-     1,3,3
+     1,3,4
      1,3,5,6
 
      如果再来一个3，那就是第3种情况，更新序列为
@@ -133,5 +133,47 @@ public class LE_300_Longest_Increasing_Subsequence {
         }
 
         return lis.size();
+    }
+
+    //My version for lintcode 76
+    public int longestIncreasingSubsequence(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int[] tails = new int[nums.length];
+        tails[0] = nums[0];
+        int tailIndex = 0;
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < tails[0]) {
+                tails[0] = nums[i];
+            } if (nums[i] > tails[tailIndex]) {
+                tailIndex++;
+                tails[tailIndex] = nums[i];
+            } else {
+                int idx = findIndex(tails, nums[i], 0, tailIndex);
+                tails[idx] = nums[i];
+            }
+        }
+
+        return tailIndex + 1;
+    }
+
+    /**
+     * Binary Search find the first index with value that is bigger or equal to target value
+     * Write with JiuZhang Binary Search template.
+     */
+    private int findIndex(int[] tails, int target, int l, int r) {
+        while (l + 1 < r) {
+            int mid = l + (r - l) / 2;
+            if (tails[mid] < target) {
+                l = mid;
+            } else {
+                r = mid;
+            }
+        }
+
+        //!!!
+        if (tails[l] >= target) return l;
+        return r;
     }
 }

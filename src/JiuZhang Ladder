@@ -410,8 +410,8 @@ LE_150_Evaluate_Reverse_Polish_Notation
 #Binary Search
 LE_162_Find_Peak_Element                                  (lint 75)
 LI_390_Find_Peak_Element_II
-LI_183_Wood_Cut    *
-LI_437_Copy_Books  *
+LI_183_Wood_Cut                                                        *
+LI_437_Copy_Books                                                      *
 LE_643_Maximum_Average_Subarray_I                         (lint 868)
 LE_644_Maximum_Average_Subarray_II                        (lint 617)   **
 LE_69_Sqrt
@@ -429,3 +429,17 @@ LI_391_Number_Of_Airplanes_In_The_Sky
 LI_821_Time_Intersection
 LE_218_The_Sky_Line_Problem
 LI_131_The_Skyline_Problem
+
+====================================================
+
+5.DP
+LE_198_House_Robber                                       (lint 392)
+LE_213_House_Robber_II                                    (lint 534)
+LE_337_House_Robber_III                                   (lint 535)
+LE_221_Maximal_Square                                     (lint 436)
+LI_631_Maximal_Square_II
+LE_85_Max_Rectangle  (Solution 2, DP)                     (lint 510)
+LE_674_Longest_Continuous_Increasing_Subsequence
+LI_397_Longest_Continuous_Increasing_Subsequence
+LE_300_Longest_Increasing_Subsequence                     (lint 76)
+LE_152_Maximum_Product_Subarray                           (lint 191))

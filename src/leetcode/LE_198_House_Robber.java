@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/24/18.
  */
 public class LE_198_House_Robber {
-    /*
+    /**
         You are a professional robber planning to rob houses along a street.
         Each house has a certain amount of money stashed, the only constraint
         stopping you from robbing each of them is that adjacent houses have
@@ -76,4 +76,45 @@ public class LE_198_House_Robber {
          mem[idx] = Math.max(helper(nums, mem, idx-2) + nums[idx], helper(nums, mem, idx-1));
          return mem[idx];
      }
+
+    /**
+     * LI_392, return long to avoid overflow
+     * Time  : O(n)
+     * Space : O(n)
+     **/
+    public long houseRobber1(int[] A) {
+        if (A == null || A.length == 0) return 0;
+
+        //dp[i] : max value can be stolen for first i houses
+        long[] dp = new long[A.length + 1];
+        dp[0] = 0;
+        dp[1] = A[0];
+
+        for (int i = 2; i < dp.length; i++) {
+            dp[i] = Math.max(dp[i - 1], A[i - 1] + dp[i - 2]);
+        }
+
+        return dp[A.length];
+    }
+
+    /**
+     * 滚动数组
+     * Time : O(n)
+     * Space : O(1)
+     */
+    public long houseRobber2(int[] A) {
+        // write your code here
+        int n = A.length;
+        if(n == 0)
+            return 0;
+        long []res = new long[2];
+
+
+        res[0] = 0;
+        res[1] = A[0];
+        for(int i = 2; i <= n; i++) {
+            res[i%2] = Math.max(res[(i-1)%2], res[(i-2)%2] + A[i-1]);
+        }
+        return res[n%2];
+    }
 }

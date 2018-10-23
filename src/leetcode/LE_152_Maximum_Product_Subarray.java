@@ -42,6 +42,9 @@ public class LE_152_Maximum_Product_Subarray {
         int res = nums[0];
 
         for (int i = 1; i < nums.length; i ++) {
+            /**
+             * !!! "nums[i]"
+             */
             max = Math.max(nums[i], Math.max(maxPre * nums[i], minPre * nums[i]));
             min = Math.min(nums[i], Math.min(maxPre * nums[i], minPre * nums[i]));
             res = Math.max(res, max);

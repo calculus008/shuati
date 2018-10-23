@@ -60,11 +60,12 @@ public class LE_85_Max_Rectangle {
     }
 
 
-    //Solution 2 : DP
-    //Time: O(m *n), Space : O(n)
-    //https://leetcode.com/problems/maximal-rectangle/discuss/29054/Share-my-DP-solution
-
     /**
+        Solution 2 : DP
+        Time: O(m *n), Space : O(n)
+
+        https://leetcode.com/problems/maximal-rectangle/discuss/29054/Share-my-DP-solution
+
         Let the maximal rectangle area at row i and column j be computed by
         [right(i,j) - left(i,j)]*height(i,j).All the 3 variables left, right, and height can be determined
         by the information from previous row, and also information from the current row
@@ -79,11 +80,12 @@ public class LE_85_Max_Rectangle {
 
          height[] : from top to this position, there are how many ‘1’.
 
-         left[] : At current position(i, j), what is the index of left bound of the rectangle with height[j]. 0 means at this position, no rectangle. (现在这个矩形的左边的下标)
-                  从左到右，连续出现‘1’的string的第一个坐标。
+         left[] : At current position(i, j), what is the index of left bound of the rectangle with height[j].
+                  0 means at this position, no rectangle. (现在这个矩形的左边的下标)
+                  !!!从左到右，连续出现‘1’的string的第一个坐标。
 
          right[] : Right bound index of this rectangle. ‘n’ means no rectangle.
-                   从右到左，连续出现‘1’的string的第一个坐标。
+                   !!!从右到左，连续出现‘1’的string的第一个坐标。
 
          matrix
          0 0 0 1 0 0 0

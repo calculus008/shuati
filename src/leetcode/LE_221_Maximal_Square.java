@@ -4,8 +4,9 @@ package leetcode;
  * Created by yuank on 4/5/18.
  */
 public class LE_221_Maximal_Square {
-    /*
-        Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+    /**
+        Given a 2D binary matrix filled with 0's and 1's,
+        find the largest square containing only 1's and return its area.
 
         For example, given the following matrix:
 
@@ -27,7 +28,10 @@ public class LE_221_Maximal_Square {
         int m = matrix.length;
         int n = matrix[0].length;
 
-        //dp[x][y] : 如果以matrix[x - 1][y - 1]为正方形bottom right顶点所形成的所有正方形中，边长最大的那个正方形的边长的值。
+        /**
+         * dp[x][y] : 如果以matrix[x - 1][y - 1]为正方形bottom right顶点所形成的所有正方形中，边长最大的那个正方形的边长的值。
+         * 注意 ： 是边长的值。
+         * **/
         int[][] dp = new int[m + 1][n + 1];
         int res = 0;
 
