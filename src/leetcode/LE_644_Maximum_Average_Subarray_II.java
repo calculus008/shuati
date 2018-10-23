@@ -42,15 +42,22 @@ public class LE_644_Maximum_Average_Subarray_II {
          *  于是我们便可以在max和min中间使用binary search
          */
         for(int i = 0; i < nums.length; i++) {
-            start = Math.min(start, (double)nums[i]);
-            end = Math.max(end, (double)nums[i]);
+            start = Math.min(start, (double)nums[i]); //double 转换
+            end = Math.max(end, (double)nums[i]); //double 转换
         }
 
-        double eps = 1e-6;
+        double eps = 1e-6; //double
 
-        double avg = 0;
+        double avg = 0; //double
 
-        while(start + eps < end) {
+        /**
+         * 对于average,在可能的范围内(数组中的最小和再大值之间), 二分查找。
+         * 对于每一个可能的值，用checkAvg(),看以给定的平均值avg，是否存在
+         * subarray,其平均值大于avg, 如果yes, 就是说平均值还可以更大，于是
+         * 往右移动区间，如果no, 就是说当前的avg太大了，得缩小，于是往左移动
+         * 区间。
+         */
+        while(start + eps < end) {//O(log(max - min))
             avg = start + (end - start) / 2;
             if(checkAvg(nums, k, avg)) {
                 start = avg;
@@ -62,14 +69,21 @@ public class LE_644_Maximum_Average_Subarray_II {
         return start;
     }
 
-    private boolean checkAvg(int[] nums, int k, double avg) {
-        double sum = 0;
-        double prevSum = 0;
-        double prevMin = 0;
+    private boolean checkAvg(int[] nums, int k, double avg) {//O(n)
+        double sum = 0;  //double
+        double prevSum = 0; //double
+        double prevMin = 0; //double
 
+        /**
+         * 存在一个长度大于等于k的subarray, 其平均值大于等于avg，
+         * 使用presum的技巧。
+         */
         for(int i = 0; i < nums.length; i++) {
-            sum += (double)nums[i] - avg;
+            sum += (double)nums[i] - avg; //double 转换
 
+            /**
+             * 这里是检查subarray从下标0开始的情况。
+             */
             if(i >= k - 1 && sum >= 0) {
                 return true;
             }
@@ -86,7 +100,7 @@ public class LE_644_Maximum_Average_Subarray_II {
                  =>(nums[i]-x)+(nums[i+1]-x)+...+(nums[j]-x)>0
              **/
             if(i >= k) {
-                prevSum += (double)nums[i - k] - avg;
+                prevSum += (double)nums[i - k] - avg; //double 转换
                 prevMin = Math.min(prevMin, prevSum);
                 if(sum - prevMin >= 0) {
                     return true;

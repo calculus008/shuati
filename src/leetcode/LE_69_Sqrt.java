@@ -4,15 +4,15 @@ package leetcode;
  * Created by yuank on 3/4/18.
  */
 public class LE_69_Sqrt {
-    /*
+    /**
         Implement int sqrt(int x).
 
         Compute and return the square root of x.
 
         x is guaranteed to be a non-negative integer.
-     */
 
-    //Same as LE_367
+        Same as LE_367_Valid_Perfect_Square
+     */
 
     public int mySqrt(int x) {
         if(x==0) return 0;

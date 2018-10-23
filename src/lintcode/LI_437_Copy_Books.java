@@ -7,8 +7,8 @@ public class LI_437_Copy_Books {
     /**
          Given n books and the ith book has A[i] pages. You are given k people to copy the n books.
 
-         n books list in a row and each person can claim a continous range of the n books.
-         For example one copier can copy the books from ith to jth continously, but he can not copy the 1st book,
+         n books list in a row and each person can claim a continuous range of the n books.
+         For example one copier can copy the books from ith to jth continuously, but he can not copy the 1st book,
          2nd book and 4th book (without 3rd book).
 
          They start copying books at the same time and they all cost 1 minute to copy 1 page of a book.
@@ -28,10 +28,36 @@ public class LI_437_Copy_Books {
     /**
      * Binary Search
      *
-     * Time : O(n * log(sum)), n is length of pages, sum is total pages number
-     * @param pages
-     * @param k
-     * @return
+     * Time : O(n * log(sum)), n is length of pages[]   , sum is total pages number
+     */
+
+
+    /**
+     * Example:
+     *
+     * A = [3,2,4], k = 2, sum = 9, max = 4, first mid = 6
+     * [4, 9]
+     *
+     * t = 6
+     * i = 0, sum = 3
+     * i = 1, sum = 5
+     * i = 2, sum = 9, 9 > 6, count = 2, return 2
+     * k = 2, within range, try end = mid = 6, mid = 5
+     *
+     * t = 5
+     * i = 0, sum = 3
+     * i = 1, sum = 5
+     * i = 2, sum = 9, 9 > 5, count = 2, return 2
+     * k = 2, within range, try end = mid = 5, mid = 4, start + 1 < mid, exit while, start = 4, end = 5
+     *
+     * check start (4)
+     * i = 0, sum = 3
+     * i = 1, sum = 5 > 4, count = 2
+     * i = 2, sum = 9 > 4, count = 3, return 3
+     *
+     * 3 > k = 2,  "<= k" not satisfied, it's not start,
+     *
+     * return result as end - 5
      */
     public int copyBooks(int[] pages, int k) {
         if (pages == null || pages.length == 0) {

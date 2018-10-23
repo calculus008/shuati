@@ -403,3 +403,29 @@ LE_227_Basic_Calculator_II                                (lint 980)
 LE_772_Basic_Calculator_III                               (lint 849, 368)
 LE_981_Basic_Calculator_IV                                (lint 981)
 LE_150_Evaluate_Reverse_Polish_Notation
+
+====================================================
+
+4.Sweep Line and Binary Search
+#Binary Search
+LE_162_Find_Peak_Element                                  (lint 75)
+LI_390_Find_Peak_Element_II
+LI_183_Wood_Cut    *
+LI_437_Copy_Books  *
+LE_643_Maximum_Average_Subarray_I                         (lint 868)
+LE_644_Maximum_Average_Subarray_II                        (lint 617)   **
+LE_69_Sqrt
+LI_586_Sqrtx_II
+LE_367_Valid_Perfect_Square
+LE_29_Divide_Two_Integers                                 (lint 414)
+LE_278_First_Bad_Version                                  (lint 74)
+LE_287_Find_The_Duplicate_Number                          (lint 633)   ***
+LE_302_Smallest_Rectangle_Enclosing_Black_Pixels          (lint 600)   ***
+
+#Line Sweep
+LE_252_Meeting_Rooms                                      (lint 920)
+LE_253_Meeting_Rooms_II                                   (lint 919)
+LI_391_Number_Of_Airplanes_In_The_Sky
+LI_821_Time_Intersection
+LE_218_The_Sky_Line_Problem
+LI_131_The_Skyline_Problem

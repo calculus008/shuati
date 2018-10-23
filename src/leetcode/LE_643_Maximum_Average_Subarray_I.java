@@ -31,6 +31,9 @@ public class LE_643_Maximum_Average_Subarray_I {
      *   sum += nums[4] - nums[0]
      **/
     public double findMaxAverage(int[] nums, int k) {
+        /**
+         * !!!Must use long here to prevent overflow when we do sum.
+         */
         long sum = 0; //!!! long
         for (int i = 0; i < k; i++) {
             sum += nums[i];
@@ -47,6 +50,10 @@ public class LE_643_Maximum_Average_Subarray_I {
             max = Math.max(max, sum);
         }
 
+        /**
+         * !!! must first divide by 1.0 to convert it to double, then divide by k
+         * Can't reverse the order
+         */
         return max / 1.0 / k; //!!! 1.0
     }
 

@@ -73,7 +73,7 @@ public class LE_218_The_Sky_Line_Problem {
         /**
             Sort height by x, if x is equal, by height. Since we make the entry height negative,
             if the exit line of rectangle A and the start line of rectangle B are at the same x,
-            enter line of A will be in front of the exit line of B. So the event of the entering
+            enter line of B will be in front of the exit line of A. So the event of the entering
             line will be processed first.
 
             This is the trick that helps to deal with special cases that entry/exit lines of

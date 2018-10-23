@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Created by yuank on 4/10/18.
@@ -25,25 +24,25 @@ public class LE_253_Meeting_Rooms_II {
      starts : [0,   5, 15]
      ends :   [10, 20, 30]
 
-     i
+      i
      [0,   5, 15]    res = 0
      [10, 20, 30]
-     j
+      j
 
-     i
+      i
      [0,   5, 15]    res = 1
      [10, 20, 30]
-     j
+      j
 
-     i
+           i
      [0,   5, 15]    res = 2
      [10, 20, 30]
-     j
+      j
 
-     i
+               i
      [0,   5, 15]    res = 2
      [10, 20, 30]
-     j
+          j
 
      i
      [0,   5, 15]    res = 2
@@ -93,5 +92,60 @@ public class LE_253_Meeting_Rooms_II {
         }
 
         return heap.size();
+    }
+
+    /**
+     * Lintcode 919
+     * Input is list of Interval
+     *
+     * Line Sweep
+     *
+     * Time  : O(nlogn)
+     * Space : O(n)
+     */
+    public class Solution3 {
+        class Pair {
+            int x;
+            int flag;
+
+            public Pair(int x, int flag) {
+                this.x = x;
+                this.flag = flag;
+            }
+        }
+
+        public int minMeetingRooms(List<Interval> intervals) {
+            if (intervals == null || intervals.size() == 0) return 0;
+
+            List<Pair> pairs = new ArrayList<>();
+            for (Interval interval : intervals) {
+                pairs.add(new Pair(interval.start, 1));
+                pairs.add(new Pair(interval.end, 0));
+            }
+
+            Collections.sort(pairs, (a, b) -> {
+                int comp = 0;
+                if (a.x == b.x) {
+                    comp = Integer.compare(a.flag, b.flag);
+                } else {
+                    comp = Integer.compare(a.x, b.x);
+                }
+                return comp;
+            });
+
+            int res = Integer.MIN_VALUE;
+            int count = 0;
+            for (Pair p : pairs) {
+                if (p.flag == 1) {
+                    count++;
+                } else {
+                    count--;
+                }
+
+                res = Math.max(res, count);
+            }
+
+            return res;
+        }
     }
 }

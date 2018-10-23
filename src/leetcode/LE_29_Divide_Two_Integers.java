@@ -34,22 +34,39 @@ public class LE_29_Divide_Two_Integers {
      * Time and Space : O(logn) !!!
      */
 
-    public int divide(int dividend, int divisor) {
-        boolean isNegative = (dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0);
+    class Solution1 {
+        public int divide(int dividend, int divisor) {
+            int sign = 1;
+            if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) sign = -1;
+            long divd = Math.abs((long) dividend);
+            long divs = Math.abs((long) divisor);
+            long lres = longDivd(divd, divs);
 
-        long a = Math.abs((long)dividend);
-        long b = Math.abs((long)divisor);
+            if (lres > Integer.MAX_VALUE){
+                if (sign > 0) return Integer.MAX_VALUE;
+                else return Integer.MIN_VALUE;
+            }
 
-        if (a == 0 || a < b) {
-            return 0;
+            if (sign > 0) return (int) lres;
+            return (int) (-lres);
         }
 
-        long lres = divide(a, b);
-        if (lres > Integer.MAX_VALUE) {
-            return isNegative ? Integer.MIN_VALUE : Integer.MAX_VALUE;
-        } else {
-            int sign = isNegative ? -1 : 1;
-            return (int)(lres * sign);
+        private long longDivd(long divd, long divs){
+            // Recursion exit condition
+            if (divd < divs) return 0;
+            long sum = divs;
+            long multi = 1;
+
+            //  Find the largest multiple so that (divisor * multiple <= dividend),
+            //  whereas we are moving with stride 1, 2, 4, 8, 16...2^n for performance reason.
+            //  Think this as a binary search.
+            while (sum + sum <= divd){
+                sum += sum;
+                multi += multi;
+            }
+
+            //Look for additional value for the multiple from the reminder (dividend - sum) recursively.
+            return multi + longDivd(divd - sum, divs);
         }
     }
 
@@ -81,18 +98,7 @@ public class LE_29_Divide_Two_Integers {
      * return 0
      *
      */
-    public long divide(long a, long b) {
-        if (a < b) return 0;
-        long sum = b;
-        long multiple = 1;
 
-        while ((sum + sum) <= a) {
-            sum += sum;
-            multiple += multiple;
-        }
-
-        return multiple + divide(a - sum, b);
-    }
 
     //Solution 2 : use bit operation
     public int divide2(int dividend, int divisor) {

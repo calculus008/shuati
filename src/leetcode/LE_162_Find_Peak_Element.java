@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/20/18.
  */
 public class LE_162_Find_Peak_Element {
-    /*
+    /**
         A peak element is an element that is greater than its neighbors.
 
         Given an input array where num[i] ≠ num[i+1], find a peak element and return its index.
@@ -37,8 +37,8 @@ public class LE_162_Find_Peak_Element {
 
 
     /**
-     Key insights"
-     1.Fiond mid, 4 possible cases for relationship between mid and its left and right neighbors.
+     Key insights
+     1.Find mid, 4 possible cases for relationship between mid and its left and right neighbors.
          1. \
             \
 
@@ -57,9 +57,16 @@ public class LE_162_Find_Peak_Element {
 
         while (start + 1 < end) {
             int mid = (end - start) / 2 + start;
-            if (A[mid] > A[mid + 1]) {//Case #1 an #2, since we know the array increases first and decreas at the end, so we discard the 2nd half, move to first half
+            /**
+             * Case #1 an #2, since we know the array increases first and decrease at the end,
+             * so we discard the 2nd half, move to first half
+             * **/
+            if (A[mid] > A[mid + 1]) {
                 end = mid;
-            } else {//since adjacent elements not equal, Case #3 and #4
+            } else {
+                /**
+                 * Since adjacent elements not equal, Case #3 and #4
+                 */
                 start = mid + 1;
             }
         }
