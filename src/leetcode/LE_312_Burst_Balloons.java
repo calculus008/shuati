@@ -47,6 +47,7 @@ public class LE_312_Burst_Balloons {
         int[] arr = new int[n + 2];
         arr[0] = 1;
         arr[n + 1] = 1;
+
         for (int i = 0; i < n; i++) {
             arr[i + 1] = nums[i];
         }
@@ -71,9 +72,32 @@ public class LE_312_Burst_Balloons {
     }
 
     /**
-     * Solution 2 : DP with 3 loops, not recommended for interview.
+     * Solution 2 : DP with 3 loops.
+     *
+     input {3,1,5,8}:
+
+     l=1, i=1, j=1, k=1
+     l=1, i=2, j=2, k=2
+     l=1, i=3, j=3, k=3
+     l=1, i=4, j=4, k=4
+     l=2, i=1, j=2, k=1
+     l=2, i=1, j=2, k=2
+     l=2, i=2, j=3, k=2
+     l=2, i=2, j=3, k=3
+     l=2, i=3, j=4, k=3
+     l=2, i=3, j=4, k=4
+     l=3, i=1, j=3, k=1
+     l=3, i=1, j=3, k=2
+     l=3, i=1, j=3, k=3
+     l=3, i=2, j=4, k=2
+     l=3, i=2, j=4, k=3
+     l=3, i=2, j=4, k=4
+     l=4, i=1, j=4, k=1
+     l=4, i=1, j=4, k=2
+     l=4, i=1, j=4, k=3
+     l=4, i=1, j=4, k=4
      */
-    public int maxCoins2(int[] nums) {
+    public static int maxCoins2(int[] nums) {
         if (null == nums || nums.length == 0) {
             return 0;
         }
@@ -92,7 +116,7 @@ public class LE_312_Burst_Balloons {
             for (int i = 1; i <= n - l + 1; i++) {//starting point
                 int j = i + l - 1; //end point
                 for(int k = i; k <= j; k++) {
-                    // System.out.println("i="+i+",k="+k+",j="+j+",l="+l);
+                    System.out.println("l="+ l+ ", i="+i+ ", j="+j+ ", k="+k);
                     // int v1 = dp[i][k - 1];
                     // int v2 = coins[i - 1] * coins[k] * coins[j + 1];
                     // int v3 = dp[k + 1][j];
@@ -103,4 +127,10 @@ public class LE_312_Burst_Balloons {
 
         return dp[1][n];
     }
+
+    public static void main(String [] args)
+    {
+        maxCoins2(new int[] {3,1,5,8});
+    }
+
 }

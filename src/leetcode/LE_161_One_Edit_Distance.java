@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/20/18.
  */
 public class LE_161_One_Edit_Distance {
-    /*
+    /**
         Given two strings S and T, determine if they are both one edit distance apart.
      */
 

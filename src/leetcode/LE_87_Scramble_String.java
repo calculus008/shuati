@@ -43,10 +43,21 @@ public class LE_87_Scramble_String {
         Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
      **/
 
-    //Time : O(n!), Space : O(n)
+    /**
+     * Time : O(n!), Space : O(n)
+     *
+     * Note : can't sort 2 strings and check equal (like checking anagrams.
+     *        For example :
+     *        "abcd" and "bdac"
+     *        "abta" and "tbaa"
+     *
+     *        They are anagrams, but they are not scramble String
+     **/
     public static boolean isScramble(String s1, String s2) {
         if (s1 == null || s2 == null) return false;
+
         if (s1.equals(s2)) return true;
+
         int n = s1.length();
         if (s2.length() != n) return false;
 
@@ -60,7 +71,18 @@ public class LE_87_Scramble_String {
             if (letters[i] != 0) return false;
         }
 
-        //!!! i starts at 1
+        /**
+         * !!! i starts at 1
+         *
+         * The 1st IF is to check the LEFT child of S1 is scramble of LEFT child of S2
+         * AND RIGHT child of S1 is also a scramble of RIGHT child of s2.
+         *
+         * When this fails, it means the left and right substrings are swapped.
+         *
+         * The 2nd IF statement check for the swap case with LEFT child of S1 and
+         * RIGHT child of S2 AND RIGHT child of S1 and LEFT child of S2.
+         */
+
         for (int i = 1; i < n; i++) {
             if (isScramble(s1.substring(0, i), s2.substring(0, i)) &&
                     isScramble(s1.substring(i), s2.substring(i))) return true;

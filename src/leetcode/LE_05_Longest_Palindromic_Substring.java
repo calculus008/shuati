@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/17/18.
  */
 public class LE_05_Longest_Palindromic_Substring {
-    /*
+    /**
         Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
 
         Example:
