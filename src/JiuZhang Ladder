@@ -473,7 +473,10 @@ LI_593_Stone_Game_II
 LE_312_Burst_Balloons
 
 #匹配类动态规划
-LE_72_Edit_Distance
+LE_72_Edit_Distance                                      （lint 119)
+LI_623_K_Edit_Distance
 LI_581_Longest_Repeating_Subsequence
+LI_77_Longest_Common_Subsequence
+LI_79_Longest_Common_Substring
 
 #leetcode Minimax type problems
