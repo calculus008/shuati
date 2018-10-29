@@ -48,4 +48,95 @@ public class LE_115_Distinct_Subsequences {
 
          Hard
      */
+
+
+    /**
+     * DP
+     *
+     * http://www.cnblogs.com/yuzhangcmu/p/4196373.html
+     *
+     * State :
+     * dp[i][j] : number of distinct subsequences in the first i chars from s that matches the first chars (subarray) of t.
+     *
+     * Init :
+     *   dp[0][0] = 1, null in s matches null in t, so there's one valid subsequence.
+     *
+     *   When i = 0 and j >= 1, meaning it is null in s, t starts from first char,  dp[0][j] = 0,
+     *   null does not match any
+     *
+     *   when j = 0 and i >= 1, meaning it is null in t, s starts from first char , dp[i][0] = 1,
+     *   so they all have a subsequence "null" that matches the null in t.
+     *
+     * Equation:
+     *    s.charAt(i - 1) == t.charAt(j - 1) :  if the current character in S equal to the current character T,
+     *                                          then the distinct number of subsequences:
+     *                                          the number we had before
+     *                                                plus
+     *                                          the distinct number of subsequences we had with less longer T and less longer S.
+     *                                          dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
+     *
+     *
+     *    s.charAt(i - 1) != t.charAt(j - 1) :  if the current character in S doesn't equal to current character T,
+     *                                          then we have the same number of distinct subsequences as we had without the new character.
+     *                                          dp[i][j] = dp[i -1][j];
+     *
+     * Example: s = "babgbag", t = "bag"
+     *
+     *        null b a g
+     *  null   1   0 0 0
+     *   b     1   1 0 0
+     *   a     1   1 1 0
+     *   b     1   2 1 0
+     *   g     1   2 1 1
+     *   b     1   3 1 1
+     *   a     1   3 4 1
+     *   g     1   3 4 5
+     *
+     *   Time and Space : O(mn)
+     *
+     */
+    public int numDistinct(String s, String t) {
+        if (s == null || t == null || s.length() < t.length()) return 0;
+
+        int m = s.length();
+        int n = t.length();
+        int[][] dp = new int[m + 1][n + 1];
+
+        dp[0][0] = 1;
+
+        /**
+         * !!!start at 1
+         */
+        for (int i = 1; i <= n; i++) {
+            dp[0][i] = 0;
+        }
+
+        /**
+         * !!!start at 1
+         */
+        for (int i = 1; i <= m; i++) {
+            dp[i][0] = 1;
+        }
+
+        /**
+         * the init logic can be simplied as :
+         *
+         *         for (int i = 0; i <= m; i++) {
+         *              dp[i][0] = 1;
+         *         }
+         */
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s.charAt(i - 1) == t.charAt(j - 1)) {
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+
+
 }

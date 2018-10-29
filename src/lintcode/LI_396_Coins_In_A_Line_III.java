@@ -54,8 +54,9 @@ public class LI_396_Coins_In_A_Line_III {
             for (int i = 0; i < n; ++i) {//!!!
                 int j = i + len - 1;//!!!
 
-                if (j >= n) continue;
+//                if (j >= n) continue;
 
+                // sum between values[j] and values[i] = sum[j + 1] -  sum[i];
                 int s = sum[j + 1] - sum[i];
                 dp[i][j] = Math.max(s - dp[i + 1][j], s - dp[i][j - 1]);
             }

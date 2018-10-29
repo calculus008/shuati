@@ -27,7 +27,7 @@ public class LI_395_Coins_In_A_Line_II {
         int[] sum = new int[n + 1];
 
         for (int i = 1; i <= n; ++i) {
-            sum[i] = sum[i - 1] + values[n - i];
+            sum[i] = sum[i - 1] + values[n - i];//!!! values[n - i], go backwards, right to left
         }
 
         int[] dp = new int[n + 1];

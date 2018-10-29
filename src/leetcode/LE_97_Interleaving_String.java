@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/9/18.
  */
 public class LE_97_Interleaving_String {
-    /*
+    /**
         Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
 
         For example,
@@ -16,7 +16,7 @@ public class LE_97_Interleaving_String {
         When s3 = "aadbbbaccc", return false.
      */
 
-    /*
+    /**
         DP, Time and Space : O(m * n)
         dp[i][j] : if first i elements in s2 and first j elements in s1 can interleave to form the first i + j elemets in s3.
 
