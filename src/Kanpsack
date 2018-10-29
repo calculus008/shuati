@@ -1,0 +1,194 @@
+#Knapsack
+https://blog.csdn.net/luoshengkim/article/details/76514558
+
+Basic 2D Solutions
+
+1.Basic knapsack, check how full you can fill the knapsack
+LI_92_Backpack                      :   boolean bp[i][j] : 前i个物品，取出一些能否组成和为j
+                                        dp[i][j] =
+                                            1. dp[i - 1][j - a[i]] // 能放下第i个物品，那么要看除掉第i 个物品剩下的容量 j - a[i]时候与i － 1个物品的情况
+                                            2. dp[i - 1][j] // 若前i-1个物品就能组成大小为j
+
+                                        dp[0][0] = true;
+                                        for (int i = 1; i <= n; i++) {
+                                            for (int j = 0; j <= m; j++) {
+                                                dp[i][j] = dp[i - 1][j];
+                                                if (j >= A[i - 1] && dp[i - 1][j - A[i - 1]]) {
+                                                    dp[i][j] = true;
+                                                }
+                                            }
+                                        }
+                                        return max j value which makes dp[i][j] == true
+
+2.Value related knapsack
+LI_125_Backpack_II                  :   Each item may only be chose once
+                                        int bp[i][j] ： 前i个物品，取出一些能放入size为j的空间，这i个物品可能的最大价值。
+                                        dp[i][j] = Max( dp[i-1][j], dp[i-1][j-A[i]]+Value[i]);
+
+                                        for (int i = 1; i <= n; i++) {
+                                            for (int j = 0; j <= m; j++) {
+                                                dp[i][j] = dp[i - 1][j];
+                                                if (j >= A[i - 1]) {
+                                                    dp[i][j] = Math.max(dp[i - 1][j - A[i - 1]] + V[i - 1], dp[i - 1][j]); //0-1, put in current item or not put in current item
+                                                    //Since we already execute " dp[i][j] = dp[i - 1][j]", we can also writ this line as :
+                                                    //dp[i][j] = Math.max(dp[i - 1][j - A[i - 1]] + V[i - 1], dp[i][j]);
+                                                }
+                                            }
+                                        }
+                                        return dp[n][m];
+
+LI_440_Backpack_III                 :   Each item may be chosen unlimited number of times  (unbounded knapsack)
+                                        int bp[i][j] ： 前i个物品，取出一些能放入size为j的空间，这i个物品可能的最大价值。
+                                        for (int i = 1; i <= n; i++) {
+                                            for (int j = 0; j <= m; j++) {
+                                                int k = 0;
+                                                /**
+                                                 * this while loop approach seems to be the common
+                                                 * technique to deal with unbounded knapsack problem
+                                                 */
+                                                while (j >= A[i - 1] * k) {
+                                                    dp[i][j] = Math.max(dp[i][j], dp[i-1][j-A[i-1]*k]+V[i-1]*k);
+                                                    k++;
+                                                }
+                                            }
+                                        }
+                                        return dp[n][m];
+                                           or
+                                        for (int i = 1; i <= n; ++i) {
+                                            for (int j = 0; j <= m; ++j) {
+                                                dp[i][j] = dp[i - 1][j];
+                                                if (j >= A[i - 1]) {
+                                                    dp[i][j] = Math.max(dp[i][j - A[i - 1]] + V[i - 1], dp[i][j]); //same item can be put in unlimited time, so always use i to reference to it.
+                                                }
+                                            }
+                                        }
+                                        return dp[n][m];
+
+
+3.Number of ways to fill kanpsack
+LI_563_Backpack_V                   :   Each item may only be chose once                      Different sequences are counted as the same combinations
+                                        int dp[m][n] 前m种硬币凑成n元的方案数量 (the number of combinations that first m kinds of items form the target n)
+                                        dp[m][n] = dp[m - 1][n] + dp[m - 1][n - A[m] ];
+
+                                        dp[0][0] = 1;
+                                        for (int i = 1; i <= m; i++) {
+                                            for (int j = 0; j <= n; j++) {
+                                                dp[i][j] = dp[i - 1][j];
+                                                /**
+                                                 * !!! since we already execute "dp[i][j] = dp[i - 1][j]",
+                                                 * this line is actually doing :
+                                                 * dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i - 1]]
+                                                 *
+                                                 * 0 - 1 knapsack
+                                                 *
+                                                 * dp[i - 1][j] :                用前i-1个硬币凑成j元的方案数量。
+                                                 *                               即不用当前硬币的方案数量。
+                                                 * dp[i - 1][j - nums[i - 1]] ： 用前i-1个硬币凑成j - nums[i - 1]元的方案数量, 也就是，
+                                                 *                               只要加上当前的硬币就能凑成j元的方案数目。
+                                                 *                               即用当前硬币的方案数量。
+                                                 */
+                                                if (j >= A[i - 1]) {
+                                                    dp[i][j] += dp[i - 1][j - A[i - 1]];
+                                                }
+                                            }
+                                        }
+                                        return dp[m][n];
+
+LI_562_Backpack_IV                  :    Each item may be chosen unlimited number of times     Different sequences are counted as the same combinations
+                                         int dp[m][n] 前m种硬币凑成n元的方案数量
+                                         dp[m][n] = dp[m - 1][n] + dp[m - 1][n - A[m] * 1] + dp[m - 1][n - A[m] * 2] + dp[m - 1][n - A[m] * 3] + ...
+
+                                         dp[0][0] = 1;
+                                         for (int i = 1; i <= n; i++) {
+                                             for (int j = 0; j <= m; j++) {
+                                                 int k = 0;
+                                                 while (j >= A[i - 1] * k) {
+                                                     dp[i][j] += dp[i - 1][j - A[i - 1] * k];
+                                                     k++;
+                                                  }
+                                             }
+                                         }
+
+                                         return dp[n][m];
+
+LE_377_Combination_Sum_IV           :   Each item may only be chose once                      Different sequences are counted as different combinations
+(LI 564. Backpack VI)                   dp[i] : 表示target为i的排列数有多少种。
+
+                                        dp[0] = 1;
+                                        for (int i = 1; i <= target; i++) {
+                                            for (int num : nums) {
+                                                if (i >= num) {
+                                                    dp[i] += dp[i - num];
+                                                }
+                                            }
+                                        }
+
+                                        return dp[target];
+
+LI_89_k_Sum                         :   Each item may only be chose once                      Different sequences are counted as the same combinations     Must pick K items
+                                        int dp[i][j][t] : From the first i items, pick j of them and the sum of those j items is t.
+                                        do[i][j][t] = dp[i - 1][j][t] + dp[i - 1][j - 1][t - a[i - 1]] (不包括第i 个数的时候组成t的情况 + 包括第i个数的时候组成t的情况)
+
+                                        for (int i = 0; i < n + 1; i++) {
+                                            dp[i][0][0] = 1;
+                                        }
+                                        for (int i = 1; i <= n; i++) {
+                                            for (int j = 1; j <= k && j <= i; j++) {
+                                                for (int t = 1; t <= target; t++) {
+                                                    dp[i][j][t] = dp[i - 1][j][t];
+                                                    if (t >= A[i - 1]) {
+                                                        dp[i][j][t] = dp[i - 1][j - 1][t - A[i - 1]];
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        return f[n][k][target];
+
+                                        Each item may be chosen unlimited number of times     Different sequences are counted as the same combinations     Must pick K items
+                                        Replace if with while loop like in LI_562_Backpack_IV
+                                        for (int i = 0; i < n + 1; i++) {
+                                            f[i][0][0] = 1;
+                                        }
+                                        for (int i = 1; i <= n; i++) {
+                                            for (int j = 1; j <= k && j <= i; j++) {
+                                                for (int t = 1; t <= target; t++) {
+                                                    dp[i][j][t] = dp[i - 1][j][t];
+
+                                                    int k = 0;
+                                                    while (t >= A[i - 1] * k) {
+                                                        dp[i][j][t] += dp[i - 1][j - 1][t - A[i - 1] * k];
+                                                        k++;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        return f[n][k][target];
+
+
+LI_91_Minimum_Adjustment_Cost           State:        f[i][v] 前i个数，第i个数调整为v，满足相邻两数<=target，所需要的最小代价 
+                                        Function:     f[i][v] = min(f[i-1][v’] + |A[i]-v|, |v-v’| <= target)
+                                        Answer:       f[n][a[n]-target~a[n]+target]
+                                        时间复杂度:    O(n * A * T)
+
+                                        其实很简单，就是当前index为v时，我们把上一个index从1-100全部过一次，取其中的最小值（判断一下前一个跟当前的是不是abs <= target）
+
+                                        int[][] dp = new int[A.size() + 1][101];
+
+                                        for (int i = 1; i <= A.size(); i++) {
+                                            for (int j = 1; j <= 100; j++) {
+                                                dp[i][j] = Integer.MAX_VALUE;
+                                                for (int k = 1; k <= 100; k++) {
+                                                    if (Math.abs(k - j) > target) {
+                                                        continue;
+                                                    }
+                                                    int diff = Math.abs(j - A.get(i - 1)) + dp[i - 1][k];
+                                                    dp[i][j] = Math.min(dp[i][j], diff);
+                                                }
+                                            }
+                                        }
+
+                                        int res = Integer.MAX_VALUE;
+                                        for (int i = 1; i <= 100; i++) {
+                                            res = Math.min(res, dp[A.size()][i]);
+                                        }
+                                        return res;

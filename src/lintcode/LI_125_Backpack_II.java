@@ -99,4 +99,31 @@ public class LI_125_Backpack_II {
 
         return dp[m];
     }
+
+    /**
+     * Solution 3
+     * Same as Solution 1, use the form of 2D solution for LI_440_Backpack_III
+     * The difference is only in transfer equation
+     */
+    public int backPackII4(int m, int[] A, int[] V) {
+        if (m == 0 || A == null || A.length == 0 || V == null || V.length == 0) return 0;
+
+        int n = A.length;
+        int[][] dp = new int[n + 1][m + 1];
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= m; j++) {
+                dp[i][j] = dp[i - 1][j];
+                if (j >= A[i - 1]) {
+                    dp[i][j] = Math.max(dp[i - 1][j - A[i - 1]] + V[i - 1], dp[i - 1][j]);
+                    /**
+                        Since we already execute " dp[i][j] = dp[i - 1][j]", we can also writ this line as :
+                        dp[i][j] = Math.max(dp[i - 1][j - A[i - 1]] + V[i - 1], dp[i][j]);
+                     **/
+                }
+            }
+        }
+
+        return dp[n][m];
+    }
 }

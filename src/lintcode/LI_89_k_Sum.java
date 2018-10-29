@@ -19,6 +19,29 @@ public class LI_89_k_Sum {
          Hard
      */
 
+    /**
+     * 3D DP
+     *
+     * If we change questions to "Pick (any number of) elements from n distinct positive numbers and
+     * its sum is target, find how many ways", it will be a normal 0-1 knapsack problem - LI_562_Backpack_IV.
+     *
+     * Since we must pick k numbers, we have to add another dimension to track number of items picked.
+     *
+     * dp[i][j][t] : From the first i items, pick j of them and the sum of those j items is t.
+     *
+     *
+         state:
+             f[i][j][t]前 i 个数中取 j 个数出来组成和为 t 的组合数目
+         function: 
+             f[i][j][t] = f[i - 1][j][t] + f[i - 1][j - 1][t - a[i - 1]] (不包括第i 个数的时候组成t的情况 + 包括第i个数的时候组成t的情况)
+         initialize:
+             f[i][0][0] = 1
+         result:
+             f[n][k][target]
+
+         时间复杂度：O(n * k * target)
+     *
+     */
     public class Solution1 {
         public int  kSum(int A[], int k, int target) {
             int n = A.length;
@@ -34,9 +57,9 @@ public class LI_89_k_Sum {
                             f[i][j][t] = f[i - 1][j - 1][t - A[i - 1]];
                         }
                         f[i][j][t] += f[i - 1][j][t];
-                    } // for t
-                } // for j
-            } // for i
+                    }
+                }
+            }
             return f[n][k][target];
         }
     }
@@ -54,7 +77,6 @@ public class LI_89_k_Sum {
      */
     public class Solution2 {
         public int kSum(int[] A, int k, int target) {
-            // write your code here
             int[][] prev = new int[k+1][target+1];
             prev[0][0] = 1;
             for(int i = 0; i < A.length; i++) {

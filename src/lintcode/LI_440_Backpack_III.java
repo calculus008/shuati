@@ -31,28 +31,65 @@ public class LI_440_Backpack_III {
      */
 
     /**
+     * Solution 1
      * 2D version
      */
     public int backPackIII1(int[] A, int[] V, int m) {
+        if (m == 0 || A == null || A.length == 0 || V == null || V.length == 0) return 0;
+
         int n = A.length;
-        int[][] f = new int[n + 1][m + 1];
+        int[][] dp = new int[n + 1][m + 1];
+
         for (int i = 1; i <= n; ++i) {
             for (int j = 0; j <= m; ++j) {
-                f[i][j] = f[i - 1][j];
-
+                dp[i][j] = dp[i - 1][j];
                 if (j >= A[i - 1]) {
-                    f[i][j] = Math.max(f[i][j - A[i - 1]] + V[i - 1], f[i][j]);
+                    dp[i][j] = Math.max(dp[i][j - A[i - 1]] + V[i - 1], dp[i][j]);
                 }
             }
         }
-        return f[n][m];
+
+        return dp[n][m];
     }
 
     /**
+     * Solution 2
+     *
+     * 这道题是上题Backpack II的变种，区别就每种item可以重复的选择，基本思路跟上题一样，只不过由于可以重复，
+     * 所以在最内层循环还要再加一层while循环用于遍历枚举重复的组合。
+     *
+     * Solution 1 seems to be an optimized version of Solution 2
+     *
+     * Time : O(m * n * k)。
+     */
+    public int backPackIII2(int[] A, int[] V, int m) {
+        int n = A.length;
+        int[][] dp = new int[n + 1][m + 1];
+        dp[0][0] = 0;
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= m; j++) {
+                int k = 0;
+                /**
+                 * this while loop approach seems to be the common
+                 * technique to deal with unbounded knapsack problem
+                 */
+                while (A[i - 1] * k <= j) {
+                    dp[i][j] = Math.max(dp[i][j], dp[i-1][j-A[i-1]*k]+V[i-1]*k);
+                    k++;
+                }
+            }
+        }
+
+        return dp[n][m];
+    }
+
+
+    /**
+     * Solution 3
      * 1D version
      */
-    public int backPackIII(int[] A, int[] V, int m) {
-        // Write your code here
+    public int backPackIII3(int[] A, int[] V, int m) {
         int n = A.length;
         int[] f = new int[m+1];
         for (int i = 0; i < n; ++i)

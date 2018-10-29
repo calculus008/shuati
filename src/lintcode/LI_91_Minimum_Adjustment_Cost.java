@@ -1,5 +1,6 @@
 package lintcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,19 +27,62 @@ public class LI_91_Minimum_Adjustment_Cost {
      */
 
     /**
-     * if each number has a range < 100
+     * Solution 1
+         题意有点复杂，给定一个整型数组，调整这个数组使得每两个数之间的差值不超过给定target值。问你调整这个数组所需要的最小开销是多少。
+         注意数组中的每个数不会超过100，这是一个非常关键的条件。因为这样的话，当前可取的值是1-100，并且与上一个值是在target的差值以内。
+         那我们可以转换成背包问题：
+
+         State:        f[i][v] 前i个数，第i个数调整为v，满足相邻两数<=target，所需要的最小代价 
+         Function:     f[i][v] = min(f[i-1][v’] + |A[i]-v|, |v-v’| <= target)
+         Answer:       f[n][a[n]-target~a[n]+target]
+         时间复杂度:    O(n * A * T)
+
+         其实很简单，就是当前index为v时，我们把上一个index从1-100全部过一次，取其中的最小值（判断一下前一个跟当前的是不是abs <= target）
+     *
      */
     public class Solution1 {
+        public int MinAdjustmentCost(ArrayList<Integer> A, int target) {
+            if (A == null || A.size() == 0) {
+                return 0;
+            }
+
+            int[][] dp = new int[A.size() + 1][101];
+
+            for (int i = 1; i <= A.size(); i++) {
+                for (int j = 1; j <= 100; j++) {
+                    dp[i][j] = Integer.MAX_VALUE;
+                    for (int k = 1; k <= 100; k++) {
+                        if (Math.abs(k - j) > target) {
+                            continue;
+                        }
+                        int diff = Math.abs(j - A.get(i - 1)) + dp[i - 1][k];
+                        dp[i][j] = Math.min(dp[i][j], diff);
+                    }
+                }
+            }
+
+            int res = Integer.MAX_VALUE;
+            for (int i = 1; i <= 100; i++) {
+                res = Math.min(res, dp[A.size()][i]);
+            }
+            return res;
+        }
+    }
+
+    /**
+     * Same logic as Solution 1, use rolling array to optimize space complextiy
+     */
+    public class Solution2 {
 
         public int MinAdjustmentCost(List<Integer> A, int target) {
             /**
-                DP: each number has a range < 100, so just enumerate each position from 0 to 100
-                Kind of build up a new List B, and compare every B to A, find out the min
-                and sum up the difference in each position comparing to A[i], then pick up the min one.
-                for final result, we just loop the last row or last dp loop, to find out the min one
+             DP: each number has a range < 100, so just enumerate each position from 0 to 100
+             Kind of build up a new List B, and compare every B to A, find out the min
+             and sum up the difference in each position comparing to A[i], then pick up the min one.
+             for final result, we just loop the last row or last dp loop, to find out the min one
 
-                F[j] defines min cost for position i, if we pick j  (0 <= j <= 100) as its number, then
-                F[j] = (PrevF[0....100] + abs(j - A[i])
+             F[j] defines min cost for position i, if we pick j  (0 <= j <= 100) as its number, then
+             F[j] = (PrevF[0....100] + abs(j - A[i])
              **/
 
             //using 2 rows to do rolling.
@@ -75,7 +119,7 @@ public class LI_91_Minimum_Adjustment_Cost {
     /**
      * Generalize to number that is not limited by range < 100
      */
-    public class Solution2 {
+    public class Solution3 {
         int MIN = 0x7fffffff, MAX = -0x80000000;
 
         public int MinAdjustmentCost(List<Integer> A, int target) {

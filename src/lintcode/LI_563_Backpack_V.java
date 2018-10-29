@@ -47,7 +47,20 @@ public class LI_563_Backpack_V {
         for (int i = 1; i <= m; i++) {
             for (int j = 0; j <= n; j++) {
                 dp[i][j] = dp[i - 1][j];
-                if (nums[i - 1] <= j) {
+                if (j >= nums[i - 1]) {
+                    /**
+                     * !!! since we already execute "dp[i][j] = dp[i - 1][j]",
+                     * this line is actually doing :
+                     * dp[i][j] = dp[i - 1][j] + dp[i - 1][j - nums[i - 1]]
+                     *
+                     * 0 - 1 knapsack
+                     *
+                     * dp[i - 1][j] :                用前i-1个硬币凑成j元的方案数量。
+                     *                               即不用当前硬币的方案数量。
+                     * dp[i - 1][j - nums[i - 1]] ： 用前i-1个硬币凑成j - nums[i - 1]元的方案数量, 也就是，
+                     *                               只要加上当前的硬币就能凑成j元的方案数目。
+                     *                               即用当前硬币的方案数量。
+                     */
                     dp[i][j] += dp[i - 1][j - nums[i - 1]];
                 }
             }

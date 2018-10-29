@@ -33,7 +33,7 @@ public class LI_562_Backpack_IV {
     /**
      *   https://blog.csdn.net/luoshengkim/article/details/76514558
          State:
-             dp[m][n] 前m种硬币凑成n元的方案数量
+             dp[m][n] 前m种硬币凑成n元的方案数量 (the number of ways)
          DP Function:
              dp[m][n] = dp[m - 1][n] + dp[m - 1][n - A[m] * 1] + dp[m - 1][n - A[m] * 2] + dp[m - 1][n - A[m] * 3] + ...
          Initialize:
