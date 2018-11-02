@@ -26,7 +26,7 @@ public class LI_404_Subarray_Sum_II {
      * ("The element in the array should be positive"),
      * 用两个指针的方法计算任意两个数之差在[start, end]范围。
      */
-    public int subarraySumII_1(int[] A, int start, int end) {
+    public static int subarraySumII_1(int[] A, int start, int end) {
         if (A == null || A.length == 0 || start > end) {
             return 0;
         } else if (A.length == 1) {
@@ -63,22 +63,69 @@ public class LI_404_Subarray_Sum_II {
      *
      * We can use two pointers or binary search on sources[] because it is sorted
      * by definition.
+     *
+     * Example : [1,2,3,4] and interval = [1,3]
+     * prefixSum passed in : [0, 1, 3, 6, 10], target = 1 - 1 = 0 :
+     * left = 0, right = 1, count = 0 + 5 - 1 = 4, left++
+     * left = 1, right = 1, right++
+     * left = 1, right = 2, count = 4 + 5 - 2 = 7, left++
+     * left = 2, right = 2, right++
+     * left = 2, right = 3, count = 7 + 5 - 3 = 9, left++
+     * left = 3, right = 3, right++
+     * left = 3, right = 4, count = 9 + 5 - 4 = 10, left++
+     * left = 4, right = 4,,right++
+     * left = 4, right = 5 == prefixSum.length, stop
+     * return count = 10
+     *
+     * prefixSum passed in : [0, 1, 3, 6, 10], target = 3
+     * left = 0, right = 1, prefixSum[1] - prefixSum[0] = 1 - 0 = 1 <= 3, right++
+     * left = 0, right = 2, prefixSum[2] - prefixSum[0] = 3 - 0 = 3 == 3, right++
+     * left = 0, right = 3, prefixSum[3] - prefixSum[0] = 6 - 0 = 6 > 3,  count = 0 + 5 - 3 = 2, left++
+     * left = 1, right = 3, prefixSum[3] - prefixSum[1] = 6 - 1 = 5 > 3,  count = 2 + 5 - 3 = 4, left++
+     * left = 2, right = 3, prefixSum[3] - prefixSum[2] = 6 - 3 = 3 == 3, right++
+     * left = 2, right = 4, prefixSum[4] - prefixSum[2] = 10 - 3 = 7 > 3, count = 4 + 5 - 4 = 5, left++
+     * left = 3, right = 4, prefixSum[4] - prefixSum[3] = 10 - 6 = 4 > 3, count = 5 + 5 - 4 = 6, left++
+     * left = 4, right = 4, right++, right = 5,exit while loop
+     * return count = 6
+     *
+     * In essence, this function is to find the number of subarrays that the difference between left and right elements
+     * are bigger than target in a none-decrease array.
+     *
+     * Use two pointers.
      */
-    private int getLarger(int[] sources, int target) {
-        int left = 0, right = 1;
+    private static int getLarger(int[] sources, int target) {
+        int left = 0, right = 1;//!!!
         int count = 0;
 
-        while (right < sources.length) {
+        while (right < sources.length) {//!!! "right < sources.length"
             if (left == right) {
+                /**
+                 * make sure left and right at least one step apart
+                 */
                 right++;
             } else if (sources[right] - sources[left] <= target) {
+                /**
+                 * Difference of the first and the last equals or is small then target,
+                 * need to keep adding more, move right by one.
+                 */
                 right++;
             } else {
-                count += sources.length - right;
+                /**
+                 * Difference of the first and the last is bigger than target,
+                 * so no need to go further, since array is none-decrease, the subarrays
+                 * after current index of "right" will also be bigger than target.
+                 *
+                 * !!! "sources.length - right"
+                 * In another form : the last index of sources - right + 1
+                 *                   = (the last index of sources + 1) - right
+                 *                   = sources.length - right
+                 */
+                count += sources.length - right; // !!!"- right"
                 left++;
             }
         }
 
+//        System.out.println("return count=" + count);
         return count;
     }
 
@@ -86,6 +133,9 @@ public class LI_404_Subarray_Sum_II {
      * Solution 2
      *
      * Difference from Solution 1 is to use binary search in find().
+     *
+     * Time is also O(n), since we still need to first calculate prefixSun
+     * Even using Binary Search, the time for search is nlogn since it is done in a for loop
      *
      */
     public int subarraySumII_2(int[] A, int start, int end) {
@@ -121,5 +171,9 @@ public class LI_404_Subarray_Sum_II {
                 l = mid + 1;
         }
         return ans;
+    }
+
+    public static void main(String [] args) {
+        subarraySumII_1(new int[] {1, 2, 3, 4}, 1, 3);
     }
 }

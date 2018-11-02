@@ -45,6 +45,10 @@ public class LI_139_Subarray_Sum_Closest {
         Map<Integer, Integer> map = new HashMap<>();
         int[] prefixSum = new int[nums.length + 1];
         int sum = 0;
+
+        /**
+         * 必须加这个entry以处理开始位置在index=0
+         */
         map.put(0, -1);
         prefixSum[0] = 0;
 
@@ -111,6 +115,9 @@ public class LI_139_Subarray_Sum_Closest {
                 return res;
             }
 
+            /**
+             * map.higtherKey and map.lowerKey
+             */
             Integer greater = map.higherKey(sum);
             if (greater != null && Math.abs(sum - greater) < closest) {
                 closest = Math.abs(sum - greater);

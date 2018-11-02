@@ -32,7 +32,7 @@ public class LI_405_Submatrix_Sum {
         int N = matrix[0].length;
         if (N == 0) return result;
 
-        // pre-compute: sum[i][j] = sum of submatrix [(0, 0), (i, j)]
+        //!!! pre-compute: sum[i][j] = sum of submatrix [(0, 0), (i, j)]
         int[][] sum = new int[M + 1][N + 1];
 
         for (int j = 0; j <= N; ++j) sum[0][j] = 0;
@@ -44,13 +44,18 @@ public class LI_405_Submatrix_Sum {
 
         for (int l = 0; l < M; ++l) {
             for (int h = l + 1; h <= M; ++h) {
-                Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+                Map<Integer, Integer> map = new HashMap<>();
                 for (int j = 0; j <= N; ++j) {
                     int diff = sum[h][j] - sum[l][j];
                     if (map.containsKey(diff)) {
                         int k = map.get(diff);
                         result[0][0] = l;
                         result[0][1] = k;
+                        /**
+                         * operate on sum, which is padded, so based on
+                         * sum[j + 1] - sum[i] is the subarray sum between [i, j],
+                         * higher end should minus 1.
+                         */
                         result[1][0] = h - 1;
                         result[1][1] = j - 1;
                         return result;

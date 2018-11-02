@@ -103,11 +103,11 @@ public class LI_92_Backpack {
         int[] dp = new int[m + 1];//!!! int, not boolean
         for (int i = 0; i < A.length; i++) {
             for (int j = m; j >= A[i]; j--) {
-                System.out.println("i=" + i + ", dp[" + j +" - A[" + i + "]]=" + dp[j - A[i]] + ", dp[" + j + "]=" + dp[j]);
+//                System.out.println("i=" + i + ", dp[" + j +" - A[" + i + "]]=" + dp[j - A[i]] + ", dp[" + j + "]=" + dp[j]);
 
                 dp[j] = Math.max(dp[j], dp[j - A[i]] + A[i]);
 
-                System.out.println("i=" + i + ", dp[" + j +"]=" + dp[j]);
+//                System.out.println("i=" + i + ", dp[" + j +"]=" + dp[j]);
             }
         }
 

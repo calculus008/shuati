@@ -46,6 +46,10 @@ public class LI_944_Maximum_Submatrix {
         int n = matrix[0].length;
         int[][] sums = new int[m + 1][n + 1];
 
+        /**
+         * sums[i][j] : for column index in j - 1 in matrix[][], the sum of elements from
+         *              matrix[0][j - 1] to matrix[i - 1][j - 1]
+         */
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
                 sums[i][j] = sums[i - 1][j] + matrix[i - 1][j - 1];

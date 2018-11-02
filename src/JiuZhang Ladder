@@ -433,7 +433,7 @@ LI_131_The_Skyline_Problem
 
 ====================================================
 
-5.DP
+5 & 6.DP
 LE_198_House_Robber                                       (lint 392)
 LE_213_House_Robber_II                                    (lint 534)
 LE_337_House_Robber_III                                   (lint 535)
@@ -478,12 +478,13 @@ LI_623_K_Edit_Distance
 LI_581_Longest_Repeating_Subsequence
 LI_77_Longest_Common_Subsequence
 LI_79_Longest_Common_Substring
-LE_115_Distinct_Subsequences                              (lint 118)
-LE_97_Interleaving_String                                 (lint 29)
+LE_115_Distinct_Subsequences                              (lint 118)   ***
+LE_97_Interleaving_String                                 (lint 29)    ***
 
 #Knapsack
 https://blog.csdn.net/luoshengkim/article/details/76514558
 LI_92_Backpack
+LE_416_Partition_Equal_Subset_Sum
 LI_125_Backpack_II
 LI_440_Backpack_III                                                     ***
 LI_562_Backpack_IV                                                      ***
@@ -493,6 +494,26 @@ LI_89_k_Sum                                                             ***
 LI_91_Minimum_Adjustment_Cost                                           ***
 
 LE_926_Flip_String_To_Monotone_Increasing
+
+====================================================
+
+7.Follow Up
+#Subarray Sum (Use PrefixSum Technique)
+LI_138_Subarray_Sum
+LI_404_Subarray_Sum_II                                                  ***
+LI_139_Subarray_Sum_Closest
+
+2D
+LI_405_Submatrix_Sum
+LI_944_Maximum_Submatrix
+
+LI_406_Minimum_Size_Subarray_Sum
+LE_325_Maximum_Size_Subarray_Sum_Equals_k
+LI_45_Maximum_Subarray_Difference                           *
+LE_643_Maximum_Average_Subarray_I                         (lint 868)
+LE_644_Maximum_Average_Subarray_II                        (lint 617)
+
+
 
 
 #leetcode Minimax type problems

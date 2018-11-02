@@ -61,10 +61,10 @@ public class LE_115_Distinct_Subsequences {
      * Init :
      *   dp[0][0] = 1, null in s matches null in t, so there's one valid subsequence.
      *
-     *   When i = 0 and j >= 1, meaning it is null in s, t starts from first char,  dp[0][j] = 0,
+     *   When i = 0 and j >= 1, meaning it is null in s, t is null + first char,  dp[0][j] = 0,
      *   null does not match any
      *
-     *   when j = 0 and i >= 1, meaning it is null in t, s starts from first char , dp[i][0] = 1,
+     *   when j = 0 and i >= 1, meaning it is null in t, s is null + first char , dp[i][0] = 1,
      *   so they all have a subsequence "null" that matches the null in t.
      *
      * Equation:
@@ -73,7 +73,7 @@ public class LE_115_Distinct_Subsequences {
      *                                          the number we had before
      *                                                plus
      *                                          the distinct number of subsequences we had with less longer T and less longer S.
-     *                                          dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j]
+     *                                          dp[i][j] =  dp[i - 1][j] + dp[i - 1][j - 1]
      *
      *
      *    s.charAt(i - 1) != t.charAt(j - 1) :  if the current character in S doesn't equal to current character T,
