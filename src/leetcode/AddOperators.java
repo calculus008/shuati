@@ -43,8 +43,7 @@ public class AddOperators {
         }
     }
 
-    public static void main(String [] args)
-    {
+    public static void main(String [] args) {
         addOperators("123", 6);
     }
 }

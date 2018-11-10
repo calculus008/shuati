@@ -75,9 +75,9 @@ public class LE_341_Flatten_Nested_List_Iterator {
     }
 
     /**
-         Solution 2
+        Solution 2
 
-         Use iterator, a better solution
+        Use iterator, a better solution
 
         Key Insights:
         The stack only stores iterator, it does not store NestedInteger, therefore we need to have another global variable "current"

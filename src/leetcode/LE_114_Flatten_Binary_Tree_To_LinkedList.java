@@ -6,7 +6,7 @@ import java.util.Stack;
  * Created by yuank on 3/14/18.
  */
 public class LE_114_Flatten_Binary_Tree_To_LinkedList {
-    /*
+    /**
         Given a binary tree, flatten it to a linked list in-place.
 
         For example,
@@ -33,8 +33,10 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
      */
 
      /**
+        Solution 1 : Recursive
         Time and Space : O(n)
 
+      ``!!!
         Postorderd的变形， instead of left->right->cur, it goes right->left->cur.
         It goes right side first, save right side nodes in system stack. Then it links from back to start (goes backwards)
 
@@ -45,9 +47,10 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
         Preorde r: 2 -> 3 -> 4, reverse it : 4 -> 3 -> 2, so it is postorder but visit right side first
 
         Solution 1: Recursion
-        All nodes are linked in "right" field, "left" field points to null. It requries that root first linked to left subtree in preorder sequence,
-        then link to right substree in preorder sequence. Therefore we recurse to right side first, using stack provided in recursion
-        to remember nodes in right substree.
+        !!!All nodes are linked in "right" field, "left" field points to null!!!
+        It requires that root first linked to right subtree in postorder sequence,
+        then link to left substree in postorder sequence. Therefore we recurse to right side first,
+        using stack provided in recursion to remember nodes in right substree.
 
                  1
                 / \
@@ -57,12 +60,15 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
 
             pre :  null, 6, 5, 1, 4, 3, 2
 
-            6 R-> null, pre = 6        6-> null
-            5 R-> 6     pre = 5        5 -> 6 -> null
-            4 R-> null, pre = 4        4 -> 5 -> 6 -> null
-            3 R-> 4,    pre = 3        3 -> 4 -> 5 -> 6 -> null
-            2 R-> 3,    pre = 2        2 -> 3 -> 4 -> 5 -> 6 -> null
-            1 R-> 2,    pre = 1        1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null
+           cur node     set cur.right = pre                set pre = cur
+            ----------------------------------------------------------
+                                                            pre = null
+            6 R-> null, 6 -> null,                          pre = 6
+            5 R-> 6     5 -> 6 -> null                      pre = 5
+            4 R-> null, 4 -> 5 -> 6 -> null                 pre = 4
+            3 R-> 4,    3 -> 4 -> 5 -> 6 -> null            pre = 3
+            2 R-> 3,    2 -> 3 -> 4 -> 5 -> 6 -> null       pre = 2
+            1 R-> 2,    1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null  pre = 1
       */
 
     TreeNode pre = null;

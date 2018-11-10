@@ -32,6 +32,14 @@ public class LE_251_Flatten_2D_Vector {
      * while (i.hasNext()) v[f()] = i.next();
      */
 
+    /**
+     * Difference from questions with NestedInteger :
+     * NextedInteger can be nexted to multiple levels, that's why we need to use stack to preserve
+     * the iterator on each level. For this questions, there are two level, list of list of Integer,
+     * then list of Integer. Therefore, no stack needed. Just need to maintain a current Iterator of
+     * Integers
+     *
+     */
     //Solution 1 : Use Iterator
     public class Vector2D1 implements Iterator<Integer> {
         Queue<Iterator> queue;
@@ -56,6 +64,7 @@ public class LE_251_Flatten_2D_Vector {
 
         @Override
         public boolean hasNext() {
+            //!!!"while"
             while (cur != null) {
                 if (cur.hasNext()) {
                     return true;

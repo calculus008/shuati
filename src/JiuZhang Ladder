@@ -231,7 +231,7 @@ LI_685_First_Unique_Number_In_Stream
 LI_613_High_Five
 LE_128_Longest_Consecutive_Sequence                       (lint 124)
 
-Iterators
+#Iterators
 LE_251_Flatten_2D_Vector                                  (lint 601)
 LE_281_Zigzag_Iterator                                    (lint 540)
 LE_339_Nested_List_Weight_Sum                             (lint 551)
@@ -480,6 +480,7 @@ LI_77_Longest_Common_Subsequence
 LI_79_Longest_Common_Substring
 LE_115_Distinct_Subsequences                              (lint 118)   ***
 LE_97_Interleaving_String                                 (lint 29)    ***
+LE_132_Palindrome_Partition_II
 
 #Knapsack
 https://blog.csdn.net/luoshengkim/article/details/76514558
@@ -498,22 +499,44 @@ LE_926_Flip_String_To_Monotone_Increasing
 ====================================================
 
 7.Follow Up
-#Subarray Sum (Use PrefixSum Technique)
+#1.Subarray Sum (Use PrefixSum Technique)
 LI_138_Subarray_Sum
 LI_404_Subarray_Sum_II                                                  ***
 LI_139_Subarray_Sum_Closest
+LE_209_Minimum_Size_Subarray_Sum                          (lint 406)    ***
 
-2D
+#SubMatrix in 2D array
 LI_405_Submatrix_Sum
 LI_944_Maximum_Submatrix
+LI_558_Sliding_Window_Matrix_Maximum
+LE_361_Bomb_Enemy                                         (lint 553)
 
+#2.Continuous_Subarray
+LI_402_Continuous_Subarray_Sum
+LI_403_Continuous_Subarray_Sum_II (循环数组 ???)
+
+LE_162_Find_Peak_Element                                  (lint 75)
+
+#Array
 LI_406_Minimum_Size_Subarray_Sum
 LE_325_Maximum_Size_Subarray_Sum_Equals_k
 LI_45_Maximum_Subarray_Difference                           *
 LE_643_Maximum_Average_Subarray_I                         (lint 868)
 LE_644_Maximum_Average_Subarray_II                        (lint 617)
 
+#Bucket Sort
+LE_164_Maxium_Gap                                         (lint 400)
 
+#Quick Select
+LI_005_Kth_Largest_Number
+LI_461_Kth_Smallest_Number
+LE_04_Median_Of_Two_Sorted_Arrays (Solution 3)
 
+#Iterator
+LE_341_Flatten_Nested_List_Iterator
+LI_22_Flatten_List
+LE_339_Nested_List_Weight_Sum
+LE_251_Flatten_2D_Vector
+LI_601_Flatten_2D_Vector
 
 #leetcode Minimax type problems
