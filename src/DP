@@ -1,0 +1,22 @@
+Huahua's Summary
+https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-dp-summary/
+
+1.1
+Input O(n)
+dp[i] : optimal solution for a sub problem (A[1 -> i])
+dp[i] only depends on const smaller problem
+Time : O(n)
+Space : O(n) -> O(1)
+
+Template
+dp = new int[n + 1]
+for i = 1 to n
+ dp[i] = f(dp[n - 1], dp[n - 2],...)
+return dp[n]
+
+LE_70_Climbing_Stairs
+LE_198_House_Robber
+LE_746_Min_Cost_Climbing_Stairs
+LE_790_Domino_And_Tromino_Tiling
+LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
+

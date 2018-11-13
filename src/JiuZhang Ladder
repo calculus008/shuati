@@ -471,6 +471,7 @@ LE_188_Best_Time_To_Buy_And_Sell_Stock_IV
 LI_476_Stone_Game
 LI_593_Stone_Game_II
 LE_312_Burst_Balloons
+LI_435_Post_Office_Problem                                             ***
 
 #匹配类动态规划
 LE_72_Edit_Distance                                      （lint 119)
@@ -538,5 +539,13 @@ LI_22_Flatten_List
 LE_339_Nested_List_Weight_Sum
 LE_251_Flatten_2D_Vector
 LI_601_Flatten_2D_Vector
+LE_281_Zigzag_Iterator
+LI_541_Zigzag_Iterator_II
+
+#Shortest Distance From All
+LE_317_Shortest_Distance_From_All_Buildings              (lint 573)
+LI_574_Build_Post_Office   (2D)                                            ***
+LI_435_Post_Office_Problem (1D)  (DP)
+LI_778_Pacific_Atlantic_Water_Flow
 
 #leetcode Minimax type problems
