@@ -65,7 +65,7 @@ public class LE_898_Bitwise_ORs_Of_Subarrays {
          set.add(A[n - 1]);
 
          for (int l = 1; l <= n; l++) {
-             for (int i = 0; i <= n - l; i++) {
+             for (int i = 0; i + l <= n; i++) {
                  int j = i + l -1;
                  if (l == 1) {//!!!
                      dp[i][j] = A[i];//!!!

@@ -59,7 +59,7 @@ public class LE_115_Distinct_Subsequences {
      * dp[i][j] : number of distinct subsequences in the first i chars from s that matches the first chars (subarray) of t.
      *
      * Init :
-     *   dp[0][0] = 1, null in s matches null in t, so there's one valid subsequence.
+     *   dp[0][0] = 1, null (or empty string) in s matches null in t, so there's one valid subsequence.
      *
      *   When i = 0 and j >= 1, meaning it is null in s, t is null + first char,  dp[0][j] = 0,
      *   null does not match any
