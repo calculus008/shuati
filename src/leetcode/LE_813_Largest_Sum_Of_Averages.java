@@ -41,22 +41,23 @@ public class LE_813_Largest_Sum_Of_Averages {
      *   Time  : O(K * n ^ 2)
      *   Space : O(K * n) (can be optimized to O(n) with rolling arrays)
      *
-         dp[k][i] : largest sum of average with the first i elements divided into k groups
-
-         找分割点j
-         do[k][i] = max(dp[k - 1][j] + Avg((j+1)th to ith element), dp[k][j])
-         In other words, the first j elements in k - 1 groups, the first j + 1 th to the first ith in one group
-
-         init:
-         dp[1][i] = Avg(the first i elements)
+     *   http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-813-largest-sum-of-averages/
+     *
+     *   dp[k][i] : largest sum of average with the first i elements divided into k groups
+     *
+     *   找分割点j
+     *   do[k][i] = max(dp[k - 1][j] + Avg((j+1)th to ith element), dp[k][j])
+     *   In other words, the first j elements in k - 1 groups, the first j + 1 th to the first ith in one group
+     *
+     *   init:
+     *   dp[1][i] = Avg(the first i elements)
      **/
     public double largestSumOfAverages(int[] A, int K) {
         int n = A.length;
 
         /**
-         sums[] and dp[][] all use number of elements, NOT real index
-         !!!
-         sums[i] : sum of the first i elements
+         * sums[] and dp[][] all use number of elements, NOT real index
+         * !!! sums[i] : sum of the first i elements
          **/
         double[][] dp = new double[K + 1][n + 1];
         double[] sums = new double[n + 1];
@@ -88,8 +89,8 @@ public class LE_813_Largest_Sum_Of_Averages {
                     /**
                      * "(sums[i] - sums[j]) / (i - j)"
                      *
-                     * It's average for numbers starting from the (j + 1)th element and
-                     * ending with ith element.
+                     * It's average for numbers starting from the (j + 1)th element (A[j]) and
+                     * ending with ith element (A[i - 1]).
                      */
                     dp[k][i] = Math.max(dp[k][i],
                             dp[k - 1][j] + (sums[i] - sums[j]) / (i - j));

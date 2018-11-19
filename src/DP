@@ -22,16 +22,28 @@ LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
 
 ---------------------------------------------------
 
+935
 LE_926_Flip_String_To_Monotone_Increasing
 LE_901_Online_Stock_Span
 LE_894_All_Possible_Full_Binary_Trees
 LE_898_Bitwise_ORs_Of_Subarrays
 LE_873_Length_Of_Longest_Fibonacci_Subsequence
 LE_877_Stone_Game
+LE_823_Binary_Trees_With_Factors
 LE_813_Largest_Sum_Of_Averages
+LE_410_Split_Array_Largest_Sum
+LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
+LE_790_Domino_And_Tromino_Tiling
 LE_712_Minimum_ASCII_Delete_Sum_For_Two_Strings
 LE_115_Distinct_Subsequences
+818
 879
+799
 546
+
+LE_935_Knight_Dialer
 LE_576_Out_Of_Boundary_Paths
 LE_688_Knight_Probability_In_Chessboard
+
+LE_787_Cheapest_Flights_Within_K_Stops
+LE_516_Longest_Palindromic_Subsequence
