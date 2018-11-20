@@ -29,20 +29,22 @@ public class LE_746_Min_Cost_Climbing_Stairs {
      */
 
     /**
-     * Solutin 1 : DP, iterative space O(1)
+     * Solutin 1 : DP, iterative
+     * Time  : O(n)
+     * Space : O(1)
      **/
     public int minCostClimbingStairs1(int[] cost) {
-         int dp1 = 0; //f(n-1)
-         int dp2 = 0; //f(n-2)
+        int dp1 = 0; //f(n-1)
+        int dp2 = 0; //f(n-2)
 
-         //!!! <= !!!
-         for(int i=2; i<=cost.length; i++) {
-              int dp = Math.min(dp1 + cost[i-1], dp2 + cost[i-2]);
-              dp2 = dp1;
-              dp1 = dp;
-         }
+        //!!! <= !!!
+        for (int i = 2; i <= cost.length; i++) {
+            int dp = Math.min(dp1 + cost[i - 1], dp2 + cost[i - 2]);
+            dp2 = dp1;
+            dp1 = dp;
+        }
 
-         return dp1;
+        return dp1;
     }
 
      /**
@@ -59,19 +61,19 @@ public class LE_746_Min_Cost_Climbing_Stairs {
          return mem[cost.length];
      }
 
-     private int helper(int[] cost, int[] mem, int step) {
-         if(step <= 1) {
-             return 0;
-         }
+    private int helper(int[] cost, int[] mem, int step) {
+        if (step <= 1) {
+            return 0;
+        }
 
-         if(mem[step] > 0) {
-             return mem[step];
-         }
+        if (mem[step] > 0) {
+            return mem[step];
+        }
 
-         mem[step] = Math.min(helper(cost, mem, step-1) + cost[step-1],
-                              helper(cost, mem, step-2) + cost[step-2]);
+        mem[step] = Math.min(helper(cost, mem, step - 1) + cost[step - 1],
+                helper(cost, mem, step - 2) + cost[step - 2]);
 
-         return mem[step];
-     }
+        return mem[step];
+    }
 }
 
