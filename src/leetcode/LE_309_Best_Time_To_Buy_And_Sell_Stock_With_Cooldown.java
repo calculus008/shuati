@@ -24,7 +24,7 @@ public class LE_309_Best_Time_To_Buy_And_Sell_Stock_With_Cooldown {
     /**
          https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
 
-         1.buy[i] = max(rest[i - 1] - price, buy[i - 1])
+         1.buy[i]  = max(rest[i - 1] - price, buy[i - 1])
          2.sell[i] = max(buy[i - 1] + price, sell[i - 1])
          3.rest[i] = max(buy[i - 1], sell[i - 1], rest[i - 1])
 

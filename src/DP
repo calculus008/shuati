@@ -36,14 +36,23 @@ LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
 LE_790_Domino_And_Tromino_Tiling
 LE_712_Minimum_ASCII_Delete_Sum_For_Two_Strings
 LE_115_Distinct_Subsequences
+
 818
 879
 799
-546
+LE_546_Remove_Boxes
 
+#Chessboard DP
 LE_935_Knight_Dialer
 LE_576_Out_Of_Boundary_Paths
 LE_688_Knight_Probability_In_Chessboard
 
 LE_787_Cheapest_Flights_Within_K_Stops
 LE_516_Longest_Palindromic_Subsequence
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+LE_309_Best_Time_To_Buy_And_Sell_Stock_With_Cooldown
+LE_416_Partition_Equal_Subset_Sum
+
+LE_198_House_Robber
+LE_740_Delete_And_Earn

@@ -39,6 +39,10 @@ public class LE_198_House_Robber {
         }
 
         int len = nums.length;
+        /**
+         * dp1, dp2, dp
+         *      dp1, dp2 --->
+         */
         int dp1 = 0;
         int dp2 = 0;
 
