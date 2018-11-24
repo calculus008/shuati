@@ -45,6 +45,21 @@ public class LE_300_Longest_Increasing_Subsequence {
 
      3.如果在中间，则更新那个末尾数字刚刚大于等于自己的那个序列，说明那个长度的序列可以更新了。
 
+
+     Run with example {1,3,5,2,8,4,6}
+
+     tails[0] = 1, tailIdx = 0,
+     i = 0,                                                                                                              {1}
+     i = 1, nums[1] = 3, #1, tailIdx++, tailIdx = 1,                                      tails[tailIdx] = tails[1] = 3, {1, 3}
+     i = 2, nums[2] = 5, #1, tailIdx++, tailIdx = 2,                                      tails[tailIdx] = tails[2] = 5, {1, 3, 5}
+     i = 3, nums[3] = 2, #3,            tailIdx = 2, find in tails {1, 3, 5}, idx = 1,    tails[idx] = tails[1] = 2,     {1, 2, 5}
+     i = 4, nums[4] = 8, #1, tailIDx++, tailIdx = 3,                                      tails[tailIdx] = tails[3] = 8, {1, 2, 5, 8}
+     i = 5, nums[5] = 4, #3,            tailIdx = 3, find in tails {1, 2, 5, 8}, idx = 2, tails[idx] = tails[2] = 4,     {1, 2, 4, 8}
+     i = 6, nums[6] = 6, #3,            tailIdx = 3, find in tails {1, 2, 4, 8}, idx = 3, tails[idx] = tails[3] = 6,     {1, 2, 4, 6}
+
+     Answer: tailIdx + 1 = 3 + 1 = 4
+
+
      比如这时，如果再来一个9，那就是第1种情况，更新序列为
 
      1
@@ -69,6 +84,9 @@ public class LE_300_Longest_Increasing_Subsequence {
 
 
      前两种都很好处理，O(1)就能解决，主要是第三种情况，实际上我们观察直到6之前这四个不同长度的升序序列，他们末尾是递增的，所以可以用二分搜索来找到适合的更新位置。
+
+
+
      */
     public int lengthOfLIS(int[] nums) {
         if (nums == null || nums.length == 0)

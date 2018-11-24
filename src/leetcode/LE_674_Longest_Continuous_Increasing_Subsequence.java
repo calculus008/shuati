@@ -23,6 +23,13 @@ public class LE_674_Longest_Continuous_Increasing_Subsequence {
          Easy
      */
 
+    /**
+     * DP
+     * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-674-longest-continuous-increasing-subsequence/
+     *
+     * Time : O(n)
+     * Space : O(1)
+     */
     public int findLengthOfLCIS(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
 
