@@ -56,6 +56,8 @@ public class LE_871_Minimum_Number_Of_Refueling_Stops {
 
 
     /**
+     * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-871-minimum-number-of-refueling-stops/
+     *
      * Heap
      * Time  : O(nlogn)
      * Space : O(n)
