@@ -86,6 +86,35 @@ public class LE_516_Longest_Palindromic_Subsequence {
         }
 
         /**
+         * Another form of solution 1, init dp[i][i] separately and "i + l < len",
+         * same as LE_730_Count_Different_Palindromic_Subsequences, Solution 2.
+         */
+        public int longestPalindromeSubseq3(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            int len = s.length();
+            int[][] dp = new int[len][len];
+
+            for (int i = 0; i < len; i++) {
+                dp[i][i] = 1;
+            }
+
+            for (int l = 1; l <= len; l++) {
+                for (int i = 0; i + l < len; i++) {
+                    int j = i + l;
+
+                    if (s.charAt(i) == s.charAt(j)) {
+                        dp[i][j] = dp[i + 1][j - 1] + 2;
+                    } else {
+                        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                    }
+                }
+            }
+
+            return dp[0][len - 1];
+        }
+
+        /**
          Solution 2
          Time : O(n ^ 2)
          Space : O(n)
@@ -93,9 +122,9 @@ public class LE_516_Longest_Palindromic_Subsequence {
         public int longestPalindromeSubseq2(String s) {
             int len = s.length();
 
-            int[] dp0 = new int[len];// length of l
-            int[] dp1 = new int[len];// length of l - 1
-            int[] dp2 = new int[len];// length of l - 2
+            int[] dp0 = new int[len];// length of l,     dp0[i] - result for substring starting at i and length is l
+            int[] dp1 = new int[len];// length of l - 1, dp1[i] - result for substring starting at i and length is l - 1
+            int[] dp2 = new int[len];// length of l - 2, dp2[i] - result for substring starting at i and length is l - 2
 
             for (int l = 1; l <= len; l++) {
                 for (int i = 0; i <= len - l; i++) {

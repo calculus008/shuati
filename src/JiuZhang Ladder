@@ -422,6 +422,7 @@ LE_29_Divide_Two_Integers                                 (lint 414)
 LE_278_First_Bad_Version                                  (lint 74)
 LE_287_Find_The_Duplicate_Number                          (lint 633)   ***
 LE_302_Smallest_Rectangle_Enclosing_Black_Pixels          (lint 600)   ***
+LE_719_Find_Kth_Smallest_Pair_Distance
 
 #Line Sweep
 LE_252_Meeting_Rooms                                      (lint 920)

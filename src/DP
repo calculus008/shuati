@@ -38,7 +38,8 @@ LE_712_Minimum_ASCII_Delete_Sum_For_Two_Strings
 LE_115_Distinct_Subsequences
 
 818
-879
+LE_879_Profitable_Schemes
+LE_719_Find_Kth_Smallest_Pair_Distance
 799
 LE_546_Remove_Boxes
 
@@ -48,7 +49,6 @@ LE_576_Out_Of_Boundary_Paths
 LE_688_Knight_Probability_In_Chessboard
 
 LE_787_Cheapest_Flights_Within_K_Stops
-LE_516_Longest_Palindromic_Subsequence
 
 LE_121_Best_Time_To_Buy_And_Sell_Stock
 LE_309_Best_Time_To_Buy_And_Sell_Stock_With_Cooldown
@@ -71,3 +71,5 @@ LE_871_Minimum_Number_Of_Refueling_Stops (Solution 2)
 
 LE_664_Strange_Printer
 LE_730_Count_Different_Palindromic_Subsequences
+LE_516_Longest_Palindromic_Subsequence
+
