@@ -1,1 +1,1 @@
-[LE_911_Online_Election](src/leetcode/LE_911_Online_Election.java)
+[LE_911_Online_Election](leetcode/LE_911_Online_Election.java)
