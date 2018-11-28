@@ -22,8 +22,8 @@ return dp[n]
 
 ---------------------------------------------------
 
-[LE_926_Flip_String_To_Monotone_Increasing](src/leetcode/LE_926_Flip_String_To_Monotone_Increasing.java)\
-[LE_901_Online_Stock_Span](src/leetcode/LE_901_Online_Stock_Span.java)\
+[LE_926_Flip_String_To_Monotone_Increasing](/src/leetcode/LE_926_Flip_String_To_Monotone_Increasing.java)\
+[LE_901_Online_Stock_Span](/src/leetcode/LE_901_Online_Stock_Span.java)\
 [LE_894_All_Possible_Full_Binary_Trees](src/leetcode/LE_894_All_Possible_Full_Binary_Trees.java)\
 [LE_898_Bitwise_ORs_Of_Subarrays](src/leetcode/LE_898_Bitwise_ORs_Of_Subarrays.java)\
 [LE_873_Length_Of_Longest_Fibonacci_Subsequence](src/leetcode/LE_873_Length_Of_Longest_Fibonacci_Subsequence.java)\
