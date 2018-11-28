@@ -22,7 +22,6 @@ LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
 
 ---------------------------------------------------
 
-935
 LE_926_Flip_String_To_Monotone_Increasing
 LE_901_Online_Stock_Span
 LE_894_All_Possible_Full_Binary_Trees
@@ -40,7 +39,6 @@ LE_115_Distinct_Subsequences
 818
 LE_879_Profitable_Schemes
 LE_719_Find_Kth_Smallest_Pair_Distance
-799
 LE_546_Remove_Boxes
 
 #Chessboard DP
@@ -73,3 +71,8 @@ LE_664_Strange_Printer
 LE_730_Count_Different_Palindromic_Subsequences
 LE_516_Longest_Palindromic_Subsequence
 
+LE_494_Target_Sum
+LE_799_Champagne_Tower
+
+#TSP
+LE_943_Find_The_Shortest_Superstring

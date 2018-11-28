@@ -67,7 +67,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
     /**
      * DP + Binary Search, 7 ms
      *
-     * Time  : O(nlogn)
+     * Time  : O(nlogn + log(n ^ 2)) -> O(nlogn + 2logn) -> O(nlogn)
      * Space : O(n)
      */
     class Solution2 {
