@@ -14,7 +14,7 @@ for i = 1 to n
  dp[i] = f(dp[n - 1], dp[n - 2],...)
 return dp[n]
 
-[LE_70_Climbing_Stairs](src/leetcode/LE_70_Climbing_Stairs.java)\
+[LE_70_Climbing_Stairs](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_70_Climbing_Stairs.java)\
 [LE_198_House_Robber](src/leetcode/LE_198_House_Robber.java)\
 [LE_746_Min_Cost_Climbing_Stairs](src/leetcode/LE_198_House_Robber.java)\
 [LE_790_Domino_And_Tromino_Tiling](src/leetcode/LE_790_Domino_And_Tromino_Tiling.java)\
