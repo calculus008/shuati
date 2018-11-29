@@ -3,6 +3,8 @@
 [LE_567_Permutation_In_String](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_567_Permutation_In_String.java)
 [LE_560_Subarray_Sum_Equals_K](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_560_Subarray_Sum_Equals_K.java)
 [LE_438_Find_All_Anagrams_In_A_String](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_438_Find_All_Anagrams_In_A_String.java)
+[LE_763_Partition_Labels](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_763_Partition_Labels.java)
+[LE_748_Shortest_Completing_Word](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_748_Shortest_Completing_Word.java)
 
 #Design with HashMap
 [LE_146_LRU_Cache](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_146_LRU_Cache.java)
@@ -10,3 +12,4 @@
 [LE_380_Insert_Delete_GetRandom_O1](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_380_Insert_Delete_GetRandom_O1.java)
 [LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed.java)
 [LE_432_All_O_One_Data_Structure](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_432_All_O_One_Data_Structure.java)
+[LE_745_Prefix_And_Suffix_Search](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_745_Prefix_And_Suffix_Search.java)
