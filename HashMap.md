@@ -5,6 +5,7 @@
 [LE_438_Find_All_Anagrams_In_A_String](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_438_Find_All_Anagrams_In_A_String.java)
 [LE_763_Partition_Labels](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_763_Partition_Labels.java)
 [LE_748_Shortest_Completing_Word](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_748_Shortest_Completing_Word.java)
+[LE_792_Number_Of_Matching_Subsequences](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_792_Number_Of_Matching_Subsequences.java)
 
 #Design with HashMap
 [LE_146_LRU_Cache](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_146_LRU_Cache.java)
