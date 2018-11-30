@@ -65,7 +65,7 @@ public class LE_347_Top_K_Frequent_Elements {
     }
 
     /**
-     * Headp + HashMap
+     * Head + HashMap
      * Time  : O(nlogk)
      * Space : O(n)
      *
