@@ -12,6 +12,7 @@ LE_347_Top_K_Frequent_Elements
 LE_692_Top_K_Frequent_Words
 LE_677_Map_Sum_Pairs
 LE_409_Longest_Palindrome
+LE_771_Jewels_And_Stones
 
 #Design with HashMap
 LE_146_LRU_Cache

@@ -12,6 +12,7 @@
 [LE_692_Top_K_Frequent_Words](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_692_Top_K_Frequent_Words.java)
 [LE_677_Map_Sum_Pairs](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_677_Map_Sum_Pairs.java)
 [LE_409_Longest_Palindrome](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_409_Longest_Palindrome.java)
+[LE_771_Jewels_And_Stones](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_771_Jewels_And_Stones.java)
 
 #Design with HashMap
 [LE_146_LRU_Cache](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_146_LRU_Cache.java)
