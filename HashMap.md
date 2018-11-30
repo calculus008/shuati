@@ -6,6 +6,11 @@
 [LE_763_Partition_Labels](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_763_Partition_Labels.java)
 [LE_748_Shortest_Completing_Word](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_748_Shortest_Completing_Word.java)
 [LE_792_Number_Of_Matching_Subsequences](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_792_Number_Of_Matching_Subsequences.java)
+[LE_734_Sentence_Similarity](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_734_Sentence_Similarity.java)
+[LE_720_Longest_Word_In_Dictionary](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_720_Longest_Word_In_Dictionary.java)
+[LE_347_Top_K_Frequent_Elements](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_347_Top_K_Frequent_Elements.java)
+[LE_692_Top_K_Frequent_Words](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_692_Top_K_Frequent_Words.java)
+[LE_677_Map_Sum_Pairs](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_677_Map_Sum_Pairs.java)
 
 #Design with HashMap
 [LE_146_LRU_Cache](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_146_LRU_Cache.java)

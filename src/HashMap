@@ -6,6 +6,11 @@ LE_438_Find_All_Anagrams_In_A_String
 LE_763_Partition_Labels
 LE_748_Shortest_Completing_Word
 LE_792_Number_Of_Matching_Subsequences
+LE_734_Sentence_Similarity
+LE_720_Longest_Word_In_Dictionary
+LE_347_Top_K_Frequent_Elements
+LE_692_Top_K_Frequent_Words
+LE_677_Map_Sum_Pairs
 
 #Design with HashMap
 LE_146_LRU_Cache
