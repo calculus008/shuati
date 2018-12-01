@@ -65,7 +65,7 @@ public class LE_347_Top_K_Frequent_Elements {
     }
 
     /**
-     * Head + HashMap
+     * Heap + HashMap
      * Time  : O(nlogk)
      * Space : O(n)
      *
@@ -108,6 +108,48 @@ public class LE_347_Top_K_Frequent_Elements {
             }
 
             Collections.sort(res);
+
+            return res;
+        }
+    }
+
+    /**
+     * A concise version of Heap + HashMap
+     *
+     * 1.No need to define a Pair class
+     * 2.Use Map.Entry instead, put it in to pq.
+     *
+     * Less code to write, good for interview.
+     */
+    class Solution3 {
+        public List<Integer> topKFrequent(int[] nums, int k) {
+            List<Integer> res = new ArrayList<>();
+            Map<Integer, Integer> map = new HashMap<>();
+
+            for (int num : nums) {
+                int cur = map.getOrDefault(num, 0) + 1;
+                map.put(num, cur);
+            }
+
+            /**
+             * !!!
+             */
+            PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
+
+            for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+                pq.offer(e);
+                if (pq.size() > k) {
+                    pq.poll();
+                }
+            }
+
+            while (!pq.isEmpty()) {
+                /**
+                 * List.add(0, value)
+                 * Keep adding at the begining of the list, so it is reversed order (higher frequency number in the front)
+                 */
+                res.add(0, pq.poll().getKey());
+            }
 
             return res;
         }
