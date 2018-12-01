@@ -76,3 +76,7 @@ LE_799_Champagne_Tower
 
 #TSP
 LE_943_Find_The_Shortest_Superstring
+
+[LE_139_Word_Break](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_139_Word_Break.java)
+[LE_140_Word_Break_II](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_140_Word_Break_II.java)
+[LI_683_Word_Break_III]((https://github.com/calculus008/shuati/blob/master/src/lintcode/LI_683_Word_Break_III.java)

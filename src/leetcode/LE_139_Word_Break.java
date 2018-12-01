@@ -73,10 +73,9 @@ public class LE_139_Word_Break {
          * 2.dp[i - j]
          * 3.s.substring(i - j, i)
          *
-
          */
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= max && j <= i; j++) {
+        for (int i = 1; i <= n; i++) {//loop for length
+            for (int j = 1; j <= max && j <= i; j++) {//loop for break point between i and j
                 if (dp[i - j] && dict.contains(s.substring(i - j, i))) {
                     dp[i] = true;
                     break;
