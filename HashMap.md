@@ -13,6 +13,7 @@
 [LE_692_Top_K_Frequent_Words](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_692_Top_K_Frequent_Words.java)
 [LE_451_Sort_Characters_By_Frequency](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_451_Sort_Characters_By_Frequency.java)
 
+[LE_676_Implement_Magic_Dictionary](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_676_Implement_Magic_Dictionary.java)
 [LE_677_Map_Sum_Pairs](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_677_Map_Sum_Pairs.java)
 [LE_409_Longest_Palindrome](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_409_Longest_Palindrome.java)
 [LE_771_Jewels_And_Stones](https://github.com/calculus008/shuati/blob/master/src/leetcode/LE_771_Jewels_And_Stones.java)
