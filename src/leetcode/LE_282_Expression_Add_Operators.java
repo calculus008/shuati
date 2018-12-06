@@ -21,10 +21,13 @@ public class LE_282_Expression_Add_Operators {
          Hard
      */
 
+
     /**
         Backtracking
         Time : Not sure
         Space : O(n)
+
+        http://zxi.mytechroad.com/blog/searching/leetcode-282-expression-add-operators/
 
         Test Run:
         num = "123", target = 6
@@ -48,60 +51,271 @@ public class LE_282_Expression_Add_Operators {
                  cur = 3, call (pos = 3, val = 2 - 2 + 2 * 3,  pre = 3),  val == target add "1*2*3" return
 
      */
-    public List<String> addOperators(String num, int target) {
-        List<String> res = new ArrayList<>();
-        if (num == null || num.length() == 0) return res;
 
-        helper(res, num, target, "", 0, 0, 0);
-        return res;
-    }
+    /**
+     * Solution with no optimization
+     *
+     * Time  : O(n ^ 2 * 4 ^ (n - 1))
+     *         n ^ 2 : in each helper() call, do substring in for loop is O(n ^ 2)
+     *         4 ^ (n - 1) : For num with length n, there are n - 1 spaces to fill with 4 possible ops:
+     *                       '+', '-', '*', ''(empty, meaning assemble with the previous chars as one number)
+     *
+     * Space : O(n ^ 2)
+     *
+     * 256 ms
+     */
+    class Solution1 {
+        public List<String> addOperators(String num, int target) {
+            List<String> res = new ArrayList<>();
+            if (num == null || num.length() == 0) return res;
 
-    public void helper(List<String> res, String num, int target, String path, int pos, long val, long pre) {
-        if (pos == num.length()) {
-            /**
-             !!! NOT the following one:
-             if (target == val) {
-             res.add(path);
-             return;
-             }
-
-             If you put "return" inside 2nd if, it won't return for the case that target != val
-
-             You also can't write it as :
-             "if (pos == num.length() && target == val) {res.add(path); return}" for the same reason
-             */
-            if (target == val) {
-                res.add(path);
-            }
-            return;
+            helper(res, num, target, "", 0, 0, 0);
+            return res;
         }
 
-        for (int i = pos; i < num.length(); i++) {
-            /**
-             !!! "num.charAt(pos)", 如果开始为"0"而当前是非起始位（012）就不用再往后走了，“0XX”不是合法的数字。
-             !!!“charAt(pos)"
-             */
-            if(num.charAt(pos) == '0' && i != pos) {
-                break;
+        public void helper(List<String> res, String num, int target, String path, int pos, long val, long pre) {
+            if (pos == num.length()) {
+                /**
+                 !!! NOT the following one:
+                 if (target == val) {
+                 res.add(path);
+                 return;
+                 }
+
+                 If you put "return" inside 2nd if, it won't return for the case that target != val
+
+                 You also can't write it as :
+                 "if (pos == num.length() && target == val) {res.add(path); return}" for the same reason
+                 */
+                if (target == val) {
+                    res.add(path);
+                }
+                return;
             }
 
-            long cur = Long.parseLong(num.substring(pos, i + 1));
+            for (int i = pos; i < num.length(); i++) {
+                /**
+                 !!! "num.charAt(pos)", 如果开始为"0"而当前是非起始位（012）就不用再往后走了，“0XX”不是合法的数字。
+                 !!!“charAt(pos)"
+                 */
+                if (num.charAt(pos) == '0' && i != pos) {
+                    break;
+                }
 
-            if (pos == 0) {
-                helper(res, num, target, path + cur, i + 1, cur, cur);
-            } else {
-                helper(res, num, target, path + "+" + cur, i + 1, val + cur, cur);
+                long cur = Long.parseLong(num.substring(pos, i + 1));
+
+                if (pos == 0) {
+                    helper(res, num, target, path + cur, i + 1, cur, cur);
+                } else {
+                    helper(res, num, target, path + "+" + cur, i + 1, val + cur, cur);
+
+                    /**
+                     !!!", -cur)" 把"-"看作负数，这样才能在“*”时做“val - pre".
+                     */
+                    helper(res, num, target, path + "-" + cur, i + 1, val - cur, -cur);
+
+                    /**
+                     !!!"val - pre + pre * cur"
+                     */
+                    helper(res, num, target, path + "*" + cur, i + 1, val - pre + pre * cur, pre * cur);
+
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Solution optimized with StringBuilder
+     *
+     * 115 ms
+     *
+     * 坑 ：
+     * 1.With passing StringBuilder, since content is changed in sb for each recursion call to helper(),
+     * after each helper() returns, need to do "sb.setLength(n)"
+     *
+     * 2.Number "0XX" is invalid. When starting digit is '0' and current index is not starting index,
+     * it's case for "0XX", just break.
+     *
+     * 3.Special processing when pos at the beginning of num (pos == 0)
+     *   helper(num, target, res, sb.append(cur), i + 1, cur, cur);
+     *
+     * 4.In each helper() call, pos is set to "i + 1"
+     *
+     */
+    class Solution2 {
+        public List<String> addOperators(String num, int target) {
+            List<String> res = new ArrayList<>();
+            if (null == num || num.length() == 0) {
+                return res;
+            }
+
+            helper(num, target, res, new StringBuilder(), 0, 0, 0);
+
+            return res;
+        }
+
+        private void helper(String num, int target, List<String> res, StringBuilder sb, int pos, long val, long pre) {
+            if (pos == num.length()) {
+                if (val == target) {
+                    res.add(sb.toString());
+                }
+
+                return;
+            }
+
+            for (int i = pos; i < num.length(); i++) {
+                if (num.charAt(pos) == '0' && i != pos) {
+                    break;
+                }
+
+                long cur = Long.parseLong(num.substring(pos, i + 1));
+
+                int n = sb.length();
+
+                if (pos == 0) {
+                    helper(num, target, res, sb.append(cur), i + 1, cur, cur);
+                    sb.setLength(n);//!!!
+                    continue;
+                }
+
+                helper(num, target, res, sb.append('+').append(cur), i + 1, val + cur, cur);
+                sb.setLength(n);//!!!
+
+                helper(num, target, res, sb.append('-').append(cur), i + 1, val - cur, -cur);
+                sb.setLength(n);//!!!
+
+                helper(num, target, res, sb.append('*').append(cur), i + 1, val - pre + pre * cur, pre * cur);
+                sb.setLength(n);//!!!
+            }
+        }
+    }
+
+    /**
+     * Optimized by removing using substring() in helper()
+     * Time  : O(n * 4 ^ (n - 1))
+     * Space : O(n)
+     *
+     * 53 ms
+     */
+    class Solution {
+        public List<String> addOperators(String num, int target) {
+            List<String> res = new ArrayList<>();
+            if (null == num || num.length() == 0) {
+                return res;
+            }
+
+            helper(num, target, res, new StringBuilder(), 0, 0, 0);
+
+            return res;
+        }
+
+        private void helper(String num, int target, List<String> res, StringBuilder sb, int pos, long val, long pre) {
+            if (pos == num.length()) {
+                if (val == target) {
+                    res.add(sb.toString());
+                }
+
+                return;
+            }
+
+            long cur = 0;
+            for (int i = pos; i < num.length(); i++) {
+                if (num.charAt(pos) == '0' && i != pos) {
+                    break;
+                }
 
                 /**
-                  !!!", -cur)" 把"-"看作负数，这样才能在“*”时做“val - pre".
+                 * rolling sum, avoid using substring() and parsing it into long
                  */
-                helper(res, num, target, path + "-" + cur, i + 1, val - cur, -cur);
+                cur = cur * 10 + num.charAt(i) - '0';
+                // long cur = Long.parseLong(num.substring(pos, i + 1));
 
-                /**
-                  !!!"val - pre + pre * cur"
-                 */
-                helper(res, num, target, path + "*" + cur, i + 1, val - pre + pre * cur, pre * cur);
+                int n = sb.length();
 
+                if (pos == 0) {
+                    helper(num, target, res, sb.append(cur), i + 1, cur, cur);
+                    sb.setLength(n);
+                    continue;
+                }
+
+                helper(num, target, res, sb.append('+').append(cur), i + 1, val + cur, cur);
+                sb.setLength(n);
+
+                helper(num, target, res, sb.append('-').append(cur), i + 1, val - cur, -cur);
+                sb.setLength(n);
+
+                helper(num, target, res, sb.append('*').append(cur), i + 1, val - pre + pre * cur, pre * cur);
+                sb.setLength(n);
+            }
+        }
+    }
+
+    /**
+     * Optimized version by Huahua
+     *
+     * Time  : O(n * 4 ^ (n - 1))
+     * Space : O(n)
+     *
+     * 15 ms
+     */
+    class Solution4 {
+        private List<String> ans;
+        private char[] num;
+        private char[] exp;
+        private int target;
+
+        public List<String> addOperators(String num, int target) {
+            this.num = num.toCharArray();
+            this.ans = new ArrayList<>();
+            this.target = target;
+
+            /**
+             * get result from this char array
+             */
+            this.exp = new char[num.length() * 2];
+
+            dfs(0, 0, 0, 0);
+
+            return ans;
+        }
+
+        private void dfs(int pos, int len, long prev, long curr) {
+            if (pos == num.length) {
+                if (curr == target)
+                    ans.add(new String(exp, 0, len));//!!!
+                return;
+            }
+
+            int s = pos;
+            int l = len;
+            if (s != 0) ++len;
+
+            long n = 0;
+            while (pos < num.length) {
+                if (num[s] == '0' && pos - s > 0) {
+                    break; // 0X...
+                }
+
+
+                n = n * 10 + (int) (num[pos] - '0');
+
+                if (n > Integer.MAX_VALUE) {
+                    break; // too long
+                }
+
+                exp[len++] = num[pos++]; // copy exp
+                if (s == 0) {
+                    dfs(pos, len, n, n);
+                    continue;
+                }
+
+                exp[l] = '+';
+                dfs(pos, len, n, curr + n);
+                exp[l] = '-';
+                dfs(pos, len, -n, curr - n);
+                exp[l] = '*';
+                dfs(pos, len, prev * n, curr - prev + prev * n);
             }
         }
     }

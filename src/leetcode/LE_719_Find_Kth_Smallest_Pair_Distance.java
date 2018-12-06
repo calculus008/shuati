@@ -41,6 +41,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
             int n = nums.length;
             /**
              * !!!
+             * Key!, don't forget!!
              */
             Arrays.sort(nums);
             int max = nums[n - 1];
@@ -73,7 +74,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
     class Solution2 {
         public int smallestDistancePair(int[] nums, int k) {
             int n = nums.length;
-            Arrays.sort(nums);
+            Arrays.sort(nums);//!!!
 
             int l = 0;
             int r = nums[n - 1];
