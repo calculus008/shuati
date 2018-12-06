@@ -49,6 +49,9 @@ public class LE_480_Sliding_Window_Median {
      * Similar to LI_360_Sliding_Window_Median
      * 1.return type is int[]
      * 2.test cases show that we need to handle int value overflow
+     *
+     * Time  : O(n ^ 2 * logk)
+     * Space : O(n)
      */
     public double[] medianSlidingWindow1(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k == 0) return new double[]{};
@@ -69,7 +72,7 @@ public class LE_480_Sliding_Window_Median {
         for (int i = 0; i < nums.length; i++) {
             if (i >= k) {//remove left element
                 if (nums[l] < large.peek()) {
-                    small.remove((long)nums[l]);
+                    small.remove((long)nums[l]);//PriorityQueue remove is O(n)
                 } else {
                     large.remove((long)nums[l]);
                 }

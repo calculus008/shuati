@@ -328,4 +328,61 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
             return findKth(A, startA, B, startB + k / 2, k - k / 2);
         }
     }
+
+
+    /**
+     * Solution 4
+     *
+     * Huahua version :
+     * https://zxi.mytechroad.com/blog/algorithms/binary-search/leetcode-4-median-of-two-sorted-arrays/
+     *
+     * Binary Search
+     * Time  : O(log(min(n1,n2)))
+     * Space : O(1)
+     *
+     */
+    class Solution {
+        public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+            if (nums1 == null && nums2 == null) return 0.0;
+
+            int l1 = nums1.length;
+            int l2 = nums2.length;
+
+            if (l1 > l2) {
+                return findMedianSortedArrays(nums2, nums1);
+            }
+
+            int k = (l1 + l2 + 1) / 2;
+
+            /**
+             * [l, r) 左闭右开，所以r不能=m-1。循坏条件是 l < r，但最后 l 可能等于 r， 表示第一个数组所有的元素都要使用。
+             * 如果循环条件是(l <= r)，最后 l 可能大于 r，那就越界了。﻿
+             */
+            int l = 0;
+            int r = l1;
+            while (l < r) {
+                int m = l + (r - l) / 2;
+                if (nums1[m] < nums2[k - m - 1]) {
+                    l = m + 1;
+                } else {
+                    r = m;
+                }
+            }
+
+            int m1 = l;
+            int m2 = k - m1;
+
+            int c1 = Math.max (m1 <= 0 ? Integer.MIN_VALUE : nums1[m1 - 1],
+                               m2 <= 0 ? Integer.MIN_VALUE : nums2[m2 - 1]);
+
+            if (((l1 + l2) % 2) == 1) {
+                return c1;
+            }
+
+            int c2 = Math.min(m1 >= l1 ? Integer.MAX_VALUE : nums1[m1],
+                              m2 >= l2 ? Integer.MAX_VALUE : nums2[m2]);
+
+            return (c1 + c2) / 2.0;
+        }
+    }
 }
