@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 /**
  * Created by yuank on 3/5/18.
  */
@@ -16,6 +18,11 @@ public class LE_72_Edit_Distance {
      **/
 
     /**
+     * 对该题最清楚的解释
+     * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-72-edit-distance/
+     */
+
+    /**
         DP Solution : Time : O(m * n), Space : O(m * n)
 
         "convert word1 to word2", so all actions (insert, delete and replace) are done on word1
@@ -25,45 +32,29 @@ public class LE_72_Edit_Distance {
 
        D("abbc", "acc")
        = D("abb", "ac")
-       = 1 + min ( D("ab", "ac")   //Delete : delete "b" from word1
-                   D("abb", "a")   //Insert : if we know how to convert "abb" to "a",
-                                   //         then we just need to insert "c" at the end of word1
-                   D("ab",  "a"))  //Replace : if we know how to convert "ab" to "a",
-                                              then we just need to replace the last "b" in word1 with "c"
+       = 1 + min ( D("ab", "ac")   //Delete : Delete "b" from "abb"
+                   D("abb", "a")   //Insert : Insert "c" at the end of "abb" -> "abbc", which has the same char 'c' as "ac"
+                                   //         at the last position, so they cancel each other:
+                                   //         "abbc" vs "ac" --> "abb" vs "a"
 
-        d(i, j) = minDistance(word1[0..i-1], word2[0..j-1])
+                   D("ab",  "a"))  //Replace : Replace last "b" in "abb" with "c", "abc" vs "ac" --> "ab" vs "a"
+
+        DP:
+        d(i, j) = minDistance(word1[0..i-1], word2[0..j-1]), or the first i chars in word1 vs the first j chars in word2.
+                  d(i, j) 表示把 str1 前 i 个字符编辑成 str2 前 j 个字符所需要的最小 edit distance
+
+        Init:
         1.if j = 0, i
         2.if i = 0, j
-        3.if word1[i -1] = word2[j -1]  d(i - i, j - 1)
-        4.min (d(i - 1, j), d(i, j - 1), d(i - 1, j - 1) + 1
 
-        d(i, j) 表示把 str1 前 i 个字符编辑成 str2 前 j 个字符所需要的最小 edit distance
+        Transition:
+        if word1[i -1] = word2[j -1]
+            d(i - i, j - 1)
+        else
+           min (d(i - 1, j), d(i, j - 1), d(i - 1, j - 1) + 1
 
-        d(2, 1) = 1 + d(1, 1)
-        edit("ab", "a") = 1 + edit("a", "a") <- delete "b" from str1
-
-        d(1, 2) = 1 + d(1, 1)
-        edit("a", "ab") = 1 + edit("a", "a") <- insert "b" into str1
-
-        d(2, 2) = 1 + d(1, 1)
-        edit("ab", "ac") = 1 + edit("a", "a") <- replace "b" with "c" in str1﻿
-
-
-        Another way to understand the transition formula:
-                   i
-         s1 :  xxxxa
-         s2 :  xxxab      chars at i and j - 1 are equal, so add "b" in s1, then : dp[i][j] = dp[i][j - 1] + 1 :
-                   j
-
-                   i
-         s1 :  xxxab
-         s2 :  xxxad    chars at i - 1 and j - 1 are equal, so replace "b" at i in s1 with "d", then : dp[i][j] = dp[i - 1 ][j - 1] + 1 :
-                   j
-
-                   i
-         s1 :  xxxac
-         s2 :  xxxxa    chars at i - 1 and j are equal, so remove "c" from s1, then : dp[i][j] = dp[i - 1 ][j] + 1 :
-                   j
+        Result:
+        dp(l1, l2)
      **/
 
     /**
@@ -98,39 +89,93 @@ public class LE_72_Edit_Distance {
 
      **/
 
-    public static int minDistance(String word1, String word2) {
-        int[][] dp = new int[word1.length() + 1][word2.length() + 1];
-        int len1 = word1.length();
-        int len2 = word2.length();
+    /**
+     * DP
+     * Bottom up
+     * 9 ms
+     */
+    class Solution1 {
+        public  int minDistance(String word1, String word2) {
+            int[][] dp = new int[word1.length() + 1][word2.length() + 1];
+            int len1 = word1.length();
+            int len2 = word2.length();
 
-        /**
-         * 注意， 根据dp的定义决定初始化循环的变量。
-         * 此处我们定义dp为int[word1.length() + 1][word2.length() + 1]，
-         * 所以dp[i][0]需要在以len1为i的终值的循环中。
-         */
-        //!! "<="
-        for (int i = 0; i <= len1; i++) {
-            dp[i][0] = i;
-        }
+            /**
+             * 注意， 根据dp的定义决定初始化循环的变量。
+             * 此处我们定义dp为int[word1.length() + 1][word2.length() + 1]，
+             * 所以dp[i][0]需要在以len1为i的终值的循环中。
+             */
+            //!! "<="
+            for (int i = 0; i <= len1; i++) {
+                dp[i][0] = i;
+            }
 
-        //!! "<="
-        for (int i = 0; i <= len2; i++) {
-            dp[0][i] = i;
-        }
+            //!! "<="
+            for (int i = 0; i <= len2; i++) {
+                dp[0][i] = i;
+            }
 
-        //!! "<=" and starts at index "1"
-        for (int i = 1; i <= len1; i++) {
             //!! "<=" and starts at index "1"
-            for (int j = 1; j <= len2; j++) {
-                // compare char at "i - 1 and "j - 1"
-                if(word1.charAt(i - 1) == word2.charAt(j - 1)) {
-                    dp[i][j] = dp[i - 1][j - 1];
-                } else {
-                    dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
+            for (int i = 1; i <= len1; i++) {
+                //!! "<=" and starts at index "1"
+                for (int j = 1; j <= len2; j++) {
+                    // compare char at "i - 1 and "j - 1"
+                    if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    } else {
+                        dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
+                    }
                 }
             }
+
+            return dp[len1][len2];
+        }
+    }
+
+    /**
+     * Recursion + Memoization
+     * Top-down
+     * 5 ms
+     */
+    class Solution2 {
+        int[][] mem;
+        public int minDistance(String word1, String word2) {
+            if (word1 == null && word2 == null) return 0;
+            if (word1 == null) return word2.length();
+            if (word2 == null) return word1.length();
+
+            int l1 = word1.length();
+            int l2 = word2.length();
+
+            mem = new int[l1 + 1][l2 + 1];
+            for (int[] m : mem) {
+                Arrays.fill(m, -1);
+            }
+            return helper(word1, word2, l1, l2);
         }
 
-        return dp[len1][len2];
+        private int helper(String word1, String word2, int l1, int l2) {
+            if (l1 == 0) {
+                return l2;
+            }
+            if (l2 == 0) {
+                return l1;
+            }
+
+            if (mem[l1][l2] > 0) {
+                return mem[l1][l2];
+            }
+
+            int res = 0;
+            if (word1.charAt(l1 - 1) == word2.charAt(l2 - 1)) {
+                res =  helper(word1, word2, l1 - 1, l2 - 1);
+            } else {
+                res = Math.min(Math.min(helper(word1, word2, l1 - 1, l2), helper(word1, word2, l1, l2 - 1)),
+                        helper(word1, word2, l1 - 1, l2 - 1)) + 1;
+            }
+
+            mem[l1][l2] = res;
+            return res;
+        }
     }
 }

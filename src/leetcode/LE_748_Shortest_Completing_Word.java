@@ -59,6 +59,8 @@ public class LE_748_Shortest_Completing_Word {
         String res = "";
         for (String word : words) {
             int n = word.length();
+
+            //!!! Pruning
             if (n >= minLen) {
                 continue;
             }

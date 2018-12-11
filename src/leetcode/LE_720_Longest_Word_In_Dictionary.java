@@ -175,6 +175,18 @@ public class LE_720_Longest_Word_In_Dictionary {
                 }
             }
 
+            /**
+                //Or sort words by its length, then in for loop, once we find a valid word, we can break right away.
+
+                 Arrays.sort(words, (a, b) -> a.length() == b.length() ? a.compareTo(b) : b.length() - a.length());
+                 for (String word : words) {
+                     if (trie.hasAllPrefix(word)) {
+                         res = word;
+                         break;
+                     }
+                 }
+             */
+
             return res;
         }
     }
