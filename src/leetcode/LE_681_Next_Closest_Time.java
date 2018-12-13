@@ -36,7 +36,10 @@ public class LE_681_Next_Closest_Time {
      */
 
     /**
+     * http://zxi.mytechroad.com/blog/simulation/leetcode-681-next-closest-time/
+     *
      * Permutation based DFS
+     *
      * new time : d1d2:d3d4, d1 ~ d4 in set
      * Time : O(4 ^ 4) = O(256)
      */
@@ -77,7 +80,7 @@ public class LE_681_Next_Closest_Time {
             if (val == target) return;
 
             //is the closest by far?
-            int curDiff = val > target ? val - target : 1440 - target + val;
+            int curDiff = val > target ? val - target : 1440 - target + val;//!!!
             if (curDiff < diff) {
                 res = String.valueOf(cur.get(0)) + String.valueOf(cur.get(1)) + ":" + String.valueOf(cur.get(2)) + String.valueOf(cur.get(3));
                 diff = curDiff;
@@ -87,16 +90,16 @@ public class LE_681_Next_Closest_Time {
 
         for (int i : set) {
             //pruning
-            if (pos == 0) {
+            if (pos == 0) {//first digit for hour, only valid digits : 0,1,2
                 if (i > 2) return;
             }
-            if (pos == 1) {
+            if (pos == 1) {//hour, valid range : 0 ~ 23
                 if (cur.get(0) * 10 + i > 23) return;
             }
-            if (pos == 2) {
+            if (pos == 2) {//first digit of minute, valid range : 0 ~ 5
                 if (i > 5) return;
             }
-            if (pos == 3) {
+            if (pos == 3) {//minutes, 0 ~ 59
                 if (cur.get(2) * 10 + i > 59) return;
             }
 

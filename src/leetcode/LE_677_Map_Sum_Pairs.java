@@ -68,7 +68,6 @@ public class LE_677_Map_Sum_Pairs {
                 }
 
                 TrieNode cur = root;
-                System.out.println(s + ",val=" + val);
                 for (int i = 0; i < s.length(); i++) {
                     int idx = s.charAt(i) - 'a';//!!! " - 'a'"
                     if (cur.next[idx] == null) {
@@ -94,7 +93,7 @@ public class LE_677_Map_Sum_Pairs {
                 TrieNode cur = root;
                 for (int i = 0; i < s.length(); i++) {
                     int idx = s.charAt(i) - 'a';
-                    if (cur.next[idx] == null) {
+                    if (cur.next[idx] == null) {//!!!
                         return 0;
                     }
 
@@ -115,7 +114,8 @@ public class LE_677_Map_Sum_Pairs {
         }
 
         public void insert(String key, int val) {
-            int delta = map.containsKey(key) ? val - map.get(key) : val;
+//            int delta = map.containsKey(key) ? val - map.get(key) : val;
+            int delta = val - map.getOrDefault(key, 0);
 
             map.put(key, val);//!!!
             trie.insert(key, delta);
@@ -149,6 +149,9 @@ public class LE_677_Map_Sum_Pairs {
             int delta = map.containsKey(key) ? val - map.get(key) : val;
 
             for (int i = 0; i < c.length; i++) {
+                /**
+                 * avoid using substring() to construct prefix
+                 */
                 prefix += c[i];
                 map.put(key, val);
                 sum.put(prefix, sum.getOrDefault(prefix, 0) + delta);

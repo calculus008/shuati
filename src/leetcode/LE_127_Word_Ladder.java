@@ -47,10 +47,17 @@ public class LE_127_Word_Ladder {
      */
 
     /**
-     * Solution 1 : BFS, 83ms
+     * http://zxi.mytechroad.com/blog/searching/127-word-ladder/
      *
-     * Time  : O(V + E)
+     * BFS
+     *
+     * Time  : O(n*26^l) -> O(n*26^l/2), l = len(word), n=|wordList|
      * Space : O(n)
+     */
+
+
+    /**
+     * Solution 1 : BFS, 83ms
      */
     public int ladderLength_1(String beginWord, String endWord, List<String> wordList) {
         HashSet<String> dict = new HashSet<>();
@@ -72,6 +79,7 @@ public class LE_127_Word_Ladder {
             for (int i = 0; i < size; i++) {
                 String cur = queue.poll();
                 char[] chars = cur.toCharArray();
+
                 for (int j = 0; j < cur.length(); j++) {
                     char original = chars[j];
                     for (char c = 'a'; c <= 'z'; c++) {
@@ -192,6 +200,9 @@ public class LE_127_Word_Ladder {
 
     /**
      * Bi-direction BFS, 34 ms
+     *
+     * Time  : O(n*26^l/2), l = len(word), n=|wordList|
+     * Space : O(n)
      */
     public int ladderLength_3(String beginWord, String endWord, List<String> wordAsList) {
         if (!wordAsList.contains(endWord)) return 0;

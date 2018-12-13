@@ -10,10 +10,12 @@ public class LE_680_Valid_Palindrome_II {
          Example 1:
          Input: "aba"
          Output: True
+
          Example 2:
          Input: "abca"
          Output: True
          Explanation: You could delete the character 'c'.
+
          Note:
          The string will only contain lowercase characters a-z. The maximum length of the string is 50000.
 
@@ -23,6 +25,8 @@ public class LE_680_Valid_Palindrome_II {
      */
 
     /**
+     http://zxi.mytechroad.com/blog/string/leetcode-680-valid-palindrome-ii/
+
      正确的算法如下：
 
      依然用相向双指针的方式从两头出发，两根指针设为 L 和 R。

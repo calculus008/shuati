@@ -21,7 +21,7 @@ public class LI_120_Word_Ladder {
          return its length 5.
 
          !!! Notice:
-            From the Example, we know that the end does not need to be in the tiven dictionary ("cog" is not in "dict")
+            From the Example, we know that the end does not need to be in the given dictionary ("cog" is not in "dict")
             This is different from LE_127_Word_Ladder, where end must be in the given dictionary.
      */
 

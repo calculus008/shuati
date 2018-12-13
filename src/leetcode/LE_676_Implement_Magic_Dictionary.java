@@ -32,6 +32,8 @@ public class LE_676_Implement_Magic_Dictionary {
          Medium
      */
     /**
+     * https://zxi.mytechroad.com/blog/hashtable/leetcode-676-implement-magic-dictionary/
+     *
      * Solution 1
      * HashMap
      * Time and Space : O(n * m)
