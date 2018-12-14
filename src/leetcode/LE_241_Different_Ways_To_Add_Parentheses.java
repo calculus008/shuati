@@ -9,8 +9,9 @@ import java.util.Map;
  * Created by yuank on 4/7/18.
  */
 public class LE_241_Different_Ways_To_Add_Parentheses {
-    /*
-        Given a string of numbers and operators, return all possible results from computing all the different possible ways
+    /**
+        Given a string of numbers and operators, return all possible results
+        from computing all the different possible ways
         to group numbers and operators. The valid operators are +, - and *.
 
 
@@ -33,7 +34,9 @@ public class LE_241_Different_Ways_To_Add_Parentheses {
         Output: [-34, -14, -10, -10, 10]
      */
 
-    /*
+    /**
+     *  http://zxi.mytechroad.com/blog/leetcode/leetcode-241-different-ways-to-add-parentheses/
+
         Backtracking, same type as Word Break questions.
 
         https://www.youtube.com/watch?v=gxYV8eZY0eQ
@@ -101,7 +104,10 @@ public class LE_241_Different_Ways_To_Add_Parentheses {
             }
         }
 
-        //!!! This means current input is a number, no operand in it, memorize it.
+        /**
+         * !!!
+         * This means current input is a number, no operand in it, memorize it.
+         **/
         if(res.isEmpty()) {
             res.add(Integer.parseInt(input));
         }

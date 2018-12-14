@@ -1,4 +1,21 @@
-LI_547_Intersection_Of_Two_Arrays
-LI_544_Top_K_Largest_Numbers
-LI_545_Top_K_Largest_Numbers_II
+1.Top K Frequent Elements
+LI_612_K_Closest_Points
 LI_549_Top_K_Frequent_Words_Map_Reduce
+LI_545_Top_K_Largest_Numbers_II
+LI_544_Top_K_Largest_Numbers
+LI_547_Intersection_Of_Two_Arrays
+LE_692_Top_K_Frequent_Words                               (lint 471)
+LI_550_Top_K_Frequent_Words_II
+
+====================================================
+
+2.Bloom Filter
+LI_556_Standard_Bloom_Filter
+LI_555_Counting_Bloom_Filter
+
+====================================================
+
+3.External Sorting
+LI_577_Merge_K_Sorted_Interval_Lists
+LI_486_Merge_K_Sorted_Arrays
+LE_23_Merge_k_Sorted_Lists                                (lint 104)
