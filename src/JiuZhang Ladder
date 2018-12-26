@@ -115,6 +115,9 @@ LI_624_Remove_Substrings
 LI_794_Sliding_Puzzle_II
 LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II)
 
+LE_847_Shortest_Path_Visiting_All_Nodes
+LE_864_Shortest_Path_To_Get_All_Keys
+
 ====================================================
 
 5.Binary Tree & Tree-based DFS
@@ -452,6 +455,9 @@ LE_62_Unique_Path
 LE_63_Unique_Path_II
 LE_64_Min_Path_Sum
 LE_72_Edit_Distance
+
+#Mutate from problems above - 3D DP
+LI_1447_Calculation_The_Sum_Of_Path
 
 LE_674_Longest_Continuous_Increasing_Subsequence
 LI_397_Longest_Continuous_Increasing_Subsequence

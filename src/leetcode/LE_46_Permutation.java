@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yuank on 2/28/18.
  */
 public class LE_46_Permutation {
-    /*
+    /**
         Given a collection of distinct numbers, return all possible permutations.
 
         For example,
@@ -20,7 +20,7 @@ public class LE_46_Permutation {
           [3,1,2],
           [3,2,1]
         ]
-     */
+     **/
 
     /**
         Solution 1 : use visited[] to tell if current number is in the sequence.

@@ -24,26 +24,26 @@ public class LE_63_Unique_Path_II {
         Note: m and n will be at most 100.
      */
 
-     public static int uniquePathsWithObstacles(int[][] obstacleGrid) {
-         if(obstacleGrid[0][0]==1) return 0;
-         int m = obstacleGrid.length;
-         int n = obstacleGrid[0].length;
-         int[] a = new int[n];
-         a[0] = 1; //!!! if entry point is "1", we already return "0", so here we set a[0] to 1.
+    public static int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        if (obstacleGrid[0][0] == 1) return 0;
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int[] a = new int[n];
+        a[0] = 1; //!!! if entry point is "1", we already return "0", so here we set a[0] to 1.
 
 
-         for(int i=0; i<m; i++) {
-             for(int j=0; j<n; j++) {
-                 //int array is initialized with default value of "0", once a "1" appears in the first column and first row
-                 //, the rest will also be 0
-                 if(obstacleGrid[i][j] == 1) {
-                     a[j] = 0;
-                 } else if(j>0) {
-                     a[j] += a[j-1];
-                 }
-             }
-         }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                //int array is initialized with default value of "0", once a "1" appears in the first column and first row
+                //, the rest will also be 0
+                if (obstacleGrid[i][j] == 1) {
+                    a[j] = 0;
+                } else if (j > 0) {
+                    a[j] += a[j - 1];
+                }
+            }
+        }
 
-         return a[n-1];
-     }
+        return a[n - 1];
+    }
 }

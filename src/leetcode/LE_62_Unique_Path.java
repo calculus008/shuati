@@ -15,22 +15,23 @@ public class LE_62_Unique_Path {
         Solution 1: straight forward with 2D array
         Time : O(m*n),Space : O(m*n)
      **/
-     public static int uniquePaths1(int m, int n) {
-         int[][] a = new int[m][n];
-         a[0][0] = 1;
+    public static int uniquePaths1(int m, int n) {
+        int[][] a = new int[m][n];
+        a[0][0] = 1;
 
-         for(int i=0; i<m; i++) {
-             for(int j=0; j<n; j++) {
-                 if(i==0 || j==0) {
-                     a[i][j] = 1;
-                 } else {
-                     a[i][j]= a[i][j-1] + a[i-1][j];
-                 }
-             }
-         }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    a[i][j] = 1;
+                } else {
+                    a[i][j] = a[i][j - 1] + a[i - 1][j];
+                }
+            }
+        }
 
-         return a[m-1][n-1];
-     }
+        return a[m - 1][n - 1];
+    }
+
     /**
         Solution 2:
         Evole from Solution 1, each time when we update path[i][j], we only need path[i - 1][j] (at the same column) and path[i][j - 1] (at the left column).
