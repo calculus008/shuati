@@ -30,9 +30,11 @@ public class LE_801_Minimum_Swaps_To_Make_Sequences_Increasing {
 
          A, B are arrays with the same length, and that length will be in the range [1, 1000].
          A[i], B[i] are integer values in the range [0, 2000].
-     */
+     **/
 
     /**
+     * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-801-minimum-swaps-to-make-sequences-increasing/
+     *
      * Solution 1
      * DFS
      * Time : O(2 ^ n)
@@ -86,20 +88,20 @@ public class LE_801_Minimum_Swaps_To_Make_Sequences_Increasing {
      * keep[i] : min swaps to make A[0] ~ A[i] and B[0] ~ B[i] strictly increase without swapping at index i (not swap A[i] and B[i])
      * swap[i] : min swaps to make A[0] ~ A[i] and B[0] ~ B[i] strictly increase with swapping at index i (swap A[i] and B[i])
      *
-     * if A[i] > A[i - 1] && B[i] > B[i - 1]
-     * #1.No Swap
-     * keep[i] = keep[i - 1]
+     * A.if A[i] > A[i - 1] && B[i] > B[i - 1]
+     *   #1.No Swap
+     *   keep[i] = keep[i - 1]
      *
-     * #2.Swap both i and i - 1
-     * swap[i] = swap[i - 1] + 1
+     *   #2.Swap both i and i - 1
+     *   swap[i] = swap[i - 1] + 1
      *
-     * if A[i] > B[i - 1] && B[i] > A[i - 1]
-     * #3.Only Swap i
-     * swap[i] = min(swap[i], keep[i - 1] + 1)
+     * B.if A[i] > B[i - 1] && B[i] > A[i - 1]
+     *   #3.Only Swap i
+     *   swap[i] = min(swap[i], keep[i - 1] + 1)
      *
-     * $4.Only Swap i - 1
-     * keep[i] = min(keep[i], swap[i - 1])
-     */
+     *   #4.Only Swap i - 1
+     *   keep[i] = min(keep[i], swap[i - 1])
+     **/
     class Solution2 {
         int res = Integer.MAX_VALUE;
 
