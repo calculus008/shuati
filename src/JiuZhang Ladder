@@ -118,6 +118,11 @@ LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II)
 #Variation of BFS
 LE_847_Shortest_Path_Visiting_All_Nodes
 LE_864_Shortest_Path_To_Get_All_Keys
+LE_815_Bus_Routes
+LE_773_Sliding_Puzzle
+LE_787_Cheapest_Flights_Within_K_Stops
+
+LE_282_Expression_Add_Operators
 
 ====================================================
 

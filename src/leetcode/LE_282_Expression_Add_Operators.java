@@ -93,6 +93,15 @@ public class LE_282_Expression_Add_Operators {
                 return;
             }
 
+            /**
+             * !!!
+             * This for loop is really doing the work of filling "" between digits. For example:
+             *
+             * 1 2 3, it will try in cur with substring():
+             * 1
+             * 12
+             * 123
+             */
             for (int i = pos; i < num.length(); i++) {
                 /**
                  !!! "num.charAt(pos)", 如果开始为"0"而当前是非起始位（012）就不用再往后走了，“0XX”不是合法的数字。
@@ -165,6 +174,7 @@ public class LE_282_Expression_Add_Operators {
             }
 
             for (int i = pos; i < num.length(); i++) {
+                //!!! "=='0'"
                 if (num.charAt(pos) == '0' && i != pos) {
                     break;
                 }

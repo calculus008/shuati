@@ -15,6 +15,12 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
          cheapest price from src to dst with up to k stops.
          If there is no such route, output -1.
 
+         Example 1:
+         Input:
+         n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]
+         src = 0, dst = 2, k = 1
+         Output: 200
+
          Note:
 
          The number of nodes n will be in range [1, 100], with nodes labeled from 0 to n - 1.
