@@ -26,12 +26,12 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
 
          Medium
 
-         Follow up :
+         !!!Follow up :
          如果有一个词典(Dictionary)，要求组成的单词都是词典里的，如何优化?  Trie or Hash
      */
 
     /**
-     * https://zxi.mytechroad.com/blog/searching/leetcode-17-letter-combinations-of-a-phone-number/
+     https://zxi.mytechroad.com/blog/searching/leetcode-17-letter-combinations-of-a-phone-number/
      */
 
     /**
@@ -88,7 +88,11 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
             int x = Character.getNumericValue(digits.charAt(i));
 
             while (res.peek().length() == i) {
-                //using poll (remove from queue), so all intermediate strings will be removed from queue, int end, only the valid results remain
+                /**
+                 * !!!
+                 * using poll (remove from queue), so all intermediate strings will be removed from queue,
+                 * in the end, only the valid results remain
+                 **/
                 String t = res.poll();
                 for (char c : mapping[x].toCharArray()) {
                     res.add(t + c);

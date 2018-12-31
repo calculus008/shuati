@@ -1,5 +1,7 @@
 BFS and DFS
 
+LE_17_Letter_Combinations_Of_A_Phone_Number
+
 LE_46_Permutation
 LE_78_Subsets
 LE_943_Find_The_Shortest_Superstring
@@ -13,3 +15,5 @@ LE_815_Bus_Routes
 LE_773_Sliding_Puzzle
 LE_787_Cheapest_Flights_Within_K_Stops
 LE_282_Expression_Add_Operators
+LE_322_Coin_Change
+LE_752_Open_The_Lock

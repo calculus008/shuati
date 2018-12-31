@@ -83,6 +83,9 @@ LI_894_Pancake_Sorting
 
 4.BFS and Topological Sort
 
+LE_17_Letter_Combinations_Of_A_Phone_Number
+LE_752_Open_The_Lock
+
 LE_200_Number_Of_Islands                     (lint 433)
 LE_305_Number_Of_Islands_II                  (lint 434)  (Union Find)
 LE_102_Binary_Tree_Level_Order_Traversal     (lint 69)
@@ -189,6 +192,8 @@ LI_652_Factorization
 LE_93_Restore_IP_Addresses                                (lint 426)
 LE_22_Generate_Parentheses                                (lint 427)
 LE_301_Remove_Invalid_Parentheses                         (lint 780)   ***
+
+LE_322_Coin_Change
 
 ====================================================
 
