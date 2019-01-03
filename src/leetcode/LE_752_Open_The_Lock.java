@@ -57,7 +57,7 @@ public class LE_752_Open_The_Lock {
      * http://zxi.mytechroad.com/blog/searching/leetcode-752-open-the-lock/
      *
      * Level by level expansion using BFS
-     * Each node can have at most 8 neighbors
+     * Each node can have at most 8 neighbors (max branching factor is 8)
      *
      * Number of max states : "0000" - "9999", 10000
      *

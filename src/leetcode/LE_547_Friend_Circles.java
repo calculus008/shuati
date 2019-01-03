@@ -111,4 +111,34 @@ public class LE_547_Friend_Circles {
             }
         }
     }
+
+    /**
+     * Huahua vsion
+     * http://zxi.mytechroad.com/blog/graph/leetcode-547-friend-circles/
+     *
+     * DFS, without using visited[]
+     *
+     */
+    class Solution {
+        public int findCircleNum(int[][] M) {
+            int n = M.length;
+            if (n == 0) return 0;
+
+            int ans = 0;
+            for (int i = 0; i < n; ++i) {
+                if (M[i][i] == 0) continue;
+                ++ans;
+                dfs(M, i, n);
+            }
+            return ans;
+        }
+
+        private void dfs(int[][] M, int curr, int n) {
+            for (int i = 0; i < n; ++i) {
+                if (M[curr][i] == 0) continue;
+                M[curr][i] = M[i][curr] = 0;
+                dfs(M, i, n);
+            }
+        }
+    }
 }

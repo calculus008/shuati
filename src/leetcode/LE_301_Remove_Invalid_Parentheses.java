@@ -47,7 +47,7 @@ public class LE_301_Remove_Invalid_Parentheses {
                 if (c == '(') {
                     l++;
                 } else if (c == ')') {
-                    if (l == 0) {
+                    if (l == 0) {//!!!
                         r++;
                     } else {
                         l--;
@@ -155,7 +155,7 @@ public class LE_301_Remove_Invalid_Parentheses {
                      * the current s is not changed, so no need to do recovery
                      **/
                     StringBuilder sb = new StringBuilder(s);
-                    sb.deleteCharAt(i);
+                    sb.deleteCharAt(i);//!!!
                     String temp = sb.toString();
 
                     if (c == ')' && right > 0) {
@@ -204,10 +204,10 @@ public class LE_301_Remove_Invalid_Parentheses {
          Space : O((l + r) ^ 2) ~ O(n ^ 2)
 
          Key:
-         1.Find number of unbalanced left and right parenthese, try all possible way to remove them.
+         1.Find number of unbalanced left and right parentheses, try all possible way to remove them.
          2.Pruning:
          A.For consecutive same parentheses, only delete the first one to avoid duplication.
-         B.Delete right parenthese first, then delete left parenthese.
+         B.Delete right parentheses first, then delete left parentheses.
          */
         public List<String> removeInvalidParentheses(String s) {
             List<String> res = new ArrayList<>();
