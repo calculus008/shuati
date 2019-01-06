@@ -29,6 +29,14 @@ public class LE_40_Combination_SUM_II {
         ]
      */
 
+    /**
+     * http://zxi.mytechroad.com/blog/searching/leetcode-40-combination-sum-ii/
+     *
+     * DFS
+     * Time  : O(2 ^ n)
+     * Space : O(k * n)
+     */
+
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
 

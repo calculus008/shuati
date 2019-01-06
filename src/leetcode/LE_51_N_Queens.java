@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class LE_51_N_Queens {
-    /*
+    /**
         Given an integer n, return all distinct solutions to the n-queens puzzle.
 
         Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
@@ -27,7 +27,7 @@ public class LE_51_N_Queens {
           "...Q",
           ".Q.."]
         ]
-     */
+     **/
 
     //Backtracking
     //Time : O(n ^ n),  Space : O(n)

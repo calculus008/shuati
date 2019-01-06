@@ -127,6 +127,7 @@ LE_864_Shortest_Path_To_Get_All_Keys
 LE_815_Bus_Routes
 LE_773_Sliding_Puzzle
 LE_787_Cheapest_Flights_Within_K_Stops
+LE_675_Cut_Off_Trees_For_Golf_Event
 
 LE_282_Expression_Add_Operators
 
@@ -197,6 +198,7 @@ LE_22_Generate_Parentheses                                (lint 427)
 LE_301_Remove_Invalid_Parentheses                         (lint 780)   ***
 
 LE_322_Coin_Change
+LE_967_Numbers_With_Same_Consecutive_Differences
 
 ====================================================
 

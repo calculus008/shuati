@@ -427,6 +427,15 @@ public class LE_749_Contain_Virus {
 
             // need one wall
             if (grid[y][x] == 0) {
+                /**
+                 * Only check visited after checking if current cell is 0,
+                 * if it's 0, put it into next.
+                 *
+                 * We use Set (next) here to avoid getting duplicate cells
+                 *
+                 * So for 0 cell, walls increases by 1 each time it is accessed.
+                 * It also adds to Set (next) each time, but Set makes it unique.
+                 */
                 walls++;
                 next.add(key);
 
@@ -438,6 +447,10 @@ public class LE_749_Contain_Virus {
                 return;
             }
 
+            /**
+             * By logic, visited checking only happens after checking 0 value above.
+             * In other words, it only works for none-zero cell.
+             */
             if (visited[key] == 1) {
                 return;
             }

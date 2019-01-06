@@ -51,7 +51,7 @@ public class LE_127_Word_Ladder {
      *
      * BFS
      *
-     * Time  : O(n*26^l) -> O(n*26^l/2), l = len(word), n=|wordList|
+     * Time  : O(n*26^l) -> O(n*26^l/2), l = length of solution, n=|wordList|
      * Space : O(n)
      */
 
@@ -216,7 +216,7 @@ public class LE_127_Word_Ladder {
         start.add(beginWord);
         end.add(endWord);
 
-        while (!start.isEmpty() && !end.isEmpty()) {
+        while (!start.isEmpty() && !end.isEmpty()) {//!!!
             length++;
 
             //use the samller set, balance the sets on 2 ends
@@ -236,8 +236,11 @@ public class LE_127_Word_Ladder {
                     for (char c = 'a'; c <= 'z'; c++) {
                         wordArray[i] = c;
                         String str = String.valueOf(wordArray);
-                        if (end.contains(str))
+
+                        if (end.contains(str)) {
                             return length + 1;
+                        }
+
                         if (wordList.contains(str)) {
                             next.add(str);
                             wordList.remove(str);
@@ -247,7 +250,7 @@ public class LE_127_Word_Ladder {
                 }
             }
 
-            start = next;
+            start = next;//!!!
             // Set<String> temp1 = new HashSet<>();
             // temp1 = start;
             // start = next;
