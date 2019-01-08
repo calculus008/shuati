@@ -3,7 +3,7 @@ package leetcode;
 /**
  * Created by yuank on 4/29/18.
  */
-public interface LE_304_Range_Sum_Query_2D_Immutable {
+public class LE_304_Range_Sum_Query_2D_Immutable {
     /**
          Given a 2D matrix matrix, find the sum of the elements inside the rectangle defined by its upper
          left corner (row1, col1) and lower right corner (row2, col2).

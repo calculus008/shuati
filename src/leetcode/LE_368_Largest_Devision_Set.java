@@ -7,12 +7,15 @@ import java.util.List;
 /**
  * Created by yuank on 2/2/18.
  */
-//#368
-//Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0.
-//
-//        If there are multiple solutions, return any subset is fine.
 
-public class LargestDevisionSet {
+/**
+  Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj)
+  of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0.
+
+  If there are multiple solutions, return any subset is fine.
+ **/
+
+public class LE_368_Largest_Devision_Set {
 
     public static List<Integer> largestDivisibleSubset(int[] nums) {
         int n = nums.length;

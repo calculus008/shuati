@@ -52,6 +52,14 @@ public class LE_943_Find_The_Shortest_Superstring {
             int n = A.length;
             cost = new int[n][n];
             minPath = new int[n];
+
+            /**
+             * !!!
+             * Must set to MAX for strong pruning in dfs() :
+             * if (curLen >= minLen) {
+             *     return;
+             * }
+             */
             minLen = Integer.MAX_VALUE;
 
             /**
@@ -97,6 +105,9 @@ public class LE_943_Find_The_Shortest_Superstring {
             return sb.toString();
         }
 
+        /**
+         * path[] is int, it only stores the index of the String in A[] that on the path
+         */
         private void dfs(String[] A, int[] path, int pos, int curLen, boolean[] used) {
             if (curLen >= minLen) {
                 return;
@@ -121,10 +132,16 @@ public class LE_943_Find_The_Shortest_Superstring {
 
                 path[pos] = i;
                 used[i] = true;
+
                 dfs(A, path, pos + 1,
                         pos == 0 ? A[i].length() : curLen + cost[path[pos - 1]][i],
                         used);
 
+                /**
+                 * As for path[pos], its value will be set in each for iteration,
+                 * therefore, we don't need to set it back to its previous value,
+                 * as other backtracking problem does.
+                 */
                 used[i] = false;
             }
         }
