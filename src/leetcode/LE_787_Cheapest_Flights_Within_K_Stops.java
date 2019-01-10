@@ -35,6 +35,8 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
 
     /**
      * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-787-cheapest-flights-within-k-stops/
+     *
+     * Single source, single destination, lowest cost within K steps
      */
 
     /**
@@ -58,13 +60,13 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
         int res = Integer.MAX_VALUE;
 
         public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
-            Map<Integer, List<Pair>> map = new HashMap<>();
+            //build DIRECTED graph
+            Map<Integer, List<Pair>> graph = new HashMap<>();
             for (int[] flight : flights) {
-                if (!map.containsKey(flight[0])) {
-                    System.out.println("add key " + flight[0]);
-                    map.put(flight[0], new ArrayList<Pair>());
+                if (!graph.containsKey(flight[0])) {
+                    graph.put(flight[0], new ArrayList<Pair>());
                 }
-                map.get(flight[0]).add(new Pair(flight[1], flight[2]));
+                graph.get(flight[0]).add(new Pair(flight[1], flight[2]));
             }
 
             boolean[] visited = new boolean[n];
@@ -74,12 +76,12 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
              * "K + 1" : with K stops, total number of steps is K + 1,
              * "0" : start cost is 0
              */
-            helper(src, dst, K + 1, 0, visited, map);
+            helper(src, dst, K + 1, 0, visited, graph);
 
             return res == Integer.MAX_VALUE ? -1 : res;
         }
 
-        private void helper(int src, int dst, int k, int cost, boolean[] visited, Map<Integer, List<Pair>> map) {
+        private void helper(int src, int dst, int k, int cost, boolean[] visited, Map<Integer, List<Pair>> graph) {
             if (src == dst) {
                 res = cost;
                 return;
@@ -93,13 +95,13 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
             }
 
             /**
-             * !!! src does not exist as key in map
+             * !!! src does not exist as key in graph
              */
-            if (map.get(src) == null) {
+            if (graph.get(src) == null) {
                 return;
             }
 
-            for (Pair p : map.get(src)) {
+            for (Pair p : graph.get(src)) {
                 if (visited[p.dst]) {
                     continue;
                 }
@@ -112,7 +114,7 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
                 }
 
                 visited[p.dst] = true;
-                helper(p.dst, dst, k - 1, cost + p.cost, visited, map);
+                helper(p.dst, dst, k - 1, cost + p.cost, visited, graph);
                 visited[p.dst] = false;
             }
 
@@ -138,13 +140,13 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
 
         int res = Integer.MAX_VALUE;
         public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
-            Map<Integer, List<Pair>> map = new HashMap<>();
+            //build DIRECTED graph
+            Map<Integer, List<Pair>> graph = new HashMap<>();
             for (int[] flight : flights) {
-                if (!map.containsKey(flight[0])) {
-                    System.out.println("add key " + flight[0]);
-                    map.put(flight[0], new ArrayList<Pair>());
+                if (!graph.containsKey(flight[0])) {
+                    graph.put(flight[0], new ArrayList<Pair>());
                 }
-                map.get(flight[0]).add(new Pair(flight[1], flight[2]));
+                graph.get(flight[0]).add(new Pair(flight[1], flight[2]));
             }
 
             int steps = 0;
@@ -153,21 +155,22 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
 
             while (!q.isEmpty()) {
                 int size = q.size();
+
                 for (int i = 0; i < size; i++) {
                     Pair cur = q.poll();
                     int cost = cur.cost;
                     int curDst = cur.dst;
 
-                    if (dst == curDst) {
+                    if (dst == curDst) {//we get to the destination
                         res = Math.min(res, cost);
                     }
 
-                    if (!map.containsKey(curDst)) {
+                    if (!graph.containsKey(curDst)) {
                         continue;
                     }
 
-                    for (Pair p : map.get(curDst)) {
-                        if (cost + p.cost > res) {
+                    for (Pair p : graph.get(curDst)) {
+                        if (cost + p.cost > res) {//strong pruning
                             continue;
                         }
 
@@ -198,6 +201,7 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
      */
     class Solution3 {
         public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+            //"with nodes labeled from 0 to n - 1"
             int[][] dp = new int[K + 2][n];
 
             //!!!

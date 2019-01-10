@@ -80,3 +80,7 @@ LE_943_Find_The_Shortest_Superstring
 LE_139_Word_Break
 LE_140_Word_Break_II
 LI_683_Word_Break_III
+
+#Bellman-Ford (DP)
+LE_787_Cheapest_Flights_Within_K_Stops
+LE_743_Network_Delay_Time

@@ -58,7 +58,7 @@ public class LE_863_All_Nodes_Distance_K_In_Binary_Tree {
 
         /**
          * !!!
-         * Build a graph (adjacent list) from binary tree.
+         * Build a UNDIRECTED graph (adjacent list) from binary tree.
          *
          * For binary tree, each node can have at most 3 neighbors.
          * We can go top down.
