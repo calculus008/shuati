@@ -5,7 +5,8 @@ import java.util.Queue;
 
 public class LE_864_Shortest_Path_To_Get_All_Keys {
     /**
-         We are given a 2-dimensional grid. "." is an empty cell, "#" is a wall, "@" is the starting point, ("a", "b", ...) are keys,
+         We are given a 2-dimensional grid. "." is an empty cell, "#" is a wall,
+         "@" is the starting point, ("a", "b", ...) are keys,
          and ("A", "B", ...) are locks.
 
          We start at the starting point, and one move consists of walking one space in one of the 4 cardinal directions.

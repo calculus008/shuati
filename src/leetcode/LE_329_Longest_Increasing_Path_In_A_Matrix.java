@@ -40,8 +40,8 @@ public class LE_329_Longest_Increasing_Path_In_A_Matrix {
          Time and Space : O(m * n)
 
          Each vertex/cell will be calculated once and only once, and each edge will be visited once and only once.
-         The total time complexity is then O(V+E)O(V+E). VV is the total number of vertices and EE is the total number of edges.
-         In our problem, O(V) = O(mn)O(V)=O(mn), O(E) = O(4V) = O(mn)O(E)=O(4V)=O(mn).
+         The total time complexity is then O(V+E). V is the total number of vertices and E is the total number of edges.
+         In our problem, O(V) = O(mn), O(E) = O(4V) = O(mn)O(E)=O(4V)=O(mn).
 
          14 ms
      **/

@@ -1,6 +1,20 @@
 LeetCode 964. Least Operators to Express Number
 LeetCode 959. Regions Cut By Slashes
+LeetCode 882. Reachable Nodes In Subdivided Graph
+Leetocde 863. All Nodes Distance K in Binary Tree
 
 LE_943_Find_The_Shortest_Superstring
 LE_886_Possible_Bipartition
 LE_785_Is_Graph_Bipartite
+
+LE_934_Shortest_Bridge
+
+#Need to find way to represent a unique state for avoiding duplicate path in BFS
+LE_864_Shortest_Path_To_Get_All_Keys
+LE_847_Shortest_Path_Visiting_All_Nodes
+
+LE_841_Keys_And_Rooms
+LE_329_Longest_Increasing_Path_In_A_Matrix
+LE_827_Making_A_Large_Island
+LE_863_All_Nodes_Distance_K_In_Binary_Tree
+LE_817_Linked_List_Components

@@ -1,4 +1,4 @@
-package leetcode;
+package common;
 
 /**
  * Created by yuank on 3/8/18.

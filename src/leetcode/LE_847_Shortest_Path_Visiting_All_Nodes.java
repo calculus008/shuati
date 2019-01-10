@@ -26,6 +26,11 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
      Output: 4
      Explanation: One possible path is [0,1,4,2,3]
 
+     Note:
+
+     1 <= graph.length <= 12
+     0 <= graph[i].length < graph.length
+
      Hard
      **/
 
@@ -34,6 +39,30 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
      * http://zxi.mytechroad.com/blog/graph/leetcode-847-shortest-path-visiting-all-nodes/
      * Time  : O(n * 2 ^ n)
      * Space : O(n * 2 ^ n)
+     *
+     * Keys
+     * Shortest path -> BFS, but it has some important variations for this problem :
+     *
+     * 1. As problem requires - "you may revisit nodes multiple times, and you may reuse edges",
+     *    it means you may revisit the same node many times. Therefore we can't just put a node
+     *    into visited[] and filter it. visited should capture the unique state of the BFS traversal,
+     *    which has two elements - current node id and all nodes that have been visited by now.
+     *    When this unique state re-appears in BFS, we can tell now we come back to a state that already
+     *    happened before (visiting the same node and with the same nodes that have been visited),
+     *    so we don't need to continue.
+     *
+     * 2. Therefore, we use class Pair to save the unique state. Normally, for visited nodes, we can
+     *    use a set, here, since we know, "1 <= graph.length <= 12", we can use the trick of bit operation
+     *    to represent visited node in a single int value.
+     *
+     * 3. Another bit operation trick : for visited set, we combine node id and visited integer into a single
+     *    Integer and use it as the key in the set.
+     *
+     * 4. Pop each Pair out of queue, first process, then expand to next level. In other words, all processing
+     *    of Pair happens after it is popped out of the queue.
+     *
+     * 5. Init queue by put all nodes into the queue, since we can start any of those nodes.
+     *    Similar to LE_934_Shortest_Bridge
      */
 
     class Solution1 {
@@ -69,12 +98,13 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
                         return steps;
                     }
 
+                    //!!! #3
                     int key = (n << 16) | state;
                     if (visited.contains(key)) {//prevent duplicate path
                         continue;
                     }
-
                     visited.add(key);
+
                     for (int next : graph[n])
                         q.offer(new Pair(next, state | (1 << next)));
                 }
@@ -88,11 +118,15 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
     /**
      * Leetcode version
      * https://leetcode.com/problems/shortest-path-visiting-all-nodes/discuss/135809/Fast-BFS-Solution-(46ms)-Clear-Detailed-Explanation-Included
-     * <p>
+     *
      * BFS
-     * <p>
-     * Time  : O(n*2^n)
-     * Space : O(n*2^n)
+     *
+     * Time  : O(n * 2 ^ n)
+     * Space : O(n * 2 ^ n)
+     *
+     * This solution uses the same BFS algorithm as Solution1, difference :
+     * 1.Keep steps in Tuple class, instead of maintaining "steps" variable.
+     * 2.Notice we must implement equal() and hashCode() in class Tuple
      */
 
     class Solution2 {
@@ -100,6 +134,7 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
         public int shortestPathLength(int[][] graph) {
 
             int N = graph.length;
+            int target = (1 << N) - 1;
 
             Queue<Tuple> queue = new LinkedList<>();
             Set<Tuple> set = new HashSet<>();
@@ -118,18 +153,18 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
                 Tuple curr = queue.remove();
 
                 /**
-                 * At each step, we remove element from the queue and see if we have covered all 12 nodes in our bitMask.
+                 * At each step, we remove element from the queue and see if we have covered all 12 nodes in our state.
                  * If we cover all nodes, we return the cost of the path immediately. Since we are using BFS,
-                 * this is guranteed to be path with the lowest cost.
+                 * this is guaranteed to be path with the lowest cost.
                  */
-                if (curr.bitMask == (1 << N) - 1) {
+                if (curr.state == target) {
                     return curr.cost - 1;//!!!
                 } else {
                     int[] neighbors = graph[curr.curr];
 
                     for (int v : neighbors) {
-                        int bitMask = curr.bitMask;
-                        bitMask = bitMask | (1 << v);
+                        int state = curr.state;
+                        state = state | (1 << v);
 
                         /**
                          * In order to prevent duplicate paths from being visited, we use a Set<Tuple>
@@ -137,14 +172,15 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
                          * need the cost here, I set cost to 0 for elements stored in Set. You could
                          * also set the actual cost value here, it wouldn't make a difference.
                          */
-                        Tuple t = new Tuple(bitMask, v, 0);
+                        Tuple t = new Tuple(state, v, 0);
                         if (!set.contains(t)) {
-                            queue.add(new Tuple(bitMask, v, curr.cost + 1));
+                            queue.add(new Tuple(state, v, curr.cost + 1));
                             set.add(t);
                         }
                     }
                 }
             }
+
             return -1;
         }
     }
@@ -152,10 +188,10 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
     /**
      * In order to represent a path, I used a combination of 3 variables:
      *
-     * int bitMask:
+     * int state:
      * mask of all the nodes we visited so far: 0 -> not visited,
      * 1 -> visited (Originally this was Set<Integer>of all nodes we visited so far,
-     * but since the Solution TLE and N <= 12, it turns out we can use a bitMask and 32 bits
+     * but since the Solution TLE and N <= 12, it turns out we can use a state and 32 bits
      * total in an Integer can cover all the possibilities. This is a small speed up optimization.)
      *
      * int curr:
@@ -167,23 +203,23 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
      * Each path taken will have a unique combination of these 3 variables.
      */
     class Tuple {
-        int bitMask;
+        int state;
         int curr;
         int cost;
 
         public Tuple(int bit, int n, int c) {
-            bitMask = bit;
+            state = bit;
             curr = n;
             cost = c;
         }
 
         public boolean equals(Object o) {//!!!
             Tuple p = (Tuple) o;
-            return bitMask == p.bitMask && curr == p.curr && cost == p.cost;
+            return state == p.state && curr == p.curr && cost == p.cost;
         }
 
         public int hashCode() {//!!!
-            return 1331 * bitMask + 7193 * curr + 727 * cost;
+            return 1331 * state + 7193 * curr + 727 * cost;
         }
     }
 }

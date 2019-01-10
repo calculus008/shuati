@@ -1,5 +1,7 @@
 package leetcode;
 
+import common.TreeNode;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -33,14 +35,14 @@ public class LE_94_Binary_Tree_Inorder_Traversal {
 
     //Recursive version
     //Time and Space : O(n)
-    public static List<Integer> inorderTraversal1(leetcode.TreeNode root) {
+    public static List<Integer> inorderTraversal1(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
         helper(root, res);
         return res;
     }
 
-    public static void helper(leetcode.TreeNode root, List<Integer> res) {
+    public static void helper(TreeNode root, List<Integer> res) {
         if (root == null) return;
         helper(root.left, res);
         res.add(root.val);
@@ -49,7 +51,7 @@ public class LE_94_Binary_Tree_Inorder_Traversal {
 
     //Iterative Version
     //Time and Space : O(n)
-    public static List<Integer> inorderTraversal(leetcode.TreeNode root) {
+    public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
 

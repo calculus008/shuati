@@ -1,6 +1,6 @@
 package lintcode;
 
-import leetcode.TreeNode;
+import common.TreeNode;
 
 /**
  * Created by yuank on 7/25/18.

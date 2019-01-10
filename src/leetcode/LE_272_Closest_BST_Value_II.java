@@ -1,5 +1,7 @@
 package leetcode;
 
+import common.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -93,7 +95,7 @@ public class LE_272_Closest_BST_Value_II {
      */
     public List<Integer> closestKValues2(TreeNode root, double target, int k) {
         List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> pred = new Stack<>(); //!!! "<leetcode.TreeNode>"
+        Stack<TreeNode> pred = new Stack<>(); //!!! "<common.TreeNode>"
         Stack<TreeNode> succ = new Stack<>();
         initPred(root, target, pred);
         initSucc(root, target, succ);

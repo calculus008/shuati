@@ -1,5 +1,7 @@
 package leetcode;
 
+import common.TreeNode;
+
 /**
  * Created by yuank on 3/14/18.
  */

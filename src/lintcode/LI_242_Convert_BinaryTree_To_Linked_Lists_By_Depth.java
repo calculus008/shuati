@@ -1,7 +1,7 @@
 package lintcode;
 
 import common.ListNode;
-import leetcode.TreeNode;
+import common.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
