@@ -37,14 +37,13 @@ public class LE_734_Sentence_Similarity {
 
     /**
      * Time and Space : O(n)
-     * @param words1
-     * @param words2
-     * @param pairs
-     * @return
      */
     public boolean areSentencesSimilar(String[] words1, String[] words2, String[][] pairs) {
         if (words1.length != words2.length) return false;
 
+        /**
+         * Build undirected graph
+         */
         Map<String, Set<String>> map = new HashMap<>();
         for (String[] pair : pairs) {
             if (!map.containsKey(pair[0])) {

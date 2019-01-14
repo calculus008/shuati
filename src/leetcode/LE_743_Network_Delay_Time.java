@@ -132,6 +132,7 @@ public class LE_743_Network_Delay_Time {
      * https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
      *
      * Heap implementation
+     * Single source, all destinations
      *
      * Time  : O(NlogN + E)
      * Space : O(N + E)
@@ -171,12 +172,14 @@ public class LE_743_Network_Delay_Time {
                 /**
                  * process the node with the shortest distance from source
                  */
-                if (graph.containsKey(node))
+                if (graph.containsKey(node)) {
                     for (int[] edge : graph.get(node)) {
                         int nei = edge[0], d2 = edge[1];
-                        if (!dist.containsKey(nei))
+                        if (!dist.containsKey(nei)) {
                             heap.offer(new int[]{d + d2, nei});
+                        }
                     }
+                }
             }
 
             /**

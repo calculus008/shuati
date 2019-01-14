@@ -45,52 +45,67 @@ public class LE_737_Sentence_Similarity_II {
      */
 
     /**
+     * http://zxi.mytechroad.com/blog/hashtable/leetcode-737-sentence-similarity-ii/
+     *
      * DFS
      *
      * Time complexity: O(|Pairs| * |words1|)
      * Space complexity: O(|Pairs|)
-     * @param words1
-     * @param words2
-     * @param pairs
-     * @return
      */
 
     public boolean areSentencesSimilarTwoDFS(String[] words1, String[] words2, String[][] pairs) {
-        if(words1.length!=words2.length) return false;
+        if (words1.length != words2.length) return false;
 
+        /**
+         * Build undirected graph
+         */
         Map<String, Set<String>> map = new HashMap<>();
-        for(String[] pair : pairs) {
-            if(!map.containsKey(pair[0])) {
+        for (String[] pair : pairs) {
+            if (!map.containsKey(pair[0])) {
                 map.put(pair[0], new HashSet<>());
             }
             map.get(pair[0]).add(pair[1]);
 
-            if(!map.containsKey(pair[1])) {
+            if (!map.containsKey(pair[1])) {
                 map.put(pair[1], new HashSet<>());
             }
             map.get(pair[1]).add(pair[0]);
         }
 
         Set<String> visited = new HashSet<String>();
-        for(int i=0; i<words1.length; i++) {
-            if(words1[i].equals(words2[i])) continue;
+        for (int i = 0; i < words1.length; i++) {
+            if (words1[i].equals(words2[i])) {
+                continue;
+            }
 
-            if(!map.containsKey(words1[i])) return false;
+            if (!map.containsKey(words1[i])) {
+                return false;
+            }
 
             visited.clear();
-            if(!dfs(words1[i], words2[i], map, visited)) return false;
+            if (!dfs(words1[i], words2[i], map, visited)) {
+                return false;
+            }
         }
 
         return true;
     }
 
     public boolean dfs(String s1, String s2, Map<String, Set<String>> map, Set<String> visited) {
-        if(s1.equals(s2)) return true;
+        if (s1.equals(s2)) {
+            return true;
+        }
+
         visited.add(s1);
 
-        for(String s : map.get(s1)) {
-            if(visited.contains(s)) continue;
-            if(dfs(s, s2, map, visited)) return true;
+        for (String s : map.get(s1)) {
+            if (visited.contains(s)) {
+                continue;
+            }
+
+            if (dfs(s, s2, map, visited)) {
+                return true;
+            }
         }
 
         return false;
@@ -103,7 +118,9 @@ public class LE_737_Sentence_Similarity_II {
      *
      */
     public boolean areSentencesSimilarUnionFind(String[] words1, String[] words2, String[][] pairs) {
-        if (words1 == null || words2 == null || pairs == null || words1.length != words2.length) return false;
+        if (words1 == null || words2 == null || pairs == null || words1.length != words2.length) {
+            return false;
+        }
 
         UnionFindSetString ufs = new UnionFindSetString();
         for (String[] pair : pairs) {
@@ -111,7 +128,9 @@ public class LE_737_Sentence_Similarity_II {
         }
 
         for (int i = 0; i < words1.length; i++) {
-            if (words1[i].equals(words2[i])) continue;
+            if (words1[i].equals(words2[i])) {
+                continue;
+            }
 
             if(!ufs.find(words1[i], false).equals(ufs.find(words2[i], false))) {
                 return false;

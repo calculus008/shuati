@@ -13,6 +13,7 @@ public class LE_823_Binary_Trees_With_Factors {
          We make a binary tree using these integers and each number may be used for any number of times.
 
          Each non-leaf node's value should be equal to the product of the values of it's children.
+         (根结点的值需为子节点值的乘积）
 
          How many binary trees can we make?  Return the answer modulo 10 ** 9 + 7.
 
@@ -43,7 +44,7 @@ public class LE_823_Binary_Trees_With_Factors {
      *
      * 1.For a, b,c in A, c = a * b
      * dp(c) = number of binary trees rooted at c
-     * dp(c) = sum (dp(a) * dp(b))
+     * dp(c) = sum (dp(a) * dp(b)) (a, b are factors for c and a, b, c should all be in A)
      * answer is sum(dp(c))
      *
      * 2.Since root value is the product of its 2 children, from bottom up, root value increases.
@@ -51,6 +52,9 @@ public class LE_823_Binary_Trees_With_Factors {
      *
      * 3.Here can't use array as structure to record sub problems, need to use a HashMap.
      * root value is key and number of binary trees rooted with key is value.
+     *
+     * Time  : O(n ^ 2)
+     * Space : O(n)
      */
 
     public static int numFactoredBinaryTrees(int[] A) {

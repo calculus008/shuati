@@ -38,9 +38,18 @@ public class LE_98_Validate_BST {
 
     //!!! pass min and max as object Integer
     public static boolean helper(TreeNode root, Integer min, Integer max) {
-        if (root == null) return true;
-        if (min != null && root.val <= min) return false;
-        if (max != null && root.val >= max) return false;
+        if (root == null) {
+            return true;
+        }
+
+        if (min != null && root.val <= min) {
+            return false;
+        }
+
+        if (max != null && root.val >= max) {
+            return false;
+        }
+
         return (helper(root.left, min, root.val) && helper(root.right, root.val, max));
     }
 
@@ -67,6 +76,10 @@ public class LE_98_Validate_BST {
     /**
      * Solution 3
      * 采用非递归（Non-recursion / Iteration）版本的遍历法, 时间复杂度O(n)
+     *
+     * Explicitly use Stack to simulate recursion, use BST property that inorder output is sorted.
+     *
+     * This is the iterative version of inorder traversal.
      */
     public boolean isValidBST3_JiuZhang(TreeNode root) {
         Stack<TreeNode> stack = new Stack<>();

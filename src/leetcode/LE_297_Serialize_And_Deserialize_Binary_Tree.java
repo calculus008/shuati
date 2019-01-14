@@ -82,7 +82,7 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
          * str array gets the token, queue ensures tree structure
          */
         for (int i = 1; i < str.length; i++) {
-            TreeNode cur = queue.poll();
+            TreeNode cur = queue.poll();//!!!
             if (!str[i].equals("null")) {
                 cur.left = new TreeNode(Integer.parseInt(str[i]));
                 queue.offer(cur.left);
@@ -100,7 +100,7 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
     }
 
     /**
-     * Solution 2, recursion DFS, preorder
+     * Solution 2, recursion DFS, pre-order
      */
 
     public String serialize1(TreeNode root) {
@@ -151,6 +151,77 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
         return node;
     }
 
+
+    /**
+     * Another try with BFS, find out that using "null" is not a random decision,
+     * for "Integer.parseInt()", "null"
+     */
+    public class Solution {
+
+        // Encodes a tree to a single string.
+        public String serialize(TreeNode root) {
+            StringBuilder sb = new StringBuilder();
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
+
+            while (!q.isEmpty()) {
+                TreeNode cur = q.poll();
+
+                if (cur == null) {
+                    sb.append("#").append(" ");
+                    continue;
+                }
+
+                sb.append(cur.val).append(" ");
+
+                q.offer(cur.left);
+                q.offer(cur.right);
+            }
+
+            return sb.toString();
+        }
+
+
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            if ("".equals(data)) {
+                return null;
+            }
+
+            String[] tokens = data.split(" ");
+            Queue<TreeNode> q = new LinkedList<>();
+
+            /**
+             * !!! Must check if root is null
+             */
+            if("#".equals(tokens[0])) {
+                return null;
+            }
+
+            TreeNode root = new TreeNode(Integer.parseInt(tokens[0]));
+            q.offer(root);
+
+            for (int i = 1; i < tokens.length; i++) {
+                TreeNode cur = q.poll();
+                if (!tokens[i].equals("#")) {
+                    TreeNode l = new TreeNode(Integer.parseInt(tokens[i]));
+                    cur.left = l;
+                    q.offer(l);
+                }
+
+                i++;
+
+                if (!tokens[i].equals("#")) {
+                    TreeNode r = new TreeNode(Integer.parseInt(tokens[i]));
+                    cur.right = r;
+                    q.offer(r);
+                }
+            }
+
+            return root;
+        }
+
+    }
     /**
      * syntax error made:
      *
