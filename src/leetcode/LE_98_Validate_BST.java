@@ -38,6 +38,9 @@ public class LE_98_Validate_BST {
 
     //!!! pass min and max as object Integer
     public static boolean helper(TreeNode root, Integer min, Integer max) {
+        /**
+         * !!!
+         */
         if (root == null) {
             return true;
         }

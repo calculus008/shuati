@@ -10,7 +10,7 @@ import java.util.Stack;
  * Created by yuank on 3/18/18.
  */
 public class LE_144_Binary_Tree_Preorder_Traversal {
-    /*
+    /**
         Given a binary tree, return the preorder traversal of its nodes' values.
 
         For example:
@@ -57,7 +57,7 @@ public class LE_144_Binary_Tree_Preorder_Traversal {
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             res.add(cur.val);
-            if (cur.right != null) stack.push(cur.right);
+            if (cur.right != null) stack.push(cur.right);//!!! right, it's a Stack
             if (cur.left != null) stack.push(cur.left);
         }
         return res;

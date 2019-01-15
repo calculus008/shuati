@@ -18,9 +18,10 @@ public class LE_298_Binary_Tree_Longest_Consecutive_Sequence {
            3
           / \
          2   4
-         \
-         5
+              \
+              5
          Longest consecutive sequence path is 3-4-5, so return 3.
+
              2
              \
              3
@@ -28,7 +29,7 @@ public class LE_298_Binary_Tree_Longest_Consecutive_Sequence {
            2
           /
          1
-         Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
+         Longest consecutive sequence path is 2-3, not3-2-1, so return 2.
 
          Medium
      */
@@ -45,13 +46,14 @@ public class LE_298_Binary_Tree_Longest_Consecutive_Sequence {
     /**
      *
      * @param root
-     * @param curMax     Current max consecutive sequence length, if not consectutive,
+     * @param curMax  Current max consecutive sequence length, if not consectutive,
      *                need to start from current node, so max set to 1
      * @param target  If consecutive, target should be current node val plus 1
      */
     public void helper(TreeNode root, int curMax, int target) {
         if (root == null) return;
 
+        //!!!
         if (target == root.val) {
             curMax++;
         } else {

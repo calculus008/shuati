@@ -10,7 +10,7 @@ import java.util.Stack;
  * Created by yuank on 3/18/18.
  */
 public class LE_145_Binary_Tree_Postorder_Traversal {
-    /*
+    /**
         Given a binary tree, return the postorder traversal of its nodes' values.
 
         For example:
@@ -58,7 +58,14 @@ public class LE_145_Binary_Tree_Postorder_Traversal {
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
+            /**
+             * different from Preorder iterative version, add at index 0.
+             */
             res.add(0, cur.val);
+            /**
+             * It's a Stack, push in left first, then it will be popped out after right,
+             * so output sequence is postorder
+             */
             if (cur.left != null) stack.push(cur.left);
             if (cur.right != null) stack.push(cur.right);
         }

@@ -58,10 +58,16 @@ public class LE_865_Smallest_Subtree_With_All_The_Deepest_Nodes {
 
         private Pair helper(TreeNode root) {
             if (root == null) {
+                /**
+                 * "new Pair(-1, null)"
+                 */
                 return new Pair(-1, null);
             }
 
             if (root.left == null && root.right == null) {
+                /**
+                 * "new Pair(1, root)"
+                 */
                 return new Pair(1, root);
             }
 

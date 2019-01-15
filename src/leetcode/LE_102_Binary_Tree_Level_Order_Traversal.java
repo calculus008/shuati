@@ -11,8 +11,9 @@ import java.util.Queue;
  * Created by yuank on 3/11/18.
  */
 public class LE_102_Binary_Tree_Level_Order_Traversal {
-    /*
-        Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+    /**
+        Given a binary tree, return the level order traversal of its nodes' values.
+        (ie, from left to right, level by level).
 
         For example:
         Given binary tree [3,9,20,null,null,15,7],
@@ -31,7 +32,7 @@ public class LE_102_Binary_Tree_Level_Order_Traversal {
 
     //Time and Space : O(n)
 
-    //Solution 1 : use Queue and recurrsion
+    //Solution 1 : use Queue and recursion
     public static List<List<Integer>> levelOrderBottom1(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) return res;

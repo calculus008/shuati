@@ -30,6 +30,11 @@ public class LE_404_Sum_Of_Left_Leaves {
                 return 0;
             }
 
+            /**
+             * !!!
+             * not only look at current node, but also two levels down (its left child and children of its left child)
+             * to tell if it is a leave node.
+             */
             if (root.left != null && root.left.left == null && root.left.right == null) {
                 /**
                  * !!!

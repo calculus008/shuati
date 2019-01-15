@@ -6,7 +6,7 @@ import common.TreeNode;
  * Created by yuank on 3/9/18.
  */
 public class LE_100_Same_Tree {
-    /*
+    /**
         Given two binary trees, write a function to check if they are the same or not.
 
         Two binary trees are considered the same if they are structurally identical and the nodes have the same value.

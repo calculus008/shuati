@@ -6,12 +6,12 @@ import common.TreeNode;
  * Created by yuank on 3/15/18.
  */
 public class LE_129_Sum_Root_To_Leaf_Numbers {
-    /*
+    /**
         Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
 
         An example is the root-to-leaf path 1->2->3 which represents the number 123.
 
-        Find the total sum of all root-to-leaf numbers.
+        Find the TOTAL SUM of all root-to-leaf numbers.
 
         For example,
 
@@ -27,7 +27,7 @@ public class LE_129_Sum_Root_To_Leaf_Numbers {
     //Time and Space : O(n)
 
     //Solution 1
-    int res;
+    int res;//!!!
     public int sumNumbers1(TreeNode root) {
         if (root == null) return 0;
         helper(root, 0);
@@ -57,6 +57,11 @@ public class LE_129_Sum_Root_To_Leaf_Numbers {
             return cur * 10 + root.val;
         }
 
+        /**
+         * !!!
+         *helper(left) + helper(right)
+         * 真正的sum是发生在这里
+         */
         return helper2(root.left, cur * 10 + root.val) + helper2(root.right, cur * 10 + root.val);
     }
 }

@@ -6,7 +6,7 @@ import common.TreeNode;
  * Created by yuank on 3/11/18.
  */
 public class LE_110_Balanced_Binary_Tree {
-    /*
+    /**
         Given a binary tree, determine if it is height-balanced.
 
         For this problem, a height-balanced binary tree is defined as:

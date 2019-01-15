@@ -6,7 +6,7 @@ import common.TreeNode;
  * Created by yuank on 3/11/18.
  */
 public class LE_101_Symmetric_Tree {
-    /*
+    /**
         Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
 
         For example, this binary tree [1,2,2,3,4,4,3] is symmetric:

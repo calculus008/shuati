@@ -14,8 +14,8 @@ public class LE_257_Binary_Tree_Paths {
 
          For example, given the following binary tree:
 
-         1
-         /   \
+            1
+          /   \
          2     3
          \
          5
@@ -36,6 +36,9 @@ public class LE_257_Binary_Tree_Paths {
     }
 
     public void helper(TreeNode root, List<String> res, String path) {
+        /**
+         * Base case, already reach end of the path
+         */
         if (root.left == null && root.right == null) {
             res.add(path + root.val);
             return;
