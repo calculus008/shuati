@@ -14,7 +14,6 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
          contain at least one node and does not need to go through the root.
 
          Example 1:
-
          Input: [1,2,3]
 
            1
@@ -22,8 +21,8 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
          2   3
 
          Output: 6
-         Example 2:
 
+         Example 2:
          Input: [-10,9,20,null,null,15,7]
 
              -10
@@ -39,6 +38,8 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
 
 
     /**
+     *  Similar Problem : LE_687_Longest_Univalue_Path
+
         Postorder
                  3
                 / \
@@ -58,7 +59,6 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
             Compare with LI_475_Binary_Tree_Maximum_Path_Sum_II (path only start from root)
     */
 
-
         //!!! can't make it res = 0
         int res;
 
@@ -72,6 +72,11 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
             return res;
         }
 
+        /**
+         * For return value of this helper, it is the length of the path that
+         * goes through the input root. It is NOT the final answer since the path
+         * does not have to go through any node and can go from right branch to left branch
+         */
         public int helper(TreeNode root) {
             if (root == null) return 0;
 
@@ -94,6 +99,8 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
 
             /**
              * !!!因为要找路径上的sum, 所以只能挑左和右中较大的值，再加上root.val
+             * In other words, the returned value here is just part of the
+             * path sum calculated later.
              */
             return Math.max(l, r) + root.val;
         }

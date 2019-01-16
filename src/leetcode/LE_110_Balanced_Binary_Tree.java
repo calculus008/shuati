@@ -38,19 +38,72 @@ public class LE_110_Balanced_Binary_Tree {
         Return false.
      */
 
-    public static boolean isBalanced(TreeNode root) {
-        if (root == null) return true;
-        return depth(root) == -1 ? false : true;
+    /**
+     * Time and Space : O(n)
+     * 2 ms, 58%
+     */
+    class Solution1 {
+        public boolean isBalanced(TreeNode root) {
+            if (root == null) return true;
+            /**
+             * Reason to use -1 : -1 is just a flag that tells
+             * the tree is not balanced, depth() also returns
+             * value >= 0 which represents the real depth of a
+             * subtree
+             */
+            return depth(root) == -1 ? false : true;
+        }
+
+        public int depth(TreeNode root) {
+            if (root == null) return 0;
+
+            int l = depth(root.left);
+            int r = depth(root.right);
+
+            if (l == -1 || r == -1 || Math.abs(l - r) > 1) return -1;
+
+            return Math.max(l, r) + 1;
+        }
     }
 
-    public static int depth(TreeNode root) {
-        if (root == null) return 0;
+    /**
+     * Huahua's version
+     * http://zxi.mytechroad.com/blog/leetcode/leetcode-110-balanced-binary-tree/
+     *
+     * 重点是是件复杂度分析。
+     * Naive solution O(nlogn)
+     *
+     * Time and Space : O(n)
+     *
+     * 1 ms, 99%
+     */
+    class Solution2 {
+        private boolean balanced;
 
-        int l = depth(root.left);
-        int r = depth(root.right);
+        public boolean isBalanced(TreeNode root) {
+            this.balanced = true;
+            height(root);
+            return this.balanced;
+        }
 
-        if (l == -1 || r == -1 || Math.abs(l - r) > 1) return -1;
+        private int height(TreeNode root) {
+            /**
+             * !!!
+             * Use balanced here to return early if we know the tree is not balanced,
+             * make it much faster than Solution1.
+             */
+            if (root == null || !this.balanced) {
+                return -1;
+            }
 
-        return Math.max(l, r) + 1;
+            int l = height(root.left);
+            int r = height(root.right);
+
+            if (Math.abs(l - r) > 1) {
+                this.balanced = false;
+                return -1;
+            }
+            return Math.max(l, r) + 1;
+        }
     }
 }

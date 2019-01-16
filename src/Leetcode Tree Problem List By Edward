@@ -19,8 +19,9 @@ Postorder
 LE_104_Max_Depth_Of_Binary_Tree
 LE_110_Balanced_Binary_Tree
 LE_124_Binary_Tree_Max_Path_Sum                          (***)
+LE_687_Longest_Univalue_Path                             (***)
 LE_250_Count_Univalue_Subtrees
-LE_366_Find_Leaves_Of_Binary_Tree
+LE_366_Find_Leaves_Of_Binary_Tree                        (***)
 LE_337_House_Robber_III
 
 BFS

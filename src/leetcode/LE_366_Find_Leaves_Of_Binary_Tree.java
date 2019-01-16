@@ -43,73 +43,92 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
          Medium
      */
 
-    //Solution 1
-    public List<List<Integer>> findLeaves(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) {
+    class Solution1 {
+        public List<List<Integer>> findLeaves(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+
+            helper(root, res);
             return res;
         }
 
-        helper(root, res);
-        return res;
-    }
-
-
-    public int helper(TreeNode root, List<List<Integer>> res) {
-        if (root == null) return -1;
-
-        int left = helper(root.left, res);
-        int right = helper(root.right, res);
 
         /**
-         * 求出每个Node的height就是它在list中相对应的位置
+         * helper() 所求是树的高度
          */
-        int level = Math.max(left, right) + 1;
-        if (res.size() == level) {
-            res.add(new ArrayList<>());
+        public int helper(TreeNode root, List<List<Integer>> res) {
+            if (root == null) return -1;
+
+            int left = helper(root.left, res);
+            int right = helper(root.right, res);
+
+            /**
+             * 求出每个Node的height就是它在list中相对应的位置
+             */
+            int level = Math.max(left, right) + 1;
+
+            /**
+             * common trick for using DFS on level related problem
+             */
+            if (res.size() == level) {
+                res.add(new ArrayList<>());
+            }
+
+            /**
+             * DFS的性质保证叶子节点被一层层移除
+             */
+            res.get(level).add(root.val);
+            /**
+             * !!!
+             * 题意要求是remove, 所以在postorder的最后一步把左右指针设为零
+             **/
+            root.left = null;
+            root.right = null;
+
+            /**
+             * level returned : 0, 1, 2,...., it is the index in res.
+             **/
+            return level;
         }
-
-        res.get(level).add(root.val);
-        /**
-           题意要求是remove, 所以在postorder的最后一步把左右指针设为零
-         **/
-        root.left = null;
-        root.right = null;
-
-        /**
-         level returned : 0, 1, 2,...., it is the index in res.
-         **/
-        return level;
-    }
-
-    /**Solution 2
-     **/
-    public List<List<Integer>> findLeaves2_JiuZhang(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
-
-        Map<Integer, List<Integer>> depth = new HashMap<>();
-        int max_depth = dfs(root, depth);
-
-        for (int i = 1; i <= max_depth; i++) {
-            ans.add(depth.get(i));
-        }
-        return ans;
     }
 
 
     /**
-     * This method is to save leaves list of each level in a map
+     * It seems this solution only collects the leaf nodes, not doing removal.
      */
-    int dfs(TreeNode cur, Map<Integer, List<Integer>> depth) {
-        if (cur == null) {
-            return 0;
+    class Solution2 {
+        public List<List<Integer>> findLeaves2_JiuZhang(TreeNode root) {
+            List<List<Integer>> ans = new ArrayList<>();
+
+            Map<Integer, List<Integer>> depth = new HashMap<>();
+            int max_depth = dfs(root, depth);
+
+            for (int i = 1; i <= max_depth; i++) {
+                ans.add(depth.get(i));
+            }
+            return ans;
         }
-        int d = Math.max(dfs(cur.left, depth), dfs(cur.right, depth)) + 1;
 
-        depth.putIfAbsent(d, new ArrayList<>());
-        depth.get(d).add(cur.val);
-        return d;
+
+        /**
+         * This method is modified from finding depth of a binary tree,
+         * while it finds depth, it also saves leaves list of each level in a map
+         */
+        int dfs(TreeNode cur, Map<Integer, List<Integer>> depth) {
+            if (cur == null) {
+                return 0;
+            }
+            int d = Math.max(dfs(cur.left, depth), dfs(cur.right, depth)) + 1;
+
+            /**
+             * Map depth : key - current level or height, value - list of leaves nodes.
+             */
+            depth.putIfAbsent(d, new ArrayList<>());
+            depth.get(d).add(cur.val);
+            return d;
+        }
     }
-
 
 }

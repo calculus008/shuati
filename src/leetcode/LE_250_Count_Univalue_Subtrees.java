@@ -49,6 +49,9 @@ public class LE_250_Count_Univalue_Subtrees {
         return res;
     }
 
+    /**
+     * helper() checks if a given subtree is univalue subtree
+     */
     public boolean helper(TreeNode root) {
         if (root == null) return true;
 
