@@ -4,6 +4,8 @@ LE_823_Binary_Trees_With_Factors
 #Preorder
 LE_404_Sum_Of_Left_Leaves (**)
 LE_655_Print_Binary_Tree
+LE_314_Binary_Tree_Vertical_Order_Traversal
+
 
 LE_865_Smallest_Subtree_With_All_The_Deepest_Nodes
 LE_450_Delete_Node_In_A_BST

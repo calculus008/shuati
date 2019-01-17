@@ -19,10 +19,10 @@ public class LE_230_Kth_Smallest_Element_In_BST {
 
         Follow up:
         What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently?
-        How would you optimize the kthSmallest routine?
+        How would you optimize the kthSmallest() routine?
      */
 
-    /*
+    /**
        For follow up:
        we can keep both the kth smallest element and (k-1)th smallest element. If we insert or delete an element larger than the kth smallest elemen,
        the result remains unaffected. If something smaller than is inserted, compare it with the (k-1)th smallest element. The larger one becomes

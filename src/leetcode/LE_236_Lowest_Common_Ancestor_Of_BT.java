@@ -23,6 +23,11 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
         since a node can be a descendant of itself according to the LCA definition.
      */
 
+    /**
+     * if both p and q exist in Tree rooted at root, then return their LCA
+     * if neither p and q exist in Tree rooted at root, then return null
+     * if only one of p or q (NOT both of them), exists in Tree rooted at root, return it
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) return root;
 

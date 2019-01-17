@@ -6,7 +6,7 @@ import common.TreeNode;
  * Created by yuank on 3/9/18.
  */
 public class LE_99_Recover_BST {
-    /*
+    /**
         Two elements of a binary search tree (BST) are swapped by mistake.
 
         Recover the tree without changing its structure.

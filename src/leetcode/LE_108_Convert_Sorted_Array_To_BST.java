@@ -6,10 +6,13 @@ import common.TreeNode;
  * Created by yuank on 3/12/18.
  */
 public class LE_108_Convert_Sorted_Array_To_BST {
-    /*
-        Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+    /**
+        Given an array where elements are sorted in ascending order,
+        convert it to a height balanced BST.
 
-        For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+        For this problem, a height-balanced binary tree is defined
+        as a binary tree in which the depth of the two subtrees of
+        every node never differ by more than 1.
 
 
         Example:

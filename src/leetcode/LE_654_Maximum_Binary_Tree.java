@@ -77,4 +77,39 @@ public class LE_654_Maximum_Binary_Tree {
             return res;
         }
     }
+
+    /**
+     * version with range 0 to length - 1 (左闭右闭）
+     */
+    class Solution1 {
+        public TreeNode constructMaximumBinaryTree(int[] nums) {
+            if (null == nums || nums.length == 0) return null;
+
+            return helper(nums, 0, nums.length - 1);//!!!
+        }
+
+        private TreeNode helper(int[] nums, int l, int r) {
+            if (l > r) {//!!!
+                return null;
+            }
+
+            int idx = getMax(nums, l, r);
+            TreeNode node = new TreeNode(nums[idx]);
+            node.left = helper(nums, l, idx - 1);//!!!
+            node.right = helper(nums, idx + 1, r);
+
+            return node;
+        }
+
+        private int getMax(int[] nums, int l, int r) {
+            int res = l;
+            for (int i = l; i <= r; i++) {//!!!
+                if (nums[i] > nums[res]) {
+                    res = i;
+                }
+            }
+
+            return res;
+        }
+    }
 }

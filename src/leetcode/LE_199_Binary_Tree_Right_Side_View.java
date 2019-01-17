@@ -11,8 +11,9 @@ import java.util.Queue;
  * Created by yuank on 3/24/18.
  */
 public class LE_199_Binary_Tree_Right_Side_View {
-    /*
-        Given a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+    /**
+        Given a binary tree, imagine yourself standing on the right side of it,
+        return the values of the nodes you can see ordered from top to bottom.
 
         For example:
         Given the following binary tree,
