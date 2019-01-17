@@ -38,8 +38,6 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
 
 
     /**
-     *  Similar Problem : LE_687_Longest_Univalue_Path
-
         Postorder
                  3
                 / \
@@ -57,6 +55,10 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
             Return value in each recursion has nothing to do with "res"
 
             Compare with LI_475_Binary_Tree_Maximum_Path_Sum_II (path only start from root)
+
+            Similar problems:
+            LE_543_Diameter_Of_Binary_Tree
+            LE_687_Longest_Univalue_Path
     */
 
         //!!! can't make it res = 0
