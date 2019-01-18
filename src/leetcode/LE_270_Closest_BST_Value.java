@@ -14,7 +14,14 @@ public class LE_270_Closest_BST_Value {
      You are guaranteed to have only one unique value in the BST that is closest to the target.
      */
 
-    //Time : O(n), Space : O(1)
+    /**
+     * Time : O(n)
+     * Space : O(1)
+     *
+     * Use BST property,no need to traverse the whole tree.
+     * Based on target value and root.val comparison, move to left or right side.
+     */
+
     public int closestValue(TreeNode root, double target) {
         int res = root.val;
         while (root != null) {

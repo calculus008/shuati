@@ -39,9 +39,9 @@ LE_108_Convert_Sorted_Array_To_BST                       (***, similar problem L
 LE_109_Convert_Sorted_List_To_BST                        (***)
 LE_173_Binary_Search_Tree_Iterator                       (***)
 LE_230_Kth_Smallest_Element_In_BST                       (****)
-LE_285_Inorder_Successor_In_BST
+LE_285_Inorder_Successor_In_BST                          (***)
 LE_270_Closest_BST_Value
-LE_272_Closest_BST_Value_II
+LE_272_Closest_BST_Value_II                              (****)
 LE_99_Recover_BST
 
 Hard By Importance

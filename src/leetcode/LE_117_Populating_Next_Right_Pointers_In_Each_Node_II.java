@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/13/18.
  */
 public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
-    /*
+    /**
 
         Follow up for problem "Populating Next Right Pointers in Each Node".
 
@@ -31,7 +31,7 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
 
     //Important
 
-    /*
+    /**
           在第一个循环中
                      1  -  移动层
                    /  \
@@ -70,6 +70,7 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
                     }
                     pre = cur.left; //然后set pre.
                 }
+
                 if (cur.right != null) {
                     if (pre != null) {
                         pre.next = cur.right;

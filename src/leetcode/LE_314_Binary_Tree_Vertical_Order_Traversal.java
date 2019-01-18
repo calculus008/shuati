@@ -40,12 +40,12 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
      *
      * Input: [3,9,8,4,0,1,7]
      *
-     *      3
-     *     /\
-     *    /  \
-     *    9   8
-     *   /\  /\
-     *  /  \/  \
+     *       3
+     *      /\
+     *     /  \
+     *     9   8
+     *    /\  /\
+     *   /  \/  \
      *  4  01   7
      *
      * Output:
@@ -86,7 +86,15 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
      */
 
     /**
-     Time and Space : O(n)
+     * Similar to LE_655_Print_Binary_Tree, but not the same, can't use its solution for this problem directly,
+     * because of the root position alignment.
+     *
+     * The similarity is that we need to first run a pass for the whole tree to get dimension of the tree.
+     * Here, we start from root, get the width of the left subtree wl and right subtree wr, then we know how
+     * many levels we need to process (wl + wr). For 655, we need to find depth of the tree, then we know the
+     * max length of the list (2 ^ h - 1)
+     *
+     * Time and Space : O(n)
      **/
     public List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
@@ -100,6 +108,12 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
             res.add(new ArrayList<Integer>());
         }
 
+        /**
+         * In BFS, need both the node object and its col index
+         * we can create a class Pair and use one queue, Or
+         * we just use 2 queues and offer and poll elements from
+         * those 2 queues at the same time
+         */
         Queue<TreeNode> nodes = new LinkedList<>();
         Queue<Integer> cols = new LinkedList<>();
 
@@ -121,6 +135,10 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
             int curCol = cols.poll();
             res.get(curCol).add(curNode.val);
 
+            /**
+             * !!!
+             * "curl - 1" for left, and "cur + 1" for right
+             */
             if (curNode.left != null) {
                 nodes.offer(curNode.left);
                 cols.offer(curCol - 1);
@@ -135,6 +153,37 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
         return res;
     }
 
+    /**
+     * !!!
+     * range[0] : offset from root location to the left most child (negative number)
+     * range[1] : offset from root location fo the right most child (positive number)
+     *
+     * example:
+     * 5 vertical levels in range[] and its index
+     *
+     * 0  1  2 3  4
+     * -2,-1,0 1, 2
+     *      3            list Idx [2]
+     *     /\
+     *    /  \
+     *    9   8                  [1, 3]
+     *   /\  /\
+     *  /  \/  \
+     *  4  01   7            [0, 2] [2, 4]
+     *     /\
+     *    /  \
+     *    5   2                 [1] [3]
+     *
+     *  answer:
+     * [
+     *   [4],
+     *   [9,5],
+     *   [3,0,1],
+     *   [8,2],
+     *   [7]
+     * ]
+     *
+     */
     public void findRange(TreeNode root, int[] range, int col) {
         if (root == null) return;
 

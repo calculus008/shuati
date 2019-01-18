@@ -25,7 +25,7 @@ public class LE_235_Lowest_Common_Ancestor_Of_BST {
      */
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) return root;
+        if (root == null) return root;//!!! return root
 
         if (p.val > root.val && q.val > root.val) {
             return lowestCommonAncestor(root.right, p, q);

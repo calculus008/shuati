@@ -9,7 +9,7 @@ import java.util.Stack;
 
 public class LE_255_Verify_Preorder_Sequence_In_BST  {
     /**
-         Given an array of numbers, verify whether it is the correct preorder traversal sequence of a binary search tree.
+         Given an array of numbers, verify whether it is the correct pre-order traversal sequence of a binary search tree.
 
          You may assume each number in the sequence is unique.
 
@@ -73,8 +73,10 @@ public class LE_255_Verify_Preorder_Sequence_In_BST  {
         Stack<Integer> inorder = new Stack<>();
 
         for(int v : preorder){
-            if(!inorder.isEmpty() && v < inorder.peek())
+            if(!inorder.isEmpty() && v < inorder.peek()) {
                 return false;
+            }
+
             while(!stack.isEmpty() && v > stack.peek()){
                 inorder.push(stack.pop());
             }

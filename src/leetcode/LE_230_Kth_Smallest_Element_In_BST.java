@@ -113,7 +113,8 @@ public class LE_230_Kth_Smallest_Element_In_BST {
     }
 
     /**
-        Count total number of nodes
+     * !!!
+     * Count total number of nodes under a given root
      */
     private int countNodes(TreeNode root, Map<TreeNode, Integer> numOfChildren) {
         if (root == null) {
@@ -152,6 +153,9 @@ public class LE_230_Kth_Smallest_Element_In_BST {
     public int kthSmallest5_JiuZhang(TreeNode root, int k) {
         Stack<TreeNode> stack = new Stack<>();
 
+        /**
+         * find the smallest elements in BST (left most leaf child)
+         */
         while (root != null) {
             stack.push(root);
             root = root.left;

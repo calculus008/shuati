@@ -36,7 +36,7 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
      */
 
     //Time and Space : O(n)
-    //Solution 1 : Recurssion
+    //Solution 1 : Recursion
     public static void connect1(TreeLinkNode root) {
         if (root == null) return;
 
@@ -59,7 +59,7 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
         connect1(root.right);
     }
 
-    //Solution 2 : None recurssion
+    //Solution 2 : Iterative
     public void connect2(TreeLinkNode root) {
         if (root == null) return;
         TreeLinkNode start = root;

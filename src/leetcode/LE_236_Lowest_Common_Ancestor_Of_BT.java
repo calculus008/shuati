@@ -29,15 +29,24 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
      * if only one of p or q (NOT both of them), exists in Tree rooted at root, return it
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        /**
+         * when p or q equals root, return root.
+         */
         if (root == null || root == p || root == q) return root;
 
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
 
+        /**
+         * this condition actually is that p and q are under root.
+         */
         if (left != null && right != null) {
             return root;
         }
 
+        /**
+         * then here, we just have one not null answer among left and right
+         */
         return left == null ? right : left;
     }
 }

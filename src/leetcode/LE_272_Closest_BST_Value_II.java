@@ -26,6 +26,12 @@ public class LE_272_Closest_BST_Value_II {
      */
 
     /**
+     * BST + 2 pointers
+     *
+     * 重点看Solution 3 and Solution 4
+     */
+
+    /**
       Solution 1 : Time : O(n), Space : O(n)
      */
     public List<Integer> closestKValues1(TreeNode root, double target, int k) {
@@ -211,13 +217,31 @@ public class LE_272_Closest_BST_Value_II {
             }
         }
 
+        /**
+         * target value is bigger than the largest element in BST
+         */
         if (i >= n) {
             return values.subList(n - k, n);
         }
 
+        /**
+         * tow pointers
+         */
         int left = i - 1, right = i;
         List<Integer> result = new ArrayList<>();
         for (i = 0; i < k; i++) {
+            /**
+             * left is in valid range (>=0) and diff between left element and target is smaller than
+             * diff between right element and target.
+             * OR
+             * left is in valid range, right is out of range (>= n)
+             *
+             * add left and left moves one more step
+             *
+             * Otherwise
+             *
+             * add right and right moves one more step
+             */
             if (left >= 0 && (right >= n || target - values.get(left) < values.get(right) - target)) {
                 result.add(values.get(left));
                 left--;
@@ -243,7 +267,7 @@ public class LE_272_Closest_BST_Value_II {
     /**
      * Solution 4 :
      *
-     * 最优算法，时间复杂度 O(k + logn)，空间复杂度 O(logn)
+     * 最优算法，时间复杂度 O(logn + k)，空间复杂度 O(logn)
      *
      * Building each of the stacks takes O(log(n)) assuming BST is balanced.
      * Each call to getNext/goPrev has an amortized cost of O(1), since every node is pushed and popped at most once.
@@ -264,10 +288,18 @@ public class LE_272_Closest_BST_Value_II {
          *          This steps takes O(logn), assume BST is balanced. Or O(h)
          **/
         while (node != null) {
+            /**
+             * current value is smaller than target, so it must be predecessor of target,
+             * add it to prev stack, then we need to find target on the right
+             */
             if (node.val < target) {
                 prev.push(node);
                 node = node.right;
             } else {
+                /**
+                 * current value is bigger than target, so it must be successor of target,
+                 * add it to next stack, then we need to find target on the left.
+                 */
                 next.push(node);
                 node = node.left;
             }

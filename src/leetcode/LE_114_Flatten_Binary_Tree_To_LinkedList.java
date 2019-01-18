@@ -38,8 +38,8 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
         Solution 1 : Recursive
         Time and Space : O(n)
 
-      ``!!!
-        Postorderd的变形， instead of left->right->cur, it goes right->left->cur.
+        !!!
+        Postorderd 的变形， instead of left->right->cur, it goes right->left->cur.
         It goes right side first, save right side nodes in system stack. Then it links from back to start (goes backwards)
 
            2
@@ -51,8 +51,8 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
         Solution 1: Recursion
         !!!All nodes are linked in "right" field, "left" field points to null!!!
         It requires that root first linked to right subtree in postorder sequence,
-        then link to left substree in postorder sequence. Therefore we recurse to right side first,
-        using stack provided in recursion to remember nodes in right substree.
+        then link to left subtree in post-order sequence. Therefore we recurse to right side first,
+        using stack provided in recursion to remember nodes in right subtree.
 
                  1
                 / \
@@ -86,8 +86,8 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
     /**
      * Solution 2 : Iterative
      *
-     * Use a stack, first go to right side, so nodes in right substree will be saved at the bottom of the stack
-     * and will be linked at the later stage (after left substree is processed).
+     * Use a stack, first go to right side, so nodes in right subtree will be saved at the bottom of the stack
+     * and will be linked at the later stage (after left subtree is processed).
      *
      * Difference from Solution 1 :
      * It links from start to end.

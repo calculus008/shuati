@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/9/18.
  */
 public class LE_96_Unique_BST {
-    /*
+    /**
         Given n, how many structurally unique BST's (binary search trees) that store values 1...n?
 
         For example,
@@ -17,7 +17,7 @@ public class LE_96_Unique_BST {
            2     1         2                 3
      */
 
-    /*     DP, Time and Space : O(n)
+    /**     DP, Time and Space : O(n)
 
            1         3     3      2      1
             \       /     /      / \      \

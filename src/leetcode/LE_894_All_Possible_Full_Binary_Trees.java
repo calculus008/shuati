@@ -59,13 +59,13 @@ public class LE_894_All_Possible_Full_Binary_Trees {
              * !!!
              * Outer loop loops with number of nodes, starts from 1 and
              * ends with with N - 1, because the biggest number of nodes
-             * that can go into left substree (in the next loop) is N - 1.
+             * that can go into left subtree (in the next loop) is N - 1.
              * If outer loop ends with N, we will see stack overflow.
              *
              * Increase step 2, because even number of
              * nodes does not have a solution.
              *
-             * For right, N - i - 1 : subtract i in left substree and the root node
+             * For right, N - i - 1 : subtract i in left subtree and the root node
              */
             for (int i = 1; i < N; i += 2) {
                 for (TreeNode l : allPossibleFBT(i)) {
