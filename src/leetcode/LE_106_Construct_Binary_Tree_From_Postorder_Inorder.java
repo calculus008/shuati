@@ -6,23 +6,25 @@ import common.TreeNode;
  * Created by yuank on 3/12/18.
  */
 public class LE_106_Construct_Binary_Tree_From_Postorder_Inorder {
-    /*
-        Given inorder and postorder traversal of a tree, construct the binary tree.
-
-        Note:
-        You may assume that duplicates do not exist in the tree.
-
-        For example, given
-
-        inorder = [9,3,15,20,7]
-        postorder = [9,15,7,20,3]
-        Return the following binary tree:
-
-            3
-           / \
-          9  20
-            /  \
-           15   7
+    /**
+     * Given inorder and postorder traversal of a tree, construct the binary tree.
+     *
+     * Note:
+     * You may assume that duplicates do not exist in the tree.
+     *
+     * For example, given
+     *
+     * inorder = [9,3,15,20,7]
+     * postorder = [9,15,7,20,3]
+     * Return the following binary tree:
+     *
+     *     3
+     *    / \
+     *   9  20
+     *     /  \
+     *    15   7
+     *
+     * Medium
      */
 
     public TreeNode buildTree(int[] inorder, int[] postorder) {
@@ -31,8 +33,9 @@ public class LE_106_Construct_Binary_Tree_From_Postorder_Inorder {
 
     //Same method as LE_105 : get root from postorder, find root in inorder, calculate length of the left subtree string, then recurse..
     private TreeNode helper1(int[] postorder, int poststart, int postend,  int[] inorder, int instart, int inend) {
-        if(instart > inend || poststart > postend)
+        if(instart > inend || poststart > postend) {
             return null;
+        }
 
         TreeNode root = new TreeNode(postorder[postend]);
         int i = 0;
@@ -40,8 +43,8 @@ public class LE_106_Construct_Binary_Tree_From_Postorder_Inorder {
             i++;
         }
 
-        root.left = helper1(postorder,  poststart, poststart + i - instart - 1, inorder, instart, i - 1);
-        root.right = helper1(postorder, poststart + i - instart, postend - 1, inorder, i + 1, inend);
+        root.left = helper1(postorder,  poststart, poststart + (i - instart) - 1, inorder, instart, i - 1);
+        root.right = helper1(postorder, poststart + (i - instart), postend - 1, inorder, i + 1, inend);
 
         return root;
     }

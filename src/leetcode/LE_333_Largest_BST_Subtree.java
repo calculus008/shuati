@@ -33,7 +33,7 @@ public class LE_333_Largest_BST_Subtree {
      */
 
     /**
-     1.substree : use post order, from bottom up
+     1.subtree : use post order, from bottom up
      2.Can't tell if it is a BST during traversal : create new class SearchNode to store subtree info
      3.BST
 
@@ -42,6 +42,9 @@ public class LE_333_Largest_BST_Subtree {
      **/
     class SearchNode {
         int size;
+        /**
+         * upper and lower bound are used to tell if it is BST
+         */
         int lower;
         int upper;
 

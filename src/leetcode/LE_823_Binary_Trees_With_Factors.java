@@ -42,7 +42,7 @@ public class LE_823_Binary_Trees_With_Factors {
      *
      * DP
      *
-     * 1.For a, b,c in A, c = a * b
+     * 1.For a, b, c in A, c = a * b
      * dp(c) = number of binary trees rooted at c
      * dp(c) = sum (dp(a) * dp(b)) (a, b are factors for c and a, b, c should all be in A)
      * answer is sum(dp(c))

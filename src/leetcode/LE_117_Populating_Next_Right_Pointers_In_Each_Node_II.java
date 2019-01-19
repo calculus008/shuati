@@ -60,8 +60,15 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
             每次循环后，当前连接层成为下个循环中的移动层。
          **/
         while (cur != null) {
+            /**
+             * 处理每一层
+             */
             while (cur != null) {
-                //对当前node的左右chilren以同样的逻辑处理。
+                /**
+                 * 对当前node的左右chilren以同样的逻辑处理。
+                 * 每一次的链接都是从pre链接到当前的左或右节点。
+                 * 对每个连接层的第一个节点，只是把它设为head, 没有连接的动作。
+                 **/
                 if (cur.left != null) {
                     if (pre != null) { //链接
                         pre.next = cur.left;
@@ -86,6 +93,9 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
                 cur = cur.next;
             }
 
+            /**
+             * 每层处理完后，cur指回head(起点），这样就能走往下一层。
+             */
             cur = head;
             pre = null;
             head = null;

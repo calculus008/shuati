@@ -59,7 +59,7 @@ public class LE_96_Unique_BST {
             }
         }
 
-        return dp [n];
+        return dp[n];
     }
 
 }

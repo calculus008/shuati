@@ -30,11 +30,22 @@ public class LE_255_Verify_Preorder_Sequence_In_BST  {
 
         https://leetcode.com/problems/verify-preorder-sequence-in-binary-search-tree/discuss/68142/Java-O(n)-and-O(1)-extra-space
 
-        Kinda simulate the traversal, keeping a stack of nodes (just their values) of which we’re still in the left subtree.
+        "Kinda simulate the traversal, keeping a stack of nodes (just their values) of which we’re still in the left subtree.
         If the next number is smaller than the last stack value, then we’re still in the left subtree of all stack nodes,
         so just push the new one onto the stack. But before that, pop all smaller ancestor values, as we must now be in their right subtrees
        (or even further, in the right subtree of an ancestor). Also, use the popped values as a lower bound, since being in their right subtree
-       means we must never come across a smaller number anymore.
+       means we must never come across a smaller number anymore."
+
+
+       As for all other BST problems, we also use the special property of BST to solve the problem. BST inorder is in soorted order.
+       For preorder, there's an interesting property, as above example show :
+
+        6 | 1 0 3 2 5 | 8
+
+      The separator shows root, left subtree and right subtree. The first element in preorder must be root, then it goes to left subtree,
+      those values are smaller than root, until there's a number bigger than root, then we know we reach right subtree. So just we this
+      property, use a stack, start with root, keep pushing elements smaller than current number from preorder sequence, until it hits
+      a bigger value, then push in that value, during the process, if a number is smaller than the last min value, it is wrong.
 
      */
     public boolean verifyPreorder1(int[] preorder) {
@@ -42,6 +53,11 @@ public class LE_255_Verify_Preorder_Sequence_In_BST  {
 
         Stack<Integer> stack = new Stack<>();
 
+        /**
+         * min here is actually "last min", it is the last value that is smaller than
+         * the last number in preorder, then current number in preorder is supposed to
+         * be bigger than it, if its smaller, then we know it is wrong.
+         */
         int min = Integer.MIN_VALUE;
         for(int num : preorder) {
             if(num < min) return false;
