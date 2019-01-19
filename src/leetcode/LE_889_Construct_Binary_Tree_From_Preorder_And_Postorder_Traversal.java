@@ -24,6 +24,17 @@ public class LE_889_Construct_Binary_Tree_From_Preorder_And_Postorder_Traversal 
      * you can return any of them.
      */
 
+    /**
+     * https://zxi.mytechroad.com/blog/tree/leetcode-889-construct-binary-tree-from-preorder-and-postorder-traversal/
+     *
+     * If use O(n) look up to find left root:
+     * Time  : O(logn) ~ O(n ^ 2)
+     * Space : O(logn) ~ O(n)
+     *
+     * For the following solution with HashMap to speed up look up:
+     * Time  : O(n)
+     * Space : O(n)
+     */
     class Solution {
         public TreeNode constructFromPrePost(int[] pre, int[] post) {
             if (pre == null || post == null) return null;
