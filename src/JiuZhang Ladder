@@ -243,6 +243,8 @@ LI_209_First_Unique_Character_In_A_String
 LE_346_Moving_Average_From_Data_Stream                    (lint 642)
 LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
 LE_23_Merge_k_Sorted_Lists                                (lint 104)
+LE_632_Smallest_Range                                     (***)
+
 
 LI_545_Top_K_Largest_Numbers_II
 LI_486_Merge_K_Sorted_Arrays
