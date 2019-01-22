@@ -59,7 +59,7 @@ public class LE_777_Swap_Adjacent_In_LR_String {
             /**
              * "1 <= len(start) = len(end) <= 10000", with this guaranteed,we don't need to check length equality.
              */
-            if !start.replace("X", "").equals(end.replace("X", ""))) {
+            if (!start.replace("X", "").equals(end.replace("X", ""))) {
                 return false;
             }
 
