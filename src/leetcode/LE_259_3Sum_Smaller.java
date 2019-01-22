@@ -17,7 +17,7 @@ public class LE_259_3Sum_Smaller {
         [-2, 0, 1]
         [-2, 0, 3]
         Follow up:
-        Could you solve it in O(n2) runtime?
+        Could you solve it in O(n ^ 2) runtime?
      */
 
     /**
@@ -33,9 +33,21 @@ public class LE_259_3Sum_Smaller {
         for (int i = 0; i < nums.length -2; i++) {
             int left = i + 1;
             int right = nums.length - 1;
+
             while (left < right) {
                 if (nums[i] + nums[left] + nums[right] < target) {
+                    /**
+                     * !!!
+                     * nums[i] is fixed in each for loop,so for numbers :
+                     *
+                     * i, left, right
+                     *
+                     * Since nums is sorted, all numbers after right is not bigger than nums[right],
+                     * therefore, nums[i] + nums[left] + nums[k] (k <= right) must be smaller
+                     * than target, the number of triples is right - left.
+                     */
                     res += right - left;
+
                     left++;
                 } else {
                     right--;

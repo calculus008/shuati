@@ -27,6 +27,24 @@ public class LE_889_Construct_Binary_Tree_From_Preorder_And_Postorder_Traversal 
     /**
      * https://zxi.mytechroad.com/blog/tree/leetcode-889-construct-binary-tree-from-preorder-and-postorder-traversal/
      *
+     * pre = [(root) (left-child) (right-child)]
+     *
+     * post = [(left-child) (right-child) (root)]
+     *
+     * We need to recursively find the first node in pre.left-child from post.left-child
+     *
+     * e.g.
+     *
+     * pre = [(1), (2,4,5), (3,6,7)]
+     *
+     * post = [(4,5,2), (6,7,3), (1)]
+     *
+     * First element of left-child is 2 and the length of it is 3.
+     *
+     * root = new TreeNode(1)
+     * root.left = build((2,4,5), (4,5,2))
+     * root.right = build((3,6,7), (6,7,3))
+     *
      * If use O(n) look up to find left root:
      * Time  : O(logn) ~ O(n ^ 2)
      * Space : O(logn) ~ O(n)
@@ -63,6 +81,8 @@ public class LE_889_Construct_Binary_Tree_From_Preorder_And_Postorder_Traversal 
             /**
              * !!!
              * This if condition is unique among the 3 constructing binary tree problems.
+             *
+             * Notice it is "preStart == preEnd", NOT pre.length - 1!!!
              */
             if (preStart == preEnd) {
                 root.left = null;

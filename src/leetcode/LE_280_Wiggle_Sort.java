@@ -15,7 +15,7 @@ public class LE_280_Wiggle_Sort {
 
      Key insights:
      For end result such as :
-     idx  0  1  2  3  4  5
+     col  0  1  2  3  4  5
      [1, 6, 2, 5, 3, 4]
 
      Peak values are at index 1, 3, 5. So the peak values always appear at odd number indexes.

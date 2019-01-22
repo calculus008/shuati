@@ -1,0 +1,42 @@
+#MS
+445. Add Two Numbers II
+722. Remove Comments
+402. Remove K Digits
+LE_165_Compare_Version_Number
+LE_71_Simplify_Path
+
+#Amazon
+LE_98_Validate_BST
+LE_146_LRU_Cache
+LE_116_Populating_Next_Right_Pointers_In_Each_Node (DFS)
+LE_117_Populating_Next_Right_Pointers_In_Each_Node_II
+LE_139_Word_Break
+LE_307_Range_Sum_Query_Mutable
+LE_564_Find_The_Closest_Palindrome
+LE_215_Kth_Largest_Element_In_Array
+LE_93_Restore_IP_Addresses
+LE_658_Find_K_Closest_Elements                                   (***)
+
+#Google
+LE_218_The_Sky_Line_Problem(
+LE_249_Group_Shifted_Strings     (**)
+LE_632_Smallest_Range            (*** variation of k way merge)
+LE_777_Swap_Adjacent_In_LR_String
+
+"有一个array存放着1以上的整数，每个数的一个digit为一个element，如[1,2,3,4,5,6,7,8,9,1,0,1,1,1,2,1,3,1,4,1,5,1,6,1,7,1,8,1,9,2,0,2,1,......]
+给一个index，求这个array[index]是几？ 比如index = 14，output = 2    感觉像是数学题一样"
+
+
+"有一个string stream， 给一个function，每次return一个character，写一个函数detect这个string中是否存在一个word
+ 有duplicate prefix比较特殊，比如aaab这种情况"
+ 给一个function调用一次可以return string stream中的一个character，要求detect这个string stream中是否含有特定的词。 比如string stream是“aaba....” 要求detect 是否有“aba”这个词出现，如果出现可以直接print。
+ 有一个做法是维护一个和要求detect的词长度一样的buffer，每次pop第一个字符，append最后一个字符，再比较buffer和word是否相等
+
+#Uber
+LE_230_Kth_Smallest_Element_In_BST (Variation : Kth biggest number, reverse inorder)
+
+#Notice that the returns are different for each problem
+LE_15_3Sum                (return all unique triplets sum to target)
+LE_16_3Sum_Closest        (return sum of the triplet)
+LE_259_3Sum_Smaller       (return total number of triples met requirement)
+LE_18_4Sum                (return all unique quadruplets sum to target)

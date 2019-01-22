@@ -22,7 +22,7 @@ public class LE_540_Single_Element_In_A_Sorted_Array {
         int r = nums.length;
 
         /**
-         idx 0 1 2 3 4 5 6 7 8 9 10
+         col 0 1 2 3 4 5 6 7 8 9 10
          1 1 2 2 3 3 4 5 5 6 6
          Before single number, [0,1], [2,3], [4,5], pair stars at index of even number.
          After single number, [7,8], [9, 10], pair stars at index of odd number.

@@ -14,9 +14,11 @@ public class LE_658_Find_K_Closest_Elements {
          Example 1:
          Input: [1,2,3,4,5], k=4, x=3
          Output: [1,2,3,4]
+
          Example 2:
          Input: [1,2,3,4,5], k=4, x=-1
          Output: [1,2,3,4]
+
          Note:
          The value k is positive and will always be smaller than the length of the sorted array.
          Length of the given array is positive and will not exceed 104
@@ -97,7 +99,7 @@ public class LE_658_Find_K_Closest_Elements {
      */
 
     public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
-        Collections.sort(arr, (a,b) -> a == b ? a - b : Math.abs(a-x) - Math.abs(b-x));
+        Collections.sort(arr, (a, b) -> a == b ? a - b : Math.abs(a - x) - Math.abs(b - x));
         arr = arr.subList(0, k); //!!!subList()
         Collections.sort(arr);
         return arr;

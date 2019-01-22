@@ -159,7 +159,7 @@ public class LE_239_Sliding_Window_Maximum {
      * Solution using Deque and return type is list (instead of array)
      * Example:
      *
-     *  idx   0 1 2 3 4
+     *  col   0 1 2 3 4
      * Input [1,2,7,7,2]
      *
      * i = 0

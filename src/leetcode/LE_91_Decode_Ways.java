@@ -28,7 +28,7 @@ public class LE_91_Decode_Ways {
      *
         s : "1231"
 
-        idx  0 1 2 3
+        col  0 1 2 3
          s   1 2 3 1
 
         i   0 1 2 3 4
@@ -121,7 +121,7 @@ public class LE_91_Decode_Ways {
         int len = s.length();
         int[] dp = new int[len + 1]; //how many ways for the first i chars
         dp[0] = 1;
-        dp[1] = s.charAt(0) == '0' ? 0 : 1; //for array idx "0"
+        dp[1] = s.charAt(0) == '0' ? 0 : 1; //for array col "0"
 
         for (int i = 2; i <= len; i++) {
             int first = Integer.valueOf(s.substring(i - 1, i));
@@ -143,7 +143,7 @@ public class LE_91_Decode_Ways {
         if (s == null || s.length() == 0) return 0;
         int len = s.length();
         int c1 = 1;
-        int c2 = s.charAt(0) == '0' ? 0 : 1; //for array idx "0"
+        int c2 = s.charAt(0) == '0' ? 0 : 1; //for array col "0"
 
         for (int i = 2; i <= len; i++) {
             int c3 = 0;

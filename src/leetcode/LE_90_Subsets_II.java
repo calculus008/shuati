@@ -39,7 +39,7 @@ public class LE_90_Subsets_II {
     public static void helper(List<List<Integer>> res, int[] nums, int idx, List<Integer> temp) {
         res.add(new ArrayList<Integer>(temp));
         for (int i = idx; i < nums.length; i++) {
-            //!!! "i != idx", because i starts from idx
+            //!!! "i != col", because i starts from col
             if (i != idx && nums[i] == nums[i - 1]) continue;
 
             temp.add(nums[i]);

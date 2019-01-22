@@ -40,6 +40,9 @@ public class  LE_95_Unique_BST_II {
         return helper(1, n);
     }
 
+    /**
+     * start and end are used to ensure BST property
+     */
     public static List<TreeNode> helper(int start, int end) {
         List<TreeNode> res = new ArrayList<>();
         if(start > end) {

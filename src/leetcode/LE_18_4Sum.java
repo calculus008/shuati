@@ -34,13 +34,21 @@ public class LE_18_4Sum {
         List<List<Integer>> res = new ArrayList<>();
         if(nums.length < 4) return res;
 
-        //!!!!!
+        /**
+         * !!!!!
+         **/
         Arrays.sort(nums);
 
         for (int i = 0; i < nums.length - 3; i++) {
+            /**
+             * 去重
+             */
             if (i > 0 && nums[i] == nums[i - 1]) continue;
 
             for (int j = i + 1; j < nums.length - 2; j++) {
+                /**
+                 * 去重
+                 */
                 if (j > i + 1 && nums[j] == nums[j - 1]) continue;
 
                 int start = j + 1;
@@ -54,6 +62,9 @@ public class LE_18_4Sum {
                         while (start < end && nums[start] == nums[start + 1]) start++;
                         while (start < end && nums[end] == nums[end - 1]) end--;
 
+                        /**
+                         * one more step
+                         */
                         start++;
                         end--;
                     } else if (sum < target) {

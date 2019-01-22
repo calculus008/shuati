@@ -64,7 +64,7 @@ public class LE_895_Maximum_Frequency_Stack {
      *   b.This is not a cache, so no need to worry about capacity (evict element when capacity is full)
      *   c.No need to keep updating current min or max index (see #6)
      *
-     * 5.Be careful with bucket index, it starts as '0', while it maps to 1. So the mapping : frequency - 1 = idx
+     * 5.Be careful with bucket index, it starts as '0', while it maps to 1. So the mapping : frequency - 1 = col
      * 6.Since it acts as a stack, so if a bucket becomes empty after a pop(), we just remove that bucket,
      *   by doing this, we don't need to keep an variable to track the current max frequency, we simply use
      *   "buckets.size()", the current max frequency is buckets.size(), its index is "buckets.size() - 1".

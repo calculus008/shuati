@@ -52,10 +52,10 @@ public class LE_287_Find_The_Duplicate_Number {
      * 那么，我们证明了这是一个带环链表。而我们要找的重复的数，也就是两个点都指向了同一个点作为 next 的那个点。也就是环的入口。
      * 因此完全套用 Linked List Cycle 这个题快慢指针的方法即可。
      *
-     *  idx 0 1 2 3
+     *  col 0 1 2 3
      * nums 2 1 3 1
      *
-     * idx
+     * col
      *  0 - 2
      *  1 - 1
      *  2 - 3

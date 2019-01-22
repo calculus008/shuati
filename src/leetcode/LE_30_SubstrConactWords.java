@@ -186,7 +186,7 @@ public class LE_30_SubstrConactWords {
             int l = i, count = 0;
             final Map<String, Integer> seen = new HashMap<>();
 
-            //!!! "j <= n - len", last idx : n - 1, therefore (n - 1) - len + 1 = n - len
+            //!!! "j <= n - len", last col : n - 1, therefore (n - 1) - len + 1 = n - len
             for (int j = i; j <= n - len; j += len) {
                 final String word = s.substring(j, j + len);
                 if (need.containsKey(word)) {

@@ -46,28 +46,28 @@ public class LE_215_Kth_Largest_Element_In_Array {
     //Time : O(n)  Space : O(1)
     /*
         [3, 2, 1, 5, 6, 4]   k = 3
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
     Partition 1, left=0, right=5:
          p  l           r
         [3, 2, 1, 5, 6, 4]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p     l     r
         [3, 4, 1, 5, 6, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p        lr
         [3, 4, 6, 5, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p        r  l
         [3, 4, 6, 5, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p        r  l
         [5, 4, 6, 3, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
         return r (3)
 
@@ -75,19 +75,19 @@ public class LE_215_Kth_Largest_Element_In_Array {
         Partition 2, left=0, right=2:
          l     r
         [5, 4, 6, 3, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p  l  r
         [5, 4, 6, 3, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p  r  l
         [5, 6, 4, 3, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          p  r  l
         [6, 5, 4, 3, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
          return r (1)
 
@@ -96,7 +96,7 @@ public class LE_215_Kth_Largest_Element_In_Array {
 
                lr
         [6, 5, 4, 3, 1, 2]
-    idx  0  1  2  3  4  5
+    col  0  1  2  3  4  5
 
         return r (2)
 

@@ -68,7 +68,7 @@ public class LE_79_Word_Search {
                  * !!!
                  * Set '#' to visited position in original 2D array, save the space for visited[][],
                  * also, once it is set to '#', checking if the position is visited can be combined into
-                 * "if (board[i][j] == word.charAt(idx))".
+                 * "if (board[i][j] == word.charAt(col))".
                  */
                 board[i][j] = '#';
 

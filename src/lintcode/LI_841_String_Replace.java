@@ -1,7 +1,9 @@
 package lintcode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by yuank on 6/11/18.
@@ -22,17 +24,20 @@ public class LI_841_String_Replace {
          Example
          Given A = ["ab","aba"], B = ["cc","ccc"], S = "ababa", return "cccba".
 
-         In accordance with the rules, the substring that can be replaced is "ab" or "aba". Since "aba" is longer, we replace "aba" with "ccc".
+         In accordance with the rules, the substring that can be replaced is "ab" or "aba". Since "aba" is longer,
+         we replace "aba" with "ccc".
 
 
          Given A = ["ab","aba"], B = ["cc","ccc"] ,S = "aaaaa" ,return "aaaaa".
 
          S does not contain strings in A, so no replacement is done.
 
-
          Given A = ["cd","dab","ab"], B = ["cc","aaa","dd"], S = "cdab", return "ccdd".
 
-         From left to right, you can find the "cd" can be replaced at first, so after the replacement becomes "ccab", then you can find "ab" can be replaced, so the string after the replacement is "ccdd".
+         From left to right, you can find the "cd" can be replaced at first,
+         so after the replacement becomes "ccab", then you can find "ab" can be replaced,
+         so the string after the replacement is "ccdd".
+
          Hard
      */
 
@@ -58,59 +63,107 @@ public class LI_841_String_Replace {
         https://www.jiuzhang.com/solution/string-replace/
      */
 
-    public String stringReplace(String[] a, String[] b, String s) {
-        // Write your code here
-        if (a == null || b == null) {
-            return s;
-        }
-        if (a.length == 0 || b.length == 0) {
-            return s;
-        }
+    class Solution1 {
+        public String stringReplace(String[] a, String[] b, String s) {
+            // Write your code here
+            if (a == null || b == null) {
+                return s;
+            }
+            if (a.length == 0 || b.length == 0) {
+                return s;
+            }
 
 
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
-        for (int i = 0; i < s.length(); i++) {
-            list.add(new ArrayList<Integer>());
-        }
+            List<List<Integer>> list = new ArrayList<List<Integer>>();
+            for (int i = 0; i < s.length(); i++) {
+                list.add(new ArrayList<Integer>());
+            }
 
-        // Calculate all the possible replacements on each string position
-        for (int i = 0; i < a.length; i++) {
+            // Calculate all the possible replacements on each string position
+            for (int i = 0; i < a.length; i++) {
+                int index = 0;
+                while (s.indexOf(a[i], index) >= 0) {
+                    int tmp = s.indexOf(a[i], index);
+                    List<Integer> entry = list.get(tmp);
+                    entry.add(i);
+                    index = tmp + 1;
+                }
+            }
+
+
+            StringBuilder sb = new StringBuilder();
             int index = 0;
-            while (s.indexOf(a[i], index) >= 0) {
-                int tmp = s.indexOf(a[i], index);
-                List<Integer> entry = list.get(tmp);
-                entry.add(i);
-                index = tmp + 1;
+            // Check on each string position and replace with the longest one
+            while (index < s.length()) {
+                List<Integer> candidates = list.get(index);
+                if (candidates.size() == 0) {
+                    sb.append(s.charAt(index));
+                    index++;
+                } else {
+                    int target = findMaxLen(candidates, a);
+                    sb.append(b[target]);
+                    index = index + a[target].length();
+                }
             }
+            return sb.toString();
         }
 
-
-        StringBuilder sb = new StringBuilder();
-        int index = 0;
-        // Check on each string position and replace with the longest one
-        while (index < s.length()) {
-            List<Integer> candidates = list.get(index);
-            if (candidates.size() == 0) {
-                sb.append(s.charAt(index));
-                index++;
-            } else {
-                int target = findMaxLen(candidates, a);
-                sb.append(b[target]);
-                index = index + a[target].length();
+        /**
+         * return value is the index (for a and b) which has the max length among elements in list
+         */
+        public int findMaxLen(List<Integer> list, String[] a) {
+            int target = -1;
+            int len = 0;
+            for (int i : list) {
+                if (a[i].length() > len) {
+                    len = a[i].length();
+                    target = i;
+                }
             }
+            return target;
         }
-        return sb.toString();
     }
 
-    public int findMaxLen(List<Integer> list, String[] a) {
-        int target = -1;
-        int len = 0;
-        for (int i: list) {
-            if (a[i].length() > len) {
-                len = a[i].length();
-                target = i;
+    public class Solution2 {
+        public String stringReplace(String[] a, String[] b, String s) {
+            if(a.length == 0 || s.isEmpty()){
+                return s;
             }
+
+            StringBuilder builder = new StringBuilder(s);
+            int m = a.length;
+            int n = builder.length();
+            Map<Integer, Integer> map = findReplaceable(a, s);
+
+            for(int i = 0; i < n; i++){
+                if(map.containsKey(i)){
+                    int index = map.get(i);
+                    int len = b[index].length();
+                    builder.replace(i, i + len, b[index]);
+                    i = i + len - 1;
+                }
+            }
+
+            return builder.toString();
         }
-        return target;
+
+        //map of i->index
+        //s[i] is replaceable by max(a[index].length())
+        private Map<Integer, Integer> findReplaceable(String[] a, String s){
+            Map<Integer, Integer> rpMap = new HashMap<>();
+            for(int i = 0; i < a.length; i++){
+                for(int j = 0; j < s.length(); j++){
+                    int index = s.indexOf(a[i], j);
+                    if(index != -1){
+                        if(!rpMap.containsKey(index) || rpMap.containsKey(index) && a[rpMap.get(index)].length() < a[i].length()){
+                            rpMap.put(index, i);
+                        }
+                    }
+                    j = j + a[i].length() - 1;
+                }
+
+            }
+            return rpMap;
+        }
     }
 }

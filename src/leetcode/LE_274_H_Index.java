@@ -61,7 +61,7 @@ public class LE_274_H_Index {
      c[3] = 1 < 5 : index = 1 -> count[1]++ = 1;
      c[4] = 5 ==5 : index = 5 -> count[5]++ = 2;
 
-     idx     0  1  2  3  4  5
+     col     0  1  2  3  4  5
      count : [1, 1, 0, 1, 0, 2]
 
                      i    sum  i

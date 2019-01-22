@@ -57,17 +57,18 @@ public class LE_894_All_Possible_Full_Binary_Trees {
 
             /**
              * !!!
-             * Outer loop loops with number of nodes, starts from 1 and
-             * ends with with N - 1, because the biggest number of nodes
-             * that can go into left subtree (in the next loop) is N - 1.
-             * If outer loop ends with N, we will see stack overflow.
+             * Outer loop loops with number of nodes that go into left
+             * subtree. To this step, we know that N must > 1. So based
+             * on def of full BT, root can have zero or 2 children. So
+             * the possible range of nodes in left is 1 ~ N - 2, because
+             * right subtree must at least have one node.
              *
              * Increase step 2, because even number of
              * nodes does not have a solution.
              *
              * For right, N - i - 1 : subtract i in left subtree and the root node
              */
-            for (int i = 1; i < N; i += 2) {
+            for (int i = 1; i < N - 1; i += 2) {
                 for (TreeNode l : allPossibleFBT(i)) {
                     for (TreeNode r : allPossibleFBT(N - i - 1)) {
                         TreeNode root = new TreeNode(0);

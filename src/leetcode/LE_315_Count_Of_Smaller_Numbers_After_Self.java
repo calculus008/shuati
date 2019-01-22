@@ -191,9 +191,9 @@ public class LE_315_Count_Of_Smaller_Numbers_After_Self {
          */
         BinaryIndexedTree tree = new BinaryIndexedTree(set.size());
         for (int i = nums.length - 1; i >= 0; i--) {
-            int idx = map.get(nums[i]);//!!! get rank for nums[i], idx is 1 based
-            res.add(0, tree.query(idx - 1));//!!!"idx - 1", query see prefix sum of the rank that 1 smaller than idx
-            tree.update(idx, 1);//!!!update with idx (1 based) and delta as "1" -> meaning one more occurrence of the element with rank i
+            int idx = map.get(nums[i]);//!!! get rank for nums[i], col is 1 based
+            res.add(0, tree.query(idx - 1));//!!!"col - 1", query see prefix sum of the rank that 1 smaller than col
+            tree.update(idx, 1);//!!!update with col (1 based) and delta as "1" -> meaning one more occurrence of the element with rank i
         }
 
         return res;
@@ -235,7 +235,7 @@ public class LE_315_Count_Of_Smaller_Numbers_After_Self {
     }
 
     private void update(int idx, int delta) {
-        // for (int i = idx + 1; i < bit.length; i = i + lowbit(i)) {
+        // for (int i = col + 1; i < bit.length; i = i + lowbit(i)) {
         //     bit[i] += delta;
         // }
         while (idx < bit.length) {
@@ -246,7 +246,7 @@ public class LE_315_Count_Of_Smaller_Numbers_After_Self {
 
     private int query(int idx) {
         int sum = 0;
-        // for (int i = idx + 1; i > 0; i = i - lowbit(i)) {
+        // for (int i = col + 1; i > 0; i = i - lowbit(i)) {
         //     sum += bit[i];
         // }
 

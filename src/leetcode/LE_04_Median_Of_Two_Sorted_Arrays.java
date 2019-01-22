@@ -188,7 +188,7 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
             int m1 = low + (high-low)/2; //cut point for nums1
             int m2 = n1 + n2 - m1; //cut point for nums2
 
-            //!!!use MIN and MAX to handle the case that left and right idx falls out of the array boundary
+            //!!!use MIN and MAX to handle the case that left and right col falls out of the array boundary
             double l1 = m1 == 0 ? Integer.MIN_VALUE : nums1[(m1 - 1) / 2];
             double l2 = m2 == 0 ? Integer.MIN_VALUE : nums2[(m2 - 1) / 2];
 

@@ -22,7 +22,7 @@ public class LE_32_Longest_Valid_Parentheses {
         Stack<Integer> stack = new Stack<>();
 
         /**
-         !!!cover the corner case that idx 0 and 1 is a pair, 1 - (-1) = 2
+         !!!cover the corner case that col 0 and 1 is a pair, 1 - (-1) = 2
          */
         stack.push(-1);
         int res = 0;
@@ -34,10 +34,10 @@ public class LE_32_Longest_Valid_Parentheses {
                 /**
                     The idea is simple, we only update the result (max) when we find a “pair”.
                     If we find a pair, we throw this pair away and see how big the gap is between current and previous invalid.
-                    Key : the length is current idx minus previous invalid idx
-                    Example : idx  0 1 2 3 4 5 6
+                    Key : the length is current col minus previous invalid col
+                    Example : col  0 1 2 3 4 5 6
                                    ) ) ) ( ( ) )
-                    First match pair is idx 4 and 5, length is 5 - 3 = 2, next match is 3 and 6, length is 6 - 2 = 4
+                    First match pair is col 4 and 5, length is 5 - 3 = 2, next match is 3 and 6, length is 6 - 2 = 4
                  */
                 stack.pop();
 

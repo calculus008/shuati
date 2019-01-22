@@ -137,7 +137,7 @@ public class LE_200_Number_Of_Islands {
      * 3.Initial number of islands should be the total number of element with "TRUE" value (here grid is boolean type)
      * 4.Traverse grid, for each element grid[i][j], check its 4 neighbours, if it's TRUE, union (i, j) with it.
      * 5.Trick of using 1D parents[] array for 2D array grid[][]:
-     *   convert 2D to 1D : idx = i * n + y
+     *   convert 2D to 1D : col = i * n + y
      */
     public class Solution {
         int m;

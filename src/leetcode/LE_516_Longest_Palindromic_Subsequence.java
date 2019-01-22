@@ -33,7 +33,7 @@ public class LE_516_Longest_Palindromic_Subsequence {
              DP
              http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-516-longest-palindromic-subsequence/
 
-             dp[i][j]: the longest palindromic subsequence's length of substring(i, j +1)
+             dp[i][j]: the longest palindromic subsequence's length of substring(i, j + 1)
              // here, the 'end' is exclusive in String.substring(int start, int end);
 
              Solution 1 : Time and Space : O(n ^ 2)
@@ -116,6 +116,8 @@ public class LE_516_Longest_Palindromic_Subsequence {
 
         /**
          Solution 2
+         Use rolling array to reduce space to O(n)
+
          Time : O(n ^ 2)
          Space : O(n)
          **/

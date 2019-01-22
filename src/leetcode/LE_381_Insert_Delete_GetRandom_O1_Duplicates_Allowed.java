@@ -100,11 +100,11 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             /**
              * 2. if the target index is not the last one in list :
              *  a.Get the last value in list.
-             *  b.Set the value at index "idx".
+             *  b.Set the value at index "col".
              *  c.Update HashMap:
              *    For value "last" in HashMap, use it as key to find the set in HashMAp
              *    delete the value of the current last index of list from set,
-             *    add value "idx" to set.
+             *    add value "col" to set.
              */
             if (idx < list.size() - 1) {//!!! not the last one in list
                 int last = list.get(list.size() - 1);
@@ -269,7 +269,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             if (targetIdx < list.size() - 1) {
                 Element e = list.get(list.size() - 1);
                 list.set(targetIdx, e);
-                map.get(e.val).set(e.idx, targetIdx);//!!! list.set(idx,value)
+                map.get(e.val).set(e.idx, targetIdx);//!!! list.set(col,value)
             }
             list.remove(list.size() - 1);
 

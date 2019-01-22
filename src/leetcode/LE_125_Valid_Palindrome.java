@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/14/18.
  */
 public class LE_125_Valid_Palindrome {
-    /*
+    /**
         Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
 
         For example,
@@ -17,6 +17,11 @@ public class LE_125_Valid_Palindrome {
         For the purpose of this problem, we define empty string as valid palindrome.
      */
 
+    /**
+     * Two pointers
+     *
+     * Character.isLetterOrDigit()
+     */
     public static  boolean isPalindrome(String s) {
         if (s == null ||s.length() == 0) return true;
 
@@ -25,6 +30,9 @@ public class LE_125_Valid_Palindrome {
         s = s.toLowerCase();
 
         while (l < r) {
+            /**
+             * find start position from left and right for each round
+             */
             while (l < r && !Character.isLetterOrDigit(s.charAt(l))) {
                 l++;
             }
@@ -32,7 +40,10 @@ public class LE_125_Valid_Palindrome {
                 r--;
             }
 
-            if (s.charAt(l) != s.charAt(r)) return false;
+            if (s.charAt(l) != s.charAt(r)) {
+                return false;
+            }
+
             l++;
             r--;
         }

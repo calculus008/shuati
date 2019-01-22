@@ -50,13 +50,13 @@ public class LE_926_Flip_String_To_Monotone_Increasing {
      *
      * Example :
      *
-     * idx 0 1 2 3 4
+     * col 0 1 2 3 4
      *     0 0 1 1 0
      *
      * '|' 代表分割处。 <== | ==>
      *
      *        | 0 | 0 | 1 | 1 | 0 |
-     * idx    0   1   2   3   4   5
+     * col    0   1   2   3   4   5
      *      <== ------------------->
      * l[i]   0   0   0   1   2   2
      *

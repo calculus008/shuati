@@ -33,6 +33,8 @@ public class LE_207_Course_Schedule {
     Topological sorting, https://www.geeksforgeeks.org/topological-sorting/
     Time : O(V + E), Space : O(n)
     https://www.youtube.com/watch?v=3gelaRgXRpA&index=7&list=PLvyIyKZVcfAkKE4fx9dz12HnEn-uzxrIK
+
+     面经变形题 - 处理make file dependency
     */
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         int[] indegree = new int[numCourses];

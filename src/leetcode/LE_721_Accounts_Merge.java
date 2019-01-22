@@ -61,21 +61,21 @@ public class LE_721_Accounts_Merge {
      *
      *  It is actually:
      *
-     *  idx
+     *  col
      *   0   ["John", "johnsmith@mail.com", "john00@mail.com"],
      *   1   ["John", "johnnybravo@mail.com"],
      *   2   ["John", "johnsmith@mail.com", "john_newyork@mail.com"]
      *   3    ["Mary", "mary@mail.com"]
      *
-     *   So we can use "idx" as index in UnionFind, plus, "name" for each account (first element in each list)
+     *   So we can use "col" as index in UnionFind, plus, "name" for each account (first element in each list)
      *   is not unique, so we can't use it as index in UnionFind.
      *
-     *   3.第二个坑 ： The first HashMap uses email as key and the idx that the mail first appears as value.
+     *   3.第二个坑 ： The first HashMap uses email as key and the col that the mail first appears as value.
      *     In the first for loop, loop through accounts, inner loop goes through emails of each account.
-     *     If given email is not in HashMap, put it as key and current account idx as value;
+     *     If given email is not in HashMap, put it as key and current account col as value;
      *     If given email is already in HashMap, union it with the one that is already in HashMap;
      *
-     *     最后，相同的email通过UnifonFind, 会有一个相同的representative. It is in the form of idx of account.
+     *     最后，相同的email通过UnifonFind, 会有一个相同的representative. It is in the form of col of account.
      *
      *     这里用UnionFind起到分类功能，有相同性质的个体之间做union, 最后他们有共同的代表, 是一个代表，不是“三个代表”。
      *     应用的时候要确定用那个属性做union, 这个属性必须有唯一值 (unique). 理想状况是，该属性是非负的integer, 这样

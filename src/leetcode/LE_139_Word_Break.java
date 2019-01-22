@@ -99,7 +99,7 @@ public class LE_139_Word_Break {
     /**
      * This solution MLE on lintcode for the case that given s is very large
      *
-     * Here dp[i] means if chars from idx 0 to i -1 can be broken into valid words
+     * Here dp[i] means if chars from col 0 to i -1 can be broken into valid words
      */
     public boolean wordBreak2(String s, List<String> wordDict) {
         if (s == null || s.length() == 0) return false;

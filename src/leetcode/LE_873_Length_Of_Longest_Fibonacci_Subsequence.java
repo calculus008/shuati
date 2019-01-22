@@ -124,7 +124,7 @@ public class LE_873_Length_Of_Longest_Fibonacci_Subsequence {
          k = 2, j = 1, A[2] = 3, A[1] = 2, A[2] - A[1] = 1, 1 exists in A, index is 0 (i),
          dp[j][k] = dp[1][2] = dp[i][j] + 1 = dp[0][1] + 1 = 3
 
-      idx      0 1 2 3 4
+      col      0 1 2 3 4
                1 2 3 4 5
          0  1  2 2 2 2 2
          1  2  2 2 3 2 2
@@ -135,7 +135,7 @@ public class LE_873_Length_Of_Longest_Fibonacci_Subsequence {
          k = 3, j = 2, A[3] = 4, A[2] = 3, A[3] - A[2] = 1, 1 exists in A, index is 0 (i),
          dp[j][k] = dp[2][3] = dp[i][j] + 1 = dp[0][2] + 1 = 3
 
-      idx      0 1 2 3 4
+      col      0 1 2 3 4
                1 2 3 4 5
          0  1  2 2 2 2 2
          1  2  2 2 3 2 2
@@ -146,7 +146,7 @@ public class LE_873_Length_Of_Longest_Fibonacci_Subsequence {
          k = 4, j = 2, A[4] = 5, A[2] = 3, A[3] - A[2] = 2, 2 exists in A, index is 1 (i),
          dp[j][k] = dp[2][4] = dp[i][j] + 1 = dp[1][2] + 1 = 4
 
-     idx       0 1 2 3 4
+     col       0 1 2 3 4
                1 2 3 4 5
          0  1  2 2 2 2 2
          1  2  2 2 3 2 2

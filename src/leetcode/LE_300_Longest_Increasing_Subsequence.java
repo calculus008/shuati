@@ -52,10 +52,10 @@ public class LE_300_Longest_Increasing_Subsequence {
      i = 0,                                                                                                              {1}
      i = 1, nums[1] = 3, #1, tailIdx++, tailIdx = 1,                                      tails[tailIdx] = tails[1] = 3, {1, 3}
      i = 2, nums[2] = 5, #1, tailIdx++, tailIdx = 2,                                      tails[tailIdx] = tails[2] = 5, {1, 3, 5}
-     i = 3, nums[3] = 2, #3,            tailIdx = 2, find in tails {1, 3, 5}, idx = 1,    tails[idx] = tails[1] = 2,     {1, 2, 5}
+     i = 3, nums[3] = 2, #3,            tailIdx = 2, find in tails {1, 3, 5}, col = 1,    tails[col] = tails[1] = 2,     {1, 2, 5}
      i = 4, nums[4] = 8, #1, tailIDx++, tailIdx = 3,                                      tails[tailIdx] = tails[3] = 8, {1, 2, 5, 8}
-     i = 5, nums[5] = 4, #3,            tailIdx = 3, find in tails {1, 2, 5, 8}, idx = 2, tails[idx] = tails[2] = 4,     {1, 2, 4, 8}
-     i = 6, nums[6] = 6, #3,            tailIdx = 3, find in tails {1, 2, 4, 8}, idx = 3, tails[idx] = tails[3] = 6,     {1, 2, 4, 6}
+     i = 5, nums[5] = 4, #3,            tailIdx = 3, find in tails {1, 2, 5, 8}, col = 2, tails[col] = tails[2] = 4,     {1, 2, 4, 8}
+     i = 6, nums[6] = 6, #3,            tailIdx = 3, find in tails {1, 2, 4, 8}, col = 3, tails[col] = tails[3] = 6,     {1, 2, 4, 6}
 
      Answer: tailIdx + 1 = 3 + 1 = 4
 

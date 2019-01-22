@@ -19,9 +19,8 @@ public class LE_16_3Sum_Closest {
 
     //Time : O(n ^ 2), Space : O(1)
     public int threeSumClosest(int[] nums, int target) {
-        int res = nums[0] + nums[1] + nums[2];
-
         Arrays.sort(nums);
+        int res = nums[0] + nums[1] + nums[2];
 
         for (int i = 0; i < nums.length - 2; i++) {
             int start = i + 1;
@@ -52,6 +51,7 @@ public class LE_16_3Sum_Closest {
         for (int i = numbers.length - 1; i >= 2; i--) {
             int start = 0;
             int end = i - 1;
+
             while (start < end) {
                 int sum = numbers[start] + numbers[end] + numbers[i];
                 if (sum > target) {

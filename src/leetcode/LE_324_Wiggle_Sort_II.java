@@ -31,7 +31,7 @@ public class LE_324_Wiggle_Sort_II {
          Given  [1, 5, 1, 1, 6, 4]
 
          After sort : [1, 1, 1, 4, 5, 6]
-                   idx 0  1  2  3  4  5
+                   col 0  1  2  3  4  5
 
          mid = (6 - 1) / 2 = 2
 
@@ -39,19 +39,19 @@ public class LE_324_Wiggle_Sort_II {
              temp[0] = nums[2 - 0] = 1
              temp[1] = nums[5 - 0] = 6
              temp [1, 6, 0, 0, 0, 0]
-             idx   0  1  2  3  4  5
+             col   0  1  2  3  4  5
 
          i = 1
              temp[2] = nums[2 - 1] = 1
              temp[3] = nums[5 - 1] = 5
              temp [1, 6, 1, 5, 0, 0]
-             idx   0  1  2  3  4  5
+             col   0  1  2  3  4  5
 
          i = 2
              temp[4] = nums[2 - 2] = 1
              temp[5] = nums[5 - 2] = 4
              temp [1, 6, 1, 5, 1, 4]
-             idx   0  1  2  3  4  5
+             col   0  1  2  3  4  5
      **/
 
     public void wiggleSort1(int[] nums) {
@@ -64,11 +64,11 @@ public class LE_324_Wiggle_Sort_II {
         //!!! "<= mid"
         for (int i = 0; i <= mid ; i++) {
             temp[idx] = nums[mid - i];
-            if (idx + 1 < n) {//!!! if the length of nums is odd, idx+1 could go beyond boundary, need to check here
+            if (idx + 1 < n) {//!!! if the length of nums is odd, col+1 could go beyond boundary, need to check here
                 /**
                     (n-1)-i : start from end of the sorted array (the largest), move left
 
-                    idx starts with 0 (even), each time increase 2, so it always points to even index. idx + 1 points to odd index.
+                    col starts with 0 (even), each time increase 2, so it always points to even index. col + 1 points to odd index.
 
                     place 2 elements adjacent to each other in each iteration, garauntee first one is smaller than the 2nd one.
 
@@ -120,8 +120,8 @@ public class LE_324_Wiggle_Sort_II {
          Original Indices:    6  0  7  1  8  2  9  3 10  4 11  5   (wiggled)
          In order to achieve this, we can use a function alike
 
-         int map_index(int idx, int n) {
-            return (2 * idx + 1) % (n | 1);
+         int map_index(int col, int n) {
+            return (2 * col + 1) % (n | 1);
          }
          where (n | 1) calculates the nearest odd that is not less than n.!!!
 

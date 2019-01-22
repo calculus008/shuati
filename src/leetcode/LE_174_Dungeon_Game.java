@@ -1,10 +1,12 @@
 package leetcode;
 
+import java.util.Arrays;
+
 /**
  * Created by yuank on 3/23/18.
  */
 public class LE_174_Dungeon_Game {
-    /*
+    /**
         The demons had captured the princess (P) and imprisoned her in the bottom-right corner of a dungeon.
         The dungeon consists of M x N rooms laid out in a 2D grid. Our valiant knight (K) was initially positioned
         in the top-left room and must fight his way through the dungeon to rescue the princess.
@@ -61,29 +63,92 @@ public class LE_174_Dungeon_Game {
          1   1   6
 
     */
-    public int calculateMinimumHP(int[][] dungeon) {
-        if (dungeon == null || dungeon.length == 0) return 0;
+    class Solution1 {
+        public int calculateMinimumHP(int[][] dungeon) {
+            if (dungeon == null || dungeon.length == 0) return 0;
 
-        int m = dungeon.length;
-        int n = dungeon[0].length;
-        int[][] dp = new int[m][n];
+            int m = dungeon.length;
+            int n = dungeon[0].length;
+            int[][] dp = new int[m][n];
 
-        dp[m - 1][n - 1] = Math.max(1 - dungeon[m - 1][n - 1], 1);
-        for (int i = n - 2; i >= 0; i--) {//last row
-            dp[m - 1][i] = Math.max(dp[m - 1][i + 1] - dungeon[m - 1][i], 1);
-        }
+            dp[m - 1][n - 1] = Math.max(1 - dungeon[m - 1][n - 1], 1);
 
-        for (int i = m - 2; i >= 0; i--) {//last column
-            dp[i][n - 1] = Math.max(dp[i + 1][n - 1] - dungeon[i][n - 1], 1);
-        }
-
-        for (int i = m - 2; i >= 0; i--) {
-            for (int j = n - 2; j >= 0; j--) {
-                dp[i][j] = Math.min(Math.max(dp[i + 1][j] - dungeon[i][j], 1),
-                        Math.max(dp[i][j + 1] - dungeon[i][j], 1));
+            for (int i = n - 2; i >= 0; i--) {//last row
+                dp[m - 1][i] = Math.max(dp[m - 1][i + 1] - dungeon[m - 1][i], 1);
             }
-        }
 
-        return dp[0][0];
+            for (int i = m - 2; i >= 0; i--) {//last column
+                dp[i][n - 1] = Math.max(dp[i + 1][n - 1] - dungeon[i][n - 1], 1);
+            }
+
+            for (int i = m - 2; i >= 0; i--) {
+                for (int j = n - 2; j >= 0; j--) {
+                    dp[i][j] = Math.min(Math.max(dp[i + 1][j] - dungeon[i][j], 1),
+                            Math.max(dp[i][j + 1] - dungeon[i][j], 1));
+                }
+            }
+
+            return dp[0][0];
+        }
+    }
+
+    /**
+     * https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-174-dungeon-game/
+     *
+     * dp[i][j] : min health at position (i, j) to save princess and is alive.
+     *
+     * Time and Space : O(m * n)
+     *
+     * Example :
+     *
+     * Dungeon
+     *         -2  -3   3
+     *         -5  -10  1
+     *          10  30 -5
+     *
+     * dp
+     *         max max max max
+     *         max max max max
+     *         max max max 1
+     *         max max 1 max
+     *
+     *         max max max max
+     *         max max max max
+     *          1   1   6   1
+     *         max max 1   max
+     *
+     *         max max max max
+     *          6  11  5  max
+     *          1   1   6   1
+     *         max max 1   max
+     *
+     *          7   5   2 max
+     *          6  11   5  max
+     *          1   1   6   1
+     *         max max 1   max
+     */
+    class Solution2 {
+        public int calculateMinimumHP(int[][] dungeon) {
+            if (dungeon == null || dungeon.length == 0) return 0;
+
+            int m = dungeon.length;
+            int n = dungeon[0].length;
+            int[][] dp = new int[m + 1][n + 1];
+
+            for(int[] d : dp) {
+                Arrays.fill(d, Integer.MAX_VALUE);
+            }
+
+            dp[m][n - 1] = 1;
+            dp[m - 1][n] = 1;
+
+            for (int i = m - 1; i >= 0; i--) {
+                for (int j = n - 1; j >= 0; j--) {
+                    dp[i][j] = Math.max(1, Math.min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j]);
+                }
+            }
+
+            return dp[0][0];
+        }
     }
 }

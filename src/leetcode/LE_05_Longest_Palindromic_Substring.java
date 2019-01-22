@@ -59,7 +59,15 @@ public class LE_05_Longest_Palindromic_Substring {
          }
      }
 
-    //Solution 2 : DP
+    /**Solution 2 : DP
+     * dp[i][j] : if substring between index i ~ j is palindrome
+     * Transition :  dp[i][j] = true if char at i and j are equal AND :
+     *                 1.j - i == 0, 即i和j相等，是同一个char, 例如， “b"
+     *                 2.j - i == 1, 例如， “bb"
+     *                 3.j - i == 2, 例如， “bab"
+     *                 4.i+1 - j-1 是palindrome (dp[i + 1][j - 1] = true)
+     *
+     **/
     public String longestPalindrome2(String s) {
         if (s == null || s.length() == 0) return s;
 

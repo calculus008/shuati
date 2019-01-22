@@ -37,6 +37,10 @@ public class LE_93_Restore_IP_Addresses {
         return res;
     }
 
+    /**
+     * !!!
+     * Validate if each token is a valid IP address token
+     */
     private static boolean isValid(String s) {
         int n = s.length();
 
@@ -61,7 +65,7 @@ public class LE_93_Restore_IP_Addresses {
     //Using StingBuilder to save memory. 4ms
     public static void helper1(List<String> res, String s, int idx, int count, StringBuilder sb) {
         if (count > 4) return;
-        //!!! idx == s.length()
+        //!!! col == s.length()
         if (count == 4 && idx == s.length()) {
             res.add(sb.toString());
             return;

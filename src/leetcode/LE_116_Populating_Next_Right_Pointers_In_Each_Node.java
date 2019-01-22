@@ -63,6 +63,7 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
     public void connect2(TreeLinkNode root) {
         if (root == null) return;
         TreeLinkNode start = root;
+
         while (start != null) {
             TreeLinkNode cur = start;
 
