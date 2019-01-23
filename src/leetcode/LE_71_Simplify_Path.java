@@ -14,6 +14,10 @@ public class LE_71_Simplify_Path {
         path = "/a/./b/../../c/", => "/c"
      */
 
+    /**
+     * !!!
+     * Stack
+     */
     public static String simplifyPath(String path) {
         if (null == path || path.length() == 0) return path;
 
@@ -29,7 +33,7 @@ public class LE_71_Simplify_Path {
             if (token.equals("..")) {
                 if (!stack.isEmpty()) {
                     stack.pop();
-                }
+                }//else - token is "..", but stack is empty, do nothing
             } else {
                 stack.push(token);
             }

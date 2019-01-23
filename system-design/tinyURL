@@ -1,0 +1,92 @@
+https://github.com/FreemanZhang/system-design/blob/master/tinyURL.md
+
+https://www.youtube.com/watch?v=JQDHz72OA3c&list=PLPwtuEokMsa_rriFpXGFX6StQAkQFwhvd
+https://www.youtube.com/watch?v=fMZMm_0ZhK4
+
+1.Scenario
+Assume Twitter has 300M user per month, our site is 1/10, so user per month 30M.
+
+1.1
+What can we use to build tinyURL?
+Assume we can use A ~ Z, a ~ z, 0 ~ 9, total 26 + 26 + 10 = 62 chars.
+Say we use 7 chars, total possible combination is 62 ^ 7 = 10,000,000 * 6 ^ 7, 6 ^ 2 * 6 ^ 2 * 6 ^ 2 * 6 > 30 * 30 * 30 * 6 = 27 * 6 * 1000 = 162000
+
+162 * 1000 * 10,000,000 = 162 * 10,000,000,000 = 1.62 * 1000,000,000,000 in trillion scale
+
+Actual size : 3.5 Trillion
+
+If we use a few thousand per second, it will take 1000,000,000 seconds to use it up (about 110 years)
+
+1.2
+Column:
+longURL is 2000 chars = 2KB
+tinyURL : assume 17 bytes
+created_ts : assume 7 bytes
+exp_ts : aums 7 bytes
+
+(Oracle ts ranging from 5 to 11 bytes)
+
+So total 2.031 KB.
+
+For 30M users/moth, -> 60.7 GB/Month -> 0.7 TB/Year -> 3.6 TB/5Years
+
+
+2.Service + Storage
+RDBMS - ACID, but hard to scale.
+        Need to check if generated random number exists in DB, which only works for a single host(DB) solution.
+        If we are in a distributed env, raise condition will happen - same random number could happen at the same time,
+        so they both try to insert into DB, it means different longURL mapped to the same tinyURL. Data is corrupted.
+
+        So you have to do check or set constrain for unique tinyURL.
+
+        Or use putIfAbsent, which is only supported in RDBMS.
+
+
+No Sql - highly scalable, eventual consistency
+
+Is transaction required?            No
+Is complicated SQL query required?  No
+Is fast implementation desired?     Yes. Less code if we use RDBMS
+
+Also we need to get tinyURL form longURL and get longURL from tinyURL. So we need to build indexes for both.
+Most No SQL don't support secondary index. So it needs to build 2 tables:
+table1 : row_key=longURL, col_key=shortURL, value=timestamp
+table2 : row_key=shortURL, col_key=longURL, value=timestamp
+
+
+
+MD5(longURL), then take the first 7 chars. Problem - high collision rate, it could generate the same hash for different inputs.
+
+3.Scale
+Base62  + counter, use unique number fro a counter in Base62()
+
+Can't maintain one counter for all hosts in a distributed env, can't scale.
+
+So :
+
+Base62 + ZooKeeper (distributed coordination service to manage distributed hosts)
+ZooKeeper manages resources and resolve raise condition.
+
+Distributed URL shortener using ZooKeeper, no collision guaranteed.
+Each tinyURL worker has a range of numbers, it requests it from ZooKeeper. We break 3.5 Trillion into different ranges (buckets)
+and assign it to different workers.
+
+If one worker is down, we just lose one bucket.
+If one new worker is added, it will also request a bucket from ZooKeeper.
+If one bucket is used up, worker requests ZooKeeper again, ZooKeeper keeps the record and assign another bucket.
+
+This way, we don't need to do DB checking and there's no collision. A cache is used to store
+already generated tinyURL to improve request latency.
+
+API
+createTinyURL()
+getLongURL()
+
+Or
+
+encode()
+decode()
+
+Nee to clarify with interviewer:
+1.longURL and tinyURL must be 1 to 1 mapping?
+2.Do we need to recycle tinyURL after it's expired?

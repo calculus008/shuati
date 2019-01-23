@@ -51,10 +51,12 @@ public class LE_777_Swap_Adjacent_In_LR_String {
      *   it means L actually moves to the right side, which is impossible based
      *   on the given rules, therefore we should return false.
      *
+     *   two pass
+     *
      * Time  : O(n)
      * Space : O(1)
      */
-    class Solution {
+    class Solution1 {
         public boolean canTransform(String start, String end) {
             /**
              * "1 <= len(start) = len(end) <= 10000", with this guaranteed,we don't need to check length equality.
@@ -92,6 +94,56 @@ public class LE_777_Swap_Adjacent_In_LR_String {
                     j++;
                 }
             }
+
+            return true;
+        }
+    }
+
+    /**
+     * one pass
+     */
+    class Solution2 {
+        public boolean canTransform(String start, String end) {
+            if (!start.replace("X", "").equals(end.replace("X", ""))) {
+                return false;
+            }
+
+            int i = 0, j = 0;
+            int n = start.length();
+            char[] s = start.toCharArray();
+            char[] e = end.toCharArray();
+
+            while (i < n && j < n) {
+                while (i < n && s[i] == 'X') {
+                    i++;
+                }
+
+                while (j < n && e[j] == 'X') {
+                    j++;
+                }
+
+                /**
+                 * !!!
+                 * check boundary
+                 */
+                if (i < n && j < n) {
+                    /**
+                     * with the logic at the beginning to check if strings are equal
+                     * after 'X' removed, no need to check "s[i] != e[j]" here
+                     */
+                    if ((s[i] == 'L' && i < j) || (s[i] == 'R' && i > j)) {
+                        return false;
+                    }
+                }
+
+                /**
+                 * !!!
+                 * Never forget in while loop like this
+                 */
+                i++;
+                j++;
+            }
+
 
             return true;
         }
