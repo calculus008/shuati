@@ -1,5 +1,7 @@
 https://github.com/FreemanZhang/system-design/blob/master/tinyURL.md
 
+https://leetcode.com/discuss/interview-question/system-design/124658/Design-a-URL-Shortener-(-TinyURL-)-System
+
 https://www.youtube.com/watch?v=JQDHz72OA3c&list=PLPwtuEokMsa_rriFpXGFX6StQAkQFwhvd
 https://www.youtube.com/watch?v=fMZMm_0ZhK4
 
@@ -90,3 +92,6 @@ decode()
 Nee to clarify with interviewer:
 1.longURL and tinyURL must be 1 to 1 mapping?
 2.Do we need to recycle tinyURL after it's expired?
+
+
+
