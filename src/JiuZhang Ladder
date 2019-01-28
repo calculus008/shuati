@@ -50,13 +50,13 @@ LE_01_Two_Sum
 LE_167_Two_Sum_II_Array_Is_Sorted            (lint 608)
 LE_170_Two_Sum_III_Data_Structure_Design     (lint 607)
 LI_587_Two_Sum_Unique_Pairs
-LI_610_Two_Sum_Difference_Equals_To_Target
+LI_610_Two_Sum_Difference_Equals_To_Target   (**)
 LE_15_3Sum                                   (lint 57)
 LE_16_3Sum_Closest                           (lint 533)
 LE_18_4Sum                                   (lint 58)
 LE_454_4Sum_II
-LE_611_Valid_Triangle_Number                 (lint 382)
-LE_259_3Sum_Smaller                          (lint 59)
+LE_611_Valid_Triangle_Number                 (lint 382)  (***)
+LE_259_3Sum_Smaller                          (lint 59)   (***)
 LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
 LI_604_Window_Sum
 

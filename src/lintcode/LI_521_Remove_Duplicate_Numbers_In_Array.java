@@ -24,6 +24,8 @@ public class LI_521_Remove_Duplicate_Numbers_In_Array {
 
          LintCode 练习地址：http://www.lintcode.com/problem/remove-duplicate-numbers-in-array/
 
+         Different from LE_26, here, the given array is NOT sorted.
+
          问题分析
          这个问题有两种做法，第一种做法比较容易想到的是，把所有的数扔到 hash 表里，然后就能找到不同的整数有哪些。
          但是这种做法会耗费额外空间 O(n)。面试官会追问，如何不耗费额外空间。

@@ -21,6 +21,11 @@ public class LI_610_Two_Sum_Difference_Equals_To_Target {
 
     //HashMap solution, Time and Space : O(n)
     public int[] twoSum7(int[] nums, int target) {
+        /**
+         * HashMap :
+         *  key           value
+         * number -> its index in nums
+         */
         HashMap<Integer, Integer> map = new HashMap<>();
 
         for (int i = 0; i < nums.length; i++) {
@@ -109,9 +114,11 @@ public class LI_610_Two_Sum_Difference_Equals_To_Target {
      *   Two Pointers solution : Time : O(nlogn), Space : O(n)
 
          作为两数之和的一个 Follow up 问题，在两数之和被问烂了以后，两数之差是经常出现的一个面试问题。
-         我们可以先尝试一下两数之和的方法，发现并不奏效，因为即便在数组已经排好序的前提下，nums[i] - nums[j] 与 target 之间的关系并不能决定我们淘汰掉 nums[i] 或者 nums[j]。
+         我们可以先尝试一下两数之和的方法，发现并不奏效，因为即便在数组已经排好序的前提下，
+         nums[i] - nums[j] 与 target 之间的关系并不能决定我们淘汰掉 nums[i] 或者 nums[j]。
 
-         那么我们尝试一下将两根指针同向前进而不是相向而行，在 i 指针指向 nums[i] 的时候，j 指针指向第一个使得 nums[j] - nums[i] >= |target| 的下标 j：
+         那么我们尝试一下将两根指针同向前进而不是相向而行，在 i 指针指向 nums[i] 的时候，j 指针指向第一个使得
+         nums[j] - nums[i] >= |target| 的下标 j：
 
          如果 nums[j] - nums[i] == |target|，那么就找到答案
          否则的话，我们就尝试挪动 i，让 i 向右挪动一位 => i++
@@ -162,7 +169,7 @@ public class LI_610_Two_Sum_Difference_Equals_To_Target {
                 j++;
             }
             /**
-             * 两个指针同相而行，先移动j, 指向第一个使得 nums[j] - nums[i] >= |target| 的下标 j
+             * 两个指针同向而行，先移动j, 指向第一个使得 nums[j] - nums[i] >= |target| 的下标 j
              */
             while (j < n && pairs[j].num - pairs[i].num < target) {
                 j++;

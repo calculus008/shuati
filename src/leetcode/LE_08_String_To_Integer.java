@@ -59,30 +59,30 @@ public class LE_08_String_To_Integer {
      */
 
     public int myAtoi(String str) {
-        if(null == str || str.length() == 0) return 0;
+        if (null == str || str.length() == 0) return 0;
         int sign = 1;
         //!!!
         long base = 0;
 
         //trim leading space
-        int i=0;
-        while(str.charAt(i)==' ') {
+        int i = 0;
+        while (str.charAt(i) == ' ') {
             i++;
         }
 
         //check possible sign
-        if(str.charAt(i)=='-' || str.charAt(i)=='+') {
-            sign = str.charAt(i)=='+'?1:-1;
+        if (str.charAt(i) == '-' || str.charAt(i) == '+') {
+            sign = str.charAt(i) == '+' ? 1 : -1;
             i++;
         }
 
-        while(i<str.length() && str.charAt(i)>='0' && str.charAt(i)<='9') {
-            base = base*10 + (str.charAt(i) - '0');
+        while (i < str.length() && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
+            base = base * 10 + (str.charAt(i) - '0');
             i++;
             if (base > Integer.MAX_VALUE)
                 return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
         }
 
-        return sign*(int)base;
+        return sign * (int) base;
     }
 }

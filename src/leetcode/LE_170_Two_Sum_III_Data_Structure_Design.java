@@ -19,7 +19,9 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
      */
 
     public class TwoSum1 {
-        // Solution 1 : add O(1), find O(n)
+        /**
+         * Solution 1 : add O(1), find O(n)
+         **/
         private Map<Integer, Integer> map;
 
         public TwoSum1() {
@@ -65,7 +67,7 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
                 sum.add(number * 2);
             } else {
                 /**
-                 * 1.注意Iterator的用法 ： "Iterator<Inreger>"
+                 * 1.注意Iterator的用法 ： "Iterator<Integer>"
                  *
                  * 2.set用的是"contains", 不是“containsKey"
                  */
@@ -85,9 +87,11 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
 
     public class TwoSum3 {
         /**
-         * 双指针。add操作时间复杂度一般情况下为O(1)。find操作时间复杂度O(nlogn)。n为已加入的元素个数。
+         * Solution 3
+         * 双指针。
+         * add操作时间复杂度一般情况下为O(1)。
+         * find操作时间复杂度O(nlogn)。n为已加入的元素个数。
          */
-
         ArrayList<Integer> nums = new ArrayList<>();
 
         public void add(int number) {

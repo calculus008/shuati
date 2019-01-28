@@ -6,8 +6,8 @@ package lintcode;
 public class LI_604_Window_Sum {
     /**
          Given an array of n integer, and a moving window(size k),
-         move the window at each iteration from the start of the array, f
-         ind the sum of the element inside the window at each moving.
+         move the window at each iteration from the start of the array,
+         find the sum of the element inside the window at each moving.
 
          Example
          For array [1,2,7,8,5], moving window size k = 3.

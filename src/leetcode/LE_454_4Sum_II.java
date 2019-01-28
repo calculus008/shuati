@@ -34,25 +34,25 @@ public class LE_454_4Sum_II {
 
     //HashMap, Time : O(n ^ 2)
     public int fourSumCount(int[] A, int[] B, int[] C, int[] D) {
-        if(null == A || null == B|| null == D || null == D ||
-                A.length ==0 || B.length== 0 || C.length==0 || D.length ==0)
+        if (null == A || null == B || null == D || null == D ||
+                A.length == 0 || B.length == 0 || C.length == 0 || D.length == 0)
             return 0;
 
-        int result=0;
+        int result = 0;
         Map<Integer, Integer> map = new HashMap<>();
 
-        for(int i=0; i<A.length; i++) {
-            for(int j=0; j<B.length; j++) {
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < B.length; j++) {
                 int sum = A[i] + B[j];
                 map.put(sum, map.getOrDefault(sum, 0) + 1);
             }
         }
 
-        for(int i=0; i<C.length; i++) {
-            for(int j=0; j<D.length; j++) {
+        for (int i = 0; i < C.length; i++) {
+            for (int j = 0; j < D.length; j++) {
                 int target = 0 - (C[i] + D[j]);
-                if(map.containsKey(target)) {
-                    result+=map.get(target);
+                if (map.containsKey(target)) {
+                    result += map.get(target);
                 }
             }
         }

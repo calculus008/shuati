@@ -4,8 +4,8 @@ package leetcode;
  * Created by yuank on 3/6/18.
  */
 public class LE_26_Remove_Dup_From_Sorted_Array {
-    /*
-        Given a sorted array, remove the duplicates in-place such that each element appear only once and return the new length.
+    /**
+        Given a SORTED(!!!) array, remove the duplicates in-place such that each element appear only once and return the new length.
 
         Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 

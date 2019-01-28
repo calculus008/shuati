@@ -38,7 +38,7 @@ public class LE_259_3Sum_Smaller {
                 if (nums[i] + nums[left] + nums[right] < target) {
                     /**
                      * !!!
-                     * nums[i] is fixed in each for loop,so for numbers :
+                     * nums[i] is fixed in each for loop, so for numbers :
                      *
                      * i, left, right
                      *
