@@ -50,6 +50,9 @@ public class LE_494_Target_Sum {
                 sum += num;
             }
 
+            /**
+             * !!! 都是正整数
+             */
             if (sum < S) {
                 return 0;
             }
