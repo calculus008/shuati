@@ -65,7 +65,7 @@ LE_26_Remove_Dup_From_Sorted_Array           (lint 521)
 LE_80_Remove_Dup_From_Sorted_Array_II        (lint 101)
 
 LE_75_Set_Colors                             (lint 148)   Dutch Flag
-LI_143_Sort_Colors_II                                     Rainbow Sort
+LI_143_Sort_Colors_II                                     Rainbow Sort (***)
 LI_625_Partition_Array_II
 LI_539_Move_Zero
 

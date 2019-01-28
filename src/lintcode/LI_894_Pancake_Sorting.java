@@ -18,16 +18,19 @@ public class LI_894_Pancake_Sorting {
          Use flip(arr, i) function to sort the array.
      */
 
-    //https://www.geeksforgeeks.org/pancake-sorting/
-    //Time : O(n ^ 2)
-
+    /**
+     * https://www.geeksforgeeks.org/pancake-sorting/
+     * Time : O(n ^ 2)
+     * **/
     public void pancakeSort(int[] array) {
         if (array == null || array.length == 0) {
             return;
         }
 
-        // iterate from right to left,
-        // keep flipping to make sure the current largest number is at array[0], then, flip it to the last
+        /**
+         * iterate from right to left, keep flipping to make sure the current largest number is at array[0],
+         * then, flip it to the last
+         **/
         int i = array.length; // track the first index of "largest" element
         while (i > 0) {
             for (int j = 0; j < i; j++) {

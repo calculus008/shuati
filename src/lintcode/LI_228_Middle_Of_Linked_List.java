@@ -48,13 +48,14 @@ public class LI_228_Middle_Of_Linked_List {
 
          ListNode slow = head, fast = head.next;
          while (fast != null && fast.next != null) {
-         slow = slow.next;
-         fast = fast.next.next;
+            slow = slow.next;
+            fast = fast.next.next;
          }
 
          return slow;
 
-         在上面的程序中，我们将快指针放在第二个节点上，慢指针放在第一个节点上，while 循环中每一次快指针走两步，慢指针走一步。这样当快指针走到头的时候，慢指针就在中点了。
+         在上面的程序中，我们将快指针放在第二个节点上，慢指针放在第一个节点上，while 循环中每一次快指针走两步，慢指针走一步。
+         这样当快指针走到头的时候，慢指针就在中点了。
 
          快慢指针的算法，在下一小节的“带环链表”中，也用到了。
 
