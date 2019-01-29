@@ -41,7 +41,7 @@ public class LE_668_Kth_Smallest_Number_In_Multiplication_Table {
      *
      * Find first x such that there are k elements less or equal to x in the table.
      *
-     * Time  : O(m*log(m*n))
+     * Time  : O(m * log(m*n))
      * Space : O(1)
      *
      * 1 2 3
@@ -72,7 +72,8 @@ public class LE_668_Kth_Smallest_Number_In_Multiplication_Table {
              * ">=", 是要找比mid小的数的个数是 k - 1 个
              * 而mid是第k个
              */
-            System.out.println("l = " + l + ", r = " + r + ", mid = " + mid);
+//            System.out.println("l = " + l + ", r = " + r + ", mid = " + mid);
+
             if (len(m, n, mid) >= k) {
                 r = mid;
             } else {
@@ -88,7 +89,7 @@ public class LE_668_Kth_Smallest_Number_In_Multiplication_Table {
         for (int i = 1; i <= m; i++) {
             res += Math.min(x / i, n);
         }
-        System.out.println(" len(" + x + ") = " + res);
+//        System.out.println(" len(" + x + ") = " + res);
         return res;
     }
 

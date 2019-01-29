@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 2/28/18.
  */
 public class LE_50_POW {
-    /*
+    /**
         Implement pow(x, n).
 
         Example 1:

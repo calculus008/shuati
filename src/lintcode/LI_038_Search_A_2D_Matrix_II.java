@@ -45,7 +45,7 @@ public class LI_038_Search_A_2D_Matrix_II {
                 y++;
             } else if(target < matrix[x][y]) {
                 x--;
-            } else {
+            } else {//!!! return number of occurrences
                 res++;
                 x--;
                 y++;

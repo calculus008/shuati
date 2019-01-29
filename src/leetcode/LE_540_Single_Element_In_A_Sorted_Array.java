@@ -17,13 +17,16 @@ public class LE_540_Single_Element_In_A_Sorted_Array {
          Medium
      */
 
+    /**
+     * https://zxi.mytechroad.com/blog/algorithms/binary-search/leetcode-540-single-element-in-a-sorted-array/
+     */
     public int singleNonDuplicate(int[] nums) {
         int l = 0;
         int r = nums.length;
 
         /**
          col 0 1 2 3 4 5 6 7 8 9 10
-         1 1 2 2 3 3 4 5 5 6 6
+             1 1 2 2 3 3 4 5 5 6 6
          Before single number, [0,1], [2,3], [4,5], pair stars at index of even number.
          After single number, [7,8], [9, 10], pair stars at index of odd number.
 

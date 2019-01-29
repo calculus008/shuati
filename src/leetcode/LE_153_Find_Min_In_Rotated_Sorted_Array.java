@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/20/18.
  */
 public class LE_153_Find_Min_In_Rotated_Sorted_Array {
-    /*
+    /**
         Suppose an array sorted in ascending order is rotated at some pivot unknown to you beforehand.
 
         (i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
@@ -13,6 +13,47 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
 
         You may assume no duplicate exists in the array.
      */
+
+    /**
+     * Best solution, from Huahua
+     * http://zxi.mytechroad.com/blog/divide-and-conquer/leetcode-153-find-minimum-in-rotated-sorted-array/
+     *
+     * Essence is divide-conquer.
+     *
+     * Divide nums into 2 parts, always has one side sorted.
+     * For the part that is sorted (nums[start] < nums[end] because there's no duplicate), min is nums[start],
+     * it takes O(1)
+     *
+     * Time : O(1) + T(n / 2) = O(logn)
+     *
+     */
+    class Solution {
+        public int findMin(int[] nums) {
+            return findMin(nums, 0, nums.length - 1);
+        }
+
+        private int findMin(int[] nums, int left, int right) {
+            /**
+             * 1 or 2 elements left.
+             */
+            if (left + 1 >= right) {
+                return Math.min(nums[left], nums[right]);
+            }
+
+            /**
+             * check if it is sorted, we can do it because there's no duplicate
+             */
+            if (nums[left] < nums[right]) {
+                return nums[left];
+            }
+
+            int mid = left + (right - left) / 2;
+            return Math.min(findMin(nums, left, mid - 1), findMin(nums, mid, right));
+        }
+    }
+
+
+
 
     public int findMin(int[] nums) {
         int start = 0;

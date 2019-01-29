@@ -105,16 +105,23 @@ public class LE_215_Kth_Largest_Element_In_Array {
     */
 
     public int findKthLargest(int[] nums, int k) {
+        /**
+         * first set left and right value
+         */
         int left = 0;
         int right = nums.length - 1;
 
         while (true) {
             int pos = partition(nums, left, right);
+
+            /**
+             * "pos == k - 1"
+             */
             if (pos == k - 1) {
                 return nums[pos];
-            } else if (pos > k - 1) {
+            } else if (pos > k - 1) {//pos - 1
                 right = pos - 1;
-            } else if (pos < k - 1) {
+            } else if (pos < k - 1) {//pos + 1
                 left = pos + 1;
             }
         }
@@ -128,10 +135,19 @@ public class LE_215_Kth_Largest_Element_In_Array {
             if (nums[l] < pivot && nums[r] > pivot) {
                 swap(nums, l++, r--);
             }
+
+            /**
+             * !!!
+             * it's ">=" and "<="
+             */
             if (nums[l] >= pivot) l++;
             if (nums[r] <= pivot) r--;
         }
 
+        /**
+         * put pivot back, since while loop condition is "l <= r",
+         * by this step, we know l and r has crossed each other.
+         */
         swap(nums, left, r);
         return r;
     }

@@ -30,14 +30,15 @@ public class LE_302_Smallest_Rectangle_Enclosing_Black_Pixels {
 
          https://leetcode.com/problems/smallest-rectangle-enclosing-black-pixels/discuss/75127/C++JavaPython-Binary-Search-solution-with-explanation?page=3
 
-         "Imagine we project the 2D array to the bottom axis with the rule "if a column has any black pixel it's projection is black otherwise white"."
+         Imagine we project the 2D array to the bottom axis with the rule
+         "if a column has any black pixel it's projection is black otherwise white"."
 
          Key - "The black pixels are connected, i.e., there is only one black region"
 
          There are only '1' and '0' in image.
 
-         So we can search vertically and horizontally for left, right, top an down since it can be seen as sorted array (0->1 or 1->0)
-         for the two sections separated by given x or y.
+         So we can search vertically and horizontally for left, right, top an down since it can
+         be seen as sorted array (0->1 or 1->0) for the two sections separated by given x or y.
      */
     public int minArea(char[][] image, int x, int y) {
         if (image == null || image.length == 0 || image[0].length == 0) return 0;

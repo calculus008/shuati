@@ -27,6 +27,7 @@ public class LI_235_Prime_Factorization {
             }
         }
 
+        //one extra
         if (num != 1) {
             factors.add(num);
         }

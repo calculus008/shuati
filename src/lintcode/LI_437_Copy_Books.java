@@ -13,6 +13,7 @@ public class LI_437_Copy_Books {
 
          They start copying books at the same time and they all cost 1 minute to copy 1 page of a book.
          What's the best strategy to assign books so that the slowest copier can finish at earliest time?
+         (Min time to finish copying all books)
 
          给出一个数组A包含n个元素，表示n本书以及各自的页数。现在有个k个人复印书籍，每个人只能复印连续一段编号的书，
          比如A[1],A[2]由第一个人复印，但是不能A[1],A[3]由第一个人复印，求最少需要的时间复印所有书。
@@ -71,6 +72,9 @@ public class LI_437_Copy_Books {
             sum += p;
         }
 
+        /**
+         * here the range is time (which equals number of pages)
+         */
         int start = max;
         int end = sum;
         while (start + 1 < end) {

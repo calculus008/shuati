@@ -75,14 +75,15 @@ public class LE_644_Maximum_Average_Subarray_II {
         double prevMin = 0; //double
 
         /**
-         * 存在一个长度大于等于k的subarray, 其平均值大于等于avg，
-         * 使用presum的技巧。
+         * 求是否存在一个长度大于等于k的subarray, 其平均值大于等于avg，
+         * 使用prefix sum的技巧。
          */
         for(int i = 0; i < nums.length; i++) {
             sum += (double)nums[i] - avg; //double 转换
 
             /**
              * 这里是检查subarray从下标0开始的情况。
+             * 就是说，我们找到一个从下标0开始的subarray， 它满足要求的条件。
              */
             if(i >= k - 1 && sum >= 0) {
                 return true;
@@ -179,7 +180,6 @@ public class LE_644_Maximum_Average_Subarray_II {
      * Solution 3, same algorithm as Solution 2
      */
     public double maxAverage2(int[] nums, int k) {
-        // Write your code here
         double l = -1e12;
         double r = 1e12;
         double eps = 1e-6;
@@ -196,6 +196,11 @@ public class LE_644_Maximum_Average_Subarray_II {
         return l;
     }
 
+    /**
+     * The difference with the other solutions is that it uses array sum and min_pre to
+     * record current prefix sum and the min of prefix sum of the elements 0 ~ i - k.
+     * More expensive space wise, the code just looks cleaner.
+     */
     boolean check(int nums[], double avg, int k) {
         double[] sum = new double[nums.length + 1];
         double[] min_pre = new double[nums.length + 1];
@@ -209,5 +214,62 @@ public class LE_644_Maximum_Average_Subarray_II {
             }
         }
         return false;
+    }
+
+    /**
+     * Complete code without comments
+     */
+    class Solution {
+        public double findMaxAverage(int[] nums, int k) {
+            if(nums == null || k > nums.length) {
+                return 0;
+            }
+
+            double start = Double.MAX_VALUE;
+            double end = Double.MIN_VALUE;
+
+            for(int i = 0; i < nums.length; i++) {
+                start = Math.min(start, (double)nums[i]);
+                end = Math.max(end, (double)nums[i]);
+            }
+
+            double eps = 1e-6;
+            double avg = 0;
+
+            while(start + eps < end) {
+                avg = start + (end - start) / 2;
+                if(checkAvg(nums, k, avg)) {
+                    start = avg;
+                } else {
+                    end = avg;
+                }
+            }
+
+            return start;
+        }
+
+        private boolean checkAvg(int[] nums, int k, double avg) {
+            double sum = 0;
+            double prevSum = 0;
+            double prevMin = 0;
+
+            for(int i = 0; i < nums.length; i++) {
+                sum += (double)nums[i] - avg;
+
+                if(i >= k - 1 && sum >= 0) {
+                    return true;
+                }
+
+                if(i >= k) {
+                    prevSum += (double)nums[i - k] - avg;
+                    prevMin = Math.min(prevMin, prevSum);
+                    if(sum - prevMin >= 0) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

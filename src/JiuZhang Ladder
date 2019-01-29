@@ -18,27 +18,30 @@ LE_153_Find_Min_In_Rotated_Sorted_Array
 LE_154_Find_Min_In_Rotated_Sorted_Array_II
 LE_278_First_Bad_Version                     (lint 74)
 LE_162_Find_Peak_Element                     (lint 75)
-LE_658_Find_K_Closest_Elements               (lint 460)
+LE_658_Find_K_Closest_Elements               (lint 460)  (****)
 LI_585_Maximum_Number_In_Mountain_Sequence
 LI_458_Last_Position_Of_Target
-LI_140_Fast_Power
-LI_428_Pow
-LI_447_Search_In_A_Big_Sorted_Array
+LE_50_POW
+LI_428_Pow                                   (??)
+LI_140_Fast_Power                            (??)
+LI_447_Search_In_A_Big_Sorted_Array          (**)
 
 LI_014_First_Position_Of_Target
 LI_254_Drop_Eggs
-LI_38_Search_A_2D_Matrix_II
 LI_459_Closest_Number_In_Sorted_Array
-LI_462_Total_Occurrence_Of_Target
+LI_462_Total_Occurrence_Of_Target            (***, find first and find last)
 LI_235_Prime_Factorization
 LE_34_Search_For_A_Range                     (lint 61)
-LE_74_Search_In_2D_Matrix                    (lint 28)
-LE_29_Divide_Two_Integers                    (lint 414)
-LE_302_Smallest_Rectangle_Enclosing_Black_Pixels  (lint 600)
+LE_29_Divide_Two_Integers                    (lint 414)   (***)
 
-LE_644_Maximum_Average_Subarray_II           (lint 617)
+#Binary Search on Values
+LE_644_Maximum_Average_Subarray_II           (lint 617)   (****)
 LI_183_Wood_Cut
 LI_437_Copy_Books
+
+LE_74_Search_In_2D_Matrix                    (lint 28)
+LI_38_Search_A_2D_Matrix_II
+LE_302_Smallest_Rectangle_Enclosing_Black_Pixels  (lint 600) (***)
 
 ====================================================
 
@@ -75,8 +78,8 @@ LE_142_Linked_List_Cycle_II                  (lint 103)
 LE_160_Intersection_Of_Tow_Linked_List       (lint 380)
 
 LE_215_Kth_Largest_Element_In_Array          (lint 5)     QuickSelect
-LI_461_Kth_Smallest_Number
-LI_031_Partition_Array
+LI_461_Kth_Smallest_Number                                QuickSelect, only difference from LE_215 is partition condition (smaller on left, bigger on right)
+LI_031_Partition_Array                       (same as LE_75_Set_Colors Dutch Flag)
 LI_894_Pancake_Sorting
 
 ====================================================

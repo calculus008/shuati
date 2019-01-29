@@ -37,14 +37,20 @@ public class LE_29_Divide_Two_Integers {
     class Solution1 {
         public int divide(int dividend, int divisor) {
             int sign = 1;
-            if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) sign = -1;
+            if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) {
+                sign = -1;
+            }
+
             long divd = Math.abs((long) dividend);
             long divs = Math.abs((long) divisor);
             long lres = longDivd(divd, divs);
 
             if (lres > Integer.MAX_VALUE){
-                if (sign > 0) return Integer.MAX_VALUE;
-                else return Integer.MIN_VALUE;
+                if (sign > 0) {
+                    return Integer.MAX_VALUE;
+                } else {
+                    return Integer.MIN_VALUE;
+                }
             }
 
             if (sign > 0) return (int) lres;

@@ -76,18 +76,24 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
             int n = nums.length;
             Arrays.sort(nums);//!!!
 
+            int max = nums[n - 1];
+            int min = nums[0];
+
+            /**
+             * use min and max to shrink the search range
+             */
             int l = 0;
-            int r = nums[n - 1];
+            int r = max - min + 1;
 
             /**
              * binary search on distance, find the distance value mid that has k pairs whose
-             * distance <= mid.
+             * distance <= mid. (use huahua's template)
              */
-            while (l <= r) {
+            while (l < r) {
                 int mid = l + (r - l) / 2;
 
                 if (getCount(nums, mid) >= k) {
-                    r = mid - 1;
+                    r = mid;
                 } else {
                     l = mid + 1;
                 }

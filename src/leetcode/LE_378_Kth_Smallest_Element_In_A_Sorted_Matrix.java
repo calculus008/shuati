@@ -38,6 +38,8 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
      * Time : O((n + k)log(n)))
      * Space : O(n)
      *
+     * 14 ms
+     *
      * 实际上是“LE_23_Merge_k_Sorted_Lists”中的算法，K-way merge sort.
      * 把第一行（或列）的数先放入HEAP，拿出一个，根据“rows and columns are sorted in ascending order”，
      * 这实际上就是n个sorted list, 放入当前“list”的下一个。用MIN HEAP来从小到大找k个数。
@@ -63,6 +65,11 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
                 pq.offer(new Element(0, i, matrix[0][i]));
             }
 
+            /**
+             * loop i - 1 times, each time remove the smallest element and add one from the
+             * same list that the smallest element is in. After it, the one at the top of
+             * pq is the ith smallest element.
+             */
             for (int i = 0; i < k - 1; i++) {
                 Element e = pq.poll();
 
@@ -73,7 +80,7 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
                 pq.offer(new Element(e.x + 1, e.y, matrix[e.x + 1][e.y]));
             }
 
-            return pq.poll().val;
+            return pq.poll().val;//0R pq.peek().val
         }
     }
 
@@ -82,6 +89,8 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
      *
      * Time  : O(klogk)
      * Space : O(k + mn)
+     *
+     * 54 ms
      *
      * 其实是利用优先级队列做BFS，搜索直到第k小，对于
      * [
@@ -146,25 +155,43 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
      * Solution 3
      * Binary Search
      * https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
+     *
+     * Time  : O(n * log(Max)), binary search on range [lo, hi) -> log(Max), for each iteration, O(n) to get count.
+     * Space : O(1)
+     *
+     * 1 ms
      */
     public class Solution3 {
-
         public int kthSmallest(int[][] matrix, int k) {
-            int lo = matrix[0][0], hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;//[lo, hi)
+            int lo = matrix[0][0];
+            int hi = matrix[matrix.length - 1][matrix[0].length - 1] + 1;//[lo, hi), use huahua's binary search template
 
             while(lo < hi) {
                 int mid = lo + (hi - lo) / 2;
-                int count = 0,  j = matrix[0].length - 1;
+
+                /**
+                 * For each row, start from the end of the row, find
+                 * the first element that is <= mid, sum of them, so
+                 * count is the total number of element that is <= mid.
+                 */
+                int count = 0;
+                int j = matrix[0].length - 1;
+
                 for(int i = 0; i < matrix.length; i++) {
                     while(j >= 0 && matrix[i][j] > mid) {
                         j--;
                     }
 
-                    count += (j + 1);
+                    count += (j + 1);//j is index, so the number of elements is j + 1
                 }
-                if(count < k) lo = mid + 1;
-                else hi = mid;
+
+                if(count < k) {//if count < k, means there are not enough elements on the left side of mid, move to right
+                    lo = mid + 1;
+                } else {//if count >= k, there are more elements than needed on left, move to left.
+                    hi = mid;
+                }
             }
+
             return lo;
         }
     }

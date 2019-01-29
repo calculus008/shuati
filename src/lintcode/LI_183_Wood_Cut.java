@@ -33,15 +33,19 @@ public class LI_183_Wood_Cut {
 
         int start = 1;
         int end = max;
+
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
-            if (count(L, mid) >= k) {
+            if (count(L, mid) >= k) {//if we can have more than k pieces of woods of length mid, we can increase length
                 start = mid;
-            } else {
+            } else {//if we can have fewer than k pieces of woods of length mid, we should decrease length
                 end = mid;
             }
         }
 
+        /**
+         * we want max length, so check end first.
+         */
         if (count(L, end) >= k) {
             return end;
         }
@@ -53,6 +57,9 @@ public class LI_183_Wood_Cut {
         return 0;//!!!
     }
 
+    /**
+     * count how many pieces of woods we can get if we cut them into length len.
+     */
     private int count(int[] L, int len) {
         int sum = 0;
         for (int l : L) {
