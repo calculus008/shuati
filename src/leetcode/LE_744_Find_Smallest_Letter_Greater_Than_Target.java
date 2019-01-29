@@ -67,6 +67,6 @@ public class LE_744_Find_Smallest_Letter_Greater_Than_Target {
         }
 
         //return letters[l % n];
-        return l >= n ? letters[0] : letters[l];
+        return l >= n ? letters[0] : letters[l];//!!!
     }
 }

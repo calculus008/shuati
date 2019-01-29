@@ -352,16 +352,40 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
                 return findMedianSortedArrays(nums2, nums1);
             }
 
+            /**
+             *  k是个数
+             */
             int k = (l1 + l2 + 1) / 2;
 
             /**
-             * [l, r) 左闭右开，所以r不能=m-1。循坏条件是 l < r，但最后 l 可能等于 r， 表示第一个数组所有的元素都要使用。
+             * !!!
+             * 此处，二分搜素的对象是nums1[] 的index，所以，[l, r) 左闭右开，所以r不能是l1 - 1, 是l1.
+             * 循坏条件是 l < r，但最后 l 可能等于 r， 表示第一个数组所有的元素都要使用。
              * 如果循环条件是(l <= r)，最后 l 可能大于 r，那就越界了。﻿
              */
             int l = 0;
             int r = l1;
             while (l < r) {
                 int m = l + (r - l) / 2;
+
+                /**
+                 * !!1
+                 * nums1[m], 可见m是下标，不是元素个数。
+                 *
+                 * m1 elements from nums1 and m2 elements from nums2, m1 + m2 = k
+                 *
+                 *
+                 * nums1 : A[0]......,A[m1 - 1],  | A[m1] <= m1 is the value we do binary search on (m)
+                 * nums2 : B[0].......B[m2 - 1],  | B[m2]
+                 *
+                 * A[m1] > B[m2 - 1]
+                 * A[m1 - 1] < B[m2]
+                 *
+                 * Left median : max(A[m1 - 1], B[m2 - 1])
+                 * right median : min(A[m1], B[m2])
+                 *
+                 * so here m is m1, m2 = k - m1 = k - m, so m2 - 1 = k - m - 1
+                 */
                 if (nums1[m] < nums2[k - m - 1]) {
                     l = m + 1;
                 } else {
@@ -369,9 +393,16 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
                 }
             }
 
+
+            /**
+             * !!!
+             */
             int m1 = l;
             int m2 = k - m1;
 
+            /**!!!
+             * It "nums1" and "nums1", NOT "nums"
+             */
             int c1 = Math.max (m1 <= 0 ? Integer.MIN_VALUE : nums1[m1 - 1],
                                m2 <= 0 ? Integer.MIN_VALUE : nums2[m2 - 1]);
 
@@ -379,6 +410,11 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
                 return c1;
             }
 
+            /**
+             * !!!
+             * m1 >= l1
+             * m2 >= l2
+             */
             int c2 = Math.min(m1 >= l1 ? Integer.MAX_VALUE : nums1[m1],
                               m2 >= l2 ? Integer.MAX_VALUE : nums2[m2]);
 

@@ -136,4 +136,68 @@ public class LE_410_Split_Array_Largest_Sum {
             return groups;
         }
     }
+
+    /**
+     * Binary Search
+     * Use huahua's binary search template
+     *
+     * Time : O(n * log(max))
+     * Space : O(1)
+     *
+     * One important detail, all variables involves num range should be long type to prevent int value overflow.
+     * "left", "right", "target", add conversion when return result.
+     *
+     * !!!
+     * "Given an array which consists of non-negative integers and an integer m"
+     * This is a very important given condition, it allows us to use binary search since it guarantees the range
+     * of sum is increasing.
+     *
+     * It we don't have this condition, then we have to use DP in Solution1.
+     */
+    class Solution3 {
+        public int splitArray(int[] nums, int m) {
+            if (null == nums || nums.length == 0) return 0;
+
+            long left = 0;
+            long right = 0;
+            for (int num : nums) {
+                left = Math.max(num, left);
+                right += num;
+            }
+
+            while (left < right) {
+                long mid = left + (right - left) / 2;
+
+                if (isBigger(nums, mid, m)) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+
+            /**
+             * conversion!!!
+             */
+            return (int)left;
+        }
+
+        private boolean isBigger(int[] nums, long target, int m) {
+            long sum = 0;//!!!
+            int count = 1;
+            for (int num : nums) {
+                if (sum + num > target) {
+                    count++;
+                    sum = num; //!!!
+
+                    if (count > m) {
+                        return true;
+                    }
+                } else {
+                    sum += num;
+                }
+            }
+
+            return false;
+        }
+    }
 }

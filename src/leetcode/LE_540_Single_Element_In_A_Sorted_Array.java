@@ -31,6 +31,15 @@ public class LE_540_Single_Element_In_A_Sorted_Array {
          After single number, [7,8], [9, 10], pair stars at index of odd number.
 
          So this give indication which direction we should go.
+
+         Basically, the single char becomes a separation point, chars before and after it will change properties :
+         before it, char starting at an even number index i equals to the char to its right (i + 1);
+         after it,  char starting at an odd number index j equals to the char to its right (j + 1);
+
+         So we use this condition to do binary search. When we get mid value, it could be even or odd.
+         So we need to calculate the index of its equal neighbor. Based on the rules of the "before section" :
+            If it's even, its equal neighbor is at its right (i + 1);
+            If it's odd, its equal neighbor is at its left (i - 1);
          **/
         while (l < r) {
             int m = l + (r - l) / 2;

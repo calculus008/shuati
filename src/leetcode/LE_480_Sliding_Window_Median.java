@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -45,12 +42,19 @@ public class LE_480_Sliding_Window_Median {
      */
 
     /**
+     * !!!
+     * http://zxi.mytechroad.com/blog/difficulty/hard/leetcode-480-sliding-window-median/
+     */
+
+    /**
      * Solution 1
      * Similar to LI_360_Sliding_Window_Median
      * 1.return type is int[]
      * 2.test cases show that we need to handle int value overflow
      *
      * Time  : O(n ^ 2 * logk)
+     *         O(n * (n + logk)) ??
+     *
      * Space : O(n)
      */
     public double[] medianSlidingWindow1(int[] nums, int k) {
@@ -67,11 +71,11 @@ public class LE_480_Sliding_Window_Median {
          */
         PriorityQueue<Long> small = new PriorityQueue<>(1000, Collections.reverseOrder());//max heap
 
-        int l = 0;
-        int j = 0;
-        for (int i = 0; i < nums.length; i++) {
+        int l = 0; //index of the left most element in window
+        int j = 0; //index of result array
+        for (int i = 0; i < nums.length; i++) {//index of the right most element in window
             if (i >= k) {//remove left element
-                if (nums[l] < large.peek()) {
+                if (nums[l] < large.peek()) {//decide which pq nums[l] is in
                     small.remove((long)nums[l]);//PriorityQueue remove is O(n)
                 } else {
                     large.remove((long)nums[l]);
@@ -116,7 +120,9 @@ public class LE_480_Sliding_Window_Median {
         double[] result = new double[nums.length - k + 1];
 
         //fill the first window
-        for (int i = 0; i < k; i++) left.add(i);
+        for (int i = 0; i < k; i++) {
+            left.add(i);
+        }
 
         balance.run();
         result[0] = median.get();
@@ -214,4 +220,64 @@ public class LE_480_Sliding_Window_Median {
 
         return res;
     }
+
+    /**
+     * Insertion Sort Solution
+     *
+     * Time  : O((n - k + 1)logn)
+     *         k size window moves n - k + 1 times, each time cost O(n) with insertion sort.
+     * Space : O(k)
+     *
+     * Author: Huahua
+     * Running time:
+     * 60 ms
+     *
+     * While moving the window, maintain the elements in window in sorted order.
+     * Use insertion sort when add and delete elements from window. Main cost is
+     * shifting elements each time add/delete (O(k))
+     *
+     **/
+    class Solution4 {
+        public double[] medianSlidingWindow(int[] nums, int k) {
+            if (k == 0) return new double[0];
+            double[] ans = new double[nums.length - k + 1];
+            int[] window = new int[k];
+
+            for (int i = 0; i < k; ++i) {
+                window[i] = nums[i];
+            }
+
+            Arrays.sort(window);//!!!
+
+            for (int i = k; i <= nums.length; ++i) {
+                //median for current window
+                ans[i - k] = ((double) window[k / 2] + window[(k - 1) / 2]) / 2;
+
+                if (i == nums.length) {
+                    break;
+                }
+
+                remove(window, nums[i - k]);
+                insert(window, nums[i]);
+            }
+            return ans;
+        }
+
+        // Insert val into window, window[k - 1] is empty before inseration
+        private void insert(int[] window, int val) {
+            int i = 0;
+            while (i < window.length - 1 && val > window[i]) ++i;
+            int j = window.length - 1;
+            while (j > i) window[j] = window[--j];
+            window[j] = val;
+        }
+
+        // Remove val from window and shrink it.
+        private void remove(int[] window, int val) {
+            int i = 0;
+            while (i < window.length && val != window[i]) ++i;
+            while (i < window.length - 1) window[i] = window[++i];
+        }
+    }
+
 }

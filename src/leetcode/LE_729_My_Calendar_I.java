@@ -65,6 +65,11 @@ public class LE_729_My_Calendar_I {
             for (Map.Entry<Integer, Integer> entry: map.entrySet()) {
                 int start1 = entry.getKey();
                 int end1 = entry.getValue();
+
+                /**
+                 * !!!
+                 * trick to tell if tell intervals have overlap
+                 */
                 if (Math.max(start, start1) < Math.min(end, end1)) {
                     return false;
                 }
@@ -79,6 +84,8 @@ public class LE_729_My_Calendar_I {
      * TreeMap + Binary Search
      * Time  : O(nlogn)
      * Space : O(n)
+     *
+     * Classic usage of TreeMap - floorKey and ceilingKey
      */
     class MyCalendar2 {
         TreeMap<Integer, Integer> map;
