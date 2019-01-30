@@ -1,7 +1,8 @@
 #MS
 445. Add Two Numbers II
-722. Remove Comments
-402. Remove K Digits
+LE_722_Remove_Comments
+LE_402_Remove_K_Digits                                    (***)
+
 LE_165_Compare_Version_Number
 LE_71_Simplify_Path
 
@@ -18,7 +19,7 @@ LE_93_Restore_IP_Addresses
 LE_658_Find_K_Closest_Elements                                   (***)
 
 #Google
-LE_218_The_Sky_Line_Problem(
+LE_218_The_Sky_Line_Problem
 LE_249_Group_Shifted_Strings     (**)
 LE_632_Smallest_Range            (*** variation of k way merge)
 LE_777_Swap_Adjacent_In_LR_String

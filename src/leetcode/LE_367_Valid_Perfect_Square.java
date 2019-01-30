@@ -5,7 +5,8 @@ package leetcode;
  */
 public class LE_367_Valid_Perfect_Square {
     /**
-         Given a positive integer num, write a function which returns True if num is a perfect square else False.
+         Given a positive integer num, write a function which returns True if num is a
+         perfect square else False.
 
          Note: Do not use any built-in library function such as sqrt.
 
@@ -24,6 +25,14 @@ public class LE_367_Valid_Perfect_Square {
          Same as LE_69_Sqrt
      */
 
+    /**
+     * !!!
+     * Notice the difference from the solution for LE_69_Sqrt.
+     * Here we must use long for mid and sqr, since we must calculate mid * mid.
+     * We must do "(int)sqr == num" and can't do "m == num / m". For example :
+     *
+     * if num = 5, when mid is 2, 5/2 == 2, but 5 is NOT a perfect square number.
+     */
     public boolean isPerfectSquare(int num) {
         if (num <= 1) return true;
 
@@ -46,5 +55,29 @@ public class LE_367_Valid_Perfect_Square {
         if (start * start == num || end * end == num) return true;
 
         return false;
+    }
+
+    /**
+     * same algorithm, simpler syntax.
+     */
+    public boolean isPerfectSquare2(int num) {
+        if (num <= 1) return true;
+
+        long l = 1;
+        long r = num;
+
+        while (l + 1 < r) {
+            long m = l + (r - l) / 2;
+            long sqr = m * m;
+            if (sqr == num) {
+                return true;
+            } else if (sqr > num) {
+                r = m;
+            } else {
+                l = m;
+            }
+        }
+
+        return (l * l == num) || (r * r == num);
     }
 }

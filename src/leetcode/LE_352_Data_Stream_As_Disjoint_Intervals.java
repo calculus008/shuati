@@ -27,6 +27,9 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
      */
 
     class SummaryRanges {
+        /**
+         * Key is start of the interval
+         */
         TreeMap<Integer, Interval> map;
 
         /** Initialize your data structure here. */
@@ -34,7 +37,9 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
             map = new TreeMap<>();
         }
 
-        //Time : O(logn), TreeMap is implemented as Red-Black tree, remove and add takes O(logn)
+        /**
+         * Time : O(logn), TreeMap is implemented as Red-Black tree, remove and add takes O(logn)
+         **/
         public void addNum(int val) {
             /**
              !!!
@@ -43,6 +48,13 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
                 return;
             }
 
+            /**
+             * !!!
+             * lowerKey() : Returns the greatest key strictly less than the given key, or null if there is no such key.
+             * floorKey() : Returns the greatest key less than OR EQUAL TO the given key, or null if there is no such key.
+             *
+             * 所以，这里只能用lowerKey/higherKey, 不能用ceilingKey/floorKey(含等于的情况）
+             */
             Integer lowerKey = map.lowerKey(val);
             Integer higherKey = map.higherKey(val);
 
@@ -54,14 +66,26 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
                  2.TreeMap中的key是interval里的start值。
              **/
             if (lowerKey != null && higherKey != null && map.get(lowerKey).end + 1 == val && val == map.get(higherKey).start - 1) {
+                /**
+                 * 上下相邻的interal存在，和已知的上下interval连接，去掉上边interval,因为被merge了。
+                 */
                 map.get(lowerKey).end = map.get(higherKey).end;
                 map.remove(higherKey);
             } else if (lowerKey != null && val <= map.get(lowerKey).end + 1) {
+                /**
+                 * 只有下边的相邻interval存在，连接
+                 */
                 map.get(lowerKey).end = Math.max(val, map.get(lowerKey).end);
             } else if (higherKey != null && val + 1 == map.get(higherKey).start) {
+                /**
+                 * 只有上边的相邻interval存在，连接， 去掉上边interval,因为被merge了
+                 */
                 map.put(val, new Interval(val, map.get(higherKey).end));
                 map.remove(higherKey);
             } else {
+                /**
+                 * 没有上下相邻interval，
+                 */
                 map.put(val, new Interval(val, val));
             }
         }

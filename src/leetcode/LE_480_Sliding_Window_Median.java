@@ -102,7 +102,9 @@ public class LE_480_Sliding_Window_Median {
 
     /**
      * Solution 2
-     * 2 TreeSet
+     *
+     * Use two TreeSet and save index.
+     *
      * Time : O(nlogk)
      */
     public double[] medianSlidingWindow2(int[] nums, int k) {
@@ -146,8 +148,11 @@ public class LE_480_Sliding_Window_Median {
     /**
      * Solution 3
      * Use 2 TreeSet, adapt to similar flow as in Solution 1
+     *
      * Time : O(nlogk)
      * Space : O(n)
+     *
+     * Use two TreeSet and save index.
      *
      * Best Solution
      */
@@ -158,7 +163,7 @@ public class LE_480_Sliding_Window_Median {
 
         /**
          * !!!
-         * This is the key trick for using TreeSet. Instead of saving value, we save index for nums
+         * This is the key trick for using TreeSet. Instead of saving value, we save INDEX(!!!) for nums
          * in TreeSet, since index is unique, we can save them in a set.
          *
          * This Comparator tells TreeSet to sort based on the values in nums by using indexed saved in
