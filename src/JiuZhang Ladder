@@ -92,12 +92,12 @@ LI_894_Pancake_Sorting
 4.BFS and Topological Sort
 
 LE_17_Letter_Combinations_Of_A_Phone_Number
-LE_752_Open_The_Lock
+LE_752_Open_The_Lock                         (***)   BFS综合题         revisit
 
 LE_200_Number_Of_Islands                     (lint 433)
-LE_305_Number_Of_Islands_II                  (lint 434)  (Union Find)
+LE_305_Number_Of_Islands_II                  (lint 434)  (Union Find) revisit
 LE_695_Max_Area_Of_Island
-LE_749_Contain_Virus
+LE_749_Contain_Virus                         (***)                    revisit
 LE_733_Flood_Fill
 LE_102_Binary_Tree_Level_Order_Traversal     (lint 69)
 LE_107_Binary_Tree_Level_Order_Traversal_II  (lint 70)
@@ -106,14 +106,14 @@ LI_611_Knight_Shortest_Path
 LI_127_Topological_Sorting
 LE_207_Course_Schedule                       (lint 615)
 LE_210_Course_Schedule_II                    (lint 616)
-LE_444_Sequence_Reconstruction               (lint 605)
+LE_444_Sequence_Reconstruction               (lint 605)               revisit (??)
 
 LE_133_Clone_Graph                           (lint 137)
 LE_297_Serialize_And_Deserialize_Binary_Tree (lint 7)
 
 LE_127_Word_Ladder
 LI_120_Word_Ladder
-LE_126_Word_Ladder_II
+LE_126_Word_Ladder_II                                                 revisit
 LI_121_Word_Ladder_II
 
 LI_242_Convert_BinaryTree_To_Linked_Lists_By_Depth
@@ -124,16 +124,17 @@ LI_598_Zombie_In_Matrix
 LI_618_Search_Graph_Nodes
 LI_178_Graph_Valid_Tree
 LI_431_Connected_Component
-LI_624_Remove_Substrings
+LI_624_Remove_Substrings                     (*)
 
-LI_794_Sliding_Puzzle_II
-LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II)
+LE_773_Sliding_Puzzle                        (*)
+LI_794_Sliding_Puzzle_II                     (*)
+
+LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II) (***)  revisit
 
 #Variation of BFS
-LE_847_Shortest_Path_Visiting_All_Nodes
+LE_847_Shortest_Path_Visiting_All_Nodes      (***)
 LE_864_Shortest_Path_To_Get_All_Keys
-LE_815_Bus_Routes
-LE_773_Sliding_Puzzle
+LE_815_Bus_Routes                            (***)
 LE_787_Cheapest_Flights_Within_K_Stops
 LE_675_Cut_Off_Trees_For_Golf_Event
 

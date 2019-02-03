@@ -40,12 +40,12 @@ public class LE_207_Course_Schedule {
         int[] indegree = new int[numCourses];
         int res = numCourses;
 
-        //Get indgree for all nodes
+        //Get indegree for all nodes
         for (int[] pair : prerequisites) {
             indegree[pair[0]]++;
         }
 
-        //Find starting nodes which have 0 indgree
+        //Find starting nodes which have 0 indegree
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
             if (indegree[i] == 0) {
@@ -71,7 +71,8 @@ public class LE_207_Course_Schedule {
 
     /**
      * The 1st Solution TLE on lintcode for a test case with extreme large data set.
-     * The reason is : it does not have a data structure that saves neighbour info (the node I point to),
+     * The reason is :
+     * it does not have a data structure that saves neighbour info (the node I point to),
      * instead, it uses for loop to go through entire given array.
      *
      * The following solution adds "edges" (array of ArrayList) for storing neighbours
@@ -80,13 +81,16 @@ public class LE_207_Course_Schedule {
         int[] indegree = new int[numCourses];
         int res = numCourses;
 
-        //Create datastructure to store neighour info
+        /**
+         * Create data structure to store neighbour info
+         * Array of list, which contains neighbors ids.
+         **/
         ArrayList[] edges = new ArrayList[numCourses];
         for (int i = 0; i < numCourses; i++) {
             edges[i] = new ArrayList<Integer>();
         }
 
-        //Get indgree for all nodes
+        //Get indegree for all nodes
         for (int[] pair : prerequisites) {
             indegree[pair[0]]++;
             /**

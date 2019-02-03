@@ -121,8 +121,8 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
      * Optimization :
      * Not using visited[][] as in Solution 1.
      * Instead, I walk only onto the cells that were reachable from all previous buildings.
-     * From the first building I only walk onto cells where grid is 0, and make them -1.
-     * From the second building I only walk onto cells where grid is -1, and I make them -2.
+     * From the first building, I only walk onto cells where grid is 0, and make them -1.
+     * From the second building ,I only walk onto cells where grid is -1, and I make them -2.
      * And so on.
      *
      * We can do this because the post office should be built on a empty land that should be

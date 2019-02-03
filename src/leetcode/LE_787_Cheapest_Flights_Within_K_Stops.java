@@ -189,8 +189,14 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
     /**
      * Solution 3
      * DP, Bellman-Ford algorithm
+     *   1    2    3    4
+     * a -> b -> c -> c -> d
+     * stops   : 3
+     * flights : 4
      *
-     * dp[k][i]: min cost from src to i taken up to k flights (k-1 stops)
+     * So with K stops, we have K + 1 flights from src to dst.
+     *
+     * dp[k][i]: min cost from src to i taken up to k flights (k + 1 stops)
      * init: dp[0:k+2][src] = 0
      * transition: dp[k][i] = min(dp[k-1][j] + price[j][i])
      * ans: dp[K+1][dst]
@@ -211,9 +217,24 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
             }
             dp[0][src] = 0;
 
-            for (int i = 1; i <= K + 1; i++) {//loop through K + 1 stops
+            /**
+             * loop through K + 1 flights -> take 1 flight, 2 flights, 3 flights .... K + 1 flights
+             */
+            for (int i = 1; i <= K + 1; i++) {
+                /**
+                 * no matter how many flights taken, cost to get to src is always 0
+                 */
                 dp[i][src] = 0;
                 for (int[] f : flights) {
+                    /**
+                     * f[0] : start
+                     * f[1] : end
+                     * f[2] : cost
+                     *
+                     * With i flights
+                     * 直达 ：dp[i][f[1]]
+                     * 中转 ：dp[i - 1][f[0]] + f[2]， 假设在i个flights里，最后的一个flight(ith)是当前的f (f[0]到f[1], costs f[2])
+                     */
                     dp[i][f[1]] = Math.min(dp[i][f[1]], dp[i - 1][f[0]] + f[2]);
                 }
             }

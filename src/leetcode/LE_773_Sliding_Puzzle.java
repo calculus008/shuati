@@ -46,11 +46,18 @@ public class LE_773_Sliding_Puzzle {
      * http://zxi.mytechroad.com/blog/searching/leetcode-773-sliding-puzzle/
      *
      * Time complexity: O(6!)
-     * Generally,O(R ∗ C ∗ (R ∗ C)!), where R, C are the number of rows and columns in board.
+     * Generally,O((R ∗ C)!), where R, C are the number of rows and columns in board.
+     * You can see it as R * c numbers permutation, so (R * C)! is its upper bound
+     *
      * There are O((R * C)!) possible board states.
      *
      * Space complexity: O(6!)
-     * O(R ∗ C ∗ (R ∗ C)!)
+     * O((R ∗ C)!)
+     *
+     * Same as LI_794_Sliding_Puzzle_II
+     *
+     * Since the board is small, can optimize it by pre-computing all valid neighbors of '0' at each location :
+     *  idx[] {{1, 3}, {0, 2, 4}, {1, 5}, {0, 4}, {1, 3, 5}, {2, 4}};
      */
     class Solution {
         public int slidingPuzzle(int[][] board) {
@@ -78,7 +85,7 @@ public class LE_773_Sliding_Puzzle {
             Queue<String> q = new LinkedList<>();
             q.offer(start);
             Set<String> visited = new HashSet<>();
-            visited.add(start);
+            visited.add(start);//!!!
 
             int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 

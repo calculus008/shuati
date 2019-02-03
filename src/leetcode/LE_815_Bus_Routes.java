@@ -78,14 +78,23 @@ public class LE_815_Bus_Routes {
      *
      *
      * BFS levels :
-     *               stop 1
-     *                |
-     *              Bus #0
-     *           stop 2, stop 7
+     *                   stop 1
+     *                     |
+     *           Bus #0 {stop 2, stop 7}
+     *           Bus #0 marked as visited
+     *           mapping stop 2, 7 to bus number: {0, 1}
      *                     / \
      *               Bus #0   Bus #1
      *              visited   not visited
-     *                        stop 3, stop 6 == T
+     *                        {3, 6, 7}
+     *                        stop 3, stop 6 == T, return
+     *
+     * So the key to understand it is : for each BFS level, q saves stop number, after we pop out stop number,
+     * we use the map we built to map stop numbers to a list of bus numbers, then check if destination is in any
+     * of the bus routes.
+     *
+     * Notice, we need to get size of q first first then pop out #size of stop numbers from q, this is one level
+     * in BFS.
      *
      * For each BFS level, since we don't take bus that is already visited, we only check stops of the buses that
      * we haven't taken, in other words, all the stops that we put into q for the next level are stops belong to
@@ -98,6 +107,10 @@ public class LE_815_Bus_Routes {
                 return 0;
             }
 
+            /**
+             * key   : stop number
+             * value : list of buses that stop at this stop number
+             */
             Map<Integer, List<Integer>> map = new HashMap<>();
 
             int m = routes.length;
@@ -112,16 +125,20 @@ public class LE_815_Bus_Routes {
                 }
             }
 
-            boolean[] visited = new boolean[m];//!!!
+            /**
+             * !!!
+             * m is number of buses, visited is to record which buses have been taken.
+             */
+            boolean[] visited = new boolean[m];
             Queue<Integer> q = new LinkedList<>();
             q.offer(S);
             int buses = 0;
 
             while (!q.isEmpty()) {
-                int size = q.size();
+                int size = q.size();//!!!
                 buses++; //!!!
 
-                for(int i = 0; i < size; i++) {
+                for(int i = 0; i < size; i++) {//!!!
                     int curStop = q.poll();
 
                     /**

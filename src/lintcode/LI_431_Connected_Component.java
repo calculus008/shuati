@@ -45,6 +45,9 @@ public class LI_431_Connected_Component {
         Queue<UndirectedGraphNode> q = new LinkedList<>();
 
         for (UndirectedGraphNode n : nodes) {
+            /**
+             * !!!
+             */
             if (visited.size() == nodes.size()) {
                 break;
 

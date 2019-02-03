@@ -277,15 +277,31 @@ public class LE_749_Contain_Virus {
      * Adapted from Huahua's solution
      * http://zxi.mytechroad.com/blog/searching/leetcode-749-contain-virus/
      *
-     * This solution is more straight forward conceptually.
+     * This solution is more straight-forward conceptually.
      *
      * Keys :
-     * 1.Use key = y * row + col, the advantage is that we can use the key to put location of cell (x, y) into list and set.
-     * 2.For each day， check calls， from DFS, get the set of cells that will be infected and number walls should be built,
-     *   then 打擂台，maintain the max number of walls and the list of virus cells。
-     * 3.Update grid :
-     *   set the area that has the most infected cells to 2
-     *   set the cells that will be infected by other area to 1
+     * 1.Use key = y * row + col, the advantage is that we can use the key to put location of cell (x, y) into list and set,
+     *   also can use the key in visited[] to mark '1' cell is visited.
+     *
+     * 2.For each day，check cells，by DFS(), get 3 things :
+     *   a."next"  : the set of cells that will be infected (the ones with '0' and around island with '1')
+     *   b."walls" : number walls should be built
+     *   c."curr"  : cells in current island, used to do quarantine (mark those cells as '2')
+     *
+     *
+     * 3.Then 打擂台，maintain :
+     *   a."block_walls" : the max number of walls
+     *   b."block_index" : the index of virus cells to be quarantined
+     *   c."virus_area"  : set of cells to be quarantined
+     *
+     * 4.add "next" to "nexts" (list of sets that contain cells that should be affected without quarantine)
+     *
+     * 5.If "nexts" is empty, no more area to be infected, exit.
+     *
+     * 6.Update grid :
+     *   a.set the area that has the most infected cells to 2 :
+     *     the one with index "block_index", cells are in "virus_area"
+     *   b.set the cells that will be infected without quarantined to 1 (in "nexts")
      *
      * 24 ms
      *
@@ -317,7 +333,7 @@ public class LE_749_Contain_Virus {
      */
     class Solution2 {
         /**
-         * has to make those gobal because DFS helper change those values
+         * has to make those global because DFS helper change those values
          * and they are used in update action
          */
         int walls = 0;
@@ -351,6 +367,14 @@ public class LE_749_Contain_Virus {
                 int block_index = -1;
                 int block_walls = -1;
 
+                /**
+                 * Each day, find infected areas info.
+                 *
+                 * nexts : All infected areas, list of set, each set contains ids of each infected cell that will be infected today.
+                 * next : set contains ids for cells that will be infected in each iteration.
+                 * block_index : id for the infected area that should be quarantine today.
+                 * virus_area  : list of ids which belong to the area that should be quarantine today.
+                 */
                 for (int i = 0; i < m; i++) {
                     for (int j = 0; j < n; j++) {
                         int key = i * n + j;
@@ -375,6 +399,150 @@ public class LE_749_Contain_Virus {
                         if (nexts.isEmpty() || next.size() > nexts.get(block_index).size()) {
                             // or deep copy each time
                             // virus_area = new ArrayList<>(curr);
+                            virus_area.clear();
+                            virus_area.addAll(curr);
+
+                            block_index = nexts.size();
+                            block_walls = walls;
+                        }
+
+                        nexts.add(next);
+                    }
+                }
+
+                /**
+                 * no more area to quarantine, exit.
+                 */
+                if (nexts.isEmpty()) {
+                    break;
+                }
+
+                total_walls += block_walls;
+
+                //update
+                for (int i = 0; i < nexts.size(); i++) {
+                    if (i == block_index) {
+                        for (int key : virus_area) {
+                            int y = key / n;
+                            int x = key % n;
+                            grid[y][x] = 2; // blocked or quarantined
+                        }
+                    } else {
+                        for (int key : nexts.get(i)) {
+                            int y = key / n;
+                            int x = key % n;
+                            grid[y][x] = 1; // newly affected
+                        }
+                    }
+                }
+            }//end of while()
+
+            return total_walls;
+        }
+
+        private void helper(int x, int y, int m, int n,
+                            int[][] grid,
+                            int[] visited,
+                            Set<Integer> next) {
+            int dirs[][] = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+            if (x < 0 || x >= n || y < 0 || y >= m || grid[y][x] == 2) {
+                return;
+            }
+
+            /**
+             * map 2D coordinate to 1D number, better use this mapping,, instead of creating a Pair class
+             * since we need to record which coordinates have been visited, use this mapping, we can use
+             * 1 1D array visited[]. Use Pair class, we need to implement compare method etc, add more
+             * complexity and error-prone in interview.
+             */
+            int key = y * n + x;
+
+            // need one wall
+            if (grid[y][x] == 0) {
+                /**
+                 * Only check visited after checking if current cell is 0,
+                 * if it's 0, put it into next.
+                 *
+                 * We use Set (next) here to avoid getting duplicate cells
+                 *
+                 * So for 0 cell, walls increases by 1 each time it is accessed.
+                 * It also adds to Set (next) each time, but Set makes it unique.
+                 */
+                walls++;
+                next.add(key);
+
+                /**
+                 * !!!
+                 * we just need to go one layer for cell with 0 value - the directed infected target
+                 * for a given area. Therefore, return here.
+                 */
+                return;
+            }
+
+            /**
+             * By logic, visited checking only happens after checking 0 value above.
+             * In other words, it only works for none-zero cell.
+             */
+            if (visited[key] == 1) {
+                return;
+            }
+
+            /**
+             * for a cell with value 1, mark it as visited and add it curr.
+             * curr is the potential area to be quarantined.
+             */
+            visited[key] = 1;
+            curr.add(key);
+
+            /**
+             * only recurse on cells with value 1.
+             */
+            for (int i = 0; i < 4; ++i) {
+                helper(x + dirs[i][0], y + dirs[i][1], m, n, grid, visited, next);
+            }
+        }
+    }
+
+    class Solution_CleanView {
+        int walls = 0;
+        List<Integer> curr;
+
+        public int containVirus(int[][] grid) {
+            if (null == grid || grid.length == 0) return 0;
+
+            int m = grid.length;
+            int n = grid[0].length;
+
+            int total_walls = 0;
+            curr = new ArrayList<>();
+
+            while (true) {
+                int[] visited = new int[m * n];
+                List<Integer> virus_area = new ArrayList<>();
+                List<Set<Integer>> nexts = new ArrayList<>();
+
+                int block_index = -1;
+                int block_walls = -1;
+
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                        int key = i * n + j;
+                        if (grid[i][j] != 1 || visited[key] == 1) {
+                            continue;
+                        }
+
+                        Set<Integer> next = new HashSet<>();
+                        walls = 0;
+                        curr.clear();
+
+                        helper(j, i, m, n, grid, visited, next);
+
+                        if (next.isEmpty()) {
+                            continue;
+                        }
+
+                        if (nexts.isEmpty() || next.size() > nexts.get(block_index).size()) {
                             virus_area.clear();
                             virus_area.addAll(curr);
 
@@ -425,42 +593,20 @@ public class LE_749_Contain_Virus {
 
             int key = y * n + x;
 
-            // need one wall
-            if (grid[y][x] == 0) {
-                /**
-                 * Only check visited after checking if current cell is 0,
-                 * if it's 0, put it into next.
-                 *
-                 * We use Set (next) here to avoid getting duplicate cells
-                 *
-                 * So for 0 cell, walls increases by 1 each time it is accessed.
-                 * It also adds to Set (next) each time, but Set makes it unique.
-                 */
-                walls++;
-                next.add(key);
-
-                /**
-                 * !!!
-                 * we just need to go one layer for cell with 0 value - the directed infected target
-                 * for a given area. Therefore, return here.
-                 */
+            if (visited[key] == 1) {
                 return;
             }
 
-            /**
-             * By logic, visited checking only happens after checking 0 value above.
-             * In other words, it only works for none-zero cell.
-             */
-            if (visited[key] == 1) {
+            // need one wall
+            if (grid[y][x] == 0) {
+                walls++;
+                next.add(key);
                 return;
             }
 
             visited[key] = 1;
             curr.add(key);
 
-            /**
-             * only recurse on cells with value 1.
-             */
             for (int i = 0; i < 4; ++i) {
                 helper(x + dirs[i][0], y + dirs[i][1], m, n, grid, visited, next);
             }

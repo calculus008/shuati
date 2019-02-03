@@ -20,7 +20,7 @@ public class LI_178_Graph_Valid_Tree {
 
     /**
      * BFS
-     * 因为在n个节点，n-1条边的情况下，只有两种可能：1、树 2、几个有环的不联通的图 因此从节点0出发，最后得到的hash size不是n的话，一定不是树
+     * 因为在n个节点，n-1条边的情况下，只有两种可能：1、树 2、几个有环的不联通的图 因此从节点0出发，最后得到的set size不是n的话，一定不是树
      *
      * 因为这个题并不需要判断是不是有环。如果按照判断环的思路就只能用DFS。但是这里的话是在判断所有节点能不能构成一棵树，
      * 所以可以通过判断边的数量和节点数量的关系以及是否全连同来判断是否是树。
@@ -46,14 +46,14 @@ public class LI_178_Graph_Valid_Tree {
 
         // bfs
         Queue<Integer> queue = new LinkedList<>();
-        Set<Integer> hash = new HashSet<>();
+        Set<Integer> set = new HashSet<>();
 
         queue.offer(0);
 
         /**
          * !!! 千万不能忘
          */
-        hash.add(0);
+        set.add(0);
 
         while (!queue.isEmpty()) {
             int node = queue.poll();
@@ -61,16 +61,16 @@ public class LI_178_Graph_Valid_Tree {
                 /**
                  * !!! 千万不能忘
                  */
-                if (hash.contains(neighbor)) {
+                if (set.contains(neighbor)) {
                     continue;
                 }
 
-                hash.add(neighbor);
+                set.add(neighbor);
                 queue.offer(neighbor);
             }
         }
 
-        return (hash.size() == n);
+        return (set.size() == n);
     }
 
     //!!!
@@ -106,6 +106,12 @@ public class LI_178_Graph_Valid_Tree {
 
         while (!q.isEmpty()) {
             int cur = q.poll();
+
+            /**
+             * For isolated node, in buildGraph(), we don't add a
+             * list, as previous solution does. So there could be
+             * null value in the map.
+             */
             if (!map.containsKey(cur)) {
                 continue;
             }

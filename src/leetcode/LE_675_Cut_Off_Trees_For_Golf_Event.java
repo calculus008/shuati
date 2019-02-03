@@ -265,4 +265,134 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
             return -1;
         }
     }
+
+    /**
+     * same as Solution2, only difference is to use 2D array in processing, make it faster
+     *
+     * 241 ms
+     * 94.36%
+     */
+    class Solution3 {
+        class Tuple {
+            int x, y, val;
+            public Tuple(int x, int y, int val) {
+                this.x = x;
+                this.y = y;
+                this.val = val;
+            }
+        }
+
+        public int cutOffTree(List<List<Integer>> forest) {
+            if(null == forest) return -1;
+
+            if (forest.get(0).get(0) == 0) return -1;
+
+            int res = 0;
+            List<Tuple> trees = new ArrayList<>();
+            int m = forest.size();
+            int n = forest.get(0).size();
+            int[][] f = new int[m][n];
+
+            for (int i = 0; i < forest.size(); i++) {
+                List l = forest.get(i);
+                for (int j = 0; j < l.size(); j++) {
+                    /**
+                     * 坑1
+                     * Integer to int here must explicitly cast "(int)"
+                     */
+                    int val = (int)l.get(j);
+                    f[i][j] = val;
+
+                    if (val > 1) {
+                        trees.add(new Tuple(i, j, val));
+                    }
+                }
+            }
+
+            Collections.sort(trees, (a, b) -> a.val - b.val);
+
+            Tuple start = new Tuple(0, 0, 1);
+
+            for (Tuple t : trees) {
+                /**
+                 * each time, destitnation or end is current t.
+                 */
+                int steps = getSteps(f, start, t);
+                if (steps == -1) {
+                    return -1;
+                }
+
+                /**
+                 * !!!
+                 * Don't forget
+                 */
+                res += steps;
+                start = t;
+            }
+
+            return res;
+        }
+
+        private int getSteps(int[][] f, Tuple start, Tuple end) {
+            int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+            Queue<Tuple> q = new LinkedList<>();
+            q.offer(start);
+
+            boolean[][] visited = new boolean[f.length][f[0].length];
+
+            /**
+             * 坑2
+             * !!!
+             * 别忘了把起点加入visited
+             */
+            visited[start.x][start.y] = true;
+
+            int steps = 0;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    Tuple cur = q.poll();
+
+                    /**
+                     * 坑3
+                     * !!!
+                     * 是在从队列里去除元素是判断是否到达重点
+                     * 判断坐标相等，不是值相等
+                     */
+                    if (cur.x == end.x && cur.y == end.y) {
+                        return steps;
+                    }
+
+                    for (int j = 0; j < 4; j++) {
+                        int nx = cur.x + dirs[j][0];
+                        int ny = cur.y + dirs[j][1];
+
+                        if (nx < 0 || nx >= f.length || ny < 0 || ny >= f[0].length
+                                || f[nx][ny] == 0 || visited[nx][ny]) {
+                            continue;
+                        }
+
+                        // if (f[nx][ny] == dst) {
+                        //     return steps;
+                        // }
+
+                        visited[nx][ny] = true;
+                        q.offer(new Tuple(nx, ny, 1));
+                    }
+                }
+
+                /**
+                 * 坑4
+                 * !!!
+                 * 在最后steps加1.
+                 */
+                steps++;
+            }
+
+            return -1;
+        }
+    }
 }

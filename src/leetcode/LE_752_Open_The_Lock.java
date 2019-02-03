@@ -57,7 +57,17 @@ public class LE_752_Open_The_Lock {
      * http://zxi.mytechroad.com/blog/searching/leetcode-752-open-the-lock/
      *
      * Level by level expansion using BFS
-     * Each node can have at most 8 neighbors (max branching factor is 8)
+     *
+     * 关键 ：
+     * 1.Each node can have at most 8 neighbors (max branching factor is 8) :
+     *   Each node has 4 digits, each digit can be changed to 2 other values, +1, -1.
+     *   So total changes re 2 * 4 = 8
+     *   This is done by 双重循环，外层loop on each of the 4 digit, 内层loop on 2 possible new digits current digit can
+     *   be changed to.
+     *
+     * 2.Bypass two kinds of String - visited and dead end, we can use one set for them.
+     *
+     * 3.Tricky part is how to calculate the next digit, mainly, deal with 2 cases : 9 + 1 -> 0, 0 - 1 -> 9
      *
      * Number of max states : "0000" - "9999", 10000
      *
@@ -108,6 +118,8 @@ public class LE_752_Open_The_Lock {
                          * 当前数字加一，当前数字减一。
                          * 比如，3 -> 3 - 1 = 2, 3 + 1 = 4
                          * 不是从当前数字能到所有其他9个数字。
+                         *
+                         * So from each digit, branching factor is 2.
                          */
                         for (int k = -1; k <= 1; k += 2) {
                             /**
@@ -117,9 +129,17 @@ public class LE_752_Open_The_Lock {
                             char[] chars = cur.toCharArray();
 
                             /**
+                             * !!!
                              * 坑3：
                              * 模拟开关向上和向下旋转一位。
-                             * "+ 10" ： 0 - 1 = -1, 所以， 0 - 1 + 10 = 9
+                             *
+                             * 9 + 1 = 10 -> map to 0
+                             * 0 - 1 = -1 -> map to 9 : "+ 10" ： 0 - 1 = -1, 所以， 0 - 1 + 10 = 9
+                             *
+                             * ((chars[i] - '0') + 10) % 10 + '0'
+                             *
+                             * '0' is offset
+                             *
                              */
                             chars[j] = (char)((chars[j] - '0' + k + 10) % 10 + '0');
 

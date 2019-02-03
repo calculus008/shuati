@@ -46,6 +46,10 @@ public class LI_242_Convert_BinaryTree_To_Linked_Lists_By_Depth {
 
         while (!q.isEmpty()) {
             int size = q.size();
+
+            /**
+             * key : use dummy and pre
+             */
             ListNode dummy = new ListNode(0);
             ListNode pre = null;
 
@@ -53,12 +57,19 @@ public class LI_242_Convert_BinaryTree_To_Linked_Lists_By_Depth {
                 TreeNode cur = q.poll();
 
                 ListNode node = new ListNode(cur.val);
+
+                /**
+                 * !!!
+                 */
                 if (i == 0) {
                     dummy.next = node;
                 } else {
                     pre.next = node;
                 }
 
+                /**
+                 * !!!
+                 */
                 pre = node;
 
                 if (cur.left != null) {
@@ -69,12 +80,18 @@ public class LI_242_Convert_BinaryTree_To_Linked_Lists_By_Depth {
                 }
             }
 
+            /**
+             * !!!
+             */
             res.add(dummy.next);
         }
 
         return res;
     }
 
+    /**
+     * A Better Implementation
+     */
     public List<ListNode> binaryTreeToLists_JiuZhang(TreeNode root) {
         List<ListNode> res = new ArrayList<>();
         if (root == null) {
@@ -89,6 +106,10 @@ public class LI_242_Convert_BinaryTree_To_Linked_Lists_By_Depth {
 
         while (!q.isEmpty()) {
             int size = q.size();
+
+            /**
+             * !!!
+             */
             dummy.next = null;
             pre = dummy;
 

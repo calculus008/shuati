@@ -42,6 +42,9 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
      *
      * Time : O(4 ^ n), n is length of given string. 4 - total number of string one char can generate.
      * for example, 2 -> 2, a, b, c.
+     *
+     * ?? O(3 ^ n): each number represents 3 chars
+     *
      * Space : O(4 ^ n + n)
      **/
     public List<String> letterCombinations(String digits) {
@@ -60,6 +63,7 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
             return;
         }
 
+        //!!!
         int x = Character.getNumericValue(s.charAt(idx));
         for (char c : mapping[x].toCharArray()) {
             sb.append(c);

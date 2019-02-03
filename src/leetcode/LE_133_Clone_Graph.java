@@ -6,13 +6,19 @@ import java.util.*;
  * Created by yuank on 3/17/18.
  */
 public class LE_133_Clone_Graph {
-    /*
+    /**
      Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors.
       */
 
-    //Very Important
+    /**Very Important**/
 
-    //Solution 1: DFS
+    /**
+     * Solution 1: DFS
+     *
+     * map
+     * key : current node
+     * value : new copied node
+     **/
     Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
 
     public UndirectedGraphNode cloneGraph1(UndirectedGraphNode node) {
@@ -36,8 +42,10 @@ public class LE_133_Clone_Graph {
         return dup;
     }
 
-    //Solution 2 : BFS
-    //First go through graph using BFS, put all nodes in a set. Then clone, put into hashmap, link all neighbors
+    /**
+     * Solution 2 : BFS
+     * First go through graph using BFS, put all nodes in a set. Then clone, put into hashmap, link all neighbors
+     **/
     public UndirectedGraphNode cloneGraph2(UndirectedGraphNode node) {
         if (node == null) return node;
         List<UndirectedGraphNode> nodes = getNodes(node);
@@ -74,7 +82,8 @@ public class LE_133_Clone_Graph {
         return new ArrayList<>(set);
     }
 
-    /**Solution 3 : from JiuZhang, one step BFS
+    /**
+     * Solution 3 : from JiuZhang, one step BFS
      */
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         if (node == null) return null;
@@ -107,7 +116,7 @@ public class LE_133_Clone_Graph {
     }
 
     /**
-     * Solution 4, same as Solution 3, only difference is to use label as key in map (since the question garunteed
+     * Solution 4, same as Solution 3, only difference is to use label as key in map (since the question guaranteed
      * label is unique)
      *   BFS + HashMap
          Time : O(nm)，Space : O(n)

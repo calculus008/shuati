@@ -9,7 +9,8 @@ import java.util.List;
 public class LE_282_Expression_Add_Operators {
     /**
      * Given a string that contains only digits 0-9 and a target value,
-     * return all possibilities to add binary operators (not unary) +, -, or * between the digits so they evaluate to the target value.
+     * return all possibilities to add binary operators (not unary) +, -, or *
+     * between the digits so they evaluate to the target value.
 
          Examples:
          "123", 6 -> ["1+2+3", "1*2*3"]
@@ -264,7 +265,13 @@ public class LE_282_Expression_Add_Operators {
     /**
      * Optimized version by Huahua
      *
+     * http://zxi.mytechroad.com/blog/searching/leetcode-282-expression-add-operators/
+     *
      * Time  : O(n * 4 ^ (n - 1))
+     *         With n digits, it actually try to put 4 kinds of chars in each of the n - 1 positions between those
+     *         n digits : "+", "-", "*", "", notice "" means the two digits merged together to from a larger number.
+     *         Therefore, O(4 ^ (n - 1)). We also need to evaluate the value of the expression, which takes O(n).
+     *
      * Space : O(n)
      *
      * 15 ms
@@ -306,7 +313,6 @@ public class LE_282_Expression_Add_Operators {
                 if (num[s] == '0' && pos - s > 0) {
                     break; // 0X...
                 }
-
 
                 n = n * 10 + (int) (num[pos] - '0');
 

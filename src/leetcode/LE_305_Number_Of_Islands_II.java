@@ -61,7 +61,7 @@ public class LE_305_Number_Of_Islands_II {
      *
      *  Key :
      *  1.Convert 2D position to a 1D index;
-     *  2.Each time we add a land in a cell, check its 4 neigbhours, if the neightour is also a land and it is not merged with the
+     *  2.Each time we add a land in a cell, check its 4 neighbours, if the neighbour is also a land and it is not merged with the
      *  current one, do merge. Keep count of the connected components
      *
      *  Time : O(n ^ 2), (not doing optimization (path compression and merge by rank))
@@ -124,7 +124,7 @@ public class LE_305_Number_Of_Islands_II {
      * A full Union Find solution : Solution 3 at
      * https://leetcode.com/articles/number-of-islands-ii/
      *
-     *Time complexity : O(m * n + L) where L is the number of operations, m is the number of rows and n is the number of columns.
+     * Time complexity : O(m * n + L) where L is the number of operations, m is the number of rows and n is the number of columns.
      * it takes O(mn) to initialize UnionFind, and O(L) to process positions.
      * Note that Union operation takes essentially constant time1 when UnionFind is implemented with both path compression and union by rank.
      *

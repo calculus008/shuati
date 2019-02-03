@@ -27,7 +27,7 @@ public class LI_624_Remove_Substrings {
      * BFS
      *
      * 变化的地方是如何expand. 这里是loop through dict, 删除所有当前可见的w (dict中的元素).
-     * 因为数顺序遍历dict, 会出现这样的情况 ： 先删了所有w1, 当loop到w3时，删掉w3, 又会出现w1.
+     * 因为顺序遍历dict, 会出现这样的情况 ： 先删了所有w1, 当loop到w3时，删掉w3, 又会出现w1.
      * 所以用BFS，把每次处理完的string存入queue, 在后面重新处理。
      *
      * Example : s = ccdaabcdbb, substrs = ["ab", "cd"]
@@ -36,12 +36,15 @@ public class LI_624_Remove_Substrings {
      *
      * ccdaabcdbb                                                  level 0    Queue - ccdaabcdbb
      *    |
-     * ccdacdbb,                      caabcdbb  -> caabbb          level 1    Queue - ccdacdbb, caabcdbb, caabbb
+     * ccdacdbb,                      caabcdbb  -> ccdaabbb          level 1    Queue - ccdacdbb, caabcdbb, caabbb
      * (删'ab'）                     （删'cd'1）    （删'cd'2）
      *    |                              |             \
-     * 没有‘ab', cacdbb -> cabb       cacdbb, caabbb  cabb, cb     level 2    Queue - cacdbb, cabb, caabbb, cb
-     *             |
-     *           cabb      cb         cabb    cabb->cb, cb         Now, all newly generated Strings already exist in visited,
+     * 没有‘ab', cacdbb          （cacdbb, caabbb）(cdabb, caabbb)     level 2    Queue - cacdbb, cabb, caabbb, cb
+     *             |                     |       |       |      |
+     *           cabb                  cabb   cabb     cdb     cabb
+     *             |                     |      |
+     *            cb                     cb     cb
+     *                                                             Now, all newly generated Strings already exist in visited,
      *                                                             none of them is added to queue, now queue is empty,
      *                                                             BFS is done.
      *

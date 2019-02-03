@@ -40,6 +40,9 @@ public class LI_611_Knight_Shortest_Path {
         Queue<Point> queue = new LinkedList<>();
         queue.offer(source);
 
+        /**
+         * knights move pattern
+         */
         int[][] dir = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {1, -2}, {1, 2}, {-1, -2}, {-1, 2}};
         int res = 0;
 
@@ -61,7 +64,11 @@ public class LI_611_Knight_Shortest_Path {
 
                     queue.offer(next);
                     /**
-                     * !!! Don't forget
+                     * !!!
+                     * set it as visited
+                     *
+                     * Don't forget
+                     * Don't forget
                      */
                     grid[next.x][next.y] = true;
                 }

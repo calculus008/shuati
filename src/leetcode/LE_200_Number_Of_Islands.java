@@ -57,6 +57,7 @@ public class LE_200_Number_Of_Islands {
         }
 
         /**
+         * !!!
          * 千万别忘了这一步!!!
          */
         grid[x][y] = '0';
@@ -92,6 +93,10 @@ public class LE_200_Number_Of_Islands {
         return islands;
     }
 
+    /**
+     * Start from given coordinate which is true, "sink" the island (set all on the island to false)
+     * in BFS
+     */
     private void markByBFS(boolean[][] grid, int x, int y) {
         // magic numbers!
         int[] directionX = {0, 1, -1, 0};

@@ -10,10 +10,10 @@ public class LE_444_Sequence_Reconstruction {
          Check whether the original sequence org can be uniquely reconstructed from the sequences in seqs.
          The org sequence is a permutation of the integers from 1 to n, with 1 ≤ n ≤ 104. Reconstruction
          means building a shortest common supersequence of the sequences in seqs (i.e., a shortest sequence
-         so that all sequences in seqs are subsequences of it). Determine whether there is only one sequence that can be reconstructed from seqs and it is the org sequence.
+         so that all sequences in seqs are subsequences of it). Determine whether there is only one sequence
+         that can be reconstructed from seqs and it is the org sequence.
 
          Example 1:
-
          Input:
          org: [1,2,3], seqs: [[1,2],[1,3]]
 
@@ -21,9 +21,10 @@ public class LE_444_Sequence_Reconstruction {
          false
 
          Explanation:
-         [1,2,3] is not the only one sequence that can be reconstructed, because [1,3,2] is also a valid sequence that can be reconstructed.
-         Example 2:
+         [1,2,3] is not the only one sequence that can be reconstructed, because [1,3,2] is also a valid
+         sequence that can be reconstructed.
 
+         Example 2:
          Input:
          org: [1,2,3], seqs: [[1,2]]
 
@@ -32,8 +33,8 @@ public class LE_444_Sequence_Reconstruction {
 
          Explanation:
          The reconstructed sequence can only be [1,2].
-         Example 3:
 
+         Example 3:
          Input:
          org: [1,2,3], seqs: [[1,2],[1,3],[2,3]]
 
@@ -42,8 +43,8 @@ public class LE_444_Sequence_Reconstruction {
 
          Explanation:
          The sequences [1,2], [1,3], and [2,3] can uniquely reconstruct the original sequence [1,2,3].
-         Example 4:
 
+         Example 4:
          Input:
          org: [4,1,5,2,6,3], seqs: [[5,2,6,3],[4,1,5,2]]
 
@@ -59,7 +60,7 @@ public class LE_444_Sequence_Reconstruction {
                return false;
           }
 
-          Map<Integer, Set<Integer>> map = new HashMap<>();//save the numbers it points to
+          Map<Integer, Set<Integer>> map = new HashMap<>();//save the numbers it points to -> adjacent list (neighbors)
           Map<Integer, Integer> indegree = new HashMap<>();//save indegree of a number
 
           /**
@@ -67,6 +68,9 @@ public class LE_444_Sequence_Reconstruction {
            * 1.map of indegree for each number appears in seqs
            * 2.map of mapping each number appears in seqs to the numbers it points to.
            *   It serves the same purpose of "ArrayList<DirectedGraphNode> neighbors" in DirectedGraphNode class
+           *
+           * Has to process 2 adjacent elements at each iteration, therefore need to process the case that
+           * there's only element in seq separately.
            */
           for (List<Integer> seq : seqs) {
                if (seq.size() == 1) {
@@ -80,6 +84,11 @@ public class LE_444_Sequence_Reconstruction {
                          map.putIfAbsent(seq.get(i + 1), new HashSet<>());
                          indegree.putIfAbsent(seq.get(i + 1), 0);
 
+                         /**
+                          * !!!
+                          * notice this if, we try to add an element into a set, if add returns false,
+                          * it means the element exists in set, so do nothing.
+                          */
                          if (map.get(seq.get(i)).add(seq.get(i + 1))) {//!!!
                               indegree.put(seq.get(i + 1), indegree.get(seq.get(i + 1)) + 1);
                          }
@@ -88,13 +97,13 @@ public class LE_444_Sequence_Reconstruction {
           }
 
           /**
-           * Tow places of using indgree:
+           * Tow places of using indegree:
            * 1.Check which node should be put into queue initially
            * 2.After update indegree, if there's 0 indegree, put element into queue
            */
           Queue<Integer> queue = new LinkedList<>();
           for (Map.Entry<Integer, Integer> entry : indegree.entrySet()) {
-               if (entry.getValue() == 0) {
+               if (entry.getValue() == 0) {//add key that has value '0' (0 indegree)
                     queue.offer(entry.getKey());
                }
           }
@@ -102,18 +111,24 @@ public class LE_444_Sequence_Reconstruction {
           int index = 0;
           while (!queue.isEmpty()) {
                int size = queue.size();
-               if (size > 1) {
+
+               /**
+                * there are more than 1 node with 0 indegree
+                */
+               if (size > 1) {//??
                     return false;
                }
 
                int cur = queue.poll();
-               if (index == org.length || org[index] != cur) {
+               if (index == org.length || org[index] != cur) {//??
                     return false;
                }
 
                index++;
 
-               if(!map.containsKey(cur)) continue; //don't forget
+               if(!map.containsKey(cur)) {
+                    continue; //don't forget
+               }
 
                for (int next : map.get(cur)) {
                     indegree.put(next, indegree.get(next) - 1);

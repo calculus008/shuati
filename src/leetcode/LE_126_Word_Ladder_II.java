@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class LE_126_Word_Ladder_II {
     /**
-         Given two words (beginWord and endWord), and a dictionary's word list, find all
+         Given two words (beginWord and endWord), and a dictionary's word list, find ALL
          shortest transformation sequence(s) from beginWord to endWord, such that:
 
          Only one letter can be changed at a time
@@ -366,10 +366,10 @@ public class LE_126_Word_Ladder_II {
              这个dfs的写法有些特殊：
              1.For backtracking, add and remove at the very beginning and end.
              2.Can't return right after adding a path to ladder, we also need to remove last element for backtracking,
-             therefore, if ... else...
+               therefore, if ... else...
              3." if (distance.get(cur) == distance.get(parent) + 1)"
-             Only recurse to the next level if cur is expanded from parent and its path length is
-             parent's path length + 1.
+               Only recurse to the next level if cur is expanded from parent and its path length is
+               parent's path length + 1.
          **/
         private void dfs (List<List<String>> ladders,
                           List<String> path,
@@ -377,7 +377,7 @@ public class LE_126_Word_Ladder_II {
                           String target,
                           Map<String, Integer> distance,
                           Map<String, List<String>> map) {
-            path.add(cur);
+            path.add(cur);//!!!
 
             if (cur.equals(target)) {
                 ladders.add(new ArrayList<>(path));
@@ -393,7 +393,7 @@ public class LE_126_Word_Ladder_II {
                 }
             }
 
-            path.remove(path.size() - 1);
+            path.remove(path.size() - 1);//!!!
         }
     }
 }

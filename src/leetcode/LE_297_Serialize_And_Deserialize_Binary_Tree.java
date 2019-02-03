@@ -11,25 +11,32 @@ import java.util.Queue;
  */
 public class LE_297_Serialize_And_Deserialize_Binary_Tree {
     /**
-         Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer,
-         or transmitted across a network connection link to be reconstructed later in the same or another computer environment.
+         Serialization is the process of converting a data structure or object into a
+         sequence of bits so that it can be stored in a file or memory buffer,
+         or transmitted across a network connection link to be reconstructed later
+         in the same or another computer environment.
 
-         Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should
-         work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.
+         Design an algorithm to serialize and deserialize a binary tree. There is no
+         restriction on how your serialization/deserialization algorithm should
+         work. You just need to ensure that a binary tree can be serialized to a string
+         and this string can be deserialized to the original tree structure.
 
          For example, you may serialize the following tree
 
-         1
-         / \
-         2   3
-         / \
+             1
+            / \
+           2   3
+          / \
          4   5
+
          as "[1,2,3,null,null,4,5]", just the same as how LeetCode OJ serializes a binary tree.
          You do not necessarily need to follow this format, so please be creative and come up with different approaches yourself.
 
-         Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
+         Note:
+         Do not use class member/global/static variables to store states.
+         Your serialize and deserialize algorithms should be stateless.
 
-        Hard
+         Hard
      */
 
     /**
@@ -126,6 +133,8 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
              1.No need to use Deque, declare it as LinkedList is ok, Queue interface does not have "addAll" method.
              2.Notice, the type of queue is "String" (compared with BFS solution using "TreeNode") since decode
                method already made the string follow BT structure.
+
+             (unique : here DFS, not BFS, uses Queue)
          **/
         Queue<String> q = new LinkedList<>();
         /**
@@ -139,7 +148,7 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
     private TreeNode decode(Queue<String> q) {
         if(q.isEmpty()) return null;
 
-        String s = q.remove();
+        String s = q.remove();//!!!"q.remove()"
         if(s.equals("#")) {
             return null;
         }
@@ -157,7 +166,6 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
      * for "Integer.parseInt()", "null"
      */
     public class Solution {
-
         // Encodes a tree to a single string.
         public String serialize(TreeNode root) {
             StringBuilder sb = new StringBuilder();
@@ -169,7 +177,7 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
 
                 if (cur == null) {
                     sb.append("#").append(" ");
-                    continue;
+                    continue;//!!!
                 }
 
                 sb.append(cur.val).append(" ");
@@ -198,6 +206,9 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
                 return null;
             }
 
+            /**
+             * Create root from the first element, then loop from index 1 on tokens
+             * **/
             TreeNode root = new TreeNode(Integer.parseInt(tokens[0]));
             q.offer(root);
 

@@ -285,4 +285,71 @@ public class LE_480_Sliding_Window_Median {
         }
     }
 
+
+    class Solution_Practice {
+        public double[] medianSlidingWindow(int[] nums, int k) {
+            /**
+             * Boundary check
+             */
+            if (null == nums || nums.length == 0 || k == 0) {
+                return new double[]{};
+            }
+
+            /**
+             * !!!
+             * Must remember how to write comparator
+             * "comparator.reversed()"
+             */
+            Comparator<Integer> comparator = (a, b) -> nums[a] != nums[b] ? Integer.compare(nums[a], nums[b]) : a - b;
+            TreeSet<Integer> large = new TreeSet<>(comparator);
+            TreeSet<Integer> small = new TreeSet<>(comparator.reversed());
+
+            int n = nums.length;
+            double[] res = new double[n - k + 1];
+
+            /**
+             * l : left side of window
+             * r : right side of window
+             * idx : index in res[]
+             */
+            int l = 0;
+            int idx = 0;
+            for (int r = 0; r < n; r++) {
+                /**
+                 * !!!
+                 * only start removing left most element in window when right side hit index value k
+                 * (window 0 ~ k - 1 has k elements, index k is its k + 1 th element, must do remove)
+                 */
+                if (r >= k) {
+                    if (!large.remove(l)) {
+                        small.remove(l);
+                    }
+                    l++;
+                }
+
+                large.add(r);
+                small.add(large.pollFirst());
+                while (small.size() > large.size()) {
+                    large.add(small.pollFirst());
+                }
+
+                /**!!!
+                 * Don't forget this if condition
+                 * res starts to have value when r hits index k - 1 (first full window with k elements)
+                 */
+                if (r >= k - 1) {
+                    /**
+                     * !!!
+                     * 1.Don't forget, what stores in large and small are INDEX!!!
+                     *   So after retrieve it using "first()", the value is in "nums[large.first()]" and "nums[small.first()]"
+                     * 2.Must consider int overflow, deal with it by converting to long
+                     */
+                    res[idx] = (k % 2 == 1) ? (long) nums[large.first()] / 1.0 : (((long)nums[large.first()] + (long)nums[small.first()]) / 2.0);
+                    idx++;
+                }
+            }
+
+            return res;
+        }
+    }
 }

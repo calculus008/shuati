@@ -28,7 +28,7 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
 
      Note:
 
-     1 <= graph.length <= 12
+     1 <= graph.length <= 12 (!!!)
      0 <= graph[i].length < graph.length
 
      Hard
@@ -61,7 +61,7 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
      * 4. Pop each Pair out of queue, first process, then expand to next level. In other words, all processing
      *    of Pair happens after it is popped out of the queue.
      *
-     * 5. Init queue by put all nodes into the queue, since we can start any of those nodes.
+     * 5. Init queue by putting all nodes into the queue, since we can start any of those nodes.
      *    Similar to LE_934_Shortest_Bridge
      */
 
@@ -105,8 +105,9 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
                     }
                     visited.add(key);
 
-                    for (int next : graph[n])
+                    for (int next : graph[n]) {
                         q.offer(new Pair(next, state | (1 << next)));
+                    }
                 }
                 ++steps;
             }

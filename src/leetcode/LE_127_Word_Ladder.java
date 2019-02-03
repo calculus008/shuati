@@ -58,6 +58,9 @@ public class LE_127_Word_Ladder {
 
     /**
      * Solution 1 : BFS, 83ms
+     *
+     * Time  : O(n * (26 ^ l))
+     * Space : O(n)
      */
     public int ladderLength_1(String beginWord, String endWord, List<String> wordList) {
         HashSet<String> dict = new HashSet<>();
@@ -171,7 +174,10 @@ public class LE_127_Word_Ladder {
 
     /**
      * The string returned in the list must exit in dict.
-     * Timne : O((l ^ 2)* 25)
+     * Timne : O((l ^ 2)* 25), l is length of s.
+     *         1.iterate through s - O(l)
+     *         2.try 25 letters - O(25)
+     *         3.use set.contains() check if new string is dict - O(l)
      */
     public List<String> findNeighbors(String s, HashSet<String> dict) {
         char[] chars = s.toCharArray();
@@ -216,6 +222,11 @@ public class LE_127_Word_Ladder {
         start.add(beginWord);
         end.add(endWord);
 
+        /**
+         * !!!
+         * In Bi-direction BFS, we no longer use Queue !!!
+         * Use two sets start and end. While condition checks if both are empty.
+         */
         while (!start.isEmpty() && !end.isEmpty()) {//!!!
             length++;
 
@@ -227,6 +238,12 @@ public class LE_127_Word_Ladder {
                 end = temp;
             }
 
+            /**
+             * !!!
+             * Must create a new set to record the new strings generated in each level,
+             * then use it as the set for comparison in the next level. Can't add new
+             * word to start or end.
+             */
             Set<String> next = new HashSet<String>();
 
             for (String word : start) {
@@ -243,6 +260,10 @@ public class LE_127_Word_Ladder {
 
                         if (wordList.contains(str)) {
                             next.add(str);
+                            /**
+                             * !!!
+                             * remove from dictionary, serve the purpose of marking it as visited
+                             */
                             wordList.remove(str);
                         }
                     }
@@ -257,5 +278,86 @@ public class LE_127_Word_Ladder {
             // next = temp1;
         }
         return 0;
+    }
+
+    class Solution {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            /**
+                Those checks are not needed as the problem states :
+                    You may assume no duplicates in the word list.
+                    You may assume beginWord and endWord are non-empty and are not the same.
+             **/
+//            if (null == beginWord || null == endWord || beginWord.length() == 0 || endWord.length() == 0) {
+//                return 0;
+//            }
+//
+//            if (beginWord.equals(endWord)) {
+//                return 1;
+//            }
+
+
+            Set<String> dict = new HashSet<>(wordList);
+
+            /**
+             * need to do this check, leetcode test cases require endWord must be in wordList
+             */
+            if (!dict.contains(endWord)) {
+                return 0;
+            }
+
+            Set<String> start = new HashSet<>();
+            Set<String> end = new HashSet<>();
+
+            start.add(beginWord);
+            end.add(endWord);
+
+            int n = beginWord.length();
+            int steps = 0;
+
+            while (start.size() != 0 && end.size() != 0) {//!!!
+                steps++;
+
+                if (start.size() < end.size()) {
+                    Set<String> temp = new HashSet<>();
+                    temp = start;
+                    start = end;
+                    end = temp;
+                }
+
+                Set<String> nexts = new HashSet<>();
+
+                for (String cur : start) {//!!!
+                    char[] chars = cur.toCharArray();
+
+                    for (int i = 0; i < n; i++) {
+                        char original = chars[i];
+
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            if (c == original) {
+                                continue;
+                            }
+
+                            chars[i] = c;
+                            String next = String.valueOf(chars);
+
+                            if (end.contains(next)) {//!!!
+                                return steps + 1;//!!!
+                            }
+
+                            if (dict.contains(next)) {
+                                nexts.add(next);//!!!
+                                dict.remove(next);//!!!
+                            }
+                        }
+
+                        chars[i] = original;
+                    }
+                }
+
+                start = nexts;
+            }
+
+            return 0;
+        }
     }
 }

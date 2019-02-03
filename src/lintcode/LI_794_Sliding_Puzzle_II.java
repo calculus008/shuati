@@ -11,7 +11,8 @@ public class LI_794_Sliding_Puzzle_II {
 
          A move consists of choosing 0 and a 4-directionally adjacent number and swapping it.
 
-         Given an initial state of the puzzle board and final state, return the least number of moves required so that the initial state to final state.
+         Given an initial state of the puzzle board and final state, return the least number of moves required so that
+         the initial state to final state.
 
          If it is impossible to move from initial state to final state, return -1.
 
@@ -67,6 +68,8 @@ public class LI_794_Sliding_Puzzle_II {
     /**
      * BFS
      *
+     * "华容道"
+     *
      * 非常典型的BFS。注意这两个方法：
      *
      * matrixToString() : 把矩阵转换成String,这样才能比较他们，以判断是否到达终点。
@@ -92,6 +95,7 @@ public class LI_794_Sliding_Puzzle_II {
             int step = 0;
             while (!queue.isEmpty()) {
                 int size = queue.size();
+
                 for (int i = 0; i < size; i++) {
                     String curt = queue.poll();
                     if (curt.equals(target)) {
