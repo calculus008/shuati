@@ -131,6 +131,15 @@ public class LE_549_Binary_Tree_Longest_Consecutive_Sequence_II {
         if (root.right != null && root.right.val - 1 == root.val)
             up = Math.max(up, right.max_up + 1);
 
+        /**
+         * if both left and right are null, then len = 0 + 1 + 0 = 1
+         *
+         *         2 (3, 1, 1)
+         *        / \
+         *       1  3
+         * (1,0,0)  (1,0,0)
+         *
+         */
         int len = down + 1 + up;
         len = Math.max(len, Math.max(left.max_length, right.max_length));
 

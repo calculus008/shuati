@@ -63,6 +63,25 @@ public class LE_140_Word_Break_II {
         List<String> cur = new ArrayList<>();
         if (dict.contains(s)) {
             cur.add(s);
+            /**
+             * since we want to find all possible answers,
+             * we can't return here, must go to the next step.
+             *
+             * For example: Given:
+             * "pineapplepenapple"
+             * ["apple","pen","applepen","pine","pineapple"]
+             *
+             * Correct answer is :
+             * ["pine apple pen apple","pineapple pen apple","pine applepen apple"]
+             *
+             * If we return here, answer turned out to be :
+             * ["pine applepen apple","pineapple pen apple"]
+             *
+             * We missed "pine apple pen apple", because "applepen" is a valid word,
+             * but it can be further divided into "apple" and "pen". If we return here,
+             * we won't be able to get this part.
+             *
+             */
         }
 
         for (int i = 1; i < s.length(); i++) {

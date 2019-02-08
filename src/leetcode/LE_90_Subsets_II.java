@@ -8,8 +8,9 @@ import java.util.List;
  * Created by yuank on 3/8/18.
  */
 public class LE_90_Subsets_II {
-    /*
-        Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
+    /**
+        Given a collection of integers that might contain duplicates, nums,
+        return all possible subsets (the power set).
 
         Note: The solution set must not contain duplicate subsets.
 
@@ -26,7 +27,10 @@ public class LE_90_Subsets_II {
         ]
      */
 
-    //Time : O(2 ^ n), Space : O(n)
+    /**
+     * Time  : O(2 ^ n),
+     * Space : O(n)
+     **/
     public static List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length == 0) return res;

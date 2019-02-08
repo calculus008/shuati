@@ -267,9 +267,15 @@ public class LE_272_Closest_BST_Value_II {
     /**
      * Solution 4 :
      *
-     * 最优算法，时间复杂度 O(logn + k)，空间复杂度 O(logn)
+     * 最优算法，时间复杂度 O(logn + k)，空间复杂度 O(logn)  (assume the BST is balanced).
      *
-     * Building each of the stacks takes O(log(n)) assuming BST is balanced.
+     * In essence, it is the same idea of solution 1, first find the element that is the closet to
+     * given target , then use two pointers to find k closet elements. In stead of first traversing
+     * BST inorder to output all elements into a list(which takes o(n)), we do it using BST properties
+     * and don't need to traverse the whole BST.
+     *
+     * Here we use 2 stacks (prev and next) which are taking the roles of two pointers.
+     * Building each of the stacks (prev and next) takes O(log(n)) assuming BST is balanced.
      * Each call to getNext/goPrev has an amortized cost of O(1), since every node is pushed and popped at most once.
      *
      * 思路等同于从指定节点开始分别向前和向后遍历，直到找到k个最接近target的节点。

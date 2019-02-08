@@ -25,6 +25,8 @@ public class LE_301_Remove_Invalid_Parentheses {
 
      http://zxi.mytechroad.com/blog/string/leetcode-301-remove-invalid-parentheses/
 
+     Combination kind of problem.
+
      Time :  O(2 ^ (l + r))  Depth of recursion at most : l + r. Each time we delete left or right parentheses, therefore 2 ^ (l + r)
      Space : O((l + r) ^ 2) ~ O(n ^ 2)
 

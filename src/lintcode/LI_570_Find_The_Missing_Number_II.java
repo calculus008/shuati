@@ -5,7 +5,7 @@ package lintcode;
  */
 public class LI_570_Find_The_Missing_Number_II {
     /**
-         Giving a string with number from 1-n in random order, but miss 1 number.Find that number.
+         Giving a string with number from 1 ~ n in random order, but miss 1 number.Find that number.
 
          Example
          Given n = 20, str = 19201234567891011121314151618
@@ -48,7 +48,14 @@ public class LI_570_Find_The_Missing_Number_II {
             return;
         }
 
-        //parse to the end, check status in found
+        /**
+         * parse to the end, check status in found
+         *
+         * !!!
+         * Must to it here instead of doing it after DFS is finished
+         * because found[] is changed along DFS and only here it has
+         * been fully populated.
+         **/
         if (start == str.length()) {
             for (int i = 1; i < found.length; i++) {
                 if (!found[i]) {

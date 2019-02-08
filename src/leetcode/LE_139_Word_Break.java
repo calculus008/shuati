@@ -47,6 +47,8 @@ public class LE_139_Word_Break {
     /**
      * Best solution, DP
      *
+     * Fastest, 4ms, 95.55%
+     *
      */
     public boolean wordBreak(String s, Set<String> dict) {
         if (s == null || s.length() == 0) {
@@ -54,10 +56,18 @@ public class LE_139_Word_Break {
         }
 
         int n = s.length();
-        // 长度为n的单词 有n + 1个切割点 比如: _l_i_n_t_
+        /**
+         * 长度为n的单词 有n + 1个切割点 比如: _l_i_n_t_
+         *
+         * dp[i] : if the first i chars in current string is valid
+         * **/
         boolean[] dp = new boolean[n + 1];
-        // 当s长度为0时
+
+        /**
+         * 当s长度为0时, "" is valid
+         * **/
         dp[0] = true;
+
         //find the max length of the word in dict
         int max = getMaxLen(dict);
 
@@ -124,41 +134,49 @@ public class LE_139_Word_Break {
 
 
     /**
-     Solution 2 : Recurssion with cache. Slower solution, takes 36 ms.
-                  AC at leetcode, but MLE(Memory Limit Exceed) at Lintcode (139)
+     * Solution 2 : Recursion with cache. Slower solution, takes 36 ms.
+     *              AC at leetcode, but MLE(Memory Limit Exceed) at Lintcode (139)
+     *
+     * Huahua's version
+     * http://zxi.mytechroad.com/blog/leetcode/leetcode-139-word-break/
+     *
+     * Time  : O(n^2)
+     * Space : O(n^2)
+     *
+     * very slow on leetcode
      */
-     public boolean wordBreak3(String s, List<String> wordDict) {
-         Set<String> dict = new HashSet<>(wordDict);
-         Map<String, Boolean> cache = new HashMap<>();
+    public boolean wordBreak3(String s, List<String> wordDict) {
+        Set<String> dict = new HashSet<>(wordDict);
+        Map<String, Boolean> cache = new HashMap<>();
 
-         return isValid(s, dict, cache);
-     }
+        return isValid(s, dict, cache);
+    }
 
-     private boolean isValid(String s, Set<String> wordDict, Map<String, Boolean> cache ) {
-         //!!! This is wrong!!!, if use getOrDefault, it means that it will only return
-         // true when cache has the key and value is true. The correct logic is that you need
-         // to return the value (regardless it is ture or false) if the key exists.
-         //!!!
-         // if(cache.getOrDefault(s, false)) return true;
+    private boolean isValid(String s, Set<String> wordDict, Map<String, Boolean> cache) {
+        //!!! This is wrong!!!, if use getOrDefault, it means that it will only return
+        // true when cache has the key and value is true. The correct logic is that you need
+        // to return the value (regardless it is ture or false) if the key exists.
+        //!!!
+        // if(cache.getOrDefault(s, false)) return true;
 
-         if(cache.containsKey(s)) return cache.get(s);
+        if (cache.containsKey(s)) return cache.get(s);
 
-         if(wordDict.contains(s)) {
-             cache.put(s, true);
-             return true;//!!! #1 diff from 140
-         }
+        if (wordDict.contains(s)) {
+            cache.put(s, true);
+            return true;//!!! #1 diff from 140
+        }
 
-         for(int i=1; i<s.length(); i++) {
-             String l = s.substring(0, i);
-             String r = s.substring(i);
+        for (int i = 1; i < s.length(); i++) {
+            String l = s.substring(0, i);
+            String r = s.substring(i);
 
-             if(isValid(l, wordDict, cache) && wordDict.contains(r)) {//!!! #2 diff from 140
-                 cache.put(s, true);
-                 return true;//!!! #3 diff from 140
-             }
-         }
+            if (isValid(l, wordDict, cache) && wordDict.contains(r)) {//!!! #2 diff from 140
+                cache.put(s, true);
+                return true;//!!! #3 diff from 140
+            }
+        }
 
-         cache.put(s, false);
-         return false;//!!! #4 diff from 140
-     }
+        cache.put(s, false);
+        return false;//!!! #4 diff from 140
+    }
 }

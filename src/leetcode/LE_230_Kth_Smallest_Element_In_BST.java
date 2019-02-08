@@ -154,6 +154,8 @@ public class LE_230_Kth_Smallest_Element_In_BST {
          使用 Binary Search Tree Iterator 的方式（可以参考 binary search tree iterator 那个题）
          用 stack，从第一个点开始，走 k-1 步，就是第 k 个点了。
          时间复杂度是 O(h + k), h 是树的高度。
+
+         same as Solution 2 , inorder iterative.
      */
     public int kthSmallest5_JiuZhang(TreeNode root, int k) {
         Stack<TreeNode> stack = new Stack<>();

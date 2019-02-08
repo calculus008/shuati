@@ -23,7 +23,12 @@ public class LE_22_Generate_Parentheses {
          Medium
      */
 
-    //Time : O(n!) Space : O(n)
+    /**
+     * This is permutation.
+     *
+     * Time  : O(n!)
+     * Space : O(n)
+     **/
     public List<String> generateParenthesis(int n) {
         List<String> res = new ArrayList<>();
         if (n <= 0) {

@@ -19,7 +19,7 @@ public class LE_285_Inorder_Successor_In_BST {
      *
      * Then those 2 steps are combined.
      *
-     * When we decide which subtree to go, us "<=". "=" means
+     * When we decide which subtree to go, use "<=". "=" means
      * we find p, then we still need to go to its right side.
      *
      * If its right side child R is null, return null, there's no such successor.

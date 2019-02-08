@@ -46,7 +46,7 @@ public class LE_298_Binary_Tree_Longest_Consecutive_Sequence {
     /**
      *
      * @param root
-     * @param curMax  Current max consecutive sequence length, if not consectutive,
+     * @param curMax  Current max consecutive sequence length, if not consecutive,
      *                need to start from current node, so max set to 1
      * @param target  If consecutive, target should be current node val plus 1
      */

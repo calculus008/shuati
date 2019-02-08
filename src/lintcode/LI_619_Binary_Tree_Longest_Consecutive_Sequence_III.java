@@ -17,10 +17,10 @@ public class LI_619_Binary_Tree_Longest_Consecutive_Sequence_III {
          An example of test data: k-ary tree 5<6<7<>,5<>,8<>>,4<3<>,5<>,3<>>>, denote the following structure:
 
 
-         5
-         /   \
-         6     4
-         /|\   /|\
+              5
+            /   \
+           6     4
+          /|\   /|\
          7 5 8 3 5 3
 
          Return 5, // 3-4-5-6-7

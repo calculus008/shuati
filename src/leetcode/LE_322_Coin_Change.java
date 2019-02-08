@@ -29,8 +29,8 @@ public class LE_322_Coin_Change {
      * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-322-coin-change/
      *
      *   DP
-         Time : O(n * amount)
-         Space : O(amount)
+     *   Time  : O(n * amount)
+     *   Space : O(amount)
      */
     class Solution1 {
         public int coinChange(int[] coins, int amount) {
@@ -82,11 +82,12 @@ public class LE_322_Coin_Change {
 
     /**
      * DFS + Greedy
-     * Time complexity: O(amount^n/(coin_0*coin_1*…*coin_n))
-     * Space complexity: O(n)
+     * Time  : O(n * amount ^ 2)
+     * Space : O(n)
      */
     class Solution3 {
         int res = Integer.MAX_VALUE;
+
         public int coinChange(int[] coins, int amount) {
             if (amount == 0 || null == coins || coins.length == 0) {
                 return 0;

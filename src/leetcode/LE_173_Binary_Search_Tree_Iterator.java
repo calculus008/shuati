@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * Created by yuank on 3/23/18.
  */
-public class    LE_173_Binary_Search_Tree_Iterator {
+public class  LE_173_Binary_Search_Tree_Iterator {
     /**
         Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
 
@@ -19,9 +19,7 @@ public class    LE_173_Binary_Search_Tree_Iterator {
     /**
      * !!!
      * This basically is a variation of iterative version of inorder traversal
-     * Refer to LE_94 inorder iterative traversal
-     *
-     * LE_94_Binary_Tree_Inorder_Traversal
+     * Refer to LE_94_Binary_Tree_Inorder_Traversal inorder iterative traversal
      */
     public class BSTIterator {
         private Stack<TreeNode> stack;
@@ -36,13 +34,17 @@ public class    LE_173_Binary_Search_Tree_Iterator {
          * return whether we have a next smallest number
          */
         public boolean hasNext() {
-            //!!!
+            /**
+             * This is actually the outer while loop condition in LE_94_Binary_Tree_Inorder_Traversal
+             */
             if (!stack.isEmpty() || cur != null) return true;
             return false;
         }
 
-        /** @return the next smallest number */
-        //Refer to LE_94 for inorder iterative traversal
+        /** @return the next smallest number
+         * This is the steps inside the while loop in LE_94_Binary_Tree_Inorder_Traversal,
+         * each call to this method will just move 1 step in BST.
+         */
         public int next() {
             while (cur != null) {
                 stack.push(cur);

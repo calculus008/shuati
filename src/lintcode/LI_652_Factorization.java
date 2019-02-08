@@ -28,35 +28,76 @@ public class LI_652_Factorization {
      */
 
     //Solution 1 : DFS
-    public List<List<Integer>> getFactors(int n) {
-        List<List<Integer>> res = new ArrayList<>();
-        helper(res, new ArrayList<>(), n, 2);
-        return res;
-    }
-
-    private void helper(List<List<Integer>> res, List<Integer> cur, int n, int start) {
-        if (n <= 1) {
-            if (cur.size() > 1) {//!!!
-                res.add(new ArrayList<>(cur));
-            }
-            return;//!!!
+    class Solution1 {
+        public List<List<Integer>> getFactors(int n) {
+            List<List<Integer>> res = new ArrayList<>();
+            helper(res, new ArrayList<>(), n, 2);
+            return res;
         }
 
-        for (int i = start; i <= Math.sqrt(n); i++) {
-            if (n % i == 0) {
-                cur.add(i);
-                helper(res, cur, n / i, i); //!!!
+        private void helper(List<List<Integer>> res, List<Integer> cur, int n, int start) {
+            if (n <= 1) {
+                if (cur.size() > 1) {//!!!
+                    res.add(new ArrayList<>(cur));
+                }
+                return;//!!!
+            }
+
+            for (int i = start; i <= Math.sqrt(n); i++) {
+                if (n % i == 0) {
+                    cur.add(i);
+                    helper(res, cur, n / i, i); //!!!
+                    cur.remove(cur.size() - 1);
+                }
+            }
+
+            //!!! ?
+            if (n >= start) {
+                cur.add(n);
+                helper(res, cur, 1, n);
                 cur.remove(cur.size() - 1);
             }
         }
-
-        //!!! ?
-        if (n >= start) {
-            cur.add(n);
-            helper(res, cur, 1, n);
-            cur.remove(cur.size() - 1);
-        }
     }
 
+    public class Solution2 {
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+
+        public List<List<Integer>> getFactors(int n) {
+            dfs(2, n);
+            return ans;
+        }
+
+        private void dfs(int start, int remain) {
+            if (remain == 1) {
+                if (path.size() != 1) {
+                    ans.add(new ArrayList<>(path)); //deep copy
+                }
+                return;
+            }
+
+            for (int i = start; i <= remain; i++) {
+                if (i > remain / i) {//same effect as using "i <= Math.sqrt(remain)" as end condition for this for loop
+                    break;
+                }
+                if (remain % i == 0) {
+                    path.add(i);                  //进栈
+                    dfs(i, remain / i);
+                    path.remove(path.size() - 1); //出栈
+                }
+            }
+
+            /**
+             * !!!
+             * one more step after loop
+             * set remain as 1, so the next level will be base case and
+             * add path into ans. Without this step, ans will be empty list.
+             */
+            path.add(remain);
+            dfs(remain, 1);
+            path.remove(path.size() - 1);
+        }
+    }
 
 }

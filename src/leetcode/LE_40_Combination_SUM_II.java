@@ -37,69 +37,76 @@ public class LE_40_Combination_SUM_II {
      * Space : O(k * n)
      */
 
-    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        List<List<Integer>> res = new ArrayList<>();
+    class Solution1 {
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> res = new ArrayList<>();
 
-        //!!!
-        Arrays.sort(candidates);
-
-        getAns(candidates, res, target, new ArrayList<>(), 0);
-
-        return res;
-    }
-
-    public void getAns(int[] candidates, List<List<Integer>> res, int target, List<Integer> cur, int s) {
-        if (target < 0) return;
-        if (target == 0) {
-            res.add(new ArrayList<Integer>(cur));
-            return;
-        }
-
-        for (int i = s; i < candidates.length; i++) {
             //!!!
-            if (candidates[i] > target) return;
+            Arrays.sort(candidates);
 
-            //!!!去重， “i > s" means this is not the start eelement in this loop
-            // The for loop here is to try all possible elements for one fixed position, for this position, one value only needs to appear once
-            if (i > s && candidates[i] == candidates[i - 1]) continue;
+            getAns(candidates, res, target, new ArrayList<>(), 0);
 
-            cur.add(candidates[i]);
-            getAns(candidates, res, target - candidates[i], cur, i + 1);
-            cur.remove(cur.size() - 1);
-        }
-    }
-
-    public List<List<Integer>> combinationSum2_2_JiuZhang(int[] num, int target) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (num == null || num.length == 0) {
             return res;
         }
 
-        //!!!
-        Arrays.sort(num);
-        helper(num, target, 0, res, new ArrayList<>());
-        return res;
+        public void getAns(int[] candidates, List<List<Integer>> res, int target, List<Integer> cur, int s) {
+            if (target < 0) return;
+            if (target == 0) {
+                res.add(new ArrayList<Integer>(cur));
+                return;
+            }
+
+            for (int i = s; i < candidates.length; i++) {
+                //!!!
+                if (candidates[i] > target) return;
+
+                /**!!!
+                 * 去重， “i > s" means this is not the start element in this loop.
+                 * The for loop here is to try all possible elements for one fixed position,
+                 * for this position, one value only needs to appear once
+                 **/
+                if (i > s && candidates[i] == candidates[i - 1]) continue;
+
+                cur.add(candidates[i]);
+                getAns(candidates, res, target - candidates[i], cur, i + 1);
+                cur.remove(cur.size() - 1);
+            }
+        }
     }
 
-    private void helper(int[] num, int target, int startIdx, List<List<Integer>> res, List<Integer> temp) {
-        if (target == 0) {
-            res.add(new ArrayList<>(temp));
-            return;
-        }
-
-        for (int i = startIdx; i < num.length; i++) {
-            if (i != startIdx && num[i] == num[i - 1]) {
-                continue;
+    class Solution2 {
+        public List<List<Integer>> combinationSum_JiuZhang(int[] num, int target) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (num == null || num.length == 0) {
+                return res;
             }
 
             //!!!
-            if (num[i] > target) {
-                break;
+            Arrays.sort(num);
+            helper(num, target, 0, res, new ArrayList<>());
+            return res;
+        }
+
+        private void helper(int[] num, int target, int startIdx, List<List<Integer>> res, List<Integer> temp) {
+            if (target == 0) {
+                res.add(new ArrayList<>(temp));
+                return;
             }
 
-            temp.add(num[i]);
-            helper(num, target - num[i], i + 1, res, temp);
-            temp.remove(temp.size() - 1);
+            for (int i = startIdx; i < num.length; i++) {
+                if (i != startIdx && num[i] == num[i - 1]) {
+                    continue;
+                }
+
+                //!!!
+                if (num[i] > target) {
+                    break;
+                }
+
+                temp.add(num[i]);
+                helper(num, target - num[i], i + 1, res, temp);
+                temp.remove(temp.size() - 1);
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ public class LI_597_Subtree_With_Maximum_Average {
      */
 
     /**
-     * For average, need to have sum and count of nodes in each recurssion,
+     * For average, need to have sum and count of nodes in each recursion,
      * therefore, has to create class Result which can contain multiple member variables
      */
     class Result {
@@ -59,8 +59,11 @@ public class LI_597_Subtree_With_Maximum_Average {
             Result a = new Result(left.sum + right.sum + root.val,
                     left.count + right.count + 1);
 
-            //!!! instead of "s1 / c1 > s2 / c2", use "s1 * c2 > s2 * c1",
-            //    avoid accuracy issue caused by division
+            /**
+             * !!!
+             * instead of "s1 / c1 > s2 / c2", use "s1 * c2 > s2 * c1",
+             * avoid accuracy issue caused by division
+             **/
             if (res == null || ((a.sum * res.count) > (res.sum * a.count))) {
                 res = a;
                 node = root;

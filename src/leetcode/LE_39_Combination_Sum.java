@@ -32,7 +32,7 @@ public class LE_39_Combination_Sum {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
 
-        //!!! 为了剪枝(line 24)
+        //!!! 为了剪枝
         Arrays.sort(candidates);
 
         getAns(candidates, target, 0, new ArrayList<Integer>(), res);
@@ -48,10 +48,17 @@ public class LE_39_Combination_Sum {
         }
 
         for (int i = start; i < candidates.length; i++) {
-            //!!!剪枝，因为已经排了序， 如果当前元素已经大于target,后面的元素也会大与target,没必要再继续下去
+            /**
+             * !!!
+             * 剪枝，因为已经排了序， 如果当前元素已经大于target,后面的元素也会大与target,没必要再继续下去
+             **/
             if (target < candidates[i]) break;
+
             cur.add(candidates[i]);
-            //!!! 本题允许重复使用同一元素，所以继续pass当前下标i, 这与求组合的标准算法有区别 - 组合算法pass下一个下标i+1
+            /**
+             * !!!
+             * 本题允许重复使用同一元素，所以继续pass当前下标i, 这与求组合的标准算法有区别 - 组合算法pass下一个下标i+1
+             */
             getAns(candidates, target - candidates[i], i, cur, res);
             cur.remove(cur.size() - 1);
         }

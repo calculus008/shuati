@@ -2,10 +2,7 @@ package leetcode;
 
 import common.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by yuank on 5/3/18.
@@ -83,6 +80,8 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
      * ]
      *
      * Medium
+     *
+     * A variation of the problem : LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
      */
 
     /**
@@ -96,30 +95,31 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
      *
      * Time and Space : O(n)
      **/
-    public List<List<Integer>> verticalOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res;
+    class Solution1 {
+        public List<List<Integer>> verticalOrder(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
 
-        int[] range = new int[2];
-        findRange(root, range, 0);
+            int[] range = new int[2];
+            findRange(root, range, 0);
 
-        //!!!
-        for (int i = range[0]; i <= range[1]; i++) {
-            res.add(new ArrayList<Integer>());
-        }
+            //!!!
+            for (int i = range[0]; i <= range[1]; i++) {
+                res.add(new ArrayList<Integer>());
+            }
 
-        /**
-         * In BFS, need both the node object and its col index
-         * we can create a class Pair and use one queue, Or
-         * we just use 2 queues and offer and poll elements from
-         * those 2 queues at the same time
-         */
-        Queue<TreeNode> nodes = new LinkedList<>();
-        Queue<Integer> cols = new LinkedList<>();
+            /**
+             * In BFS, need both the node object and its col index
+             * we can create a class Pair and use one queue, Or
+             * we just use 2 queues and offer and poll elements from
+             * those 2 queues at the same time
+             */
+            Queue<TreeNode> nodes = new LinkedList<>();
+            Queue<Integer> cols = new LinkedList<>();
 
-        nodes.offer(root);
+            nodes.offer(root);
 
-        /**
+            /**
              Once we find the min we create n number of lists starting from min till max. Now when doing BFS,
              we need to start adding the elements to the correct lists which will be between 0 to n.
              If you think about where the root will end up (which index in the cols list), it will be in the index at Math.abs(min).
@@ -127,70 +127,115 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
              hence root will be in the |min| index.
 
              So -range[0] is simply a shift of index positions so all nodes end up in their corresponding lists.
-         **/
-        cols.offer(-range[0]);
+             **/
+            cols.offer(-range[0]);
 
-        while (!nodes.isEmpty()) {
-            TreeNode curNode = nodes.poll();
-            int curCol = cols.poll();
-            res.get(curCol).add(curNode.val);
+            while (!nodes.isEmpty()) {
+                TreeNode curNode = nodes.poll();
+                int curCol = cols.poll();
+                res.get(curCol).add(curNode.val);
 
-            /**
-             * !!!
-             * "curl - 1" for left, and "cur + 1" for right
-             */
-            if (curNode.left != null) {
-                nodes.offer(curNode.left);
-                cols.offer(curCol - 1);
+                /**
+                 * !!!
+                 * "curl - 1" for left, and "cur + 1" for right
+                 */
+                if (curNode.left != null) {
+                    nodes.offer(curNode.left);
+                    cols.offer(curCol - 1);
+                }
+
+                if (curNode.right != null) {
+                    nodes.offer(curNode.right);
+                    cols.offer(curCol + 1);
+                }
             }
 
-            if (curNode.right != null) {
-                nodes.offer(curNode.right);
-                cols.offer(curCol + 1);
-            }
+            return res;
         }
 
-        return res;
+        /**
+         * !!!
+         * range[0] : offset from root location to the left most child (negative number)
+         * range[1] : offset from root location fo the right most child (positive number)
+         * <p>
+         * example:
+         * 5 vertical levels in range[] and its index
+         * <p>
+         * 0  1  2 3  4
+         * -2,-1,0 1, 2
+         * 3            list Idx [2]
+         * /\
+         * /  \
+         * 9   8                  [1, 3]
+         * /\  /\
+         * /  \/  \
+         * 4  01   7            [0, 2] [2, 4]
+         * /\
+         * /  \
+         * 5   2                 [1] [3]
+         * <p>
+         * answer:
+         * [
+         * [4],
+         * [9,5],
+         * [3,0,1],
+         * [8,2],
+         * [7]
+         * ]
+         */
+        public void findRange(TreeNode root, int[] range, int col) {
+            if (root == null) return;
+
+            range[0] = Math.min(col, range[0]);
+            range[1] = Math.max(col, range[1]);
+
+            findRange(root.left, range, col - 1);
+            findRange(root.right, range, col + 1);
+        }
     }
 
     /**
-     * !!!
-     * range[0] : offset from root location to the left most child (negative number)
-     * range[1] : offset from root location fo the right most child (positive number)
+     * Adapt from LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
      *
-     * example:
-     * 5 vertical levels in range[] and its index
+     * Changes :
+     * TreeMap<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
      *
-     * 0  1  2 3  4
-     * -2,-1,0 1, 2
-     *      3            list Idx [2]
-     *     /\
-     *    /  \
-     *    9   8                  [1, 3]
-     *   /\  /\
-     *  /  \/  \
-     *  4  01   7            [0, 2] [2, 4]
-     *     /\
-     *    /  \
-     *    5   2                 [1] [3]
-     *
-     *  answer:
-     * [
-     *   [4],
-     *   [9,5],
-     *   [3,0,1],
-     *   [8,2],
-     *   [7]
-     * ]
-     *
+     * Use list instead of TreeSet, the values in the trees are not unique.
      */
-    public void findRange(TreeNode root, int[] range, int col) {
-        if (root == null) return;
+    class Solution2 {
+        class Solution {
+            public List<List<Integer>> verticalOrder(TreeNode root) {
+                TreeMap<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
 
-        range[0] = Math.min(col, range[0]);
-        range[1] = Math.max(col, range[1]);
+                dfs(root, 0, 0, map);
 
-        findRange(root.left, range, col - 1);
-        findRange(root.right, range, col + 1);
+                List<List<Integer>> list = new ArrayList<>();
+                for (TreeMap<Integer, List<Integer>> ys : map.values()) {
+                    list.add(new ArrayList<>());
+                    for (List<Integer> nodes : ys.values()) {
+                        list.get(list.size() - 1).addAll(nodes);
+                    }
+                }
+                return list;
+            }
+
+            private void dfs(TreeNode root, int x, int y, TreeMap<Integer, TreeMap<Integer, List<Integer>>> map){
+                if (root == null) {
+                    return;
+                }
+
+                if (!map.containsKey(x)) {
+                    map.put(x, new TreeMap<>());
+                }
+                if (!map.get(x).containsKey(y)) {
+                    map.get(x).put(y, new ArrayList<>());
+                }
+
+                map.get(x).get(y).add(root.val);
+
+                dfs(root.left, x - 1, y + 1, map);
+                dfs(root.right, x + 1, y + 1, map);
+            }
+        }
     }
 }
