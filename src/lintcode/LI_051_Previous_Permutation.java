@@ -51,6 +51,10 @@ public class LI_051_Previous_Permutation {
     }
 
     private void swap(List<Integer> nums, int i, int j) {
+        /**
+         * !!!
+         * "Collections.swap"
+         */
         Collections.swap(nums, i, j);
     }
 

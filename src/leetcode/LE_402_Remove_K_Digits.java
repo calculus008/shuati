@@ -34,7 +34,7 @@ public class LE_402_Remove_K_Digits {
      * 此时，无论删除哪一个数字，最后的结果都是从9位整数变成8位整数。既然同样是8位整数，我们显然应该优先把高位的数字降低，
      * 这样对新整数的值影响最大。
      *
-     * 如何把高位的数字降低呢？很简单，我们把原整数的所有数字从左到右进行比较，如果发现某一位的数字大于它右面的数字，
+     * 如何把高位的数字降低呢？很简单，我们把原整数的所有数字从左到右进行比较，如果发现某一位的数字大于它右面(后面)的数字，
      * 那么在删除该数字后，必然会使得该数位的值降低，因为右面比它小的数字顶替了它的位置。
      *
      * 541270936
@@ -114,7 +114,7 @@ public class LE_402_Remove_K_Digits {
             }
 
             /**
-             * For example :
+             * Corner case 1:
              * 9
              * k = 1
              *
@@ -136,6 +136,7 @@ public class LE_402_Remove_K_Digits {
             }
 
             /**!!!
+             * Corner case 2:
              * Must check is sb is empty when removing leading zero
              **/
             while (sb.length() > 0 && sb.charAt(0) == '0') {
@@ -144,7 +145,8 @@ public class LE_402_Remove_K_Digits {
 
             /**
              * !!!
-             * need to deal the case that nothing left in sb.
+             * Corner case 3:
+             * need to deal with the case that nothing left in sb.
              */
             return sb.length() == 0 ? "0" : sb.toString();
         }

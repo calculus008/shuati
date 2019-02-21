@@ -57,6 +57,10 @@ public class LE_967_Numbers_With_Same_Consecutive_Differences {
                 res.add(0);
             }
 
+            /**
+             * 从个位开始，尝试1 ~ 9, 构建所要求的数。
+             * 以为这里已经把一个数放在了个为，所以还剩 N - 1 位。
+             */
             for (int i = 1; i <= 9; i++) {
                 helper(N - 1, K, i, res);
             }
@@ -78,6 +82,10 @@ public class LE_967_Numbers_With_Same_Consecutive_Differences {
 
             int cur = temp % 10;
 
+            /**
+             * branching factor is 2 : cur + k and cur - k.
+             * If k is 0, then we only branch to cur + k.
+             */
             if (cur + k < 10) {
                 helper(n - 1, k, temp * 10 + cur + k, res);
             }

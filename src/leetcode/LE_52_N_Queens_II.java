@@ -20,6 +20,10 @@ public class LE_52_N_Queens_II {
     private void helper(int[] queens, int pos) {
         if (pos == queens.length) {
             res++;
+
+            /**
+             * !!!
+             */
             return;
         }
 

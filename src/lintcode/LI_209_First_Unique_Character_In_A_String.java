@@ -10,7 +10,8 @@ import java.util.Set;
  */
 public class LI_209_First_Unique_Character_In_A_String {
     /**
-     Find the first unique character in a given string. You can assume that there is at least one unique character in the string.
+     Find the first unique character in a given string. You can assume that there is at
+     least one unique character in the string.
 
      Follow up
      What if it is in a data stream? (online)
@@ -60,7 +61,12 @@ public class LI_209_First_Unique_Character_In_A_String {
     }
 
     class DataStream {
-        private Map<Character, ListCharNode> charToPrev; //save pointer to the previous node, simulate a double linked list
+        /**
+         * 1.save pointer to the previous node, simulate a double linked list
+         * 2.also serves the purpose to check if the element exists in linked list
+         *   in O(1).
+         **/
+        private Map<Character, ListCharNode> charToPrev;
         private Set<Character> dupChars; //save the char that appears more than once
         private ListCharNode dummy, tail;
 
@@ -73,7 +79,7 @@ public class LI_209_First_Unique_Character_In_A_String {
 
         public void add(char c) {
             /**
-             * 3 c appears more than 2 times
+             * #3.c appears more than or equal to 2 times
              *   It's in set, not in linked list. Do nothing
              * **/
             if (dupChars.contains(c)) {
@@ -81,9 +87,9 @@ public class LI_209_First_Unique_Character_In_A_String {
             }
 
             /**
-             * 1 c appears for the very first time in the stream,
+             *   #1.c appears for the very first time in the stream,
              *   it's not in linked list or set. Only add it to linked list.
-             * p**/
+             **/
             if (!charToPrev.containsKey(c)) {
                 ListCharNode node = new ListCharNode(c);
                 charToPrev.put(c, tail);
@@ -93,11 +99,15 @@ public class LI_209_First_Unique_Character_In_A_String {
             }
 
             /**
-             * 2 c appears for the 2nd time.
+             * #2.c appears for the 2nd time.
              *   It's in linked list, not in set, remove it from linked list and add it to set
              * **/
             ListCharNode prev = charToPrev.get(c);
             prev.next = prev.next.next;
+
+            /**
+             * !!!
+             */
             if (prev.next == null) {
                 // tail node removed
                 tail = prev;

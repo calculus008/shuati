@@ -219,9 +219,10 @@ LI_010_String_Permutation_II
 LE_31_NextPermutation                                     (lint 52, 190)
 LI_51_Previous_Permutation
 LE_51_N_Queens                                            (lint 33)
-LE_52_N_Quees_II                                          (lint 34)
-LE_681_Next_Closest_Time                                  (lint 862)
+LE_52_N_Queens_II                                          (lint 34)
+LE_681_Next_Closest_Time                                  (lint 862)    (***)
 LE_17_Letter_Combinations_Of_A_Phone_Number               (lint 425)
+
 LE_212_Word_Search_II                                     (lint 132)
 LE_291_Word_Pattern_II                                    (lint 829)
 LE_126_Word_Ladder_II                                     (lint 121)
@@ -241,14 +242,16 @@ LI_198_Permutation_Index_II
 LE_346_Moving_Average_From_Data_Stream
 LE_225_Implement_Stack_Using_Queues
 LI_494_Implement_Stack_By_Two_Queues
-LE_387_First_Unique_Character_In_A_String (*)
-LI_612_K_Closest_Points
+LI_209_First_Unique_Character_In_A_String
+LE_387_First_Unique_Character_In_A_String                 (***)
+LI_612_K_Closest_Points                                   (***)
+LE_973_K_Closest_Points_To_Origin
 LE_347_Top_K_Frequent_Elements                            (lint 544)
 LI_544_Top_K_Largest_Numbers
 LE_23_Merge_k_Sorted_Lists
 LE_232_Implement_Queue_Using_Stacks
 LE_264_Ugly_Number_II
-LE_146_LRU_Cache
+LE_146_LRU_Cache                                          (***)
 LI_209_First_Unique_Character_In_A_String
 LE_346_Moving_Average_From_Data_Stream                    (lint 642)
 LE_380_Insert_Delete_GetRandom_O1                         (lint 657)

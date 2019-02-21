@@ -73,6 +73,7 @@ public class LI_685_First_Unique_Number_In_Stream {
             head.next = tail;
             tail.pre = head;
 
+            //flag to tell if terminating number is found.
             boolean found = false;
 
             for (int num : nums) {

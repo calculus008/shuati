@@ -116,6 +116,12 @@ public class LE_322_Coin_Change {
              * !!!
              * 终止条件 : "i >= 0 && numOfCoins + i < res"
              * 一旦当前coin总数大于等于res，stop the loop right away， otherwise TLE
+             *
+             * !!!
+             * 注意参数的传递：
+             * "remain - coins[pos] * i"
+             * "numOfCoins + i"
+             * "pos - 1"
              */
             for (int i = remain / coins[pos]; i >= 0 && numOfCoins + i < res; i--) {
                 helper(coins, remain - coins[pos] * i, numOfCoins + i, pos - 1);

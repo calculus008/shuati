@@ -35,7 +35,10 @@ public class LE_346_Moving_Average_From_Data_Stream {
          [1][2][3]
          Then when another number comes in, you would want to remove 1 and insert 4
          [2][3][4]
-         But you don't have to shift the array if you keep the index of the oldest element. In the example code, it's called insert
+
+         But you don't have to shift the array if you keep the index of the oldest element.
+         In the example code, it's called insert :
+
          Given this array, insert is at 0:
          [1][2][3] insert = 0
          If you get 4, you insert at 0, then increment insert:
@@ -44,6 +47,7 @@ public class LE_346_Moving_Average_From_Data_Stream {
          [4][5][3] insert = 2
          Then if you get 6, you insert at 2 and increment insert, but divide and find the remainder with array length:
          [4][5][6] insert = 3 % 3 = 0
+
          The modulus allows you to repeat the insert index.
      */
 
@@ -62,7 +66,7 @@ public class LE_346_Moving_Average_From_Data_Stream {
         }
 
         public double next(int val) {
-            if (n < window.length) {//!!! calculate what is devider
+            if (n < window.length) {//!!! calculate what is divider
                 n++;
             }
 
@@ -70,6 +74,9 @@ public class LE_346_Moving_Average_From_Data_Stream {
             sum += val;
             window[insert] = val;
 
+            /**
+             * !!!
+             */
             insert = (insert + 1) % window.length;
 
             return sum == 0 ? 0 : (double)sum / n; //!!! use "n", not window.length!!!

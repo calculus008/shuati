@@ -35,66 +35,116 @@ public class LE_692_Top_K_Frequent_Words {
      Bucket solution, same as LE_347_Top_K_Frequent_Elements.
      Only difference - need to consider alphabetic order, therefore use PriorityQueue instead of list here
 
-     Time  : O(nlogk)
+     Time  : O(nlogn)
      Space : O(n)
      **/
-    public List<String> topKFrequent(String[] words, int k) {
-        List<String> res = new ArrayList<>();
-        Map<String, Integer> map = new HashMap<>();
-        PriorityQueue<String>[] bucket = new PriorityQueue[words.length + 1];
+    class Solution1 {
+        public List<String> topKFrequent(String[] words, int k) {
+            List<String> res = new ArrayList<>();
+            Map<String, Integer> map = new HashMap<>();
+            PriorityQueue<String>[] bucket = new PriorityQueue[words.length + 1];
 
-        for (String word : words) {
-            map.put(word, map.getOrDefault(word, 0) + 1);
-        }
-
-        for (String key : map.keySet()) {
-            int freq = map.get(key);
-            if (bucket[freq] == null) {
-                bucket[freq] = new PriorityQueue<>();
+            for (String word : words) {
+                map.put(word, map.getOrDefault(word, 0) + 1);
             }
-            bucket[freq].offer(key);
-        }
 
-        for (int i = bucket.length - 1; i >= 0 && res.size() < k; i--) {
-            if (bucket[i] != null) {
-                while (bucket[i].size() != 0 && res.size() < k) {
-                    res.add(bucket[i].poll());
+            for (String key : map.keySet()) {
+                int freq = map.get(key);
+                if (bucket[freq] == null) {
+                    bucket[freq] = new PriorityQueue<>();
+                }
+                bucket[freq].offer(key);
+            }
+
+            for (int i = bucket.length - 1; i >= 0 && res.size() < k; i--) {
+                if (bucket[i] != null) {
+                    while (bucket[i].size() != 0 && res.size() < k) {
+                        res.add(bucket[i].poll());
+                    }
                 }
             }
-        }
 
-        return res;
+            return res;
+        }
     }
 
-    //Same algorithm, return String[]
-    public String[] topKFrequentWords2(String[] words, int k) {
-        int len = words.length;
-        String[] res = new String[k];
+    //Same algorithm as Solution1, return String[]
+    class Solution2 {
+        public String[] topKFrequentWords2(String[] words, int k) {
+            int len = words.length;
+            String[] res = new String[k];
 
-        PriorityQueue<String>[] bucket = new PriorityQueue[len + 1];
-        Map<String, Integer>  map = new HashMap<>();
+            PriorityQueue<String>[] bucket = new PriorityQueue[len + 1];
+            Map<String, Integer> map = new HashMap<>();
 
-        for (String word : words) {
-            map.put(word, map.getOrDefault(word, 0) + 1);
-        }
-
-        for (String key : map.keySet()) {
-            int num = map.get(key);
-            if (bucket[num] == null) {
-                bucket[num] = new PriorityQueue<>();
+            for (String word : words) {
+                map.put(word, map.getOrDefault(word, 0) + 1);
             }
-            bucket[num].offer(key);
-        }
 
-        for (int i = len, j = 0; i >= 0 && j < k; i--) {
-            if (bucket[i] != null) {
-                while (bucket[i].size() != 0 && j < k) {
-                    res[j] = bucket[i].poll();
-                    j++;
+            for (String key : map.keySet()) {
+                int num = map.get(key);
+                if (bucket[num] == null) {
+                    bucket[num] = new PriorityQueue<>();
+                }
+                bucket[num].offer(key);
+            }
+
+            for (int i = len, j = 0; i >= 0 && j < k; i--) {
+                if (bucket[i] != null) {
+                    while (bucket[i].size() != 0 && j < k) {
+                        res[j] = bucket[i].poll();
+                        j++;
+                    }
                 }
             }
-        }
 
-        return res;
+            return res;
+        }
+    }
+
+    /**
+     * Same logic as Solution3 in LE_347_Top_K_Frequent_Elements
+     *
+     * Time  : O(n + nlogk)
+     * Space : O(n)
+     */
+    class Solution3 {
+        public List<String> topKFrequent(String[] words, int k) {
+            Map<String, Integer> map = new HashMap<>();
+            List<String> res = new ArrayList<>();
+
+            for (String word : words) {
+                map.put(word, map.getOrDefault(word, 0) + 1);
+            }
+
+            /**
+             * !!!
+             * Comparator defined for sorting logic in pq
+             */
+            PriorityQueue<Map.Entry<String, Integer>> pq =
+                    new PriorityQueue<>((a, b) -> a.getValue() != b.getValue() ? a.getValue() - b.getValue() : b.getKey().compareTo(a.getKey()));
+
+            for (Map.Entry<String, Integer> e : map.entrySet()) {
+                /**
+                 * "pq.offer(e)"
+                 */
+                pq.offer(e);
+                if (pq.size() > k) {
+                    pq.poll();
+                }
+            }
+
+            while (!pq.isEmpty()) {
+                /**
+                 * pq by default is min heap, requirement here is to put max freq first,
+                 * therefore, add at index 0.
+                 *
+                 * "pq.poll().getKey()"
+                 */
+                res.add(0, pq.poll().getKey());
+            }
+
+            return res;
+        }
     }
 }

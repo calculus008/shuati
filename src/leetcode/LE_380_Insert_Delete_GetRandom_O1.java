@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by yuank on 8/17/18.
@@ -44,6 +41,23 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
          Medium
      */
 
+    /**
+     * For problem like this, one or multiple HashMap must be needed.
+     * At least, you have a HashMap to find given element in O(1).
+     *
+     * For this problem, O(1) insertion and getRandom imply using list,
+     * we can insert new value at the end of a list, which is O(1).
+     * getRandom - randomly get an index in a list and return its value.
+     *
+     * 这道题的关键是getRandom(), 这确定了我们需要用List.
+     *
+     * For remove(), use the trick of swap-delete_last in a list.
+     *
+     * Then, use HashMap to track the location (index) of a element in the list.
+     *
+     * Therefore, the internal data structure is a combination of HashMap
+     * and List.
+     */
     public class RandomizedSet {
         private HashMap<Integer, Integer> locs;
         private List<Integer> nums;
@@ -90,6 +104,61 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
             nums.remove(nums.size() - 1);
 
             return true;
+        }
+    }
+
+    class RandomizedSet_Exersize_1 {
+        Map<Integer, Integer> map;
+        List<Integer> list;
+
+        public RandomizedSet_Exersize_1() {
+            map = new HashMap<>();
+            list = new ArrayList<>();
+        }
+
+        public boolean insert(int val) {
+            if (map.containsKey(val)) {
+                return false;
+            }
+
+            map.put(val, list.size());
+            list.add(val);
+            return true;
+        }
+
+        public boolean remove(int val) {
+            if (!map.containsKey(val)) {
+                return false;
+            }
+
+            int idx = map.get(val);
+            if (idx < list.size() - 1) {
+                int lastVal = list.get(list.size() - 1);
+                list.set(idx, lastVal);
+                /**
+                 * !!!
+                 */
+                map.put(lastVal, idx);
+            }
+            list.remove(list.size() - 1);
+            /**
+             * !!!
+             */
+            map.remove(val);
+
+            return true;
+        }
+
+        public int getRandom() {
+            java.util.Random rand = new Random();
+            /**
+             * nextInt(int boundary) :
+             * Returns a pseudorandom, uniformly distributed int value
+             * between 0 (inclusive) and the specified value (exclusive),
+             * drawn from this random number generator's sequence.
+             */
+            int idx = rand.nextInt(list.size());
+            return list.get(idx);
         }
     }
 }

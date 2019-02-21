@@ -6,7 +6,7 @@ import java.util.Stack;
  * Created by yuank on 3/30/18.
  */
 public class LE_232_Implement_Queue_Using_Stacks {
-    /*
+    /**
         Implement the following operations of a queue using stacks.
 
         push(x) -- Push element x to the back of queue.

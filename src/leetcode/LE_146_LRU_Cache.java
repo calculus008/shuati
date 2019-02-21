@@ -13,7 +13,7 @@ public class LE_146_LRU_Cache {
 
          get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
          put(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity,
-         it should invalidate the least recently used item before inserting a new item.
+                           it should invalidate the least recently used item before inserting a new item.
 
          Follow up:
          Could you do both operations in O(1) time complexity?
@@ -50,7 +50,7 @@ public class LE_146_LRU_Cache {
             Node pre, next;
             /**
              Must have key in Node object,
-             it is used to track key value when we want to delelete
+             it is used to track key value when we want to delete
              the entry from map in put() (when capacity is full)
              **/
             int key, val;
@@ -147,6 +147,8 @@ public class LE_146_LRU_Cache {
      *
      * Key
      * 1.Map + Double Linked List
+     *   LRU is a HashMap, with the extra requirement of LRU logic, which is
+     *   maintained by double linked list.
      * 2.New node added to tail, used node (get or set) move to tail
      * 3.LRU node is always the one pointed by head (head.next)
      * 4.DLL structure : head <=> n1 <=> n2 <=> n3 <=> tail
@@ -166,6 +168,8 @@ public class LE_146_LRU_Cache {
      *   b.Remove node when capacity is full:
      *             "  map.remove(head.next.key);
      *                removeHead();  "
+     *
+     *   !!! Always remember : There are TWO data structure we need to maintain.
      *
      */
     public class LRUCache2 {
@@ -240,6 +244,102 @@ public class LE_146_LRU_Cache {
             ListNode node = new ListNode(key, value);
             map.put(key, node);
             addNodeToTail(node);
+        }
+    }
+
+    /**
+     * One more exercise version.
+     */
+    class LRUCache3 {
+        class ListNode {
+            int key, val;
+            ListNode pre, next;
+
+            public ListNode(int key, int val) {
+                this.key = key;
+                this.val = val;
+            }
+        }
+
+        /**
+         * !!!
+         * Map value is ListNode, otherwise there's no way to
+         * track node in DDL.
+         */
+        Map<Integer, ListNode> map;
+        int capacity;
+        ListNode head, tail;
+
+        public LRUCache3(int capacity) {
+            map = new HashMap<>();
+            this.capacity = capacity;
+
+            head = new ListNode(-1, -1);
+            tail = new ListNode(-1, -1);
+            head.next = tail;
+            tail.pre = head;
+        }
+
+        public int get(int key) {
+            if (!map.containsKey(key)) {
+                return -1;
+            }
+
+            ListNode node = map.get(key);
+            moveToTail(node);
+            return node.val;
+        }
+
+        public void put(int key, int value) {
+            if (map.containsKey(key)) {
+                ListNode node = map.get(key);
+                node.val = value;
+                moveToTail(node);
+                return;
+            }
+
+            /**
+             * !!!
+             * Use "map.size()" to check current size.
+             */
+            if (map.size() == capacity) {
+                /**
+                 * !!!
+                 * #8, never forget action of remove and add should be done on both map and DDL
+                 */
+                map.remove(head.next.key);
+
+                removeNode(head.next);
+            }
+
+            ListNode node = new ListNode(key, value);
+
+            /**
+             * !!!
+             * #8, never forget action of remove and add should be done on both map and DDL
+             */
+            map.put(key, node);//!!!
+
+            addToTail(node);
+        }
+
+        private void addToTail(ListNode node) {
+            node.next = tail;
+            node.pre = tail.pre;
+            tail.pre.next = node;
+            tail.pre = node;
+        }
+
+        private void removeNode(ListNode node) {
+            node.pre.next = node.next;
+            node.next.pre = node.pre;
+            node.pre = null;
+            node.next = null;
+        }
+
+        private void moveToTail(ListNode node) {
+            removeNode(node);
+            addToTail(node);
         }
     }
 }

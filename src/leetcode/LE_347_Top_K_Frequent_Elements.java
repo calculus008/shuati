@@ -116,6 +116,9 @@ public class LE_347_Top_K_Frequent_Elements {
     /**
      * A concise version of Heap + HashMap
      *
+     * Time  : O(nlogk)
+     * Space : O(n)
+     *
      * 1.No need to define a Pair class
      * 2.Use Map.Entry instead, put it in to pq.
      *
@@ -146,7 +149,7 @@ public class LE_347_Top_K_Frequent_Elements {
             while (!pq.isEmpty()) {
                 /**
                  * List.add(0, value)
-                 * Keep adding at the begining of the list, so it is reversed order (higher frequency number in the front)
+                 * Keep adding at the start of the list, so it is reversed order (higher frequency number in the front)
                  */
                 res.add(0, pq.poll().getKey());
             }

@@ -109,7 +109,7 @@ public class LE_632_Smallest_Range {
      *
      * Heap : {22, 24}
      *
-     * Heap size < 3, whil loop stops.
+     * Heap size < 3, while loop stops.
      *
      * Final answer :
      * start = 20, end = 24, range = 4

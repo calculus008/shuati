@@ -15,7 +15,8 @@ public class LE_460_LFU_Cache {
          get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
          put(key, value) - Set or insert the value if the key is not already present. When the cache reaches its capacity,
          it should invalidate the least frequently used item before inserting a new item. For the purpose of this problem,
-         when there is a tie (i.e., two or more keys that have the same frequency), the least recently used key would be evicted.
+         when there is a tie (i.e., two or more keys that have the same frequency), the least recently used key would be
+         evicted.
 
          Follow up:
          Could you do both operations in O(1) time complexity?
@@ -42,11 +43,11 @@ public class LE_460_LFU_Cache {
      * Solution 1 : 3 HashMap + LinkedHashSet
      * O(1) for get() and put()
      *
-     * 3 HashMap
+     * 3 HashMap solution
      * 1."valueMap" : save KV pair, used for getting value for a given key,
      *                also for checking if a key exists int current cache.
      * 2."freMap"   : record frequency of each key
-     * 3."bucket"   : Key for this HashMap is frequency, value is a LinkedHashMap, acts as a bucket,
+     * 3."bucket"   : Key for this HashMap is frequency, value is a LinkedHashSet, acts as a bucket,
      *                each bucket saves the elements which have the same frequency.
      *
      *                As the question states:
@@ -70,7 +71,7 @@ public class LE_460_LFU_Cache {
      *
      *   For a given key
      *   a.Get frequency from "freqMap", plus one, update its value in "freqMap"
-     *   b.Check in "bucket" if the new freqency exists, if not, create a new bucket for it in "bucket"
+     *   b.Check in "bucket" if the new frequency exists, if not, create a new bucket for it in "bucket"
      *   c.Remove key from old bucket, add to new bucket.
      *   d.Update minFreq
      *
@@ -163,4 +164,107 @@ public class LE_460_LFU_Cache {
         }
     }
 
+    class LFUCache_Exersize_1 {
+        Map<Integer, Integer> valueMap;
+        Map<Integer, Integer> freqMap;
+        Map<Integer, LinkedHashSet<Integer>> bucket;
+        int capacity;
+        int minFreq;
+
+        public LFUCache_Exersize_1(int capacity) {
+            valueMap = new HashMap<>();
+            freqMap = new HashMap<>();
+            bucket = new HashMap<>();
+            bucket.put(1, new LinkedHashSet<>());
+
+            this.capacity = capacity;
+            minFreq = 0;
+        }
+
+        public int get(int key) {
+            if (!valueMap.containsKey(key)) {
+                return -1;
+            }
+
+            int res = valueMap.get(key);
+            update(key);//update freqMap and bucket to increase freq by 1.
+            return res;
+        }
+
+        public void put(int key, int value) {
+            /**
+             * !!!
+             * Corner case
+             */
+            if (capacity <= 0) {
+                return;
+            }
+
+            if (valueMap.containsKey(key)) {
+                valueMap.put(key, value);
+                update(key);
+                return;
+            }
+
+            /**
+             * eviction act
+             **/
+            if (valueMap.size() == capacity) {
+                /**
+                 * what saved in bucket map:
+                 * key - frequency
+                 * value - all keys (!!!) which have the same frequency as the key.
+                 *
+                 * so the values in LinkedHashSet are keys (!!!)
+                 */
+                int evictKey = bucket.get(minFreq).iterator().next();
+
+                freqMap.remove(evictKey);
+                valueMap.remove(evictKey);
+                bucket.get(minFreq).remove(evictKey);
+            }
+
+            valueMap.put(key, value);
+            freqMap.put(key, 1);
+            bucket.get(1).add(key);
+            minFreq = 1;//!!!
+        }
+
+        /**
+         * update() :
+         * Update on freqMap, bucket and minFreq when a key is used in either get() or put().
+         * valueMap will be updated separately.
+         */
+        private void update(int key) {
+            /**
+             * #1.update freqMap
+             */
+            int freq = freqMap.getOrDefault(key, 0);
+            int newFreq = freq + 1;
+            freqMap.put(key, newFreq);
+
+            /**
+             * #2.update bucket
+             */
+            if (!bucket.containsKey(newFreq)) {
+                bucket.put(newFreq, new LinkedHashSet<>());
+            }
+            /**
+             * When a new key is added, we execute "freqMap.put(key, 1)" and "valueMap.put(key, value)"
+             * in put().
+             *
+             * So when update() is called (in two places), the if logic guarantees the key already exists
+             * in valueMap, so it also must exist in freqMap, so bucket.get(freq) will never be null.
+             */
+            bucket.get(freq).remove(key);
+            bucket.get(newFreq).add(key);
+
+            /**
+             * #3.update minFreq
+             */
+            if (minFreq == freq && bucket.get(freq).size() == 0) {
+                minFreq++;
+            }
+        }
+    }
 }

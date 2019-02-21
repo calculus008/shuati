@@ -31,25 +31,43 @@ public class LE_432_All_O_One_Data_Structure {
      * Design + HashMap
      *
      * Key implementation tricks:
-     * 1.Use two HashMap:
-     * countMap  - key to frequency
-     * nodeMap   - frequency to node
+     * 1.Use two HashMap + DDL (buckets)
+     *
+     *   countMap  - key to its values (will be increased/decreased in inc() and dec())
+     *   nodeMap   - values to node (so that we can find the node (bucket) in DDL with a
+     *               given value in O(1)).
+     *
+     *   DDL - kind of like insertion sort, for a new key, insert at the head.
+     *         maintain order in inc() and dec(). So, max key is always at the
+     *         end of the DDL and min key is always at the head of the DDL.
+     *
+     *         The node in DDL basically functions as a bucket, it contains the
+     *         list of keys that have the same value.
+     *
+     *   这题和LE_460_LFU_Cache有类似的地方，都是用bucket来存放同样frequency的keys.
+     *
+     *   LE_460_LFU_Cache 我们只关心minFreq, 并且要处理"least recent", 所以用HashMap
+     *   to map frequency to LinkedHashSet.
+     *
+     *   对这道题，关键要求是要能同时getMaxKey() and getMinKey() in O(1), 所以要用
+     *   DDL, 要动态的维护其order, 保证最小和最大各在头和尾。
      *
      * 2.Add head and tail to list : head <=> n1 <=> n2 .... <=> tail
-     * This way there's always a node for pre and next pointers,
-     * much simply the logic (no need to check null pointer for pre and next).
-     * Also, you don't need to worry about updating tail and head. It will be
-     * there in the list.
+     *   This way there's always a node for pre and next pointers,
+     *   simplify the logic (no need to check null pointer for pre and next).
+     *   Also, you don't need to worry about updating tail and head. It will be
+     *   there in the list.
      *
      * 3.Common list operation
-     * removeNodeFromList
-     * addNodeAfter
+     *   removeNodeFromList
+     *   addNodeAfter
      *
      * 4.Common function for node
-     * removeKeyFromNode
-     * changeKey
+     *   removeKeyFromNode
+     *   changeKey
      *
-     *
+     * Reference
+     * https://leetcode.com/problems/all-oone-data-structure/discuss/91416/Java-AC-all-strict-O(1)-not-average-O(1)-easy-to-read
      */
     class AllOne {
         class Node{

@@ -10,7 +10,8 @@ public class LE_212_Word_Search_II {
         Given a 2D board and a list of words from the dictionary, find all words in the board.
 
         Each word must be constructed from letters of sequentially adjacent cell,
-        where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+        where "adjacent" cells are those horizontally or vertically neighboring.
+        The same letter cell may not be used more than once in a word.
 
         For example,
         Given words = ["oath","pea","eat","rain"] and board =
@@ -80,7 +81,10 @@ public class LE_212_Word_Search_II {
         if (p.word != null) {
             res.add(p.word);
             p.word = null;
-            //!!! 不能return, for example, find "fight", another word is "fighter", need to continue to search
+            /**
+             * !!!
+             * 不能return, for example, find "fight", another word is "fighter", need to continue to search*
+             */
             // return
         }
 
@@ -117,6 +121,10 @@ public class LE_212_Word_Search_II {
 
         for (int i = 0; i < m ; i++) {
             for (int j = 0; j < n; j++) {
+                /**
+                 * !!!
+                 * "i, j", NOT "0, 0"
+                 */
                 helper(board, set, map, i, j, "");
             }
         }

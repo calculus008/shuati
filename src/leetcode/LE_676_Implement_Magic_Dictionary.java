@@ -39,7 +39,7 @@ public class LE_676_Implement_Magic_Dictionary {
      * Time and Space : O(n * m)
      *
      * 脑筋急转弯
-     * 1.Search()要找的，是word中任意以为做了变换，比如，如果字典中有"hello",search "hello" returns FALSE,
+     * 1.Search()要找的，是word中任意位做了变换，比如，如果字典中有"hello",search "hello" returns FALSE,
      *   since it can not be the searched word itself.
      * 2.但是，如果字典输入有"hello"和“hallo", search "hello" returns TRUE, because "hello" can be deemed as
      *   "hallo" replacing "a" with "e".

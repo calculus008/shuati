@@ -15,8 +15,6 @@ public class LE_895_Maximum_Frequency_Stack {
          pop(), which removes and returns the most frequent element in the stack.
          If there is a tie for most frequent element, the element closest to the top of the stack is removed and returned.
 
-
-
          Example 1:
 
          Input:
@@ -60,7 +58,7 @@ public class LE_895_Maximum_Frequency_Stack {
      *   Therefore, we use Stack as an individual bucket
      * 4.Compare with LE_460_LFU_Cache:
      *   a.when doing push(), we don't need to remove element from current bucket (a stack),
-     *     just push it into the next bucket.
+     *     just push it into the next bucket.（!!!)
      *   b.This is not a cache, so no need to worry about capacity (evict element when capacity is full)
      *   c.No need to keep updating current min or max index (see #6)
      *
@@ -80,6 +78,8 @@ public class LE_895_Maximum_Frequency_Stack {
      *    so no need to worry about this case.
      *
      *
+     * 关键 ：
+     * 如果一个数出现了3次，那么，该数会在bucket 1， 2， 3 中各出现一次，例如下面例子中的5。
      * Example :
      * [5,7,5,7,4,5]
      *
@@ -187,6 +187,44 @@ public class LE_895_Maximum_Frequency_Stack {
                 map.remove(res);
             } else{
                 map.put(res, freq);
+            }
+
+            return res;
+        }
+    }
+
+    class FreqStack_Excersize_1 {
+        Map<Integer, Integer> map;
+        List<Stack<Integer>> list;
+
+        public FreqStack_Excersize_1() {
+            map = new HashMap<>();
+            list = new ArrayList<>();
+        }
+
+        public void push(int x) {
+            int freq = map.getOrDefault(x, 0) + 1;
+            map.put(x, freq);
+
+            int idx = freq - 1;
+            if (idx >= list.size()) {
+                list.add(new Stack<>());
+            }
+            list.get(idx).push(x);
+        }
+
+        public int pop() {
+            Stack<Integer> stack = list.get(list.size() - 1);
+            int res = stack.pop();
+
+            if (stack.size() == 0) {
+                list.remove(list.size() - 1);
+            }
+
+            if (map.get(res) == 1) {
+                map.remove(res);
+            } else {
+                map.put(res, map.get(res) - 1);
             }
 
             return res;

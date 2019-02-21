@@ -44,9 +44,15 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
      *  Solution 1
         Solution with HashMap, LinkedHashSet and List
 
-        1.To start, we know HashMap satisfies insert/remove in O(1), but not random retrieval. So we need to another data structure.
+        Modified from LE_380_Insert_Delete_GetRandom_O1:
+        Instead of using Map<Integer, Integer>, use Map<Integer, LinkedHashSet<>>, because now we may have duplicates,
+        so, for each inserted value, need to save its index in list in LinkedHashSet.
+
+        1.To start, we know HashMap satisfies insert/remove in O(1), but not random retrieval.
+          So we need to another data structure.
         2.ArrayList "list" is the data structure satisfies random retrieval requirements.
-        3.HashMap uses the input val as key, the value is set, which stores the indexes of the key value in ArrayList "nums"
+        3.HashMap uses the input val as key, the value is set, which stores the indexes of the key value
+          in ArrayList "nums"
         4.So that remove can trace the it back to "list" and remove it in O(1) by using copy and remove trick
         5.In HashMap, why use LinkedHashSet, not list?
           Remove()
@@ -55,6 +61,11 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
           So when we use remove on map, using set avoids confusion and potential bug.
 
           因为普通的HashSet iterate时间复杂度不是O(1)而是O(h/n) h是capacity
+
+          This solution is based on assumption :
+          LinkedHashSet.remove() is O(1)
+
+          "Using LinkedHashSet can be considered as O(1) if we only get the first element to remove."
 
      **/
     class RandomizedCollection1 {
@@ -140,12 +151,12 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
      *
      * 假设你已经会了 Insert Delete GetRandom O(1),然后在这个题的基础上，基本算法是不变的，只不过需要一个办法来处理重复的数。
      * 这里的解决办法是，用 HashMap 存储 number to a list of indices in numbers array. 也就是说，把某个数在数组中出现的所有的位置用
-     * List 的形式存储下来这样子的话，删除一个数的时候，就是从这个 list 里随便拿走一个数（比如最后一个数）,
+     * List 的形式存储下来,这样子的话，删除一个数的时候，就是从这个 list 里随便拿走一个数（比如最后一个数）,
      * 但是还需要解决的问题是，原来的算法中，删除一个数的时候，需要拿 number array 的最后个位置的数，来覆盖掉被删除的数。
      * 那这样原本在最后一个位置的数，他在 HashMap 里的记录就应该相应的变化。但是，我们只能得到这个移动了的数是什么，而这个被移动过的数，
      * 可能出现在好多个位置上，去要从 HashMap 里得到的 indices 列表里，改掉那个 index=当前最后一个位置的下标。
      * 所以这里的做法是，修改 number array，不只是存储 Number，同时存储，这个数在 HashMap 的 indices 列表中是第几个数。
-     * 这样就能直接去改那个数的值了。否则还得 for 循环一次，就无法做到 O(1)还有一种办法是用 LinkedHashMap，不过其他语言没有这个东西。
+     * 这样就能直接去改那个数的值了。否则还得 for 循环一次，就无法做到 O(1),还有一种办法是用 LinkedHashSet，不过其他语言没有这个东西。
      *
      */
     class NumberAndIndex {
@@ -216,6 +227,17 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
     /**
      * Solution 3
      * Same as Solutin 2, my version
+     *
+     * 比较LE_380_Insert_Delete_GetRandom_O1，我们需要存储相同value在list中出现的所有的indexes。
+     * 问题的焦点是，如何保证remove()是O(1)。这里，remove()要有两个操作：
+     *
+     * 1.从map的list里删除，因为没有删除list 里元素的顺序的要求，所以，取map里list的最后一个元素。
+     *   删除它（O(1))，并用其值（也就是list 里的index）去删除list里的元素。
+     * 2.从list里删除。我们用#1里从map里拿到的index，用copy_delete-last可以保证删除是O(1)
+     *
+     * 最后在删除的同时，作为copy_delete-last的相应处理，应该把原先的list 里最后的元素在map里
+     * 相应的index值改变。这就是为什么我们要用Element class (have both val and idx). 如果
+     * 没有idx, 我们不知道在map的list里的什么位置去做改变。
      */
     class RandomizedCollection3 {
         /**
@@ -265,6 +287,12 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
                 return false;
             }
 
+            /**
+             * !!!
+             * list.remove(), return value : the element previously at the specified position.
+             *
+             * Also, remove last element in ArrayList is O(1).
+             */
             int targetIdx = map.get(val).remove(map.get(val).size() - 1);
             if (targetIdx < list.size() - 1) {
                 Element e = list.get(list.size() - 1);
