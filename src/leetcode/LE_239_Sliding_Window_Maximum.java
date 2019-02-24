@@ -156,9 +156,17 @@ public class LE_239_Sliding_Window_Maximum {
     }
 
     /**
+     * 关键
+     * 1.Use Deque, save index in deque instead of number itself
+     * 2.When add element into dq, first remove all elements in dq which reference
+     *   to numbers that are smaller than the new number.
+     *   This guarantees that the first index saved in dq refers to the largest
+     *   number in current window.
+     *
      * Solution using Deque and return type is list (instead of array)
      * Example:
      *
+     * k = 3
      *  col   0 1 2 3 4
      * Input [1,2,7,7,2]
      *
@@ -173,17 +181,17 @@ public class LE_239_Sliding_Window_Maximum {
      * i = 2
      * dq  : 2
      * res : [nums[2]]
-     * (i - k + 1 = 0)<> (dq.peekFirst() == 2)
+     * (i - k + 1 = 0) -> (dq.peekFirst() == 2)
      *
      * i = 3
      * dq = 2, 3
      * res : [nums[2], nums[3]]
-     * (i - k + 1 = 1)<> (dq.peekFirst() == 2)
+     * (i - k + 1 = 1) -> (dq.peekFirst() == 2)
      *
      * i = 4
      * dq = 2, 3, 4
      * res : [nums[2], nums[2], nums[2]]
-     * (i - k + 1 = 2) == (dq.peekFirst() == 2), remove first element
+     * (i - k + 1 = 2) -> (dq.peekFirst() == 2), remove first element
      * dq = 3, 4
      */
     public List<Integer> maxSlidingWindow4(int[] nums, int k) {
@@ -194,12 +202,20 @@ public class LE_239_Sliding_Window_Maximum {
 
         //i tracks the index of the element that will come into sliding window
         for (int i = 0; i < nums.length; i++) {
+            /**
+             * !!!
+             * 1."nums[dq.peekLast()]" : remember, dq里存的是index!!!
+             *
+             * 2."dq.pollLast()" : 这里比较和弹出的都是队列里末尾的元素 - "peekLast" and "pollLast"
+             *   不是first!!!
+             */
             while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {
                 dq.pollLast();
             }
             dq.offerLast(i);
 
             /**
+                "i - k + 1 >= 0"
                 meaning we already fill up the window
 
                 !!! ">= 0"
@@ -214,6 +230,12 @@ public class LE_239_Sliding_Window_Maximum {
             if (i - k + 1 >= 0) {
                 res.add(nums[dq.peekFirst()]);
 
+                /**
+                 * moving sliding window by removing the
+                 * left most element.
+                 *
+                 * i - k + 1 : the index of the left most element.
+                 */
                 if ((i - k + 1) == dq.peekFirst()) {
                     dq.pollFirst();
                 }

@@ -163,7 +163,7 @@ public class LE_227_Basic_Calculator_II {
      * 1.取出数字，根据当前的操作符，对乘除，运算优先，从stack中取出一个数，和当前数计算，将结果压入stack.
      * 2.遇到操作符号，记下当前的操作符。
      *
-     * 关键 ：因为乘除优先，计算乘除，结果入栈。对加减，分别入栈正数和负数。最后，所有元素处栈并想加。
+     * 关键 ：因为乘除优先，计算乘除，结果入栈。对加减，分别入栈正数和负数。最后，所有元素出栈并相加。
      */
     public int calculate3(String s) {
         if (s == null || s.length() == 0) return 0;
@@ -206,6 +206,8 @@ public class LE_227_Basic_Calculator_II {
     }
 
     /**
+     * Preferred Solution
+     *
      * Use eval(), like LE_772_Basic_Calculator_III
      *
      * No parentheses, so no extra level to "recurse". No need to save operator in a separate stack

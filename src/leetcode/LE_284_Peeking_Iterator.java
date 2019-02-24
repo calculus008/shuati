@@ -62,7 +62,8 @@ public class LE_284_Peeking_Iterator {
      * The first solution does not consider the case that NULL could be a valid value.
      *
      * using null to check if we have reached the end of iterator is not 100% right.
-     * In theory, null could be a valid element.An slightly alternative approach to use boolean indicating end of iterator:
+     * In theory, null could be a valid element.An slightly alternative approach to
+     * use boolean indicating end of iterator:
      *
      */
     class PeekingIterator1 implements Iterator<Integer> {

@@ -113,6 +113,12 @@ public class LE_155_Min_Stack {
         }
 
         public void pop() {
+            /**
+               int cur = stack.pop(); //first pop
+               if (cur == min) {      //if current min value is popped
+                  min = stack.pop();  //2nd pop -> previous min value, set it to min
+               }
+             */
             if (stack.pop() == min) { //!!! "=="
                 min = stack.pop();
             }

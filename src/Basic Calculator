@@ -1,0 +1,242 @@
+左括号代表进入下一层的等效处理，这里需要用Stack来保存当前当前的"现场"。
+相当于把工作台清理干净，为下一层的处理做好准备。
+
+右括号代表当前层处理结束，需要把上一层的处理结果从Stack里弹出并运算。
+
+如果题目里不要求有括号 （LE_227_Basic_Calculator_II），则Stack是
+用于处理*和/， *和/需要保存上一个数字，当遇到乘除符号时，弹出上一个
+数字，运算，要入Stack.
+
+
+Basic Calculator Questions : use Stack
+
+LE_224_Basic_Calculator :  + - ( )
+
+class Solution1 {
+    public int calculate(String s) {
+        if (null == s || s.length() == 0) {
+            return 0;
+        }
+
+        int res = 0;
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        Stack<Integer> nums = new Stack<>();
+        Stack<Character> operators = new Stack<>();
+
+        char op = '+';
+
+        for (int i = 0; i < n; i++) {
+            char c = chars[i];
+            if (Character.isDigit(c)) {
+               int num = 0;
+               while (i < n && Character.isDigit(chars[i])) {
+                   num = num * 10 + chars[i] - '0';
+                   i++;
+               }
+               i--;
+
+               res += (op == '+' ? num : -num);
+            } else if (c == '+') {
+                op = '+';
+            } else if (c == '-') {
+                op = '-';
+            } else if (c == '(') {
+                nums.push(res);
+                operators.push(op);
+                op = '+';
+                res = 0;
+            } else if (c == ')') {
+                op = operators.pop();
+                res = nums.pop() + (op == '+' ? res : -res);
+            }
+        }
+
+        return res;
+    }
+}
+
+
+LE_227_Basic_Calculator_II : + - * /
+
+class Solution {
+    public int calculate(String s) {
+        if (null == s || s.length() == 0) {
+            return 0;
+        }
+
+        int res = 0;
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        Stack<Integer> nums = new Stack<>();
+
+        //no need to have stack for operators
+        //Stack<Character> operators = new Stack<>();
+
+        char op = '+';
+
+        for (int i = 0; i < n; i++) {
+            char c = chars[i];
+            if (Character.isDigit(c)) {
+               int num = 0;
+               while (i < n && Character.isDigit(chars[i])) {
+                   num = num * 10 + chars[i] - '0';
+                   i++;
+               }
+               i--;
+
+               // res += (op == '+' ? num : -num);
+                eval(num, op, nums);
+            } else if (c == '+') {
+                op = '+';
+            } else if (c == '-') {
+                op = '-';
+            } else if (c == '*') {
+                op = '*';
+            } else if (c == '/') {
+                op = '/';
+            }
+        }
+
+        for (int num : nums) {
+            res += num;
+        }
+
+        return res;
+    }
+
+    private void eval(int num, char op, Stack<Integer> stack) {
+        if (op == '+') {
+            stack.push(num);
+        } else if (op == '-') {
+            stack.push(-num);
+        } else if (op == '*') {
+            stack.push(stack.pop() * num);
+        } else if (op == '/') {
+            stack.push(stack.pop() / num);
+        }
+    }
+}
+
+
+LE_772_Basic_Calculator_III : + - * / ( )
+This solution also works for LE_224_Basic_Calculator without any change.
+
+class Solution {
+    public int calculate(String s) {
+        if (null == s || s.length() == 0) {
+            return 0;
+        }
+
+        int res = 0;
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        Stack<Long> nums = new Stack<>();
+        Stack<Character> operators = new Stack<>();
+        char op = '+';
+
+        for (int i = 0; i < n; i++) {
+            char c = chars[i];
+            if (Character.isDigit(c)) {
+               int num = 0;
+               while (i < n && Character.isDigit(chars[i])) {
+                   num = num * 10 + chars[i] - '0';
+                   i++;
+               }
+               i--;
+
+               // res += (op == '+' ? num : -num);
+                eval((long)num, op, nums);
+            } else if (c == '+') {
+                op = '+';
+            } else if (c == '-') {
+                op = '-';
+            } else if (c == '*') {
+                op = '*';
+            } else if (c == '/') {
+                op = '/';
+            } else if (c == '(') {
+                nums.push(Long.MAX_VALUE);
+                operators.push(op);
+                op = '+';
+            } else if (c == ')') {
+                int sum = 0;
+                while (nums.peek() != Long.MAX_VALUE) {
+                    sum += nums.pop();
+                }
+                nums.pop();
+                op = operators.pop();
+                eval((long)sum, op, nums);
+            }
+        }
+
+        for (long num : nums) {
+            res += num;
+        }
+
+        return res;
+    }
+
+    private void eval(long num, char op, Stack<Long> stack) {
+        if (op == '+') {
+            stack.push(num);
+        } else if (op == '-') {
+            stack.push(-num);
+        } else if (op == '*') {
+            stack.push(stack.pop() * num);
+        } else if (op == '/') {
+            stack.push(stack.pop() / num);
+        }
+    }
+}
+
+LE_394_Decode_String
+s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
+
+在这道题里，等效的"运算"是append.
+
+class Solution {
+    public String decodeString(String s) {
+        if (null == s || s.length() == 0) {
+            return "";
+        }
+
+        String res = "";
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        Stack<String> s2 = new Stack<>();
+        Stack<Integer> s1 = new Stack<>();
+
+        for (int i = 0; i < n; i++) {
+            char c = chars[i];
+            if (Character.isDigit(c)) {
+               int num = 0;
+               while (i < n && Character.isDigit(chars[i])) {
+                   num = num * 10 + chars[i] - '0';
+                   i++;
+               }
+               i--;
+
+               s1.push(num);
+            } else if (c == '[') {
+               s2.push(res);
+               res = "";
+            } else if (c == ']') {
+               int num = s1.pop();
+
+               StringBuilder sb = new StringBuilder(s2.pop());//!!!
+
+               for (int j = 0; j < num; j++) {
+                   sb.append(res);
+               }
+
+               res = sb.toString();
+            } else {
+               res += c;
+            }
+        }
+
+
+        return res;
+    }
+}

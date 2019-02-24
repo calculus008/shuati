@@ -103,6 +103,10 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
                 if (map[chars[j]] == 0) {
                     count--;
                 }
+                /**
+                 * !!!
+                 * 最后才对j加一。应为上面的logic要reference当前的j值。
+                 */
                 j++;
             }
 

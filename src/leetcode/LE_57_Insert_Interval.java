@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yuank on 3/3/18.
  */
 public class LE_57_Insert_Interval {
-    /*
+    /**
         Given a set of non-overlapping intervals, insert a new interval into the intervals (merge if necessary).
 
         You may assume that the intervals were initially sorted according to their start times.
@@ -43,13 +43,20 @@ public class LE_57_Insert_Interval {
         List<Interval> res = new ArrayList<>();
         int i = 0;
 
+        /**
+         * #1.Find insertion position
+         */
         while (i < intervals.size() && intervals.get(i).end < newInterval.start) {
             res.add(intervals.get(i++));
         }
 
         // int start = newInterval.start , end = newInterval.end;
 
-        //!!! "<= newInterval.end", case : [[1,5]], insert [0,1], if use "<", it won't be merged
+        /**
+         * #2.Merge
+         * !!!
+         * "<= newInterval.end", case : [[1,5]], insert [0,1], if use "<", it won't be merged
+         **/
         while (i < intervals.size() && intervals.get(i).start <= newInterval.end) {
             //!!! changes value in newInterval itself, otherwise, won't work
             //case: [[1,2],[3,5],[6,7],[8,10],[12,16]], insert [4,9]
@@ -63,9 +70,16 @@ public class LE_57_Insert_Interval {
             newInterval.end = Math.max(intervals.get(i).end, newInterval.end);
             i++;
         }
+
+        /**
+         * #3.Insert
+         */
         res.add(newInterval);
         // res.add(new leetcode.Interval(start, end));
 
+        /**
+         * $4.Copy the rest
+         */
         while (i < intervals.size()) {
             res.add(intervals.get(i++));
         }

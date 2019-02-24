@@ -80,16 +80,22 @@ public class LE_341_Flatten_Nested_List_Iterator {
         Use iterator, a better solution
 
         Key Insights:
-        The stack only stores iterator, it does not store NestedInteger, therefore we need to have another global variable "current"
-        to save the current number. NOTICE, "current" is an Integer type object, so we can set it to null to tell the current status
-        of the number.
 
-        NestedInteger is nested, when we want to flatten it, we can only do output when current NestedInteger is an Integer (not a list).
-        Therefore we have to go to the bottom of the nested structure, save the iterator of each level in stack, whose FILO sequence
+        The stack only stores iterator, it does not store NestedInteger,
+        therefore we need to have another global variable "current"
+        to save the current number. NOTICE, "current" is an Integer
+        type object, so we can set it to null to tell the current
+        status of the number.
+
+        NestedInteger is nested, when we want to flatten it, we can only
+        do output when current NestedInteger is an Integer (not a list).
+        Therefore we have to go to the bottom of the nested structure,
+        save the iterator of each level in stack, whose FILO sequence
         is what we need here.
 
-        hasNext() actually finds the next Integer, put int in "current" (current is not null then)
-        next() returns value in "current" and puts it back to null.
+        hasNext() actually finds the next Integer, put int in "current"
+        (current is not null then) next() returns value in "current"
+        and puts it back to null.
 
 
         Example :
@@ -197,6 +203,50 @@ public class LE_341_Flatten_Nested_List_Iterator {
                 }
             }
 
+            return false;
+        }
+    }
+
+    /**
+     * Similar to LE_339_Nested_List_Weight_Sum
+     *
+     * A question before this is the Nested List Weight Sum, and it requires recursion to solve.
+     * As it carries to this problem that we will need recursion to solve it. But since we need
+     * to access each NestedInteger at a time, we will use a stack to help.
+     *
+     * In the constructor, we push all the nestedList into the stack from back to front, so when
+     * we pop the stack, it returns the very first element. Second, in the hasNext() function,
+     * we peek the first element in stack currently, and if it is an Integer, we will return true
+     * and pop the element. If it is a list, we will further flatten it. This is iterative version
+     * of flatting the nested list. Again, we need to iterate from the back to front of the list.
+     */
+
+    public class NestedIterator3 implements Iterator<Integer> {
+        Stack<NestedInteger> stack = new Stack<>();
+
+        public NestedIterator3(List<NestedInteger> nestedList) {
+            for(int i = nestedList.size() - 1; i >= 0; i--) {
+                stack.push(nestedList.get(i));
+            }
+        }
+
+        @Override
+        public Integer next() {
+            return stack.pop().getInteger();
+        }
+
+        @Override
+        public boolean hasNext() {
+            while(!stack.isEmpty()) {
+                NestedInteger curr = stack.peek();
+                if(curr.isInteger()) {
+                    return true;
+                }
+                stack.pop();
+                for(int i = curr.getList().size() - 1; i >= 0; i--) {
+                    stack.push(curr.getList().get(i));
+                }
+            }
             return false;
         }
     }

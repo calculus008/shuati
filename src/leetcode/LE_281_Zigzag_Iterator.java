@@ -52,7 +52,7 @@ public class LE_281_Zigzag_Iterator {
 
         /**
          * Key :
-         * Use "removeFirst()" to remove the iterator fro head, use it to get the current
+         * Use "removeFirst()" to remove the iterator from head, use it to get the current
          * Integer, then if it still has more elements, add it back to list.
          * "add()" adds the iterator to the tail of the list. So, if we have 4 iterators:
          *

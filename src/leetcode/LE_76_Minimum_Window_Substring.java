@@ -102,7 +102,7 @@ public class LE_76_Minimum_Window_Substring
         int total = target.length();
         int[] count = new int[256];
         int start = 0;
-        int minLen = Integer.MAX_VALUE;
+        int minLen = Integer.MAX_VALUE;//!!!
 
         for (char c : target.toCharArray()) {
             count[c]++;

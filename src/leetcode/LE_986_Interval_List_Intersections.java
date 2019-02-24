@@ -51,6 +51,20 @@ public class LE_986_Interval_List_Intersections {
                 Interval a = A[i];
                 Interval b = B[j];
 
+                /**
+                 * !!!
+                 * check if two intervals has intersection
+                 *
+                 * start1    end1    start2     end2
+                 *      *******        ***********
+                 * -----------------------------
+                 *
+                 * so we get:
+                 * start = max(start1, start2)
+                 * edn = min(end1, end2)
+                 *
+                 * if start > end, there's no intersection
+                 */
                 int start = Math.max(a.start, b.start);
                 int end = Math.min(a.end, b.end);
 

@@ -53,7 +53,11 @@ public class LE_480_Sliding_Window_Median {
      * 2.test cases show that we need to handle int value overflow
      *
      * Time  : O(n ^ 2 * logk)
-     *         O(n * (n + logk)) ??
+
+     *         For each window of size k, remove() in qp is O(k), poll/offer takes O(logk)
+     *         Number of windows : n - k + 1
+     *
+     *         O((n - k + 1) * (k + logk))
      *
      * Space : O(n)
      */
@@ -69,14 +73,15 @@ public class LE_480_Sliding_Window_Median {
          * For Long, can't use lambda "(a,b) -> b - a", guessing the comparator requires comparing
          * expression return int. Better use "Collections.reverseOrder()"
          */
-        PriorityQueue<Long> small = new PriorityQueue<>(1000, Collections.reverseOrder());//max heap
+//        PriorityQueue<Long> small = new PriorityQueue<>(1000, Collections.reverseOrder());//max heap
+        PriorityQueue<Long> small = new PriorityQueue<>((a, b) -> Long.compare(b, a));
 
         int l = 0; //index of the left most element in window
         int j = 0; //index of result array
         for (int i = 0; i < nums.length; i++) {//index of the right most element in window
             if (i >= k) {//remove left element
                 if (nums[l] < large.peek()) {//decide which pq nums[l] is in
-                    small.remove((long)nums[l]);//PriorityQueue remove is O(n)
+                    small.remove((long)nums[l]);//!!!PriorityQueue remove is O(n)
                 } else {
                     large.remove((long)nums[l]);
                 }
@@ -164,7 +169,7 @@ public class LE_480_Sliding_Window_Median {
         /**
          * !!!
          * This is the key trick for using TreeSet. Instead of saving value, we save INDEX(!!!) for nums
-         * in TreeSet, since index is unique, we can save them in a set.
+         * in TreeSet, since index is UNIQUE, we can save them in a set.
          *
          * This Comparator tells TreeSet to sort based on the values in nums by using indexed saved in
          * the set.

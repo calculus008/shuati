@@ -269,10 +269,15 @@ LE_128_Longest_Consecutive_Sequence                       (lint 124)
 #Iterators
 LE_251_Flatten_2D_Vector                                  (lint 601)
 LE_281_Zigzag_Iterator                                    (lint 540)
+LI_541_Zigzag_Iterator_II
 LE_339_Nested_List_Weight_Sum                             (lint 551)
-LE_394_Decode_String                                      (lint 575)
+LI_22_Flatten_List
+LE_341_Flatten_Nested_List_Iterator
+LE_394_Decode_String                                      (lint 575)   (***) revisit
 LE_692_Top_K_Frequent_Words                               (lint 471)
 LE_460_LFU_Cache                                          (lint 24)
+LE_173_Binary_Search_Tree_Iterator
+LE_284_Peeking_Iterator
 
 #Design Questions
 LE_146_LRU_Cache
@@ -286,13 +291,14 @@ LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
 LE_676_Implement_Magic_Dictionary
 
 #Sliding Window
-LE_03_Longest_Substring_Without_Repeating_Characters
-LE_30_SubstrConactWords
+LE_03_Longest_Substring_Without_Repeating_Characters      (**)
+LE_30_SubstrConactWords                                   (***)
 LE_76_Min_Window_Substring
 LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
 LE_209_Minimum_Size_Subarray_Sum
 LE_239_Sliding_Window_Maximum
-LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
+LE_480_Sliding_Window_Median                              (lint 360)   (***) Revisit
 LE_346_Moving_Average_From_Data_Stream
 LE_438_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
@@ -304,6 +310,13 @@ LE_567_Permutation_In_String
 LE_56_Merge_Intervals                                     (lint 156)
 LE_57_Insert_Interval                                     (lint 30)
 LI_577_Merge_K_Sorted_Interval_Lists
+LE_986_Interval_List_Intersections
+
+Interval problems : merge/insert
+#1.Must be sorted by start.
+#2.Have global (or last) interval, then compare with each one, do merge.
+#3.Add the global/last one.
+
 
 #Merge
 LI_839_Merge_Two_Sorted_Interval_Lists
@@ -359,6 +372,8 @@ LI_249_Count_Of_Smaller_Number_Before_Itself
 LE_308_Range_Sum_Query_2D_Mutable                         (lint 817)
 LI_532_Reverse_Pairs
 LE_493_Reverse_Pairs
+
+====================================================
 
 Advanced Algorithm
 1.Follow Up Questions
@@ -424,24 +439,22 @@ LE_720_Longest_Word_In_Dictionary
 
 3.Data Structure II - Stack, Deque, Heap
 #Heap
-LE_42_Trapping_Rain_Water                                 (lint 363)
-LE_407_Trapping_Rain_Water_II                             (lint 364)
+LE_42_Trapping_Rain_Water                                 (lint 363)   (***) It's two pointers problem, can also use Stack
+LE_407_Trapping_Rain_Water_II                             (lint 364)   (***) 2D  Heap
 LE_295_Find_Median_From_Data_Stream                       (lint 81)
 LE_239_Sliding_Window_Maximum                             (lint 362)
-LI_360_Sliding_Window_Median
-LE_480_Sliding_Window_Median
+LE_480_Sliding_Window_Median                              (lint 360)   (***) Revisit
 
 #Stack
-LI_126_Max_Tree
+LI_126_Max_Tree                                                        mono stack, revisit
 LE_84_Largest_Rectangle_In_Histogram                      (lint 122)
-LE_85_Max_Rectangle                                       (lint 510)
+LE_85_Max_Rectangle                                       (lint 510)   (***)
 LE_155_Min_Stack                                          (lint 12)
-LI_126_Max_Tree
 LE_394_Decode_String                                      (lint 575)
 LE_224_Basic_Calculator                                   (lint 978)
 LE_227_Basic_Calculator_II                                (lint 980)
 LE_772_Basic_Calculator_III                               (lint 849, 368)
-LE_981_Basic_Calculator_IV                                (lint 981)
+LE_770_Basic_Calculator_IV                                (lint 981)   (*)
 LE_150_Evaluate_Reverse_Polish_Notation
 
 ====================================================

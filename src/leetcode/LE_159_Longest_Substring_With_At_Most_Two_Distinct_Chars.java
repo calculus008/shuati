@@ -26,15 +26,38 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
         int start = 0;
         int end = 0;
         int res = 0;
+
+        /**
+         * map stores char and the index that the char appeared last time
+         */
         Map<Character, Integer> map = new HashMap<>();
 
+        /**
+         * Move right side of the sliding window. No inner while loop,
+         * each time window just moves one step
+         **/
         while (end < len) {
-            if (map.size() <= 2) {//Move right side of the sliding window. No inner while loop, each time window just moves one step
+            if (map.size() <= 2) {
                 map.put(s.charAt(end), end);
                 end++;
             }
 
-            if (map.size() > 2) {//current sliding window moves out of its max position (window is no longer valid(has more than 2 distinct chars)), move left or start side to make the window valid again by removing the char which last appearance is the left most among all chars in the map.
+            /**
+             *
+             * 1."(map.size() > 2" :
+             *    condition to tell if current window is still valid
+             *
+             * current sliding window moves out of its max position
+             * (window is no longer valid(has more than 2 distinct chars)),
+             * move left or start side to make the window valid again by
+             * removing the char which last appearance is the left most among
+             * all chars in the map.
+             *
+             * 2.since "map.size() <= 2" is the condition to do map.put(),
+             *  map.size() > 2 will happen.
+             *
+             **/
+            if (map.size() > 2) {
                 int leftmost = len;
                 for (int num : map.values()) {//!!! map.values()
                     leftmost = Math.min(leftmost, num);
@@ -42,7 +65,13 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
                 map.remove(s.charAt(leftmost));//!!!
                 start = leftmost + 1;
             }
-            res = Math.max(res, end - start); //normally, len should be end - start + 1, but here "end" is already one more than the end position for calculation, therefore just do "end - start"
+
+            /**
+             * normally, len should be end - start + 1, but here "end" is already
+             * one more than the end position for calculation, therefore just
+             * do "end - start"
+             **/
+            res = Math.max(res, end - start);
         }
 
         return res;

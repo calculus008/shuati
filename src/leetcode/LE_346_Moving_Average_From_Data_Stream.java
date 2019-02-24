@@ -36,7 +36,7 @@ public class LE_346_Moving_Average_From_Data_Stream {
          Then when another number comes in, you would want to remove 1 and insert 4
          [2][3][4]
 
-         But you don't have to shift the array if you keep the index of the oldest element.
+         But you don't have to shift the array if you keep the index of the OLDEST(!!!) element.
          In the example code, it's called insert :
 
          Given this array, insert is at 0:

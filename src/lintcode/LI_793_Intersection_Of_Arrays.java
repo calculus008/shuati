@@ -89,7 +89,7 @@ public class LI_793_Intersection_Of_Arrays {
      * 基于 Priority Queue 的版本。
      *
      * 实际上是用了“LI_486_Merge_K_Sorted_Arrays”的算法，keep counting number of elements with
-     * the same value, sinc "There are no duplicated elements in each array",
+     * the same value, since "There are no duplicated elements in each array",
      * once the count equals arrs.length, this value exists in all arrays, add 1 to result.
      *
      * 假设每个数组长度为 n, 一共 k 个数组。
@@ -130,13 +130,23 @@ public class LI_793_Intersection_Of_Arrays {
         int last = 0, count = 0;
         while (!pq.isEmpty()) {
             Pair p = pq.poll();
+
+            /**
+             * the number is not the same as 'last'
+             * Or
+             * it shows for the first time.
+             */
             if (arrs[p.row][p.col] != last || count == 0) {
                 if (count == arrs.length) {
                     res++;
                 }
+
                 last = arrs[p.row][p.col];
                 count = 1;
             } else {
+                /**
+                 * number is the same as 'last', increase count
+                 */
                 count++;
             }
 
@@ -147,7 +157,9 @@ public class LI_793_Intersection_Of_Arrays {
         }
 
         /**
-         * !!! Deal with the last element outside loop
+         * !!!
+         * Deal with the last element outside loop
+         * Easy to forget!!!
          */
         if (count == arrs.length) {
             res++;

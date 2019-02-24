@@ -34,7 +34,7 @@ public class LE_251_Flatten_2D_Vector {
 
     /**
      * Difference from questions with NestedInteger :
-     * NextedInteger can be nexted to multiple levels, that's why we need to use stack to preserve
+     * NestedInteger can be nested to multiple levels, that's why we need to use stack to preserve
      * the iterator on each level. For this questions, there are two level, list of list of Integer,
      * then list of Integer. Therefore, no stack needed. Just need to maintain a current Iterator of
      * Integers
@@ -101,6 +101,43 @@ public class LE_251_Flatten_2D_Vector {
                     indexEle = 0;
                 }
             }
+            return false;
+        }
+    }
+
+
+    /**
+     * Leetcode changes input from list to 2D array
+     */
+    class Vector2DArray {
+        int idxRow;
+        int idxCol;
+        int[][] elements;
+
+        public Vector2DArray(int[][] v) {
+            elements = v;
+            idxRow = 0;
+            idxCol = 0;
+        }
+
+        public int next() {
+            if (hasNext()) {
+                return elements[idxRow][idxCol++];
+            } else {
+                return -1;
+            }
+        }
+
+        public boolean hasNext() {
+            while (idxRow < elements.length) {
+                if (elements[idxRow] != null && idxCol < elements[idxRow].length) {
+                    return true;
+                } else {
+                    idxRow++;
+                    idxCol = 0;
+                }
+            }
+
             return false;
         }
     }

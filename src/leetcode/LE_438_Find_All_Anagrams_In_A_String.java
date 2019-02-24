@@ -64,6 +64,10 @@ public class LE_438_Find_All_Anagrams_In_A_String {
             if (i >= l2) {
                 /**
                  * move the first one in window out
+                 * "i >= l2" : defines a point when we should
+                 *             remove left most element to move
+                 *             the sliding window. It should
+                 *             start at the 2nd valid window.
                  */
                 m1[s.charAt(i - l2) - 'a']--;
             }

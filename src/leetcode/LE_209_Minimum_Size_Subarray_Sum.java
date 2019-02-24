@@ -33,6 +33,25 @@ public class LE_209_Minimum_Size_Subarray_Sum {
         return res == Integer.MAX_VALUE ? 0 : res;
     }
 
+    public int minSubArrayLen3(int s, int[] nums) {
+        if (null == nums || nums.length == 0) return 0;
+        int res = Integer.MAX_VALUE;
+
+        int sum = 0;
+
+        for (int i = 0, j = 0; i < nums.length; i++) {
+            sum += nums[i];
+
+            while (sum >= s) {
+                res = Math.min(res, i - j + 1);
+                sum -= nums[j];
+                j++;
+            }
+        }
+
+        return res == Integer.MAX_VALUE ? 0 : res;
+    }
+
     /**
      * Solution 2
      * Binary search with window sum

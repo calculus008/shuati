@@ -24,7 +24,6 @@ public class LE_224_Basic_Calculator {
     /**
      *  Very Important
         Time and Space : O(n)
-     eiddcchttjurhrgrgklfrdgtdhuujiblbbdjiekulnvn
 
         1.Use Stack
         2.Only valid input char : non-negative integers, +, -, ' ', (, )
@@ -63,7 +62,7 @@ public class LE_224_Basic_Calculator {
                 res = 0;
                 sign = 1;
             } else if (s.charAt(i) == ')') {//遇到")", 说明当前计算单元结束，计算当前和上一个单元的和。
-                //注意pop的顺序
+                //注意pop的顺序, 第一个pop出来的是sign, 第二各才是数值
                 res = stack.pop() * res + stack.pop();
             } else if (s.charAt(i) == '+') {
                 sign = 1;

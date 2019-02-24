@@ -108,7 +108,7 @@ public class LE_394_Decode_String {
         int len = s.length();
         /**
          * "res" is like the work table of the current level,
-         * save to stack s2 and set to "" when go to tne next level.
+         * save to stack s2 and set to "" when go to the next level.
          * "save and clean table".
          *
          * "res" is only used to save none digit char
@@ -167,10 +167,12 @@ public class LE_394_Decode_String {
      * Solution 2 : DFS
      * */
     /**
-     * Init global vriable pos to pass process start position between recursion calls.
+     * !!!
+     * Init global variable pos to pass process start position between recursion calls.
      * has to be init here.
      */
     int pos = 0;
+
     public String decodeStringDFS(String s) {
         StringBuilder sb = new StringBuilder();
         String num = "";
@@ -185,12 +187,14 @@ public class LE_394_Decode_String {
             } else if(c == '[') {
                 pos = i + 1;//!!!
                 String next = decodeStringDFS(s);
+
                 for (int j = 0; j < Integer.valueOf(num); j++) {
                     sb.append(next);
                 }
                 num = "";//!!!
+
                 /**
-                 * now pos has bee changed in the returned recusion call
+                 * now pos has bee changed in the returned recursion call
                  * and points to the location of matching ']'
                  */
                 i = pos;                // <-|  pass pos param between recursion calls

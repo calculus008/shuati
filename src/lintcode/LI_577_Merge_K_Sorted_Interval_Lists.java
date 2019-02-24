@@ -33,6 +33,9 @@ public class LI_577_Merge_K_Sorted_Interval_Lists {
      * 空间复杂度 O(k)
      *
      * Combination of LI_839_Merge_Two_Sorted_Interval_Lists and LI_486_Merge_K_Sorted_Arrays
+     *
+     * Use pq to ensure process interval in the order of its start value (each interval list is sorted)
+     *
      */
     class Element{
         public int row;
@@ -133,6 +136,9 @@ public class LI_577_Merge_K_Sorted_Interval_Lists {
             }
         }
 
+        /**
+         *!!!
+         **/
         res.add(last);
         return res;
     }

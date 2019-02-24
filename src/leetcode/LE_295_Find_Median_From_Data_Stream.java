@@ -126,8 +126,15 @@ public class LE_295_Find_Median_From_Data_Stream {
             /**
              * init max head
              */
-            small = new PriorityQueue<>(1000, Collections.reverseOrder()); //has to specify init capacity in this constructor
-            // small = new PriorityQueue<>((a, b) -> b - a); //since we use Long in heap, this line won't work, because the comparator still takes Integer, so the complier is confused and return error. If we use Integer for heap, it works.
+//            small = new PriorityQueue<>(1000, Collections.reverseOrder()); //has to specify init capacity in this constructor
+
+            /**
+             * !!!
+             * "small = new PriorityQueue<>((a, b) -> b - a);"
+             * since we use Long in heap, this line won't work, because the comparator still takes Integer,
+             * so the compiler is confused and return error. If we use Integer for heap, it works.
+             * **/
+            small = new PriorityQueue<>((a, b) -> Long.compare(b, a));
             large = new PriorityQueue<>();
         }
 

@@ -35,6 +35,9 @@ public class LE_84_Largest_Rectangle_In_Histogram {
             //!!!While
             while (!stack.isEmpty() && h < heights[stack.peek()]) {
                 int height = heights[stack.pop()];
+                /**
+                 * after "stack.pop()", stack could be empty
+                 */
                 int start = stack.isEmpty() ? -1 : stack.peek();
                 /*
                   Why (i - start - 1):
@@ -63,6 +66,7 @@ public class LE_84_Largest_Rectangle_In_Histogram {
 
         for (int i = 0; i <= n; i++) {
             int h = i == n ? 0 : height[i];
+
             while (!stack.isEmpty() && h < height[stack.peek()]) {//!!! "height[stack.peek()]", NOT "stack.peek()"
                 int x = height[stack.pop()];
                 int right = i - 1;

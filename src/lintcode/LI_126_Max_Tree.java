@@ -37,9 +37,9 @@ public class LI_126_Max_Tree {
      * 有一个小技巧是首先把正无穷大的Node加入到栈中。然后遍历数组，for循环中当前元素是A[i]
      * 1.如果 A[i] 小于栈顶的元素，则无脑 push
      * 2.如果 A[i] 大于栈顶的元素，那么把栈顶元素 pop 出来成为 son 节点，同时比较 A[i] 和 新的栈顶元素，分情况讨论
-     * a.如果 A[i] 较小，那么让 A[i] 成为 son 的 father 节点，同时 push A[i] 节点进栈
-     * b.如果 A[i] 较大，那么 pop 出栈顶元素成为 son 的 father 节点。同时把 father push 回栈。
-     *   注意这个时候 A[i] 实际上并没有参与树的构建，所以我用到了 i--，在下一层 for 循环再来判断这个 A[i]
+     *  a.如果 A[i] 较小，那么让 A[i] 成为 son 的 father 节点，同时 push A[i] 节点进栈
+     *  b.如果 A[i] 较大，那么 pop 出栈顶元素成为 son 的 father 节点。同时把 father push 回栈。
+     *    注意这个时候 A[i] 实际上并没有参与树的构建，所以我用到了 i--，在下一层 for 循环再来判断这个 A[i]
      *
      * for 循环结束后，栈为单调递减栈，这个时候把栈里所有非正无穷大的元素 pop 出来最后 return root
      *
@@ -61,7 +61,7 @@ public class LI_126_Max_Tree {
      *           2
      *
      * i = 3
-     * stack [max, 5, 3]
+     * stack [max, 5, ]  6
      *            / \
      *           2   3
      *
@@ -95,9 +95,11 @@ public class LI_126_Max_Tree {
      *
      *           6
      *         /   \
-     *        5     1
-     *       / \   /
-     *      2  3  0
+     *        5     3
+     *       / \     \
+     *      2  3      1
+     *               /
+     *              0
      * */
     public class Solution {
         public TreeNode maxTree(int[] A) {
@@ -142,6 +144,33 @@ public class LI_126_Max_Tree {
             }
 
             return root;
+        }
+    }
+
+    /**
+     * Recursion
+     */
+    public class Solution2 {
+        public TreeNode maxTree(int[] A) {
+            TreeNode root = null;
+            for(int x : A) {
+                root = insert(root, x);
+            }
+            return root;
+        }
+
+        private TreeNode insert(TreeNode node, int x) {
+            TreeNode xnode = new TreeNode(x);
+            if (node == null)
+                return xnode;
+
+            if (xnode.val > node.val) {
+                xnode.left = node;
+                return xnode;
+            } else {
+                node.right = insert(node.right, x);
+                return node;
+            }
         }
     }
 }
