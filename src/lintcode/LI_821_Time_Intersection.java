@@ -33,6 +33,10 @@ public class LI_821_Time_Intersection {
          Medium
      */
 
+    /**
+     * Time : O(nlogn) (need sorting on pairs), not as efficient as LI_821_Time_Intersection (O(n))
+     *
+     */
     class Pair {
         int time;
         int flag;

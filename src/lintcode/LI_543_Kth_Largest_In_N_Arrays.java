@@ -20,6 +20,14 @@ public class LI_543_Kth_Largest_In_N_Arrays {
      */
 
     /**
+     * Variation of LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
+     * 1.Arrays are not sort, so need to sort.
+     * 2."Kth Largest",
+     *   a.Must use a MAX heap
+     *   b.We sort array in ascending order, so we need to iterate arrays
+     *     backwards when adding elements into MAX heap.
+     *
+     *
      * Time  : O(mlogn + klogm)
      * Space : O(m)
      */
@@ -34,11 +42,19 @@ public class LI_543_Kth_Largest_In_N_Arrays {
         }
 
         public int KthInArrays(int[][] arrays, int k) {
-            //!!!Comparator!!! Max Heap
+            /**
+             * !!!
+             * "Find K-th LARGERST element in N arrays",
+             * so we must use a Max Heap.
+             **/
             PriorityQueue<Element> pq = new PriorityQueue<>((a, b) -> b.val - a.val);
 
             int m = arrays.length;
 
+            /**
+             * !!!
+             * The arrays are not sorted, so we must sort first.
+             */
             for (int[] array : arrays) {
                 if (array != null && array.length != 0) {
                     Arrays.sort(array);
@@ -53,6 +69,15 @@ public class LI_543_Kth_Largest_In_N_Arrays {
                  * 题意arrays是变长的数组，所以要判断每个数组是否长度为零。
                  */
                 if (arrays[i] != null && arrays[i].length != 0) {
+                    /**
+                     * !!!
+                     * Since we use default sort comparator in Arrays.sort(),
+                     * therefore, numbers increases in each 1D array.
+                     * Since we try to find kth largest, we have to start from
+                     * the end of the arrays (the largest values in each array)
+                     *
+                     * "Element(i, arrays[i].length - 1, arrays[i][arrays[i].length - 1])"
+                     */
                     pq.offer(new Element(i, arrays[i].length - 1, arrays[i][arrays[i].length - 1]));
                 }
             }
@@ -64,6 +89,11 @@ public class LI_543_Kth_Largest_In_N_Arrays {
                 k--;
 
                 if (e.y != 0) {
+                    /**
+                     * !!!
+                     * starting from end of the array, move to start of the array
+                     * (from large value to small value)
+                     */
                     pq.offer(new Element(e.x, e.y - 1, arrays[e.x][e.y - 1]));
                 }
             }

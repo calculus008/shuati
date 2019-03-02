@@ -57,13 +57,13 @@ public class LI_944_Maximum_Submatrix {
         }
 
         int max = Integer.MIN_VALUE;
-        for (int i = 0; i <= m; i++) {
-            for (int j = i + 1; j <= m; j++) {
+        for (int i = 0; i <= m; i++) {//上边界
+            for (int j = i + 1; j <= m; j++) {//下边界
                 int cur = 0;
                 for (int k = 1; k <= n; k++) {
                     cur += (sums[j][k] - sums[i][k]);
                     max = Math.max(cur, max);
-                    cur = Math.max(0, cur);
+                    cur = Math.max(0, cur);//!!!
                 }
             }
         }

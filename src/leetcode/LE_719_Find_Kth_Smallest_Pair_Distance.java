@@ -74,7 +74,12 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
     class Solution2 {
         public int smallestDistancePair(int[] nums, int k) {
             int n = nums.length;
-            Arrays.sort(nums);//!!!
+
+            /**
+             * !!!
+             * Must sort, it will optimize the time complexity in getCount()
+             */
+            Arrays.sort(nums);
 
             int max = nums[n - 1];
             int min = nums[0];
@@ -132,6 +137,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
         }
 
         /**
+         * !!!
          * Find number of pairs that the distance of the two elements in the pair
          * is smaller or equal to mid.
          */

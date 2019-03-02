@@ -14,8 +14,9 @@ public class LI_438_Copy_Books_II {
          You must distribute the continuous id books to one people to copy.
 
          (You can give book A[1],A[2] to one people, but you cannot give book A[1],
-         A[3] to one people, because book A[1] and A[3] is not continuous.) Return the number
-         of smallest minutes need to copy all the books.
+         A[3] to one people, because book A[1] and A[3] is not continuous.)
+
+         Return the number of smallest minutes need to copy all the books.
 
          Example
          Given n = 4, array A = [3,2,4]

@@ -26,7 +26,8 @@ public class LI_139_Subarray_Sum_Closest {
     /**
      * Solution 1
      * 不使用 pair，不使用 TreeMap，只使用 HashMap + Array + Sort 的方法.
-     * 用 HashMap 记录之前的位置，用 Array 来打擂台找最小差距时间复杂度为O(nlogn), 空间复杂度为O(n)
+     * 用 HashMap 记录之前的位置，用 Array 来打擂台找最小差距
+     * 时间复杂度为O(nlogn), 空间复杂度为O(n)
      */
 
     public int[] subarraySumClosest1(int[] nums) {
@@ -117,6 +118,9 @@ public class LI_139_Subarray_Sum_Closest {
 
             /**
              * map.higtherKey and map.lowerKey
+             *
+             * For current prefix sum - "sum", we look back, get the
+             * closet higher and lower value, 打擂台， find answer.
              */
             Integer greater = map.higherKey(sum);
             if (greater != null && Math.abs(sum - greater) < closest) {
@@ -134,4 +138,28 @@ public class LI_139_Subarray_Sum_Closest {
         }
         return res;
     }
+
+    /**
+        问：为什么需要一个 (0,0) 的初始 Pair?
+
+        答：
+        我们首先需要回顾一下，在 subarray 这节课里，我们讲过一个重要的知识点，叫做 Prefix Sum
+        比如对于数组 [1,2,3,4]，他的 Prefix Sum 是 [1,3,6,10]
+        分别表示 前1个数之和，前2个数之和，前3个数之和，前4个数之和
+        这个时候如果你想要知道 子数组 从下标  1 到下标 2 的这一段的和(2+3)，就用前 3个数之和 减去 前1个数之和
+        = PrefixSum[2] - PrefixSum[0] = 6 - 1 = 5
+
+        你可以看到这里的 前 x 个数，和具体对应的下标之间，存在 +-1 的问题
+        第 x 个数的下标是 x - 1，反之 下标 x 是第 x + 1 个数
+
+        那么问题来了，如果要计算 下标从 0~2 这一段呢？也就是第1个数到第3个数，因为那样会访问到 PrefixSum[-1]
+        所以我们把 PrefixSum 整体往后面移动一位，把第0位空出来表示前0个数之和，也就是0. => [0,1,3,6,10]
+
+        那么此时就用 PrefixSum[3] - PrefixSum[0] ，这样计算就更方便了。
+        此时，PrefixSum[i] 代表 前i个数之和，也就是 下标区间在 0 ~ i-1 这一段的和
+
+        那么回过头来看看，为什么我们需要一个 (0,0) 的 pair 呢？
+        因为 这个 0,0 代表的就是前0个数之和为0
+        一个 n 个数的数组， 变成了 prefix Sum 数组之后，会多一个数出来
+    **/
 }

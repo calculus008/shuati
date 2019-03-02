@@ -63,7 +63,8 @@ public class LE_643_Maximum_Average_Subarray_I {
      Advanced solution:
      Another solution is not try to calculate the max value but try to find a value that close enough
      to the max average value. When it is close enough, could consider that value is the max average value.
-     Time complexity will be nlog(max - min).
+
+     Time : nlog(max - min).
 
      1.Average bound
      Average value of any number of elements in the array must be in this bound:
@@ -82,7 +83,7 @@ public class LE_643_Maximum_Average_Subarray_I {
      we should lower the bar, i.e. set max bound = bar.
 
      when the differences between the max and min bound is close enough, this means the bar is close enough
-     to the max avarage value we could found, then return the max value (or min value or the mid value doesn't matter).
+     to the max average value we could found, then return the max value (or min value or the mid value doesn't matter).
 
      3.Evaluation
      Key problem is how to find the subarray whose length is >= k and average >= bar?
@@ -94,11 +95,11 @@ public class LE_643_Maximum_Average_Subarray_I {
      If a number in the source array is bigger than the bar, it means it will pull up the subarray average to the bar,
      if a number in the source array is smaller than the bar, it means it will pull down the subarray average to the bar.
 
-     With the aggragation of the differences, we don't need to really calculate the sum of elements and divide k,
+     With the aggregation of the differences, we don't need to really calculate the sum of elements and divide k,
      we only need to see the trend of the average comparing to the bar.
 
      Iterate through the pre-sum array
-     When i >=k i.e. here the subarray from first element to ith element length is >= k.
+     When i >= k i.e. here the subarray from first element to ith element length is >= k.
 
      If the ith pre-sum is >= 0, it means the first ith elements average is bigger than the bar,
      so we should raise the bar (return true).

@@ -6,7 +6,7 @@ package leetcode;
 public class LE_644_Maximum_Average_Subarray_II {
     /**
          Given an array consisting of n integers, find the contiguous subarray whose length is
-         greater than or equal to k that has the maximum average value.
+         greater than or equal to k that has the maximum AVERAGE value.
          And you need to output the maximum average value.
 
          Example 1:
@@ -221,12 +221,12 @@ public class LE_644_Maximum_Average_Subarray_II {
      */
     class Solution {
         public double findMaxAverage(int[] nums, int k) {
-            if(nums == null || k > nums.length) {
+            if(nums == null || k > nums.length) {//!!! "k > nums.length"
                 return 0;
             }
 
-            double start = Double.MAX_VALUE;
-            double end = Double.MIN_VALUE;
+            double start = Double.MAX_VALUE;//!!! Double
+            double end = Double.MIN_VALUE;//!!!Double
 
             for(int i = 0; i < nums.length; i++) {
                 start = Math.min(start, (double)nums[i]);
@@ -256,11 +256,11 @@ public class LE_644_Maximum_Average_Subarray_II {
             for(int i = 0; i < nums.length; i++) {
                 sum += (double)nums[i] - avg;
 
-                if(i >= k - 1 && sum >= 0) {
+                if(i >= k - 1 && sum >= 0) {//!!! "i >= k - 1"
                     return true;
                 }
 
-                if(i >= k) {
+                if(i >= k) {//!!! "i >= k"
                     prevSum += (double)nums[i - k] - avg;
                     prevMin = Math.min(prevMin, prevSum);
                     if(sum - prevMin >= 0) {

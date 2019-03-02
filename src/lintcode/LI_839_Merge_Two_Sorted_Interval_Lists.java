@@ -114,18 +114,18 @@ public class LI_839_Merge_Two_Sorted_Interval_Lists {
             return results;
         }
 
-        Interval last = null, curt = null;
+        Interval last = null, cur = null;
         int i = 0, j = 0;
         while (i < list1.size() && j < list2.size()) {
             if (list1.get(i).start < list2.get(j).start) {
-                curt = list1.get(i);
+                cur = list1.get(i);
                 i++;
             } else {
-                curt = list2.get(j);
+                cur = list2.get(j);
                 j++;
             }
 
-            last = merge(results, last, curt);
+            last = merge(results, last, cur);
         }
 
         while (i < list1.size()) {
@@ -144,17 +144,17 @@ public class LI_839_Merge_Two_Sorted_Interval_Lists {
         return results;
     }
 
-    private Interval merge(List<Interval> results, Interval last, Interval curt) {
+    private Interval merge(List<Interval> results, Interval last, Interval cur) {
         if (last == null) {
-            return curt;
+            return cur;
         }
 
-        if (curt.start > last.end) {
+        if (cur.start > last.end) {
             results.add(last);
-            return curt;
+            return cur;
         }
 
-        last.end = Math.max(last.end, curt.end);
+        last.end = Math.max(last.end, cur.end);
         return last;
     }
 }

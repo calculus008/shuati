@@ -16,6 +16,10 @@ public class LE_152_Maximum_Product_Subarray {
      * Time : O(n)
      * Space : O(1)
      * https://leetcode.com/problems/maximum-product-subarray/discuss/48252/Sharing-my-solution:-O(1)-space-O(n)-running-time
+     *
+     * Since there could be negative numbers in array, we need to keep track and max and min
+     * products while traversing the array. If min value in negative, when it's multiplied by
+     * a negative number, it will turn into positive and can possibly become max.
      */
     public int maxProduct1(int[] nums) {
         if (nums == null || nums.length == 0) return 0;

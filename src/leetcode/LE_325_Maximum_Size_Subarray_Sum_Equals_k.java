@@ -7,10 +7,12 @@ import java.util.HashMap;
  */
 public class LE_325_Maximum_Size_Subarray_Sum_Equals_k {
     /**
-         Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn't one, return 0 instead.
+         Given an array nums and a target value k, find the maximum length of a
+         subarray that sums to k. If there isn't one, return 0 instead.
 
          Note:
-         The sum of the entire nums array is guaranteed to fit within the 32-bit signed integer range.
+         The sum of the entire nums array is guaranteed to fit within the
+         32-bit signed integer range.
 
          Example 1:
          Given nums = [1, -1, 5, -2, 3], k = 3,
@@ -39,12 +41,28 @@ public class LE_325_Maximum_Size_Subarray_Sum_Equals_k {
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
             if (sum == k) {//从nums[0]开始的和是
+                /**
+                 * go from 0 to nums.length, so it keeps overwriting previous
+                 * result, and the final value is the longest length.
+                 */
                 res = i + 1;
             } else if(map.containsKey(sum - k)) {
+                /**
+                 * sum - s = k => s = sum - k.
+                 * index of s = map.get(sum - k).
+                 *
+                 * length of subarray:
+                 *
+                 * i - (index + 1) + 1 = i - index = i - map.get(sum - k)
+                 */
                 res = Math.max(res, i - map.get(sum - k));
             }
 
-            //!!!保证max length, 后面出现的不覆盖前面出现的。
+            /**
+             * !!!
+             * 保证max length, 后面出现的不覆盖前面出现的,
+             * 以保证对同样的sum值，只保留最靠前的index值。
+             */
             if (!map.containsKey(sum)) {
                 map.put(sum, i);
             }

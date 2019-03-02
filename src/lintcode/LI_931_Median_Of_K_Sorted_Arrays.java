@@ -19,7 +19,11 @@ public class LI_931_Median_Of_K_Sorted_Arrays {
      */
 
     /**
-     * 假如每个数组长度为 N，数组的整数值在 0~ 2 ^ 31 - 1 之间。O(logRange * klogn)
+     * Quick Select + 2 levels of binary search
+     *
+     * 假如每个数组长度为 N，数组的整数值在 0~ 2 ^ 31 - 1 之间。O(log(Range) * klogn)
+     *
+     *
      */
     public double findMedian(int[][] nums) {
         int l = getTotalLength(nums);
@@ -52,6 +56,9 @@ public class LI_931_Median_Of_K_Sorted_Arrays {
         return res;
     }
 
+    /**
+     * Time : O(log(Range) * mlog(n) )
+     */
     private int findKth(int[][] nums, int k) {
         int start = 0, end = Integer.MAX_VALUE;
         while (start + 1 < end) {
@@ -70,6 +77,12 @@ public class LI_931_Median_Of_K_Sorted_Arrays {
         return end;
     }
 
+    /**
+     * Iterator through 2D arrays, find total number of elements that
+     * are greater than or equal to given "val"
+     *
+     * Time : O(klogn), k - number of 1D arrays, n - average size of 1D arrays
+     */
     private int getGECount(int[][] nums, int val) {
         int sum = 0;
         for (int[] num : nums) {
@@ -78,12 +91,22 @@ public class LI_931_Median_Of_K_Sorted_Arrays {
         return sum;
     }
 
-    // !!! get how many numbers greater than or equal to val in an array
+    /**
+     * !!!
+     * get how many numbers greater than or equal to val in an 1D array
+     * Another binary search
+     *
+     * Time : O(logn)
+     */
     private int getCount(int[] num, int val) {
         if (num == null || num.length == 0) return 0;
 
         int start = 0, end = num.length - 1;
-        // find first element >= val
+
+        /**
+         * Binary Search :
+         * find the index of the first element >= val
+         */
         while (start + 1 < end) {
             int mid = (end - start) / 2 + start;
             if (num[mid] >= val) {
@@ -93,6 +116,11 @@ public class LI_931_Median_Of_K_Sorted_Arrays {
             }
         }
 
+        /**
+         * return value is the number of elements that
+         * greater than or equal to val. So that's why
+         * we return "num.length - start" or "num.length - end"
+         */
         if (num[start] >= val) {
             return num.length - start;
         }

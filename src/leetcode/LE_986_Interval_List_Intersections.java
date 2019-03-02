@@ -29,6 +29,8 @@ public class LE_986_Interval_List_Intersections {
      * 0 <= A[i].start, A[i].end, B[i].start, B[i].end < 10^9
      *
      * Medium
+     *
+     * Same as LI_821_Time_Intersection ??
      */
 
     /**

@@ -36,7 +36,8 @@ public class LE_295_Find_Median_From_Data_Stream {
      * Solution 1 : instead of make min heap and max heap, use min heap by default and use the trick that make element negative when adding to small
      * heap to achieve the same result of a max heap.
      *
-     * O(logn)
+     * Time  : O(logn)
+     * Space : O(n)
      */
     class MedianFinder1 {
         /**
@@ -133,6 +134,8 @@ public class LE_295_Find_Median_From_Data_Stream {
              * "small = new PriorityQueue<>((a, b) -> b - a);"
              * since we use Long in heap, this line won't work, because the comparator still takes Integer,
              * so the compiler is confused and return error. If we use Integer for heap, it works.
+             *
+             * Must use "(a, b) -> Long.compare(b, a)"
              * **/
             small = new PriorityQueue<>((a, b) -> Long.compare(b, a));
             large = new PriorityQueue<>();

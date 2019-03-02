@@ -369,22 +369,36 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
                 int m = l + (r - l) / 2;
 
                 /**
-                 * !!1
-                 * nums1[m], 可见m是下标，不是元素个数。
                  *
-                 * m1 elements from nums1 and m2 elements from nums2, m1 + m2 = k
+                 * #1.Merged View :
+                 *   k = (n1 + n2 + 1) / 2
+                 *
+                 *   if (n1 + n2) is even, median is (C[k - 1] + C[k]) / 2
+                 *   C[0]..........., | C[k - 1], C[k], | .......C[n1 + n2 -1]
+                 *
+                 *   if (n1 + n2) is odd, median is C[k])
+                 *   C[0]...........C[k - 1], | C[k], |   .......C[n1 + n2 -1]
                  *
                  *
-                 * nums1 : A[0]......,A[m1 - 1],  | A[m1] <= m1 is the value we do binary search on (m)
-                 * nums2 : B[0].......B[m2 - 1],  | B[m2]
+                 * #2.Assume, we get m1 elements from nums1 and m2 elements from nums2
+                 *    And : m1 + m2 = k
                  *
-                 * A[m1] > B[m2 - 1]
-                 * A[m1 - 1] < B[m2]
+                 *   nums1 : A[0]......,A[m1 - 1],  | A[m1], ... <=== m1 (元素个数）is the value we do binary search on (m)
+                 *   nums2 : B[0].......B[m2 - 1],  | B[m2], ...
                  *
-                 * Left median : max(A[m1 - 1], B[m2 - 1])
-                 * right median : min(A[m1], B[m2])
+                 *   Then, median must be from : A[m1 - 1], A[m1], B[m2 - 1], B[m2]
                  *
-                 * so here m is m1, m2 = k - m1 = k - m, so m2 - 1 = k - m - 1
+                 * #3.Binary Search for m1 so that :
+                 *    A[m1] > B[m2 - 1]
+                 *    A[m1 - 1] < B[m2]
+                 *
+                 * #4.If n1 + n2 is even :
+                 *    Left median (C[k - 1]): max(A[m1 - 1], B[m2 - 1])
+                 *    Right median (C[k]): min(A[m1], B[m2])
+                 *
+                 *    Median = (C[k - 1] + C[k]) / 2
+                 *
+                 *    so here m is m1, m2 = k - m1 = k - m, so m2 - 1 = k - m - 1
                  */
                 if (nums1[m] < nums2[k - m - 1]) {
                     l = m + 1;
@@ -401,7 +415,7 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
             int m2 = k - m1;
 
             /**!!!
-             * It "nums1" and "nums1", NOT "nums"
+             * It's "nums1" and "nums2", NOT "nums"
              */
             int c1 = Math.max (m1 <= 0 ? Integer.MIN_VALUE : nums1[m1 - 1],
                                m2 <= 0 ? Integer.MIN_VALUE : nums2[m2 - 1]);

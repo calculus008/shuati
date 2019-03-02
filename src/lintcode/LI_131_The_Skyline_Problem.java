@@ -80,6 +80,7 @@ public class LI_131_The_Skyline_Problem {
                 }
             }
 
+            //convert to return type List<List<Integer>>
             int start = 0, height = 0;
             for (int i = 0; i < points.size(); i++) {
                 int[] cur = points.get(i);

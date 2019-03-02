@@ -137,7 +137,7 @@ public class LE_407_Trapping_Rain_Water_II {
                      * Must be "cur.val", because the logic to add new Element above does not
                      * use the value of heights[nx][ny], it is the max between cur.val and
                      * heights[nx][ny], so amount of water is difference between the value of
-                     * the Element that is just poped off pq and the value of the new location.
+                     * the Element that is just popped off pq and the value of the new location.
                      *
                      * Here, what we calculate is the amount of water that heights[nx][ny] can
                      * hold.

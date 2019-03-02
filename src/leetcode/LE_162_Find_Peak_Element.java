@@ -39,15 +39,15 @@ public class LE_162_Find_Peak_Element {
     /**
      Key insights
      1.Find mid, 4 possible cases for relationship between mid and its left and right neighbors.
-         1. \
+         1. \          11 10 9
             \
 
-         2.  /\
+         2.  /\        9 10 8
 
-         3.  /
+         3.  /         8 9 10
             /
 
-         4. \/
+         4. \/         9 8 10
 
      2.For input, it increases at the beginning and decreases at the end.
      */

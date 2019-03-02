@@ -6,7 +6,9 @@ package leetcode;
 public class LE_318_Maximum_Product_Of_Word_Lengths {
     /**
          Given a string array words, find the maximum value of length(word[i]) * length(word[j])
-         where the two words do not share common letters. You may assume that each word will contain only lower case letters.
+         where the two words do not share common letters. You may assume that each word will
+         contain only lower case letters.
+
          If no such two words exist, return 0.
 
          Example 1:
@@ -40,12 +42,22 @@ public class LE_318_Maximum_Product_Of_Word_Lengths {
 
         for (int i = 0; i < words.length; i++) {
             for (int j = 0; j < words[i].length(); j++) {
+                /**
+                 * "the two words do not share common letters" :
+                 * Since all letters are lower cases, so we
+                 * can use a 32 bit integer to represent a word
+                 * (what letters have been used)
+                 */
                 bytes[i] |= 1 << (words[i].charAt(j) - 'a');
             }
         }
 
         for (int i = 0; i < bytes.length; i++) {
             for (int j = i + 1; j < bytes.length; j++) {
+                /**
+                 * "bytes[i] & bytes[j]) == 0" :
+                 * No common letter shared between words[i] and words[j]
+                 */
                 if ((bytes[i] & bytes[j]) == 0) {
                     int prod = words[i].length() * words[j].length();
                     res = Math.max(prod, res);

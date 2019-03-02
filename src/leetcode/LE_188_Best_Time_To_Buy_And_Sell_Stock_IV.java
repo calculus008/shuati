@@ -21,7 +21,7 @@ public class LE_188_Best_Time_To_Buy_And_Sell_Stock_IV {
 
         //dp[i][j] : max gain for j days and at most i actions
         int[][] dp = new int[k + 1][len];
-        for (int i = 1; i <=k; i++) {
+        for (int i = 1; i <= k; i++) {
             int tempMax = -prices[0]; //at index 0,must be a buy action, so the gain is negative
             for (int j = 1; j < len; j++) {
                 dp[i][j] = Math.max(dp[i][j - 1], prices[j] + tempMax);
@@ -64,14 +64,15 @@ public class LE_188_Best_Time_To_Buy_And_Sell_Stock_IV {
      */
 
     public int maxProfit2(int K, int[] prices) {
-        // write your code here
         if (K == 0 || prices.length == 0){
             return 0;
         }
-        // this is necessary to pass test case35%.
-        // the maximum number of transactions would be # of days / 2
-        // if k >= upper limit, this is the same situation as unlimited transaction.
-        // so apply Greedy Choice Property and you don't need to go through the dp.
+        /**
+             this is necessary to pass test case35%.
+             the maximum number of transactions would be # of days / 2
+             if k >= upper limit, this is the same situation as unlimited transaction.
+             so apply Greedy Choice Property and you don't need to go through the dp.
+         */
         int profit = 0;
         if(K >= prices.length / 2) {
             for (int i = 1; i < prices.length; i++) {
@@ -81,8 +82,13 @@ public class LE_188_Best_Time_To_Buy_And_Sell_Stock_IV {
             }
             return profit;
         }
-        /*
-        mod by 2 for space optimization
+        /**
+          mod by 2 for space optimization
+          dp[j][i] : max profit in the first i days with number of transactions of j.
+
+          Transition :
+          For a ith day, we can do transaction or not do any transaction
+          dp[j][i] = max(dp[j - 1][i] , max(dp[j - 1][m] + prices[i] - prices[m]))
         */
         int[][] dp = new int[2][prices.length + 1];
         for (int j = 1; j <= K; j++){
@@ -94,5 +100,47 @@ public class LE_188_Best_Time_To_Buy_And_Sell_Stock_IV {
             }
         }
         return dp[K % 2][prices.length];
+    }
+
+    /**
+     * 同样的DP, leetcode 里的解释 ：
+     * https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/135704/Detail-explanation-of-DP-solution
+     */
+    class Solution_Practice {
+        public int maxProfit(int k, int[] prices) {
+            if (null == prices || k == 0) {
+                return 0;
+            }
+
+            int res = 0;
+            int n = prices.length;
+            if (k > n / 2) {
+                for (int i = 1; i < n; i++) {
+                    if (prices[i] > prices[i - 1]) {
+                        res += prices[i] - prices[i - 1];
+                    }
+                }
+                return res;
+            }
+
+            int[][] dp = new int[k + 1][n];
+
+            /**
+             dp[i][j] = max(dp[i][j - 1], dp[i - 1][m] + prices[j] - prices[m]) (m < j)
+
+             To make max of : dp[i - 1][m] + prices[j] - prices[m] = dp[i - 1][m] - prices[m] + prices[j]
+             = tempMax + prices[j]
+             */
+            for (int i = 1; i <= k; i++) {
+                int tempMax = -prices[0];
+
+                for (int j = 1; j < n; j++) {
+                    dp[i][j] = Math.max(dp[i][j - 1], tempMax + prices[j]);
+                    tempMax = Math.max(tempMax, dp[i - 1][j] - prices[j]);
+                }
+            }
+
+            return dp[k][n - 1];
+        }
     }
 }

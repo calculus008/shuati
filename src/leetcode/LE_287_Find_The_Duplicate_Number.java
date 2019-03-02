@@ -22,7 +22,9 @@ public class LE_287_Find_The_Duplicate_Number {
 
     //Important
 
-    //This one works, but it needs Space O(n).So it does not meet the requirement
+    /**
+     * This one works, but it needs Space O(n).So it does not meet the requirement for space O(n)
+     **/
     public int findDuplicate1(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
 
@@ -139,6 +141,10 @@ public class LE_287_Find_The_Duplicate_Number {
      *
      */
     public int findDuplicate(int[] nums) {
+        /**
+         * !!!
+         * l = 1, earch range 1 ~ n
+         */
         int l = 1;
         int r = nums.length - 1;  // n
 

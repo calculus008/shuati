@@ -46,9 +46,22 @@ public class LE_218_The_Sky_Line_Problem {
         扫描线(Line Sweep)
         关键的规律 ：
         按x坐标扫描，在x1, 碰到正方形的起始边，如果该边的高度h是到现在遇到的边中最高的，那它是一个key point,加入 k[x1, h].
-                   在x2, 碰到正方形的终结边，要看第二高的边。
+                    在x2, 碰到正方形的终结边，要看第二高的边。
         https://www.youtube.com/watch?v=7AE-VCGEhtI
-   */
+
+        http://zxi.mytechroad.com/blog/tree/leetcode-218-the-skyline-problem/
+
+        1.Sorting by x, then special cases :
+          when x values are equal - if entering : sort by height in reverse order
+                                    if leaving  : sort by height
+          Therefore, for entering point, use -h as value.
+
+        2.Line sweep : all points sorted in a list. This is the data structure we will
+                       operate on. PriorityQueue is just the tools to help us maintain
+                       the current max height. Simple logic - add -h to pq when entering,
+                                                            - remove h when leaving
+        3.Line sweep : get cur max from pq, compare with pre, add to res if they are not equal.
+     */
 
     /**
      * Solution 1 : Heap, Time : O(n ^ 2), Space : O(n)
@@ -58,6 +71,7 @@ public class LE_218_The_Sky_Line_Problem {
      * it takes o(logn). Just need to understand its mechanism. A reference implementation
      * from JiuZhang:
      * https://github.com/awangdev/LintCode/blob/master/Java/HashHeap.java
+     *
      **/
     public List<int[]> getSkyline1(int[][] buildings) {
         List<int[]> res = new ArrayList<>();

@@ -215,15 +215,9 @@ public class LE_311_Sparse_Matrix_Multiplication {
         }
     }
 
-    // 方法四
+    // 方法四 : Best Solution
     public class Solution4 {
-        /**
-         * @param A: a sparse matrix
-         * @param B: a sparse matrix
-         * @return: the result of A * B
-         */
         public int[][] multiply(int[][] A, int[][] B) {
-            // write your code here
             // A(n, t) * B(t, m) = C(n, m)
             int n = A.length;
             int t = A[0].length;

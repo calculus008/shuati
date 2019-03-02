@@ -32,7 +32,7 @@ public class LI_77_Longest_Common_Subsequence {
      * DP
      * Time and Space : O(m * n)
      *
-     • state: f[i][j]表示前i个字符配上前j个字符的LCS的长度
+     • state: f[i][j]表示A前i个字符配上B前j个字符的LCS的长度
      • function: f[i][j] = f[i-1][j-1] + 1           // A[i - 1] == B[j - 1]
      •                   = MAX(f[i-1][j], f[i][j-1]) // A[i - 1] != B[j - 1]
      • intialize: f[i][0] = 0 f[0][j] = 0
@@ -71,7 +71,7 @@ public class LI_77_Longest_Common_Subsequence {
 
         int m = A.length();
         int n = B.length();
-        int[][] memo = new int[m+1][n+1];
+        int[][] memo = new int[m + 1][n + 1];
         for (int i = 0; i <= m; i++) {
             Arrays.fill(memo[i], -1);
         }
@@ -88,10 +88,10 @@ public class LI_77_Longest_Common_Subsequence {
 
         if (m == 0 || n == 0) {
             result = 0;
-        } else if (A.charAt(m-1) == B.charAt(n-1)) {
-            result = dfs(A, B, memo, m-1, n-1) + 1;
+        } else if (A.charAt(m - 1) == B.charAt(n - 1)) {
+            result = dfs(A, B, memo, m - 1, n - 1) + 1;
         } else {
-            result = Math.max(dfs(A, B, memo, m, n-1), dfs(A, B, memo, m-1, n));
+            result = Math.max(dfs(A, B, memo, m, n - 1), dfs(A, B, memo, m - 1, n));
         }
         memo[m][n] = result;
         return result;

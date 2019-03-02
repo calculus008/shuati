@@ -161,7 +161,8 @@ C.BST
 LE_230_Kth_Smallest_Element_In_BST           (lint 902)   (**)
 LE_98_Validate_BST                           (lint 95)
 LE_173_Binary_Search_Tree_Iterator           (lint 86)
-LE_272_Closest_BST_Value_II                  (lint 901)    (****) revisit
+LE_272_Closest_BST_Value_II                  (lint 901)    (****) revisit (LINKEDIN)
+LE_510_Inorder_Successor_In_BST_II
 
 Optional
 LE_94_Binary_Tree_Inorder_Traversal          (lint 67)
@@ -289,6 +290,7 @@ LI_209_First_Unique_Character_In_A_String
 LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
 LE_676_Implement_Magic_Dictionary
+LE_716_Max_Stack                                          (Solution 2, DDL + TreeMap)
 
 #Sliding Window
 LE_03_Longest_Substring_Without_Repeating_Characters      (**)
@@ -302,6 +304,7 @@ LE_480_Sliding_Window_Median                              (lint 360)   (***) Rev
 LE_346_Moving_Average_From_Data_Stream
 LE_438_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
+LE_643_Maximum_Average_Subarray_I
 
 ====================================================
 
@@ -318,13 +321,16 @@ Interval problems : merge/insert
 #3.Add the global/last one.
 
 
-#Merge
+#Merge and Intervals
 LI_839_Merge_Two_Sorted_Interval_Lists
 LE_88_Merge_Sorted_Array                                  (lint 64)
 LI_486_Merge_K_Sorted_Arrays
 LE_21_Merge_Two_Sorted_Lists                              (lint 165)
 LE_23_Merge_k_Sorted_Lists                                (lint 104)
 LE_986_Interval_List_Intersections
+LE_252_Meeting_Rooms                                      (lint 920)
+LE_253_Meeting_Rooms_II                                   (lint 919)
+LI_391_Number_Of_Airplanes_In_The_Sky
 
 #Intersection
 LE_349_Intersection_Of_Two_Arrays                         (lint 547)
@@ -333,19 +339,21 @@ LI_793_Intersection_Of_Arrays
 
 #Subarray
 LI_138_Subarray_Sum
-LI_404_Subarray_Sum_II                                      *
-LI_139_Subarray_Sum_Closest                                 *
-LE_325_Maximum_Size_Subarray_Sum_Equals_k
+LI_404_Subarray_Sum_II                                      (**)    revisit
+LI_139_Subarray_Sum_Closest                                 (***)   revisit
+LE_325_Maximum_Size_Subarray_Sum_Equals_k                   (***)   revisit
 LE_53_Maximum_Subarray                                    (lint 41)
-LI_42_Maximum_Subarray_II                                   *
-LI_43_Maximum_Subarray_III                                  ***
-LI_620_Maximum_Subarray_IV                                  *
-LI_45_Maximum_Subarray_Difference                           *
+LI_42_Maximum_Subarray_II                                   (***)
+LI_43_Maximum_Subarray_III                                  (***)   DP
+LI_620_Maximum_Subarray_IV                                  (***)
+LI_45_Maximum_Subarray_Difference                           (***)
 LE_643_Maximum_Average_Subarray_I                         (lint 868)
-LE_644_Maximum_Average_Subarray_II                        (lint 617)
+LE_644_Maximum_Average_Subarray_II                        (lint 617)  求AVERAGE  (***) Revisit
 LE_318_Maximum_Product_Of_Word_Lengths
 LE_152_Maximum_Product_Subarray                           (lint 191)
 
+
+#https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems
 LE_121_Best_Time_To_Buy_And_Sell_Stock                    (lint 149)
 LE_122_Best_Time_To_Buy_And_Sell_Stock_II                 (lint 150)
 LE_123_Best_Time_To_Buy_And_Sell_Stock_III                (lint 151)
@@ -356,11 +364,11 @@ LE_714_Best_Time_To_Buy_And_Sell_Stock_With_Transaction_Fee  (lint 1000)
 #Submatrix
 LI_944_Maximum_Submatrix
 LI_405_Submatrix_Sum
-LE_311_Sparse_Matrix_Multiplication                       (lint 654)
+LE_311_Sparse_Matrix_Multiplication                       (lint 654)   (***) Revisit
 
 #Median
-LE_04_Median_Of_Two_Sorted_Arrays                         (lint 65)
-LI_931_Median_Of_K_Sorted_Arrays
+LE_04_Median_Of_Two_Sorted_Arrays                         (lint 65)    （***）Revisit
+LI_931_Median_Of_K_Sorted_Arrays                                       （***）Revisit
 
 
 #Binary Indexed Tree
@@ -379,11 +387,11 @@ Advanced Algorithm
 1.Follow Up Questions
 
 #Kth Largest/Smallest
-LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix            (lint 401)
-LE_373_Find_K_Pairs_With_Smallest_Sums                    (lint 465)
-LI_543_Kth_Largest_In_N_Arrays
-LI_461_Kth_Smallest_Number
-LI_005_Kth_Largest_Number
+LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix            (lint 401)    (***) Revisit
+LE_373_Find_K_Pairs_With_Smallest_Sums                    (lint 465)    (***) Revisit
+LI_543_Kth_Largest_In_N_Arrays                                          (***)
+LI_461_Kth_Smallest_Number                                Quick Select  (***)
+LI_005_Kth_Largest_Number                                 Quick Select  (***)
 
 #Sliding Window
 LI_406_Minimum_Size_Subarray_Sum
@@ -391,8 +399,8 @@ LE_209_Minimum_Size_Subarray_Sum
 LE_03_Longest_Substring_Without_Repeating_Characters      (lint 384)
 LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars    (lint 386)
 LE_76_Minimum_Window_Substring                            (lint 32)
-LE_611_Valid_Triangle_Number                              (lint 382) ***
-LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
+LE_611_Valid_Triangle_Number                              (lint 382)     (****)
+LI_609_Two_Sum_Less_Than_Or_Equal_To_Target                              (****)
 
 #Matrix, DFS
 LI_778_Pacific_Atlantic_Water_Flow
@@ -442,7 +450,7 @@ LE_720_Longest_Word_In_Dictionary
 LE_42_Trapping_Rain_Water                                 (lint 363)   (***) It's two pointers problem, can also use Stack
 LE_407_Trapping_Rain_Water_II                             (lint 364)   (***) 2D  Heap
 LE_295_Find_Median_From_Data_Stream                       (lint 81)
-LE_239_Sliding_Window_Maximum                             (lint 362)
+LE_239_Sliding_Window_Maximum                             (lint 362)   (***)
 LE_480_Sliding_Window_Median                              (lint 360)   (***) Revisit
 
 #Stack
@@ -450,6 +458,7 @@ LI_126_Max_Tree                                                        mono stac
 LE_84_Largest_Rectangle_In_Histogram                      (lint 122)
 LE_85_Max_Rectangle                                       (lint 510)   (***)
 LE_155_Min_Stack                                          (lint 12)
+LE_716_Max_Stack
 LE_394_Decode_String                                      (lint 575)
 LE_224_Basic_Calculator                                   (lint 978)
 LE_227_Basic_Calculator_II                                (lint 980)
@@ -462,27 +471,27 @@ LE_150_Evaluate_Reverse_Polish_Notation
 4.Sweep Line and Binary Search
 #Binary Search
 LE_162_Find_Peak_Element                                  (lint 75)
-LI_390_Find_Peak_Element_II
+LI_390_Find_Peak_Element_II                                                ??
 LI_183_Wood_Cut                                                        *
 LI_437_Copy_Books                                                      **
-LI_438_Copy_Books_II                                                   **
+LI_438_Copy_Books_II                                                   **  ??
 LE_643_Maximum_Average_Subarray_I                         (lint 868)
-LE_644_Maximum_Average_Subarray_II                        (lint 617)   **
+LE_644_Maximum_Average_Subarray_II                        (lint 617)   (***) revisit
 LE_69_Sqrt
 LI_586_Sqrtx_II
 LE_367_Valid_Perfect_Square
 LE_29_Divide_Two_Integers                                 (lint 414)
 LE_278_First_Bad_Version                                  (lint 74)
-LE_287_Find_The_Duplicate_Number                          (lint 633)   ***
-LE_302_Smallest_Rectangle_Enclosing_Black_Pixels          (lint 600)   ***
-LE_719_Find_Kth_Smallest_Pair_Distance
+LE_287_Find_The_Duplicate_Number                          (lint 633)   (***)
+LE_302_Smallest_Rectangle_Enclosing_Black_Pixels          (lint 600)   (***)
+LE_719_Find_Kth_Smallest_Pair_Distance                                 (***)
 
-#Line Sweep
+#Line Sweep                                               (***)
 LE_252_Meeting_Rooms                                      (lint 920)
-LE_253_Meeting_Rooms_II                                   (lint 919)
+LE_253_Meeting_Rooms_II                                   (lint 919)   (***) revisit
 LI_391_Number_Of_Airplanes_In_The_Sky
 LI_821_Time_Intersection
-LE_218_The_Sky_Line_Problem
+LE_218_The_Sky_Line_Problem                               (*****)   Revisit
 LI_131_The_Skyline_Problem
 
 ====================================================
@@ -534,7 +543,8 @@ LI_435_Post_Office_Problem                                             ***
 LE_72_Edit_Distance                                      （lint 119)
 LI_623_K_Edit_Distance
 LI_581_Longest_Repeating_Subsequence
-LI_77_Longest_Common_Subsequence
+LI_77_Longest_Common_Subsequence                          (***)
+LE_583_Delete_Operation_For_Two_Strings                   (***) use LCS
 LI_79_Longest_Common_Substring
 LE_115_Distinct_Subsequences                              (lint 118)   ***
 LE_97_Interleaving_String                                 (lint 29)    ***

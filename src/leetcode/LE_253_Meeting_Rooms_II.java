@@ -100,6 +100,13 @@ public class LE_253_Meeting_Rooms_II {
      *
      * Line Sweep
      *
+     * Move line, for a given moment, count how many meetings are running in parallel?
+     * Main the MAX count value, then it is the answer.
+     *
+     * In order to do it, need to map all start/end points on a single timeline,
+     * hence we need Pair Class to represent time and type of events (start or end),
+     * then sort.
+     *
      * Time  : O(nlogn)
      * Space : O(n)
      */
@@ -126,6 +133,10 @@ public class LE_253_Meeting_Rooms_II {
             Collections.sort(pairs, (a, b) -> {
                 int comp = 0;
                 if (a.x == b.x) {
+                    /**
+                     * !!!
+                     * if time is the same, end point is ahead of start point
+                     */
                     comp = Integer.compare(a.flag, b.flag);
                 } else {
                     comp = Integer.compare(a.x, b.x);

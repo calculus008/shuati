@@ -41,6 +41,20 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
      * Exact same as Solution 1 in LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
      * K-way merge sort
      *
+     * val(i, j) = nums1[i] + nums2[j]
+     * There will be m * n vals which form a arrays of sorted arrays (matrix),
+     * just like in LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
+     *
+     * For example :
+     * nums1 = [1,7,11], nums2 = [2,4,6],
+     *
+     * Matrix formed:
+     * [
+     *  [1 + 2, 7 + 2, 11 + 2],
+     *  [1 + 4, 7 + 4, 11 + 4],
+     *  [1 + 6, 7 + 6, 11 + 6]
+     * ]
+     *
      * Time  : O((n + k)logk)
      * Space : O(n))
      */
