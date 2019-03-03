@@ -10,7 +10,8 @@ import java.util.List;
 public class LE_244_Shortest_Word_Distance_II {
     /**
         This is a follow up of Shortest Word Distance (LE_243)
-        The only difference is now you are given the list of words and your method will be called repeatedly many times with different parameters.
+        The only difference is now you are given the list of words
+        and your method will be called repeatedly many times with different parameters.
         How would you optimize it?
 
         Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and

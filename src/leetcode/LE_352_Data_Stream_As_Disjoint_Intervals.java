@@ -21,9 +21,17 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
          [1, 3], [6, 7]
 
          Follow up:
-         What if there are lots of merges and the number of disjoint intervals are small compared to the data stream's size?
+         What if there are lots of merges and the number of disjoint intervals are small
+         compared to the data stream's size?
 
          Hard
+
+
+         Possible variation?
+         "给一个Interval class:
+         class Interval {int start, int end}
+         让我写两个function: add(int start, int end) : 建立一个新的interval类，然后存到自己定义的数据结构上，下面那个function会用到
+         get_totoal(int start, int end):  给出start,和 end之间的所有inerval覆盖的长度 （重复覆盖的部分只能算一次）"
      */
 
     class SummaryRanges {

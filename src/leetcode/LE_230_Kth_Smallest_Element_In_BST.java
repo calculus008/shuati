@@ -12,7 +12,7 @@ import java.util.Stack;
  */
 public class LE_230_Kth_Smallest_Element_In_BST {
     /**
-        Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+        Given a binary search tree, write a function kth Smallest to find the kth smallest element in it.
 
         Note:
         You may assume k is always valid, 1 ≤ k ≤ BST's total elements.
