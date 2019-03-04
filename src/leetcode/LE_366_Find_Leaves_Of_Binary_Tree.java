@@ -2,10 +2,7 @@ package leetcode;
 
 import common.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yuank on 7/28/18.
@@ -140,4 +137,112 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
         }
     }
 
+    class Solution_Practice {
+        public List<List<Integer>> findLeaves(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+
+            helper(root, res);
+            return res;
+        }
+
+        /**
+         * 这个helper()实际上就是用来找tree的。
+         */
+        private int helper(TreeNode root, List<List<Integer>> res) {
+            if (root == null) {
+                return -1;//!!!
+            }
+
+            int left = helper(root.left, res);
+            int right = helper(root.right, res);
+
+            int level = Math.max(left, right) + 1;
+
+            if (res.size() == level) {
+                res.add(new ArrayList<>());
+            }
+            res.get(level).add(root.val);
+
+            return level;
+        }
+    }
+
+    /**
+     * 变形题，把Tree变成Graph, 求同样的叶子借天输出。
+     * 可以用以下Graph 里DFS function.
+     *
+     * https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+     *
+     * http://www.algolist.net/Algorithms/Graph/Undirected/Depth-first_search
+     */
+    class Graph {
+        private int V;   // No. of vertices
+
+        // Array  of lists for Adjacency List Representation
+        private LinkedList<Integer> adj[];
+
+        // Constructor
+        Graph(int v)
+        {
+            V = v;
+            adj = new LinkedList[v];
+            for (int i=0; i<v; ++i) {
+                adj[i] = new LinkedList();
+            }
+        }
+
+        //Function to add an edge into the graph
+        void addEdge(int v, int w)
+        {
+            adj[v].add(w);  // Add w to v's list.
+        }
+
+        // A function used by DFS
+        void DFSUtil(int v,boolean visited[])
+        {
+            // Mark the current node as visited and print it
+            visited[v] = true;
+            System.out.print(v+" ");
+
+            // Recur for all the vertices adjacent to this vertex
+            Iterator<Integer> i = adj[v].listIterator();
+            while (i.hasNext())
+            {
+                int n = i.next();
+                if (!visited[n])
+                    DFSUtil(n, visited);
+            }
+        }
+
+        // The function to do DFS traversal. It uses recursive DFSUtil()
+        void DFS(int v)
+        {
+            // Mark all the vertices as not visited(set as
+            // false by default in java)
+            boolean visited[] = new boolean[V];
+
+            // Call the recursive helper function to print DFS traversal
+            DFSUtil(v, visited);
+        }
+
+//        public static void main(String args[])
+//        {
+//            Graph g = new Graph(4);
+//
+//            g.addEdge(0, 1);
+//            g.addEdge(0, 2);
+//            g.addEdge(1, 2);
+//            g.addEdge(2, 0);
+//            g.addEdge(2, 3);
+//            g.addEdge(3, 3);
+//
+//            System.out.println("Following is Depth First Traversal "+
+//                    "(starting from vertex 2)");
+//
+//            g.DFS(2);
+//        }
+    }
 }
