@@ -121,14 +121,25 @@ public class LE_76_Minimum_Window_Substring
                     minLen = i - j + 1;
                 }
 
+                /**
+                 * !!!
+                 * count[s[j]], not count[j]
+                 */
                 count[s[j]]++;
                 if (count[s[j]] > 0) {
                     total++;
                 }
-                j++;//!!!
+
+                /**
+                 * !!!
+                 * !!!
+                 * !!!
+                 */
+                j++;
             }
         }
 
+        //!!!"start + minLen"
         return minLen == Integer.MAX_VALUE ? "" : source.substring(start, start + minLen);
     }
 }

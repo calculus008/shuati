@@ -17,24 +17,24 @@ public class LE_198_House_Robber {
 
     //Solution 1: DP
     public int rob1(int[] nums) {
-        if(null == nums || nums.length==0) {
+        if (null == nums || nums.length == 0) {
             return 0;
         }
 
         int len = nums.length;
         int[] dp = new int[len];
 
-        for(int i=0; i<len; i++) {
-            dp[i] = Math.max(i<2 ? nums[i] : nums[i] + dp[i-2],
-                    i<1 ? 0 : dp[i-1]);
+        for (int i = 0; i < len; i++) {
+            dp[i] = Math.max(i < 2 ? nums[i] : nums[i] + dp[i - 2],
+                    i < 1 ? 0 : dp[i - 1]);
         }
 
-        return dp[len-1];
+        return dp[len - 1];
     }
 
     //Solution 2: DP with optimization on space
     public int rob2(int[] nums) {
-        if(null == nums || nums.length==0) {
+        if (null == nums || nums.length == 0) {
             return 0;
         }
 
@@ -46,9 +46,9 @@ public class LE_198_House_Robber {
         int dp1 = 0;
         int dp2 = 0;
 
-        for(int i=0; i<len; i++) {
-            int dp = Math.max(i<2 ? nums[i] : nums[i] + dp1,
-                    i<1 ? 0 : dp2);
+        for (int i = 0; i < len; i++) {
+            int dp = Math.max(i < 2 ? nums[i] : nums[i] + dp1,
+                    i < 1 ? 0 : dp2);
             dp1 = dp2;
             dp2 = dp;
         }
@@ -109,16 +109,16 @@ public class LE_198_House_Robber {
     public long houseRobber2(int[] A) {
         // write your code here
         int n = A.length;
-        if(n == 0)
+        if (n == 0)
             return 0;
-        long []res = new long[2];
+        long[] res = new long[2];
 
 
         res[0] = 0;
         res[1] = A[0];
-        for(int i = 2; i <= n; i++) {
-            res[i%2] = Math.max(res[(i-1)%2], res[(i-2)%2] + A[i-1]);
+        for (int i = 2; i <= n; i++) {
+            res[i % 2] = Math.max(res[(i - 1) % 2], res[(i - 2) % 2] + A[i - 1]);
         }
-        return res[n%2];
+        return res[n % 2];
     }
 }

@@ -153,6 +153,9 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
      * Same as Solution2 in LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
      * Time  : O(klogk)
      * Space : O(k + mn)
+     *
+     * 适用于follow up：
+     * 假设是两个超大的sorted stream.
      */
     public class Solution3 {
 

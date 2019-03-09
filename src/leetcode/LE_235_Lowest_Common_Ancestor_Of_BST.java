@@ -24,6 +24,11 @@ public class LE_235_Lowest_Common_Ancestor_Of_BST {
         since a node can be a descendant of itself according to the LCA definition.
      */
 
+    /**
+     * Time  : O(n)
+     * Space : O(n) : This is because the maximum amount of space utilized by the recursion stack would be
+     *                N since the height of a skewed BST could be N.
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) return root;//!!! return root
 
@@ -36,5 +41,33 @@ public class LE_235_Lowest_Common_Ancestor_Of_BST {
         }
 
         return root;
+    }
+
+    /**
+     * Iterative
+     * Time : O(n)
+     * Space : O(1), constant space
+     */
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        int pVal = p.val;
+        int qVal = q.val;
+
+        // Start from the root node of the tree
+        TreeNode node = root;
+
+        // Traverse the tree
+        while (node != null) {
+            int parentVal = node.val;
+
+            if (pVal > parentVal && qVal > parentVal) {
+                node = node.right;
+            } else if (pVal < parentVal && qVal < parentVal) {
+                node = node.left;
+            } else {
+                return node;
+            }
+        }
+
+        return null;//!!!
     }
 }

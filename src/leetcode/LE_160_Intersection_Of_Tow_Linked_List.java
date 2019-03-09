@@ -72,7 +72,8 @@ public class LE_160_Intersection_Of_Tow_Linked_List {
      * Solution 2
      *
      * 1.Intersection exists
-     *   For each list, when come to the end, go to the head of the other list (create a circle of length m + n if intersection exists)
+     *   For each list, when come to the end, go to the head of the other list
+     *   (create a circle of length m + n if intersection exists)
      *
      *     ____________________
      *    |                    |

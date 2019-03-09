@@ -65,7 +65,13 @@ public class LE_516_Longest_Palindromic_Subsequence {
             int[][] dp = new int[len][len];
 
             for (int l = 1; l <= len; l++) {
-                for (int i = 0; i <= len - l; i++) {
+                /**
+                 * The only difference from Solution 2 is here :
+                 * "i + 1 <= len", it looks the same, but it allows case like
+                 * s = "a" to pass without first init dp[i][i] in a separate
+                 * loop.
+                 */
+                for (int i = 0; i + 1 <= len; i++) {
                     int j = i + l - 1;
 
                     // System.out.println("i="+i+",j="+j);
@@ -129,7 +135,7 @@ public class LE_516_Longest_Palindromic_Subsequence {
             int[] dp2 = new int[len];// length of l - 2, dp2[i] - result for substring starting at i and length is l - 2
 
             for (int l = 1; l <= len; l++) {
-                for (int i = 0; i <= len - l; i++) {
+                for (int i = 0; i + l <= len; i++) {
                     int j = i + l - 1;
                     if (i == j) {
                         dp0[i] = 1;
@@ -149,6 +155,39 @@ public class LE_516_Longest_Palindromic_Subsequence {
             }
 
             return dp1[0];
+        }
+
+        class Solution_Practice {
+            public int longestPalindromeSubseq(String s) {
+                if (null == s || s.length() == 0) {
+                    return 0;
+                }
+
+                int n = s.length();
+                int[][] dp = new int[n][n];
+                for (int i = 0; i < n; i++) {
+                    dp[i][i] = 1;
+                }
+
+                char[] t = s.toCharArray();
+                for (int l = 1; l <= n; l++) {
+                    for (int i = 0; i + l < n; i++) {
+                        int j = i + l;
+
+                        if (i == j) {
+                            continue;
+                        }
+
+                        if (t[i] == t[j]) {
+                            dp[i][j] = 2 + dp[i + 1][j - 1];
+                        } else {
+                            dp[i][j] = Math.max(dp[i][j - 1], dp[i + 1][j]);
+                        }
+                    }
+                }
+
+                return dp[0][n - 1];
+            }
         }
     }
 }

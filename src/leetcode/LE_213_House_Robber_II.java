@@ -19,7 +19,7 @@ public class LE_213_House_Robber_II {
      */
 
     /**
-     * rob 0, not rob n-1 || rob 0,not rob n-1      ==>rob(0, nums.length-2, nums)
+     * rob 0, not rob n-1 || rob 0, not rob n-1      ==>rob(0, nums.length-2, nums)
      * not rob 0, rob n-1 || not rob 0,not rob n-1  ==>rob(1, nums.length-1, nums)
      */
     public int rob(int[] nums) {
@@ -43,8 +43,8 @@ public class LE_213_House_Robber_II {
         int dp2 = 0;
 
         for (int i = lo; i <= hi; i++) {
-            int dp = Math.max((i<2 ? 0 : dp1) + nums[i],
-                    i<1 ? 0 : dp2);
+            int dp = Math.max((i < 2 ? 0 : dp1) + nums[i],
+                    i < 1 ? 0 : dp2);
             dp1 = dp2;
             dp2 = dp;
         }

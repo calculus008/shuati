@@ -179,6 +179,7 @@ public class LE_341_Flatten_Nested_List_Iterator {
 
         @Override
         public Integer next() {
+            // or call next() first to make sure next is available
             Integer result = current;
             current = null;
             return result;
@@ -250,5 +251,102 @@ public class LE_341_Flatten_Nested_List_Iterator {
             return false;
         }
     }
+
+    /**
+     * Follow up for NestedIterator3
+     * This is an optimization especially for non-balanced tree.
+     * Idea is to save current traverse index of NestedInteger
+     * list instead of flattening whole 'getList()'
+     */
+    class NestedIterator4 {
+        class Pair {
+            NestedInteger ni;
+            int idx;
+
+            public Pair(NestedInteger ni, int idx) {
+                this.ni = ni;
+                this.idx = idx;
+            }
+        }
+
+        Stack<Pair> stack;
+
+        public NestedIterator4(List<NestedInteger> nestedList) {
+            stack = new Stack<>();
+            for (int i = nestedList.size() - 1; i >= 0 ; i--) {
+                stack.push(new Pair(nestedList.get(i), 0));
+            }
+        }
+
+        public Integer next() {
+            return stack.pop().ni.getInteger();
+        }
+
+        /**
+         * In NestedIterator3, in hasNext(), we flatten a list completely,
+         * extract every NestedInteger and push it into the stack.
+         *
+         * 虽然average hasNext()的时间复杂度是O(1), 但是极端情况下，hasNext()的时间复杂度是O(n)。
+         *
+         * 这里我们加index，免去了flatten的时间
+         *
+         * Here, we use Pair.idx to remember the index in the list, every
+         * call to hasNext() will only extract one element from list and
+         * push into stack, then increase idx.
+         *
+         * This works better for 'none-balanced' structure -
+         * there are many elements in one list element.
+         *
+         * In this case, hasNext() won't spend time to extract all elements
+         * (say 10000), it just get the next one, push into stack so that
+         * next() can retrieve it.
+         */
+        public boolean hasNext() {
+            while (!stack.isEmpty() && !stack.peek().ni.isInteger()) {
+                /**
+                 * From 2nd condition above, here, top element of stack
+                 * is not an Integer, must be a list.
+                 *
+                 * Then, first check if the list is already at the end.
+                 */
+                if (stack.peek().idx == stack.peek().ni.getList().size()) {
+                    stack.pop();
+                    continue;
+                }
+
+                Pair p = stack.peek();
+                stack.push(new Pair(p.ni.getList().get(p.idx++), 0));
+            }
+
+            return stack.isEmpty() ? false : true;
+        }
+    }
+
+    /**
+     * Here are a few reasons why Deque is better than Stack:
+     *
+     * Object oriented design - Inheritance, abstraction, classes and interfaces: Stack is a class, Deque is an interface.
+     * Only one class can be extended, whereas any number of interfaces can be implemented by a single class in Java
+     * (multiple inheritance of type). Using the Deque interface removes the dependency on the concrete Stack class and
+     * its ancestors and gives you more flexibility, e.g. the freedom to extend a different class or swap out different
+     * implementations of Deque (like LinkedList, ArrayDeque).
+     *
+     * Inconsistency: Stack extends the Vector class, which allows you to access element by index. This is inconsistent
+     * with what a Stack should actually do, which is why the Deque interface is preferred (it does not allow such operations)
+     * --its allowed operations are consistent with what a FIFO or LIFO data structure should allow.
+     *
+     * Performance: The Vector class that Stack extends is basically the "thread-safe" version of an ArrayList. T
+     * he synchronizations can potentially cause a significant performance hit to your application. Also, extending other
+     * classes with unneeded functionality (as mentioned in #2) bloat your objects, potentially costing a lot of extra memory
+     * and performance overhead.
+     *
+     * There are probably other good reasons.. these are the ones I think are most important.
+     *
+     * In several of my interviews, I used the Deque data structure instead of a Stack and mentioned why.
+     * It only took a few seconds, but I'm sure the interviewer was happy about it. (I ended up with 12 offers,
+     * in case you're curious.)
+     *
+     * https://dzone.com/articles/why-future-generations-will
+     */
 
 }

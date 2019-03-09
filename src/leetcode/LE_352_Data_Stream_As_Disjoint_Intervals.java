@@ -31,7 +31,19 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
          "给一个Interval class:
          class Interval {int start, int end}
          让我写两个function: add(int start, int end) : 建立一个新的interval类，然后存到自己定义的数据结构上，下面那个function会用到
-         get_totoal(int start, int end):  给出start,和 end之间的所有inerval覆盖的长度 （重复覆盖的部分只能算一次）"
+         get_total(int start, int end):  给出start,和 end之间的所有inerval覆盖的长度 （重复覆盖的部分只能算一次）"
+
+         TreeMap<Integer, Interval> map
+         add() : add new Interval to TreeMap.
+         get_total(int start, int end) : merge all intervals between start and end, find total length;
+
+         fromKey = TreeMap.higherKey(start) //first Interval
+         toKey = TreeMap.higherKey(end)      //last Interval
+
+         submap = TreeMap.subMap(fromKey, toKey)
+         "Returns a view of the portion of this map whose keys range from fromKey, inclusive, to toKey, exclusive"
+
+         Iterate through submap, do merge, same as in LE_56_Merge_Intervals
      */
 
     class SummaryRanges {

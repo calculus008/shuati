@@ -55,6 +55,11 @@ public class LE_244_Shortest_Word_Distance_II {
 
             while (m < size1 && n < size2) {
                 res = Math.min(res, Math.abs(l1.get(m) - l2.get(n)));
+
+                /**
+                 * !!! !!!
+                 * 注意 ：是比较list中存的下标值，不是list自己的下标
+                 */
                 if (l1.get(m) < l2.get(n)) {
                     m++;
                 } else {

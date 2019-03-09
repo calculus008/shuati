@@ -60,7 +60,7 @@ public class LE_973_K_Closest_Points_To_Origin {
             /**
              * !!!
              * Since we want "closest", so we should keep the smallest K distance values
-             * in heap, therefore, it should be a max heap.
+             * in heap, therefore, it should be a MAX HEAP.
              *
              * Comparator expects return type is int, here,
              * since dist() return type is long, can not simply use "(a, b) -> dist(b) - dist(a)".
@@ -96,7 +96,7 @@ public class LE_973_K_Closest_Points_To_Origin {
 
     /**
      * Brutal Force Solution
-     * Time and Space : O(n)
+     * Time and Space : O(nlogn)
      *
      * 72 ms
      */
@@ -114,7 +114,7 @@ public class LE_973_K_Closest_Points_To_Origin {
      * In the quick sort, we will always choose a pivot to compare with other elements.
      * After one iteration, we will get an array that all elements smaller than the
      * pivot are on the left side of the pivot and all elements greater than the pivot
-     * are on the right side of the pviot (assuming we sort the array in ascending order).
+     * are on the right side of the pivot (assuming we sort the array in ascending order).
      * So, inspired from this, each iteration, we choose a pivot and then find the
      * position p the pivot should be. Then we compare p with the K, if the p is smaller
      * than the K, meaning the all element on the left of the pivot are all proper candidates
@@ -128,7 +128,7 @@ public class LE_973_K_Closest_Points_To_Origin {
      *
      * The advantage of this solution is it is very efficient.
      *
-     * The disadvatage of this solution are it is neither an online solution nor a stable one.
+     * The disadvantage of this solution are it is neither an online solution nor a stable one.
      * And the K elements closest are not sorted in ascending order.
      */
     class Solution3 {

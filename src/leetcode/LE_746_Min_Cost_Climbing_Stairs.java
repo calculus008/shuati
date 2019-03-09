@@ -48,7 +48,7 @@ public class LE_746_Min_Cost_Climbing_Stairs {
     }
 
      /**
-      * Solution 2 : recurssion + memorization
+      * Solution 2 : recursion + memorization
       *
       * f(n) : cost get to n step, exclude cost on step n.
       * f(n) = min(f(n-1) + cost(n-1), f(n-2) + cost(n-2));

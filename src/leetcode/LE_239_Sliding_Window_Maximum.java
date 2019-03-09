@@ -215,7 +215,7 @@ public class LE_239_Sliding_Window_Maximum {
             dq.offerLast(i);
 
             /**
-                "i - k + 1 >= 0"
+                "i - k + 1 >= 0" -> i >= k - 1
                 meaning we already fill up the window
 
                 !!! ">= 0"
@@ -243,5 +243,42 @@ public class LE_239_Sliding_Window_Maximum {
         }
 
         return res;
+    }
+
+    class Solution_Practice {
+        public int[] maxSlidingWindow(int[] nums, int k) {
+            if (null == nums || nums.length == 0 || k == 0) {
+                return new int[]{};
+            }
+
+            int n = nums.length;
+            int[] res = new int[n - k + 1];
+
+            Deque<Integer> dq = new LinkedList<>();
+
+            int idx = 0;
+            for (int i = 0; i < n; i++) {
+                //1.Add
+                while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {
+                    dq.pollLast();
+                }
+                dq.offer(i);
+
+                //2.remove when window starts to move
+                if (i >= k) {
+                    if (dq.peekFirst() == i - k) {
+                        dq.pollFirst();
+                    }
+                }
+
+                //3.fill answer array after we have a full window
+                if (i >= k - 1) {
+                    res[idx] = nums[dq.peekFirst()];
+                    idx++;
+                }
+            }
+
+            return res;
+        }
     }
 }

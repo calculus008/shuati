@@ -233,6 +233,10 @@ public class LE_282_Expression_Add_Operators {
             long cur = 0;
             for (int i = pos; i < num.length(); i++) {
                 if (num.charAt(pos) == '0' && i != pos) {
+                    /**
+                     * !!!
+                     * "break", not "continue"
+                     */
                     break;
                 }
 
@@ -245,7 +249,17 @@ public class LE_282_Expression_Add_Operators {
                 int n = sb.length();
 
                 if (pos == 0) {
+                    /**
+                     * "helper(num, target, res, sb.append(cur), i + 1, cur, cur);"
+                     *
+                     * When pos == 0, special process :
+                     * 1.No operand yet, just append "cur" in sb.
+                     * 2.Both current value and pre value are "cur"
+                     */
                     helper(num, target, res, sb.append(cur), i + 1, cur, cur);
+                    /**
+                     * !!!
+                     */
                     sb.setLength(n);
                     continue;
                 }

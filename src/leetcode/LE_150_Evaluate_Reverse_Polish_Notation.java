@@ -38,7 +38,10 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
 
                 if (a == 0) throw new IllegalArgumentException("divisor can't be 0.");
 
-                stack.push(b/a);
+                stack.push(b / a);
+//            } else if (token.equals("!")) {
+//                int a = stack.pop();
+//                stack.push(factorial(a));
             } else {
                 stack.push(Integer.parseInt(token));
             }

@@ -44,94 +44,98 @@ public class LE_241_Different_Ways_To_Add_Parentheses {
         Time : O(n ^ 3) not sure, Space : O(n)
     */
     //Solution 1 : recursion  9 ms
-    public List<Integer> diffWaysToCompute(String input) {
-        List<Integer> res = new ArrayList<>();
-        if (input == null || input.length() == 0) return res;
+    class Solution1 {
+        public List<Integer> diffWaysToCompute(String input) {
+            List<Integer> res = new ArrayList<>();
+            if (input == null || input.length() == 0) return res;
 
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
-            if (c == '+' || c == '-' || c == '*') {
-                String a = input.substring(0, i);
-                String b = input.substring(i + 1);
-                List<Integer> al = diffWaysToCompute(a);
-                List<Integer> bl = diffWaysToCompute(b);
+            for (int i = 0; i < input.length(); i++) {
+                char c = input.charAt(i);
+                if (c == '+' || c == '-' || c == '*') {
+                    String a = input.substring(0, i);
+                    String b = input.substring(i + 1);
+                    List<Integer> al = diffWaysToCompute(a);
+                    List<Integer> bl = diffWaysToCompute(b);
 
-                for (int j : al) {
-                    for (int k : bl) {
-                        if (c == '+') {
-                            res.add(j + k);
-                        } else if (c == '-') {
-                            res.add(j - k);
-                        } else if (c == '*') {
-                            res.add(j * k);
+                    for (int j : al) {
+                        for (int k : bl) {
+                            if (c == '+') {
+                                res.add(j + k);
+                            } else if (c == '-') {
+                                res.add(j - k);
+                            } else if (c == '*') {
+                                res.add(j * k);
+                            }
                         }
                     }
                 }
             }
-        }
 
-        if (res.size() == 0) {
-            res.add(Integer.valueOf(input));
-        }
+            if (res.size() == 0) {
+                res.add(Integer.valueOf(input));
+            }
 
-        return res;
+            return res;
+        }
     }
 
     //Solution 2 : Recursion with memorization, 3 ms
-    public List<Integer> diffWaysToCompute2(String input) {
-        Map<String, List<Integer>> map = new HashMap<>();
+    class Solution2 {
+        public List<Integer> diffWaysToCompute2(String input) {
+            Map<String, List<Integer>> map = new HashMap<>();
 
-        return  getAns(input, map);
-    }
-
-    List<Integer> getAns(String input, Map<String, List<Integer>> map) {
-        if(map.containsKey(input)) return map.get(input);
-
-        List<Integer> res = new ArrayList<>();
-
-        for(int i=1; i<input.length(); i++) {
-            char ch = input.charAt(i);
-            if(ch=='+' || ch=='-' || ch=='*') {
-                String l = input.substring(0, i);
-                String r = input.substring(i+1);
-
-                List<Integer> res1 = getAns(l, map);
-                List<Integer> res2 = getAns(r, map);
-
-                List<Integer> res3 = compute(res1, res2, ch);
-
-                res.addAll(res3);
-            }
+            return getAns(input, map);
         }
 
-        /**
-         * !!!
-         * This means current input is a number, no operand in it, memorize it.
-         **/
-        if(res.isEmpty()) {
-            res.add(Integer.parseInt(input));
-        }
+        List<Integer> getAns(String input, Map<String, List<Integer>> map) {
+            if (map.containsKey(input)) return map.get(input);
 
-        map.put(input, res);
-        return res;
-    }
+            List<Integer> res = new ArrayList<>();
 
-    //compute Descartes product (笛卡尔积)
-    List<Integer> compute(List<Integer> l1, List<Integer> l2, char operand) {
-        List<Integer> res = new ArrayList<Integer>();
-        for(Integer i : l1) {
-            for(Integer j: l2) {
-                int k=0;
-                if(operand == '+') {
-                    k=i+j;
-                } else if(operand =='-') {
-                    k=i-j;
-                } else if(operand == '*') {
-                    k=i*j;
+            for (int i = 1; i < input.length(); i++) {
+                char ch = input.charAt(i);
+                if (ch == '+' || ch == '-' || ch == '*') {
+                    String l = input.substring(0, i);
+                    String r = input.substring(i + 1);
+
+                    List<Integer> res1 = getAns(l, map);
+                    List<Integer> res2 = getAns(r, map);
+
+                    List<Integer> res3 = compute(res1, res2, ch);
+
+                    res.addAll(res3);
                 }
-                res.add(k);
             }
+
+            /**
+             * !!!
+             * This means current input is a number, no operand in it, memorize it.
+             **/
+            if (res.isEmpty()) {
+                res.add(Integer.parseInt(input));
+            }
+
+            map.put(input, res);
+            return res;
         }
-        return res;
+
+        //compute Descartes product (笛卡尔积)
+        List<Integer> compute(List<Integer> l1, List<Integer> l2, char operand) {
+            List<Integer> res = new ArrayList<Integer>();
+            for (Integer i : l1) {
+                for (Integer j : l2) {
+                    int k = 0;
+                    if (operand == '+') {
+                        k = i + j;
+                    } else if (operand == '-') {
+                        k = i - j;
+                    } else if (operand == '*') {
+                        k = i * j;
+                    }
+                    res.add(k);
+                }
+            }
+            return res;
+        }
     }
 }

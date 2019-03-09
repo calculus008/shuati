@@ -360,4 +360,71 @@ public class LE_127_Word_Ladder {
             return 0;
         }
     }
+
+    //14 ms
+    class Solution_Practice_Bi_BFS {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            if (null == beginWord || null == endWord || null == wordList) {
+                return 0;
+            }
+
+            Set<String> dict = new HashSet<>(wordList);
+
+            if (!dict.contains(endWord)) {
+                return 0;
+            }
+
+            if (beginWord.equals(endWord)) {
+                return 0;
+            }
+
+            Set<String> start = new HashSet<>();
+            Set<String> end = new HashSet<>();
+
+            start.add(beginWord);
+            end.add(endWord);
+
+            int steps = 1;
+
+            while (!start.isEmpty() && !end.isEmpty()) {
+                steps++;
+                Set<String> set = new HashSet<>();
+
+                for (String cur : start) {
+                    char[] chars = cur.toCharArray();
+                    for (int j = 0; j < chars.length; j++) {
+                        char temp = chars[j];
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            if (c == temp) {
+                                continue;
+                            }
+
+                            chars[j] = c;
+                            String next = new String(chars);
+
+                            if (end.contains(next)) {
+                                return steps;
+                            }
+
+                            if (dict.contains(next)) {
+                                set.add(next);
+                                dict.remove(next);
+                            }
+                        }
+                        chars[j] = temp;
+                    }
+                }
+
+                start = set;
+                if (start.size() > end.size()) {
+                    Set<String> buf = new HashSet<>();
+                    buf = start;
+                    start = end;
+                    end = buf;
+                }
+            }
+
+            return 0;
+        }
+    }
 }

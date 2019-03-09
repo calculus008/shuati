@@ -13,15 +13,18 @@ public class LE_189_Rotate_Array {
         Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
      */
 
-    /*
+    /**
         Solution 1 : 3 swaps, Time : O(n), Space : O(1)
 
         k = 3
             1 2 3 4 5 6 7
 
-            7 6 5 4 3 2 1
-
-            5 6 7 1 2 3 4
+        #1  7 6 5 4 3 2 1
+            -------------
+        #2  5 6 7 4 3 2 1
+            -----
+        #3  5 6 7 1 2 3 4
+                  -------
      */
     public void rotate1(int[] nums, int k) {
         if (nums == null || nums.length == 0) return;

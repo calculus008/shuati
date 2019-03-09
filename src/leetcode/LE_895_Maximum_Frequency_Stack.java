@@ -53,9 +53,10 @@ public class LE_895_Maximum_Frequency_Stack {
      * Map and List of Stacks Solution, O(1) for both push() and pop()
      *
      * 1.Use HashMap to keep track frequency
-     * 2.Bucket sorting - use list of "buckets", each bucket saves element with the same frequency
+     * 2.Bucket sorting - use list of "buckets", each bucket saves element with the same frequency.
+     *                    It's a list of buckets, index in the list is the frequency.
      * 3.Break tie - "the element closest to the top of the stack is removed and returned."
-     *   Therefore, we use Stack as an individual bucket
+     *   Therefore, we use Stack as an individual bucket -> It's a list of stacks.
      * 4.Compare with LE_460_LFU_Cache:
      *   a.when doing push(), we don't need to remove element from current bucket (a stack),
      *     just push it into the next bucket.（!!!)

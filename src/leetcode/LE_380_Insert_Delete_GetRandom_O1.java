@@ -51,7 +51,7 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
      *
      * 这道题的关键是getRandom(), 这确定了我们需要用List.
      *
-     * For remove(), use the trick of swap-delete_last in a list.
+     * !!!For remove(), use the trick of swap-delete_last in a list.
      *
      * Then, use HashMap to track the location (index) of a element in the list.
      *

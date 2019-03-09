@@ -215,6 +215,7 @@ LE_967_Numbers_With_Same_Consecutive_Differences
 
 7.基于排列、图的DFS
 LE_46_Permutation                                         (lint 15)
+ParityPermutation
 LE_47_Permutation_II                                      (lint 16)
 LI_010_String_Permutation_II
 LE_31_NextPermutation                                     (lint 52, 190)

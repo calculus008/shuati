@@ -50,8 +50,11 @@ public class LE_254_Factor_Combinations {
         return res;
     }
 
-    public void helper( List<List<Integer>> res, List<Integer> list, int start, int n) {
-        //!!! "> 1".排除因子中只有n本身，如，n=12, 如果用"> 0",则[12]会出现在res中。
+    public void helper(List<List<Integer>> res, List<Integer> list, int start, int n) {
+        /**
+         * !!!
+         *  "> 1".排除因子中只有n本身，如，n=12, 如果用"> 0",则[12]会出现在res中。
+         *  **/
         if (n == 1 && list.size() > 1) {
             res.add(new ArrayList<>(list));
             //!!! 必须return

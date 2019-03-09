@@ -20,6 +20,9 @@ public class LE_46_Permutation {
           [3,1,2],
           [3,2,1]
         ]
+
+        Variation :
+        Parity_Permutation
      **/
 
     /**

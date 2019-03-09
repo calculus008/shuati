@@ -28,59 +28,93 @@ public class LE_611_Valid_Triangle_Number {
          LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
      */
 
-    //Time : O(n), Space : O(1)
-    public int triangleNumber(int[] nums) {
-        /**
-         * 1.Must sort
-         */
-        Arrays.sort(nums);
-        int n = nums.length;
-        int count = 0;
-
-        /**
-         * 2.当前的for循环确定3条边中最长的那条(nums[i])
-         */
-        for (int i = n - 1; i >= 2; i--) {
-            int l = 0;
+    /**
+     * Time : O(n ^ 2), Space : O(1
+     **/
+    class Solution1 {
+        public int triangleNumber(int[] nums) {
+            /**
+             * 1.Must sort
+             */
+            Arrays.sort(nums);
+            int n = nums.length;
+            int count = 0;
 
             /**
-             * 3.当最长的边确定后，找其他两条边，
-             *   在已经排好序的数组中，这两条边的上边界是nums[i-1]
+             * 2.当前的for循环确定3条边中最长的那条(nums[i])
              */
-            int r = i - 1;
-            while (l < r) {
-                if (nums[l] + nums[r] > nums[i]) {
-                    count += r - l;
-                    /**
-                     * 4.上边界下移，继续找
-                     */
-                    r--;
-                } else {
-                    l++;
+            for (int i = n - 1; i >= 2; i--) {
+                int l = 0;
+
+                /**
+                 * 3.当最长的边确定后，找其他两条边，
+                 *   在已经排好序的数组中，这两条边的上边界是nums[i-1]
+                 */
+                int r = i - 1;
+                while (l < r) {
+                    if (nums[l] + nums[r] > nums[i]) {
+                        count += r - l;
+                        /**
+                         * 4.上边界下移，继续找
+                         */
+                        r--;
+                    } else {
+                        l++;
+                    }
                 }
             }
+
+            return count;
         }
 
-        return count;
-    }
+        public int triangleCount_JiuZhang(int S[]) {
+            int left = 0, right = S.length - 1;
+            int ans = 0;
+            Arrays.sort(S);
 
-    public int triangleCount_JiuZhang(int S[]) {
-        int left = 0, right = S.length - 1;
-        int ans = 0;
-        Arrays.sort(S);
-
-        for(int i = 0; i < S.length; i++) {
-            left = 0;
-            right = i - 1;
-            while(left < right) {
-                if(S[left] + S[right] > S[i]) {
-                    ans = ans + (right - left);
-                    right --;
-                } else {
-                    left ++;
+            for (int i = 0; i < S.length; i++) {
+                left = 0;
+                right = i - 1;
+                while (left < right) {
+                    if (S[left] + S[right] > S[i]) {
+                        ans = ans + (right - left);
+                        right--;
+                    } else {
+                        left++;
+                    }
                 }
             }
+            return ans;
         }
-        return ans;
     }
+
+    /**
+     * Binary Search
+     **/
+    class Solution2 {
+        public int triangleNumber(int[] nums) {
+            if (nums.length < 3) return 0;
+            Arrays.sort(nums);
+            int count = 0;
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    count += binarySearch(nums, nums[i] + nums[j], j + 1);
+                }
+            }
+            return count;
+        }
+
+        private int binarySearch(int[] nums, int target, int start)
+        {
+            int left = start, right = nums.length;
+            while (left < right)
+            {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] < target) left = mid + 1;
+                else right = mid;
+            }
+            return left - start;
+        }
+    }
+
 }

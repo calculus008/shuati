@@ -81,7 +81,7 @@ public class LE_310_Minimum_Height_Trees {
          reversed BFS, 先找出最底层(叶子)，删除，然后往上一层走。
          */
         for (int i = 0; i < n; i++) {
-            if (adj.get(i).size() == 1) {
+            if (adj.get(i).size() == 1) {//leaves, only has one connected node
                 res.add(i);
             }
         }

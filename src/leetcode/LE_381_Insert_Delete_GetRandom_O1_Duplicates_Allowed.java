@@ -294,16 +294,21 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
              * Also, remove last element in ArrayList is O(1).
              */
             int targetIdx = map.get(val).remove(map.get(val).size() - 1);
+
+            /**
+             * !!!
+             */
+            if (map.get(val).size() == 0) {
+                map.remove(val);
+            }
+
+
             if (targetIdx < list.size() - 1) {
                 Element e = list.get(list.size() - 1);
                 list.set(targetIdx, e);
                 map.get(e.val).set(e.idx, targetIdx);//!!! list.set(col,value)
             }
             list.remove(list.size() - 1);
-
-            if (map.get(val).size() == 0) {
-                map.remove(val);
-            }
 
             return true;
         }

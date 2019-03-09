@@ -21,7 +21,7 @@ public class LE_245_Shortest_Word_Distance_III {
         You may assume word1 and word2 are both in the list.
      */
 
-        /*
+    /**
         ["practice", "makes", "perfect", "coding", "makes"].
 
         When get to first "makes"
@@ -38,28 +38,36 @@ public class LE_245_Shortest_Word_Distance_III {
     */
     //Time : O(n), Space : O(1)
     public int shortestWordDistance(String[] words, String word1, String word2) {
-        int res = words.length;
         int a = -1;
         int b = -1;
+
+        boolean isEqual = word1.equals(word2);
+
+        int res = Integer.MAX_VALUE;
         for (int i = 0; i < words.length; i++) {
-            if (word1.equals(words[i])) {
+            if (words[i].equals(word1)) {
                 a = i;
             }
-            if (word2.equals(words[i])) {
 
-                //====
-                if (word1.equals(word2)) {
+            if (words[i].equals(word2)) {
+                /**
+                 * For case that word1 and word2 are the same :
+                 * 1.Can only calculate distance if we see the word at least two times
+                 * 2.Always do calculation for 2 adjacent indexes. Therefore, a need to
+                 *   take the value b here.
+                 */
+                if (isEqual) {
                     a = b;
                 }
-                //====
 
                 b = i;
             }
 
-            if(a != -1 && b != -1) {
+            if (a != -1 && b != -1) {
                 res = Math.min(res, Math.abs(a - b));
             }
         }
+
         return res;
     }
 }

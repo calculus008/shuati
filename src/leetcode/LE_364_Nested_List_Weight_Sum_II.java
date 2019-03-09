@@ -98,6 +98,10 @@ public class LE_364_Nested_List_Weight_Sum_II {
                     if (n.isInteger()) {
                         unweight += n.getInteger();
                     } else {
+                        /**
+                         * !!!
+                         * addAll(n.getList())
+                         */
                         nextLevel.addAll(n.getList());
                     }
                 }

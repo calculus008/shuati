@@ -19,6 +19,22 @@ public class LE_277_Find_The_Celebrity {
      If there is no celebrity, return -1.
      */
 
+    /**
+     * The moment you realize a call to knows(i,j) eliminates either i or j,
+     * the problem is solved. knows(i,j) == true then i can't be a celeb.
+     * since a celeb knows nobody and knows(i,j) == false then j can't be
+     * a celeb since everyone must know the celeb.
+     *
+     * After first pass, let's assume candidate = i;
+     * (1)It means all the other people before i at least know someone or
+     *    it will not pass the candidate position to i. Thus people before i
+     *    won't be candidate.
+     * (2)Also, people after i are those who i do not know, which does not
+     *    satisfy the celebrity definition either. Thus people i is the only
+     *    person who have chance to be celebrity.
+     * (3)Thus, for second pass, what we need to do is just check i's qualification
+     *    that he/she does not know anyone and everyone knows him/she.
+     */
     public int findCelebrity(int n) {
         int candidate = 0;
         for (int i = 0; i < n; i++) {
@@ -38,6 +54,14 @@ public class LE_277_Find_The_Celebrity {
 
         return candidate;
     }
+
+    /**
+     * 变种，把api改成了矩阵作为input表示i是否认识j，很简单自己写个函数当api就行了
+     *
+     *      boolean knows(boolean[][] r, int i, int j) {
+     *         return r[i][j];
+     *      }
+     */
 
     //dummy method to remove compiler error
     boolean knows(int i, int j) {

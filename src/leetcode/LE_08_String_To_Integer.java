@@ -66,9 +66,11 @@ public class LE_08_String_To_Integer {
 
         //trim leading space
         int i = 0;
-        while (str.charAt(i) == ' ') {
+        while(i < str.length() && str.charAt(i)==' ') {
             i++;
         }
+
+        if (i == str.length()) return 0;
 
         //check possible sign
         if (str.charAt(i) == '-' || str.charAt(i) == '+') {

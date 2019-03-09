@@ -43,7 +43,8 @@ public class LE_678_Valid_Parenthesis_String {
      * min : 强制匹配左括号，只把'('看作合法的左括号
      * max : 非强制匹配左括号， 把非')'都看作为左括号。
      *
-     * min, max : be the smallest and largest possible number of open left brackets after processing the current character in the string.
+     * min, max : be the smallest and largest possible number of open left brackets after processing the
+     *            current character in the string.
      *
      * https://leetcode.com/problems/valid-parenthesis-string/discuss/107577/Short-Java-O(n)-time-O(1)-space-one-pass
      *
