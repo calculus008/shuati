@@ -51,12 +51,21 @@ public class LE_416_Partition_Equal_Subset_Sum {
 
         int m = sum / 2;
         int n = nums.length;
+
+        /**
+         * bp[i][j] : 前i个elements，取出一些能否组成和为j
+         */
         boolean[][] dp = new boolean[n + 1][m + 1];
         dp[0][0] = true;//!!!
 
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= m; j++) {
                 dp[i][j] = dp[i - 1][j];
+                /**
+                 * "j >= nums[i - 1]"
+                 * This condition validates if "j - nums[i - 1]" is a valid
+                 * index, therefore must be at the start.
+                 */
                 if (j >= nums[i - 1] && dp[i - 1][j - nums[i - 1]]) {//!!!
                     dp[i][j] = true;
                 }
@@ -90,7 +99,7 @@ public class LE_416_Partition_Equal_Subset_Sum {
         dp[0] = true;
 
         for (int i = 0; i < n; i++) {
-            for (int j = m; j >= nums[i]; j--) {
+            for (int j = m; j - nums[i] >= 0; j--) {
                 dp[j] = dp[j - nums[i]] || dp[j]; //!!!
             }
         }

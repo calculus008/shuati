@@ -14,9 +14,15 @@ public class LE_53_Maximum_Subarray {
 
     /**
      * Solution 1
+     * DP
+     * maxSubArray(A, i) = maxSubArray(A, i - 1) > 0 ? maxSubArray(A, i - 1) : 0 + A[i];
      */
     public static int maxSubArray1(int[] nums) {
         int[] dp = new int[nums.length];
+
+        /**
+         * dp[i] means the maximum subarray ending with A[i];
+         */
         dp[0] = nums[0];
         //!!!! 不是 res = 0 !!!
         int res = nums[0];

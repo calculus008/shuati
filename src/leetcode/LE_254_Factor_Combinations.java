@@ -21,9 +21,11 @@ public class LE_254_Factor_Combinations {
          input: 1
          output:
          []
+
          input: 37
          output:
          []
+
          input: 12
          output:
          [
@@ -31,6 +33,7 @@ public class LE_254_Factor_Combinations {
          [2, 2, 3],
          [3, 4]
          ]
+
          input: 32
          output:
          [
@@ -41,6 +44,13 @@ public class LE_254_Factor_Combinations {
          [2, 4, 4],
          [4, 8]
          ]
+     */
+
+    /**
+     * Variation :
+     * All_Ways_To_Multiple_Smaller_Numbers
+     *
+     * Difference is that "1" also counts as a factor.
      */
 
     public List<List<Integer>> getFactors(int n) {

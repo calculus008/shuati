@@ -1,6 +1,8 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by yuank on 7/9/18.
@@ -114,6 +116,49 @@ public class LE_611_Valid_Triangle_Number {
                 else right = mid;
             }
             return left - start;
+        }
+    }
+
+    /**
+     * 变形题
+     * Given一个array of non-negative integers, 找出3组数字可以组成3角形, 每个数字表示边长,
+     * 组成3角形的充要条件就是任2边的和要大于第3边
+     *
+     * Output is all possible triplets, not total number of triangles.
+     * */
+    public class CanFormTriangle {
+
+        public void main(String[] args) {
+            int[] arr = {3, 2, 1, 9, 5, 7, 4, 2, 9, 5};
+            solutionsOfTriangle(arr);
+        }
+
+
+        public List<List<Integer>> solutionsOfTriangle(int[] arr) {
+            List<List<Integer>> res = new ArrayList<List<Integer>>();
+            Arrays.sort(arr);
+
+            for (int i = arr.length - 1; i >= 2; i--) {
+                int left = 0;
+                int right = i - 1;
+
+                while (left < right) {
+                    if (arr[left] + arr[right] > arr[i]) {
+                        for (int j = left; j < right; j++) {
+                            List<Integer> list = new ArrayList<Integer>();
+                            list.add(arr[i]);
+                            list.add(arr[j]);
+                            list.add(arr[right]);
+                            res.add(list);
+                        }
+                        right--;
+                    } else {
+                        left++;
+                    }
+                }
+            }
+
+            return res;
         }
     }
 

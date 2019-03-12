@@ -23,6 +23,9 @@ LI_585_Maximum_Number_In_Mountain_Sequence
 LI_458_Last_Position_Of_Target
 LI_447_Search_In_A_Big_Sorted_Array          (**)
 
+#Upper/Lower Bound
+Simple_Queries_With_Two_Arrays
+
 #Math
 LE_50_POW
 LE_69_Sqrt
@@ -268,6 +271,8 @@ LI_685_First_Unique_Number_In_Stream
 LI_613_High_Five
 LE_128_Longest_Consecutive_Sequence                       (lint 124)
 
+LE_946_Validate_Stack_Sequences
+
 #Iterators
 LE_251_Flatten_2D_Vector                                  (lint 601)
 LE_281_Zigzag_Iterator                                    (lint 540)
@@ -292,6 +297,8 @@ LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
 LE_676_Implement_Magic_Dictionary
 LE_716_Max_Stack                                          (Solution 2, DDL + TreeMap)
+Retain_Best_Cache
+
 
 #Sliding Window
 LE_03_Longest_Substring_Without_Repeating_Characters      (**)

@@ -28,15 +28,15 @@ public class Parity_Permutation {
             return res;
         }
 
-        helper(n, res, new ArrayList<>(), new boolean[n]);
+        helper(n, res, new ArrayList<>(), new boolean[n], 0);
         return res;
     }
 
-    private static void helper(int n, List<List<Integer>> res, List<Integer> temp, boolean[] visited) {
+    private static void helper(int n, List<List<Integer>> res, List<Integer> temp, boolean[] visited, int pre) {
         if (temp.size() == n) {
-            if (isValid(temp)) {
+//            if (isValid(temp)) {
                 res.add(new ArrayList<>(temp));
-            }
+//            }
             return;
         }
 
@@ -45,9 +45,15 @@ public class Parity_Permutation {
                 continue;
             }
 
+            if (pre != 0 && pre % 2 == i % 2) {
+                continue;
+            }
+
             temp.add(i);
             visited[i - 1] = true;
-            helper(n, res, temp, visited);
+
+            helper(n, res, temp, visited, i);
+
             temp.remove(temp.size() - 1);
             visited[i - 1] = false;
         }

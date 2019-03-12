@@ -33,7 +33,12 @@ public class LE_14_Longest_Common_Prefix {
 
         String pre = strs[0]; //Take the first String as pre
         for (int i = 1; i < strs.length; i++) {
-            while (strs[i].indexOf(pre) != 0) {//This means pre is not the prefix in current string, hence, shorten it by one and continue
+            /**
+             * "indexOf"
+             * This means pre is not the prefix in current string,
+             * hence, shorten it by one and continue
+             */
+            while (strs[i].indexOf(pre) != 0) {
                 pre = pre.substring(0, pre.length() - 1);
                 if (pre.isEmpty()) {
                     return "";

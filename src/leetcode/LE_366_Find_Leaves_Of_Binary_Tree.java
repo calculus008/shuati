@@ -171,78 +171,49 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
     }
 
     /**
-     * 变形题，把Tree变成Graph, 求同样的叶子借天输出。
-     * 可以用以下Graph 里DFS function.
-     *
-     * https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
-     *
-     * http://www.algolist.net/Algorithms/Graph/Undirected/Depth-first_search
+     * 变形题，把Tree变成Graph, 求同样的叶子借天输出 - Find_Leaves
      */
-    class Graph {
-        private int V;   // No. of vertices
+    /**It is graph, rather than tree
+     * One big difference is, tree only has 1 path between 2 nodes, while graph can have several paths, which forms a circle
+     * @param graph could be isolated, but in our case, it is a connected graph
+     * @return
+     * 只用一个Set<Node> visited 不行，因为graph里边可以重复visit 但是不能有环。 所以用Map, 上次还没计算出结果来呢，又来了， 说明有环
+     * Tree上随便两个Node连起来，肯定都是环吧
+     */
+    List<List<Integer>> findLeavesInGraph(TreeNode graph) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        // Use a map to remember not only the height, but also track loop
+        Map<TreeNode, Integer> map = new HashMap<TreeNode, Integer>();
+        helper(res, map, graph);
+        return res;
+    }
 
-        // Array  of lists for Adjacency List Representation
-        private LinkedList<Integer> adj[];
+    private int helper(List<List<Integer>> res, Map<TreeNode, Integer> map, TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
 
-        // Constructor
-        Graph(int v)
-        {
-            V = v;
-            adj = new LinkedList[v];
-            for (int i=0; i<v; ++i) {
-                adj[i] = new LinkedList();
+        if (map.containsKey(node)) {
+            if (map.get(node) == -1) {
+                throw new RuntimeException("There is loop, done");
             }
+            return map.get(node);
         }
 
-        //Function to add an edge into the graph
-        void addEdge(int v, int w)
-        {
-            adj[v].add(w);  // Add w to v's list.
+        /**
+         * !!!
+         * -1 : Seen this node, but not finalized yet, it is still too high
+         */
+        map.put(node, -1);
+
+        int height = Math.max(helper(res, map, node.left), helper(res, map, node.right)) + 1;
+        if (height == res.size()) {
+            res.add(new ArrayList<Integer>());
         }
 
-        // A function used by DFS
-        void DFSUtil(int v,boolean visited[])
-        {
-            // Mark the current node as visited and print it
-            visited[v] = true;
-            System.out.print(v+" ");
+        res.get(height).add(node.val);
+        map.put(node, height);
 
-            // Recur for all the vertices adjacent to this vertex
-            Iterator<Integer> i = adj[v].listIterator();
-            while (i.hasNext())
-            {
-                int n = i.next();
-                if (!visited[n])
-                    DFSUtil(n, visited);
-            }
-        }
-
-        // The function to do DFS traversal. It uses recursive DFSUtil()
-        void DFS(int v)
-        {
-            // Mark all the vertices as not visited(set as
-            // false by default in java)
-            boolean visited[] = new boolean[V];
-
-            // Call the recursive helper function to print DFS traversal
-            DFSUtil(v, visited);
-        }
-
-//        public static void main(String args[])
-//        {
-//            Graph g = new Graph(4);
-//
-//            g.addEdge(0, 1);
-//            g.addEdge(0, 2);
-//            g.addEdge(1, 2);
-//            g.addEdge(2, 0);
-//            g.addEdge(2, 3);
-//            g.addEdge(3, 3);
-//
-//            System.out.println("Following is Depth First Traversal "+
-//                    "(starting from vertex 2)");
-//
-//            g.DFS(2);
-//        }
+        return height;
     }
 }
