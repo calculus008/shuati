@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Multi_Dimension_Array {
+public class Multi_Dimension_Array_Sum {
     /**
      * Suppose you are given a class that implements a k-dimensional array
      * interface and you want to perform an operation that requires you to

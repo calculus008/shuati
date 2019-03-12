@@ -214,6 +214,8 @@ LE_301_Remove_Invalid_Parentheses                         (lint 780)   ***
 LE_322_Coin_Change
 LE_967_Numbers_With_Same_Consecutive_Differences
 
+Multi_Dimension_Array_Sum
+
 ====================================================
 
 7.基于排列、图的DFS
