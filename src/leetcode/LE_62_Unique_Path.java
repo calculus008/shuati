@@ -34,8 +34,10 @@ public class LE_62_Unique_Path {
 
     /**
         Solution 2:
-        Evole from Solution 1, each time when we update path[i][j], we only need path[i - 1][j] (at the same column) and path[i][j - 1] (at the left column).
-        So it is enough to maintain two columns (the current column and the left column) instead of maintaining the full m*n. Space O(min(m, n))
+        Evolve from Solution 1, each time when we update path[i][j], we only need path[i - 1][j]
+        (at the same column) and path[i][j - 1] (at the left column).
+        So it is enough to maintain two columns (the current column and the left column) instead
+        of maintaining the full m*n. Space O(min(m, n))
 
         Further more,  we find that keeping two columns is used to recover pre[i], which is just cur[i] before its update.
         So there is even no need to use two vectors and one is just enough.

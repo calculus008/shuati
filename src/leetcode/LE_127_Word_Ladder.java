@@ -427,4 +427,98 @@ public class LE_127_Word_Ladder {
             return 0;
         }
     }
+
+
+    /**
+     * What if you are challenged of NOT using a - z?
+     *
+     * First build the buckets, for each word, we replace each letter as '_' to get the bucket
+     * ex. "HITS" -> "_ITS" and "H_TS" and "HI_S" and "HIT_" then put the word into the bucket
+     * so the words in each bucket are the next word to each other, only differs in one letter
+     * then use BFS to traverse from the begin word, each time we meet a word, get all the buckets it could have and find the next word
+     *
+     * Time complexity: O(mn) + O(mn),
+     * n - number of words, m- average length of word, first one is build buckets, second is BFS
+     */
+    class Word_Ladder_1_5 {}
+    public List<String> ladderLengthSolutionBetter(String start, String end, Set<String> dict) {
+        Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+        dict.add(start);
+        dict.add(end);
+
+        for (String s : dict) {
+            char[] arr = s.toCharArray();
+            for (int i = 0; i < arr.length; i++) {
+                char original = arr[i];
+
+                arr[i] = '_';
+                String s2 = new String(arr);
+
+                if (!map.containsKey(s2)) {
+                    map.put(s2, new HashSet<String>());
+                }
+                map.get(s2).add(s);
+
+                arr[i] = original;
+            }
+        }
+
+        Queue<String> queue = new LinkedList<String>();
+        Set<String> visited = new HashSet<String>();
+        Map<String, String> res = new HashMap<String, String>();
+
+        queue.offer(start);
+        visited.add(start);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                String now = queue.poll();
+                char[] arr = now.toCharArray();
+
+                for (int j = 0; j < arr.length; j++) {
+                    char original = arr[j];
+
+                    arr[j] = '_';
+                    String s2 = String.valueOf(arr);
+
+                    for (String s3 : map.get(s2)) {
+                        if (end.equals(s3)) {
+                            res.put(s3, now);
+                            return convertMapToList(res, start, end);
+                        }
+
+                        if (!visited.contains(s3)) {
+                            visited.add(s3);
+                            res.put(s3, now);
+                            queue.offer(s3);
+                        }
+                    }
+
+                    arr[j] = original;
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+    List<String> convertMapToList(Map<String, String> map, String beginWord, String endWord) {
+        LinkedList<String> res = new LinkedList<String>();
+
+        while (!map.get(endWord).equals(beginWord)) {
+            res.add(endWord);
+            endWord = map.get(endWord);
+        }
+
+        res.add(endWord);
+        res.add(beginWord);
+
+        for (int i = res.size() - 1; i >= 0; i--) {
+            System.out.print(res.get(i) + "==");
+        }
+        return res;
+    }
 }

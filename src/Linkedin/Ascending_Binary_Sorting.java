@@ -14,7 +14,7 @@ public class Ascending_Binary_Sorting {
     /**
      * https://www.geeksforgeeks.org/sort-array-according-count-set-bits/
      *
-     * This is solution with counting sort.
+     * This is solution with counting sort.(Bucket sorting)x
      *
      * If no output order required, it should be O(n).
      * Here , "若‘1’的个数相同，则十进制小的在前", so we still need to do sorting.

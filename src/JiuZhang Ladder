@@ -190,6 +190,8 @@ LE_298_Binary_Tree_Longest_Consecutive_Sequence     (lint 595)
 LE_549_Binary_Tree_Longest_Consecutive_Sequence_II  (lint 614)     revisit
 LI_619_Binary_Tree_Longest_Consecutive_Sequence_III                revisit
 
+Binary_To_Nary_Tree
+
 ====================================================
 
 6.基于组合的DFS
