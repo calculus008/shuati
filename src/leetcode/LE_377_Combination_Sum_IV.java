@@ -103,6 +103,9 @@ public class LE_377_Combination_Sum_IV {
     }
 
 
+    /**
+     * Time : O(target * |nums\)
+     */
     public int backPackVI(int[] nums, int target) {
         int[] dp = new int[target + 1];
         dp[0] = 1;

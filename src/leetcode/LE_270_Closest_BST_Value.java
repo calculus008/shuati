@@ -15,7 +15,7 @@ public class LE_270_Closest_BST_Value {
      */
 
     /**
-     * Time : O(n)
+     * Time : O(logn) or O(h)
      * Space : O(1)
      *
      * Use BST property,no need to traverse the whole tree.
