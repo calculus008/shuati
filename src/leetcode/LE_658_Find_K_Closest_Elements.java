@@ -98,7 +98,7 @@ public class LE_658_Find_K_Closest_Elements {
 
     /**
      * Problem of Solution1 is that it needs to do a sort to meet requirement
-     * "he result should also be sorted in ascending order".
+     * "the result should also be sorted in ascending order".
      *
      * This solution solves the issue by moving index high and low in a given range,
      * then return the sublist between high and low.
