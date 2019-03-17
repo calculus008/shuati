@@ -8,8 +8,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Producer_Consumer {
     final static ReentrantLock lock = new ReentrantLock();
-    final static Condition notFull = lock.newCondition();
-    final static Condition notEmpty = lock.newCondition();
+    final static Condition removeCondition = lock.newCondition();
+    final static Condition addCondition = lock.newCondition();
 
     final static Queue<String> queue = new LinkedBlockingQueue<>();
     final static AtomicInteger capacity = new AtomicInteger();
@@ -22,11 +22,11 @@ public class Producer_Consumer {
 
                 try {
                     while (queue.size() == capacity.intValue()) {
-                        notEmpty.await();
+                        addCondition.await();
                     }
 
                     queue.add("elem");
-                    notFull.signalAll();
+                    removeCondition.signalAll();
                 } catch (Exception e) {
 
                 } finally {
@@ -43,11 +43,11 @@ public class Producer_Consumer {
 
                 try {
                     while (queue.size() == 0) {
-                        notFull.await();
+                        removeCondition.await();
                     }
 
-                    queue.add("elem");
-                    notEmpty.signalAll();
+                    queue.remove("elem");
+                    addCondition.signalAll();
                 } catch (Exception e) {
 
                 } finally {

@@ -27,7 +27,7 @@ public class Build_Tree_With_Balanced_Parenthesis {
         }
     }
 
-    public Node buildGra(String s) {
+    public Node buildGrah(String s) {
         int count = 0;
         Map<Integer, ArrayList<Node>> map = new HashMap<>();
 

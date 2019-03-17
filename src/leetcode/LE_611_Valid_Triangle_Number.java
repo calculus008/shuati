@@ -45,7 +45,7 @@ public class LE_611_Valid_Triangle_Number {
             /**
              * 2.当前的for循环确定3条边中最长的那条(nums[i])
              */
-            for (int i = n - 1; i >= 2; i--) {
+            for (int i = n - 1; i >= 2; i--) {//!!!"i--"
                 int l = 0;
 
                 /**

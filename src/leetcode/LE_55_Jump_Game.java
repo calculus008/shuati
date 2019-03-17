@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/2/18.
  */
 public class LE_55_Jump_Game {
-    /*
+    /**
         Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
         Each element in the array represents your maximum jump length at that position.

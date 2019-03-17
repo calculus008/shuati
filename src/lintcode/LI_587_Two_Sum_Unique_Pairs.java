@@ -24,9 +24,15 @@ public class LI_587_Two_Sum_Unique_Pairs {
      */
 
     /**
-        HashMap Solution
-        Time : O(n), Space : O(n)
-        O(n) 时间复杂度，使用HashMap，Key, value 分别对应 数字和是出现过匹配的数字
+        HashMap Solution, optimized for time.
+        Time :  O(n),
+        Space : O(n)
+
+        O(n) 时间复杂度，使用HashMap :
+          Key   - 当前数组中的数字，以及和它匹配(相加等于target)的数字。
+          value - boolean value, 代表key里的数字是否已经被使用过了，也就是
+                  这个数字是否已经在答案里了。
+
         不用sort， 时间复杂度得到了提高
 
         Example : [1,1,2,45,46,46]
@@ -39,7 +45,28 @@ public class LI_587_Two_Sum_Unique_Pairs {
         which means 2 has never been paired with another number to sum to target,
         so, count++, and set 2 and 45 to true in map.
 
+        HashMap
+        1 -> false
+        2 -> false
+        45 ?
+        res{}
+
+        1 -> false
+        2 -> true
+        45 -> true
+        res : {{45, 2}}
+
         Same for 46, count++.
+         1 -> false
+         2 -> true
+         45 ->  true
+         46 ?
+
+         1 -> true
+         2 -> true
+         45 -> true
+         46 -> true
+         res : {{45, 3}, {46, 1}}
 
         when it comes to 2nd 46, map.get(1) = true, meaning it has been used. so
         we don't count it.
@@ -50,12 +77,17 @@ public class LI_587_Two_Sum_Unique_Pairs {
         }
 
         Map<Integer, Boolean> map = new HashMap<>();
-
+        //List<List<Integer>> res = new ArrayList<>();
         int count = 0;
         for (int num : nums) {
             if (map.containsKey(target - num)) {
                 if (!map.get(target - num)) {
                     count++;
+                    //List<Integer> ans = new ArrayList<>();
+                    //ans.add(num);
+                    //ans.add(target - num)
+                    //res.add(ans);
+
                     map.put(target - num, true);
                     map.put(num, true);
                 }
@@ -68,8 +100,10 @@ public class LI_587_Two_Sum_Unique_Pairs {
 
 
     /**
-     *  Two pointers solution
-     *  Time : O(nlogn), Space : O(1)
+     *  Two pointers solution, optimized for space
+     *
+     *  Time   : O(nlogn)
+     *  Space : O(1)
      */
     public int twoSum6(int[] nums, int target) {
         // Write your code here

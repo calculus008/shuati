@@ -110,6 +110,7 @@ LI_127_Topological_Sorting
 LE_207_Course_Schedule                       (lint 615)
 LE_210_Course_Schedule_II                    (lint 616)
 LE_444_Sequence_Reconstruction               (lint 605)               revisit (??)
+LE_269_Alien_Dictionary                                      (*****)  !!!!
 
 LE_133_Clone_Graph                           (lint 137)
 LE_297_Serialize_And_Deserialize_Binary_Tree (lint 7)
@@ -165,6 +166,7 @@ LE_230_Kth_Smallest_Element_In_BST           (lint 902)   (**)
 LE_98_Validate_BST                           (lint 95)
 LE_173_Binary_Search_Tree_Iterator           (lint 86)
 LE_272_Closest_BST_Value_II                  (lint 901)    (****) revisit (LINKEDIN)
+LE_270_Closest_BST_Value
 LE_510_Inorder_Successor_In_BST_II
 
 Optional
@@ -536,14 +538,17 @@ LE_300_Longest_Increasing_Subsequence                     (lint 76)
 LE_152_Maximum_Product_Subarray                           (lint 191)
 LE_05_Longest_Palindromic_Substring                       (lint 200)
 
-# 博弈类DP
+# 博弈类DP (Min_Max)
 LI_394_Coins_In_A_Line                                                 *
 LI_395_Coins_In_A_Line_II                                              ***
 LI_396_Coins_In_A_Line_III                                (leetcode 877)              ***
+LE_464_Can_I_Win
+LE_486_Predict_The_Winner
 
 LI_438_Copy_Books_II                                                   **
 LI_435_Post_Office_Problem                                             ***
 LE_188_Best_Time_To_Buy_And_Sell_Stock_IV
+
 
 #区间类DP
 LI_476_Stone_Game
@@ -565,12 +570,12 @@ LE_132_Palindrome_Partition_II
 #Knapsack
 https://blog.csdn.net/luoshengkim/article/details/76514558
 LI_92_Backpack
-LE_416_Partition_Equal_Subset_Sum
 LI_125_Backpack_II
 LI_440_Backpack_III                                                     ***
 LI_562_Backpack_IV                                                      ***
 LI_563_Backpack_V                                                       ***
 LE_377_Combination_Sum_IV                                 (lint 564)    ***
+LE_416_Partition_Equal_Subset_Sum
 LI_89_k_Sum                                                             ***
 LI_91_Minimum_Adjustment_Cost                                           ***
 
