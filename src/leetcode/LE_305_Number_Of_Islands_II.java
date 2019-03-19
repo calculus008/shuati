@@ -61,8 +61,8 @@ public class LE_305_Number_Of_Islands_II {
      *
      *  Key :
      *  1.Convert 2D position to a 1D index;
-     *  2.Each time we add a land in a cell, check its 4 neighbours, if the neighbour is also a land and it is not merged with the
-     *  current one, do merge. Keep count of the connected components
+     *  2.Each time we add a land in a cell, check its 4 neighbours, if the neighbour is also a land
+     *    and it is not merged with the current one, do merge. Keep count of the connected components
      *
      *  Time : O(n ^ 2), (not doing optimization (path compression and merge by rank))
      *  Space : O(n)

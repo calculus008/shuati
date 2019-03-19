@@ -1,3 +1,5 @@
+LE_415_Add_Strings
+
 LE_658_Find_K_Closest_Elements
 LE_116_Populating_Next_Right_Pointers_In_Each_Node
 LE_117_Populating_Next_Right_Pointers_In_Each_Node_II
@@ -30,3 +32,6 @@ LE_21_Merge_Two_Sorted_Lists
 LE_23_Merge_k_Sorted_Lists
 
 LE_269_Alien_Dictionary
+
+LE_964_Least_Operators_To_Express_Number
+LE_505_The_Maze_II

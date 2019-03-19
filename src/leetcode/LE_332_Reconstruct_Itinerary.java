@@ -12,9 +12,12 @@ public class LE_332_Reconstruct_Itinerary {
          Thus, the itinerary must begin with JFK.
 
          Note:
-         If there are multiple valid itineraries, you should return the itinerary that has the smallest lexical order when read as a single string.
+         If there are multiple valid itineraries, you should return the itinerary that has the smallest
+         lexical order when read as a single string.
+
          For example, the itinerary ["JFK", "LGA"] has a smaller lexical order than ["JFK", "LGB"].
          All airports are represented by three capital letters (IATA code).
+
          You may assume all tickets form at least one valid itinerary.
          Example 1:
          tickets = [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
