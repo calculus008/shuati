@@ -62,6 +62,7 @@ LE_167_Two_Sum_II_Array_Is_Sorted            (lint 608)
 LE_170_Two_Sum_III_Data_Structure_Design     (lint 607)
 LI_587_Two_Sum_Unique_Pairs
 LI_610_Two_Sum_Difference_Equals_To_Target   (**)
+LE_653_Two_Sum_IV_Input_Is_A_BST             (*****)
 LE_15_3Sum                                   (lint 57)
 LE_16_3Sum_Closest                           (lint 533)
 LE_18_4Sum                                   (lint 58)
@@ -168,6 +169,7 @@ LE_173_Binary_Search_Tree_Iterator           (lint 86)
 LE_272_Closest_BST_Value_II                  (lint 901)    (****) revisit (LINKEDIN)
 LE_270_Closest_BST_Value
 LE_510_Inorder_Successor_In_BST_II
+LE_653_Two_Sum_IV_Input_Is_A_BST
 
 Optional
 LE_94_Binary_Tree_Inorder_Traversal          (lint 67)
@@ -569,17 +571,22 @@ LE_132_Palindrome_Partition_II
 
 #Knapsack
 https://blog.csdn.net/luoshengkim/article/details/76514558
-LI_92_Backpack
+LI_92_Backpack                                                                 how full
 LI_125_Backpack_II
 LI_440_Backpack_III                                                     ***
 LI_562_Backpack_IV                                                      ***
-LI_563_Backpack_V                                                       ***
+LI_563_Backpack_V
+                                                    ***
 LE_377_Combination_Sum_IV                                 (lint 564)    ***
 LE_416_Partition_Equal_Subset_Sum
+LE_518_Coin_Change_II
+LE_926_Flip_String_To_Monotone_Increasing
+
 LI_89_k_Sum                                                             ***
 LI_91_Minimum_Adjustment_Cost                                           ***
 
-LE_926_Flip_String_To_Monotone_Increasing
+
+
 
 ====================================================
 

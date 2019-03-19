@@ -21,6 +21,18 @@ public class LI_550_Top_K_Frequent_Words_II {
          add("code")
          topk()
          >> ["code", "lint"]
+
+         Variation:
+         假设有个网站，后台有update接口：接一个字符串string，还有查询接口get:
+         返回按出现频率排序后的所有字符串。接受数据是以stream的形式，会不断接受新的string。
+         让设计update(string), get() 接口
+
+         For this variation, it returns all words, not just top k, so no need to
+         to the following in TreeSet in topK():
+             if (topk.size() > k) {
+                topk.pollLast();
+             }
+
      */
 
     public class TopK {
@@ -52,8 +64,9 @@ public class LI_550_Top_K_Frequent_Words_II {
         public void add(String word) {
             // Write your code here
             if (words.containsKey(word)) {
-                if (topk.contains(word))
+                if (topk.contains(word)) {
                     topk.remove(word);
+                }
                 words.put(word, words.get(word) + 1);
             } else {
                 words.put(word, 1);

@@ -19,7 +19,11 @@ public class  LE_173_Binary_Search_Tree_Iterator {
     /**
      * !!!
      * This basically is a variation of iterative version of inorder traversal
+     *
      * Refer to LE_94_Binary_Tree_Inorder_Traversal inorder iterative traversal
+     *
+     * Note :
+     * Space : O(h), h is height of BST.
      */
     public class BSTIterator {
         private Stack<TreeNode> stack;
@@ -53,6 +57,33 @@ public class  LE_173_Binary_Search_Tree_Iterator {
             cur = stack.pop();
             int val = cur.val;
             cur = cur.right;
+            return val;
+        }
+    }
+
+    public class BSTReverseIterator {
+        private Stack<TreeNode> stack;
+        private TreeNode cur;
+
+        public BSTReverseIterator(TreeNode root) {
+            stack = new Stack<>();
+            cur = root;
+        }
+
+        public boolean hasNext() {
+            if (!stack.isEmpty() || cur != null) return true;
+            return false;
+        }
+
+        public int next() {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.right;
+            }
+
+            cur = stack.pop();
+            int val = cur.val;
+            cur = cur.left;
             return val;
         }
     }

@@ -83,6 +83,16 @@ public class LE_322_Coin_Change {
     /**
      * DFS + Greedy
      * Time  : O(n * amount ^ 2)
+     * 
+     *  O(amount^n / (coin_1 * coin_2 * ... * coin_n))﻿
+     * 一共有n层递归，每一层的循环的上限是 amount / coin_i
+     * 所以就是 (amount / coin_1) *  (amount / coin_2) * ... (amount / coin_n)
+     *
+     * 递归展开后大概是这样...
+     * for (int i1 = 1; i1 <= amount / coin_1; ++i1)
+     *   for (int i2 = 1; i2 <= amount / coin_2; ++i2)
+     *     for (int i3 = 1; i2 <- amount / coin_3; ++i3)
+     *
      * Space : O(n)
      */
     class Solution3 {
@@ -109,6 +119,10 @@ public class LE_322_Coin_Change {
                 if (remain % coins[pos] == 0) {
                     res = Math.min(res, remain / coins[pos] + numOfCoins);
                 }
+
+                /**
+                 * !!!
+                 */
                 return;
             }
 

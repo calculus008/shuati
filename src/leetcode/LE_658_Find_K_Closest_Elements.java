@@ -1,8 +1,10 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by yuank on 6/27/18.
@@ -26,6 +28,41 @@ public class LE_658_Find_K_Closest_Elements {
 
          Medium
      */
+
+    /**
+     * Binary Search
+     * Time : O(logn), if given input is a list, we can do "subList()" to get final answer.
+     * subList() gets a view so it takes O(1).
+     *
+     * Assume we are taking A[i] ~ A[i + k -1] for final answer.
+     * We can binary research i
+     * We compare the distance between x - A[mid] and A[mid + k] - x
+     *
+     * If x - A[mid] > A[mid + k] - x,
+     * it means A[mid + 1] ~ A[mid + k] is better than A[mid] ~ A[mid + k - 1],
+     * and we have mid smaller than the right i.
+     * So assign left = mid + 1.
+     *
+     * Reversely, it's similar.
+     */
+    class Solution3 {
+        public List<Integer> findClosestElements(List<Integer> list, int k, int x) {
+//            List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+
+            int lo = 0, hi = list.size() - k;
+            while (lo < hi) {
+                int mid = (lo + hi) / 2;
+                if (x - list.get(mid) > list.get(mid + k) - x) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            return list.subList(lo, lo + k);
+        }
+    }
+
+
     /**
          https://www.jiuzhang.com/solution/find-k-closest-elements/#tag-highlight
 
@@ -102,6 +139,9 @@ public class LE_658_Find_K_Closest_Elements {
      *
      * This solution solves the issue by moving index high and low in a given range,
      * then return the sublist between high and low.
+     *
+     * Time complexity : O(log(n)+k)
+     * Space complexity : O(k)
      */
     public class Solution2 {
         public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
@@ -164,7 +204,7 @@ public class LE_658_Find_K_Closest_Elements {
                     }
                 }
 
-                return arr.subList(low, high + 1);//!!!"hight + 1", subList requires end index be none-inclusive
+                return arr.subList(low, high + 1);//!!!"high + 1", subList requires end index be none-inclusive
             }
         }
     }
