@@ -18,6 +18,13 @@ public class LE_34_Search_For_A_Range {
 
     //https://www.youtube.com/watch?v=pZ7ypg3mU64&list=PLvyIyKZVcfAlKHPFECFxlkG7jOvD64r9V&index=9
 
+    /**
+     * Similar
+     * Simple_Queries_With_Two_Arrays
+     *
+     * 这里不能用binary serach找upper/lower bound的方法，
+     * 因为我们需要知道target是否在nums中存在。
+     */
     public int[] searchRange(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return new int[]{-1, -1};

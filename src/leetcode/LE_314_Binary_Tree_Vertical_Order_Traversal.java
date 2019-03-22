@@ -122,9 +122,12 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
             /**
              Once we find the min we create n number of lists starting from min till max. Now when doing BFS,
              we need to start adding the elements to the correct lists which will be between 0 to n.
-             If you think about where the root will end up (which index in the cols list), it will be in the index at Math.abs(min).
-             If min = -3, that means we have 3 columns before the root node (0,1,2 will be occupied by nodes of the root's left subtree),
-             hence root will be in the |min| index.
+
+             If you think about where the root will end up (which index in the cols list), it will be in the index
+             at Math.abs(min).
+
+             If min = -3, that means we have 3 columns before the root node (0,1,2 will be occupied by nodes of
+             the root's left subtree), hence root will be in the |min| index.
 
              So -range[0] is simply a shift of index positions so all nodes end up in their corresponding lists.
              **/
@@ -157,22 +160,23 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
          * !!!
          * range[0] : offset from root location to the left most child (negative number)
          * range[1] : offset from root location fo the right most child (positive number)
-         * <p>
+         *
          * example:
          * 5 vertical levels in range[] and its index
-         * <p>
+         *
          * 0  1  2 3  4
          * -2,-1,0 1, 2
-         * 3            list Idx [2]
-         * /\
+         *
+         *         3            list Idx [2]
+         *        /\
+         *       /  \
+         *      9   8              [1, 3]
+         *     /\  /\
+         *    /  \/  \
+         *   4   01   7            [0, 2] [2, 4]
+         *  /\
          * /  \
-         * 9   8                  [1, 3]
-         * /\  /\
-         * /  \/  \
-         * 4  01   7            [0, 2] [2, 4]
-         * /\
-         * /  \
-         * 5   2                 [1] [3]
+         *5   2                   [1] [3]
          * <p>
          * answer:
          * [
@@ -195,25 +199,117 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
     }
 
     /**
+     *  Copied from LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree, solution 1.
+     *
+     *  Since this problem does not require values in the same level are sorted,
+     *  we can simply use set or list, instead of TreeSet
+     */
+    class Solution2 {
+        class Pair {
+            int row, col;
+            public Pair(int row, int col) {
+                this.row = row;
+                this.col = col;
+            }
+        }
+
+        int min_col;
+        int max_col;
+
+        public List<List<Integer>> verticalTraversal(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+
+            if (root == null) {
+                return res;
+            }
+
+            min_col = Integer.MAX_VALUE;
+            max_col = Integer.MIN_VALUE;
+
+            /**
+             * !!!
+             * "(a, b) -> a.row == b.row ? a.col - b.col : a.row - b.row"
+             * First sort by row, then by col
+             *
+             * The order of the elements is guaranteed by TreeSet
+             */
+            TreeMap<Pair, List<Integer>> map = new TreeMap<>((a, b) -> a.row == b.row ? a.col - b.col : a.row - b.row);
+
+            //find range
+            traverse(root, map, new Pair(0, 0));
+
+            int col = max_col - min_col + 1;
+
+            int offset = Math.abs(min_col);//!!!
+
+            for (int i = 0; i < col; i++) {
+                res.add(new ArrayList<Integer>());
+            }
+
+            for (Map.Entry<Pair, List<Integer>> e: map.entrySet()) {
+                Pair p = e.getKey();
+                int index = p.col + offset;//!!!
+                res.get(index).addAll(e.getValue());
+            }
+
+            return res;
+        }
+
+        private void traverse(TreeNode root, TreeMap<Pair, List<Integer>> map, Pair p) {
+            if (root == null) {
+                return;
+            }
+
+            min_col = Math.min(p.col, min_col);
+            max_col = Math.max(p.col, max_col);
+
+            if (!map.containsKey(p)) {
+                map.put(p, new ArrayList<>());
+            }
+            map.get(p).add(root.val);
+
+            traverse(root.left,  map, new Pair(p.row + 1, p.col - 1));
+            traverse(root.right, map, new Pair(p.row + 1, p.col + 1));
+        }
+    }
+
+    /**
      * Adapt from LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
      *
      * Changes :
      * TreeMap<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
      *
      * Use list instead of TreeSet, the values in the trees are not unique.
+     *
+     *         1
+     *        / \
+     *       2   3
+     *      / \ / \
+     *     4  56  7
+     *
+     * TreeMap:
+     * 0  0   [1]
+     * 1 -1   [2]
+     *    1   [3]
+     * 2 -2   [4]
+     *    0   [5,6]
+     *    2   [7]
      */
-    class Solution2 {
+    class Solution3 {
         class Solution {
             public List<List<Integer>> verticalOrder(TreeNode root) {
                 TreeMap<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
 
                 dfs(root, 0, 0, map);
 
+                //?? may not be correct
                 List<List<Integer>> list = new ArrayList<>();
                 for (TreeMap<Integer, List<Integer>> ys : map.values()) {
                     list.add(new ArrayList<>());
                     for (List<Integer> nodes : ys.values()) {
-                        list.get(list.size() - 1).addAll(nodes);
+                        for (int i : nodes) {
+                            list.get(list.size() - 1).add(i);
+                        }
                     }
                 }
                 return list;

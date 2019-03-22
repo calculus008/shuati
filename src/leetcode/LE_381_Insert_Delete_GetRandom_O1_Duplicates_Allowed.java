@@ -236,7 +236,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
      * 2.从list里删除。我们用#1里从map里拿到的index，用copy_delete-last可以保证删除是O(1)
      *
      * 最后在删除的同时，作为copy_delete-last的相应处理，应该把原先的list 里最后的元素在map里
-     * 相应的index值改变。这就是为什么我们要用Element class (have both val and idx). 如果
+     * 相应的index值改变。这就是为什么我们要用Element class (have both val and getIdx). 如果
      * 没有idx, 我们不知道在map的list里的什么位置去做改变。
      */
     class RandomizedCollection3 {

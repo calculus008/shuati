@@ -25,6 +25,8 @@ public class LE_265_Paint_House_II {
      dp[i][j] represents the min paint cost from house 0 to house i when house i use color j.
      Transition:
      dp[i][j] = Math.min(any k!= j| dp[i-1][k]) + costs[i][j].
+
+     是从Solution2优化而来的，都要会。
      */
     class Solution1 {
         public int minCostII(int[][] costs) {

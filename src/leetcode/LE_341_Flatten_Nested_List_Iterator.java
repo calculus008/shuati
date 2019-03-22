@@ -290,9 +290,9 @@ public class LE_341_Flatten_Nested_List_Iterator {
          *
          * 这里我们加index，免去了flatten的时间
          *
-         * Here, we use Pair.idx to remember the index in the list, every
+         * Here, we use Pair.getIdx to remember the index in the list, every
          * call to hasNext() will only extract one element from list and
-         * push into stack, then increase idx.
+         * push into stack, then increase getIdx.
          *
          * This works better for 'none-balanced' structure -
          * there are many elements in one list element.

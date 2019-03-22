@@ -315,7 +315,7 @@ public class LE_480_Sliding_Window_Median {
             /**
              * l : left side of window
              * r : right side of window
-             * idx : index in res[]
+             * getIdx : index in res[]
              */
             int l = 0;
             int idx = 0;

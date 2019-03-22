@@ -44,6 +44,7 @@ LE_285_Inorder_Successor_In_BST                          (***)
 LE_270_Closest_BST_Value
 LE_272_Closest_BST_Value_II                              (****)
 LE_99_Recover_BST
+LE_701_Insert_Into_A_Binary_Search_Tree
 
 Hard By Importance
 1.Very Important

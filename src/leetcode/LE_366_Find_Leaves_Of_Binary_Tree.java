@@ -64,6 +64,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
             /**
              * 求出每个Node的height就是它在list中相对应的位置
              *
+             * !!!
              * 这是这道题的关键，实际上，这里的level是reverse height,
              * 也就是，从叶子节点往上，依次返回 0, 1, 2..., 所以它可以被
              * 用作res里的下标。
@@ -211,7 +212,8 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
             res.add(new ArrayList<Integer>());
         }
 
-        res.get(height).add(node.val);
+        //heigth - 1??, first level returns 1, the index should be 0
+        res.get(height - 1).add(node.val);
         map.put(node, height);
 
         return height;

@@ -4,7 +4,8 @@ import java.util.HashMap;
 
 public class LI_522_Tiny_Url_II {
     /**
-     * As a follow up for Tiny URL, we are going to support custom tiny url, so that user can create their own tiny url.
+     * As a follow up for Tiny URL, we are going to support custom tiny url, so that user can create their own
+     * tiny url.
      *
      * Example
      * createCustom("http://www.lintcode.com/", "lccode")

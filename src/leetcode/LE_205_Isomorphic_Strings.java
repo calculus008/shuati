@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by yuank on 3/26/18.
  */
 public class LE_205_Isomorphic_Strings {
-    /*
+    /**
         Given two strings s and t, determine if they are isomorphic.
 
         Two strings are isomorphic if the characters in s can be replaced to get t.
@@ -25,8 +25,13 @@ public class LE_205_Isomorphic_Strings {
         You may assume both s and t have the same length.
      */
 
-    //Solution 1 : 建立s中char和t中char的映射关系。假定s和t是isomorphic, 则s和t在同一位置的char必然有一一对应的关系。不满足这一条件则必然为false
-    //Time and Space : O(n)
+
+    /**
+     * Solution 1 :
+     * 建立s中char和t中char的映射关系。假定s和t是isomorphic, 则s和t在同一位置的char必然有一一对应的关系。
+     * 不满足这一条件则必然为false
+     * Time and Space : O(n)
+     * **/
     public boolean isIsomorphic1(String s, String t) {
         if (s == null || t == null) return true;
         Map<Character, Character> map = new HashMap<>();
@@ -51,8 +56,11 @@ public class LE_205_Isomorphic_Strings {
         return true;
     }
 
-    //Solution 2 : Time : O(n), Space : O(1)
-    /*
+
+    /**
+      Solution 2 :
+      Time : O(n), Space : O(1)
+
       Case 1: s = "foo", t = "bar"
       i = 0:  ascii value - f -> 102, b -> 98, a[102] = b[98] = 98
       i = 1:  ascii value - o -> 111, a -> 97, a[111] = b[97] = 97
@@ -72,6 +80,12 @@ public class LE_205_Isomorphic_Strings {
             if (a[s.charAt(i)] != b[t.charAt(i)]) {
                 return false;
             } else {
+                /**
+                 * here : a[s.charAt(i)] == b[t.charAt(i)]
+                 * 这包括两种情况：
+                 * 1.a[] and b[] not set yet, they both have default value 0
+                 * 2.a[] and b[] have been set with the following logic.
+                 */
                 a[s.charAt(i)] = t.charAt(i);
                 b[t.charAt(i)] = t.charAt(i);
             }

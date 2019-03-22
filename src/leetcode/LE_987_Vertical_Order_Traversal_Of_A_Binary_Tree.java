@@ -110,9 +110,12 @@ public class LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree {
              * !!!
              * "(a, b) -> a.row == b.row ? a.col - b.col : a.row - b.row"
              * First sort by row, then by col
+             *
+             * The order of the elements is guaranteed by TreeSet
              */
             TreeMap<Pair, TreeSet<Integer>> map = new TreeMap<>((a, b) -> a.row == b.row ? a.col - b.col : a.row - b.row);
 
+            //find range
             traverse(root, map, new Pair(0, 0));
 
             int col = max_col - min_col + 1;

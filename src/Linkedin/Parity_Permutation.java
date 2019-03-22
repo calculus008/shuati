@@ -59,15 +59,6 @@ public class Parity_Permutation {
         }
     }
 
-    private static boolean isValid(List<Integer> list) {
-        for (int i = 1; i < list.size(); i++) {
-            if (list.get(i) % 2 == list.get(i - 1) % 2) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static void main(String[] args) {
         List<List<Integer>> res = permutation(4);
 

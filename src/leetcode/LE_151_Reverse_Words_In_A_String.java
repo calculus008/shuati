@@ -7,7 +7,7 @@ import java.util.Collections;
  * Created by yuank on 3/19/18.
  */
 public class LE_151_Reverse_Words_In_A_String {
-    /*
+    /**
         Given an input string, reverse the string word by word.
 
         For example,
@@ -35,48 +35,51 @@ public class LE_151_Reverse_Words_In_A_String {
          return String.join(" ", words);
      }
 
-    //Time : O(n), Space : O(1)
-    public String reverseWords3(String s) {
-        if (null == s || s.length() == 0) return "";
-        int n = s.length();
+    /**
+     * Time  : O(n),
+     * Space : O(1)
+     **/
+    class Solution {
+        public String reverseWords3(String s) {
+            if (null == s || s.length() == 0) return "";
+            int n = s.length();
 
-        char[] ch = s.toCharArray();
-        reverse(ch, 0, n - 1);
+            char[] ch = s.toCharArray();
+            reverse(ch, 0, n - 1);
 
-        int i = 0, j = 0;
+            int i = 0, j = 0;
 
-        while (i < n) {
-            //!!!notice "i<j" and "j<i", a clever way of moving both pointers forward
-            while (i < j || i < n && ch[i] == ' ') i++;
-            while (j < i || j < n && ch[j] != ' ') j++;
-            reverse(ch, i, j - 1);
+            while (i < n) {
+                //!!!notice "i<j" and "j<i", a clever way of moving both pointers forward
+                while (i < j || i < n && ch[i] == ' ') i++;
+                while (j < i || j < n && ch[j] != ' ') j++;
+                reverse(ch, i, j - 1);
+            }
+
+            return cleanup(ch);
         }
 
-        return cleanup(ch);
-    }
+        private String cleanup(char[] ch) {
+            int i = 0, j = 0;
+            int n = ch.length;
 
-    private String cleanup(char[] ch) {
-        int i = 0, j = 0;
-        int n = ch.length;
+            while (j < n) {
+                while (j < n && ch[j] == ' ') j++;
+                while (j < n && ch[j] != ' ') ch[i++] = ch[j++];
+                while (j < n && ch[j] == ' ') j++;
+                //!!!
+                if (j < n) ch[i++] = ' ';
+            }
 
-        while (j < n) {
-            while (j < n && ch[j] == ' ') j++;
-            while (j < n && ch[j] != ' ') ch[i++] = ch[j++];
-            while (j < n && ch[j] == ' ') j++;
-            //!!!
-            if (j < n) ch[i++] = ' ';
+            return new String(ch).substring(0, i);
         }
 
-        return new String(ch).substring(0, i);
-    }
-
-    private void reverse(char[] ch, int i, int j) {
-        while (i < j) {
-            char temp = ch[i];
-            ch[i++] = ch[j];
-            ch[j--] = temp;
+        private void reverse(char[] ch, int i, int j) {
+            while (i < j) {
+                char temp = ch[i];
+                ch[i++] = ch[j];
+                ch[j--] = temp;
+            }
         }
     }
-
-
 }

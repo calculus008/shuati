@@ -57,7 +57,7 @@ public class LE_773_Sliding_Puzzle {
      * Same as LI_794_Sliding_Puzzle_II
      *
      * Since the board is small, can optimize it by pre-computing all valid neighbors of '0' at each location :
-     *  idx[] {{1, 3}, {0, 2, 4}, {1, 5}, {0, 4}, {1, 3, 5}, {2, 4}};
+     *  getIdx[] {{1, 3}, {0, 2, 4}, {1, 5}, {0, 4}, {1, 3, 5}, {2, 4}};
      */
     class Solution {
         public int slidingPuzzle(int[][] board) {

@@ -22,6 +22,7 @@ LE_658_Find_K_Closest_Elements               (lint 460)  (****)
 LI_585_Maximum_Number_In_Mountain_Sequence
 LI_458_Last_Position_Of_Target
 LI_447_Search_In_A_Big_Sorted_Array          (**)
+LE_633_Sum_Of_Square_Numbers
 
 #Upper/Lower Bound
 Simple_Queries_With_Two_Arrays
@@ -115,6 +116,7 @@ LE_269_Alien_Dictionary                                      (*****)  !!!!
 
 LE_133_Clone_Graph                           (lint 137)
 LE_297_Serialize_And_Deserialize_Binary_Tree (lint 7)
+LE_428_Serialize_And_Deserialize_Nary_Tree
 
 LE_127_Word_Ladder
 LI_120_Word_Ladder
@@ -170,6 +172,7 @@ LE_272_Closest_BST_Value_II                  (lint 901)    (****) revisit (LINKE
 LE_270_Closest_BST_Value
 LE_510_Inorder_Successor_In_BST_II
 LE_653_Two_Sum_IV_Input_Is_A_BST
+LE_701_Insert_Into_A_Binary_Search_Tree
 
 Optional
 LE_94_Binary_Tree_Inorder_Traversal          (lint 67)
@@ -270,6 +273,7 @@ LE_346_Moving_Average_From_Data_Stream                    (lint 642)
 LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
 LE_23_Merge_k_Sorted_Lists                                (lint 104)
 LE_632_Smallest_Range                                     (***)
+LE_636_Exclusive_Time_Of_Functions
 
 LE_402_Remove_K_Digits                                    (***)
 
@@ -305,6 +309,7 @@ LE_380_Insert_Delete_GetRandom_O1                         (lint 657)
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed      (lint 954)
 LE_676_Implement_Magic_Dictionary
 LE_716_Max_Stack                                          (Solution 2, DDL + TreeMap)
+LE_706_Design_HashMap
 Retain_Best_Cache
 
 
@@ -481,6 +486,7 @@ LE_227_Basic_Calculator_II                                (lint 980)
 LE_772_Basic_Calculator_III                               (lint 849, 368)
 LE_770_Basic_Calculator_IV                                (lint 981)   (*)
 LE_150_Evaluate_Reverse_Polish_Notation
+LE_726_Number_Of_Atoms
 
 ====================================================
 
@@ -640,3 +646,8 @@ LI_435_Post_Office_Problem (1D)  (DP)
 LI_778_Pacific_Atlantic_Water_Flow
 
 #leetcode Minimax type problems
+
+====================================================
+
+Reservoir Sampling
+LE_382_Linked_List_Random_Node

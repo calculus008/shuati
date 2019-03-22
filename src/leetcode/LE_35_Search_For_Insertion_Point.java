@@ -4,8 +4,9 @@ package leetcode;
  * Created by yuank on 2/26/18.
  */
 public class LE_35_Search_For_Insertion_Point {
-    /*
-    Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+    /**
+    Given a sorted array and a target value, return the index if the target is found.
+    If not, return the index where it would be if it were inserted in order.
 
     You may assume no duplicates in the array.
 
@@ -65,7 +66,7 @@ public class LE_35_Search_For_Insertion_Point {
         } else if(target <= nums[end]) {
             return end;
         } else {
-            return end + 1;
+            return end + 1;//!!!
         }
     }
 }
