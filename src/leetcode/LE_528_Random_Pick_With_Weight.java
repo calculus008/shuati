@@ -37,30 +37,52 @@ public class LE_528_Random_Pick_With_Weight {
 
     /**
      * Pre sum + Binary Search
+     *
+     * Use accumulated freq array to get idx.
+     * w[] = {2,5,3,4} => wsum[] = {2,7,10,14}
+     * then get random val random.nextInt(14)+1, idx is in range [1,14]
+     *
+     * idx in [1,2] return 0
+     * idx in [3,7] return 1
+     * idx in [8,10] return 2
+     * idx in [11,14] return 3
+     *
+     * then become LE_35_Search_For_Insertion_Point . Search Insert Position
+     * Time: O(n) to init, O(logn) for one pick
+     * Space: O(n)
      */
+
     class Solution {
-        List<Integer> psum = new ArrayList<>();
-        int tot = 0;
-        Random rand = new Random();
+        int[] sums;
+        Random rand;
 
         public Solution(int[] w) {
-            for (int x : w) {
-                tot += x;
-                psum.add(tot);
+            rand = new Random();
+            sums = new int[w.length];
+
+            for (int i = 0; i < w.length; i++) {
+                sums[i] += w[i];
             }
         }
 
         public int pickIndex() {
-            int targ = rand.nextInt(tot);
+            int target = rand.nextInt(sums[sums.length - 1]) + 1;
+            int l = 0;
+            int r = sums.length - 1;
 
-            int lo = 0;
-            int hi = psum.size() - 1;
-            while (lo != hi) {
-                int mid = (lo + hi) / 2;
-                if (targ >= psum.get(mid)) lo = mid + 1;
-                else hi = mid;
+            while (l < r) {
+                int m = l + (r - l) / 2;
+
+                if (sums[target] == m) {
+                    return m;
+                } else if (sums[target] < m) {
+                    l = m + 1;
+                } else {
+                    r = m;
+                }
             }
-            return lo;
+
+            return l;
         }
     }
 }
