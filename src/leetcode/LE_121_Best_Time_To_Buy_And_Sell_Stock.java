@@ -37,4 +37,39 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
 
         return res;
     }
+
+    /**
+     * follow up, return value can be negative,
+     * meaning we must make a buy and a sell, if
+     * we can't profit, try to return the min loss.
+     */
+    public static int maximumProfit(int[] prices) {
+        if (null == prices || prices.length < 2) {
+            return 0;
+        }
+
+        int min = prices[0];
+        int res = Integer.MIN_VALUE;
+        int diff = Integer.MIN_VALUE;
+
+        for (int i = 1; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+
+            diff = Math.max(diff, prices[i] - prices[i - 1]);
+
+            System.out.println(diff);
+            res = Math.max(res, prices[i] - min);
+        }
+
+        if (res == 0 && diff != 0) {
+            return diff;
+        } else {
+            return res;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] test = {10, 7, 6, 6, 6, 5};
+        System.out.println(maximumProfit(test));
+    }
 }
