@@ -82,3 +82,145 @@ LE_722_Remove_Comments
 LE_726_Number_Of_Atoms
 LE_730_Count_Different_Palindromic_Subsequences   (***)
 LE_796_Rotate_String
+
+======================================
+
+2019
+LE_261_Graph_Valid_Tree
+followup 改成判断存不存在环
+
+LE_272_Closest_BST_Value_II (***)
+LE_256_Paint_House (***)
+LE_265_Paint_House_II  (followup)
+
+LE_366_Find_Leaves_Of_Binary_Tree
+(binary tree leaves的变种把bt变成了graph，没什么太大区别，注意一下recursion时候返回条件就好了)
+
+LE_243_Shortest_Word_Distance
+LE_244_Shortest_Word_Distance_II
+LE_245_Shortest_Word_Distance_III
+写完问了些扩展问题，比如如果把它扩展成一个service需要怎么部署，数据库cache分布式方面扯一扯，没什么问题
+
+LE_339_Nested_List_Weight_Sum
+LE_895_Maximum_Frequency_Stack
+LE_981_Time_Based_Key_Value_Store
+LE_352_Data_Stream_As_Disjoint_Intervals
+LE_277_Find_The_Celebrity
+(变种，把api改成了矩阵作为input表示i是否认识j，很简单自己写个函数当api就行了)
+
+LE_22_Generate_Parentheses
+LE_241_Different_Ways_To_Add_Parentheses
+LE_301_Remove_Invalid_Parentheses
+LE_32_Longest_Valid_Parentheses
+LE_678_Valid_Parenthesis_String
+
+LE_611_Valid_Triangle_Number
+优化，给了二分查找和从尾扫描两种方法，之后又让找出所有combination，烙印还要求楼主比对了他的方法的效率和楼主的效率，
+
+(***)
+LE_235_Lowest_Common_Ancestor_Of_BST
+LE_236_Lowest_Common_Ancestor_Of_BT
+follow up是如果有parent pointer怎么做，constant space : LE_160_Intersection_Of_Tow_Linked_List
+
+
+LE_373_Find_K_Pairs_With_Smallest_Sums (***)
+follow up，假设是两个超大的stream，楼主说存在一个priority queue里，存四个，烙印不是很明白，但时间差不多了，他说very close
+
+LE_716_Max_Stack (***)
+LE_730_Count_Different_Palindromic_Subsequences (***)
+要求输出Set不是数字, refer to the paper downloaded.
+
+LE_08_String_To_Integer
+LE_65_Valid_Number
+但是没有e, 00算invalid
+
+LE_170_Two_Sum_III_Data_Structure_Design
+input和sum两种最优都要写。分别是预处理所有的sum以及简单hashmap，每次求是否有sum再on走一遍
+
+LE_282_Expression_Add_Operators
+LE_127_Word_Ladder
+
+LE_150_Evaluate_Reverse_Polish_Notation （***）
+第一题 follow up if not just "+ - * /"
+比如阶乘 ！只需要一个数字
+
+LE_341_Flatten_Nested_List_Iterator (***)
+follow up 比较多， 首先写了个preprocessing using dfs， 就是recursion的写法。后来要求优化成iterative的形式;
+再后来，讨论了下极端情况， 也就是tree不balance， 方法就是push到stack之前不做flattening， 记下一个index。当时脑子比较懵， 没写完，刚刚写了一下post到了里的口德里。
+https://leetcode.com/problems/fl ... flattening-the-list
+
+虽然average hasNext()的时间复杂度是O(1), 但是极端情况下，hasNext()的时间复杂度是O(n)。加index，免去了flatten的时间
+
+LE_149_Max_Points_On_A_Line
+
+LE_189_Rotate_Array (similar problem : Sort_Odd_Even)
+)
+
+要求in-space，不能自己copy一份出来做
+
+LE_973_K_Closest_Points_To_Origin
+Max Heap
+
+LE_380_Insert_Delete_GetRandom_O1
+Followed with :
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+
+LE_198_House_Robber
+LE_746_Min_Cost_Climbing_Stairs
+LE_213_House_Robber_II
+LE_337_House_Robber_III
+
+LE_387_First_Unique_Character_In_A_String
+此后他不会出现，但是会对time space优化考察
+(LI_209_First_Unique_Character_In_A_String
+ LI_685_First_Unique_Number_In_Stream
+)
+
+LE_200_Number_Of_Islands
+LE_76_Minimum_Window_Substring
+
+LE_364_Nested_List_Weight_Sum_II
+LE_339_Nested_List_Weight_Sum
+
+LE_42_Trapping_Rain_Water
+LE_239_Sliding_Window_Maximum
+LE_68_Text_Justification
+LE_516_Longest_Palindromic_Subsequence
+让返回所有combination。
+
+LE_254_Factor_Combinations
+
+LE_156_Binary_Tree_Upside_Down
+LI_596_Minimum_Subtree  (??)
+LE_310_Minimum_Height_Trees
+LE_111_Min_Depth_Of_Binary_Tree
+LE_100_Same_Tree
+
+LE_53_Maximum_Subarray
+
+LE_364_Nested_List_Weight_Sum_II
+
+LE_152_Maximum_Product_Subarray
+LE_318_Maximum_Product_Of_Word_Lengths
+LE_628_Maximum_Product_Of_Three_Numbers
+
+LE_47_Permutation_II
+
+LE_68_Text_Justification
+LE_62_Unique_Path
+
+LE_464_Can_I_Win
+
+LE_142_Linked_List_Cycle_II
+LE_149_Max_Points_On_A_Line
+
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+(multi-thread, 问基础知识，然后lock该加在哪一行)
+
+LE_352_Data_Stream_As_Disjoint_Intervals
+区别是要找到total covered length。
+
+LE_364_Nested_List_Weight_Sum_II
+
+LE_359_Logger_Rate_Limiter                        (***)
+LI_215_Rate_Limiter
