@@ -37,7 +37,7 @@ public class LE_432_All_O_One_Data_Structure {
      *   nodeMap   - values to node (so that we can find the node (bucket) in DDL with a
      *               given value in O(1)).
      *
-     *   DDL - kind of like insertion sort, for a new key, insert at the head.
+     *   DLL - kind of like insertion sort, for a new key, insert at the head.
      *         maintain order in inc() and dec(). So, max key is always at the
      *         end of the DDL and min key is always at the head of the DDL.
      *
@@ -50,7 +50,7 @@ public class LE_432_All_O_One_Data_Structure {
      *   to map frequency to LinkedHashSet.
      *
      *   对这道题，关键要求是要能同时getMaxKey() and getMinKey() in O(1), 所以要用
-     *   DDL, 要动态的维护其order, 保证最小和最大各在头和尾。
+     *   DLL, 要动态的维护其order, 保证最小和最大各在头和尾。
      *
      * 2.Add head and tail to list : head <=> n1 <=> n2 .... <=> tail
      *   This way there's always a node for pre and next pointers,

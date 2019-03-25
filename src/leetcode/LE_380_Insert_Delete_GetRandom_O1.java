@@ -59,6 +59,10 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
      * and List.
      */
     public class RandomizedSet {
+        /**
+         * HashMap
+         * Key : element, Value : the location (index) of this element in the list
+         */
         private HashMap<Integer, Integer> locs;
         private List<Integer> nums;
 

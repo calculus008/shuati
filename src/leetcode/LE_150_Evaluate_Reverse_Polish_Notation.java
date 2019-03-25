@@ -20,7 +20,11 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
     */
 
     //Time and Space : O(n)
-    public static int evalRPN(String[] tokens) {
+    public static int evalRPN(String[] tokens) throws IllegalArgumentException, ArithmeticException{
+        if (null == tokens) {
+            throw new IllegalArgumentException("input can not be null");
+        }
+
         Stack<Integer> stack = new Stack<>();
         int res = 0;
 
@@ -37,7 +41,9 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
                 int a = stack.pop();//must do this way, because we do "b/a", can't do it in one line
                 int b = stack.pop();
 
-                if (a == 0) throw new IllegalArgumentException("divisor can't be 0.");
+                if (a == 0) {
+                    throw new ArithmeticException("divisor can't be 0.");
+                }
 
                 stack.push(b / a);
 //            } else if (token.equals("!")) {
@@ -46,6 +52,17 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
             } else {
                 stack.push(Integer.parseInt(token));
             }
+        }
+
+        return stack.pop();
+    }
+
+    /**
+     * replace "stack.pop()" with this function to detect wrong sequence in input.
+     */
+    private int pop(Stack<Integer> stack) throws IllegalArgumentException {
+        if (stack.isEmpty()) {
+            throw new IllegalArgumentException("illegal argument");
         }
 
         return stack.pop();

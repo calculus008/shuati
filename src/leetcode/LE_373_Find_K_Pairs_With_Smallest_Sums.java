@@ -106,8 +106,9 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
             int len2 = nums2.length;
             List<int[]> result = new ArrayList<>();
 
-            if(len1 == 0 || len2==0 || k<1)
+            if(len1 == 0 || len2 == 0 || k < 1) {
                 return result;
+            }
 
             PriorityQueue<Element> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
             pq.offer(new Element(0, 0, nums1[0]+nums2[0]));
@@ -156,6 +157,10 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
      *
      * 适用于follow up：
      * 假设是两个超大的sorted stream.
+     *
+     * 唯一要改变的就是， 不能用visited[][]去判断是否访问过。
+     *
+     * Set<Pair>? (Pair has x and y coordinates) ??
      */
     public class Solution3 {
 

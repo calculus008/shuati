@@ -19,7 +19,7 @@ public class LE_213_House_Robber_II {
      */
 
     /**
-     * rob 0, not rob n-1 || rob 0, not rob n-1      ==>rob(0, nums.length-2, nums)
+     * rob 0, not rob n-1 || rob 0, not rob n-1     ==>rob(0, nums.length-2, nums)
      * not rob 0, rob n-1 || not rob 0,not rob n-1  ==>rob(1, nums.length-1, nums)
      */
     public int rob(int[] nums) {

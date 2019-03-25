@@ -50,15 +50,19 @@ public class LE_337_House_Robber_III {
 
          https://leetcode.com/problems/house-robber-iii/discuss/79330/Step-by-step-tackling-of-the-problem
 
-         Now let's take one step back and ask why we have overlapping subproblems. If you trace all the way back to the beginning,
-         you'll find the answer lies in the way how we have defined rob(root). As I mentioned, for each tree root, there are two
-         scenarios: it is robbed or is not. rob(root) does not distinguish between these two cases, so "information is lost as the
-         recursion goes deeper and deeper", which results in repeated subproblems.
+         Now let's take one step back and ask why we have overlapping subproblems.
+         If you trace all the way back to the beginning, you'll find the answer lies
+         in the way how we have defined rob(root). As I mentioned, for each tree root,
+         there are two scenarios: it is robbed or is not. rob(root) does not distinguish
+         between these two cases, so "information is lost as the recursion goes deeper
+         and deeper", which results in repeated subproblems.
 
-         If we were able to maintain the information about the two scenarios for each tree root, let's see how it plays out.
-         Redefine rob(root) as a new function which will return an array of two elements:
+         If we were able to maintain the information about the two scenarios for each
+         tree root, let's see how it plays out. Redefine rob(root) as a new function
+         which will return an array of two elements:
 
-          The first element of which denotes the maximum amount of money that can be robbed if root is not robbed;
+          The first element of which denotes the maximum amount of money that can be
+          robbed if root is not robbed;
           The second element signifies the maximum amount of money robbed if it is robbed.
      **/
     public int rob(TreeNode root) {

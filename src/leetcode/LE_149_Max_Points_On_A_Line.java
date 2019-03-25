@@ -29,7 +29,7 @@ public class LE_149_Max_Points_On_A_Line {
         计算分数时先求分子分母的最大公约数gcd，再都除以gcd
         重合的点特殊处理
 
-        Since we use String to represnet slop and use as key in map,
+        Since we use String to represent slop and use as key in map,
         we avoid all the issues of calculating slop.
         */
             int l = points.length;

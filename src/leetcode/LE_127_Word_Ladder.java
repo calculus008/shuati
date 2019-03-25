@@ -430,12 +430,18 @@ public class LE_127_Word_Ladder {
 
 
     /**
-     * What if you are challenged of NOT using a - z?
+     * What if you are challenged of NOT using 'a' ~ 'z'?
      *
      * First build the buckets, for each word, we replace each letter as '_' to get the bucket
      * ex. "HITS" -> "_ITS" and "H_TS" and "HI_S" and "HIT_" then put the word into the bucket
      * so the words in each bucket are the next word to each other, only differs in one letter
-     * then use BFS to traverse from the begin word, each time we meet a word, get all the buckets it could have and find the next word
+     * then use BFS to traverse from the begin word, each time we meet a word, get all the buckets
+     * it could have and find the next word.
+     *
+     * For example :
+     * "hit", "hot", they are neighbours to each other, in HashMap, there's an entry
+     *
+     * "h_t" -> ["hit", "hot"]
      *
      * Time complexity: O(mn) + O(mn),
      * n - number of words, m- average length of word, first one is build buckets, second is BFS
@@ -474,8 +480,8 @@ public class LE_127_Word_Ladder {
             int size = queue.size();
 
             for (int i = 0; i < size; i++) {
-                String now = queue.poll();
-                char[] arr = now.toCharArray();
+                String cur = queue.poll();
+                char[] arr = cur.toCharArray();
 
                 for (int j = 0; j < arr.length; j++) {
                     char original = arr[j];
@@ -485,13 +491,13 @@ public class LE_127_Word_Ladder {
 
                     for (String s3 : map.get(s2)) {
                         if (end.equals(s3)) {
-                            res.put(s3, now);
+                            res.put(s3, cur);
                             return convertMapToList(res, start, end);
                         }
 
                         if (!visited.contains(s3)) {
                             visited.add(s3);
-                            res.put(s3, now);
+                            res.put(s3, cur);
                             queue.offer(s3);
                         }
                     }
@@ -506,19 +512,19 @@ public class LE_127_Word_Ladder {
 
 
     List<String> convertMapToList(Map<String, String> map, String beginWord, String endWord) {
-        LinkedList<String> res = new LinkedList<String>();
+        List<String> res = new ArrayList<String>();
 
         while (!map.get(endWord).equals(beginWord)) {
-            res.add(endWord);
+            res.add(0, endWord);
             endWord = map.get(endWord);
         }
 
-        res.add(endWord);
-        res.add(beginWord);
+        res.add(0, endWord);
+        res.add(0, beginWord);
 
-        for (int i = res.size() - 1; i >= 0; i--) {
-            System.out.print(res.get(i) + "==");
-        }
+//        for (int i = res.size() - 1; i >= 0; i--) {
+//            System.out.print(res.get(i) + "==");
+//        }
         return res;
     }
 }

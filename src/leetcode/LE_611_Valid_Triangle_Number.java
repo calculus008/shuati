@@ -31,7 +31,7 @@ public class LE_611_Valid_Triangle_Number {
      */
 
     /**
-     * Time : O(n ^ 2), Space : O(1
+     * Time : O(n ^ 2), Space : O(1)
      **/
     class Solution1 {
         public int triangleNumber(int[] nums) {

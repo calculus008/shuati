@@ -12,11 +12,49 @@ public class Sort_Odd_Even {
      * Vairation of LE_905_Sort_Array_By_Parity
      */
 
+    /**
+     *    scan array, do nothing if the number is positive, until we see a negative number :
+     *    1, 7, -5, 9, -12, 15
+     *  left    i
+     *
+     *    swap numbers at left and i :
+     *    -5, 7, 1, 9, -12, 15
+     *  left     i
+     *
+     *    left advances by 1:
+     *    -5, 7, 1, 9, -12, 15
+     *      left i
+     *
+     *    -5, 7, 1, 9, -12, 15
+     *      left i
+     *
+     *    -5, 1, 7, 9, -12, 15
+     *      left i
+     *
+     *    -5, 1, 7, 9, -12, 15
+     *      left        i
+     *
+     *    -5, -12, 7, 9, 1, 15
+     *           left    i
+     *
+     *    -5, -12, 9, 7, 1, 15
+     *           left    i
+     *
+     *    -5, -12, 1, 7, 9, 15
+     *           left    i
+     *
+     *
+     */
     public static void oddEven(int[] nums) {
         int left = 0;
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] < 0) {
                 if (left == i) {
+                    /**
+                     * left should try to point to positive number,
+                     * here it points negative, so we need to move it
+                     * forward.
+                     */
                     left++;
                 } else {
                     int temp = nums[left];
@@ -25,6 +63,17 @@ public class Sort_Odd_Even {
 
                     left++;
 
+                    /**
+                     *  两个swap 吧交换后的left ～ i的正数部分恢复原来的顺序关系
+                     *
+                     *   1 2 3 4 5 -1
+                     *  -1 2 3 4 5  1
+                     *     ———————
+                     *  -1 5 4 3 2  1
+                     *     ——————————
+                     *
+                     *  -1 1 2 3 4  5
+                     */
                     swap(nums, left, i - 1);
                     swap(nums, left, i);
                 }

@@ -49,7 +49,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
         so, for each inserted value, need to save its index in list in LinkedHashSet.
 
         1.To start, we know HashMap satisfies insert/remove in O(1), but not random retrieval.
-          So we need to another data structure.
+          So we need another data structure.
         2.ArrayList "list" is the data structure satisfies random retrieval requirements.
         3.HashMap uses the input val as key, the value is set, which stores the indexes of the key value
           in ArrayList "nums"
@@ -65,7 +65,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
           This solution is based on assumption :
           LinkedHashSet.remove() is O(1)
 
-          "Using LinkedHashSet can be considered as O(1) if we only get the first element to remove."
+          "Using LinkedHashSet can be considered as O(1) if we only get the FIRST element to remove."(!!!)
 
      **/
     class RandomizedCollection1 {
@@ -246,7 +246,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
          *
          * We save it in list, the purpose:
          * When doing remove(), use it to find the location to update in the HashMap list
-         * when we move the end element to overwrite the to be deleted element in list.
+         * when we move the end element to overwrite the one that will be deleted element in list.
          */
         class Element {
             int idx, val;
@@ -292,6 +292,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
              * list.remove(), return value : the element previously at the specified position.
              *
              * Also, remove last element in ArrayList is O(1).
+             * https://stackoverflow.com/questions/43145395/time-complexity-while-deleting-last-element-from-arraylist-and-linkedlist
              */
             int targetIdx = map.get(val).remove(map.get(val).size() - 1);
 

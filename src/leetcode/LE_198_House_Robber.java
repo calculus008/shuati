@@ -22,6 +22,9 @@ public class LE_198_House_Robber {
         }
 
         int len = nums.length;
+        /**
+         * dp[i] : max robbed for the first i houses (0 ~ i-1)
+         */
         int[] dp = new int[len];
 
         for (int i = 0; i < len; i++) {

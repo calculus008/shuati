@@ -45,8 +45,8 @@ public class LE_189_Rotate_Array {
         }
     }
 
-    //solution 12 with extra space
-    //Time : O(n), Space : O(1)
+    //solution 2 with extra space
+    //Time : O(n), Space : O(n)
     public void rotate(int[] nums, int k) {
         int[] old = nums.clone();
 

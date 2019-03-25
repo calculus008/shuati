@@ -39,6 +39,12 @@ public class LE_715_Range_Module {
 
     /**
      * TreeMap
+     *
+     * Time
+     * addRange/removeRange : O(mlogn), m # of overlapping intervals
+     * query : O(logn)
+     *
+     * Space : O(n)
      */
     class RangeModule {
         TreeMap<Integer, Integer> intervals = new TreeMap<>();
