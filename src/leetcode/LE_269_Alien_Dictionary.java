@@ -50,6 +50,10 @@ public class LE_269_Alien_Dictionary {
      */
 
     /**
+     * https://medium.com/@wangfengfight/leetcode-269-alien-dictionary-and-followups-77c0390629da
+     */
+
+    /**
      Topological Sort
      1.Create graph in HashMap
      2.Find the start node, which is the one that has 0 in degree.

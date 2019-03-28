@@ -1,0 +1,27 @@
+Minimize the largest sum among these M groups :
+LE_410_Split_Array_Largest_Sum
+
+不同的马甲
+LE_1014_Capacity_To_Ship_Packages_Within_D_Days
+1. 一片巧克力数组分成K块，数字代表甜度，第一个人会想拿最甜的一块，把他平分成一个状态使得第一个人拿到的总甜度是最小的，
+   求第一人拿到的甜度
+
+2. 一个必须依照数组顺序完成的工作，数字代表工作难易度，分成K天完工，尽可能把困难度最高的一天变得比较不累，求最累的一天的困难度
+   LE_875_Koko_Eating_Bananas
+
+3. 一个数组代表一排的书，数字代表页数，现在必须把相邻的书分成K组放置到K台打印机，设置一个配置方法使得需要打印最多页数的机器打印最少页，
+   求工作量最多的打印机需要打印的页数
+   LI_437_Copy_Books
+   LI_438_Copy_Books_II
+
+4. 一个包裹数组，数字代表重量，依包裹排列顺序分成K批寄送，使得最重的一批重量最小，求最重一批重量（利口比赛刚出的）
+
+Variations :
+LE_774_Minimize_Max_Distance_To_Gas_Station
+
+Max of the minimum among M groups :
+Chocolate_Sweetness
+
+
+LE_128_Longest_Consecutive_Sequence
+
