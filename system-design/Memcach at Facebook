@@ -1,0 +1,175 @@
+Memcached At Facegook (distributed key-value store)
+
+Cache aside
+Write :
+1.Update DB
+2.Delete key from cache
+
+We are willing to expose slightly stale data in exchange for insulating a
+backend storage service from excessive load.
+
+We now consider the challenges of scaling to thousands
+of servers within a cluster. At this scale, most of our
+efforts focus on reducing either the latency of fetching
+cached data or the load imposed due to a cache miss.
+
+For example, loading one of our
+popular pages results in an average of 521 distinct items
+fetched from memcache.
+
+Items are distributed across the memcached servers
+through consistent hashing.
+
+As a result, all web servers
+communicate with every memcached server in a short
+period of time. This all-to-all communication pattern
+can cause incast congestion or allow a single server
+to become the bottleneck for many web servers. Data
+replication often alleviates the single-server bottleneck
+but leads to significant memory inefficiencies in the
+common case.
+
+We reduce latency mainly by focusing on the
+memcache client, which runs on each web server. This
+client serves a range of functions, including serialization,
+compression, request routing, error handling, and
+request batching. Clients maintain a map of all available
+servers, (!!!)which is updated through an auxiliary configuration system.
+
+Parallel requests and batching: We structure our web application
+code to minimize the number of network
+round trips necessary to respond to page requests. We
+construct a directed acyclic graph (DAG) representing
+the dependencies between data. A web server uses this
+DAG to maximize the number of items that can be
+fetched concurrently. On average these batches consist
+of 24 keys per request
+
+Client-server communication: Memcached servers do
+not communicate with each other. When appropriate,
+we embed the complexity of the system into a stateless
+client rather than in the memcached servers. This greatly
+simplifies memcached and allows us to focus on making
+it highly performant for a more limited use case.
+Keeping the clients stateless enables rapid iteration in the
+software and simplifies our deployment process. Client
+logic is provided as two components: a library that can
+be embedded into applications or as a standalone proxy
+named mcrouter. This proxy presents a memcached
+server interface and routes the requests/replies to/from
+other servers.
+
+Clients use UDP and TCP to communicate with
+memcached servers. We rely on UDP for get requests to
+reduce latency and overhead.
+
+For reliability, clients perform set and delete operations
+over TCP through an instance of mcrouter running on the same
+machine as the web server. For operations where we need to c
+onfirm a state change (updates and deletes) TCP alleviates the
+need to add a retry mechanism to our UDP implementation
+
+Incast congestion:
+When client requests a large number of keys, the responses
+can overwhelm components such as rack and cluster
+switches if those responses arrive all at once.
+
+Dynamic Sliding Window:
+Clients therefore use a sliding window mechanism
+to control the number of outstanding requests. When the client
+receives a response, the next request can be sent. Similar
+to TCP’s congestion control, the size of this sliding window grows
+slowly upon a successful request and shrinks
+when a request goes unanswered.
+
+Reducing Load
+We use memcache to reduce the frequency of fetching data
+along more expensive paths such as database queries.
+Web servers fall back to these paths when the
+desired data is not cached. The following subsections
+describe three techniques for decreasing load
+
+1.Leases
+Too address two problems:
+stale sets and thundering herds
+
+We introduce a new mechanism we call leases to address
+two problems: stale sets and thundering herds. A stale
+set occurs when a web server sets a value in memcache
+that does not reflect the latest value that should be
+cached. This can occur when concurrent updates to
+memcache get reordered. A thundering herd happens
+when a specific key undergoes heavy read and write activity.
+As the write activity repeatedly invalidates the recently set values,
+many reads default to the more costly
+path. Our lease mechanism solves both problems.
+
+The lease is a 64-bit token bound
+to the specific key the client originally requested.
+ With the lease token, memcached can verify and determine whether the data should be stored and
+thus arbitrate concurrent writes.
+
+Each memcached server regulates the rate at
+which it returns tokens (!!!). By default, we configure these
+servers to return a token only once every 10 seconds per
+key. Requests for a key’s value within 10 seconds of a
+token being issued results in a special notification telling
+the client to wait a short amount of time. Typically, the
+client with the lease will have successfully set the data
+within a few milliseconds. Thus, when waiting clients
+retry the request, the data is often present in cache
+
+When a key is deleted, its value is transferred to a data struc-
+ture that holds recently deleted items, where it lives for
+a short time before being flushed. A get request can return a
+lease token or data that is marked as stale
+
+2.Memcache Pools
+Pool for frequent/inexpensive and infrequent/expensive keys
+
+3.Replication Within Pools
+if we replicate all 100 keys to multiple servers,
+a client’s request for 100 keys can be sent
+to any replica. This reduces the load per server to 500k
+requests per second. Each client chooses replicas based
+on its own IP address. (!!!)This approach requires delivering
+invalidations to all replicas to maintain consistency.
+
+When a memcached client receives no response to its
+get request, the client assumes the server has failed and
+issues the request again to a special Gutter pool. If this
+second request misses, the client will insert the appropriate
+key-value pair into the Gutter machine after querying
+the database. Entries in Gutter expire quickly to obviate
+Gutter invalidations. Gutter limits the load on backend
+services at the cost of slightly stale data
+
+SQL statements that modify authoritative state are
+amended to include memcache keys that need to be
+invalidated once the transaction commits [7]. We deploy invalidation
+daemons (named mcsqueal) on every
+database. Each daemon inspects the SQL statements that
+its database commits, extracts any deletes, and broadcasts these deletes
+to the memcache deployment in every
+frontend cluster in that region. Figure 6 illustrates this
+approach. We recognize that most invalidations do not
+delete data; indeed, only 4% of all deletes issued result
+in the actual invalidation of cached data.
+
+Invalidation daemons batch deletes into
+fewer packets and send them to a set of (!!!)dedicated servers
+running mcrouter instances in each frontend cluster.
+These mcrouters then unpack individual deletes from
+each batch and route those invalidations to the right
+memcached server co-located within the frontend cluster.
+The batching results in an 18× improvement in the
+median number of deletes per packet
+
+Single Server optimization
+(1) allow automatic expansion of the hash table to avoid look-up times drifting to O(n),
+(2) make the server multi-threaded using a global lock to protect multiple data structures,
+(3) giving each thread its own UDP port to reduce contention when sending replies and
+later spreading interrupt processing overhead.
+
+Memcached lazily evicts such entries by checking expiration times when serving a get request for that item
+or when they reach the end of the LRU
