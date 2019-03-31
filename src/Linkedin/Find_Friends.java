@@ -1,13 +1,6 @@
 package Linkedin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 已知一个函数，输入用户ID，可以返回该用户的所有友好（degree 1 friends），按好友ID从小到大排序。
@@ -35,128 +28,65 @@ import java.util.Set;
  you can just apply BFS for two layers and for the node of second layer(2nd degree friends), count the number of 1st degree friends who expand to it.
  Then just sort the 2nd layer.
  */
-public class FriendsFriends {
-
-    public static void main(String[] args) {
-
+public class Find_Friends {
+    //Assume adjacent list is given as input, if not, need to process and generate one.
+    Map<String, List<String>> map;
+    public Find_Friends(Map<String, List<String>> input) {
+        map = new HashMap<>(input);
     }
 
-    public void findSecDegreeConnections(UndirectedGraphNode myself){
-        Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
-        Set<UndirectedGraphNode> visited = new HashSet<UndirectedGraphNode>();
-        queue.offer(myself);
-        visited.add(myself);
+    private List<String> getFriends(String host) {
+        List<String> res = new ArrayList<>();
 
-        Set<UndirectedGraphNode> myFriends = new HashSet<UndirectedGraphNode>();
-        for (UndirectedGraphNode next : myself.friends) {
-            myFriends.add(next);
+        if (null == host || host.length() == 0) {
+            return res;
         }
 
-        int level = 0;
-
-        while (!queue.isEmpty() && level < 2) {
-            int size = queue.size();
-
-            for (int i = 0; i < size; i++) {
-                UndirectedGraphNode now = queue.poll();
-                for (UndirectedGraphNode next : now.friends) {
-                    if (!visited.contains(next)) {
-                        queue.offer(next);
-                        visited.add(next);
-                    }
-                }
-            }
-
-            level++;
-        }
-
-        Map<UndirectedGraphNode, Integer> map = new HashMap<UndirectedGraphNode, Integer>();
-        for (UndirectedGraphNode fof : queue) {
-            int count = 0;
-            for (UndirectedGraphNode fofof : fof.friends) {
-                if (myFriends.contains(fofof)) {
-                    count++;
-                }
-            }
-            map.put(fof, count); // This person has how many common friend with me
-        }
-
-        Map<Integer, Set<UndirectedGraphNode>> res = new HashMap<Integer, Set<UndirectedGraphNode>>();
-        for (Map.Entry<UndirectedGraphNode, Integer> entry : map.entrySet()) {
-            UndirectedGraphNode node = entry.getKey();
-            int count = entry.getValue();
-
-            if (!res.containsKey(count)) {
-                res.put(count, new HashSet<UndirectedGraphNode>());
-            }
-            res.get(count).add(node);
-        }
-
-        // Sort res and find the persons which share most common friends
-    }
-
-    Map<String, Set<String>> getFriendsFriend(Map<String, Set<String>> map) {
-        Map<String, Set<String>> res = new HashMap<String, Set<String>>();
-
-        for (Map.Entry<String, Set<String>> entry : map.entrySet()) {
-            String name = entry.getKey();
-            Set<String> friends = entry.getValue();
-
-            res.put(name, new HashSet<String>());
-
-            for (String friend : friends) {
-                if (map.containsKey(friend)) {
-                    res.get(name).addAll(map.get(friend));
-                }
-            }
-
-            System.out.print(name + " has friends' friend: ");
-            for (String friend : res.get(name)) {
-                System.out.print(friend + "--");
-            }
-            System.out.println();
+        if (map.containsKey(host)) {
+            return map.get(host);
         }
 
         return res;
     }
 
-    Set<String> get2DegreeFriend(String host) {
-        Set<String> degree1 = getFriends(host);
-
-        Set<String> res = new HashSet<String>();
-        for (String friend : degree1) {
-            Set<String> degree2 = getFriend(friend);
-            res.addAll(degree2);
-        }
-
-        // Remove himself
-        if (res.contains(host)) {
-            res.remove(host);
-        }
-
-        // Degree2 is degree2, remove degree1
-        for (String name : degree1) {
-            res.remove(name);
-        }
-
-        return res;
-    }
 
     // Better way
-    Set<String> get2DegreeFriend(String host) {
-        Set<String> degree1 = getFriends(host);
+    public List <String> get2DegreeFriend(String host) {
+        List<String> res = new ArrayList<String>();
+        List<String> degree1 = getFriends(host);
 
-        Set<String> res = new HashSet<String>();
+        if (degree1.isEmpty()) {
+            return res;
+        }
+
+        Map<String, Integer> countMap = new HashMap<>();
+
         for (String friend : degree1) {
-            Set<String> degree2 = getFriend(friend);
+            List <String> degree2 = getFriends(friend);
 
             for (String name : degree2) {
                 if (name.equals(host) || degree1.contains(name)) {
-                    continue;
+                        continue;
                 }
-                degree2.add(name);
+
+                countMap.put(name, countMap.getOrDefault(name, 0) + 1);
             }
         }
+
+        /**
+         * !!!
+         * sort hashmap by value :
+         * Put all EntrySet into a list, then sort the list.
+         */
+        List<Map.Entry<String, Integer> > list =
+                new LinkedList<Map.Entry<String, Integer> >(countMap.entrySet());
+
+        Collections.sort(list, (a, b) -> b.getValue() - a.getValue());
+
+        for (Map.Entry<String, Integer> e : list) {
+            res.add(e.getKey());
+        }
+
         return res;
     }
 
