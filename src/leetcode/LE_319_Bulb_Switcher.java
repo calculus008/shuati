@@ -70,6 +70,9 @@ public class LE_319_Bulb_Switcher {
      * 该学生将会打开或锁上lockid可以被sid整除的锁，写一个打印所有在第n个学生操作后处于打开的
      * 状态的lockid。
      *
+     * Initial State
+     *   [X  X  X  X  X  X]
+     *
      *   [1, 2, 3, 4, 5, 6]
      * 1 [O  O  O  O  O  O]
      * 2 [O  X  O  X  O  X]

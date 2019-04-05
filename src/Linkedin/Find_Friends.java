@@ -25,8 +25,8 @@ import java.util.*;
 
  }
 
- you can just apply BFS for two layers and for the node of second layer(2nd degree friends), count the number of 1st degree friends who expand to it.
- Then just sort the 2nd layer.
+ You can just apply BFS for two layers and for the node of second layer(2nd degree friends), count the number of
+ 1st degree friends who expand to it. Then just sort the 2nd layer.
  */
 public class Find_Friends {
     //Assume adjacent list is given as input, if not, need to process and generate one.
@@ -35,22 +35,6 @@ public class Find_Friends {
         map = new HashMap<>(input);
     }
 
-    private List<String> getFriends(String host) {
-        List<String> res = new ArrayList<>();
-
-        if (null == host || host.length() == 0) {
-            return res;
-        }
-
-        if (map.containsKey(host)) {
-            return map.get(host);
-        }
-
-        return res;
-    }
-
-
-    // Better way
     public List <String> get2DegreeFriend(String host) {
         List<String> res = new ArrayList<String>();
         List<String> degree1 = getFriends(host);
@@ -90,10 +74,18 @@ public class Find_Friends {
         return res;
     }
 
-    class UndirectedGraphNode {
-        String name;
-        List<UndirectedGraphNode> friends;
-        UndirectedGraphNode(String x) { name = x; friends = new ArrayList<UndirectedGraphNode>(); }
+    private List<String> getFriends(String host) {
+        List<String> res = new ArrayList<>();
+
+        if (null == host || host.length() == 0) {
+            return res;
+        }
+
+        if (map.containsKey(host)) {
+            return map.get(host);
+        }
+
+        return res;
     }
 }
 

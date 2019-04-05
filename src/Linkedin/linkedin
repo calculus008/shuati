@@ -12,7 +12,10 @@ LE_30_SubstrConactWords                           (***)  Solution3 Sliding Windo
 LE_33_Search_In_Rotated_Sorted_Array
 LE_34_Search_For_A_Range
 LE_35_Search_For_Insertion_Point
+
 LE_40_Combination_SUM_II
+LE_377_Combination_Sum_IV
+
 LE_46_Permutation
 LE_50_POW                                        (***)
 LE_53_Maximum_Subarray
@@ -37,7 +40,7 @@ LE_170_Two_Sum_III_Data_Structure_Design   (优化find, getSum o(1))
 LE_187_Repeasted_DNA_Sequences
 
 LE_200_Number_Of_Islands
-LE_205_Isomorphic_Strings
+LE_205_Isomorphic_Strings                         (***)
 LE_212_Word_Search_II
 LE_215_Kth_Largest_Element_In_Array
 LE_235_Lowest_Common_Ancestor_Of_BST
@@ -218,3 +221,15 @@ LE_352_Data_Stream_As_Disjoint_Intervals
 
 LE_359_Logger_Rate_Limiter                        (***)
 LI_215_Rate_Limiter
+
+LE_486_Predict_The_Winner
+LE_319_Bulb_Switcher
+LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
+LE_115_Distinct_Subsequences
+LE_187_Repeated_DNA_Sequences
+LE_721_Accounts_Merge                             (***)
+LE_41_First_Missing_Positive                      (***)
+
+Generic_Permutation                               (***)
+H2O
+Hopping_Iterator

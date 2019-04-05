@@ -9,27 +9,34 @@ import java.util.*;
  */
 public class LE_721_Accounts_Merge {
     /**
-         Given a list accounts, each element accounts[i] is a list of strings, where the first element accounts[i][0]
-         is a name, and the rest of the elements are emails representing emails of the account.
+         Given a list accounts, each element accounts[i] is a list of strings,
+         where the first element accounts[i][0] is a name, and the rest of the
+         elements are emails representing emails of the account.
 
          Now, we would like to merge these accounts. Two accounts definitely belong to the same person
          if there is some email that is common to both accounts. Note that even if two accounts have
          the same name, they may belong to different people as people could have the same name.
-         A person can have any number of accounts initially, but all of their accounts definitely have the same name.
+         A person can have any number of accounts initially, but all of their accounts definitely
+         have the same name.
 
          After merging the accounts, return the accounts in the following format:
-         the first element of each account is the name, and the rest of the elements are emails in sorted order.
+         the first element of each account is the name, and the rest of the elements
+         are emails in sorted order.
          The accounts themselves can be returned in any order.
 
          Example 1:
          Input:
-         accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", "johnnybravo@mail.com"], ["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
-         Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'],  ["John", "johnnybravo@mail.com"], ["Mary", "mary@mail.com"]]
+         accounts = [["John", "johnsmith@mail.com", "john00@mail.com"], ["John", "johnnybravo@mail.com"],
+                    ["John", "johnsmith@mail.com", "john_newyork@mail.com"], ["Mary", "mary@mail.com"]]
+         Output: [["John", 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com'],
+                 ["John", "johnnybravo@mail.com"], ["Mary", "mary@mail.com"]]
 
          Explanation:
          The first and third John's are the same person as they have the common email "johnsmith@mail.com".
-         The second John and Mary are different people as none of their email addresses are used by other accounts.
-         We could return these lists in any order, for example the answer [['Mary', 'mary@mail.com'], ['John', 'johnnybravo@mail.com'],
+         The second John and Mary are different people as none of their email addresses are
+         used by other accounts.
+         We could return these lists in any order, for example the answer [['Mary', 'mary@mail.com'],
+         ['John', 'johnnybravo@mail.com'],
          ['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
          Note:
 
@@ -47,11 +54,11 @@ public class LE_721_Accounts_Merge {
      * in other accounts, O(n ^ 2 * l ^ 2), n is size of accounts, l is average length of email
      * list for each account.
      *
-     * 1.Essence of the problem is to union or categorize all accounts that has at lest one
+     * 1.Essence of the problem is to union or categorize all accounts that has AT LEAST one
      *   common email (分类). That's why we think of using UnionFind
      *
      * 2.第一个坑 ：we may think of using UnionFindInMap which uses String as index. Actually,
-     *   we don't need to, notice there's an IMPLICIT param in in put - index of the List, for example:
+     *   we don't need to, notice there's an IMPLICIT param in input - index of the List, for example:
      *   [
      *     ["John", "johnsmith@mail.com", "john00@mail.com"],
      *     ["John", "johnnybravo@mail.com"],
@@ -78,12 +85,12 @@ public class LE_721_Accounts_Merge {
      *     最后，相同的email通过UnifonFind, 会有一个相同的representative. It is in the form of col of account.
      *
      *     这里用UnionFind起到分类功能，有相同性质的个体之间做union, 最后他们有共同的代表, 是一个代表，不是“三个代表”。
-     *     应用的时候要确定用那个属性做union, 这个属性必须有唯一值 (unique). 理想状况是，该属性是非负的integer, 这样
+     *     应用的时候要确定用哪个属性做union, 这个属性必须有唯一值 (unique). 理想状况是，该属性是非负的integer, 这样
      *     就可以用UnionFind的default implementation (internally it uses integer array as "parents"). 否则，
      *     要用UnionFindInMap(use HashMap as "parents"). 初始化UnifonFind时，size是总类别的最大可能值。
      *
-     *   4.第三个坑 ： 分类完成后，要整理输出。用第二个HashMap, 注意，这里， key必须是idx, 不是name, 以为只有idx是unique的，
-     *     name会有相同的值。value用TreeSet,因为题意要求email insorted order.
+     *   4.第三个坑 ： 分类完成后，要整理输出。用第二个HashMap, 注意，这里， key必须是idx, 不是name, 因为只有idx是unique的，
+     *     name会有相同的值。value用TreeSet,因为题意要求email in sorted order.
      */
 
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
@@ -92,6 +99,9 @@ public class LE_721_Accounts_Merge {
 
         UnionFindWithCount1 uf = new UnionFindWithCount1(accounts.size());
 
+        /**
+         * 1.Union Find, do union
+         */
         HashMap<String, Integer> map = new HashMap<>();
         for (int i = 0; i < accounts.size(); i++) {
             List<String> account = accounts.get(i);
@@ -102,6 +112,9 @@ public class LE_721_Accounts_Merge {
             }
         }
 
+        /**
+         * 2.Query from UFS and do merge/sort
+         */
         HashMap<Integer, TreeSet<String>> merged = new HashMap<>();
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             int idx = uf.query(entry.getValue());
@@ -112,6 +125,9 @@ public class LE_721_Accounts_Merge {
             merged.get(idx).add(entry.getKey());
         }
 
+        /**
+         * 3.load into required result form - List<List<String>>
+         */
         for (Map.Entry<Integer, TreeSet<String>> entry : merged.entrySet()) {
             Set<String> set = entry.getValue();
             int idx = entry.getKey();

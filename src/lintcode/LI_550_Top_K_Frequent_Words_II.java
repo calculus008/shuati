@@ -40,6 +40,12 @@ public class LI_550_Top_K_Frequent_Words_II {
         private NavigableSet<String> topk = null;
         private int k;
 
+        /**
+         * !!!
+         * 定义如何在topK里排序
+         * 如果a, b频率不同， 频率高的排在前面
+         * 如果a, b频率相同， 按字典顺序排。
+         */
         private Comparator<String> myComparator = new Comparator<String>() {
             public int compare(String left, String right) {
                 if (left.equals(right))
@@ -61,9 +67,14 @@ public class LI_550_Top_K_Frequent_Words_II {
             topk = new TreeSet<String>(myComparator);
         }
 
+        /**
+         * O(logk)
+         */
         public void add(String word) {
-            // Write your code here
             if (words.containsKey(word)) {
+                /**
+                 * 删除，在后面加入，enforce sorting
+                 */
                 if (topk.contains(word)) {
                     topk.remove(word);
                 }
@@ -78,8 +89,12 @@ public class LI_550_Top_K_Frequent_Words_II {
             }
         }
 
+        /**
+         *
+         * O(k)
+         * @return
+         */
         public List<String> topk() {
-            // Write your code here
             List<String> results = new ArrayList<String>();
             Iterator it = topk.iterator();
             while (it.hasNext()) {
@@ -87,6 +102,60 @@ public class LI_550_Top_K_Frequent_Words_II {
                 results.add(str);
             }
             return results;
+        }
+    }
+
+    public class TopK_Practice {
+        HashMap<String, Integer> map;
+        TreeSet<String> set;
+        int k;
+
+        public TopK_Practice(int k) {
+            this.k = k;
+
+            map = new HashMap<>();
+
+            Comparator<String> comparator = (a, b) -> {
+                int f1 = map.get(a);
+                int f2 = map.get(b);
+                if (f1 != f2) {
+                    return f2 - f1;
+                } else {
+                    return a.compareTo(b);
+                }
+            };
+
+            set = new TreeSet<>(comparator);
+        }
+
+        /*
+         * @param word: A string
+         * @return: nothing
+         */
+        public void add(String word) {
+            if (map.containsKey(word)) {
+                set.remove(word);
+            }
+            map.put(word, map.getOrDefault(word, 0) + 1);
+            set.add(word);
+
+            if (set.size() > k) {
+                set.pollLast();
+            }
+        }
+
+        /*
+         * @return: the current top k frequent words.
+         */
+        public List<String> topk() {
+            List<String> res = new ArrayList<>();
+            Iterator<String> it = set.iterator();
+
+            while (it.hasNext()) {
+                res.add(it.next());
+            }
+
+            return res;
         }
     }
 }

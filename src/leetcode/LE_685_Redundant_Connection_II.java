@@ -48,7 +48,8 @@ public class LE_685_Redundant_Connection_II {
     /**
      * Difference from LE_684_Redundant_Connection, it is a DIRECTED GRAPH
      *
-     *https://leetcode.com/problems/redundant-connection-ii/discuss/108045/C++Java-Union-Find-with-explanation-O(n)
+     https://leetcode.com/problems/redundant-connection-ii/discuss/108045/C++Java-Union-Find-with-explanation-O(n)
+     https://leetcode.com/problems/redundant-connection-ii/discuss/108058/one-pass-disjoint-set-solution-with-explain
 
      Solution from Leetcode, Time : O(n)
 
@@ -56,10 +57,18 @@ public class LE_685_Redundant_Connection_II {
      is much better clarified.
 
      There are two cases for the tree structure to be invalid.
-     1) A node having two parents;
-     including corner case: e.g. [[4,2],[1,5],[5,2],[5,3],[2,4]]
-     2) A circle exists
-     If we can remove exactly 1 edge to achieve the tree structure, a single node can have at most two parents. So my solution works in two steps.
+     Case 1 : A node having two parents;
+             Case 1.a.There is a loop
+             Case 1.b.No loop.
+
+     Case 2 : A circle exists : all node have one parent
+        1 -> 2 -> 3 -> 4
+        ^               |
+        |_______________|
+
+     If we can remove exactly 1 edge to achieve the tree structure, a single node can have at most two parents
+     (has at most 2 n-degrees).
+     So my solution works in two steps.
 
      1) Check whether there is a node having two parents.
      If so, store them as candidates A and B, and set the second edge invalid.
@@ -78,33 +87,66 @@ public class LE_685_Redundant_Connection_II {
             int[] can2 = {-1, -1};
             int[] parent = new int[edges.length + 1];
 
+            /**
+             * find the two edges point to the same child
+             */
             for (int i = 0; i < edges.length; i++) {
                 if (parent[edges[i][1]] == 0) {
                     parent[edges[i][1]] = edges[i][0];
                 } else {
+                    /**
+                     * Now we find the node with two parents
+                     * record the two edges point to current node i
+                     * in can1 and can2.
+                     */
                     can2 = new int[] {edges[i][0], edges[i][1]};
                     can1 = new int[] {parent[edges[i][1]], edges[i][1]};
+
+                    /**
+                     * remove can2
+                     */
                     edges[i][1] = 0;
                 }
             }
 
+            /**
+             * init for Union Find
+             */
             for (int i = 0; i < edges.length; i++) {
                 parent[i] = i;
             }
 
+            /**
+             * Union find, check if the graph is valid now.
+             */
             for (int i = 0; i < edges.length; i++) {
                 if (edges[i][1] == 0) {
+                    /**
+                     * bypass edge can2
+                     */
                     continue;
                 }
                 int child = edges[i][1], father = edges[i][0];
                 if (root(parent, father) == child) {
+                    /**
+                     * There's still loop :
+                     * 1."can1[0] == -1" : can1 does not exist.
+                     *   No child has two parents (case 2).
+                     *   remove current edge (the last edge to form the circle)
+                     * 2.can1 exists, (case then can1 must be the one to be removed.
+                     */
                     if (can1[0] == -1) {
                         return edges[i];
                     }
+
                     return can1;
                 }
                 parent[child] = father;
             }
+
+            /**
+             * Union Find finish, tree is valid, return can2.
+             */
             return can2;
         }
 

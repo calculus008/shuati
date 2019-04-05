@@ -21,10 +21,12 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
      0 - 0 - 0 - 0 - 0
      |   |   |   |   |
      0 - 0 - 1 - 0 - 0
-     The point (1,2) is an ideal empty land to build a house, as the total travel distance of 3+3+1=7 is minimal. So return 7.
+     The point (1,2) is an ideal empty land to build a house, as the total travel distance of 3+3+1=7 is
+     minimal. So return 7.
 
      Note:
-     There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
+     There will be at least one building. If it is not possible to build such house according to the above
+     rules, return -1.
 
      Hard
      */
@@ -32,11 +34,25 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
     /**
      * Solution 1
      * BFS, important
+     *
+     * Time complexity: O(number of 1)O(number of 0) ~ O(m^2n^2)
+     *
      * Time  : O(m ^ 2 * n ^ 2)
      * Space : O(m * n)
      *
-     * Key : Starting from every building (1), update dist[][] and nums[][], then run another pass to find the min distance
-     *       单源点(empty land)多终点(houses)可以转化为多源点(houses)单终点(empty land)问题，终点就是所有源点都覆盖过的点，最后取距离和的最小值
+     * Key : Starting from every building (1), update dist[][] and nums[][], then run another pass
+     *       to find the min distance
+     *       单源点(empty land)多终点(houses)可以转化为多源点(houses)单终点(empty land)问题，终点就是所有源
+     *       点都覆盖过的点，最后取距离和的最小值
+     *
+     *
+     * The time complexity for BFS/DFS is O(|V|+|E|), not O(|V||E|). In this problem, every vertex has
+     * up to 4 edges (left, right, up, down), so |E| ~ 4|V|. Thus, you have overall O(|V|) = O(mn) for
+     * a BFS. This has been proven for all sparse graphs like this problem. Now, we do a BFS for each
+     * building, so the overall complexity is O(#buildings*(mn)). In worst case, every vertex is a
+     * building. So the number of buildings is also upper bounded by O(mn), and thus you have
+     * O((mn)(mn)) = O(m^2 * n^2). This is a very loose bound since when every vertex is a building,
+     * we don't even need to do a BFS (nowhere to go).
      **/
     public class Solution1 {
         public int shortestDistance(int[][] grid) {

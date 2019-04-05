@@ -31,6 +31,8 @@ public class LE_261_Graph_Valid_Tree {
      *
      * Time : O(E + V)
      * Space : O(n)
+     *
+     * As a tree is connected, all nodes should point to a single parent eventually
      */
 
     class Solution1 {

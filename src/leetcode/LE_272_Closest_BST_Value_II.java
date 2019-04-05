@@ -12,7 +12,8 @@ import java.util.Stack;
  */
 public class LE_272_Closest_BST_Value_II {
     /**
-     *   Given a non-empty binary search tree and a target value, find k values in the BST that are closest to the target.
+     *   Given a non-empty binary search tree and a target value,
+     *   find k values in the BST that are closest to the target.
 
          Note:
          Given target value is a floating point.

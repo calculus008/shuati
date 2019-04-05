@@ -28,9 +28,12 @@ public class LE_205_Isomorphic_Strings {
 
     /**
      * Solution 1 :
+     * HashMap
      * 建立s中char和t中char的映射关系。假定s和t是isomorphic, 则s和t在同一位置的char必然有一一对应的关系。
      * 不满足这一条件则必然为false
-     * Time and Space : O(n)
+     *
+     * Time  : O(n * l), l is length of s. So this is ideal, best solution is Solution2
+     * Space : O(n)
      * **/
     public boolean isIsomorphic1(String s, String t) {
         if (s == null || t == null) return true;
@@ -46,6 +49,10 @@ public class LE_205_Isomorphic_Strings {
                     return false;
                 }
             } else {
+                /**
+                 * https://stackoverflow.com/questions/16757359/what-is-the-time-complexity-of-hashmap-containsvalue-in-java/16757380
+                 * map.containsValue() takes O(n)
+                 */
                 if (!map.containsValue(b)) {//!!! "containsValue"!!!
                     map.put(a, b);
                 } else {
@@ -90,6 +97,39 @@ public class LE_205_Isomorphic_Strings {
                 b[t.charAt(i)] = t.charAt(i);
             }
         }
+        return true;
+    }
+
+    /**
+     * Two strings are isomorphic if the positions of the characters follow the
+     * same pattern. So I'm using maps to compare the position patterns.
+     *
+     * For example:
+     *
+     * String 1:              A B E A C D B
+     * index pattern:         0 1 2 0 4 5 1
+     * String 2:              X Y I X H K Y
+     * index pattern:         0 1 2 0 4 5 1
+     */
+    public boolean isIsomorphic3(String s, String t) {
+        if (s == null || t == null) return false;
+        if (s.length() != t.length()) return false;
+
+        Map<Character, Integer> mapS = new HashMap<Character, Integer>();
+        Map<Character, Integer> mapT = new HashMap<Character, Integer>();
+
+        for (int i = 0; i < s.length(); i++) {
+            int indexS = mapS.getOrDefault(s.charAt(i), -1);
+            int indexT = mapT.getOrDefault(t.charAt(i), -1);
+
+            if (indexS != indexT) {
+                return false;
+            }
+
+            mapS.put(s.charAt(i), i);
+            mapT.put(t.charAt(i), i);
+        }
+
         return true;
     }
 }

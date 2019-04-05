@@ -169,7 +169,7 @@ public class LE_146_LRU_Cache {
      *             "  map.remove(head.next.key);
      *                removeHead();  "
      *
-     *   !!! Always remember : There are TWO data structure we need to maintain.
+     *   !!! Always remember : There are TWO data structure we need to maintain for each action.
      *
      */
     public class LRUCache2 {

@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Created by yuank on 3/24/18.
  */
-public class LE_187_Repeasted_DNA_Sequences {
+public class LE_187_Repeated_DNA_Sequences {
     /**
         All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG".
         When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.

@@ -208,6 +208,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
         map.put(node, -1);
 
         int height = Math.max(helper(res, map, node.left), helper(res, map, node.right)) + 1;
+
         if (height == res.size()) {
             res.add(new ArrayList<Integer>());
         }

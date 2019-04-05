@@ -25,10 +25,14 @@ public class LE_39_Combination_Sum {
         ]
      */
 
-    // http://zxi.mytechroad.com/blog/searching/leetcode-39-combination-sum/
-
-    //用DFS生成排列组合, 组合的顺序是固定的（有别于排列（permutation））
-    //17 ms
+    /**
+     * http://zxi.mytechroad.com/blog/searching/leetcode-39-combination-sum/
+     * 用DFS生成排列组合, 组合的顺序是固定的（有别于排列（permutation））
+     * 17 ms
+     *
+     * Time : O(2 ^ n)
+     * Space : O(
+     * **/
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
 

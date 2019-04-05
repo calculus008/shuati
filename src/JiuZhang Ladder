@@ -173,6 +173,7 @@ LE_270_Closest_BST_Value
 LE_510_Inorder_Successor_In_BST_II
 LE_653_Two_Sum_IV_Input_Is_A_BST
 LE_701_Insert_Into_A_Binary_Search_Tree
+LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
 
 Optional
 LE_94_Binary_Tree_Inorder_Traversal          (lint 67)
@@ -449,6 +450,7 @@ LE_130_Surrounded_Regions                                 (lint 477)
 LE_323_Number_Of_Connected_Components_In_Undirected_Graph
 LI_432_Find_The_Weak_Connected_Component_In_The_Directed_Graph
 LE_721_Accounts_Merge                                     (lint 1070)
+Find_Same_Person
 LE_737_Sentence_Similarity_II
 LI_629_Minimum_Spanning_Tree
 
@@ -651,3 +653,8 @@ LI_778_Pacific_Atlantic_Water_Flow
 
 Reservoir Sampling
 LE_382_Linked_List_Random_Node
+
+#Mono Stack
+LE_1019_Next_Greater_Node_In_Linked_List
+LE_901_Online_Stock_Span
+739. Daily Temperatures

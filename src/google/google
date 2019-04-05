@@ -22,6 +22,39 @@ LE_774_Minimize_Max_Distance_To_Gas_Station
 Max of the minimum among M groups :
 Chocolate_Sweetness
 
+================================
+
+BicyblePeopleMatching
+Redundant_Connection_BST
 
 LE_128_Longest_Consecutive_Sequence
+LE_684_Redundant_Connection
+LE_685_Redundant_Connection_II
+
+LE_62_Unique_Path
+LE_63_Unique_Path_II
+LE_64_Min_Path_Sum
+
+================================
+
+矩阵里面有0，1，2，3
+
+0表示可以通过
+3表示障碍物不能穿行。
+
+现在需要你找离1最短的2.
+
+Example :
+323003
+130001  <- 最左边的1是离右下角的2最短距离的。
+000333
+330002
+
+#我觉得是把所有的1同时放进队列里，然后按层遍历，第一个遇到的2就是最短的2.
+
+
+#对于每一个1进行bfs，会产生一个距离场，场里每个点的value就是这个点到场中心1的距离。
+所有的1对应的距离场叠加（累积），场值最小的2的位置就是解。(这应该是求到所有1距离和最小的2）
+具体的话:
+LE_317_Shortest_Distance_From_All_Buildings
 

@@ -69,9 +69,12 @@ public class Find_Leaves {
      * 只用一个Set<Node> visited 不行，因为graph里边可以重复visit 但是不能有环。 所以用Map, 上次还没计算出结果来呢，又来了， 说明有环
      * Tree上随便两个Node连起来，肯定都是环吧
      */
+
     List<List<Integer>> findLeavesInGraph(TreeNode graph) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        // Use a map to remember not only the height, but also track loop
+        /**
+         * Use a map to remember not only the height, but also track loop
+         **/
         Map<TreeNode, Integer> map = new HashMap<TreeNode, Integer>();
         helper(res, map, graph);
         return res;
@@ -89,8 +92,13 @@ public class Find_Leaves {
             return map.get(node);
         }
 
+        /**
+         * marker to check if there's loop
+         */
         map.put(node, -1); // Seen this node, but not finalized yet, it is still too high
+
         int height = Math.max(helper(res, map, node.left), helper(res, map, node.right)) + 1;
+
         if (height > res.size()) {
             res.add(new ArrayList<Integer>());
         }
