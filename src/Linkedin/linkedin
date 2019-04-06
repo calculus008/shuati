@@ -233,3 +233,8 @@ LE_41_First_Missing_Positive                      (***)
 Generic_Permutation                               (***)
 H2O
 Hopping_Iterator
+Max_Subsequence_Skip_One
+
+#k-way merge
+LE_23_Merge_k_Sorted_Lists
+LI_486_Merge_K_Sorted_Arrays
