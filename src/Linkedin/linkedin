@@ -49,6 +49,7 @@ LE_240_Search_2D_Matrix_II
 LE_243_Shortest_Word_Distance
 LE_244_Shortest_Word_Distance_II
 LE_245_Shortest_Word_Distance_III
+Word_Distance_IV
 LE_254_Factor_Combinations
 LE_265_Paint_House_II                              (***)  Solution2
 LE_270_Closest_BST_Value
@@ -250,7 +251,7 @@ Randomized_Set
 LE_311_Sparse_Matrix_Multiplication
 LE_358_Rearrange_String_K_Distance_Apart
 LE_548_Split_Array_With_Equal_Sum (k = 3)
-698. Partition to K Equal Sum Subsets
+LE_698_Partition_To_K_Equal_Sum_Subsets
 
 Reservior_Sampling
 LE_398_Random_Pick_Index
