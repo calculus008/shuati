@@ -1,6 +1,8 @@
 package leetcode;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -20,7 +22,7 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
     */
 
     //Time and Space : O(n)
-    public static int evalRPN(String[] tokens) throws IllegalArgumentException, ArithmeticException{
+    public int evalRPN(String[] tokens) throws IllegalArgumentException, ArithmeticException {
         if (null == tokens) {
             throw new IllegalArgumentException("input can not be null");
         }
@@ -28,16 +30,16 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
         Stack<Integer> stack = new Stack<>();
         int res = 0;
 
-        for(String token : tokens) {
-            if(token.equals("+")) {
+        for (String token : tokens) {
+            if (token.equals("+")) {
                 stack.push(stack.pop() + stack.pop());
-            } else if(token.equals("-")) {
+            } else if (token.equals("-")) {
                 int a = stack.pop();
                 int b = stack.pop();
                 stack.push(b - a);
-            } else if(token.equals("*")) {
+            } else if (token.equals("*")) {
                 stack.push(stack.pop() * stack.pop());
-            } else if(token.equals("/")) {
+            } else if (token.equals("/")) {
                 int a = stack.pop();//must do this way, because we do "b/a", can't do it in one line
                 int b = stack.pop();
 
@@ -46,9 +48,9 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
                 }
 
                 stack.push(b / a);
-//            } else if (token.equals("!")) {
-//                int a = stack.pop();
-//                stack.push(factorial(a));
+            } else if (token.equals("!")) {
+                int a = stack.pop();
+                stack.push(getFactorial(a));
             } else {
                 stack.push(Integer.parseInt(token));
             }
@@ -67,6 +69,17 @@ public class LE_150_Evaluate_Reverse_Polish_Notation {
 
         return stack.pop();
     }
+
+    private int getFactorial(int n) {
+        int res = 1;
+
+        for (int i = 2; i <= n; i++) {
+            res *= i;
+        }
+
+        return res;
+    }
+
 
 //    public double rpn (List<String> ops) throws IllegalArgumentException, ArithmeticException {
 //

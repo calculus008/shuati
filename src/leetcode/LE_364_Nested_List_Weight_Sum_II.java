@@ -1,7 +1,9 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LE_364_Nested_List_Weight_Sum_II {
     /**
@@ -81,6 +83,8 @@ public class LE_364_Nested_List_Weight_Sum_II {
      *
      * Each integer get added one extra time for the mere existence of each one level under it.
      * The concept of weight here is implemented with repeated addition;
+     *
+     * Shortcoming : this solution modifies input "nestedList"
      */
     class Solution2 {
         public int depthSumInverse(List<NestedInteger> nestedList) {
@@ -111,6 +115,40 @@ public class LE_364_Nested_List_Weight_Sum_II {
             }
 
             return res;
+        }
+    }
+
+    /**
+     * BFS one pass with Queue, without modifying input.
+     */
+    class Solution3 {
+        public int depthSumInverse(List<NestedInteger> nestedList) {
+            if (nestedList == null || nestedList.size() == 0) {
+                return 0;
+            }
+
+            int total = 0;
+            int prev = 0;
+            Queue<NestedInteger> queue = new LinkedList<NestedInteger>(nestedList);
+
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                int levelSum = 0;
+
+                for (int i = 0; i < size; i++) {
+                    NestedInteger ni = queue.poll();
+                    if (ni.isInteger()) {
+                        levelSum += ni.getInteger();
+                    } else {
+                        queue.addAll(ni.getList()); // Same to offer()
+                    }
+                }
+
+                prev += levelSum;
+                total += prev; // The secret is this levelSum will be added many times
+            }
+
+            return total;
         }
     }
 }

@@ -18,6 +18,89 @@ public class LE_23_Merge_k_Sorted_Lists {
          2->6
          ]
          Output: 1->1->2->3->4->4->5->6
+
+     * Linkedin question and follow up
+     *
+     * 合并K个有序数组 - LI_486_Merge_K_Sorted_Arrays
+     * 之后又问了一下时间复杂度, Should be N * Log(K)
+     *
+     * follow up 1，
+     * 如果数据太大了放不下怎么办？
+     * 答曰：输入输出都放文件，内存就放一个priority queue
+     *
+     * Divide the big data file into K smaller files,
+     * each smaller file can fit into memory to be sorted,
+     * then merge those K sorted files.
+     * Time : O(nlogK)
+     *
+     * follow up 2：
+     * 万一大到连priority queue也放不下怎么办？
+     * 答曰：那就得用多个queue，两两merge，然后问了复杂度。
+     *
+     * follow up 3：
+     * 如果再得提高速度怎么办。
+     * 答曰：因为两两merge时不会相互影响，可以并行着处理
+     */
+
+    /**
+     * A distributed sort/merge is very similar to a sort/merge on a single host.
+     * The basic idea is to split the files among the separate hosts. Have each
+     * host sort its individual files and then begin the merge operation that I
+     * described in Divide key value pairs into equal lists without access to key
+     * value counts. So each host has a priority queue containing the next item
+     * from each of the files that it sorted.
+     *
+     * One of the hosts maintains a priority queue that contains the next item from
+     * each of the other hosts. It selects the first one from that queue, outputs it,
+     * and polls the host it came from for the next item, which it inserts into the
+     * priority queue and continues.
+     *
+     * It's a priority queue of priority queues, distributed among multiple hosts.
+     * Graphically, it looks something like this:
+     *
+     *    Host1            Host2             Host3            Host4
+     * ------------------------------------------------------------------
+     * F1 F2 F3 F4      F5 F6 F7 F8      F9 F10 F11 F12   F13 F14 F15 F16
+     *  \  |  |  /      \  |  |  /       \   |   |  /      \   |   |  /
+     *  ----------      ----------       ------------      ------------
+     *     PQ1             PQ2               PQ3               PQ4
+     *      \               \                /                 /
+     *       \               \              /                 /
+     *        \               \            /                 /
+     *         \               \          /                 /
+     *           ---------------\        /------------------
+     *                           \      /
+     *                            \    /
+     *                             \  /
+     *                              --
+     *                           Master PQ
+     *                        on primary host
+     *
+     *  Total data n is divided into k files. Now k files is further divided into
+     *  l hosts. For each host, number of files : k / l, pq size : k / l,
+     *  total data : n/k * k/l = n/l, total time : O(n/l * log(k/l)).
+     *
+     *  For l hosts, total Time complexity : O(l * n/l * log(k/l)) = O(n * log(k / l)),
+     *  but they are processing in parallel.
+     *
+     *  On master, pq size is l, time : O(n * log(l))
+     *
+     *  Total : O(n * log(l) + n * log(k / l)) = O(n * (log(l) + log(k / l)))
+     *
+     * Now, it's highly inefficient to be requesting a single item at a time from
+     * the individual hosts. The primary host could request, say, 1,000 items from
+     * each host and hold them in individual buffers. Whenever a host's buffer runs out,
+     * the primary host requests another buffer full from the host. That will reduce
+     * the amount of network traffic.
+     *
+     * This also reduces I/O on the individual hosts: you never have to write the
+     * combined files to disk. You sort the individual files and write them to disk as
+     * described in my earlier answer, but then you begin the merge on the individual
+     * hosts and send the items to the primary host that does the big merge.
+     *
+     * How Hadoop handles merge sort big data set:
+     * https://stackoverflow.com/questions/3624384/sorting-large-data-using-mapreduce-hadoop
+     * http://sortbenchmark.org/YahooHadoop.pdf
      */
 
     /**

@@ -49,7 +49,9 @@ public class LI_486_Merge_K_Sorted_Arrays {
             /**
              * 题意输入是变长的2D array
              */
-            if (arrays[i].length == 0) continue;//!!!
+            if (arrays[i].length == 0) {
+                continue;//!!!
+            }
 
             pq.offer(new Element(i, 0, arrays[i][0]));
         }

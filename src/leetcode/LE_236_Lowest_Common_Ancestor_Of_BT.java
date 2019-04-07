@@ -57,7 +57,7 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
     }
 
     /**
-     * With parent pointer, iterative
+     * Iterative
      * Time  : O(n)
      * Space : O(n)
      */
@@ -108,6 +108,76 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
 
     }
 
+
+    /**
+     * With parent pointer
+     */
+    class Solution2_1 {
+         class Node {
+            Node left;
+            Node right;
+            Node parent;
+            int val;
+        }
+
+        public Node lowestCommonAncestorWithParent(Node root, Node p, Node q) {
+            int depthP = getDepth(p);
+            int depthQ = getDepth(q);
+
+            // Make them in the same level from root
+            while (depthP > depthQ) {
+                p = p.parent;
+                depthP--;
+            }
+            // No need to check who is bigger, just use 2 while loops
+            while (depthQ > depthP) {
+                q = q.parent;
+                depthQ--;
+            }
+
+            // p, q move upward together
+            while (p != null && q != null) {
+                if (p == q) {
+                    return p;
+                }
+
+                p = p.parent;
+                q = q.parent;
+            }
+
+            return null;
+        }
+
+        int getDepth(Node node) {
+            int depth = 0;
+
+            while (node != null) {
+                depth++;
+                node = node.parent;
+            }
+
+            return depth;
+        }
+
+        public Node lowestCommonAncestorWithParentUsingHashMap(Node root, Node p, Node q) {
+            Set<Node> visited = new HashSet<Node>();
+
+            while (p != null) {
+                visited.add(p);
+                p = p.parent;
+            }
+
+            while (q != null) {
+                if (visited.contains(q)) {
+                    return q;
+                }
+
+                q = q.parent;
+            }
+
+            return null;
+        }
+    }
 
     /**
      * Iterative, without parent pointer

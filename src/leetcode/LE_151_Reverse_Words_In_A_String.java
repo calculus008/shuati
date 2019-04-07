@@ -13,6 +13,21 @@ public class LE_151_Reverse_Words_In_A_String {
         For example,
         Given s = "the sky is blue",
         return "blue is sky the".
+
+         Example 1:
+         Input: "the sky is blue"
+         Output: "blue is sky the"
+
+         Example 2:
+         Input: "  hello world!  "
+         Output: "world! hello"
+         Explanation: Your reversed string should not contain leading or trailing spaces.
+
+         Example 3:
+         Input: "a good   example"
+         Output: "example good a"
+         Explanation: You need to reduce multiple spaces between two words to a single space
+                      in the reversed string.
      */
 
     //Time : O(n), Space : O(n)
@@ -59,6 +74,9 @@ public class LE_151_Reverse_Words_In_A_String {
             return cleanup(ch);
         }
 
+        /**
+         * Just keep on space between words
+         */
         private String cleanup(char[] ch) {
             int i = 0, j = 0;
             int n = ch.length;
@@ -79,6 +97,53 @@ public class LE_151_Reverse_Words_In_A_String {
                 char temp = ch[i];
                 ch[i++] = ch[j];
                 ch[j--] = temp;
+            }
+        }
+    }
+
+    /**
+     * followup 如果word之间大于一个空格, 保留空格数，可能因为太紧张调来调去都不对，
+     * 然后问小哥有没有hint.
+     *
+     * 结果小哥说了一个很好的方法 把中间的空格也按照word一样reverse 然后在整体reverse.
+     *
+     * 其实比原题简单，不用最后做cleanup
+     */
+    class Solution_FollowUp{
+        public String reverseWords(String s) {
+            if (s == null) {
+                return null;
+            }
+
+            char[] arr = s.toCharArray();
+            reverse(arr, 0, s.length() - 1);
+
+            int left = 0; int right = 0;
+            while (left < arr.length && right < arr.length) {
+                while (left < arr.length && arr[left] == ' ') {
+                    left++; // left is first non-space
+                }
+
+                right = left + 1;
+                while (right < arr.length && arr[right] != ' ') {
+                    right++; // right is first space
+                }
+
+                reverse(arr, left, right - 1);
+                left = right;
+            }
+
+            return new String(arr);
+        }
+
+        void reverse(char[] arr, int left, int right) {
+            while (left < right) {
+                char tmp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = tmp;
+
+                left++;
+                right--;
             }
         }
     }
