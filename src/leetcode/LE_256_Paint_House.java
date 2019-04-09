@@ -67,6 +67,18 @@ public class LE_256_Paint_House {
                 cur[1] = costs[i][1] + Math.min(pre[0], pre[2]);
                 cur[2] = costs[i][2] + Math.min(pre[0], pre[1]);
 
+                /**
+                 * Must do rolling array here with temp.
+                 * Otherwise, if we just do "pre = cur", then
+                 * both pre and cur refers to the same array,
+                 * once cur[i] changes, pre[] will also have
+                 * the change.
+                 *
+                 * Java is by reference!!!
+                 *
+                 * So "cur = temp" just to make sure cur now
+                 * refers to different memory.
+                 */
                 int[] temp = pre;
                 pre = cur;
                 cur = temp;

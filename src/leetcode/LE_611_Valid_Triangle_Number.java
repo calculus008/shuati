@@ -90,8 +90,32 @@ public class LE_611_Valid_Triangle_Number {
         }
     }
 
+    public class Solution1_1 {
+        public int triangleNumber(int[] nums) {
+            int count = 0;
+            Arrays.sort(nums);
+
+            for (int i = 0; i < nums.length - 2; i++) {
+                int k = i + 2;
+                for (int j = i + 1; j < nums.length - 1 && nums[i] != 0; j++) {
+                    while (k < nums.length && nums[i] + nums[j] > nums[k]) {
+                        k++;
+                    }
+
+                    count += k - j - 1;
+                }
+            }
+            return count;
+        }
+    }
+
     /**
      * Binary Search
+     * https://leetcode.com/articles/valid-triangle-number/
+     *
+     * Time complexity : O(n ^ 2 * logn). In worst case inner loop will take nlogn (binary search applied n times).
+     *
+     * Space complexity : O(log n). Sorting takes O(logn) space.
      **/
     class Solution2 {
         public int triangleNumber(int[] nums) {
@@ -112,8 +136,11 @@ public class LE_611_Valid_Triangle_Number {
             while (left < right)
             {
                 int mid = left + (right - left) / 2;
-                if (nums[mid] < target) left = mid + 1;
-                else right = mid;
+                if (nums[mid] < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
             }
             return left - start;
         }
@@ -121,7 +148,7 @@ public class LE_611_Valid_Triangle_Number {
 
     /**
      * 变形题
-     * Given一个array of non-negative integers, 找出3组数字可以组成3角形, 每个数字表示边长,
+     * Given一个array of non-negative integers, 找出3个数字可以组成3角形, 每个数字表示边长,
      * 组成3角形的充要条件就是任2边的和要大于第3边
      *
      * Output is all possible triplets, not total number of triangles.
@@ -144,6 +171,9 @@ public class LE_611_Valid_Triangle_Number {
 
                 while (left < right) {
                     if (arr[left] + arr[right] > arr[i]) {
+                        /**
+                         * ！！！
+                         */
                         for (int j = left; j < right; j++) {
                             List<Integer> list = new ArrayList<Integer>();
                             list.add(arr[i]);
@@ -151,6 +181,7 @@ public class LE_611_Valid_Triangle_Number {
                             list.add(arr[right]);
                             res.add(list);
                         }
+
                         right--;
                     } else {
                         left++;

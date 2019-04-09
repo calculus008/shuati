@@ -74,7 +74,7 @@ public class LE_265_Paint_House_II {
     }
 
     /**
-     * O(m * n * n) time, O(m * n) space solution
+     * O(m * n * n) time, O(m * n) space solution (using Solution1 notation, it is O(n * k ^ 2)
      * Easy to understand
      */
     class Solution2 {
@@ -113,8 +113,11 @@ public class LE_265_Paint_House_II {
 
     /**
      * O(n * k) time, O(1) space
-     * Optimized from Soluion2
-     * Same kind of logic as Soluton1, just easier to understand.
+     * Optimized from Solution2
+     * Same kind of logic as Solution1, just easier to understand.
+     *
+     * Instead of check all k colors to find the lowest cost, we just keep
+     * tracking the lowest and the 2nd lowest.
      */
     class Solution3 {
         public int minCostII(int[][] costs) {
@@ -127,6 +130,10 @@ public class LE_265_Paint_House_II {
             int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
             int min1index = -1;
 
+            /**
+             * Init, for first house, find the lowest and the 2nd lowest cost and
+             * index of the lowest cost.
+             */
             for (int i = 0; i < n; i++) {
                 if (costs[0][i] < min1) {
                     min1index = i;
@@ -159,8 +166,17 @@ public class LE_265_Paint_House_II {
                     if (val < min1) {
                         min1index = j;
                         min2 = min1;
+                        /**
+                         * !!!
+                         * when we roll forward, min1 and min2 is no longer just the min and 2nd min cost
+                         * for house i, it is the accumulated current min cost after we painted house 0 to i,
+                         * hence it is val as we calculate.
+                         */
                         min1 = val;
                     } else if (val < min2) {
+                        /**
+                         * !!!
+                         */
                         min2 = val;
                     }
                 }

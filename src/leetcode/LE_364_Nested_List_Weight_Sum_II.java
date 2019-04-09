@@ -28,6 +28,41 @@ public class LE_364_Nested_List_Weight_Sum_II {
      */
 
     /**
+     * BFS one pass with Queue, without modifying input.
+     * Preferred Solution
+     */
+    class Solution_BFS {
+        public int depthSumInverse(List<NestedInteger> nestedList) {
+            if (nestedList == null || nestedList.size() == 0) {
+                return 0;
+            }
+
+            int res = 0;
+            int prev = 0;
+            Queue<NestedInteger> queue = new LinkedList<NestedInteger>(nestedList);
+
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                int levelSum = 0;
+
+                for (int i = 0; i < size; i++) {
+                    NestedInteger ni = queue.poll();
+                    if (ni.isInteger()) {
+                        levelSum += ni.getInteger();
+                    } else {
+                        queue.addAll(ni.getList()); // Same to offer()
+                    }
+                }
+
+                prev += levelSum;
+                res += prev; // The secret is this levelSum will be added many times
+            }
+
+            return res;
+        }
+    }
+
+    /**
      * Solution 1
      * Two passes DFS
      *
@@ -118,37 +153,5 @@ public class LE_364_Nested_List_Weight_Sum_II {
         }
     }
 
-    /**
-     * BFS one pass with Queue, without modifying input.
-     */
-    class Solution3 {
-        public int depthSumInverse(List<NestedInteger> nestedList) {
-            if (nestedList == null || nestedList.size() == 0) {
-                return 0;
-            }
 
-            int total = 0;
-            int prev = 0;
-            Queue<NestedInteger> queue = new LinkedList<NestedInteger>(nestedList);
-
-            while (!queue.isEmpty()) {
-                int size = queue.size();
-                int levelSum = 0;
-
-                for (int i = 0; i < size; i++) {
-                    NestedInteger ni = queue.poll();
-                    if (ni.isInteger()) {
-                        levelSum += ni.getInteger();
-                    } else {
-                        queue.addAll(ni.getList()); // Same to offer()
-                    }
-                }
-
-                prev += levelSum;
-                total += prev; // The secret is this levelSum will be added many times
-            }
-
-            return total;
-        }
-    }
 }

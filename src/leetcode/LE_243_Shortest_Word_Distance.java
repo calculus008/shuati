@@ -5,7 +5,8 @@ package leetcode;
  */
 public class LE_243_Shortest_Word_Distance {
     /**
-        Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+        Given a list of words and two words word1 and word2, return the shortest distance
+        between these two words in the list.
 
         For example,
         Assume that words = ["practice", "makes", "perfect", "coding", "makes"].

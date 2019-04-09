@@ -1,0 +1,34 @@
+#DP
+LE_256_Paint_House (***)
+LE_265_Paint_House_II  (followup)
+
+#Data Structure Design
+LE_244_Shortest_Word_Distance_II
+LE_895_Maximum_Frequency_Stack
+LE_981_Time_Based_Key_Value_Store
+LE_352_Data_Stream_As_Disjoint_Intervals  (***)              revisit
+Merge_Intervals                           (*****)            revisit
+
+#Array
+LE_277_Find_The_Celebrity
+LE_243_Shortest_Word_Distance
+LE_245_Shortest_Word_Distance_III
+LE_611_Valid_Triangle_Number
+
+#Graph
+LE_261_Graph_Valid_Tree        followup 改成判断存不存在环
+LE_366_Find_Leaves_Of_Binary_Tree
+(binary tree leaves的变种把bt变成了graph，没什么太大区别，注意一下recursion时候返回条件就好了)
+
+#Tree and BST
+LE_235_Lowest_Common_Ancestor_Of_BST
+LE_236_Lowest_Common_Ancestor_Of_BT
+follow up是如果有parent pointer怎么做，constant space : LE_160_Intersection_Of_Tow_Linked_List
+
+
+
+
+
+
+
+

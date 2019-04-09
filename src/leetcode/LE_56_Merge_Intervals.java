@@ -33,8 +33,38 @@ public class LE_56_Merge_Intervals {
         }
     }
 
-    //Time : O(nlogn) (use sorting), Space : O(n)
+    /**
+     * Best version, concise, short and easy to remember
+     */
     class Solution {
+        public List<Interval> merge(List<Interval> intervals) {
+            List<Interval> res = new ArrayList<>();
+            if (intervals == null || intervals.size() == 0) {
+                return res;
+            }
+
+            Collections.sort(intervals, (a, b) -> a.start - b.start);
+
+            Interval last = null;
+            for (Interval item : intervals) {
+                if (last == null || last.end < item.start) {
+                    /**
+                     * !!!
+                     * add item, not last
+                     */
+                    res.add(item);
+                    last = item;
+                } else {
+                    last.end = Math.max(last.end, item.end);
+                }
+            }
+
+            return res;
+        }
+    }
+
+    //Time : O(nlogn) (use sorting), Space : O(n)
+    class Solution2 {
         public List<Interval> merge(List<Interval> intervals) {
             /**
              * !!!

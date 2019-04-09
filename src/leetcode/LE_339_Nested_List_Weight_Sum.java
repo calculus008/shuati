@@ -21,6 +21,38 @@ public class LE_339_Nested_List_Weight_Sum {
      */
 
     /**
+     * Use the same BFS as LE_364_Nested_List_Weight_Sum_II.
+     * Easy to remember
+     */
+    class Solution_BFS {
+        public int depthSum(List<NestedInteger> nestedList) {
+            if (nestedList == null || nestedList.size() == 0) {
+                return 0;
+            }
+
+            int level = 0;
+            int res = 0;
+            Queue<NestedInteger> queue = new LinkedList<NestedInteger>(nestedList);
+
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                level++;
+
+                for (int i = 0; i < size; i++) {
+                    NestedInteger ni = queue.poll();
+                    if (ni.isInteger()) {
+                        res += ni.getInteger() * level;
+                    } else {
+                        queue.addAll(ni.getList()); // Same to offer()
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
          Solution 1 DFS
          Time :  O(n)
          Space : O(k) k is the max level of depth

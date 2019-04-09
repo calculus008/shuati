@@ -30,8 +30,19 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
          "给一个Interval class:
          class Interval {int start, int end}
          让我写两个function: add(int start, int end) : 建立一个新的interval类，然后存到自己定义的数据结构上，下面那个function会用到
-         get_total(int start, int end):  给出start,和 end之间的所有inerval覆盖的长度 （重复覆盖的部分只能算一次）"
+         get_total(int start, int end):  给出start,和 end之间的所有interval覆盖的长度 （重复覆盖的部分只能算一次）"
      **/
+
+    /**
+     * Summary :
+     * Solution1
+     * Use TreeMap, has balanced performance , O(logn) for both addNum() and getIntervals()
+     *
+     * Solution3
+     * Optimized for addNum() - O(1), getIntervals() is O(logn). It is for follow up -
+     * "What if there are lots of merges and the number of disjoint intervals are small
+     * compared to the data stream's size?"
+     */
 
     /**
      *   TreeMap Solution  : O(logn) for addNum(), O(n) for getIntervals()
@@ -283,7 +294,12 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
                     Interval inter = new Interval(i, start.get(i));
                     res.add(inter);
                 }
+
+                /**
+                 * !!!
+                 */
                 Collections.sort(res, (i1, i2) -> i1.start - i2.start);
+
                 return res;
             }
         }

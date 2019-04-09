@@ -92,6 +92,8 @@ LI_461_Kth_Smallest_Number                                QuickSelect, only diff
 LI_031_Partition_Array                       (same as LE_75_Set_Colors Dutch Flag)
 LI_894_Pancake_Sorting
 
+LE_408_Valid_Word_Abbreviation
+
 ====================================================
 
 4.BFS and Topological Sort

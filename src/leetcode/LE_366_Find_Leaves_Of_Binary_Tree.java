@@ -178,8 +178,10 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
      * One big difference is, tree only has 1 path between 2 nodes, while graph can have several paths, which forms a circle
      * @param graph could be isolated, but in our case, it is a connected graph
      * @return
-     * 只用一个Set<Node> visited 不行，因为graph里边可以重复visit 但是不能有环。 所以用Map, 上次还没计算出结果来呢，又来了， 说明有环
-     * Tree上随便两个Node连起来，肯定都是环吧
+     *
+     * !!!
+     * 1.只用一个Set<Node> visited 不行，因为graph里边可以重复visit 但是不能有环。
+     * 2.所以用Map, 上次还没计算出结果来呢，又来了， 说明有环,Tree上随便两个Node连起来，肯定都是环吧
      */
     List<List<Integer>> findLeavesInGraph(TreeNode graph) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
