@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * Created by yuank on 10/4/18.
@@ -35,6 +33,38 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
 
          LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
      */
+
+    /**
+     * Concise preferred solution
+     *
+     * Key : limit the size of pq to k, time : O(klogk)
+     */
+    class Solution_Preferred {
+        public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a,b) -> (nums1[a[0]] + nums2[a[1]]) - (nums1[b[0]] + nums2[b[1]]));
+            List<int[]> res = new ArrayList<>();
+
+            if (nums1.length == 0 || nums2.length == 0 || k == 0){
+                return res;
+            }
+
+            for (int i = 0; i < nums1.length && i < k; i++){
+                pq.offer(new int[]{i, 0});
+            }
+
+            while (k-- > 0 && !pq.isEmpty()){
+                int[] cur = pq.poll();
+                res.add(new int[]{nums1[cur[0]], nums2[cur[1]]});
+                if (cur[1] == nums2.length - 1) {
+                    continue; //Dont' add the next index if there is no more left in 2nd array
+                }
+
+                pq.offer(new int[]{cur[0], cur[1] + 1});
+            }
+
+            return res;
+        }
+    }
 
     /**
      * Solution 1
@@ -121,13 +151,13 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
 
                 //Also, if the chosen pair is the first one in its row, then the first pair in the next row
                 //is added to the queue.
-                if(e.y == 0 && e.x < len1 -1) {
+                if(e.y == 0 && e.x < len1 - 1) {
                     pq.offer(new Element(e.x + 1, e.y, nums1[e.x + 1]+nums2[e.y]));
                 }
 
                 //Whenever a pair is chosen into the output result, the next pair in the row gets added
                 //to the priority queue of current options.
-                if(e.y < len2 -1) {
+                if(e.y < len2 - 1) {
                     pq.offer(new Element(e.x, e.y + 1, nums1[e.x] + nums2[e.y + 1]));
                 }
             }
@@ -158,50 +188,88 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
      * 适用于follow up：
      * 假设是两个超大的sorted stream.
      *
-     * 唯一要改变的就是， 不能用visited[][]去判断是否访问过。
+     * 其实是利用优先级队列做BFS，搜索直到第k小，对于
+     * [
+     *  [1 ,5 ,7],
+     *  [3 ,7 ,8],
+     *  [4 ,8 ,9],
+     * ]
      *
-     * Set<Pair>? (Pair has x and y coordinates) ??
+     * 1是第一层，斜着的3，5是第二层，再斜着的4，7，7是第三层，8，8是第四层, 9是最后一层。
+     * 利用方向数组进行向下和向右搜索，利用visited数组记录访问过的位置（可以用hashset,如x*103 + y），
+     * minheap移除的都是较小的那个。
+     *
+     * Time Complexity: O(klog(min(m,n,k)))，队列最大长度是最长的那个对角线的元素个数，which is
+     * 行和列长度的更小者（如：很高或者很宽的矩阵）(??) ；还有一点是当k比行和列长度的更小者小时，
+     * 队列的最大长度其实是k。
+     *
+     * Space Complexity: O(min(m,n,k) + mn)，visited数组和pq的大小
+     *
      */
-    public class Solution3 {
-
+    class Solution_Follow_Up {
         class Element{
-            int x, y, val;
-            public Element(int x, int y, int val) {
+            int x, y;
+
+            public Element(int x, int y) {
                 this.x = x;
                 this.y = y;
-                this.val = val;
+            }
+
+//            public boolean equals(Object o) {
+//                 if (o == this) {
+//                     return true;
+//                 }
+
+//                 if (!(o instanceof Element)) {
+//                     return false;
+//                 }
+
+//                 Element c = (Element) o;
+
+//                 // Compare the data members and return accordingly
+//                 return c.x == this.x && c.y == this.y;
+//             }
+
+            public int hashCode() {
+                return x * 103 + y;
             }
         }
 
-        public int kthSmallestSum(int[] A, int[] B, int k) {
-            if (A == null && B == null) return 0;
+        public  List<int[]> kSmallestPairs(int[] A, int[] B, int k) {
+            List<int[]> res = new ArrayList<>();
+            if (A == null || B == null || A.length == 0 || B.length == 0) return res;
 
-            //!!! Never forget to add comparator lambda here
-            PriorityQueue<Element> pq = new PriorityQueue<>((a, b) -> a.val - b.val);
-            pq.offer(new Element(0, 0, A[0] + B[0]));
+            PriorityQueue<Element> pq = new PriorityQueue<>((a, b) -> (A[a.x] + B[a.y]) - (A[b.x] + B[b.y]));
+            Set<Integer> visited = new HashSet<>();
 
-            //!!! Define 2D array
-            boolean[][] visited = new boolean[A.length][B.length];
+            Element first = new Element(0, 0);
+            pq.offer(first);
+            visited.add(first.hashCode());
+            int count = k;
+
             int[][] dir = new int[][] {{1, 0}, {0, 1}};
 
-            while (k > 1 && !pq.isEmpty()) {
+            while (count > 0 && !pq.isEmpty()) {
                 Element e = pq.poll();
-                k--;
+                res.add(new int[]{A[e.x], B[e.y]});
+                count--;
 
                 for (int i = 0; i < 2; i++) {
-                    int a = e.x + dir[i][0];
-                    int b = e.y + dir[i][1];
+                    int nx = e.x + dir[i][0];
+                    int ny = e.y + dir[i][1];
 
                     //!!!Check array boundary
-                    if (a < A.length && b < B.length && !visited[a][b]) {
-                        pq.offer(new Element(a, b, A[a] + B[b]));
-                        visited[a][b] = true;
+                    if (nx < A.length && ny < B.length ) {
+                        Element next = new Element(nx, ny);
+                        if (!visited.contains(next.hashCode())) {
+                            pq.offer(next);
+                            visited.add(next.hashCode());
+                        }
                     }
                 }
             }
 
-            return pq.poll().val;
+            return res;
         }
     }
-
 }

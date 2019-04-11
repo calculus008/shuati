@@ -52,7 +52,12 @@ public class LE_123_Best_Time_To_Buy_And_Sell_Stock_III {
         for(int p : prices) {
             buyOne = Math.min(buyOne, p);
             SellOne = Math.max(SellOne, p - buyOne);
-            buyTwo = Math.min(buyTwo, p - SellOne);//!!!
+
+            /**
+             * !!!
+             */
+            buyTwo = Math.min(buyTwo, p - SellOne);
+
             SellTwo = Math.max(SellTwo, p - buyTwo);
         }
         return SellTwo;

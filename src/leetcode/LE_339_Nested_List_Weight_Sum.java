@@ -21,8 +21,45 @@ public class LE_339_Nested_List_Weight_Sum {
      */
 
     /**
+     * BFS with iterator, this should be the best solution
+     */
+    class Solution {
+        public int depthSum(List<NestedInteger> nestedList) {
+            if (nestedList == null || nestedList.size() == 0) return 0;
+
+            Queue<Iterator<NestedInteger>> q = new LinkedList<>();
+            q.offer(nestedList.iterator());
+
+            int res = 0;
+            int level = 0;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+                level++;
+
+                int levelSum = 0;
+                for (int i = 0; i < size; i++) {
+                    Iterator<NestedInteger> cur = q.poll();
+                    while (cur.hasNext()) {
+                        NestedInteger ni = cur.next();
+                        if (ni.isInteger()) {
+                            res += ni.getInteger() * level;
+                        } else {
+                            q.offer(ni.getList().iterator());
+                        }
+                    }
+
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
      * Use the same BFS as LE_364_Nested_List_Weight_Sum_II.
-     * Easy to remember
+     * Easy to remember, but probably not the version interviewer wants
+     * since it requires to put all elements in queue at the beginning
      */
     class Solution_BFS {
         public int depthSum(List<NestedInteger> nestedList) {
@@ -109,6 +146,7 @@ public class LE_339_Nested_List_Weight_Sum {
 
     /**
      * Solution 3, iterative using Iterator, the same logic as LE_341_Flatten_Nested_List_Iterator
+     * Preferred method.
      */
     public int depthSum(List<NestedInteger> nestedList) {
         if (nestedList == null || nestedList.size() == 0) return 0;

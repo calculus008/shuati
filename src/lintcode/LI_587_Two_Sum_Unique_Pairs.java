@@ -35,7 +35,7 @@ public class LI_587_Two_Sum_Unique_Pairs {
 
         不用sort， 时间复杂度得到了提高
 
-        Example : [1,1,2,45,46,46]
+        Example : [1,1,2,45,46,46], target = 47
 
         HashMap
         1 -> false

@@ -42,6 +42,11 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
      * follow up, return value can be negative,
      * meaning we must make a buy and a sell, if
      * we can't profit, try to return the min loss.
+     *
+     * key insights, for the case there must be a loss,
+     * it means the number must keep decreasing, therefore
+     * we simply keep track the difference between each day,
+     * keep the max (minimize the loss)
      */
     public static int maximumProfit(int[] prices) {
         if (null == prices || prices.length < 2) {
@@ -69,7 +74,7 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
     }
 
     public static void main(String[] args) {
-        int[] test = {10, 7, 6, 6, 6, 5};
+        int[] test = {10, 4, 3, 2, 2, 1};
         System.out.println(maximumProfit(test));
     }
 }

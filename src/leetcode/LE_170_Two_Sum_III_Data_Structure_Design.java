@@ -64,6 +64,11 @@ public class LE_170_Two_Sum_III_Data_Structure_Design {
 
         public void add(int number) {
             if (num.contains(number)) {
+                /**
+                 * Improve efficiency, if number is already in Set num,
+                 * we don't need to iterate through num and calculate sum...
+                 * just need to make sue number * 2 to be put into sum.
+                 */
                 sum.add(number * 2);
             } else {
                 /**

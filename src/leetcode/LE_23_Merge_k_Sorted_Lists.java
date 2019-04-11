@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 /**
  * Created by yuank on 8/17/18.
  */
-public class LE_23_Merge_k_Sorted_Lists {
+public class  LE_23_Merge_k_Sorted_Lists {
     /**
          Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
@@ -104,7 +104,17 @@ public class LE_23_Merge_k_Sorted_Lists {
      */
 
     /**
-     * Time : O(nlogk), n - number of lists, k - length of list
+     * Time : O(nlogk), k is the number of linked lists, n is total number of nodes
+     *
+     * The comparison cost will be reduced to O(logk) for every pop and insertion to priority queue.
+     * But finding the node with the smallest value just costs O(1)time. There are n nodes in the final
+     * linked list
+     *
+     * Space complexity :
+     * O(n) : Creating a new linked list costs O(n) space.
+     * O(k) :The code above present applies in-place method which cost O(1) space.
+     *       And the priority queue (often implemented with heaps) costs O(k) space
+     *       (it's far less than NN in most situations).
      * **/
     class Solution1 {
         public ListNode mergeKLists(ListNode[] lists) {

@@ -127,6 +127,9 @@ public class LE_716_Max_Stack {
             dll = new DoubleLinkedList();
         }
 
+        /**
+         * O(logn)
+         */
         public void push(int x) {
             Node node = dll.add(x);
 
@@ -137,6 +140,9 @@ public class LE_716_Max_Stack {
             map.get(x).add(node);
         }
 
+        /**
+         * O(1) (if do map.remove(), it will be O(logn)
+         */
         public int pop() {
             int val = dll.pop();
             List<Node> L = map.get(val);
@@ -149,14 +155,23 @@ public class LE_716_Max_Stack {
             return val;
         }
 
+        /**
+         * O(1)
+         */
         public int top() {
             return dll.peek();
         }
 
+        /**
+         * log(n)
+         */
         public int peekMax() {
             return map.lastKey();//!!!
         }
 
+        /**
+         * log(n)
+         */
         public int popMax() {
             int max = peekMax();
             List<Node> L = map.get(max);
@@ -340,8 +355,8 @@ public class LE_716_Max_Stack {
      * Double LinkedList + LinkedList
      *
      * DLL : simulate Stack, top of the stack is tracked by tail, push() always append node at the tail.
-     * LinkedList : maxList, sorted in descending order by insertion sort, node with max value
-     *              is always at index 0.
+     * LinkedList : maxList, sorted in descending order by insertion sort,
+     *              node with max value is always at index 0.
      *              It saves a reference to each DLL node.
      *
      */

@@ -1,6 +1,7 @@
 #DP
 LE_256_Paint_House (***)
 LE_265_Paint_House_II  (followup)
+LE_730_Count_Different_Palindromic_Subsequences              revisit
 
 #Data Structure Design
 LE_244_Shortest_Word_Distance_II
@@ -8,12 +9,18 @@ LE_895_Maximum_Frequency_Stack
 LE_981_Time_Based_Key_Value_Store
 LE_352_Data_Stream_As_Disjoint_Intervals  (***)              revisit
 Merge_Intervals                           (*****)            revisit
+LE_716_Max_Stack
 
-#Array
+#Array and String
 LE_277_Find_The_Celebrity
 LE_243_Shortest_Word_Distance
 LE_245_Shortest_Word_Distance_III
 LE_611_Valid_Triangle_Number
+LE_08_String_To_Integer
+LE_65_Valid_Number
+LI_587_Two_Sum_Unique_Pairs
+LE_170_Two_Sum_III_Data_Structure_Design
+input和sum两种最优都要写。分别是预处理所有的sum以及简单hashmap，每次求是否有sum再on走一遍
 
 #Graph
 LE_261_Graph_Valid_Tree        followup 改成判断存不存在环
@@ -25,8 +32,30 @@ LE_235_Lowest_Common_Ancestor_Of_BST
 LE_236_Lowest_Common_Ancestor_Of_BT
 follow up是如果有parent pointer怎么做，constant space : LE_160_Intersection_Of_Tow_Linked_List
 
+#PriorityQueue
+#K-way
+LE_23_Merge_k_Sorted_Lists     (*** followups)
+LI_486_Merge_K_Sorted_Arrays
+LE_373_Find_K_Pairs_With_Smallest_Sums
 
+#Search DFS/BFS
+LE_282_Expression_Add_Operators
 
+#Stack
+LE_150_Evaluate_Reverse_Polish_Notation
+
+LE_339_Nested_List_Weight_Sum
+LE_364_Nested_List_Weight_Sum_II
+LE_341_Flatten_Nested_List_Iterator (***)
+follow up 比较多， 首先写了个preprocessing using dfs， 就是recursion的写法。后来要求优化成iterative的形式;
+再后来，讨论了下极端情况， 也就是tree不balance， 方法就是push到stack之前不做flattening， 记下一个index。当时脑子比较懵，
+没写完，刚刚写了一下post到了里的口德里。
+https://leetcode.com/problems/fl ... flattening-the-list
+
+#Geometry
+LE_149_Max_Points_On_A_Line
+LE_973_K_Closest_Points_To_Origin
+K_Closest_Points_To_A_Given_Point
 
 
 

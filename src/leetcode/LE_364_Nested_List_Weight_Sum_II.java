@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class LE_364_Nested_List_Weight_Sum_II {
     /**
@@ -28,8 +25,43 @@ public class LE_364_Nested_List_Weight_Sum_II {
      */
 
     /**
+     * BFS with Iterator, preferred solution
+     */
+    class Solution_BFS_Iterator {
+        public int depthSumInverse(List<NestedInteger> nestedList) {
+            if (nestedList == null || nestedList.size() == 0) return 0;
+
+            Queue<Iterator<NestedInteger>> q = new LinkedList<>();
+            q.offer(nestedList.iterator());
+
+            int res = 0;
+            int pre = 0;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    Iterator<NestedInteger> cur = q.poll();
+                    while (cur.hasNext()) {
+                        NestedInteger ni = cur.next();
+                        if (ni.isInteger()) {
+                            pre += ni.getInteger();
+                        } else {
+                            q.offer(ni.getList().iterator());
+                        }
+                    }
+
+                }
+
+                res += pre;
+            }
+
+            return res;
+        }
+    }
+
+    /**
      * BFS one pass with Queue, without modifying input.
-     * Preferred Solution
      */
     class Solution_BFS {
         public int depthSumInverse(List<NestedInteger> nestedList) {

@@ -78,6 +78,12 @@ public class LE_205_Isomorphic_Strings {
       i = 1:  ascii value - g -> 103, b -> 98, a[103] = b[98] = 98
       i = 2:  ascii value - g -> 103, b -> 98, a[103] = 98, b[98] = 98  equal, continue
       End of for loop, return ture
+
+      Case 3 : s = "aab", t = "bbc"
+      a[1] = b[2] = 0
+      a[1] = b[2] = 2
+      a[1] = b[2] = 2
+      a[2] = 0, b[2] = 2, false
     */
     public boolean isIsomorphic2(String s, String t) {
         char[] a = new char[256];
@@ -128,6 +134,42 @@ public class LE_205_Isomorphic_Strings {
 
             mapS.put(s.charAt(i), i);
             mapT.put(t.charAt(i), i);
+        }
+
+        return true;
+    }
+
+    /**
+     * Can't just use one map to map char in s to char in t, for example :
+     *
+     * s: "ab"
+     * t: "aa"
+     *
+     * for index 1, no key for 'b', it will just add and pass. But actually, a
+     * in t has been mapped to a when index is 0.
+     *
+     * Therefore we must map it to a 3rd party value.
+     *
+     */
+    public boolean isIsomorphic4(String s, String t) {
+        if (null == s || null == t) return false;
+
+        int m = s.length();
+        int n = t.length();
+
+        if (m != n) return false;
+
+        char[] a = new char[256];
+        char[] b = new char[256];
+        int i = 0;
+
+        while (i < m) {
+            if(a[s.charAt(i)] != b[t.charAt(i)]) return false;
+
+            a[s.charAt(i)] = t.charAt(i);
+            b[t.charAt(i)] = t.charAt(i);
+
+            i++;
         }
 
         return true;
