@@ -34,7 +34,7 @@ public class LE_40_Combination_SUM_II {
      *
      * DFS
      * Time  : O(2 ^ n)
-     * Space : O(k * n)
+     * Space : O(k * n), k is the length of res (number of answers)
      */
 
     class Solution1 {

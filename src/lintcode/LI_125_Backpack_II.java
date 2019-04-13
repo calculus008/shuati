@@ -5,7 +5,7 @@ package lintcode;
  */
 public class LI_125_Backpack_II {
     /**
-         Given n items with size Ai and value Vi, and a backpack with size m.
+         Given n items with SIZE Ai and VALUE Vi, and a backpack with size m.
          What's the maximum value can you put into the backpack?
 
          Example

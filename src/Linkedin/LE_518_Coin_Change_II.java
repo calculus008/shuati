@@ -43,7 +43,7 @@ public class LE_518_Coin_Change_II {
      * dp[i][0] = 1, for value 0, there's 1 way -> not choosing any coins.
      *
      * Transition
-     * dp[i][j] = sum of ways of using it coins and NOT using ith coins
+     * dp[i][j] = sum of ways of using ith coins and NOT using ith coins
      * dp[i][j] = dp[i - 1][j] + (j >= coins[i - 1] ? dp[i][j - coins[i - 1]] : 0);
      *
      * Time  : O(n * m)
@@ -98,7 +98,6 @@ public class LE_518_Coin_Change_II {
             if (amount == 0) return 1;
             if (null == coins || coins.length == 0) return 0;
 
-            int n = coins.length;
             int[] dp = new int[amount + 1];
             dp[0] = 1;
 
@@ -111,4 +110,25 @@ public class LE_518_Coin_Change_II {
             return dp[amount];
         }
     }
+
+    //compare with LE_322_Coin_Change, which requires to get min number of coins that sum to amount
+//    public int coinChange(int[] coins, int amount) {
+//        if (amount == 0) return 0;
+//        if (coins == null || coins.length == 0) return -1;
+//
+//        int[] dp = new int[amount + 1];
+//        Arrays.fill(dp, Integer.MAX_VALUE);
+//
+//        dp[0] = 0;//!!!
+//
+//        for (int coin : coins) {
+//            for (int i = coin; i <= amount; i++) {
+//                if (dp[i - coin] != Integer.MAX_VALUE) {
+//                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+//                }
+//            }
+//        }
+//
+//        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+//    }
 }

@@ -2,6 +2,13 @@
 LE_256_Paint_House (***)
 LE_265_Paint_House_II  (followup)
 LE_730_Count_Different_Palindromic_Subsequences              revisit
+LE_40_Combination_SUM_II
+LE_377_Combination_Sum_IV   (Actually it is permutation sum and unbounded)  (*****)
+LE_322_Coin_Change          (***)
+LE_518_Coin_Change_II       (***)
+
+#Knapsack
+LI_563_Backpack_V
 
 #Data Structure Design
 LE_244_Shortest_Word_Distance_II
@@ -10,6 +17,10 @@ LE_981_Time_Based_Key_Value_Store
 LE_352_Data_Stream_As_Disjoint_Intervals  (***)              revisit
 Merge_Intervals                           (*****)            revisit
 LE_716_Max_Stack
+LE_380_Insert_Delete_GetRandom_O1
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+(multi-thread, 问基础知识，然后lock该加在哪一行)
+LE_432_All_O_One_Data_Structure           (*****)
 
 #Array and String
 LE_277_Find_The_Celebrity

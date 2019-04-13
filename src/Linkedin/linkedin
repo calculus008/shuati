@@ -170,7 +170,7 @@ LE_189_Rotate_Array (similar problem : Sort_Odd_Even)
 
 LE_380_Insert_Delete_GetRandom_O1
 Followed with :
-LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed    revisit
 (multi-thread, 问基础知识，然后lock该加在哪一行)
 LE_432_All_O_One_Data_Structure
 LE_146_LRU_Cache
@@ -257,6 +257,7 @@ LE_698_Partition_To_K_Equal_Sum_Subsets
 
 Reservior_Sampling
 LE_398_Random_Pick_Index
+Subset_Sum
 
 Max Stack
 Mid Stack

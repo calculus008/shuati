@@ -32,6 +32,56 @@ public class LE_322_Coin_Change {
      *   Time  : O(n * amount)
      *   Space : O(amount)
      */
+    class Solution2 {
+        /**
+         Time : O(n * amount)
+         Space : O(amount)
+
+         Preferred
+         */
+        public int coinChange(int[] coins, int amount) {
+            if (amount == 0) return 0;
+            if (coins == null || coins.length == 0) return -1;
+
+            int[] dp = new int[amount + 1];
+            Arrays.fill(dp, Integer.MAX_VALUE);
+
+            dp[0] = 0;//!!!
+
+            for (int coin : coins) {
+                for (int i = coin; i <= amount; i++) {
+                    if (dp[i - coin] != Integer.MAX_VALUE) {
+                        dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                    }
+                }
+            }
+
+            return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+        }
+    }
+      //compare with LE_518_Coin_Change_II, which want total number of combinations that sum to amount
+//    class Solution {
+//        public int change(int amount, int[] coins) {
+//            if (amount == 0) return 1;
+//            if (null == coins || coins.length == 0) return 0;
+//
+//            int[] dp = new int[amount + 1];
+//
+//            dp[0] = 1;
+//
+//            for (int coin : coins) {
+//                for(int i = coin; i <= amount; i++) {
+//                    dp[i] += dp[i - coin];
+//                }
+//            }
+//
+//            return dp[amount];
+//        }
+//    }
+
+
+
+
     class Solution1 {
         public int coinChange(int[] coins, int amount) {
             if (amount == 0) return 0;
@@ -54,31 +104,6 @@ public class LE_322_Coin_Change {
         }
     }
 
-    class Solution2 {
-        /**
-         Time : O(n * amount)
-         Space : O(amount)
-         */
-        public int coinChange(int[] coins, int amount) {
-            if (amount == 0) return 0;
-            if (coins == null || coins.length == 0) return -1;
-
-            int[] dp = new int[amount + 1];
-            Arrays.fill(dp, Integer.MAX_VALUE);
-
-            dp[0] = 0;//!!!
-
-            for (int coin : coins) {
-                for (int i = coin; i <= amount; i++) {
-                    if (dp[i - coin] != Integer.MAX_VALUE) {
-                        dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-                    }
-                }
-            }
-
-            return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
-        }
-    }
 
     /**
      * DFS + Greedy

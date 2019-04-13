@@ -28,6 +28,8 @@ public class LI_562_Backpack_IV {
          [2, 2, 2] only gets to 6, not 7, therefore it's not a solution.
 
          Medium
+
+         Same as LE_518_Coin_Change_II
      */
 
     /**
@@ -69,6 +71,7 @@ public class LI_562_Backpack_IV {
         return dp[n][m];
     }
 
+    //LE_518_Coin_Change_II
     public int backPackIV2(int[] nums, int target) {
         int[] f = new int[target + 1];
         f[0] = 1;

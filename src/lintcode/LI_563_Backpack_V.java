@@ -40,12 +40,12 @@ public class LI_563_Backpack_V {
      */
     public int backPackV1(int[] nums, int target) {
         // state dp[m][n]: the number of combinations that first m kinds of items form the target n
-        int m = nums.length, n = target;
-        int dp[][] = new int[m + 1][n + 1];
+        int m = nums.length;
+        int dp[][] = new int[m + 1][target + 1];
         dp[0][0] = 1;
         // dp function
         for (int i = 1; i <= m; i++) {
-            for (int j = 0; j <= n; j++) {
+            for (int j = 0; j <= target; j++) {
                 dp[i][j] = dp[i - 1][j];
                 if (j >= nums[i - 1]) {
                     /**
@@ -66,19 +66,26 @@ public class LI_563_Backpack_V {
             }
         }
         // result
-        return dp[m][n];
+        return dp[m][target];
     }
 
 
-    public int backPackV2(int[] nums, int target) {
-        int[] f = new int[target + 1];
-        f[0] = 1;
+    public static int backPackV2(int[] nums, int target) {
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
         for (int i = 0; i < nums.length; i++) {
             for (int j = target; j >= nums[i]; j--) {
-                f[j] += f[j - nums[i]];
+                int temp = j - nums[i];
+                System.out.println("do["+j+"] += dp[" +temp+"], " + dp[temp]);
+                dp[j] += dp[j - nums[i]];
             }
         }
 
-        return f[target];
+        return dp[target];
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1,2,3,3,7 };
+        System.out.println(backPackV2(nums, 7));
     }
 }

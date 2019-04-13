@@ -42,6 +42,11 @@ public class LE_377_Combination_Sum_IV {
      */
 
     /**
+     * Key :
+     *
+     * 1.It's actually permutation sum
+     * 2.Unbounded - each element can be used unlimited times.
+     *
      * Looks similar to LE_39_Combination_Sum, but it asks to return only
      * the count of different numbers, NOT all combinations. Therefore we
      * can use DP to have better Time Complexity. Also we can't use solution
@@ -87,7 +92,7 @@ public class LE_377_Combination_Sum_IV {
      * Recursion with Mem
      * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-377-combination-sum-iv/
      *
-     * Time  : O(sum(target / num[i])
+     * Time  : O(sum(target / num[i]), upper bound close to O(n * target)
      * Space : O(target)
      */
     class Solution2 {
@@ -126,12 +131,20 @@ public class LE_377_Combination_Sum_IV {
      * DP top-down
      */
     class Solution3 {
+        /**
+         * dp[i] : number of combinations which can be summed to i
+         */
         private int[] dp;
 
         public int combinationSum4(int[] nums, int target) {
             dp = new int[target + 1];
             Arrays.fill(dp, -1);
+
+            /**
+             * !!!!!
+             */
             dp[0] = 1;
+
             return helper(nums, target);
         }
 
@@ -166,11 +179,14 @@ public class LE_377_Combination_Sum_IV {
      */
     public int backPackVI(int[] nums, int target) {
         int[] dp = new int[target + 1];
+        /**
+         * !!!!!!
+         */
         dp[0] = 1;
 
         for (int i = 1; i <= target; i++) {
             for (int num : nums) {
-                if (i >= num) {
+                if (i - num >= 0) {
                     dp[i] += dp[i - num];
                 }
             }

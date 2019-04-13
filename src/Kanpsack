@@ -20,7 +20,7 @@ LI_92_Backpack                      :   boolean bp[i][j] : 前i个物品，取�
                                         }
                                         return max j value which makes dp[i][j] == true
 
-2.Value related knapsack
+2.Value related knapsack, get the most value
 LI_125_Backpack_II                  :   Each item may only be chose once
                                         int bp[i][j] ： 前i个物品，取出一些能放入size为j的空间，这i个物品可能的最大价值。
                                         dp[i][j] = Max( dp[i-1][j], dp[i-1][j-A[i]]+Value[i]);
@@ -95,7 +95,7 @@ LI_563_Backpack_V                   :   Each item may only be chose once        
                                         return dp[m][n];
 
 LI_562_Backpack_IV                  :    Each item may be chosen unlimited number of times     Different sequences are counted as the same combinations
-                                         int dp[m][n] 前m种硬币凑成n元的方案数量
+(LE_518_Coin_Change_II)                  int dp[m][n] 前m种硬币凑成n元的方案数量
                                          dp[m][n] = dp[m - 1][n] + dp[m - 1][n - A[m] * 1] + dp[m - 1][n - A[m] * 2] + dp[m - 1][n - A[m] * 3] + ...
 
                                          dp[0][0] = 1;

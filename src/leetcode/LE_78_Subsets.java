@@ -114,8 +114,6 @@ public class LE_78_Subsets {
 
     /**
      * Solution 3 : 非递归版本，利用二进制的方式逐个枚举 subsets。
-     * @param nums
-     * @return
      */
     public List<List<Integer>> subsets3_JiuZhang(int[] nums) {
         List<List<Integer>> result = new ArrayList<List<Integer>>();

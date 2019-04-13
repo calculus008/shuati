@@ -32,7 +32,7 @@ public class LI_92_Backpack {
      * Solution 1
      * Time and Space : O(m * n)
      *
-     *  bp[i][j] 前i个物品，取出一些能否组成和为j
+     * boolean bp[i][j] 前i个物品，取出一些能否组成和为j
      */
     public int backPack1(int m, int[] A) {
         if (m == 0 || A == null || A.length == 0) return 0;

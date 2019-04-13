@@ -264,7 +264,7 @@ public class LE_146_LRU_Cache {
         /**
          * !!!
          * Map value is ListNode, otherwise there's no way to
-         * track node in DDL.
+         * track node in DLL.
          */
         Map<Integer, ListNode> map;
         int capacity;
