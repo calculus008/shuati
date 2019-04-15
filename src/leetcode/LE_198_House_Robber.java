@@ -23,7 +23,7 @@ public class LE_198_House_Robber {
 
         int len = nums.length;
         /**
-         * dp[i] : max robbed for the first i houses (0 ~ i-1)
+         * dp[i] : max robbed for houses from 0 to i
          */
         int[] dp = new int[len];
 
@@ -60,29 +60,32 @@ public class LE_198_House_Robber {
     }
 
     //Solution 3: recursion with memorization
-     public int rob3(int[] nums) {
-         if(null == nums || nums.length==0) {
-             return 0;
-         }
+    public int rob3(int[] nums) {
+        if (null == nums || nums.length == 0) {
+            return 0;
+        }
 
-         int len = nums.length;
-         int[] mem = new int[len];
-         //!!!init mem : the value here is greater or equal to zero, so must init it with -1
-         for(int i=0; i<len; i++) {
-             mem[i] = -1;
-         }
+        int len = nums.length;
+        int[] mem = new int[len];
+        //!!!init mem : the value here is greater or equal to zero, so must init it with -1
+        for (int i = 0; i < len; i++) {
+            mem[i] = -1;
+        }
 
-         helper(nums, mem, len-1);
-         return mem[len-1];
-     }
+        helper(nums, mem, len - 1);
+        return mem[len - 1];
+    }
 
-     public int helper(int[] nums, int[] mem, int idx) {
-         if(idx < 0) return 0;
-         if(mem[idx] >= 0) return mem[idx];
+    public int helper(int[] nums, int[] mem, int idx) {
+        if (idx < 0) return 0;
+        if (mem[idx] >= 0) return mem[idx];
 
-         mem[idx] = Math.max(helper(nums, mem, idx-2) + nums[idx], helper(nums, mem, idx-1));
-         return mem[idx];
-     }
+        /**
+         * !!!
+         */
+        mem[idx] = Math.max(helper(nums, mem, idx - 2) + nums[idx], helper(nums, mem, idx - 1));
+        return mem[idx];
+    }
 
     /**
      * LI_392, return long to avoid overflow
@@ -92,7 +95,12 @@ public class LE_198_House_Robber {
     public long houseRobber1(int[] A) {
         if (A == null || A.length == 0) return 0;
 
-        //dp[i] : max value can be stolen for first i houses
+        /**
+         * dp[i] : max value can be stolen for first i houses,
+         * 0 ~ i - 1
+         *
+         * It adds padding, different from solution1 (without padding)
+         **/
         long[] dp = new long[A.length + 1];
         dp[0] = 0;
         dp[1] = A[0];
@@ -122,6 +130,6 @@ public class LE_198_House_Robber {
         for (int i = 2; i <= n; i++) {
             res[i % 2] = Math.max(res[(i - 1) % 2], res[(i - 2) % 2] + A[i - 1]);
         }
-        return res[n % 2];
+        return res[n % 2];//!!!n % 2
     }
 }

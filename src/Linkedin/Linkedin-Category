@@ -6,6 +6,10 @@ LE_40_Combination_SUM_II
 LE_377_Combination_Sum_IV   (Actually it is permutation sum and unbounded)  (*****)
 LE_322_Coin_Change          (***)
 LE_518_Coin_Change_II       (***)
+LE_198_House_Robber
+LE_213_House_Robber_II
+LE_337_House_Robber_III
+LE_746_Min_Cost_Climbing_Stairs
 
 #Knapsack
 LI_563_Backpack_V
@@ -32,6 +36,12 @@ LE_65_Valid_Number
 LI_587_Two_Sum_Unique_Pairs
 LE_170_Two_Sum_III_Data_Structure_Design
 input和sum两种最优都要写。分别是预处理所有的sum以及简单hashmap，每次求是否有sum再on走一遍
+
+LE_387_First_Unique_Character_In_A_String
+此后他不会出现，但是会对time space优化考察
+(LI_209_First_Unique_Character_In_A_String
+ LI_685_First_Unique_Number_In_Stream
+)
 
 #Graph
 LE_261_Graph_Valid_Tree        followup 改成判断存不存在环
