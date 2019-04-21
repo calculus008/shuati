@@ -56,7 +56,7 @@ public class LE_567_Permutation_In_String {
 
         //!!! Sliding window
         for (int i = 0; i < l2; ++i) {
-            if (i >= l1) {
+            if (i - l1 >= 0) {
                 m2[s2.charAt(i - l1) - 'a']--;
             }
 

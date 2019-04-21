@@ -9,7 +9,15 @@ LE_518_Coin_Change_II       (***)
 LE_198_House_Robber
 LE_213_House_Robber_II
 LE_337_House_Robber_III
-LE_746_Min_Cost_Climbing_Stairs
+LE_746_Min_Cost_Climbing_Stairs     (***)
+LE_516_Longest_Palindromic_Subsequence
+LE_115_Distinct_Subsequences
+LE_62_Unique_Path
+LE_64_Min_Path_Sum
+
+#Min-Max Strategy (Gaming Theory), Recurssion + Memoization
+LE_464_Can_I_Win
+LE_486_Predict_The_Winner
 
 #Knapsack
 LI_563_Backpack_V
@@ -25,23 +33,36 @@ LE_380_Insert_Delete_GetRandom_O1
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
 (multi-thread, 问基础知识，然后lock该加在哪一行)
 LE_432_All_O_One_Data_Structure           (*****)
+LE_359_Logger_Rate_Limiter
+LI_215_Rate_Limiter                       (***)
 
 #Array and String
+LE_41_First_Missing_Positive              (******)!!!
 LE_277_Find_The_Celebrity
 LE_243_Shortest_Word_Distance
 LE_245_Shortest_Word_Distance_III
 LE_611_Valid_Triangle_Number
+LE_42_Trapping_Rain_Water
 LE_08_String_To_Integer
 LE_65_Valid_Number
 LI_587_Two_Sum_Unique_Pairs
 LE_170_Two_Sum_III_Data_Structure_Design
 input和sum两种最优都要写。分别是预处理所有的sum以及简单hashmap，每次求是否有sum再on走一遍
+LE_53_Maximum_Subarray
+LE_152_Maximum_Product_Subarray
+LE_318_Maximum_Product_Of_Word_Lengths
+LE_628_Maximum_Product_Of_Three_Numbers
+LE_239_Sliding_Window_Maximum         (***)
+LE_68_Text_Justification              (*****)
+LE_08_String_To_Integer
+LE_567_Permutation_In_String
 
 LE_387_First_Unique_Character_In_A_String
 此后他不会出现，但是会对time space优化考察
 (LI_209_First_Unique_Character_In_A_String
  LI_685_First_Unique_Number_In_Stream
 )
+LE_187_Repeated_DNA_Sequences
 
 #Graph
 LE_261_Graph_Valid_Tree        followup 改成判断存不存在环
@@ -52,6 +73,11 @@ LE_366_Find_Leaves_Of_Binary_Tree
 LE_235_Lowest_Common_Ancestor_Of_BST
 LE_236_Lowest_Common_Ancestor_Of_BT
 follow up是如果有parent pointer怎么做，constant space : LE_160_Intersection_Of_Tow_Linked_List
+LE_156_Binary_Tree_Upside_Down
+LE_310_Minimum_Height_Trees     (??)
+LI_596_Minimum_Subtree
+LE_111_Min_Depth_Of_Binary_Tree
+LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
 
 #PriorityQueue
 #K-way
@@ -61,6 +87,10 @@ LE_373_Find_K_Pairs_With_Smallest_Sums
 
 #Search DFS/BFS
 LE_282_Expression_Add_Operators
+LE_254_Factor_Combinations
+LE_47_Permutation_II
+LE_721_Accounts_Merge                             (*****)
+
 
 #Stack
 LE_150_Evaluate_Reverse_Polish_Notation
@@ -78,7 +108,8 @@ LE_149_Max_Points_On_A_Line
 LE_973_K_Closest_Points_To_Origin
 K_Closest_Points_To_A_Given_Point
 
-
+#LinkedList
+LE_142_Linked_List_Cycle_II
 
 
 

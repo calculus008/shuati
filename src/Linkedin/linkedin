@@ -202,10 +202,12 @@ LE_516_Longest_Palindromic_Subsequence
 LE_254_Factor_Combinations
 
 LE_156_Binary_Tree_Upside_Down
-LI_596_Minimum_Subtree  (??)
-LE_310_Minimum_Height_Trees
+LI_596_Minimum_Subtree
+LE_310_Minimum_Height_Trees  (??)
 LE_111_Min_Depth_Of_Binary_Tree
 LE_100_Same_Tree
+
+--------
 
 LE_53_Maximum_Subarray
 LE_152_Maximum_Product_Subarray
@@ -231,7 +233,7 @@ LE_319_Bulb_Switcher
 LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
 LE_115_Distinct_Subsequences
 LE_187_Repeated_DNA_Sequences
-LE_721_Accounts_Merge                             (***)
+LE_721_Accounts_Merge                             (*****)
 LE_41_First_Missing_Positive                      (***)
 
 Generic_Permutation                               (***)

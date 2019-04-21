@@ -42,23 +42,21 @@ public class LI_526_Load_Balancer {
         List<Integer> list;
 
         public LoadBalancer() {
+            /**
+             * map : key - serverId, value - index of this server in list
+             */
             map = new HashMap<>();
             list = new ArrayList<>();
         }
 
-        /*
-         * @param server_id: add a new server to the cluster
-         * @return: nothing
-         */
         public void add(int server_id) {
             int size = list.size();
             map.put(server_id, size);//!!!
             list.add(server_id);
         }
 
-        /*
-         * @param server_id: server_id remove a bad server from the cluster
-         * @return: nothing
+        /**
+         * Similar to LRU, use "swap with last" in list to make it O(1)
          */
         public void remove(int server_id) {
             int size = list.size();
@@ -70,9 +68,6 @@ public class LI_526_Load_Balancer {
             map.remove(server_id);
         }
 
-        /*
-         * @return: pick a server in the cluster randomly with equal probability
-         */
         public int pick() {
             Random r = new Random();
             int pick = r.nextInt(list.size());//!!! 0(inclusive) to given range(exclusive)

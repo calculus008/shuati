@@ -241,6 +241,7 @@ public class BicyblePeopleMatching {
                     boolean[][] visited = new boolean[m][n];
 
                     helper_hashmap_version(map, pq, visited, new int[]{i, j}, new int[]{i, j});
+                    
                     while (!pq.isEmpty() && isTaken_hashmap_version(pq, taken)) {
                         Element1 e = pq.poll();
                     }

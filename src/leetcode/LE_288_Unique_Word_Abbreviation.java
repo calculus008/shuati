@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by yuank on 4/19/18.
@@ -8,7 +9,8 @@ import java.util.HashMap;
 public class LE_288_Unique_Word_Abbreviation {
     /**
      *
-         An abbreviation of a word follows the form <first letter><number><last letter>. Below are some examples of word abbreviations:
+         An abbreviation of a word follows the form <first letter><number><last letter>.
+         Below are some examples of word abbreviations:
 
          a) it                      --> it    (no abbreviation)
 
@@ -22,7 +24,11 @@ public class LE_288_Unique_Word_Abbreviation {
          1
          1---5----0
          d) l|ocalizatio|n          --> l10n
-         Assume you have a dictionary and given a word, find whether its abbreviation is unique in the dictionary. A word's abbreviation is unique if no other word from the dictionary has the same abbreviation.
+
+         Assume you have a dictionary and given a word,
+         find whether its abbreviation is unique in the dictionary.
+
+         A word's abbreviation is unique if no other word from the dictionary has the same abbreviation.
 
          Example:
          Given dictionary = [ "deer", "door", "cake", "card" ]
@@ -33,6 +39,8 @@ public class LE_288_Unique_Word_Abbreviation {
          isUnique("make") -> true
 
         Medium
+
+        A possible follow up question - LI_639_Word_Abbreviation
      */
 
     class ValidWordAbbr {
@@ -62,6 +70,39 @@ public class LE_288_Unique_Word_Abbreviation {
             } else {
                 return s.charAt(0) + Integer.toString(s.length() - 2) + s.charAt(s.length() - 1);
             }
+        }
+    }
+
+    public class ValidWordAbbr_JiuZhang {
+        /**
+         * two hashmap, save the frequency of original word and its abbreviation.
+         *
+         * Compare the frequency values for a word and its abbreviation to tell if
+         * the abbreviation is unique.
+         */
+        Map<String, Integer> dict = new HashMap<>();
+        Map<String, Integer> abbr = new HashMap<>();
+
+        // @param dictionary a list of word
+        public ValidWordAbbr_JiuZhang(String[] dictionary) {
+            for (String d : dictionary) {
+                dict.put(d, dict.getOrDefault(d, 0) + 1);
+                String a = getAbbr(d);
+                abbr.put(a, abbr.getOrDefault(a, 0) + 1);
+            }
+        }
+
+        public boolean isUnique(String word) {
+            // Write your code here
+            String a = getAbbr(word);
+            return dict.get(word) == abbr.get(a);
+        }
+
+        String getAbbr(String str) {
+            if (str.length() <= 2) {
+                return str;
+            }
+            return "" + str.charAt(0) + (str.length() - 2) + str.charAt(str.length() - 1);
         }
     }
 }

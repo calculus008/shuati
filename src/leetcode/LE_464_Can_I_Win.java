@@ -63,7 +63,7 @@ public class LE_464_Can_I_Win {
                 return false;
             }
 
-            //!!! remeber current state
+            //!!! remember current state
             String cur = Arrays.toString(state);
 
             if (map.containsKey(cur)) {
@@ -75,7 +75,7 @@ public class LE_464_Can_I_Win {
                     state[i] = true;
                     //!!! Since we try to see if the first player can win, the next player should fail, therefore - !helper()
                     if (t <= i + 1 || !helper(m, t - (i + 1), state, map)) {
-                        //!!!
+                        //!!! backtrack
                         state[i] = false;
                         //!!! recursion with memo, always remember to put result into the memo
                         map.put(cur, true);
@@ -89,7 +89,10 @@ public class LE_464_Can_I_Win {
             return false;
         }
 
-        //use integer to store state and used as key in map
+        /**
+         * Since maxChoosableInteger is smaller than 29, therefore,
+         * use integer (32 bit) to store state and used as key in map
+         **/
         private boolean helper2(int m, int t, int state, HashMap<Integer, Boolean> map) {
             // if (t < 0) {
             //     return false;
@@ -104,6 +107,10 @@ public class LE_464_Can_I_Win {
                     continue;
                 }
 
+                /**
+                 * 在调用下一层时，传"state | (1 << i)" 最为参数，这样, 当前层
+                 * 的state值不变，省去了backtracking。
+                 */
                 if(t <= i + 1 || !helper2(m, t - (i + 1), state | (1 << i), map)) {
                     map.put(state, true);
                     return true;
@@ -118,6 +125,8 @@ public class LE_464_Can_I_Win {
     /**
      * Huahua's version
      * http://zxi.mytechroad.com/blog/searching/leetcode-464-can-i-win/
+     *
+     * In essence it is permutation problem.
      */
     class Solution2 {
         private byte[] mem;

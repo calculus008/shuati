@@ -15,7 +15,58 @@ public class LE_198_House_Robber {
         determine the maximum amount of money you can rob tonight without alerting the police.
      */
 
-    //Solution 1: DP
+
+    /**
+     * Preferred Solution
+     */
+    class Solution {
+        /**
+         * LI_392, return long to avoid overflow
+         * Time  : O(n)
+         * Space : O(n)
+         **/
+        public long houseRobber1(int[] A) {
+            if (A == null || A.length == 0) return 0;
+
+            /**
+             * dp[i] : max value can be stolen for first i houses,
+             * 0 ~ i - 1
+             *
+             * It adds padding, different from solution1 (without padding)
+             **/
+            long[] dp = new long[A.length + 1];
+            dp[0] = 0;
+            dp[1] = A[0];
+
+            for (int i = 2; i < dp.length; i++) {
+                dp[i] = Math.max(dp[i - 1], A[i - 1] + dp[i - 2]);
+            }
+
+            return dp[A.length];
+        }
+
+        /**
+         * Modified from houseRobber1, compress space to O(1)
+         */
+        public int houseRobber1_1(int[] A) {
+            if (A == null || A.length == 0) return 0;
+
+            int n = A.length;
+            long dp1 = 0;
+            long dp2 = A[0];
+
+            for (int i = 2; i <= n; i++) {
+                long temp = Math.max(dp2, A[i - 1] + dp1);
+                dp1 = dp2;
+                dp2 = temp;
+            }
+
+            return (int) dp2;
+        }
+    }
+
+
+        //Solution 1: DP
     public int rob1(int[] nums) {
         if (null == nums || nums.length == 0) {
             return 0;
@@ -34,6 +85,7 @@ public class LE_198_House_Robber {
 
         return dp[len - 1];
     }
+
 
     //Solution 2: DP with optimization on space
     public int rob2(int[] nums) {
@@ -87,30 +139,6 @@ public class LE_198_House_Robber {
         return mem[idx];
     }
 
-    /**
-     * LI_392, return long to avoid overflow
-     * Time  : O(n)
-     * Space : O(n)
-     **/
-    public long houseRobber1(int[] A) {
-        if (A == null || A.length == 0) return 0;
-
-        /**
-         * dp[i] : max value can be stolen for first i houses,
-         * 0 ~ i - 1
-         *
-         * It adds padding, different from solution1 (without padding)
-         **/
-        long[] dp = new long[A.length + 1];
-        dp[0] = 0;
-        dp[1] = A[0];
-
-        for (int i = 2; i < dp.length; i++) {
-            dp[i] = Math.max(dp[i - 1], A[i - 1] + dp[i - 2]);
-        }
-
-        return dp[A.length];
-    }
 
     /**
      * 滚动数组

@@ -1,7 +1,9 @@
 package leetcode;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class LE_505_The_Maze_II {
     /**
@@ -37,6 +39,11 @@ public class LE_505_The_Maze_II {
      * <p>
      * Explanation: One shortest way is : left -> down -> left -> down -> right -> down -> right.
      * The total distance is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
+     */
+
+    /**
+     * BFS
+     *
      */
     public class Solution1 {
         class Point {
@@ -84,15 +91,33 @@ public class LE_505_The_Maze_II {
         }
     }
 
+    /**
+     * DFS
+     *
+     * Time complexity : O(m * n * max(m,n)).
+     * Complete traversal of maze will be done in the worst case. Here, m and n refers to the
+     * number of rows and columns of the maze. Further, for every current node chosen, we can
+     * travel up to a maximum depth of max(m,n) in any direction.
+     *
+     * Space complexity : O(mn)
+     * distance array of size m * n is used.
+     */
     public class Solution2 {
         public int shortestDistance(int[][] maze, int[] start, int[] dest) {
+            /**
+             * distance[i][j] :
+             * represents the minimum number of steps required to reach the positon (i, j)
+             * starting from the start position. This array is initialized with largest
+             * integer values in the beginning.
+             */
             int[][] distance = new int[maze.length][maze[0].length];
             for (int[] row : distance) {
                 Arrays.fill(row, Integer.MAX_VALUE);
             }
-
             distance[start[0]][start[1]] = 0;
+
             dfs(maze, start, distance);
+
             return distance[dest[0]][dest[1]] == Integer.MAX_VALUE ? -1 : distance[dest[0]][dest[1]];
         }
 
@@ -103,6 +128,9 @@ public class LE_505_The_Maze_II {
                 int y = start[1] + dir[1];
                 int count = 0;
 
+                /**
+                 * this while simulates moving to one direction until it hits a wall
+                 */
                 while (x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] == 0) {
                     x += dir[0];
                     y += dir[1];
@@ -113,6 +141,43 @@ public class LE_505_The_Maze_II {
                     distance[x - dir[0]][y - dir[1]] = distance[start[0]][start[1]] + count;
                     dfs(maze, new int[]{x - dir[0], y - dir[1]}, distance);
                 }
+            }
+        }
+
+        /**
+         * BFS
+         */
+        public class Solution3 {
+            public int shortestDistance(int[][] maze, int[] start, int[] dest) {
+                int[][] distance = new int[maze.length][maze[0].length];
+                for (int[] row: distance) {
+                    Arrays.fill(row, Integer.MAX_VALUE);
+                }
+
+                distance[start[0]][start[1]] = 0;
+                int[][] dirs={{0, 1} ,{0, -1}, {-1, 0}, {1, 0}};
+                Queue< int[] > queue = new LinkedList< >();
+                queue.add(start);
+
+                while (!queue.isEmpty()) {
+                    int[] s = queue.remove();
+                    for (int[] dir: dirs) {
+                        int x = s[0] + dir[0];
+                        int y = s[1] + dir[1];
+                        int count = 0;
+                        while (x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] == 0) {
+                            x += dir[0];
+                            y += dir[1];
+                            count++;
+                        }
+
+                        if (distance[s[0]][s[1]] + count < distance[x - dir[0]][y - dir[1]]) {
+                            distance[x - dir[0]][y - dir[1]] = distance[s[0]][s[1]] + count;
+                            queue.add(new int[] {x - dir[0], y - dir[1]});
+                        }
+                    }
+                }
+                return distance[dest[0]][dest[1]] == Integer.MAX_VALUE ? -1 : distance[dest[0]][dest[1]];
             }
         }
     }

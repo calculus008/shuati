@@ -91,51 +91,109 @@ public class LE_721_Accounts_Merge {
      *
      *   4.第三个坑 ： 分类完成后，要整理输出。用第二个HashMap, 注意，这里， key必须是idx, 不是name, 因为只有idx是unique的，
      *     name会有相同的值。value用TreeSet,因为题意要求email in sorted order.
+     *
+     *   Time : O(sum (n(i))) , n(i) is length of accounts[i]
+     *   Space : O(sum (n(i))
+     *
+     *
      */
 
-    public List<List<String>> accountsMerge(List<List<String>> accounts) {
-        List<List<String>> res = new ArrayList<>();
-        if (accounts == null || accounts.size() == 0) return res;
+    class Solution1 {
+        public List<List<String>> accountsMerge(List<List<String>> accounts) {
+            List<List<String>> res = new ArrayList<>();
+            if (accounts == null || accounts.size() == 0) return res;
 
-        UnionFindWithCount1 uf = new UnionFindWithCount1(accounts.size());
+            UnionFindWithCount1 uf = new UnionFindWithCount1(accounts.size());
 
-        /**
-         * 1.Union Find, do union
-         */
-        HashMap<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < accounts.size(); i++) {
-            List<String> account = accounts.get(i);
-            for (int j = 1; j < account.size(); j++) {
-                String email = account.get(j);
-                map.putIfAbsent(email, i);
-                uf.union(i, map.get(email));
+            /**
+             * 1.Union Find, do union
+             */
+            HashMap<String, Integer> map = new HashMap<>();
+            for (int i = 0; i < accounts.size(); i++) {
+                List<String> account = accounts.get(i);
+                for (int j = 1; j < account.size(); j++) {
+                    String email = account.get(j);
+                    map.putIfAbsent(email, i);
+                    uf.union(i, map.get(email));
+                }
+            }
+
+            /**
+             * 2.Query from UFS and do merge/sort
+             */
+            HashMap<Integer, TreeSet<String>> merged = new HashMap<>();
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                int idx = uf.query(entry.getValue());
+                String name = accounts.get(idx).get(0);
+                if (!merged.containsKey(idx)) {
+                    merged.put(idx, new TreeSet<>());
+                }
+                merged.get(idx).add(entry.getKey());
+            }
+
+            /**
+             * 3.load into required result form - List<List<String>>
+             */
+            for (Map.Entry<Integer, TreeSet<String>> entry : merged.entrySet()) {
+                Set<String> set = entry.getValue();
+                int idx = entry.getKey();
+                List<String> list = new ArrayList<>(set);
+                list.add(0, accounts.get(idx).get(0));
+                res.add(list);
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * DFS
+     *
+     * Time : O(sum(nlogn)), n is length of accounts[i]
+     * Space : O(sum (n))
+     */
+    class Solution {
+        public List<List<String>> accountsMerge(List<List<String>> accounts) {
+            Map<String, Set<String>> graph = new HashMap<>();  //<email node, neighbor nodes>
+            Map<String, String> name = new HashMap<>();        //<email, username>
+            // Build the graph;
+            for (List<String> account : accounts) {
+                String userName = account.get(0);
+                for (int i = 1; i < account.size(); i++) {
+                    if (!graph.containsKey(account.get(i))) {
+                        graph.put(account.get(i), new HashSet<>());
+                    }
+                    name.put(account.get(i), userName);
+
+                    if (i == 1) continue;
+                    graph.get(account.get(i)).add(account.get(i - 1));
+                    graph.get(account.get(i - 1)).add(account.get(i));
+                }
+            }
+
+            Set<String> visited = new HashSet<>();
+            List<List<String>> res = new LinkedList<>();
+            // DFS search the graph;
+            for (String email : name.keySet()) {
+                List<String> list = new LinkedList<>();
+                if (visited.add(email)) {
+                    dfs(graph, email, visited, list);
+                    Collections.sort(list);
+                    list.add(0, name.get(email));
+                    res.add(list);
+                }
+            }
+
+            return res;
+        }
+
+        public void dfs(Map<String, Set<String>> graph, String email, Set<String> visited, List<String> list) {
+            list.add(email);
+            for (String next : graph.get(email)) {
+                if (visited.add(next)) {
+                    dfs(graph, next, visited, list);
+                }
             }
         }
-
-        /**
-         * 2.Query from UFS and do merge/sort
-         */
-        HashMap<Integer, TreeSet<String>> merged = new HashMap<>();
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            int idx = uf.query(entry.getValue());
-            String name = accounts.get(idx).get(0);
-            if (!merged.containsKey(idx)) {
-                merged.put(idx, new TreeSet<>());
-            }
-            merged.get(idx).add(entry.getKey());
-        }
-
-        /**
-         * 3.load into required result form - List<List<String>>
-         */
-        for (Map.Entry<Integer, TreeSet<String>> entry : merged.entrySet()) {
-            Set<String> set = entry.getValue();
-            int idx = entry.getKey();
-            List<String> list = new ArrayList<>(set);
-            list.add(0, accounts.get(idx).get(0));
-            res.add(list);
-        }
-
-        return res;
     }
 }

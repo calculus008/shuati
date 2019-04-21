@@ -73,7 +73,7 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
                     if (pre != null) { //链接
                         pre.next = cur.left;
                     } else {//这实际上表明这是本层的第一个元素。
-                        head = cur.left;
+                        head = cur.left;//Set head
                     }
                     pre = cur.left; //然后set pre.
                 }
@@ -82,7 +82,7 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
                     if (pre != null) {
                         pre.next = cur.right;
                     } else {
-                        head = cur.right;
+                        head = cur.right;//Set head
                     }
                     pre = cur.right;
                 }

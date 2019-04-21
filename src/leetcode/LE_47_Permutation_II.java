@@ -74,6 +74,8 @@ public class LE_47_Permutation_II {
             if (input == null || input.length == 0) {
                 return result;
             }
+
+//            Arrays.sort(input, (a, b) -> a.compareTo(b)); //??
             Arrays.sort(input, new Comparator<T>() {
                 @Override
                 public int compare(T t1, T t2) {

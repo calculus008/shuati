@@ -1,7 +1,6 @@
 package lintcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yuank on 10/12/18.
@@ -38,7 +37,7 @@ public class LI_778_Pacific_Atlantic_Water_Flow {
          Medium
      */
 
-    public class Solution {
+    public class Solution_DFS {
         int m, n;
 
         public List<List<Integer>> pacificAtlantic(int[][] matrix) {
@@ -97,6 +96,72 @@ public class LI_778_Pacific_Atlantic_Water_Flow {
 
         private boolean isValid(int x, int y) {
             return (x >= 0 && x < m && y >= 0 && y < n);
+        }
+    }
+
+    public class Solution_BFS {
+
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, -1, 0, 1};
+        int m, n;
+
+        public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+                return res;
+            }
+
+            m = matrix.length;
+            n = matrix[0].length;
+
+            boolean[][] pacific = new boolean[m][n];
+            boolean[][] atlantic = new boolean[m][n];
+            Queue<int[]> pQueue = new LinkedList<>();
+            Queue<int[]> aQueue = new LinkedList<>();
+
+            // push initial edge cells to queue
+            for (int i = 0; i < m; i++) {
+                pacific[i][0] = true;
+                pQueue.offer(new int[]{i, 0});
+                atlantic[i][n - 1] = true;
+                aQueue.offer(new int[]{i, n - 1});
+            }
+            for (int j = 0; j < n; j++) {
+                pacific[0][j] = true;
+                pQueue.offer(new int[]{0, j});
+                atlantic[m - 1][j] = true;
+                aQueue.offer(new int[]{m - 1, j});
+            }
+
+            // BFS to mark visited
+            bfs(pacific, pQueue, matrix);
+            bfs(atlantic, aQueue, matrix);
+
+            // find common visited cells
+            for (int j = 0; j < n; j++) {
+                for (int i = 0; i < m; i++) {
+                    if (pacific[i][j] && atlantic[i][j]) {
+                        res.add(new ArrayList<>(Arrays.asList(i, j)));
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        private void bfs(boolean[][] visited, Queue<int[]> queue, int[][] matrix) {
+            while (!queue.isEmpty()) {
+                int[] cell = queue.poll();
+                int x = cell[0], y = cell[1];
+                for (int i = 0; i < 4; i++) {
+                    int nx = x + dx[i];
+                    int ny = y + dy[i];
+                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && !visited[nx][ny] && matrix[nx][ny] >= matrix[x][y]) {
+                        visited[nx][ny] = true;
+                        queue.offer(new int[]{nx, ny});
+                    }
+                }
+            }
         }
     }
 }

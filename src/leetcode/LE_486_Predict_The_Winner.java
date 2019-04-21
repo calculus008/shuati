@@ -41,11 +41,36 @@ public class LE_486_Predict_The_Winner {
      *
      * Min_Max
      *
-     * Time  : O(n ^ 2)
+     * Brutal Force :
+     * Time  : O(2 ^ n)
      * Space : O(n)
      */
+    class Solution1 {
+        public boolean PredictTheWinner(int[] nums) {
+            return getScore(nums, 0, nums.length - 1) >= 0;
+        }
 
-    class Solution {
+        /**
+         * max score diff fro player in current round against the other player
+         */
+        private int getScore(int[] nums, int l, int r) {
+            if (l == r) {
+                return nums[l];
+            }
+
+            return Math.max(nums[l] - getScore(nums, l + 1, r), nums[r] - getScore(nums, l, r - 1));
+        }
+    }
+
+    /**
+     * DP
+     *
+     * dp[i][j] : Max score for sub array between index i and j
+     *
+     * Time  : O(n ^ 2), we have n ^ 2 sub-problems
+     * Space : O(n)
+     */
+    class Solution2 {
         public boolean PredictTheWinner(int[] nums) {
             int n = nums.length;
             int[] dp = new int[n];

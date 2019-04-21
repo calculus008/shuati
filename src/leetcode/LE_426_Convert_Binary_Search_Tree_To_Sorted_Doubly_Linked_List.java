@@ -22,7 +22,10 @@ public class LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List {
      * https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/solution/
      */
     class Solution1 {
-        // the smallest (first) and the largest (last) nodes
+        /**
+         * !!!
+         * The smallest (first) and the largest (last) nodes
+\        */
         TreeNode first = null;
         TreeNode last = null;
 
@@ -30,7 +33,10 @@ public class LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List {
             if (root == null) return null;
 
             helper(root);
-            // close DLL
+
+            /**
+             * make DLl circular, as required
+             */
             last.right = first;
             first.left = last;
 
@@ -40,12 +46,23 @@ public class LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List {
             return first;
         }
 
+        /**
+         * Key Insights :
+         * Still using BST property - its inorder traversal sequence is sorted.
+         *
+         * Keep tracking the min and max value with first and last, link nodes together
+         */
         public void helper(TreeNode node) {
             if (node != null) {
                 // left
                 helper(node.left);
 
-                // node
+                /**
+                 * After the last line, first and last should point to the
+                 * min value node and max value node in current node's left
+                 * sub-tree, link accordingly. Here "right" acts as "next"
+                 * and "left" acts as "pre" in DLL.
+                 */
                 if (last != null) {
                     // link the previous node (last)
                     // with the current one (node)
@@ -58,6 +75,8 @@ public class LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List {
                 }
                 /**
                  * !!!
+                 * This is where we update last.
+                 * Before going into right subtree, last node is current node.
                  */
                 last = node;
 

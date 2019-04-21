@@ -5,9 +5,11 @@ package leetcode;
  */
 public class LE_62_Unique_Path {
     /**
-        A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+        A robot is located at the top-left corner of a m x n grid
+        (marked 'Start' in the diagram below).
 
-        The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid.
+        The robot can only move either down or right at any point in time.
+        The robot is trying to reach the bottom-right corner of the grid.
 
         How many possible unique paths are there?
      */
@@ -39,13 +41,13 @@ public class LE_62_Unique_Path {
         So it is enough to maintain two columns (the current column and the left column) instead
         of maintaining the full m*n. Space O(min(m, n))
 
-        Further more,  we find that keeping two columns is used to recover pre[i], which is just cur[i] before its update.
-        So there is even no need to use two vectors and one is just enough.
+        Further more,  we find that keeping two columns is used to recover pre[i], which is just
+        cur[i] before its update. So there is even no need to use two vectors and one is just enough.
 
-        Well, till now, I guess you may even want to optimize it to O(1) space complexity since the above code seems
-        to rely on only cur[i] and cur[i - 1]. You may think that 2 variables is enough? Well, it is not.
-        Since the whole cur needs to be updated for n - 1 times, it means that all of its values need to be saved
-        for next update and so two variables is not enough.
+        Well, till now, I guess you may even want to optimize it to O(1) space complexity since the
+        above code seems to rely on only cur[i] and cur[i - 1]. You may think that 2 variables is
+        enough? Well, it is not. Since the whole cur needs to be updated for n - 1 times, it means
+        that all of its values need to be saved for next update and so two variables is not enough.
     **/
     public static int uniquePaths2(int m, int n) {
          if (m > n) return uniquePaths2 (n, m);

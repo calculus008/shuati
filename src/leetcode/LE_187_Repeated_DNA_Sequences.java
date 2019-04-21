@@ -50,13 +50,13 @@ public class LE_187_Repeated_DNA_Sequences {
         Set<String> set = new HashSet<>();
         Set<String> ans = new HashSet<>();
 
-        for (int i = 0 ; i < s.length() - 9; i++) {
+        for (int i = 0 ; i + 9 < s.length(); i++) {
             String str = s.substring(i, i + 10);
             /**
-             * if set already contains str, it will trun false.
+             * if set already contains str, it will return false.
              * So here use "!set.add(str)" we do two things in one line:
-             * 1.try to add str to set
-             * 2.Tell if it exists in set
+             *  1.try to add str to set
+             *  2.Tell if it exists in set
              */
             if (!set.add(str)) {
                 ans.add(str);

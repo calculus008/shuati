@@ -120,7 +120,7 @@ public class LI_215_Rate_Limiter {
      */
 
     class Sliding_Window {
-        HashMap<Long, Long> timeMap;
+        HashMap<Long, Long> timeMap;//LE_359_Logger_Rate_Limiter
         HashMap<Long, Long> valMap;
         int size;
 

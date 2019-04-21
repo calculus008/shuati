@@ -22,27 +22,25 @@ public class LE_310_Minimum_Height_Trees {
          Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
 
          Example 1:
-
          Given n = 4, edges = [[1, 0], [1, 2], [1, 3]]
 
-         0
-         |
-         1
-         / \
+           0
+           |
+           1
+          / \
          2   3
          return [1]
 
          Example 2:
-
          Given n = 6, edges = [[0, 3], [1, 3], [2, 3], [4, 3], [5, 4]]
 
-         0  1  2
+         0 1  2
          \ | /
-         3
-         |
-         4
-         |
-         5
+           3
+           |
+           4
+           |
+           5
          return [3, 4]
 
          Note:

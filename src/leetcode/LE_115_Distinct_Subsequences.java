@@ -55,6 +55,7 @@ public class LE_115_Distinct_Subsequences {
      *
      * http://www.cnblogs.com/yuzhangcmu/p/4196373.html
      *
+     * (!!!)
      * State :
      * dp[i][j] : number of distinct subsequences in the first i chars from s that matches the first chars (subarray) of t.
      *
@@ -92,8 +93,12 @@ public class LE_115_Distinct_Subsequences {
      *   a     1   3 4 1
      *   g     1   3 4 5
      *
-     *   Time and Space : O(mn)
+     *   Time and Space : O(mn)算法面试高频题班 第17期-2
      *
+     */
+
+    /**
+     * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-115-distinct-subsequences/
      */
     public int numDistinct(String s, String t) {
         if (s == null || t == null || s.length() < t.length()) return 0;
@@ -119,7 +124,7 @@ public class LE_115_Distinct_Subsequences {
         }
 
         /**
-         * the init logic can be simplied as :
+         * the init logic can be simplified as :
          *
          *         for (int i = 0; i <= m; i++) {
          *              dp[i][0] = 1;
