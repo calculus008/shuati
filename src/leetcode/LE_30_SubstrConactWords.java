@@ -74,8 +74,7 @@ public class LE_30_SubstrConactWords {
         for (int i = 0; i < m; i ++){
             if (!toFind.containsKey(L[i])){
                 toFind.put(L[i], 1);
-            }
-            else{
+            } else{
                 toFind.put(L[i], toFind.get(L[i]) + 1);
             }
         }
@@ -83,19 +82,24 @@ public class LE_30_SubstrConactWords {
         for (int i = 0; i <= S.length() - n * m; i ++){
             found.clear();
             int j;
+
             for (j = 0; j < m; j ++){
                 int k = i + j * n;
                 String stub = S.substring(k, k + n);
                 if (!toFind.containsKey(stub)) break;
+
                 if(!found.containsKey(stub)){
                     found.put(stub, 1);
-                }
-                else{
+                } else{
                     found.put(stub, found.get(stub) + 1);
                 }
+
                 if (found.get(stub) > toFind.get(stub)) break;
             }
-            if (j == m) result.add(i);
+
+            if (j == m) {
+                result.add(i);
+            }
         }
         return result;
     }
@@ -178,22 +182,35 @@ public class LE_30_SubstrConactWords {
         for (final String word : words) {
             need.put(word, need.getOrDefault(word, 0) + 1);
         }
+
         final int n = s.length();
         final int num = words.length;
         final int len = words[0].length();
 
+        /**
+         * !!!
+         * 外循环的次数是word的长度
+         */
         for (int i = 0; i < len; i++) {
             int l = i, count = 0;
             final Map<String, Integer> seen = new HashMap<>();
 
             //!!! "j <= n - len", last col : n - 1, therefore (n - 1) - len + 1 = n - len
-            for (int j = i; j <= n - len; j += len) {
+            for (int j = i; j + len <= n; j += len) {
                 final String word = s.substring(j, j + len);
                 if (need.containsKey(word)) {
+                    /**
+                     * 是要找的word，并且其frequency符合要求
+                     */
                     if (seen.getOrDefault(word, 0) < need.get(word)) {
                         seen.put(word, seen.getOrDefault(word, 0) + 1);
                         count++;
                     } else {
+                        /**
+                         * 是要找的word，但并且其frequency不符合要求。
+                         * 移动sliding window 的左边界，直到其frequency
+                         * 符合要求。
+                         */
                         while (seen.get(word) >= need.get(word)) {
                             String first = s.substring(l, l += len);
                             seen.put(first, seen.get(first) - 1);
@@ -204,10 +221,18 @@ public class LE_30_SubstrConactWords {
                         count++;
                     }
 
+                    /**
+                     * now current window is an answer, add starting index to final result
+                     */
                     if (count == num) {
                         ans.add(l);
 
-                        //move sliding window starting point
+                        /**
+                         * move sliding window starting point :
+                         * 1.decrease count
+                         * 2.l = l + len
+                         * 3.decrease frequency count for the first word in window
+                         **/
                         count--;
                         String first = s.substring(l, l += len);
                         seen.put(first, seen.get(first) - 1);

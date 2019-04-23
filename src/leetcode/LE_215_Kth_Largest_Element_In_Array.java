@@ -132,6 +132,11 @@ public class LE_215_Kth_Largest_Element_In_Array {
         int l = left + 1;
         int r = right;
         while (l <= r) {
+            /**
+             * we are trying to find kth largest number,
+             * therefore left part should be >= pivot,
+             * right part should be <= pivot.
+             */
             if (nums[l] < pivot && nums[r] > pivot) {
                 swap(nums, l++, r--);
             }

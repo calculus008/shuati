@@ -5,7 +5,8 @@ package leetcode;
  */
 public class LE_05_Longest_Palindromic_Substring {
     /**
-        Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+        Given a string s, find the longest palindromic substring in s.
+        You may assume that the maximum length of s is 1000.
 
         Example:
 
@@ -96,7 +97,7 @@ public class LE_05_Longest_Palindromic_Substring {
                 /**
                    !!! "(j - i <= 2 || dp[i + 1][j - 1])"
 
-                   就是说， 当在i和j的char相同时，有两种情况可以认定i-j是palindrome:
+                   就是说， 当在i和j的char相同时，有两种情况可以认定i ~ j是palindrome:
 
                    1.j - i == 0, 即i和j相等，是同一个char, 例如， “b"
                      j - i == 1, 例如， “bb"
@@ -108,6 +109,11 @@ public class LE_05_Longest_Palindromic_Substring {
                    !!! 必须把“j - i <= 2"写在“dp[i + 1][j - 1]”的前面，只有这样才能避免下标越界。
                  */
                 dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i <= 2 || dp[i + 1][j - 1]);
+
+                /**
+                 * !!!
+                 * Don't forget "dp[i][j] == true" should be the first condition here
+                 */
                 if (dp[i][j] && j - i + 1 > res.length()) {
                     res = s.substring(i, j + 1);
                 }

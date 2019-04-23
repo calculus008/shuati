@@ -74,8 +74,12 @@ public class LE_254_Factor_Combinations {
         for (int i = start; i <= n; i++) {
             if (n % i == 0) {
                 list.add(i);
-                //!!! 同一因子可以重复出现，所以继续用i作为start.
-                //!!! "n / i"
+                /**!!!
+                 * 同一因子可以重复出现，所以继续用i作为start.
+                 *
+                 * !!!
+                 * "n / i"
+                 **/
                 helper(res, list, i, n / i);
                 list.remove(list.size() - 1);
             }

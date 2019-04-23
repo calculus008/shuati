@@ -15,7 +15,7 @@ public class LE_133_Clone_Graph {
     /**
      * Solution 1: DFS
      *
-     * map
+     * map (!!!)
      * key : current node
      * value : new copied node
      **/
@@ -27,14 +27,29 @@ public class LE_133_Clone_Graph {
 
     public UndirectedGraphNode helper(UndirectedGraphNode node) {
         if (node == null) return null;
-        if (map.containsKey(node)) return map.get(node);
 
+        if (map.containsKey(node)) {
+            return map.get(node);
+        }
+
+        /**
+         * make copy of the node
+         */
         UndirectedGraphNode dup = new UndirectedGraphNode(node.label);
 
-        //must be here.
+        /**
+         * 记录原node和copied node的mapping
+         * must be here.
+         * **/
         map.put(node, dup);
 
+        /**
+         * Then make copy of current node's neighbors
+         */
         for (UndirectedGraphNode neighbor : node.neighbors) {
+            /**
+             * recursive call to make copy of neighbor node
+             */
             UndirectedGraphNode clone = helper(neighbor);
             dup.neighbors.add(clone);
         }

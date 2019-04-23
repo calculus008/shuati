@@ -12,8 +12,11 @@ public class LE_286_Walls_And_Gates {
 
          -1 - A wall or an obstacle.
          0 - A gate.
-         INF - Infinity means an empty room. We use the value 2^31 - 1 = 2147483647 to represent INF as you may assume that the distance to a gate is less than 2147483647.
-         Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, it should be filled with INF.
+         INF - Infinity means an empty room. We use the value 2^31 - 1 = 2147483647 to
+         represent INF as you may assume that the distance to a gate is less than 2147483647.
+
+         Fill each empty room with the distance to its nearest gate. If it is impossible to
+         reach a gate, it should be filled with INF.
 
          For example, given the 2D grid:
          INF  -1  0  INF
@@ -27,78 +30,101 @@ public class LE_286_Walls_And_Gates {
          0  -1   3   4
      */
 
-    //DFS Time : O(m * n), Space : O(n) (recursion uses stack)
-    public void wallsAndGates(int[][] rooms) {
-        if (rooms == null || rooms.length == 0 || rooms[0].length == 0) return;
+    /**
+     * version: 高频题班
+     *
+     * !!!
+     * Loop to add all doors to queue
+     *
+     * "Super start point", 多源点单终点 → 单源点多终点，最短路常用转化套路
+     *
+     * 增加了超级源后，其实相当于从超级源的单源最短路
+     *
+     * 多源多终点→单源多终点 (增加超级源，最短路常用转化套路)
+     **/
+    public class Solution1 {
+        public void wallsAndGates(int[][] rooms) {
+            // Write your code here
+            int n = rooms.length;
+            if (n == 0) {
+                return;
+            }
+            int m = rooms[0].length;
 
-        int m = rooms.length;
-        int n = rooms[0].length;
-        for (int i = 0; i < m ; i++) {
-            for (int j = 0; j < n; j++) {
-                /**
-                 !!!Key : start from door, NOT from room
-                 */
-                if (rooms[i][j] == 0) {
-                    helper(rooms, i , j, 0);
+            int dx[] = {0, 1, 0, -1};
+            int dy[] = {1, 0, -1, 0};
+
+            Queue<Integer> qx = new LinkedList<>();
+            Queue<Integer> qy = new LinkedList<>();
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if (rooms[i][j] == 0) {
+                        qx.offer(i);
+                        qy.offer(j);
+                    }
+                }
+            }
+
+            while (!qx.isEmpty()) {
+                int x = qx.poll();
+                int y = qy.poll();
+
+                for (int i = 0; i < 4; i++) {
+                    int nx = x + dx[i];
+                    int ny = y + dy[i];
+                    if (0 <= nx && nx < n && 0 <= ny && ny < m
+                            && rooms[nx][ny] == Integer.MAX_VALUE) {
+                        qx.offer(nx);
+                        qy.offer(ny);
+
+                        /**
+                         * !!!
+                         */
+                        rooms[nx][ny] = rooms[x][y] + 1;
+                    }
                 }
             }
         }
     }
 
-    public void helper(int[][] rooms, int i, int j, int distance) {
-        /**
-         !!!Key : "rooms[i][j] < distance"
-         */
-        if (i < 0 || i >= rooms.length || j < 0 || j >= rooms[0].length || rooms[i][j] < distance) return;
+    class Solution2 {
+        //BFS, Time and Space : O(mn)
+        public void wallsAndGatesBFS(int[][] rooms) {
+            if (rooms == null || rooms.length == 0 || rooms[0].length == 0) return;
 
-        /**
-         * Another plus for this solution : Since we keep updating the distance for each room, we don't
-         * need to mark a room as already visited and later recover it.
-         */
-        rooms[i][j] = distance;
-        helper(rooms, i + 1, j, distance + 1);
-        helper(rooms, i - 1, j, distance + 1);
-        helper(rooms, i, j + 1, distance + 1);
-        helper(rooms, i, j - 1, distance + 1);
-    }
+            int m = rooms.length;
+            int n = rooms[0].length;
+            Queue<int[]> queue = new LinkedList<>();
 
-
-    //BFS, Time and Space : O(mn)
-    public void wallsAndGatesBFS(int[][] rooms) {
-        if (rooms == null || rooms.length == 0 || rooms[0].length == 0) return;
-
-        int m = rooms.length;
-        int n = rooms[0].length;
-        Queue<int[]> queue = new LinkedList<>();
-
-        //Loop to add all doors to queue
-        for (int i = 0; i < m ; i++) {
-            for (int j = 0; j < n; j++) {
-                if (rooms[i][j] == 0) {
-                    //!!!
-                    queue.add(new int[]{i, j});
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (rooms[i][j] == 0) {
+                        //!!!
+                        queue.add(new int[]{i, j});
+                    }
                 }
             }
-        }
 
-        while (!queue.isEmpty()) {
-            int[] top = queue.remove();
-            int row = top[0], col = top[1];
-            if (row > 0 && rooms[row - 1][col] == Integer.MAX_VALUE) {
-                rooms[row - 1][col] = rooms[row][col] + 1;
-                queue.add(new int[]{row - 1, col});
-            }
-            if (row < m - 1 && rooms[row + 1][col] == Integer.MAX_VALUE) {
-                rooms[row + 1][col] = rooms[row][col] + 1;
-                queue.add(new int[]{row + 1, col});
-            }
-            if (col > 0 && rooms[row][col - 1] == Integer.MAX_VALUE) {
-                rooms[row][col - 1] = rooms[row][col] + 1;
-                queue.add(new int[]{row, col - 1});
-            }
-            if (col < n - 1 && rooms[row][col + 1] == Integer.MAX_VALUE) {
-                rooms[row][col + 1] = rooms[row][col] + 1;
-                queue.add(new int[]{row, col + 1});
+            while (!queue.isEmpty()) {
+                int[] top = queue.remove();
+                int row = top[0], col = top[1];
+                if (row > 0 && rooms[row - 1][col] == Integer.MAX_VALUE) {
+                    rooms[row - 1][col] = rooms[row][col] + 1;
+                    queue.add(new int[]{row - 1, col});
+                }
+                if (row < m - 1 && rooms[row + 1][col] == Integer.MAX_VALUE) {
+                    rooms[row + 1][col] = rooms[row][col] + 1;
+                    queue.add(new int[]{row + 1, col});
+                }
+                if (col > 0 && rooms[row][col - 1] == Integer.MAX_VALUE) {
+                    rooms[row][col - 1] = rooms[row][col] + 1;
+                    queue.add(new int[]{row, col - 1});
+                }
+                if (col < n - 1 && rooms[row][col + 1] == Integer.MAX_VALUE) {
+                    rooms[row][col + 1] = rooms[row][col] + 1;
+                    queue.add(new int[]{row, col + 1});
+                }
             }
         }
     }

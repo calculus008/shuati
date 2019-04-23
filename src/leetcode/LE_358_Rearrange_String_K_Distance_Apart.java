@@ -78,6 +78,11 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
             int candidatePos = -1;
 
             for (int i = 0; i < count.length; i++) {
+                /**
+                 * count[i] > 0 : we still have this char
+                 * count[i] > max : find the max remaining chars
+                 * index >= valid[i] :
+                 */
                 if (count[i] > 0 && count[i] > max && index >= valid[i]) {
                     max = count[i];
                     candidatePos = i;

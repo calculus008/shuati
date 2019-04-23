@@ -327,6 +327,7 @@ LE_239_Sliding_Window_Maximum
 LE_480_Sliding_Window_Median                              (lint 360)   (***) Revisit
 LE_346_Moving_Average_From_Data_Stream
 LE_438_Find_All_Anagrams_In_A_String
+LI_647_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
 LE_643_Maximum_Average_Subarray_I
 

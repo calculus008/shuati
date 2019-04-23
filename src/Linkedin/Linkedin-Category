@@ -14,8 +14,10 @@ LE_516_Longest_Palindromic_Subsequence
 LE_115_Distinct_Subsequences
 LE_62_Unique_Path
 LE_64_Min_Path_Sum
+LE_05_Longest_Palindromic_Substring
+LE_730_Count_Different_Palindromic_Subsequences
 
-#Min-Max Strategy (Gaming Theory), Recurssion + Memoization
+#Min-Max Strategy (Gaming Theory), Recursion + Memoization
 LE_464_Can_I_Win
 LE_486_Predict_The_Winner
 
@@ -37,6 +39,8 @@ LE_359_Logger_Rate_Limiter
 LI_215_Rate_Limiter                       (***)
 
 #Array and String
+LE_20_Valid_Parentheses
+LE_384_Shuffle_An_Array
 LE_41_First_Missing_Positive              (******)!!!
 LE_277_Find_The_Celebrity
 LE_243_Shortest_Word_Distance
@@ -52,10 +56,17 @@ LE_53_Maximum_Subarray
 LE_152_Maximum_Product_Subarray
 LE_318_Maximum_Product_Of_Word_Lengths
 LE_628_Maximum_Product_Of_Three_Numbers
-LE_239_Sliding_Window_Maximum         (***)
-LE_68_Text_Justification              (*****)
+LE_239_Sliding_Window_Maximum                (***)
+LE_68_Text_Justification                     (*****)
 LE_08_String_To_Integer
 LE_567_Permutation_In_String
+LE_358_Rearrange_String_K_Distance_Apart
+LE_30_SubstrConactWords                      (Sliding Window)
+LE_151_Reverse_Words_In_A_String
+LE_215_Kth_Largest_Element_In_Array
+LI_005_Kth_Largest_Number
+LE_605_Can_Place_Flowers
+LE_722_Remove_Comments
 
 LE_387_First_Unique_Character_In_A_String
 此后他不会出现，但是会对time space优化考察
@@ -63,11 +74,15 @@ LE_387_First_Unique_Character_In_A_String
  LI_685_First_Unique_Number_In_Stream
 )
 LE_187_Repeated_DNA_Sequences
+#Prefix Sum
+LE_548_Split_Array_With_Equal_Sum            (*****)
+
 
 #Graph
 LE_261_Graph_Valid_Tree        followup 改成判断存不存在环
 LE_366_Find_Leaves_Of_Binary_Tree
 (binary tree leaves的变种把bt变成了graph，没什么太大区别，注意一下recursion时候返回条件就好了)
+LE_133_Clone_Graph
 
 #Tree and BST
 LE_235_Lowest_Common_Ancestor_Of_BST
@@ -78,6 +93,10 @@ LE_310_Minimum_Height_Trees     (??)
 LI_596_Minimum_Subtree
 LE_111_Min_Depth_Of_Binary_Tree
 LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
+LE_272_Closest_BST_Value_II                                     (*****)
+LE_297_Serialize_And_Deserialize_Binary_Tree
+LE_314_Binary_Tree_Vertical_Order_Traversal
+LE_366_Find_Leaves_Of_Binary_Tree                               (*****)
 
 #PriorityQueue
 #K-way
@@ -90,10 +109,15 @@ LE_282_Expression_Add_Operators
 LE_254_Factor_Combinations
 LE_47_Permutation_II
 LE_721_Accounts_Merge                             (*****)
-
+LE_698_Partition_To_K_Equal_Sum_Subsets
+LE_79_Word_Search
+LE_212_Word_Search_II    (Trie or HashMap + DFS)
+LE_282_Expression_Add_Operators
 
 #Stack
 LE_150_Evaluate_Reverse_Polish_Notation
+LE_282_Expression_Add_Operators
+LE_636_Exclusive_Time_Of_Functions
 
 LE_339_Nested_List_Weight_Sum
 LE_364_Nested_List_Weight_Sum_II
@@ -111,5 +135,22 @@ K_Closest_Points_To_A_Given_Point
 #LinkedList
 LE_142_Linked_List_Cycle_II
 
+#k-way merge
+LE_23_Merge_k_Sorted_Lists
+LI_486_Merge_K_Sorted_Arrays
+LE_373_Find_K_Pairs_With_Smallest_Sums (smallest product, without sort)   (***)
 
+#Binary Search
+LE_633_Sum_Of_Square_Numbers
 
+#Matrix
+LE_311_Sparse_Matrix_Multiplication
+LI_654_Sparse_Matrix_Multiplication
+LE_200_Number_Of_Islands
+LE_694_Number_Of_Distinct_Islands
+LE_695_Max_Area_Of_Island
+
+Generic_Permutation                               (***)
+H2O
+Hopping_Iterator
+Max_Subsequence_Skip_One

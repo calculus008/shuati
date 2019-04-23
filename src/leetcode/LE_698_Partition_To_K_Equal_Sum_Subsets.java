@@ -18,6 +18,7 @@ public class LE_698_Partition_To_K_Equal_Sum_Subsets {
      *
      * 1 <= k <= len(nums) <= 16.
      * 0 < nums[i] < 10000.
+     *
      * Medium
      */
 
@@ -80,6 +81,15 @@ public class LE_698_Partition_To_K_Equal_Sum_Subsets {
      * Same DFS search solution from leetcode discussion which works if given set
      * has negative values.
      *
+     * Time : O(k * 2 ^ n)
+     * Space : O(n)
+     *
+     * I think the time complexity is O(k * 2^n), at least it's an upper bound.
+     * Because it takes the inner recursion 2^n time to find a good subset.
+     * Once the 1st subset is found, we go on to find the second, which would
+     * take 2^n roughly (because some numbers have been marked as visited).
+     * So T = 2^n + 2^n + 2^n + ... = k * 2^n.
+     *
      * https://leetcode.com/problems/partition-to-k-equal-sum-subsets/discuss/108730/JavaC%2B%2BStraightforward-dfs-solution
      */
     class Solution2 {
@@ -123,7 +133,7 @@ public class LE_698_Partition_To_K_Equal_Sum_Subsets {
              * 所以，we don't need to have the "count" param here.
              *
              * 如果给定的数组中有负数，consider the case when target = 0 and
-             * some numbers are negative. Without count >0, the algorithm
+             * some numbers are negative. Without count > 0, the algorithm
              * will consider empty set as a possible result. Therefore,
              * we must use count in condition "cur_sum == target && count > 0"
              * to tell a valid set is formed.
@@ -149,7 +159,7 @@ public class LE_698_Partition_To_K_Equal_Sum_Subsets {
     /**
      * DP Solution
      *
-     * Time Complexity: O(N * 2^N), where NN is the length of nums. There are 2^N
+     * Time Complexity: O(N * 2^N), where N is the length of nums. There are 2^N
      * states of used (or state in our bottom-up variant), and each state performs
      * O(N) work searching through nums.
      *

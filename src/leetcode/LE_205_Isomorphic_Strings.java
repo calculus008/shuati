@@ -145,8 +145,8 @@ public class LE_205_Isomorphic_Strings {
      * s: "ab"
      * t: "aa"
      *
-     * for index 1, no key for 'b', it will just add and pass. But actually, a
-     * in t has been mapped to a when index is 0.
+     * for index 1, no key for 'b', it will just add and pass. But actually, 'a'
+     * in t has been mapped to 'a' when index is 0.
      *
      * Therefore we must map it to a 3rd party value.
      *

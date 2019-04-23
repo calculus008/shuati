@@ -74,7 +74,7 @@ public class LE_752_Open_The_Lock {
      * Time  : O(8 ^ 10000)
      * Space : O(10000 + deadend set size)
      */
-    class Solution {
+    class Solution1 {
         public int openLock(String[] deadends, String target) {
             if (null == target || target.length() == 0) {
                 return 0;
@@ -158,6 +158,56 @@ public class LE_752_Open_The_Lock {
                         }
                     }
                 }
+            }
+
+            return -1;
+        }
+    }
+
+    class Solution2 {
+        public int openLock(String[] deadends, String target) {
+            String start = "0000";
+
+            Set<String> deadSet = new HashSet<>();
+            for (String str : deadends) {
+                if (str.equals(start)) {
+                    return -1;
+                }
+                deadSet.add(str);
+            }
+
+            int result = 0;
+            Queue<String> queue = new LinkedList<>();
+            Set<String> set = new HashSet<>();
+
+            queue.offer(start);
+            set.add(start);
+
+            while (!queue.isEmpty()) {
+                int n = queue.size();
+
+                while (n-- != 0) {
+                    String cur = queue.poll();
+                    if (cur.equals(target)) {
+                        return result;
+                    }
+
+                    for (int i = 0; i < 4; ++i) {
+                        String next = cur.substring(0, i) + (char)((cur.charAt(i) - '0' + 9) % 10 + '0') + cur.substring(i + 1);
+                        if (!set.contains(next) && !deadSet.contains(next)) {
+                            queue.offer(next);
+                            set.add(next);
+                        }
+
+                        next = cur.substring(0, i) + (char)((cur.charAt(i) - '0' + 1) % 10 + '0') + cur.substring(i + 1);
+                        if (!set.contains(next) && !deadSet.contains(next)) {
+                            queue.offer(next);
+                            set.add(next);
+                        }
+                    }
+                }
+
+                result++;
             }
 
             return -1;

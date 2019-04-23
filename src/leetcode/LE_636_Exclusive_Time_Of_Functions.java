@@ -30,6 +30,7 @@ public class LE_636_Exclusive_Time_Of_Functions {
      *  "1:end:5",
      *  "0:end:6"]
      * Output:[3, 4]
+     *
      * Explanation:
      * Function 0 starts at time 0, then it executes 2 units of time and reaches the end of time 1.
      * Now function 0 calls function 1, function 1 starts at time 2, executes 4 units of time and end at time 5.
@@ -61,6 +62,7 @@ public class LE_636_Exclusive_Time_Of_Functions {
 
             for (String log : logs) {
                 String[] parts = log.split(":");
+
                 if (!stack.isEmpty()) {
                     res[stack.peek()] += Integer.parseInt(parts[2]) - prevTime;
                 }
@@ -85,18 +87,47 @@ public class LE_636_Exclusive_Time_Of_Functions {
         public int[] exclusiveTime(int n, List<String> logs) {
             Deque<Integer> stack = new ArrayDeque<>(n);
             int[] res = new int[n];
+
+            /**
+             * Get first line of log
+             *
+             * s[0] : task id
+             * s[1] : start or end
+             * s[2] : timestamp
+             */
             String[] s = logs.get(0).split(":");
+
+            /**
+             * stack saves task id
+             */
             stack.push(Integer.parseInt(s[0]));
+
             int i = 1;
+
+            /**
+             * prev : the timestamp of the previous event
+             */
             int prev = Integer.parseInt(s[2]);
 
+            /**
+             * iterate through each line of logs, starting from line 2
+             */
             while (i < logs.size()) {
                 s = logs.get(i).split(":");
 
+                /**
+                 * process based on action type (start or end)
+                 */
                 if (s[1].equals("start")) {
                     if (!stack.isEmpty()) {
+                        /**
+                         * stack only keeps timestamp for "start" event.
+                         * So we have another "start", for the last task
+                         * in stack, we can calculate its exclusive run time.
+                         */
                         res[stack.peek()] += Integer.parseInt(s[2]) - prev;
                     }
+
                     stack.push(Integer.parseInt(s[0]));
                     prev = Integer.parseInt(s[2]);
                 } else {
@@ -104,6 +135,7 @@ public class LE_636_Exclusive_Time_Of_Functions {
                     stack.pop();
                     prev = Integer.parseInt(s[2]) + 1;
                 }
+
                 i++;
             }
             return res;

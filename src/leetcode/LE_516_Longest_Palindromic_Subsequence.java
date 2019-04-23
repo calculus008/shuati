@@ -5,7 +5,8 @@ package leetcode;
  */
 public class LE_516_Longest_Palindromic_Subsequence {
     /**
-         Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
+         Given a string s, find the longest palindromic subsequence's length in s.
+         You may assume that the maximum length of s is 1000.
 
          Example 1:
          Input:

@@ -83,7 +83,7 @@ public class LE_212_Word_Search_II {
             p.word = null;
             /**
              * !!!
-             * 不能return, for example, find "fight", another word is "fighter", need to continue to search*
+             * 不能return, for example, find "fight", another word is "fighter", need to continue to search
              */
             // return
         }
@@ -116,6 +116,9 @@ public class LE_212_Word_Search_II {
         int m = board.length;
         int n = board[0].length;
 
+        /**
+         * map : key - prefix or word, value : true if it is word, false if it is prefix
+         */
         Map<String, Boolean> map = buildMap(words);
         Set<String> set = new HashSet<>();
 
@@ -143,6 +146,9 @@ public class LE_212_Word_Search_II {
             return;
         }
 
+        /**
+         * if map.get(str) == true, then it is a word, we add it to set.
+         */
         if (map.get(str)) {
             set.add(str);
         }

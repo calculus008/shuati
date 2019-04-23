@@ -172,10 +172,12 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
     }
 
     /**
-     * 变形题，把Tree变成Graph, 求同样的叶子借天输出 - Find_Leaves
+     * 变形题，把Tree变成Graph, 求同样的叶子按层输出 - Find_Leaves
      */
     /**It is graph, rather than tree
-     * One big difference is, tree only has 1 path between 2 nodes, while graph can have several paths, which forms a circle
+     * One big difference is, tree only has 1 path between 2 nodes, while graph can have
+     * several paths, which forms a circle
+     *
      * @param graph could be isolated, but in our case, it is a connected graph
      * @return
      *

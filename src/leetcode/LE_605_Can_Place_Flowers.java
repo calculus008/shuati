@@ -34,8 +34,11 @@ public class LE_605_Can_Place_Flowers {
                     flowerbed[i++] = 1;
                     count++;
                 }
-                if(count>=n)
+
+                if (count >= n) {
                     return true;
+                }
+
                 i++;
             }
             return false;

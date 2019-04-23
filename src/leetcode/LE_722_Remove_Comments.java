@@ -23,12 +23,20 @@ public class LE_722_Remove_Comments {
         public List<String> removeComments(String[] source) {
             List<String> res = new ArrayList<>();
             StringBuilder sb = new StringBuilder();
+            /**
+             * If multi-lines comments mode is ON
+             **/
             boolean mode = false;
 
             for (String s : source) {
                 for (int i = 0; i < s.length(); i++) {
                     if (mode) {
-                        if (s.charAt(i) == '*' && i < s.length() - 1 && s.charAt(i + 1) == '/') {
+                        /**
+                         * If multi-line comments mode is ON,
+                         * detect if we run into end symbols,
+                         * if Yes, turn it off.
+                         * **/
+                        if (s.charAt(i) == '*' && i < s.length() - 1 && s.charAt(i + 1) == '/') {// "*/"
                             mode = false;
                             i++;        //skip '/' on next iteration of i
                         }
