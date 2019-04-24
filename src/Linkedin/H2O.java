@@ -2,6 +2,7 @@ package Linkedin;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -15,58 +16,93 @@ import java.util.concurrent.locks.ReentrantLock;
  * 线程一起等待某个条件（Condition）,只有当该条件具备( signal 或者 signalAll方法被
  * 带调用)时 ，这些等待线程才会被唤醒，从而重新争夺锁。
  *
- * Producer Consumer multi-threads problem. Here there's no explicit producer,
- * H() and O() are consumers, they should be blocked based on certain
- * conditions.
- *
+ * Producer Consumer multi-threads problem.
  */
+//public class H2O {
+//    ReentrantLock lock = new ReentrantLock();
+//    Condition enoughH = lock.newCondition();
+//    Condition enoughO = lock.newCondition();
+//    AtomicInteger countH  = new AtomicInteger(0);
+//    AtomicInteger countO =  new AtomicInteger(0);
+//
+//    void H() throws InterruptedException {
+//        lock.lock();
+//        try {
+//            countH.incrementAndGet();//produce H
+//
+//            while (!check(true)) {//If there's enough H, wait
+//                enoughH.await();
+//            }
+//        } finally {
+//            lock.unlock();
+//        }
+//    }
+//
+//    void O() throws InterruptedException {
+//        lock.lock();
+//        try {
+//            countO.incrementAndGet();//produce O
+//
+//            while (!check(false)) {
+//                enoughO.await();
+//            }
+//        } finally {
+//            lock.unlock();
+//        }
+//    }
+//
+//    boolean check(boolean isH) {
+//        /**
+//         * If there are enough H and O, consume.
+//         */
+//        if (countH.intValue() >= 2 && countO.intValue() >= 1) {
+//            countH.decrementAndGet();
+//            countH.decrementAndGet();
+//            countO.decrementAndGet();
+//
+//            System.out.println("H2O");
+//
+//            enoughH.signal();
+//            if (isH) { // count is added already and we will return true here, so just signal O
+//                enoughO.signal();
+//            } else {
+//                enoughH.signal();
+//            }
+//
+//            return true;
+//        }
+//
+//        return false;
+//    }
+//
+//
+//    public static void main(String[] args) {
+//
+//    }
+
+
 public class H2O {
-    ReentrantLock lock = new ReentrantLock();
-    Condition enoughH = lock.newCondition();
-    Condition enoughO = lock.newCondition();
+    static final Lock LOCK = new ReentrantLock();
+
+    static final Condition ENOUGH_H = LOCK.newCondition();
+    static final Condition ENOUGH_O = LOCK.newCondition();
+
+    /**
+     * Here those counters are to count number of threads that
+     * requests H or O
+     */
     AtomicInteger countH  = new AtomicInteger(0);
     AtomicInteger countO =  new AtomicInteger(0);
 
-    void H() throws InterruptedException {
-        lock.lock();
-        try {
-            countH.incrementAndGet();
-
-            while (!check(true)) {
-                enoughH.await();
-            }
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    void O() throws InterruptedException {
-        lock.lock();
-        try {
-            countO.incrementAndGet();
-
-            while (!check(false)) {
-                enoughO.await();
-            }
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    boolean check(boolean isH) {
+    public boolean check() {
         if (countH.intValue() >= 2 && countO.intValue() >= 1) {
+            ENOUGH_H.signal();
+            ENOUGH_H.signal();
+            ENOUGH_O.signal();
+
             countH.decrementAndGet();
             countH.decrementAndGet();
             countO.decrementAndGet();
-
-            System.out.println("H2O");
-
-            enoughH.signal();
-            if (isH) { // count is added already and we will return true here, so just signal O
-                enoughO.signal();
-            } else {
-                enoughH.signal();
-            }
 
             return true;
         }
@@ -75,8 +111,33 @@ public class H2O {
     }
 
 
-    public static void main(String[] args) {
+    public void h() {
+        LOCK.lock();
 
+        try {
+            countH.incrementAndGet();
+            while (!check()) {
+                ENOUGH_H.awaitUninterruptibly();
+            }
+        } finally {
+            LOCK.unlock();
+
+        }
+    }
+
+
+    public void o() {
+        LOCK.lock();
+
+        try {
+            countO.incrementAndGet();
+            while (!check()) {
+                ENOUGH_O.awaitUninterruptibly();
+            }
+        } finally {
+            LOCK.unlock();
+        }
     }
 }
+
 

@@ -108,15 +108,15 @@ public class Retain_Best_Cache {
             Map.Entry<Long, Set<K>> entry = rankingOfObject.firstEntry();
 
             /**
-             * Remove the first element in set with iterator
+             * get the first element (key) in set with iterator
              */
             K key = entry.getValue().iterator().next();
             /**
-             * remove from TreeMap
+             * remove from key set (as value in TreeMap)
              */
             entry.getValue().remove(key);
             /**
-             * remove from Map
+             * remove from cache (map)
              */
             cache.remove(key);
 

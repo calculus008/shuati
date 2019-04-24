@@ -22,7 +22,9 @@ public class Max_Subsequence_Skip_One {
 
     public static void main(String[] args) {
         Max_Subsequence_Skip_One mss = new Max_Subsequence_Skip_One();
-        int[] arr = {1, 3, -2, -3, 4};
+//        int[] arr = {1, 3, -2, -3, 4};
+        int[] arr = {1, -1, -2, 3, 4};
+
 
         int res = mss.maxSkip1(arr);
         System.out.println(res);

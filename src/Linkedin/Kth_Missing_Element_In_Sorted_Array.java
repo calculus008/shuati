@@ -135,6 +135,9 @@ public class Kth_Missing_Element_In_Sorted_Array {
     }
 
     public static int find_practice(int[] a, int k, int l, int h, int sumOfNumberOfMissed) {
+        /**
+         * base case : "a[l] + (k - sumOfNumberOfMissed)"
+         */
         if (h - l == 1) {
             int res = a[l] + (k - sumOfNumberOfMissed);
             return res >= a[a.length - 1] ? -1 : res;
@@ -145,6 +148,11 @@ public class Kth_Missing_Element_In_Sorted_Array {
         int numberActual = m - l;
         int missed = numberNoMissing - numberActual;
 
+        /**
+         * As we go further to higher end, total missing value should increase.
+         * Therefore, if sumOfNumberOfMissed + missed >= k, we go to left side,
+         * otherwise, go to right side
+         */
         if (sumOfNumberOfMissed + missed >= k) {
             return find_practice(a, k, l, m, sumOfNumberOfMissed);
         } else {

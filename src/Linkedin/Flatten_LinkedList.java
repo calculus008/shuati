@@ -8,6 +8,16 @@ public class Flatten_LinkedList {
 
      4.四向链表（上下左右）转双向链表（左右）。输入是一头一尾。放平链表后（中间可以乱序），保证头尾元素还是所给的指针。
      先说了BFS的想法。然后要求用O（1）做空间。就是不管一切的放平了。然后把头尾挑出来，放到列首和列尾
+
+        5<->6<->7<->8
+            |
+            1<->2<->3<->4
+           head     |  tail
+           9<->10<->11<->12
+
+      After flatten
+      1<->2<->3<->4<->5<->6<->7<->8<->9<->10<->11<->12
+     head                                          tail
      */
 
     class MetaNode {
@@ -31,6 +41,12 @@ public class Flatten_LinkedList {
         MetaNode cur = head;
 
         while (cur != null) {
+            /**
+             * 每个up and down pointer 指向另一个DLL，处理：
+             * 1.Go to the up/down list, find its head, link it with current list tail,
+             * 2.Update current list tail with new tail (tail of the up list)
+             * 3.Set up or down pointer to null
+             */
             if (cur.up != null) {
                 MetaNode up = cur.up;
                 MetaNode headOfUp = getHead(up);

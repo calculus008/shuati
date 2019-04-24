@@ -43,16 +43,25 @@ public class Ascending_Binary_Sorting {
 
         int n = arr.length;
 
+        /**
+         * 1.init buckets
+         */
         for (int i = 0; i < 32; i++) {
             buckets.add(new ArrayList<>());
         }
 
+        /**
+         * 2.count bits and put number into buckets
+         */
         int idx = 0;
         for (int i = 0; i < n ; i++) {
             idx = countBits(arr[i]);
             buckets.get(idx - 1).add(arr[i]);
         }
 
+        /**
+         * 3.sort number in each bucket and put them into res
+         */
         for (int i = 0, j = 0; i < 32; i++) {
             List<Integer> l = buckets.get(i);
             if (l.size() == 0) {

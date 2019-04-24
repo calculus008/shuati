@@ -47,8 +47,13 @@ public class Generic_Permutation<T extends Comparable<T>> {
 //            }
 //        });
 
-        Arrays.sort(arr);
+        Arrays.sort(arr, (a, b) -> a.compareTo(b));
 
+//        Arrays.sort(arr);
+
+        /**
+         * Set saves index, therefore its type is Integer, not T
+         */
         Set<Integer> visited = new HashSet<Integer>();
         helper(res, list, visited, arr);
         return res;

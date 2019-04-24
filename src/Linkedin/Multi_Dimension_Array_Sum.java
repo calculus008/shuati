@@ -50,7 +50,7 @@ public class Multi_Dimension_Array_Sum {
      */
 
     /**
-     *
+     * Dummy function
      * @param mArray 多维数组
      * @param dim 每个dim的长度
      * @return
@@ -60,8 +60,11 @@ public class Multi_Dimension_Array_Sum {
         return helper(mArray, dim, 0, list);
     }
 
-    int helper(MultiDimensionArray mArray, int[] dim, int dimIndex, List<Integer> list) {
-        if (dim.length == dimIndex) { // Done with all dimensions, 这是一串下标，唯一决定一个value
+    /**
+     * DFS, get all combinations of dims
+     */
+    private int helper(MultiDimensionArray mArray, int[] dim, int dimIndex, List<Integer> list) {
+        if (dimIndex == dim.length) { // Done with all dimensions, 这是一串下标，唯一决定一个value
             int[] array = list.stream().mapToInt(i -> i).toArray();
             return mArray.getValue(array); // Get the value by indices
         }
@@ -98,6 +101,7 @@ class MultiDimensionArray {
         for (int i = 0; i < dims; i++) {
             lengthOfDeminsion[i]--;
         }
+
         int[] cur = new int[dims], max = lengthOfDeminsion;
 
         int sum = 0;

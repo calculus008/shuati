@@ -14,6 +14,9 @@ public class Tournament_Tree_2nd_Min {
      *
      * Input: {3, 6, 100, 9, 10, 12, 7, -1, 10}
      * Output: Minimum: -1, Second minimum: 3
+     *
+     * Reference
+     * LE_671_Second_Minimum_Node_In_A_Binary_Tree
      */
 
     /**

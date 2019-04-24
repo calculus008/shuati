@@ -184,7 +184,7 @@ public class Merge_Intervals {
 
             for (Interval inter : intervals) {
                 if (end < inter.start) {
-                    totalLen += end - start;
+                    totalLen += end - start + 1;
 
                     end = inter.end;
                     start = inter.start;
@@ -202,7 +202,7 @@ public class Merge_Intervals {
         }
     }
 
-    // Above is based on call frequencey. what about using TreeSet, which could sort as well.
+    // Above is based on call frequency. what about using TreeSet, which could sort as well.
     class IntervalTreeSet {
         // Here we can use TreeSet to sort based on start time/end time
         TreeSet<Interval> treeSet = new TreeSet<Interval>((a, b) ->
@@ -211,6 +211,7 @@ public class Merge_Intervals {
 
         /**
          * O(logn)
+         * This is good for remove interval, which takes O(logn)
          */
         void add(int start, int end) {
             if (start > end) {
@@ -222,6 +223,8 @@ public class Merge_Intervals {
 
         /**
          * O(n)
+         * Compare with last solution, since we use TreeSet, we don't need to
+         * sort intervals before merging and calculating total length
          */
         int getLength() {
             int totalLen = 0;

@@ -7,7 +7,7 @@ public class Subset_Sum_II {
      * Example:
      *
      * we have a set of items of size {3, 2, 5, 6, 7} and the max size is
-     * K = 13. So the solutions are {5, 6, 2} and {6, 7}.Return value sould
+     * K = 13. So the solutions are {5, 6, 2} and {6, 7}.Return value should
      * be 2.
      *
      * This problem is also known as summing n coins without repeats to a target sum.

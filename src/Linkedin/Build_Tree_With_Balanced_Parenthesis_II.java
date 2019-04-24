@@ -39,6 +39,10 @@ public class Build_Tree_With_Balanced_Parenthesis_II {
 
     /**
      * Stack
+     *
+     * Same logic and flow as Build_Tree_With_Balanced_Parenthesis_I Solution2
+     *
+     * Adapt to the requirements of generating a binary tree
      */
     TreeNode str2tree(String s) {
         if (s.length() == 0) {
@@ -71,7 +75,10 @@ public class Build_Tree_With_Balanced_Parenthesis_II {
                 }
 
                 if (parent != null) {
-                    // If the tree is guaranteed to be binary, you can easily change above code to
+                    /**
+                     * Based on requirement :
+                     * "You always start to construct the left child node of the parent first if it exists."
+                     */
                     if (parent.left == null) {
                         parent.left = node;
                     } else {

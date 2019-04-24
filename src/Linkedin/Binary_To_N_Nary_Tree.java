@@ -31,6 +31,8 @@ public class Binary_To_N_Nary_Tree {
      *
      * In order to do so, total number of nodes should be m = 1 + N + k * N = 1 + (k - 1) * N.
      * So (m - 1) % N == 0
+     *
+     * Data structures used : Two queues and one list
      */
 
     static class Node {
@@ -48,32 +50,41 @@ public class Binary_To_N_Nary_Tree {
         List<TreeNode> list = new ArrayList<TreeNode>();
 
         /**
-         * put all binary tree nodes into queue
+         * 1.Using the first queue, it contains Binary Tree Node.
+         *   Do BFS, the goal is to put all binary tree nodes into list
          */
         while (!queue.isEmpty()) {
-            TreeNode now = queue.poll();
-            list.add(now);
+            TreeNode cur = queue.poll();
+            list.add(cur);
 
-            if (now.left != null) {
-                queue.offer(now.left);
+            if (cur.left != null) {
+                queue.offer(cur.left);
             }
-            if (now.right != null) {
-                queue.offer(now.right);
+            if (cur.right != null) {
+                queue.offer(cur.right);
             }
         }
 
         Node newRoot = null;
         /**
-         * it saves all visited N-nary
+         * 第二个Queue, it saves all visited N-nary Tree Node,
+         * do another BFS to connect N-ary tree node
          */
         Queue<Node> visitedNodes = new LinkedList<Node>();
-        boolean done = true;
+        boolean done = false;
 
+        /**
+         * 2.Connect nodes into a full N-ary tree
+         */
         for (int i = 0; i < list.size(); i++) {
             if (done) {
                 break;
             }
 
+            /**
+             * To generate N-ary tree, need to create new N-ary tree node,
+             * since we can't use the given binary tree node.
+             */
             Node parent = null;
 
             if (i == 0) {
@@ -85,10 +96,19 @@ public class Binary_To_N_Nary_Tree {
 
             /**
              * !!!
+             * Connect each N-ary node to its children (put children nodes into children list
+             * in N-ary Node)
+             *
              * Key :
              * i * N + 1  to i * N + N
              */
             for (int j = i * N + 1; j <= i * N + N; j++) { // Children section
+                /**
+                 * Mark done and break if we exhaust all available binary tree nodes in list.
+                 *
+                 * Need to clarify with interviewer if total number of binary tree odes
+                 * satisfies the requirement to build a full N-ary tree
+                 */
                 if (j >= list.size()) {
                     done = true;
                     break;

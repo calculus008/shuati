@@ -24,6 +24,54 @@ public class Build_Tree_With_Balanced_Parenthesis_I {
         }
     }
 
+    /**
+     * Stack solution
+     *
+     * Preferred Solution
+     */
+    class Solution2 {
+
+        NaryTreeNode deserialize(String s) {
+            NaryTreeNode root = null;
+            NaryTreeNode parent = null;
+            Stack<NaryTreeNode> stack = new Stack<NaryTreeNode>();
+            int pos = 0;
+
+            while (pos < s.length()) {
+                char c = s.charAt(pos);
+
+                if (c == '(') {
+                    pos++; // Next must be value
+                    // If number could be multi digits, use a while loop here
+                    NaryTreeNode node = new NaryTreeNode(s.charAt(pos));
+                    if (root == null) {
+                        root = node; // Will come here only once
+                    }
+
+                    /**
+                     * add to its parent's children list
+                     */
+                    if (parent != null) {
+                        parent.children.add(node);
+                    }
+
+                    parent = node;
+                    stack.push(node); // 记录一下
+                } else if (c == ')') {
+                    stack.pop(); // 弹出来
+
+                    if (!stack.isEmpty()) {
+                        parent = stack.peek(); // Change parent node, 1 level above
+                    }
+                }
+
+                pos++;
+            }
+
+            return root;
+        }
+
+    }
     class Solution1 {
         public NaryTreeNode buildGrah(String s) {
             int count = 0;
@@ -74,55 +122,12 @@ public class Build_Tree_With_Balanced_Parenthesis_I {
         }
     }
 
-    /**
-     * Stack solution
-     */
-    class Solution2 {
 
-        NaryTreeNode deserialize(String s) {
-            NaryTreeNode root = null;
-            NaryTreeNode parent = null;
-            Stack<NaryTreeNode> stack = new Stack<NaryTreeNode>();
-            int pos = 0;
-
-            while (pos < s.length()) {
-                char c = s.charAt(pos);
-
-                if (c == '(') {
-                    pos++; // Next must be value
-                    // If number could be multi digits, use a while loop here
-                    NaryTreeNode node = new NaryTreeNode(s.charAt(pos));
-                    if (root == null) {
-                        root = node; // Will come here only once
-                    }
-
-                    /**
-                     * add to its parent's children list
-                     */
-                    if (parent != null) {
-                        parent.children.add(node);
-                    }
-
-                    parent = node;
-                    stack.push(node); // 记录一下
-                } else if (c == ')') {
-                    stack.pop(); // 弹出来
-
-                    if (!stack.isEmpty()) {
-                        parent = stack.peek(); // Change parent node, 1 level above
-                    }
-                }
-
-                pos++;
-            }
-
-            return root;
-        }
 
 //    public static void main(String[] args) {
 //        String s = "[A[B[C][D]][E][F]]";
 //        Groph g = new Groph();
 //        g.buildGra(s);
 //    }
-    }
 }
+

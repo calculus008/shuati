@@ -70,6 +70,10 @@ public class All_Ways_To_Multiple_Smaller_Numbers {
         /**
          * !!!
          *  "> 1".排除因子中只有n本身，如，n=12, 如果用"> 0",则[12]会出现在res中。
+         *
+         *  Because we start from 2, so 1 is not in the list, "list.size() == 1" means
+         *  we only have number itself in the current list, therefore, we need to put
+         *  1 in it.
          *  **/
         if (n == 1) {
             if (list.size() == 1) {
@@ -92,7 +96,7 @@ public class All_Ways_To_Multiple_Smaller_Numbers {
     }
 
     public static void main(String[] args) {
-//        printFactor(100);
+        printFactor(12);
 
         getFactors(12);
     }

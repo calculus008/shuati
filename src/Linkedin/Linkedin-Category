@@ -16,6 +16,8 @@ LE_62_Unique_Path
 LE_64_Min_Path_Sum
 LE_05_Longest_Palindromic_Substring
 LE_730_Count_Different_Palindromic_Subsequences
+Max_Subsequence_Skip_One
+Min_Difference_Sum_In_Two_Arrays
 
 #Min-Max Strategy (Gaming Theory), Recursion + Memoization
 LE_464_Can_I_Win
@@ -29,7 +31,6 @@ LE_244_Shortest_Word_Distance_II
 LE_895_Maximum_Frequency_Stack
 LE_981_Time_Based_Key_Value_Store
 LE_352_Data_Stream_As_Disjoint_Intervals  (***)              revisit
-Merge_Intervals                           (*****)            revisit
 LE_716_Max_Stack
 LE_380_Insert_Delete_GetRandom_O1
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
@@ -37,6 +38,11 @@ LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
 LE_432_All_O_One_Data_Structure           (*****)
 LE_359_Logger_Rate_Limiter
 LI_215_Rate_Limiter                       (***)
+CustomizedHashMap
+Delayed_Scheduler
+Retain_Best_Cache
+Merge_Intervals                           (*****)            revisit
+
 
 #Array and String
 LE_20_Valid_Parentheses
@@ -45,6 +51,7 @@ LE_41_First_Missing_Positive              (******)!!!
 LE_277_Find_The_Celebrity
 LE_243_Shortest_Word_Distance
 LE_245_Shortest_Word_Distance_III
+Word_Distance_IV
 LE_611_Valid_Triangle_Number
 LE_42_Trapping_Rain_Water
 LE_08_String_To_Integer
@@ -113,6 +120,7 @@ LE_698_Partition_To_K_Equal_Sum_Subsets
 LE_79_Word_Search
 LE_212_Word_Search_II    (Trie or HashMap + DFS)
 LE_282_Expression_Add_Operators
+Multi_Dimension_Array_Sum
 
 #Stack
 LE_150_Evaluate_Reverse_Polish_Notation
@@ -139,9 +147,11 @@ LE_142_Linked_List_Cycle_II
 LE_23_Merge_k_Sorted_Lists
 LI_486_Merge_K_Sorted_Arrays
 LE_373_Find_K_Pairs_With_Smallest_Sums (smallest product, without sort)   (***)
+Intersection_Union_Of_K_Sorted_Lists
 
 #Binary Search
 LE_633_Sum_Of_Square_Numbers
+Kth_Missing_Element_In_Sorted_Array
 
 #Matrix
 LE_311_Sparse_Matrix_Multiplication
@@ -150,7 +160,14 @@ LE_200_Number_Of_Islands
 LE_694_Number_Of_Distinct_Islands
 LE_695_Max_Area_Of_Island
 
+#Union Find
+Find_Same_Person
+
+#Topological Sort
+Merge_Properties
+
 Generic_Permutation                               (***)
 H2O
 Hopping_Iterator
 Max_Subsequence_Skip_One
+

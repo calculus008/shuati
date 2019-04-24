@@ -30,6 +30,7 @@ public class Palindrome_By_Removing_Character {
      * A B C D E F E D C B A
      * |                   | portion that runs inside isPalindrome_ByRemoveOneChar
      *
+     * 0 1 2 3 4 5 6 7 8 9
      * A B D E F E D C B A
      * | |             | |  portion that can be checked inside isPalindrome_ByRemoveOneChar
      *     |       |        isPalindrome(s , i , s.length() - i - 2)
@@ -45,7 +46,7 @@ public class Palindrome_By_Removing_Character {
 
     public static boolean isPalindrome_ByRemoveOneChar(String s) {
         for (int i = 0; i < s.length() / 2; i++) {
-            if (s.charAt(i) != s.charAt(s.length() - i - 1)) {
+            if (s.charAt(i) != s.charAt((s.length() - 1) - i)) {
                 return isPalindrome(s, i + 1, s.length() - i - 1) ||
                         isPalindrome(s, i, s.length() - i - 2);
             }

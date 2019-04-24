@@ -25,14 +25,16 @@ public class Intersection_Union_Of_K_Sorted_Lists {
     /**
      * Union : K个sorted list, union all (no duplicate) in output in sorted way.
      */
-    List<Integer> union(List<List<Integer>> source) {
+    public List<Integer> union(List<List<Integer>> source) {
         int k = source.size();
 
-        PriorityQueue<Node> heap = new PriorityQueue<Node>(k, new Comparator<Node>(){
-            public int compare(Node node1, Node node2) {
-                return node1.val - node2.val;
-            }
-        });
+//        PriorityQueue<Node> heap = new PriorityQueue<Node>(k, new Comparator<Node>(){
+//            public int compare(Node node1, Node node2) {
+//                return node1.val - node2.val;
+//            }
+//        });
+
+        PriorityQueue<Node> heap = new PriorityQueue<Node>(k, (a, b) -> a.val - b.val);
 
         for (List<Integer> list : source) {
             Iterator<Integer> it = list.iterator();
@@ -59,8 +61,10 @@ public class Intersection_Union_Of_K_Sorted_Lists {
             /**
              * !!!
              * 去重， 添加不一样的
+             * "res.get(res.size() - 1) != node.val" : 当前node.val和res里最后一个元素不一样。
              */
-            if (res.isEmpty() || res.get(res.size() - 1) != node.val) {
+            if (res.isEmpty()
+                    || res.get(res.size() - 1) != node.val) {
                 res.add(node.val);
             }
 
@@ -82,7 +86,7 @@ public class Intersection_Union_Of_K_Sorted_Lists {
     /**
      * Intersection : elements that appear in more than one list among K lists
      */
-    List<Integer> intersection(List<List<Integer>> source) {
+    public List<Integer> intersection(List<List<Integer>> source) {
         int k = source.size();
 
         PriorityQueue<Node> heap = new PriorityQueue<Node>(k, new Comparator<Node>(){
@@ -116,6 +120,7 @@ public class Intersection_Union_Of_K_Sorted_Lists {
 
             if (prev == null) {
                 prev = node.val;
+                System.out.println("prev null,set prev="+prev);
             } else {
                 /**
                  * !!!
@@ -129,11 +134,10 @@ public class Intersection_Union_Of_K_Sorted_Lists {
                  * When we come to 3rd and 4th 4, condition "res.get(res.size() - 1) != node.val"
                  * is FALSE, we do nothing. Until we come to 6, it is different from prev value 4,
                  * now we set prev to 6.
-                 *
-                 * - when we come to 6, then we add prev value (4) to res.
-                 */
+                 **/
                 if (node.val == prev) {
                     if (res.isEmpty() || res.get(res.size() - 1) != node.val) {
+                        System.out.println("add " + prev);
                         res.add(prev);
                     }
                 } else {
@@ -144,7 +148,7 @@ public class Intersection_Union_Of_K_Sorted_Lists {
             if (node.it.hasNext()) {
                 node.val = node.it.next();
                 heap.offer(node);
-            } // If there is no next(), dont add back to heap
+            } // If there is no next(), don't add back to heap
         }
 
         for (int val : res) {

@@ -8,7 +8,7 @@ public class Next_01_Interval {
      */
 
     /**
-     * if current position is not avaliable, if it is 1, make it 0, move left
+     * if current position is not available, if it is 1, make it 0, move left
      **/
     int next(int num) {
         int mask = -1; //11111111111111

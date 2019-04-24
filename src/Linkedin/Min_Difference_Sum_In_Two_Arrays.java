@@ -56,7 +56,7 @@ public class Min_Difference_Sum_In_Two_Arrays {
      * dp[i][j] :
      * min pair sum for the first i number from a and first j number from b
      *
-     * Transition : Take the min value for cases of pairing a[i] - b[j] and NOT paring them.
+     * Transition : Take the min value between cases of pairing a[i] - b[j] and NOT paring them.
      * dp[i][j] = min(dp[i - 1][j - 1] + abs(a[i] - b[j]), dp[i - 1][j])
      *                    Pairing a[i] with b[j]        NOT Pairing a[i] with b[j]
      * Result :
@@ -93,6 +93,8 @@ public class Min_Difference_Sum_In_Two_Arrays {
     /**
      * What if B is super long
      * This solution has better space efficiency
+     *
+     * Basically using rolling arrays to reduce space complexity
      **/
     public int minDifferenceSumLong(int[] a, int[] b) {
         int[] dp = new int[a.length + 1];
