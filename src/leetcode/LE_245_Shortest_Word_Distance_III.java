@@ -41,7 +41,7 @@ public class LE_245_Shortest_Word_Distance_III {
         int a = -1;
         int b = -1;
 
-        boolean isEqual = word1.equals(word2);
+        boolean isEqual = word1.equals(word2);//###
 
         int res = Integer.MAX_VALUE;
         for (int i = 0; i < words.length; i++) {
@@ -56,7 +56,7 @@ public class LE_245_Shortest_Word_Distance_III {
                  * 2.Always do calculation for 2 adjacent indexes. Therefore, a need to
                  *   take the value b here.
                  */
-                if (isEqual) {
+                if (isEqual) {//###
                     a = b;
                 }
 

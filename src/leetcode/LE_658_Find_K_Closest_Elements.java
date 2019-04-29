@@ -30,12 +30,21 @@ public class LE_658_Find_K_Closest_Elements {
      */
 
     /**
+     * 三种解法都要会
+     *
+     * O(logn)   Solution1
+     * O(nlogn)  Solution2
+     * O(n)      Solution3
+     */
+
+    /**
      * Binary Search
      * Time : O(logn), if given input is a list, we can do "subList()" to get final answer.
      * subList() gets a view so it takes O(1).
      *
      * Assume we are taking A[i] ~ A[i + k -1] for final answer.
-     * We can binary research i
+     * We can binary research i, in other words, Binary Search for the start index, based on the location of x.
+     *
      * We compare the distance between x - A[mid] and A[mid + k] - x
      *
      * If x - A[mid] > A[mid + k] - x,
@@ -44,16 +53,25 @@ public class LE_658_Find_K_Closest_Elements {
      * So assign left = mid + 1.
      *
      * Reversely, it's similar.
+     *
+     * 二分求得左端点。将整个array分为这几个部分：1....mid....mid+k....arr.length - k.
+     * 当x位于mid到mid+k中点往左的位置时，左端点肯定在mid左侧，反之，则在右侧。
+     *
+     * https://www.youtube.com/watch?v=3ifFNvdfjyg
      */
-    class Solution3 {
+    class Solution1 {
         public List<Integer> findClosestElements(List<Integer> list, int k, int x) {
 //            List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
 
             int lo = 0, hi = list.size() - k;
             while (lo < hi) {
                 int mid = (lo + hi) / 2;
-                if (x - list.get(mid) > list.get(mid + k) - x) {
-                    lo = mid + 1;
+                if (x > list.get(mid)) {
+                    if (x - list.get(mid) > list.get(mid + k) - x) {
+                        lo = mid + 1;
+                    } else {
+                        hi = mid;
+                    }
                 } else {
                     hi = mid;
                 }
@@ -62,6 +80,70 @@ public class LE_658_Find_K_Closest_Elements {
         }
     }
 
+    /**
+     * Solution 2
+     * Time  : O(nlogn)
+     * Space : O(k)
+     *
+     * if input is int[], use Java 8 stream to convert it to list:
+     *
+     * List<Integer> nums = Arrays.stream(arr).boxed().collect(Collectors.toList());
+     */
+
+    class Solution2 {
+        public List<Integer> findClosestElements_list(List<Integer> arr, int k, int x) {
+            Collections.sort(arr, (a, b) -> a == b ? a - b : Math.abs(a - x) - Math.abs(b - x));
+            arr = arr.subList(0, k); //!!!subList()
+            Collections.sort(arr);
+            return arr;
+        }
+
+        public List<Integer> findClosestElements_array(int[] arr, int k, int x) {
+            List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+            Collections.sort(list, (a, b) -> a == b ? a - b : Math.abs(a - x) - Math.abs(b - x));
+            list = list.subList(0, k); //!!!subList()
+            Collections.sort(list);
+            return list;
+        }
+    }
+
+    /**
+     * O(n) Solution
+     *
+     * If input is List, it can be also O(logn)
+     */
+    class Solution3 {
+        public List<Integer> findClosestElements(int[] arr, int k, int x) {
+            int lo = 0;
+            int hi = arr.length - 1;
+            while (hi - lo >= k) {
+                if (Math.abs(arr[lo] - x) > Math.abs(arr[hi] - x)) {
+                    lo++;
+                } else {
+                    hi--;
+                }
+            }
+            List<Integer> result = new ArrayList<>(k);
+            for (int i = lo; i <= hi; i++) {
+                result.add(arr[i]);
+            }
+            return result;
+        }
+
+        public List<Integer> findClosestElements_list(List<Integer> list, int k, int x) {
+            int lo = 0;
+            int hi = list.size() - 1;
+            while (hi - lo >= k) {
+                if (Math.abs(list.get(lo) - x) > Math.abs(list.get(hi) - x)) {
+                    lo++;
+                } else {
+                    hi--;
+                }
+            }
+
+            return list.subList(lo, hi);
+        }
+    }
 
     /**
          https://www.jiuzhang.com/solution/find-k-closest-elements/#tag-highlight
@@ -71,7 +153,7 @@ public class LE_658_Find_K_Closest_Elements {
          找到最后一个 < target 的位置，然后从这个位置开始用两根指针向两边走来获得最后最接近的 k 个整数。
          时间复杂度 O(logn + k), Space : O(k)
      **/
-    class Solution1 {
+    class Solution4 {
         public int[] kClosestNumbers(int[] A, int target, int k) {
             int left = findLowerClosest(A, target);
             int right = left + 1;
@@ -143,7 +225,7 @@ public class LE_658_Find_K_Closest_Elements {
      * Time complexity : O(log(n)+k)
      * Space complexity : O(k)
      */
-    public class Solution2 {
+    public class Solution5 {
         public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
             int n = arr.size();
 
@@ -207,43 +289,5 @@ public class LE_658_Find_K_Closest_Elements {
                 return arr.subList(low, high + 1);//!!!"high + 1", subList requires end index be none-inclusive
             }
         }
-    }
-
-
-    /**
-     * Solution 2
-     * Time  : O(nlogn)
-     * Space : O(k)
-     *
-     * if input is int[], use Java 8 stream to convert it to list:
-     *
-     * List<Integer> nums = Arrays.stream(arr).boxed().collect(Collectors.toList());
-     */
-
-    public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
-        Collections.sort(arr, (a, b) -> a == b ? a - b : Math.abs(a - x) - Math.abs(b - x));
-        arr = arr.subList(0, k); //!!!subList()
-        Collections.sort(arr);
-        return arr;
-    }
-
-    /**
-     * O(n) Solution
-     */
-    public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        int lo = 0;
-        int hi = arr.length - 1;
-        while (hi - lo >= k) {
-            if (Math.abs(arr[lo] - x) > Math.abs(arr[hi] - x)) {
-                lo++;
-            } else {
-                hi--;
-            }
-        }
-        List<Integer> result = new ArrayList<>(k);
-        for (int i = lo; i <= hi; i++) {
-            result.add(arr[i]);
-        }
-        return result;
     }
 }

@@ -84,7 +84,9 @@ public class LE_716_Max_Stack {
             while (s1.peek() != ret) {
                 s3.push(s1.pop());
             }
+
             s1.pop();
+
             while (!s3.isEmpty()) {
                 /**
                  * !!!
@@ -197,6 +199,10 @@ public class LE_716_Max_Stack {
             tail.prev = head;
         }
 
+        /**
+         * simulate push()
+         * always add at the tail
+         */
         public Node add(int val) {
             Node x = new Node(val);
             x.next = tail;
@@ -205,6 +211,9 @@ public class LE_716_Max_Stack {
             return x;
         }
 
+        /**
+         *
+         */
         public int pop() {
             return unlink(tail.prev).val;
         }

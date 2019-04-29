@@ -141,15 +141,17 @@ public class LE_432_All_O_One_Data_Structure {
 
         private void changeKey(String key, int offset) {
             int count = countMap.get(key);
-            countMap.put(key, count + offset);
+            int newCount = count + offset;
+            countMap.put(key, newCount);
+
             Node curNode = nodeMap.get(count);
 
             Node newNode;
-            if (nodeMap.containsKey(count + offset)) {
-                newNode = nodeMap.get(count + offset);
+            if (nodeMap.containsKey(newCount)) {
+                newNode = nodeMap.get(newCount);
             } else {
-                newNode = new Node(count + offset);
-                nodeMap.put(count + offset, newNode);
+                newNode = new Node(newCount);
+                nodeMap.put(newCount, newNode);
                 addNodeAfter(newNode, offset == 1 ? curNode : curNode.pre);
             }
 

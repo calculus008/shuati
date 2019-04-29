@@ -8,6 +8,31 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Implement hashmap using Array and Generic type
+ *
+ * Java ReentrantReadWriteLock
+ *
+ * readLock.lock();
+ * This means that if any other thread is writing (i.e. holds a write lock) then stop here
+ * until no other thread is writing.
+ *
+ * Once the lock is granted no other thread will be allowed to write (i.e. take a write lock)
+ * until the lock is released.
+ *
+ * writeLock.lock();
+ * This means that if any other thread is reading or writing, stop here and wait until no other
+ * thread is reading or writing.
+ *
+ * Once the lock is granted, no other thread will be allowed to read or write (i.e. take a read
+ * or write lock) until the lock is released.
+ *
+ * Combining these you can arrange for only one thread at a time to have write access but as
+ * many readers as you like can read at the same time except when a thread is writing.
+ *
+ * Put another way. Every time you want to read from the structure, take a read lock.
+ * Every time you want to write, take a write lock. This way whenever a write happens no-one
+ * is reading (you can imagine you have exclusive access), but there can be many readers reading
+ * at the same time so long as no-one is writing.
+ *
  */
 
 public class CustomizedHashMap<K, V> {
@@ -30,11 +55,12 @@ public class CustomizedHashMap<K, V> {
     List<ReentrantReadWriteLock> locks = null;
     AtomicInteger count;
 
-    CustomizedHashMap(int capacity) {
+    public CustomizedHashMap(int capacity) {
         /**
          * !!!
          */
         arr = (Entry<K, V>[])new Object[capacity];
+
         // arr = new Entry<K, V>[capacity]; In java, we couldnt create generic array
         this.capacity = capacity;
 
@@ -44,15 +70,15 @@ public class CustomizedHashMap<K, V> {
         }
     }
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return count.intValue() == 0;
     }
 
-    boolean isFull() {
+    public boolean isFull() {
         return count.intValue() == capacity;
     }
 
-    void put(K key, V val) {
+    public void put(K key, V val) {
         if (isFull()) {
             throw new RuntimeException("Map is full");
         }
@@ -88,7 +114,7 @@ public class CustomizedHashMap<K, V> {
         }
     }
 
-    V get(K key) {
+    public V get(K key) {
         if (isEmpty()) {
             throw new RuntimeException("Map is empty");
         }
@@ -118,7 +144,7 @@ public class CustomizedHashMap<K, V> {
         return null;
     }
 
-    boolean remove(K key) {
+    public boolean remove(K key) {
         if (isEmpty()) {
             throw new RuntimeException("Map is empty");
         }

@@ -21,7 +21,7 @@ public class UnionFindWithCount1 {
         int root_b = query(b);
         if (root_a == root_b) return;
 
-        //union by rank optimzation
+        //union by rank optimization
         parents[Math.min(root_a, root_b)] = Math.max(root_a, root_b);
         count--;
     }

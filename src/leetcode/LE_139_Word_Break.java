@@ -140,8 +140,24 @@ public class LE_139_Word_Break {
      * Huahua's version
      * http://zxi.mytechroad.com/blog/leetcode/leetcode-139-word-break/
      *
-     * Time  : O(n^2)
-     * Space : O(n^2)
+     * Time  : O(n^2), Size of recursion tree can go up to n^2
+     *
+     *         假設n=4, 則recursion tree為
+     *        /       /           \                         \
+     *       (0,4)   (1,3)        (2,2)                    (3,1)
+     *              /             /    \               /     \        \
+     *            (0,1)      (0,2)  (1,1)           (0,3)  (1,2)  (2,1)
+     *                                  /                      /         /    \
+     *                              (0,1)                 (0,1)  (0,2)  (1,1)
+     *                                                                            /
+     *                                                                         (0,1)
+     *         可以看到, 以0為開頭, 共有4個子問題(0,4), (0,3), (0, 2), (0, 1), 以1為開頭, 共有3個子問題, 以2為開頭,
+     *         共有2個子問題, 以3為開頭, 共有1個子問題. 因此, 如果是一個長度為n的字串,
+     *         共有n+n-1+n-2+...+1=(n+1)*n/2個子問題, 因此時間複雜度是O(n^2)
+     *
+     *
+     *
+     * Space : O(n ^ 2), 因為每個子問題都要佔一個memo(true/false), 所以空間複雜度也是O(n^2)﻿
      *
      * very slow on leetcode
      */
@@ -178,5 +194,96 @@ public class LE_139_Word_Break {
 
         cache.put(s, false);
         return false;//!!! #4 diff from 140
+    }
+
+
+    class Solution_practice{
+        public boolean wordBreak(String s, List<String> wordDict) {
+            if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
+                return false;
+            }
+
+            Set<String> dict = new HashSet<>(wordDict);
+
+            return helper(s, dict, new HashMap<>());
+        }
+
+        private boolean helper(String s, Set<String> dict, Map<String, Boolean> mem) {
+            if (mem.containsKey(s)) return mem.get(s);
+
+            if (dict.contains(s)) {
+                /**
+                 * !!!
+                 * 千万不要忘记set mem
+                 */
+                mem.put(s, true);
+                return true;
+            }
+
+            for (int i = 1; i < s.length(); i++) {
+                String l = s.substring(0, i);
+                String r = s.substring(i);
+
+                if (dict.contains(r)) {
+                    if (helper(l, dict, mem)) {
+                        /**
+                         * !!!
+                         */
+                        mem.put(s, true);
+                        return true;
+                    }
+                }
+            }
+
+            /**
+             * !!!
+             */
+            mem.put(s, false);
+
+            return false;
+        }
+    }
+
+    class Solution_Variation{
+        /**
+         * Just given wordDict, find the max length of the word in wordDict that can be
+         * broken into words in the same wordDict
+         */
+
+        public getMaxLen
+        public boolean wordBreak(String s, List<String> wordDict) {
+            if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
+                return false;
+            }
+
+            Set<String> dict = new HashSet<>(wordDict);
+
+            return helper(s, dict, new HashMap<>());
+        }
+
+        private boolean helper(String s, Set<String> dict, Map<String, Boolean> mem) {
+            if (mem.containsKey(s)) return mem.get(s);
+
+            if (dict.contains(s)) {
+                mem.put(s, true);
+                return true;
+            }
+
+            for (int i = 1; i < s.length(); i++) {
+                String l = s.substring(0, i);
+                String r = s.substring(i);
+
+                if (dict.contains(r)) {
+                    if (helper(l, dict, mem)) {
+                        mem.put(s, true);
+                        return true;
+                    }
+                }
+            }
+
+            mem.put(s, false);
+
+            return false;
+        }
     }
 }

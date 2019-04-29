@@ -9,7 +9,7 @@ import java.util.Map;
  * Created by yuank on 2/28/18.
  */
 public class LE_49_Group_Anagrams {
-    /*
+    /**
         Given an array of strings, group anagrams together.
 
         For example, given: ["eat", "tea", "tan", "ate", "nat", "bat"],

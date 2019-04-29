@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 4/2/18.
  */
 public class LE_234_Palindrome_Linked_List {
-    /*
+    /**
         Given a singly linked list, determine if it is a palindrome.
 
         Follow up:

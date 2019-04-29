@@ -73,8 +73,10 @@ public class Bounded_Blocking_Queue_With_Lock<E> {
         } finally {
             putLock.unlock();
         }
-        if (c == 0)
+
+        if (c == 0) {
             signalTake();
+        }
     }
 
     public E take() throws InterruptedException {
@@ -89,14 +91,22 @@ public class Bounded_Blocking_Queue_With_Lock<E> {
             }
             x = queue.poll();
 
+            /**
+             * first get , then decrease, so c has previous value
+             */
             c = count.getAndDecrement();
-            if (c > 1) {
+            if (c > 1) {//c is at least 2
                 takeCondition.signal();
             }
         } finally {
             takeLock.unlock();
         }
 
+        /**
+         * c has the value before decreasing,
+         * here "c == capacity" means current size is capacity - 1,
+         * so there's room for one more element, hence singal put condition
+         */
         if (c == capacity) {
             signalPut();
         }

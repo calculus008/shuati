@@ -48,7 +48,7 @@ public class LE_763_Partition_Labels {
 
         /**
          * !!!
-         * Two for loop, the first one gets the last index of each char
+         * Two for loops, the first one gets the last index of each char
          */
         for (int i = 0; i < c.length; i++) {
             map[c[i] - 'a'] = i;

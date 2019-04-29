@@ -148,7 +148,9 @@ public class LE_265_Paint_House_II {
                 int temp1 = min1;
                 int temp2 = min2;
 
-                //color index which has the lowest cost to paint for previous house (i - 1)
+                /**
+                 * color index which has the lowest cost to paint for previous house (i - 1)
+                 */
                 int tempindex = min1index;
 
                 min1 = Integer.MAX_VALUE;

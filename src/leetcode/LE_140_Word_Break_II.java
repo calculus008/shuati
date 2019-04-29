@@ -46,10 +46,10 @@ public class LE_140_Word_Break_II {
     */
 
     /**
-     * Solution 1 : DP
-     * @param s
-     * @param wordDict
-     * @return
+     * Time complexity : O(n^3) Size of recursion tree can go up to n ^ 2. The creation of list takes nn time.
+     *
+     * Space complexity : O(n^3)  The depth of the recursion tree can go up to n and each activation record
+     *                            can contains a string list of size n
      */
     public List<String> wordBreak(String s, List<String> wordDict) {
         return helper(s, new HashSet<String>(wordDict), new HashMap<>());

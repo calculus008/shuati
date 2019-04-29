@@ -25,11 +25,12 @@ public class LE_296_Best_Meeting_Point {
      */
 
     /**
-     Key
+     Key : it is NOT steps between 2 points, so no need to use BFS
      1.Distance on x and y can be calculated separately. 降维。
-     2.One a one dimension line, given 2 points A, B, the point that has the min combined distance to A and B must between A and
-     B. The min combined distance is B - A. With same logic, add two more points C and D, the min combined distance to all 4
-     points must be between C and D. And the min combined distance is (B-A)+(D-C).
+     2.One a one dimension line, given 2 points A, B, the point that has the min combined distance to A and B
+       must between A and B.
+     3.The min combined distance is B - A. With same logic, add two more points C and D, the min combined distance to all 4
+       points must be between C and D. And the min combined distance is (B-A)+(D-C).
 
      A---C---------D--------B
 
@@ -46,6 +47,9 @@ public class LE_296_Best_Meeting_Point {
         List<Integer> a = new ArrayList<>();
         List<Integer> b = new ArrayList<>();
 
+        /**
+         * Get locations on x axle
+         */
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
@@ -56,6 +60,7 @@ public class LE_296_Best_Meeting_Point {
 
         /**
          !!! 第二个双重循环要把上一个的内外循环调换位置
+             Get locations on y axle
          */
         for (int j = 0; j < n; j++) {
             for (int i = 0; i < m; i++) {
@@ -68,6 +73,9 @@ public class LE_296_Best_Meeting_Point {
         return min(a) + min(b);
     }
 
+    /**
+     * two pointers to find min combined distance
+     */
     public int min(List<Integer> list) {
         int res = 0;
         int i = 0;

@@ -33,7 +33,7 @@ public class LE_449_Serialize_And_Deserialize_BST {
      * !!!
      * Optimization is to use property of BST :
      * Save the space to store NULL node in encode(), when doing decode(),
-     * use range condtion garaunteed by BST to tell if we have a NULL.
+     * use range condition guaranteed by BST to tell if we have a NULL.
      */
 
     public class Codec {

@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 4/3/18.
  */
 public class LE_242_Valid_Anagram {
-    /*
+    /**
         Given two strings s and t, write a function to determine if t is an anagram of s.
 
         For example,
