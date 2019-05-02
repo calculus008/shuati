@@ -48,6 +48,10 @@ public class LE_253_Meeting_Rooms_II {
      [0,   5, 15]    res = 2
      [10, 20, 30]
      j
+
+     the minimal number of rooms equal to the max number of overlapping meeting in any time point.
+     The code is actually counting the number of overlapping meetings throughout the timeline and
+     recording the maximum.
      */
     public int minMeetingRooms1(Interval[] intervals) {
         int res = 0;
@@ -101,7 +105,7 @@ public class LE_253_Meeting_Rooms_II {
      * Line Sweep
      *
      * Move line, for a given moment, count how many meetings are running in parallel?
-     * Main the MAX count value, then it is the answer.
+     * Maintain the MAX count value, then it is the answer.
      *
      * In order to do it, need to map all start/end points on a single timeline,
      * hence we need Pair Class to represent time and type of events (start or end),

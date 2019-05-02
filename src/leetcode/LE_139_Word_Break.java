@@ -250,7 +250,6 @@ public class LE_139_Word_Break {
          * broken into words in the same wordDict
          */
 
-        public getMaxLen
         public boolean wordBreak(String s, List<String> wordDict) {
             if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
                 return false;

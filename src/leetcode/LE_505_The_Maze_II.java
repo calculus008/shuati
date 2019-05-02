@@ -130,6 +130,7 @@ public class LE_505_The_Maze_II {
 
                 /**
                  * this while simulates moving to one direction until it hits a wall
+                 * "&& && maze[x][y] == 0" : keep moving until hits a wall
                  */
                 while (x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] == 0) {
                     x += dir[0];
@@ -137,6 +138,11 @@ public class LE_505_The_Maze_II {
                     count++;
                 }
 
+                /**
+                 * "[x - dir[0]", "y - dir[1]"
+                 * After while loop stops, we already moves into an invalid position,
+                 * therefore, need to backtrack it to the last valid position.
+                 */
                 if (distance[start[0]][start[1]] + count < distance[x - dir[0]][y - dir[1]]) {
                     distance[x - dir[0]][y - dir[1]] = distance[start[0]][start[1]] + count;
                     dfs(maze, new int[]{x - dir[0], y - dir[1]}, distance);

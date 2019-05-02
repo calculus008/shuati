@@ -60,9 +60,8 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
         for (int i = 1; i < prices.length; i++) {
             min = Math.min(min, prices[i]);
 
-            diff = Math.max(diff, prices[i] - prices[i - 1]);
+            diff = Math.max(diff, prices[i] - prices[i - 1]);//!!!
 
-            System.out.println(diff);
             res = Math.max(res, prices[i] - min);
         }
 

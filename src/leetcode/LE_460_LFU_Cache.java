@@ -107,7 +107,11 @@ public class LE_460_LFU_Cache {
 
             bucket.get(freq).remove(key);
             /**
-             * !!! How to update minFreq
+             * !!! How to update minFreq :
+             * if current key's frequency before plus 1 is minFreq
+             * AND (after last line to remove current key from
+             * freq bucket) freq bucket is empty, minFreq should
+             * increase by one
              */
             if(freq == minFreq && bucket.get(freq).size()==0) {
                 minFreq++;
@@ -273,13 +277,20 @@ public class LE_460_LFU_Cache {
      */
 
     /**
-     * Use HashMap + DLL
+     * Use Two HashMap + DLL
      *
      * Map<Integer, Node> nodeMap    : Key is the KEY(!!!), value is the Node that contains the VALUE.
      *
      * Map<Integer, DLList> countMap : This is actually the buckets, key is frequency, value is DLL
      *                                 which are all the values with the same frequency.
      *
+     * key:
+     * 1.When update(), use cnt in current node to retrieve dll from buckets.
+     *   Then remove current node from dll
+     * 2.After finish #1, check if cnt equals min and dll is already empty.
+     *   If both are true, we can update min, increasing it by one.
+     * 3.Update cnt in current node, increasing by one.
+     * 4.Add current node into bucket with its updated cnt.
      */
 
     public class LFUCache_HashMap_DLL {
@@ -289,6 +300,9 @@ public class LE_460_LFU_Cache {
             Node(int key, int val) {
                 this.key = key;
                 this.val = val;
+                /**
+                 * !!!
+                 */
                 cnt = 1;
             }
         }
@@ -304,6 +318,9 @@ public class LE_460_LFU_Cache {
                 tail.prev = head;
             }
 
+            /**
+             * Always add at the head
+             */
             void add(Node node) {
                 head.next.prev = node;
                 node.next = head.next;
@@ -329,6 +346,10 @@ public class LE_460_LFU_Cache {
 
 
         int capacity;
+        /**
+         * !!!
+         * use size to track current cache size
+         */
         int size;
         int min;
 
@@ -366,14 +387,22 @@ public class LE_460_LFU_Cache {
 
                 if (size == capacity) {
                     DLList lastList = countMap.get(min);
+                    /**
+                     * Since we always add new node at the head,
+                     * last node in dll is the oldest node in the list.
+                     */
                     nodeMap.remove(lastList.removeLast().key);
                     size--;
                 }
 
                 size++;
-                min = 1;
+                min = 1;//!!!
                 DLList newList = countMap.getOrDefault(node.cnt, new DLList());
                 newList.add(node);
+                /**
+                 * must have this line, since if get is null, getOrDefault()
+                 * return a new list that actually does not exist in map.
+                 */
                 countMap.put(node.cnt, newList);
             }
         }
@@ -403,4 +432,119 @@ public class LE_460_LFU_Cache {
         }
     }
 
+    public class LFUCache_Practice {
+        class Node {
+            int key, val, cnt;
+            Node prev, next;
+            Node(int key, int val) {
+                this.key = key;
+                this.val = val;
+                cnt = 1;
+            }
+        }
+
+        class DLList {
+            Node head, tail;
+            int size;
+
+            public DLList() {
+                head = new Node(0, 0);
+                tail = new Node(0, 0);
+                head.next = tail;
+                tail.prev = head;
+            }
+
+            public void add(Node node) {
+                head.next.prev = node;
+                node.next = head.next;
+                node.prev = head;
+                head.next = node;
+                size++;
+            }
+
+            public void remove(Node node) {
+                node.prev.next = node.next;
+                node.next.prev = node.prev;
+                size--;
+            }
+
+            public Node removeLast() {
+                if (size > 0) {
+                    Node node = tail.prev;
+                    remove(node);
+                    return node;
+                } else {
+                    return null;
+                }
+            }
+        }
+
+
+        int capacity;
+        int size;
+        int min;
+
+        Map<Integer, Node> nodeMap;
+        Map<Integer, DLList> countMap;//bucket
+
+        public LFUCache_Practice(int capacity) {
+            this.capacity = capacity;
+            nodeMap = new HashMap<>();
+            countMap = new HashMap<>();
+        }
+
+        public int get(int key) {
+            Node node = nodeMap.get(key);
+            if (node == null) {
+                return -1;
+            }
+            update(node);
+            return node.val;
+        }
+
+        public void put(int key, int value) {
+            if (capacity <= 0) {
+                return;
+            }
+
+            Node node;
+            if (nodeMap.containsKey(key)) {
+                node = nodeMap.get(key);
+                node.val = value;
+                update(node);
+            } else {
+                node = new Node(key, value);
+                nodeMap.put(key, node);
+
+                if (size == capacity) {
+                    DLList lastList = countMap.get(min);
+                    nodeMap.remove(lastList.removeLast().key);
+                    size--;
+                }
+
+                size++;
+                min = 1;
+                DLList newList = countMap.getOrDefault(1, new DLList());
+                newList.add(node);
+                countMap.put(1, newList);
+            }
+        }
+
+        private void update(Node node) {
+            DLList oldList = countMap.get(node.cnt);
+            oldList.remove(node);
+
+            if (node.cnt == min && oldList.size == 0) {
+                min++;
+            }
+
+            node.cnt++;
+
+            if (!countMap.containsKey(node.cnt)) {
+                countMap.put(node.cnt, new DLList());
+            }
+
+            countMap.get(node.cnt).add(node);
+        }
+    }
 }

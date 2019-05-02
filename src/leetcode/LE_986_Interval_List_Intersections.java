@@ -61,9 +61,14 @@ public class LE_986_Interval_List_Intersections {
                  *      *******        ***********
                  * -----------------------------
                  *
+                 * start1    end1
+                 *      *******
+                 *        start2       end2
+                 *         *************
+                 * -----------------------------
                  * so we get:
                  * start = max(start1, start2)
-                 * edn = min(end1, end2)
+                 * end   = min(end1, end2)
                  *
                  * if start > end, there's no intersection
                  */

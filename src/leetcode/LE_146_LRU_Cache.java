@@ -342,4 +342,99 @@ public class LE_146_LRU_Cache {
             addToTail(node);
         }
     }
+
+
+    class LRUCache_Practice {
+        class Node {
+            int key, val;
+            Node pre;
+            Node next;
+
+            public Node(int key, int val) {
+                this.key = key;
+                this.val = val;
+            }
+        }
+
+        int capacity = 0;
+        Map<Integer, Node> map;
+
+        /**
+         * !!!
+         * head and tail should be global
+         */
+        Node head;//!!!
+        Node tail;//!!!
+
+
+        public LRUCache_Practice(int capacity) {
+            this.capacity = capacity;
+            map = new HashMap<>();
+            head = new Node(-1, -1);
+            tail = new Node(-1, -1);
+
+            head.next = tail;
+            tail.pre = head;
+        }
+
+        public int get(int key) {
+            if (!map.containsKey(key)) {
+                return -1;
+            }
+
+            Node cur = map.get(key);
+            int res = cur.val;
+
+            moveToTail(cur);
+
+            return res;
+        }
+
+        public void put(int key, int val) {
+            if (map.containsKey(key)) {
+                Node node = map.get(key);
+                /**
+                 * !!!
+                 * Don't for get
+                 */
+                node.val = val;//!!!
+                moveToTail(node);
+                return;
+            }
+
+            if (capacity <= 0) return;
+
+            /**
+             * !!!
+             * ">=", NOT ">"
+             */
+            if (map.size() >= capacity) {
+                map.remove(head.next.key);
+                removeNode(head.next);
+            }
+
+            Node n = new Node(key, val);
+            map.put(key, n);
+            addToTail(n);
+        }
+
+        private void moveToTail(Node n) {
+            removeNode(n);
+            addToTail(n);
+        }
+
+        private void removeNode(Node n) {
+            n.pre.next = n.next;
+            n.next.pre = n.pre;
+            n.next = null;
+            n.pre = null;
+        }
+
+        private void addToTail(Node n) {
+            tail.pre.next = n;
+            n.pre = tail.pre;
+            n.next = tail;
+            tail.pre = n;
+        }
+    }
 }

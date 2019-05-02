@@ -22,6 +22,7 @@ public class LE_332_Reconstruct_Itinerary {
          Example 1:
          tickets = [["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]
          Return ["JFK", "MUC", "LHR", "SFO", "SJC"].
+
          Example 2:
          tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
          Return ["JFK","ATL","JFK","SFO","ATL","SFO"].
@@ -35,9 +36,46 @@ public class LE_332_Reconstruct_Itinerary {
      * Time  : O(nlogn)
      * Space : O(n)
      *
-     *The nodes which have odd degrees (int and out) are the entrance or exit. In your example it's JFK and A.
-     *If there are no nodes have odd degrees, we could follow any path without stuck until hit the last exit node
-     *The reason we got stuck is because that we hit the exit
+     * In this problem, the path we are going to find is an itinerary which:
+     *
+     *  #1.uses all tickets to travel among airports
+     *  #2.preferably in ascending lexical order of airport code
+     *
+     * Keep in mind that requirement 1 must be satisfied before we consider 2.
+     * If we always choose the airport with the smallest lexical order, this
+     * would lead to a perfectly lexical-ordered itinerary, but pay attention
+     * that when doing so, there can be a "dead end" somewhere in the tickets
+     * such that we are not able visit all airports (or we can't use all our
+     * tickets), which is bad because it fails to satisfy requirement 1 of
+     * this problem. Thus we need to take a step back and try other possible
+     * airports, which might not give us a perfectly ordered solution, but
+     * will use all tickets and cover all airports.
+     *
+     * Thus it's natural to think about the "backtracking" feature of DFS.
+     * We start by building a graph and then sorting vertices in the adjacency
+     * list so that when we traverse the graph later, we can guarantee the
+     * lexical order of the itinerary can be as good as possible. When we have
+     * generated an itinerary, we check if we have used all our airline tickets.
+     * If not, we revert the change and try another ticket. We keep trying until
+     * we have used all our tickets.
+     *
+     * The nodes which have odd degrees (int and out) are the entrance or exit. In your example it's JFK and A.
+     * If there are no nodes have odd degrees, we could follow any path without stuck until hit the last exit node
+     * The reason we got stuck is because that we hit the exit
+     *
+     * [
+     * ["JFK","SFO"],
+     * ["JFK","ATL"],
+     * ["SFO","ATL"],
+     * ["ATL","JFK"],
+     * ["ATL","SFO"]
+     * ]
+     *
+     * JFK : ATL, SFO
+     * SFO : ATL
+     * ATL : JFK, SFO
+     *
+     * ["JFK","ATL","JFK","SFO","ATL","SFO"].
      */
 
     Map<String, PriorityQueue<String>> map;
@@ -46,18 +84,30 @@ public class LE_332_Reconstruct_Itinerary {
     public List<String> findItinerary(String[][] tickets) {
         res = new LinkedList<>();
         map = new HashMap<>();
+
+        /**
+         * Build adjacent list
+         */
         for (String[] ticket : tickets) {
-            //!!!
             map.computeIfAbsent(ticket[0], k -> new PriorityQueue<>()).add(ticket[1]);
         }
+
         helper("JFK");
         return res;
     }
 
     private void helper(String s) {
         while (map.containsKey(s) && !map.get(s).isEmpty()) {
+            /**
+             * "poll()", try all destinations that can be reached from s,
+             * pq in map guaranteed lexicon order.
+             */
             helper(map.get(s).poll());
         }
+
+        /**
+         * DFS, go all the way down to the last, should add at index 0.
+         */
         res.add(0, s);
     }
 }

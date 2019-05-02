@@ -6,6 +6,7 @@ import common.BSTReverseIterator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class LE_653_Two_Sum_IV_Input_Is_A_BST {
     /**
@@ -141,6 +142,51 @@ public class LE_653_Two_Sum_IV_Input_Is_A_BST {
             }
 
             return false;
+        }
+    }
+
+    /**
+     * https://leetcode.com/problems/two-sum-iv-input-is-a-bst/discuss/106061/Java-Simple-AC-with-Time-O(n)-Space-O(log-n)-in-Average
+     *
+     * Same as Solution2, different implementation, not using iterator, just explicitly tracking
+     * nodes with 2 stacks.
+     */
+    class Solution3 {
+        public boolean findTarget(TreeNode root, int k) {
+            if (root == null) return false;
+            Stack<TreeNode> l_stack = new Stack<>();
+            Stack<TreeNode> r_stack = new Stack<>();
+
+            stackAdd(l_stack, root, true);
+            stackAdd(r_stack, root, false);
+
+            while (l_stack.peek().val < r_stack.peek().val) {
+                int n = l_stack.peek().val + r_stack.peek().val;
+                if (n == k) {
+                    return true;
+                } else if (n > k) {
+                    stackNext(r_stack, false);
+                } else {
+                    stackNext(l_stack, true);
+                }
+            }
+            return false;
+        }
+
+        private void stackAdd(Stack<TreeNode> stack, TreeNode node, boolean isLeft) {
+            while (node != null) {
+                stack.push(node);
+                node = (isLeft) ? node.left : node.right;
+            }
+        }
+
+        private void stackNext(Stack<TreeNode> stack, boolean isLeft) {
+            TreeNode node = stack.pop();
+            if (isLeft) {
+                stackAdd(stack, node.right, isLeft);
+            } else {
+                stackAdd(stack, node.left, isLeft);
+            }
         }
     }
 }

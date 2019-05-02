@@ -200,6 +200,8 @@ LE_298_Binary_Tree_Longest_Consecutive_Sequence     (lint 595)
 LE_549_Binary_Tree_Longest_Consecutive_Sequence_II  (lint 614)     revisit
 LI_619_Binary_Tree_Longest_Consecutive_Sequence_III                revisit
 
+LE_501_Find_Mode_In_Binary_Search_Tree
+
 Binary_To_Nary_Tree
 
 ====================================================
@@ -666,9 +668,11 @@ LE_1019_Next_Greater_Node_In_Linked_List
 LE_901_Online_Stock_Span
 739. Daily Temperatures
 
-#Array
+#Array and Array
 LE_55_Jump_Game
 LE_45_Jump_Game_II
 LE_49_Group_Anagrams
 LE_442_Find_All_Duplicates_In_An_Array
 LE_975_Odd_Even_Jump
+LE_443_String_Compression
+LE_415_Add_Strings

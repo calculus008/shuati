@@ -124,9 +124,12 @@ public class LE_305_Number_Of_Islands_II {
      * A full Union Find solution : Solution 3 at
      * https://leetcode.com/articles/number-of-islands-ii/
      *
-     * Time complexity : O(m * n + L) where L is the number of operations, m is the number of rows and n is the number of columns.
-     * it takes O(mn) to initialize UnionFind, and O(L) to process positions.
-     * Note that Union operation takes essentially constant time1 when UnionFind is implemented with both path compression and union by rank.
+     * Time complexity : O(m * n + L) where L is the number of operations,
+     * m is the number of rows and n is the number of columns.
+     *
+     * It takes O(mn) to initialize UnionFind, and O(L) to process positions.
+     * Note that Union operation takes essentially constant time when UnionFind
+     * is implemented with both path compression and union by rank.
      *
      * Space complexity : O(mn) as required by UnionFind data structure.
      */
@@ -199,7 +202,8 @@ public class LE_305_Number_Of_Islands_II {
                 int x = operator.x, y = operator.y;
 
                 /**
-                 * !!!if given coordinate is not valid or cell value
+                 * !!!
+                 * if given coordinate is not valid or cell value
                  * is already true, bypass the union step
                  * 如果要把已经是岛的地方再次变成岛，则无需有任何操作
                  * **/
@@ -218,7 +222,9 @@ public class LE_305_Number_Of_Islands_II {
                         int nextY = y + dir[k][1];
 
                         /**
-                         * "grid[nextX][nextY]"  !!! Only do union() if the valid
+                         * "grid[nextX][nextY]"
+                         * !!!
+                         * Only do union() if the valid
                          * neighbour is TRUE
                          **/
                         if (isValid(nextX, nextY, grid) && grid[nextX][nextY]) {
