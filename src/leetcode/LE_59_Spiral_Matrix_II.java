@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class LE_59_Spiral_Matrix_II {
     /**
-        Given an integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+        Given an integer n, generate a square matrix filled with elements from 1 to n^2 in spiral order.
 
         For example,
         Given n = 3,

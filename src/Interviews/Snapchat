@@ -1,4 +1,3 @@
-
 LI_550_Top_K_Frequent_Words_II
 
 LE_415_Add_Strings
@@ -83,3 +82,52 @@ LE_253_Meeting_Rooms_II
 LE_560_Subarray_Sum_Equals_K
 LE_392_Is_Subsequence
 LE_527_Word_Abbreviation
+
+
+面经
+1.LE_772_Basic_Calculator_III
+
+2.Design game messaging service.
+  Start small with small QPS, ask for services and API for each service
+  It seems this is combination of OOD and System Design. The API design
+  is more on the OO side. Need to clarify the flow of each use case, key
+  things that should be explored :
+  a.Use websocket to push message to destination
+  b.For message sending, should deal with cases that destination are
+    online and offline
+  c.Message table schema
+    message id, from id, to id, message, timestamp
+
+    Relationship table schema (only consider two-way relationship)
+    from id, to id
+
+  d.How to scale?
+    mySql can no longer handle it, consider using hbase or cassandra.
+    Load balancing, cache, partition etc.
+
+3.LE_658_Find_K_Closest_Elements
+
+4.Design Snapchat viewer count feature
+Every story pushed in snapchat will get many users' view. Each view will
+have a signal sent to server side with storyid, viewer's user id, publisher's user id
+and timestamp. First view from a user will have the counter increase by one,
+subsequent view from the same user will be ignored.
+
+Requirements:
+Design service to return the count and list of users for all viewers.
+
+Key insights:
+1.Since only the first view from a user is counted, need to have a way to de-dup for
+  all the subsequent views of the same user.
+2.Save user in a list. Since the number of the users could be huge (millions), need
+  to figure out how to save them.
+
+  Proposed to store in hbase, since the list could be huge, we need to partition it
+  to multiple hosts.
+
+  It seems that he suggests we shard by user id, hash
+  it to map to a host.
+
+  Should we shard by story id or user id?
+  How to design hbase schema? It seems that he suggests combine hash of user id and story
+  id into one primary key and do prefix scanning in index ?

@@ -356,7 +356,7 @@ public class LE_716_Max_Stack {
     }
 
     /**
-     * My solution for Linkedin's follow up which requires O(1) for popMax()
+     * My solution for Interviews.Linkedin's follow up which requires O(1) for popMax()
      *
      * O(1) for popMax(), peekMax() and top().
      * O(n) for push() and pop().

@@ -79,7 +79,7 @@ public class LE_78_Subsets {
          每一层的节点都是上一层的节点拓展而来。
      */
     public List<List<Integer>> subsets2_JiuZhang(int[] nums) {
-        // List vs ArrayList （google）
+        // List vs ArrayList （Interviews.Google）
         List<List<Integer>> results = new LinkedList<>();
 
         if (nums == null) {

@@ -30,6 +30,70 @@ public class LE_658_Find_K_Closest_Elements {
      */
 
     /**
+     * Best solution
+     *
+     * 时间复杂度 O(logn + k)O(logn+k)
+     *
+     * 直接在数组中二分查找 target, 如果不存在则返回大于 target 的最小的或者小于 target 的最大的元素均可.
+     *
+     * 然后使用两根指针从该位置开始向两端遍历, 每次把差值比较小的元素放入答案中然后将该指针向边界方向移动一下即可.
+     */
+    class Solution_Preferred {
+        public int[] kClosestNumbers(int[] A, int target, int k) {
+            int[] result = new int[k];
+
+            if (A == null || A.length == 0) {
+                return A;
+            }
+            if (k > A.length) {
+                return A;
+            }
+
+            int index = firstIndex(A, target);
+
+            int start = index - 1;
+            int end = index;
+            for (int i = 0; i < k; i++) {
+                if (start < 0) {
+                    result[i] = A[end++];
+                } else if (end >= A.length) {
+                    result[i] = A[start--];
+                } else {
+                    if (target - A[start] <= A[end] - target) {
+                        result[i] = A[start--];
+                    } else {
+                        result[i] = A[end++];
+                    }
+                }
+            }
+            return result;
+        }
+
+        private int firstIndex(int[] A, int target) {
+            int start = 0, end = A.length - 1;
+            while (start + 1 < end) {
+                int mid = start + (end - start) / 2;
+                if (A[mid] < target) {
+                    start = mid;
+                } else if (A[mid] > target) {
+                    end = mid;
+                } else {
+                    end = mid;
+                }
+            }
+
+            if (A[start] >= target) {
+                return start;
+            }
+            if (A[end] >= target) {
+                return end;
+            }
+            return A.length;
+        }
+    }
+
+
+    /**
      * 三种解法都要会
      *
      * O(logn)   Solution1
@@ -225,7 +289,7 @@ public class LE_658_Find_K_Closest_Elements {
      * Time complexity : O(log(n)+k)
      * Space complexity : O(k)
      */
-    public class Solution5 {
+    class Solution5 {
         public List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
             int n = arr.size();
 
@@ -291,3 +355,4 @@ public class LE_658_Find_K_Closest_Elements {
         }
     }
 }
+

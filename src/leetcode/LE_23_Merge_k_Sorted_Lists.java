@@ -19,7 +19,7 @@ public class  LE_23_Merge_k_Sorted_Lists {
          ]
          Output: 1->1->2->3->4->4->5->6
 
-     * Linkedin question and follow up
+     * Interviews.Linkedin question and follow up
      *
      * 合并K个有序数组 - LI_486_Merge_K_Sorted_Arrays
      * 之后又问了一下时间复杂度, Should be N * Log(K)

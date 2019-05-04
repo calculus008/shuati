@@ -28,7 +28,7 @@ public class LI_538_Memcache {
      * of value types like string and integer. In our case, let's make it simple, we can assume that we have enough
      * memory and all of the values are integers.
      *
-     * Search "LRU" & "LFU" on google to get more information about how memcache evict data.
+     * Search "LRU" & "LFU" on Interviews.Google to get more information about how memcache evict data.
      *
      * Try the following problem to learn LRU cache:
      * http://www.lintcode.com/problem/lru-cache
