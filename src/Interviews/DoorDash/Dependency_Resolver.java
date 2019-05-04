@@ -65,7 +65,9 @@ public class Dependency_Resolver {
         Queue<String> q = new LinkedList<>();
         q.offer(A);
 
-        Set<String> all = new HashSet<>();
+        Set<String> all = new LinkedHashSet<>();
+
+        Map<String, List<String>> parent = new HashMap<>();
 
         while (!q.isEmpty()) {
             int size = q.size();
@@ -73,7 +75,8 @@ public class Dependency_Resolver {
             Set<String> set = new HashSet<>();
             for (int i = 0; i < size; i++) {
                 String cur = q.poll();
-                set.add(cur);
+//                set.add(cur);
+                all.add(cur);
 
                 List<String> next = adjlist.get(cur);
                 if (next == null) {
@@ -81,17 +84,36 @@ public class Dependency_Resolver {
                 }
 
                 for (String s : next) {
+//                    if (adjlist.containsKey(s)) {
+//
+//                        backTrace(cur, s, parent, new StringBuilder());
+//                        throw new RuntimeException("Circular Dependency, s="+s);
+//                    }
+
+                    parent.putIfAbsent(s, new LinkedList<>());
+                    parent.get(s).add(cur);
+
+//                    res.add(0, s);
+
                     q.offer(s);
                 }
             }
 
-            for (String elem : set) {
-                res.add(0, elem);
+//            for (String elem : set) {
+//                res.add(0, elem);
+//
+////                if (!all.add(elem)) {
+//                if (parent.containsKey(elem)) {
+//                    backTrace()
+//                    throw new RuntimeException("Circular Dependency");
+//                }
+//            }
+        }
 
-                if (!all.add(elem)) {
-                    throw new RuntimeException("Circular Dependency");
-                }
-            }
+
+        Iterator<String> it = all.iterator();
+        while (it.hasNext()) {
+            res.add(0, it.next());
         }
     }
 
@@ -100,8 +122,30 @@ public class Dependency_Resolver {
      * Follow up
      * Print circular dependency
      *
-     * LE_261_Graph_Valid_Tree
+     * LE_261_Graph_Valid_Tree is for checking cycle in undirected graph,
+     * here we have a directed graph.
+     *
+     * https://stackoverflow.com/questions/8922060/how-to-trace-the-path-in-a-breadth-first-search
      */
+
+    private static void backTrace(String start, String end, Map<String, List<String>> parent, StringBuilder sb) {
+        if (start.equals(end)) {
+            sb.append(start);
+            System.out.println(sb.reverse().toString().trim());
+            return;
+        }
+
+        int n = sb.length();
+
+        if (!parent.containsKey(start)) return;
+
+        List<String> l = parent.get(start);
+        for (String s : l) {
+            sb.append(s).append(" ");
+            backTrace(s, end, parent, sb);
+            sb.setLength(n);
+        }
+    }
 
     public static void main(String[] args) {
         Map<String, List<String>> map = new HashMap<>();
@@ -126,7 +170,7 @@ public class Dependency_Resolver {
 
         List<String> f = new ArrayList<>();
         f.add("g");
-        f.add("a");
+//        f.add("a");
         map.put("f", f);
 
         List<String> res = resolveDependence("a", map);
