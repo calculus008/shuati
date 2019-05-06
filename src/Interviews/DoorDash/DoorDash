@@ -3,11 +3,22 @@ Delivery_Order
 Binary Tee pre/in/post/level
 N-nary Tree pre/post/level
 
-LE 429. N-ary Tree Level Order Traversal
+LE_94_Binary_Tree_Inorder_Traversal
+LE_144_Binary_Tree_Preorder_Traversal
+LE_145_Binary_Tree_Postorder_Traversal
+LE_102_Binary_Tree_Level_Order_Traversal
+LE_107_Binary_Tree_Level_Order_Traversal_II
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
+LE_314_Binary_Tree_Vertical_Order_Traversal
+
+LE_429_Nary_Tree_Level_Order_Traversal
+LE_589_Nary_Tree_Preorder_Traversal
+LE_590_Nary_Tree_Postorder_Traversal
 
 LE_62_Unique_Path
 LE_63_Unique_Path_II
 Unique_Path_K_Steps
+LE_562_Longest_Line_Of_Consecutive_One_In_Matrix
 
 LE_54_Sprial_Matrix
 LE_59_Spiral_Matrix_II
@@ -15,9 +26,11 @@ LE_695_Max_Area_Of_Island
 LE_22_Generate_Parentheses
 LE_121_Best_Time_To_Buy_And_Sell_Stock
 LE_227_Basic_Calculator_II
+LE_772_Basic_Calculator_III
 LE_33_Search_In_Rotated_Sorted_Array
 LE_284_Peeking_Iterator
 LE_687_Longest_Univalue_Path
+LE_210_Course_Schedule_II
 
 LE_269_Alien_Dictionary
 (hr简略的说了下feedback是edge case没有说完，
