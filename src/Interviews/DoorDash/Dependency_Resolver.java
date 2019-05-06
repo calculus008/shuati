@@ -49,6 +49,13 @@ public class Dependency_Resolver {
      * 拓展： 如何只 print circular dependency.
      *
      * https://stackoverflow.com/questions/14458655/topological-sort-to-find-dependencies-of-a-specific-node
+     *
+     * 这题实际上是考察BFS, DFS.
+     *
+     * BFS print dependency level by level
+     *
+     * Then maintain parent map, once cycle is detected, DFS to backtrack circular path.
+     *
      */
 
     public static List<String> resolveDependence(String A, Map<String, List<String>> adjlist) {
@@ -76,6 +83,7 @@ public class Dependency_Resolver {
             for (int i = 0; i < size; i++) {
                 String cur = q.poll();
 //                set.add(cur);
+
                 all.add(cur);
 
                 List<String> next = adjlist.get(cur);
@@ -84,30 +92,20 @@ public class Dependency_Resolver {
                 }
 
                 for (String s : next) {
-//                    if (adjlist.containsKey(s)) {
-//
-//                        backTrace(cur, s, parent, new StringBuilder());
-//                        throw new RuntimeException("Circular Dependency, s="+s);
-//                    }
+                    if (all.contains(s)) {
+
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(cur).append(" ");
+                        backTrace(cur, s, parent, sb);
+                        throw new RuntimeException("Circular Dependency, s="+s);
+                    }
 
                     parent.putIfAbsent(s, new LinkedList<>());
                     parent.get(s).add(cur);
 
-//                    res.add(0, s);
-
                     q.offer(s);
                 }
             }
-
-//            for (String elem : set) {
-//                res.add(0, elem);
-//
-////                if (!all.add(elem)) {
-//                if (parent.containsKey(elem)) {
-//                    backTrace()
-//                    throw new RuntimeException("Circular Dependency");
-//                }
-//            }
         }
 
 
@@ -129,15 +127,16 @@ public class Dependency_Resolver {
      */
 
     private static void backTrace(String start, String end, Map<String, List<String>> parent, StringBuilder sb) {
+        System.out.println("start : " + start);
         if (start.equals(end)) {
-            sb.append(start);
+//            sb.append(start);
             System.out.println(sb.reverse().toString().trim());
             return;
         }
 
-        int n = sb.length();
-
         if (!parent.containsKey(start)) return;
+
+        int n = sb.length();
 
         List<String> l = parent.get(start);
         for (String s : l) {
@@ -170,7 +169,7 @@ public class Dependency_Resolver {
 
         List<String> f = new ArrayList<>();
         f.add("g");
-//        f.add("a");
+        f.add("a");
         map.put("f", f);
 
         List<String> res = resolveDependence("a", map);

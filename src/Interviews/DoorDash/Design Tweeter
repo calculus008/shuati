@@ -1,0 +1,91 @@
+1.Service
+User Servcie
+Tweet Service
+RelationShip/Friendship Service
+Media Service
+
+2.Schema
+User Table
+----------
+id        int
+username  varchar
+email     varchar
+pwd       varchar
+
+
+Friendship Table
+-----------
+from_usr_id    FK
+to_usr_id      FK
+
+
+Tweet Table
+-----------
+id           int
+usr_id       FK
+content      text
+created_ts   timestamp
+
+
+Push Model has News_Feed table :
+News_Feed Table
+-----------
+id          int
+owner_id    FK
+tweet_id    FK
+created_ts  timestamp
+
+#Just get the latest 100 tweets from News_Feed table :
+select * from Tweet where id in (
+ select tweet_id from News_Feed where owner_id = myid order by create_ts desc limit 100
+)
+
+select * from Tweet where id in (
+    select tweet_id from News_Feed
+)
+
+On Friendship
+Select to_usr_id from Friendship where from_usr_id = myid;
+
+On Tweet
+Select id, content from Tweet where usr_id in (
+     Select to_usr_id from Friendship where from_usr_id = myid
+   ) order by created_ts desc;
+
+
+select * from Tweet where usr_id in
+(
+     Select to_usr_id from Friendship where from_usr_id = myid
+ )
+ group by usr_id;
+
+
+For Pull model, Return top 10 tweet for each user I follow, then K-way merge to get N feeds.
+ select *
+ from
+ (select *
+   rank() over (partition by usr_id order by created_ts desc) rank
+  from
+   (
+       select * from Tweet where usr_id in
+       (
+            Select to_usr_id from Friendship where from_usr_id = myid
+        )
+   )
+  )
+ where rank <= 10
+
+
+#For push model, query on News_Feed table (Oracle flavour), get latest 10 for each owner_id, then merge later.
+select *
+ from
+ (select *
+     rank() over (partition by owner_id order by created_ts desc) rank
+  from News_Feed
+ )
+ where rank <= 10
+
+ https://stackoverflow.com/questions/134958/get-top-results-for-each-group-in-oracle
+
+
+ https://stackoverflow.com/questions/2129693/using-limit-within-group-by-to-get-n-results-per-group

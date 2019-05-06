@@ -38,6 +38,9 @@ public class Sqrt {
         return start;
     }
 
+    /**
+     * Round up
+     */
     public static int sqrt_1(int x) {
         if (x <= 1) return x;
 
@@ -109,7 +112,7 @@ public class Sqrt {
         return (float)ans;
     }
 
-    public static float myPrecisionSqrt(int num, int precision) {
+    public static float myPrecisionSqrt1(int num, int precision) {
         int res = sqrt_JiuZhang(num);
 
         double ans = res;
@@ -131,12 +134,40 @@ public class Sqrt {
         return (float)ans;
     }
 
-    public static void main(String[] args) {
-//        float res = myPrecisionSqrt(30, 4);
-//        System.out.println(res);
+    /**
+     * Round up with Precision
+     */
+    public static float myPrecisionSqrt2(int num, int precision) {
+        int res = sqrt_1(num);
 
-        int res1 = sqrt_1(50);
-        System.out.println(res1);
+        double ans = res;
+        double increment = 0.1;
+
+        for (int i = 0; i < precision; i++) {
+            while (ans * ans >= num) {
+                ans -= increment;
+            }
+
+            // loop terminates when ans * ans > number
+            ans = ans + increment;
+            increment = increment / 10;
+
+            System.out.println("ans=" + (float)ans + ", incremenet=" + increment);
+
+        }
+
+        return (float)ans;
+    }
+
+    public static void main(String[] args) {
+        float res2 = myPrecisionSqrt1(30, 4);
+        System.out.println(res2);
+
+        float res3 = myPrecisionSqrt2(30, 4);
+        System.out.println(res3);
+
+//        int res1 = sqrt_1(50);
+//        System.out.println(res1);
     }
 
 }

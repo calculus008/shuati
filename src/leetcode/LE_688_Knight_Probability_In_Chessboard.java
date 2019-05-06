@@ -102,9 +102,9 @@ public class LE_688_Knight_Probability_In_Chessboard {
         int[][] dirs = new int[][] {{2, 1}, {2, -1}, {-2, 1}, {-2, -1},
                 {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
 
-        for (int k = 1; k <= K; k++) {
-            double[][] temp = new double[N][N];
+        double[][] temp = new double[N][N];
 
+        for (int k = 1; k <= K; k++) {
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N; j++) {
                     for (int d = 0; d < dirs.length; d++) {
@@ -118,7 +118,17 @@ public class LE_688_Knight_Probability_In_Chessboard {
                 }
             }
 
-            dp = temp;
+            /**
+             * We have to set dp and temp explicitly here
+             * in order to save space, it increases time complexity,
+             * it is actually O(K * 2 * N ^ 2)
+             */
+            for (int x = 0; x < N; x++) {
+                for (int y = 0; y < N; y++) {
+                    dp[x][y] = temp[x][y];
+                    temp[x][y] = 0;
+                }
+            }
         }
 
         double sum = 0.0;
@@ -130,4 +140,48 @@ public class LE_688_Knight_Probability_In_Chessboard {
 
         return  sum / Math.pow(8, K);
     }
+
+
+    /**
+     * This one modified directly from Huahua's C++ version.
+     * Since Java is by reference, therefore, we don't save
+     * space with this solution, since very time we "dp = temp",
+     * dp still references to the number in temp.
+     */
+//    public double knightProbability3(int N, int K, int r, int c) {
+//        double[][] dp = new double[N][N];
+//
+//        dp[r][c] = 1.0;//!!!
+//
+//        int[][] dirs = new int[][] {{2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+//                {1, 2}, {-1, 2}, {1, -2}, {-1, -2}};
+//
+//        for (int k = 1; k <= K; k++) {
+//            double[][] temp = new double[N][N];
+//
+//            for (int i = 0; i < N; i++) {
+//                for (int j = 0; j < N; j++) {
+//                    for (int d = 0; d < dirs.length; d++) {
+//                        int dx = i + dirs[d][0];
+//                        int dy = j + dirs[d][1];
+//
+//                        if (dx >= 0 && dx < N && dy >= 0 && dy < N) {
+//                            temp[i][j] += dp[dx][dy];
+//                        }
+//                    }
+//                }
+//            }
+//
+//            dp = temp;
+//        }
+//
+//        double sum = 0.0;
+//        for (int i = 0; i < N; i++) {
+//            for (int j = 0; j < N; j++) {
+//                sum += dp[i][j];
+//            }
+//        }
+//
+//        return  sum / Math.pow(8, K);
+//    }
 }
