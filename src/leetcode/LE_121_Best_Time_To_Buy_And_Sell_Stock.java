@@ -72,6 +72,47 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
         }
     }
 
+    /**
+     * DoorDash phone interview version
+     *
+     * 1.Input and ouput is double type
+     * 2.Throw exception for invalid input
+     * 3.Must buy and sell at least once - need to deal with the corner
+     *   case that the price is strictly decreasing, try to lose the min
+     *   amount of money
+     */
+    public static double maxProfit(double[] prices) {
+        if (null == prices) {
+            throw new RuntimeException("input is null");
+        }
+
+        if (prices.length < 2) {
+            throw new RuntimeException("not enough data point to make profit");
+        }
+
+        double res = 0.0;
+        double min = prices[0];
+
+        double diff = Integer.MIN_VALUE;
+
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] < 0) {
+                throw new RuntimeException("invalid price number");
+            }
+
+            min = Math.min(min, prices[i]);
+            diff = Math.max(diff, prices[i] - prices[i - 1]);
+            res = Math.max(res, prices[i] - min);
+        }
+
+        if (res == 0 && diff != 0) {
+            return diff;
+        } else {
+            return res;
+        }
+    }
+
+
     public static void main(String[] args) {
         int[] test = {10, 4, 3, 2, 2, 1};
         System.out.println(maximumProfit(test));

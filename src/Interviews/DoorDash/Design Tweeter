@@ -89,3 +89,12 @@ select *
 
 
  https://stackoverflow.com/questions/2129693/using-limit-within-group-by-to-get-n-results-per-group
+
+
+#query both my tweets and news feed in one SQL
+select * from Tweet where
+   usr_id in (
+   select to_usr_id from Relationship where from_usr_id = myid
+   )
+   OR usr_id = myid
+   order by created_ts desc limit 200;

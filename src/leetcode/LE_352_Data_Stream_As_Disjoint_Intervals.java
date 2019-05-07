@@ -31,6 +31,9 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
          class Interval {int start, int end}
          让我写两个function: add(int start, int end) : 建立一个新的interval类，然后存到自己定义的数据结构上，下面那个function会用到
          get_total(int start, int end):  给出start,和 end之间的所有interval覆盖的长度 （重复覆盖的部分只能算一次）"
+
+         Variation:
+         给一顿zip code的区间，要新插入一个zip code，临近的话合并，不临近的话就单独生成一个自己的区间
      **/
 
     /**

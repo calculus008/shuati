@@ -3,7 +3,7 @@ package leetcode;
 /**
  * Created by yuank on 2/26/18.
  */
-public class LE_31_NextPermutation {
+public class LE_31_Next_Permutation {
     /**
     Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
 

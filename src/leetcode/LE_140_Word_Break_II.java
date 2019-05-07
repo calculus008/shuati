@@ -100,5 +100,13 @@ public class LE_140_Word_Break_II {
         cache.put(s, cur);
         return cur;
     }
+
+    /**
+     * Variation :
+     * Given :
+     * list[superhighway, super, high, way, superhigh, way], superhighway
+     *
+     * return : [[superhighway,], [super, high, way], [superhigh, way]]
+     */
 }
 

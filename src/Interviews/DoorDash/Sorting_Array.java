@@ -28,6 +28,9 @@ public class Sorting_Array {
      * Q: okay implemet it
      * 我觉得interviewer一定知道，很多人都能马上码出quick sort / merge sort
      * 整个问答的目的只是希望能够看你能否相互分析，并且写出你刚刚的分析
+     *
+     *
+     * https://www.geeksforgeeks.org/analysis-of-different-sorting-techniques/
      */
 
     public static int[] sortArray(int[] nums) {
