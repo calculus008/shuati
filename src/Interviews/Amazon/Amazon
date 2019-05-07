@@ -1,0 +1,80 @@
+LE_273_Integer_To_English_Words
+
+#Word Break and its variation (*****)
+LE_139_Word_Break
+LE_140_Word_Break_II  (扩展成system design)
+LE_472_Concatenated_Words
+需要讲清楚为啥用字典树，而不用hashmap
+
+LE_348_Design_Tic_Tac_Toe
+LE_352_Data_Stream_As_Disjoint_Intervals
+LE_75_Set_Colors
+LI_625_Partition_Array_II
+
+return k products被买的最多次 (top N)
+
+给定一堆硬币, 硬币的两面分别印着不同的字母, 问你用这些硬币能不能拼出给定的单词, 每个硬币只能用一次, 比如
+硬币: ["A,B", "B,C"], 单词: AB => true
+硬币: ["A,A", "B,C"], 单词: AA => false
+用了两个hashmap, 一个记录硬币对应的字母, 一个记录字母对应的硬币, 然后用了个循环搞定
+
+
+LE_73_Set_Matrix_Zero
+LE_146_LRU_Cache
+LE_79_Word_Search
+LE_212_Word_Search_II
+描述就是设计一个service来提供类似word break II的API, 讲讲怎么scale，比如cache，比如input太长 run的时间太久怎么处理
+
+
+LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
+LE_314_Binary_Tree_Vertical_Order_Traversal
+要求如果两个节点的横向的index一样, 要depth最深的那个, 然后print出这些节点
+followup是: 如果depth最浅的节点? 如果两个节点depth一样我全都要
+
+给一个list of sorted data steams，写一个getSmallest的function每次pop出最小的那个
+LE_155_Min_Stack
+
+LE_244_Shortest_Word_Distance_II
+LE_245_Shortest_Word_Distance_III
+有一本书，给两个words，问两个words之间的距离，然后如果是还有page呢，给出page的距离
+
+输入一个N*N矩阵，矩阵中某些格子种有树，要求y = 0, 从x轴任意坐标为入口进入矩阵，从y = y 的x轴任意坐标为出口离开矩阵，求出一条最长路径
+input是二维数组，如果值为1，代表有种树！
+
+
+删除单链表倒数第N个结果。
+
+LE_20_Valid_Parentheses
+LE_22_Generate_Parentheses
+LE_127_Word_Ladder
+
+LE_12_Integer_To_Roman
+数字转换成罗马。 大叔po出了一堆转换的规则，最后问了一个可以转换的最大的数是多少， 相信做过刷题网的同学都会脱口而出3999，但是我觉得最好不要，
+如果你可以按照rules，一步步的将这个分析出来。然后就是写代码。 我用的是几个string数组，存的。follow-up， 如果你将来你需要更多的需求，
+更多的选择，这样写的hardcode是不是不太好？问我有什么可以改进的地方。 我想了想觉得应该是interface或者abstract class。感觉欧巴也很认可
+
+hashmap解，follow up是怎么validate这个罗马数字是有效的罗马数字。
+
+LE_416_Partition_Equal_Subset_Sum
+LE_548_Split_Array_With_Equal_Sum
+LE_281_Zigzag_Iterator
+LE_305_Number_Of_Islands_II
+LE_31_Next_Permutation
+
+================================
+
+LE_133_Clone_Graph
+LE_617_Merge_Two_Binary_Trees
+LE_743_Network_Delay_Time
+LE_281_Zigzag_Iterator
+LE_88_Merge_Sorted_Array
+LE_73_Set_Matrix_Zero
+LE_532_K_Diff_Pairs_In_An_Array
+LE_295_Find_Median_From_Data_Stream
+LE_273_Integer_To_English_Words
+LI_397_Longest_Continuous_Increasing_Subsequence
+LI_472_Binary_Tree_Path_Sum_III
+LE_49_Group_Anagrams
+LE_975_Odd_Even_Jump
+
+Leetcode 1029
