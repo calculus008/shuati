@@ -81,6 +81,7 @@ public class LE_981_Time_Based_Key_Value_Store {
             /**
              * !!!
              * "Map.Entry<Integer, String>"
+             * "floorEntry"
              */
             Map.Entry<Integer, String> entry = map.get(key).floorEntry(timestamp);
             if (entry != null) {

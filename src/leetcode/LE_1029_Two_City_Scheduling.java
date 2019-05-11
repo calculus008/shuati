@@ -34,15 +34,36 @@ public class LE_1029_Two_City_Scheduling {
      * Easy
      */
 
+    /**
+     * DP
+     *
+     * dp[i][j]: the minimum cost of the the first i person to fly to city A
+     *           and city B such that there are j person in city A.
+     *
+     * Recursive step:
+     * Case 1: the ith person goes to city A.
+     *         dp(i, j) = dp(i-1, j-1) + cost(i, 0)
+     * Case 2: the ith person goes to city B.
+     *         dp(i, j) = dp(i-1, j) + cost(i, 1)
+     * Transition :
+     * dp[i][j] = min( (i + j)th person go to City A, (i + j)th person go to City B)
+     *
+     */
     class Solution {
         public int twoCitySchedCost(int[][] costs) {
             int N = costs.length / 2;
             int[][] dp = new int[N + 1][N + 1];
 
+            /**
+             * all people go to City A
+             */
             for (int i = 1; i <= N; i++) {
                 dp[i][0] = dp[i - 1][0] + costs[i - 1][0];
             }
 
+            /**
+             * all people go to City B
+             */
             for (int j = 1; j <= N; j++) {
                 dp[0][j] = dp[0][j - 1] + costs[j - 1][1];
             }

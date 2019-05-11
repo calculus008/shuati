@@ -53,8 +53,8 @@ public class LE_245_Shortest_Word_Distance_III {
                 /**
                  * For case that word1 and word2 are the same :
                  * 1.Can only calculate distance if we see the word at least two times
-                 * 2.Always do calculation for 2 adjacent indexes. Therefore, a need to
-                 *   take the value b here.
+                 * 2.Always do calculation for 2 adjacent indexes. Therefore, "a" need to
+                 *   take the value of "b" here.
                  */
                 if (isEqual) {//###
                     a = b;

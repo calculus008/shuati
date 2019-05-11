@@ -7,8 +7,9 @@ import java.util.Map;
  * Created by yuank on 3/17/18.
  */
 public class LE_138_Copy_List_With_Random_Pointer {
-    /*
-        A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+    /**
+        A linked list is given such that each node contains an additional random pointer
+        which could point to any node in the list or null.
 
         Return a deep copy of the list.
      */
@@ -39,6 +40,9 @@ public class LE_138_Copy_List_With_Random_Pointer {
         if(null == head)
             return null;
 
+        /**
+         * 1.copy node
+         */
         RandomListNode cur = head;
         while(null != cur) {
             RandomListNode newNode = new RandomListNode(cur.label);
@@ -47,6 +51,9 @@ public class LE_138_Copy_List_With_Random_Pointer {
             cur = newNode.next;
         }
 
+        /**
+         * 2.point random pointer to copied node
+         */
         cur = head;
         RandomListNode copiedNode;
         while(null != cur) {
@@ -55,13 +62,18 @@ public class LE_138_Copy_List_With_Random_Pointer {
             cur = copiedNode.next;
         }
 
+        /**
+         * 3.split
+         */
         cur = head;
         RandomListNode newHead = cur.next;
         RandomListNode newNode;
         while(null != cur) {
             newNode = cur.next;
             cur.next = newNode.next;
+
             newNode.next = null == cur.next?null:cur.next.next;
+
             cur = cur.next;
             newNode = newNode.next;
         }

@@ -29,8 +29,11 @@ public class LE_312_Burst_Balloons {
 
     /**
          DP
-         dp[i][j] : max coin for ballons between i and j.
-         Reverse thinking - Assume we get to the last ballon at x between i and j, then => nums[i - 1] * nums[x] * nums[j + 1]
+         dp[i][j] : max coin for balloons between i and j.
+
+         Reverse thinking - Assume we get to the last balloon at x between i and j,
+         then => nums[i - 1] * nums[x] * nums[j + 1]
+
          dp[i][j] = max(dp[i][j], dp[i][x - 1]  + nums[i - 1] * nums[x] * nums[j + 1] + dp[x + 1][j])
 
          Time  : O(n ^ 3)
@@ -113,7 +116,7 @@ public class LE_312_Burst_Balloons {
         coins[n + 1] = 1;
 
         for (int l = 1; l <= n; l++) { //length
-            for (int i = 1; i <= n - l + 1; i++) {//starting point
+            for (int i = 1; i + l - 1 <= n; i++) {//starting point
                 int j = i + l - 1; //end point
                 for(int k = i; k <= j; k++) {
                     System.out.println("l="+ l+ ", i="+i+ ", j="+j+ ", k="+k);

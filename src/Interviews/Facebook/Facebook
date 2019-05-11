@@ -1,0 +1,13 @@
+LE_67_Add_Binary
+LE_528_Random_Pick_With_Weight
+Random 题目 - 大致是给你一些城市和城市的人口，请写出一个函数，该函数可以根据人口比重随机地输出城市名。
+这个题明显是一个probability的题目，楼主还是基础不扎实，有思路就是死活写不出code来。 最后follow up优化就没有时间了，估计就跪在这儿了。
+
+LE_211_Add_And_Search_Word
+LE_65_Valid_Number
+LE_380_Insert_Delete_GetRandom_O1
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+
+LE_636_Exclusive_Time_Of_Functions
+给了陆仨露的变体和多线程环境下不同的执行情况的题，总共两道一下给的，复习的时候就当成露三路就可以了。
+

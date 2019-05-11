@@ -94,7 +94,7 @@ public class LE_409_Longest_Palindrome {
 
         for (int freq : map) {
             /**
-             * equal to "res += freq % 2 * 2", set last bit to 0
+             * equal to "res += freq / 2 * 2", set last bit to 0
              */
             res += freq & (~1);
             odd |= freq & 1;

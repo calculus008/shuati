@@ -19,6 +19,62 @@ public class LI_005_Kth_Largest_Number {
          Quick Select
      */
 
+    class Solution_Practice {
+        public int findKthLargest(int[] nums, int k) {
+            /**
+             * !!!
+             * k - 1, we work on index, therefore kth largest number has index k - 1
+             */
+            return quickSelect(nums, 0, nums.length - 1, k - 1);
+        }
+
+        private int quickSelect(int[] nums, int start, int end, int k) {
+            if (start >= end) return nums[start];
+
+            /**
+             * start, end
+             * l, r
+             */
+            int l = start;
+            int r = end;
+            //!!!
+            int pivot = nums[start + (end - start) / 2];
+
+            while (l <= r) {
+                while (l <= r && nums[l] > pivot) {
+                    l++;
+                }
+
+                while (l <= r && nums[r] < pivot) {
+                    r--;
+                }
+
+                if (l <= r) {
+                    swap(nums, l, r);
+                    l++;
+                    r--;
+                }
+            }
+
+            if (k <= r) {
+                return quickSelect(nums, start, r, k);
+            }
+
+            if (k >= l) {
+                return quickSelect(nums, l, end, k );
+            }
+
+            return nums[k];
+        }
+
+        private void swap(int[] nums, int left, int right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+        }
+    }
+
+
     class Solution1 {
         public int kthLargestElement(int k, int[] nums) {
             return quickSelect(nums, 0, nums.length - 1, k);

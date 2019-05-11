@@ -35,101 +35,223 @@ public class LE_200_Number_Of_Islands {
         Solution 1: DFS, Time and Space : O(m * n)
         Have potential of stack overflow, not recommended
      **/
-    public int numIslands(char[][] grid) {
-        if (grid == null || grid.length == 0) return 0;
+    class Solution1 {
+        public int numIslands(char[][] grid) {
+            if (grid == null || grid.length == 0) return 0;
 
-        int res = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (grid[i][j] == '1') {
-                    helper(grid, i, j);
-                    res++;
+            int res = 0;
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if (grid[i][j] == '1') {
+                        helper(grid, i, j);
+                        res++;
+                    }
                 }
             }
+
+            return res;
         }
 
-        return res;
+        private void helper(char[][] grid, int x, int y) {
+            if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || grid[x][y] != '1') {
+                return;
+            }
+
+            /**
+             * !!!
+             * 千万别忘了这一步!!!
+             */
+            grid[x][y] = '0';
+
+            helper(grid, x + 1, y);
+            helper(grid, x - 1, y);
+            helper(grid, x, y + 1);
+            helper(grid, x, y - 1);
+        }
     }
 
-    private void helper(char[][] grid, int x, int y) {
-        if (x < 0 || y < 0 || x >= grid.length || y >= grid[0].length || grid[x][y] != '1') {
-            return;
+    /**
+     * Same DFS, but not modify input grid array, using visited to mark visited island
+     */
+    class Solution1_1 {
+        public int numIslands(char[][] grid) {
+            if (grid == null || grid.length == 0) return 0;
+
+            int m = grid.length;
+            int n = grid[0].length;
+
+            int res = 0;
+
+            boolean visited[][] = new boolean[m][n];
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    /**
+                     * !!!
+                     * #1. "&& !visited[i][j]
+                     */
+                    if (grid[i][j] == '1' && !visited[i][j]) {
+                        helper(grid, m, n, i, j, visited);
+                        res++;
+                    }
+                }
+            }
+
+            return res;
         }
 
-        /**
-         * !!!
-         * 千万别忘了这一步!!!
-         */
-        grid[x][y] = '0';
+        private void helper(char[][] grid, int m, int n, int x, int y, boolean[][] visited) {
+            /**
+             * #2
+             */
+            if (x < 0 || x >= m || y < 0 || y >= n || visited[x][y] || grid[x][y] != '1') return;
 
-        helper(grid, x + 1, y);
-        helper(grid, x - 1, y);
-        helper(grid, x, y + 1);
-        helper(grid, x, y - 1);
+            /**
+             * #3
+             */
+            visited[x][y] = true;
+
+            helper(grid, m, n, x + 1, y, visited);
+            helper(grid, m, n, x - 1, y, visited);
+            helper(grid, m, n, x, y + 1, visited);
+            helper(grid, m, n, x, y - 1, visited);
+        }
     }
 
 
     /**
      * Solution 2 : BFS, preferred. DFS has the danger of stack overflow if recursion depth is too big
      */
-    public int numIslands_JiuZhang(boolean[][] grid) {
-        if (grid == null || grid.length == 0 || grid[0].length == 0) {
-            return 0;
+    class Solution2 {
+        public int numIslands_JiuZhang(boolean[][] grid) {
+            if (grid == null || grid.length == 0 || grid[0].length == 0) {
+                return 0;
+            }
+
+            int n = grid.length;
+            int m = grid[0].length;
+            int islands = 0;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if (grid[i][j]) {
+                        markByBFS(grid, i, j);
+                        islands++;
+                    }
+                }
+            }
+
+            return islands;
         }
 
-        int n = grid.length;
-        int m = grid[0].length;
-        int islands = 0;
+        /**
+         * Start from given coordinate which is true, "sink" the island (set all on the island to false)
+         * in BFS
+         */
+        private void markByBFS(boolean[][] grid, int x, int y) {
+            // magic numbers!
+            int[] directionX = {0, 1, -1, 0};
+            int[] directionY = {1, 0, 0, -1};
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j]) {
-                    markByBFS(grid, i, j);
-                    islands++;
+            Queue<Coordinate> queue = new LinkedList<>();
+
+            queue.offer(new Coordinate(x, y));
+            grid[x][y] = false;
+
+            while (!queue.isEmpty()) {
+                Coordinate coor = queue.poll();
+                for (int i = 0; i < 4; i++) {
+                    Coordinate adj = new Coordinate(
+                            coor.x + directionX[i],
+                            coor.y + directionY[i]
+                    );
+                    if (!inBound(adj, grid)) {
+                        continue;
+                    }
+                    if (grid[adj.x][adj.y]) {
+                        grid[adj.x][adj.y] = false;
+                        queue.offer(adj);
+                    }
                 }
             }
         }
 
-        return islands;
+        private boolean inBound(Coordinate coor, boolean[][] grid) {
+            int n = grid.length;
+            int m = grid[0].length;
+
+            return coor.x >= 0 && coor.x < n && coor.y >= 0 && coor.y < m;
+        }
     }
 
     /**
-     * Start from given coordinate which is true, "sink" the island (set all on the island to false)
-     * in BFS
+     * BFS with visited 2D array
      */
-    private void markByBFS(boolean[][] grid, int x, int y) {
-        // magic numbers!
-        int[] directionX = {0, 1, -1, 0};
-        int[] directionY = {1, 0, 0, -1};
+    class Solution2_1 {
+        public int numIslands(char[][] grid) {
+            if (grid == null || grid.length == 0) return 0;
 
-        Queue<Coordinate> queue = new LinkedList<>();
+            int m = grid.length;
+            int n = grid[0].length;
 
-        queue.offer(new Coordinate(x, y));
-        grid[x][y] = false;
+            int res = 0;
 
-        while (!queue.isEmpty()) {
-            Coordinate coor = queue.poll();
-            for (int i = 0; i < 4; i++) {
-                Coordinate adj = new Coordinate(
-                        coor.x + directionX[i],
-                        coor.y + directionY[i]
-                );
-                if (!inBound(adj, grid)) {
-                    continue;
+            boolean visited[][] = new boolean[m][n];
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    /**
+                     * !!!
+                     * "grid[i][j] == '1' && !visited[i][j]"
+                     */
+                    if (grid[i][j] == '1' && !visited[i][j]) {
+                        helper(grid, m, n, i, j, visited);
+                        res++;
+                    }
                 }
-                if (grid[adj.x][adj.y]) {
-                    grid[adj.x][adj.y] = false;
-                    queue.offer(adj);
+            }
+
+            return res;
+        }
+
+        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+        private void helper(char[][] grid, int m, int n, int x, int y, boolean[][] visited) {
+            Queue<int[]> q = new LinkedList<>();
+            /**
+             * !!!
+             * Mark visited when enqueue the element
+             */
+            q.offer(new int[] {x, y});
+            visited[x][y] = true;
+
+            while (!q.isEmpty()) {
+                int[] cur = q.poll();
+
+                for (int[] dir : dirs) {
+                    /**
+                     * !!!
+                     */
+                    int nx = cur[0] + dir[0];
+                    int ny = cur[1] + dir[1];
+
+                    /**
+                     * !!!
+                     * "grid[nx][ny] != '1' || visited[nx][ny]"
+                     */
+                    if (nx < 0 || nx >= m || ny < 0 || ny >= n || grid[nx][ny] != '1' || visited[nx][ny]) {
+                        continue;
+                    }
+
+                    /**
+                     * !!!
+                     * Mark visited when enqueue the element
+                     */
+                    q.offer(new int[]{nx, ny});
+                    visited[nx][ny] = true;
                 }
             }
         }
-    }
-
-    private boolean inBound(Coordinate coor, boolean[][] grid) {
-        int n = grid.length;
-        int m = grid[0].length;
-
-        return coor.x >= 0 && coor.x < n && coor.y >= 0 && coor.y < m;
     }
 
     /**
@@ -144,7 +266,7 @@ public class LE_200_Number_Of_Islands {
      * 5.Trick of using 1D parents[] array for 2D array grid[][]:
      *   convert 2D to 1D : col = i * n + y
      */
-    public class Solution {
+    public class Solution3 {
         int m;
         int n;
 

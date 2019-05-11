@@ -54,8 +54,10 @@ public class LE_145_Binary_Tree_Postorder_Traversal {
     public List<Integer> postorderTraversal2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
+
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
+
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             /**

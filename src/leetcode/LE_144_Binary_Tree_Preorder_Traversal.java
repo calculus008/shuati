@@ -52,11 +52,14 @@ public class LE_144_Binary_Tree_Preorder_Traversal {
     public List<Integer> preorderTraversal2(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if (root == null) return res;
+
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);    //PUSH!!!
+
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             res.add(cur.val);
+
             if (cur.right != null) stack.push(cur.right);//!!! right, it's a Stack
             if (cur.left != null) stack.push(cur.left);
         }

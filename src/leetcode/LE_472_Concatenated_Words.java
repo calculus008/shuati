@@ -27,6 +27,120 @@ public class LE_472_Concatenated_Words {
      */
 
     /**
+     * Trie + DFS
+     *
+     * Preferred Solution
+     *
+     * Since we have an array of words, we can pre-process words to create a trie, which will help us
+     * to save processing time later one.
+     *
+     * It's O(n * k) for validation as we always needs to travel the Tire once
+     *
+     * Trie vs HashMap
+     * https://stackoverflow.com/questions/245878/how-do-i-choose-between-a-hash-table-and-a-trie-prefix-tree
+     *
+     * 49 ms
+     * 70.31%
+     * 49.7 MB
+     *
+     */
+    class Solution_Trie {
+        class TrieNode {
+            TrieNode[] children;
+            // String word;
+            boolean isWord;
+
+            public TrieNode() {
+                children = new TrieNode[26];
+            }
+        }
+
+        TrieNode root;
+
+        private void addWord(String s) {
+            TrieNode cur = root;
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                int idx = c - 'a';
+                if (cur.children[idx] == null) {
+                    cur.children[idx] = new TrieNode();
+                }
+                cur = cur.children[idx];
+            }
+            // cur.word = s;
+            cur.isWord = true;
+        }
+
+
+        public List<String> findAllConcatenatedWordsInADict(String[] words) {
+            List<String> res = new ArrayList<>();
+            if (words == null || words.length == 0) return res;
+
+            //init Trie
+            root = new TrieNode();
+            for (String word : words) {
+                if (word == null || word.length() == 0) {
+                    continue;
+                }
+                addWord(word);
+            }
+
+            //check each word to see if it meets requirement
+            for (String word : words) {
+                if (word == null || word.length() == 0) {
+                    continue;
+                }
+
+                if (helper(word.toCharArray(), 0, 0)) {
+                    res.add(word);
+                }
+            }
+
+            return res;
+        }
+
+        private boolean helper(char[] chars, int index, int count) {
+            TrieNode cur = root;
+            int n = chars.length;
+
+            for (int i = index; i < n; i++) {
+                if (cur.children[chars[i] - 'a'] == null) {
+                    return false;
+                }
+
+                /**
+                 * check if substring from index "index" to "i" is a word
+                 */
+                if (cur.children[chars[i] - 'a'].isWord) {
+                    /**
+                     * if we get to the end of current word, because of the requirement -
+                     * "comprised entirely of at least two shorter words", we only return
+                     * TRUE if count is bigger than 1.
+                     */
+                    if (i == n - 1) {
+                        return count >= 1;
+                    }
+
+                    /**
+                     * there are more chars in current word, recurse with index
+                     * i + 1. Also count should be increased, before we know
+                     * we already have a matching word with the outter if condition.
+                     */
+                    if (helper(chars, i + 1, count + 1)) {
+                        return true;
+                    }
+                }
+
+                /**
+                 * !!!
+                 */
+                cur = cur.children[chars[i] - 'a'];
+            }
+            return false;
+        }
+    }
+
+    /**
      * Recursion with mem
      *
      * Preferred Solution
@@ -34,7 +148,7 @@ public class LE_472_Concatenated_Words {
      * Exact the same algorithm as LE_139_Word_Break. "helper()" function is copied
      * from LE_139_Word_Break with no modification.
      *
-     * Time  : O(k * n ^ 2), k is length words, n is average length of a single word.
+     * Time  : O(k * n ^ 2), k is number of words, n is average length of a single word.
      * Space : O(n ^ 2)
      *
      * 88 ms
@@ -47,6 +161,10 @@ public class LE_472_Concatenated_Words {
             Set<String> set = new HashSet(Arrays.asList(words));
 
             for(String word : words) {
+                if (word == null || word.length() == 0) {
+                    continue;
+                }
+
                 set.remove(word);
 
                 if (helper(word, set, new HashMap<>())) {

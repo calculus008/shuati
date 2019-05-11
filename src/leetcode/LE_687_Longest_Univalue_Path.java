@@ -90,6 +90,11 @@ public class LE_687_Longest_Univalue_Path {
                 pr = r + 1;
             }
 
+            /**
+             * !!!
+             * the length of the path is number of edges, not number of nodes
+             * therefore, it's pl + pr, NOT pl + pr + 1
+             */
             res = Math.max(res, pl + pr);
 
             return Math.max(pl, pr);

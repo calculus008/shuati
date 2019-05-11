@@ -146,6 +146,7 @@ LE_864_Shortest_Path_To_Get_All_Keys
 LE_815_Bus_Routes                            (***)
 LE_787_Cheapest_Flights_Within_K_Stops
 LE_675_Cut_Off_Trees_For_Golf_Event
+LE_909_Snakes_And_Ladders
 
 LE_282_Expression_Add_Operators
 
@@ -162,13 +163,14 @@ LE_236_Lowest_Common_Ancestor_Of_BT          (lint 88)   (assume LCA exists)
 LI_578_Lowest_Common_Ancestor_III                        (LCA may not exist)
 LE_235_Lowest_Common_Ancestor_Of_BST
 LE_988_Smallest_String_Starting_From_Leaf
+LE_404_Sum_Of_Left_Leaves
 
 B.二叉树结构变化
 LE_114_Flatten_Binary_Tree_To_LinkedList     (lint 453)   (***)
 
 C.BST
 LE_230_Kth_Smallest_Element_In_BST           (lint 902)   (**)
-LE_98_Validate_BST                           (lint 95)
+LE_98_Validate_BST                           (lint 95)    (*****)
 LE_173_Binary_Search_Tree_Iterator           (lint 86)
 LE_272_Closest_BST_Value_II                  (lint 901)    (****) revisit (LINKEDIN)
 LE_270_Closest_BST_Value
@@ -668,7 +670,7 @@ LE_1019_Next_Greater_Node_In_Linked_List
 LE_901_Online_Stock_Span
 739. Daily Temperatures
 
-#Array and Array
+#Array and String
 LE_55_Jump_Game
 LE_45_Jump_Game_II
 LE_49_Group_Anagrams

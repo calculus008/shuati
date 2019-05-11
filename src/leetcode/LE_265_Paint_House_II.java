@@ -187,4 +187,43 @@ public class LE_265_Paint_House_II {
             return min1;
         }
     }
+
+    //O(m * n)
+    class Solution_Practice {
+        public int minCostII(int[][] costs) {
+            if (null == costs || costs.length == 0) return 0;
+
+            int m = costs.length;
+            int n = costs[0].length;
+
+            int min1 = -1;
+            int min2 = -1;
+
+            int[][] dp = new int[m][n];
+
+            for (int i = 0; i < m; i++) {
+                int last1 = min1;
+                int last2 = min2;
+                min1 = -1;
+                min2 = -1;
+
+                for (int j = 0; j < n; j++) {
+                    if (j != last1) {
+                        dp[i][j] = costs[i][j] + (last1 < 0 ? 0 : dp[i - 1][last1]);
+                    } else {
+                        dp[i][j] = costs[i][j] + (last2 < 0 ? 0 : dp[i - 1][last2]);
+                    }
+
+                    if (min1 < 0 || dp[i][j] < dp[i][min1]) {
+                        min2 = min1;
+                        min1 = j;
+                    } else if (min2 < 0 || dp[i][j] < dp[i][min2]) {
+                        min2 = j;
+                    }
+                }
+            }
+
+            return dp[m - 1][min1];
+        }
+    }
 }

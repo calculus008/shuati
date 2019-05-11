@@ -516,7 +516,7 @@ public class LE_460_LFU_Cache {
                 node = new Node(key, value);
                 nodeMap.put(key, node);
 
-                if (size == capacity) {
+                if (size == capacity) {//eviction
                     DLList lastList = countMap.get(min);
                     nodeMap.remove(lastList.removeLast().key);
                     size--;
