@@ -1,0 +1,6 @@
+1.
+假设有一群车，每辆车有个dash camera在不断拍照片/视频，每个照片都可以记录位置和时间戳，每到服务区连上wifi可以上
+传这些照片/视频，问如何利用这些数据设计一个系统可以标记道路的speed limit。其实不算难，上传照片落库（其实要是不
+在乎丢raw data这里不存也行），用message queue decouple照片处理service，按geo location关联road，用时间戳和
+OCR置信度决定是否更新speed limit，原有speed limit数值并不删除以防OCR误读，还可以想想怎么bootstap降低cold
+start的代价。全程全靠嘴皮子扯，说完了我嗓子都冒烟了哈哈。这哥们表示很满意。

@@ -1,9 +1,46 @@
+545. Boundary of Binary Tree
+642. Design Search Autocomplete System
+909. Snakes and Ladders
+Leetcode 1029
+
+LE_50_POW
+LE_136_Single_Number
 LE_273_Integer_To_English_Words
+LE_63_Unique_Path_II
+LE_312_Burst_Balloons
+LE_145_Binary_Tree_Postorder_Traversal (iterative)
+
+LE_416_Partition_Equal_Subset_Sum
+LE_548_Split_Array_With_Equal_Sum
+LE_281_Zigzag_Iterator
+LE_305_Number_Of_Islands_II
+LE_31_Next_Permutation
+LE_46_Permutation
+LI_77_Longest_Common_Subsequence
+LI_005_Kth_Largest_Number
+LE_42_Trapping_Rain_Water
+LE_227_Basic_Calculator_II
+LE_772_Basic_Calculator_III
+LE_716_Max_Stack
+LE_160_Intersection_Of_Tow_Linked_List
+LE_239_Sliding_Window_Maximum
+
+LE_133_Clone_Graph
+LE_617_Merge_Two_Binary_Trees
+LE_743_Network_Delay_Time
+LE_281_Zigzag_Iterator
+LE_88_Merge_Sorted_Array
+LE_73_Set_Matrix_Zero
+LE_532_K_Diff_Pairs_In_An_Array
+LE_295_Find_Median_From_Data_Stream
+LE_273_Integer_To_English_Words
+LI_397_Longest_Continuous_Increasing_Subsequence
+LI_472_Binary_Tree_Path_Sum_III
+LE_975_Odd_Even_Jump
 
 #Word Break and its variation (*****)
 LE_139_Word_Break
-LE_140_Word_Break_II  (扩展成system design)
-LE_472_Concatenated_Words
+LE_140_Word_Break_II  (扩展成system design, turn it into LE_472_Concatenated_Words, use Trie)
 需要讲清楚为啥用字典树，而不用hashmap
 
 LE_348_Design_Tic_Tac_Toe
@@ -11,20 +48,11 @@ LE_352_Data_Stream_As_Disjoint_Intervals
 LE_75_Set_Colors
 LI_625_Partition_Array_II
 
-return k products被买的最多次 (top N)
-
-给定一堆硬币, 硬币的两面分别印着不同的字母, 问你用这些硬币能不能拼出给定的单词, 每个硬币只能用一次, 比如
-硬币: ["A,B", "B,C"], 单词: AB => true
-硬币: ["A,A", "B,C"], 单词: AA => false
-用了两个hashmap, 一个记录硬币对应的字母, 一个记录字母对应的硬币, 然后用了个循环搞定
-
-
 LE_73_Set_Matrix_Zero
 LE_146_LRU_Cache
 LE_79_Word_Search
 LE_212_Word_Search_II
 描述就是设计一个service来提供类似word break II的API, 讲讲怎么scale，比如cache，比如input太长 run的时间太久怎么处理
-
 
 LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
 LE_314_Binary_Tree_Vertical_Order_Traversal
@@ -38,13 +66,25 @@ LE_244_Shortest_Word_Distance_II
 LE_245_Shortest_Word_Distance_III
 有一本书，给两个words，问两个words之间的距离，然后如果是还有page呢，给出page的距离
 
-输入一个N*N矩阵，矩阵中某些格子种有树，要求y = 0, 从x轴任意坐标为入口进入矩阵，从y = y 的x轴任意坐标为出口离开矩阵，求出一条最长路径
-input是二维数组，如果值为1，代表有种树！
+LE_126_Word_Ladder_II
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+如果能买任意次，并且在同一天卖掉所有之前买的股票，求最大profit
+followup是不光返回赚了多少钱，还要index
+最简单的那个——只允许一次transaction。不过输出要求是买进和卖出的日期。其实还是一样的，存trend数组，
+然后线性扫描。面试官可能想让我用divide & conquer，所以当时在看我的扫描算法时候有点懵逼。不过之前算法导论上看过
+，那样的复杂度是O(nlogn)。而线性扫描是O(n)，而且我当时脑子里确实只记得线性扫描的算法了。这题因为面试官不太能理
+解这个O(n)的算法（我觉得没理由啊，他准备的题目他还能不会么？？？），带着他仔细地过了好几遍不同的样例，面试官才确
+认了这个算法的可行性。最后他也没时间follow up。
+
+LE_34_Search_For_A_Range
+LE_33_Search_In_Rotated_Sorted_Array
 
 
-删除单链表倒数第N个结果。
 
 LE_20_Valid_Parentheses
+follow up如果不止[] {} ()这三种怎么办，我答了用HashMap, 面试官说对的，问为啥会想到，我说我需要键值对，map就比较合适
+
 LE_22_Generate_Parentheses
 LE_127_Word_Ladder
 
@@ -55,26 +95,184 @@ LE_12_Integer_To_Roman
 
 hashmap解，follow up是怎么validate这个罗马数字是有效的罗马数字。
 
-LE_416_Partition_Equal_Subset_Sum
-LE_548_Split_Array_With_Equal_Sum
-LE_281_Zigzag_Iterator
-LE_305_Number_Of_Islands_II
-LE_31_Next_Permutation
+LE_505_The_Maze_II
+重点居然是怎么model这个游戏，我直接用蠡口二维数组的方法做了model，最开始他不是很理解，跟他画了一会以后他觉得可以了。
+
+LE_49_Group_Anagrams
+follow up：input不限于alphabetical character. 变成utf-8.
+
+Variation of LE_352_Data_Stream_As_Disjoint_Intervals ?
+然后题是一道设计题算？，一个array（姑且称为MyArray），支持两个API，set(index, value)，get(index)，已知输入中会有很多连续的值出现
+（例子：[7, 7, 7, 5, 5]），需要这个MyArray内部将连续的值都用更小的空间表示（比如三个7只占用一个空间）。答得不太好 总想用Map去存外
+部坐标和内部坐标的对应关系，后来小哥说get没必要是O(1)时间，最后就只用了一个linkedlist of Pair(start, end, value)去存的，不知道
+最优解是啥，最后mergepair没写完。最后问问题。
+
+LE_205_Isomorphic_Strings
+follow up是一组字符串判断其中string可以组成几组，每组内string两两isomorphic。
+我说的就是遍历list，用一个hashmap from string to hashset来存一个group和这个group的代表（可以是这一组当中任意string），
+然后每遍历一个单词，检查它跟之前所有代表又没用同构的，有的话直接插到那个组里，没有的话自己建一个新组。
+
+LE_200_Number_Of_Islands
+number of island. follow up 1是如果改成8个方向如何做？follow up2是如果输入的数组不可以改，如何做 (Union Find?)
+但就是用深度优先搜索和广度优先搜索两种方法选一个做，顺便解释两种搜索的优势和劣势。
+
+
+LE_162_Find_Peak_Element ?
+就是找一个array里面第一个数（array里的数字都是unique的），这个数的左右两边都要比这个数大，brute force O(n) 解完，要求优化，
+第一反应是要binary search，提了出来，但是有一些bs的concern主要是基于是否每个array都会有这种数存在，提出这个concern，
+直接问我是否有?and为什么。。。
+
+LE_339_Nested_List_Weight_Sum
+类似于Nested Integer那道题，要求自己定义一个class， 就是有时候是一个Int 有时候是一个list，之后根据level求和，做了DFS和BFS
+
+LE_53_Maximum_Subarray
+follow up 是找出最大的subarray，用了左右指针标明最大subarray的window
+
+LE_112_Path_Sum
+follow up:是输出第一条path
+
+LI_647_Find_All_Anagrams_In_A_String
+
+LE_03_Longest_Substring_Without_Repeating_Characters
+Follow up : 在源代码的基础上改成输出允许有一个repeating character的 最长的 substring
+
+LE_199_Binary_Tree_Right_Side_View
+输出一个树从最左或者最右的方向看到的node
+
+
+
+==================
+
+输入一个N*N矩阵，矩阵中某些格子种有树，要求y = 0, 从x轴任意坐标为入口进入矩阵，从y = y 的x轴任意坐标为出口离开矩阵，求出一条最长路径
+input是二维数组，如果值为1，代表有种树！
+
+删除单链表倒数第N个结果。
+
+Input一个需要安装的选项1，如果要安装选项1，需要先安装2和7 => [1, [2,7]], [2, [7]], [7,[]], 返回安装顺序： 7 - 2 - 1
+
+给你几个package 然后有dependency，然后让你写一个class 根据这些dependency去安装，如果不能安装就throw exception，
+我用的拓扑排序写了，他最后跟我说其实可以不用建图，直接搜索查环就行，anyway，他说最后说 seem to work
+
+让你写个package的class, 包括包之间的dependency，让你输出安装A要安装哪些包。这个题我开始想用topological做，但是他说一个DFS就行了。
+A - B,C  B -C,E C-F, 这个例子你输出 F E C B A 顺序可以变，满足优先度就行。
+后来我问有环的问题，他说先不考虑了
+给你一堆软件包依赖关系，A->B,C,D | B->E,F | E ->F，然后让你顺利的把A装上。一开始思路是，BFS然后存list，然后逆序安装。面试官问为啥不DFS，
+答曰害怕爆栈。面试官说，不考虑这些。然后我用DFS秒杀，配合HashSet记录已经装过的软件包，防止重复安装。
+追问1， 一个包在不同的平台上有不同的安装方法，怎么办？答，安装的时候进行判定。面试官说，其实可以用一个Abstract Class定义一个install方法
+，然后不同平台的package各自实现。好吧，我承认我的Java还是菜的和弟弟一样。
+
+
+第一轮直接做题，AWS的工程师，给的题很模糊，说是要在一个directory下面找到所有名字包含后缀.log的文件。那道题后楼主进行了
+clarification，把directory变成input String array然后拿出来一个String filter作为".log“的match pattern。然后就是
+传统的string match。后面follow up的话是说如果files还有什么别的property比方说大小，创建人，这些也需要filter那么怎么做
+，我给了一个hashset包含所有的要求，然后针对每个文件做一个contains操作，再做string match。
+
+第一个是2diff，在一个array里找出来两个数diff最小，楼主刚开始给出了O（n）的解法但是发现自己错了，就指出了错误然后改成sorting解法，
+第二个coding是isBST，recursion秒掉。
+
+第一个是最小的missing number，给一串数，她强调了是long integer array，不排序，找出最小的那个missing number，0不算，楼主用hashse
+t然后遍历index，她说ok，
+第二个coding是一串无序数里面包含1-n但是长度是n+2，说明有两个重复数，找出来，要求时间O（n）space O（1），想了一下不知道怎么用O1额外
+空间来做，她说那你用O（n）怎么做，我说一个hashset然后one pass，她后面说这个ok，但是如果用linkedlist怎么做，最后好像是如果有环就是
+重复了，但是她的逻辑我没get到，
+
+题是找所有leaf node的grandparent。follow up是所有leaf node的nth 祖宗
+其实这道题我的算法思路是：一棵树的所有叶子节点的grandParent其实可以找到左子树的所有叶子节点的grandParent然后找到右子树的所有
+叶子节点的grandParent，所以我说从算法思想上是divide & conquer, 在实现的过程中，利用了postOrder的recursion的写法，对于一棵
+树来说，postOrder其实就是一种DFS, 不知道这样回答有没有回答你的问题～
+Dfs 参数加一个grand parent, 在遇到了leaf node时候存下来grand parent node就行了。至于找第nth个，把grandparent 改成path 到了
+lead node 找path上对应的node就可以了。
+可以参考利口 打印root 到leaf的那道题。
+
+return k products被买的最多次 (top N)
+
+给定一堆硬币, 硬币的两面分别印着不同的字母, 问你用这些硬币能不能拼出给定的单词, 每个硬币只能用一次, 比如
+硬币: ["A,B", "B,C"], 单词: AB => true
+硬币: ["A,A", "B,C"], 单词: AA => false
+用了两个hashmap, 一个记录硬币对应的字母, 一个记录字母对应的硬币, 然后用了个循环搞定
+
+customerID对应pageID。一个pageID可以对应多个customerID，但是一个customerID只能对应一个pageID。问如何求被访问最多
+(并且是被distinct的costumer访问)的pageID？follow up 是，如果有很多个customer，并且要求的是top k个被访问最多的pageID。
+怎么求？时间复杂度是多少？
+第三轮的coding题的输入输出是什么啊？从描述上看用key-value就可以解决。是我理解还没到位吗
+输入就是类似一连串这样的东西[customerID, pageID]表示哪个customer访问了哪个page,具体用什么数据结构作为输入都可以，面试官说无所谓。
+是的，就用hashmap就可以解决了。我感觉这道题可能是想考察follow up的问题吧，就是要选top k个如何做，我当时答的是用priority queue。
+
+天平称小球，给多少个球有一个重量不一样最少称几次
+给的例子是9个球，分三组称两次就可以了，是log(n)时间
+
+给两个bst和一个target，在两个tree里边各找一个element和等于target，返回两个数的list
+不在同一棵树了，如果有多个满足条件的返回第一组就可以了
+
+List<int[]> result = new ArrayList<>();
+public void helper(TreeNode tn1, TreeNode tn2, target){
+    if(tn1 == null || tn2 == null) return;
+    if(tn1.val+tn2.val == target){
+        result.add(new int[]{tn1.val, tn2.val});
+        helper(tn1.left, tn2.right);
+        helper(tn1.right, tn2.left);
+    }
+    else if(tn1.val+tn2.val > target){
+        helper(tn1.left, tn2);
+        helper(tn1, tn2.left);
+    }
+    else{
+        helper(tn1.right, tn2);
+        helper(tn1, tn2.right);
+    }
+
+}
+
+问如何求出两个亚麻商品的最深相同category，各种讨论，最开始我觉得可以向parent访问用链表遍历就成，然后他说如果只知道children node
+怎么办，这不就成了蠡口尔伞陆了嘛，秒杀之，后来又问如果真实service访问量很大如何优化，我说可以denormalization把一个product的所有
+parent category都存下来好了
+
+考了一个trie，given prefix(eg.ca)，先判断prefix存不存在，然后print 所有以prefix开头的单词(e.g.: cat, cap, car...)
+
+linkedlist里奇数个node是升序，偶数个是降序，list的大小已知（不是stream），return按照升序排列的linkedlist，要求O1 space
+
+找出binary tree的最下面一层的最右边的叶子节点
+
+LE_973_K_Closest_Points_To_Origin (?)
+1 triliion的星星，找离地球最近的1m个
 
 ================================
+By Category
 
-LE_133_Clone_Graph
-LE_617_Merge_Two_Binary_Trees
-LE_743_Network_Delay_Time
-LE_281_Zigzag_Iterator
-LE_88_Merge_Sorted_Array
-LE_73_Set_Matrix_Zero
-LE_532_K_Diff_Pairs_In_An_Array
-LE_295_Find_Median_From_Data_Stream
-LE_273_Integer_To_English_Words
+#Array
 LI_397_Longest_Continuous_Increasing_Subsequence
-LI_472_Binary_Tree_Path_Sum_III
-LE_49_Group_Anagrams
-LE_975_Odd_Even_Jump
+LE_273_Integer_To_English_Words
+LE_88_Merge_Sorted_Array
+LI_005_Kth_Largest_Number
 
-Leetcode 1029
+#DFS
+LE_22_Generate_Parentheses
+LE_46_Permutation
+
+#DP
+LE_63_Unique_Path_II
+LE_312_Burst_Balloons
+LI_77_Longest_Common_Subsequence
+LE_1029_Two_City_Scheduling
+
+#Binary Tree, BST
+LE_98_Validate_BST
+LE_94_Binary_Tree_Inorder_Traversal
+LE_144_Binary_Tree_Preorder_Traversal
+LE_145_Binary_Tree_Postorder_Traversal
+
+LE_112_Path_Sum
+LE_124_Binary_Tree_Max_Path_Sum
+LE_543_Diameter_Of_Binary_Tree
+LI_472_Binary_Tree_Path_Sum_III
+
+LE_617_Merge_Two_Binary_Trees
+LE_545_Boundary_Of_Binary_Tree
+LE_314_Binary_Tree_Vertical_Order_Traversal
+LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
+
+#BFS
+LE_909_Snakes_And_Ladders
+
+#Design
+LE_642_Design_Search_Autocomplete_System
