@@ -1,13 +1,288 @@
+LE_04_Median_Of_Two_Sorted_Arrays
+LE_50_POW
+LE_20_Valid_Parentheses
+LE_32_Longest_Valid_Parentheses
+LE_136_Single_Number
+LE_137_Single_Number_II
+LE_260_Single_Number_III
 LE_67_Add_Binary
+LE_338_Counting_Bits
+先2分钟写了个Brutle Force，直接每个整数移位算。后来面试官要求更好的解，然后写了个Hash Table的优化，每次算4位。继续要求更好的解，
+跪了。。。然后在提示下找到规律，然后大概花了5分钟左右写了个升级版的，过了……
+
 LE_528_Random_Pick_With_Weight
 Random 题目 - 大致是给你一些城市和城市的人口，请写出一个函数，该函数可以根据人口比重随机地输出城市名。
 这个题明显是一个probability的题目，楼主还是基础不扎实，有思路就是死活写不出code来。 最后follow up优化就没有时间了，估计就跪在这儿了。
 
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_34_Search_For_A_Range   變化是求一個數組裏大於給定數K的第一個occurrence的index
+LE_65_Valid_Number  (no E)
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+LE_158_Read_N_Char_Given_Read4_II
+LE_161_One_Edit_Distance
+LE_173_Binary_Search_Tree_Iterator
+这道题常规解法用个vector存储inorder transverse的node value. 复杂度是O(1), O(n)
+我用的mirrors transversal（大家上讨论区直接搜就能搜到）， 把BST转换成sorted Linked list.复杂度瞬减O(1), O(1)， 教导了小哥一波。
 LE_211_Add_And_Search_Word
+LE_239_Sliding_Window_Maximum
+LE_278_First_Bad_Version
+LE_297_Serialize_And_Deserialize_Binary_Tree   变体，可能不是一个平衡树，要求恢复成原来的样子。
 LE_65_Valid_Number
+LE_314_Binary_Tree_Vertical_Order_Traversal    我一开始用map直接自动排序，面试官说有O(n)的办法么？用了bucket sort
+LE_304_Range_Sum_Query_2D_Immutable     问了一下有变化怎么办，说了一下indexed tree和segment tree
 LE_380_Insert_Delete_GetRandom_O1
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed
+LE_726_Number_Of_Atoms
+LE_270_Closest_BST_Value
+LE_272_Closest_BST_Value_II
+LE_23_Merge_k_Sorted_Lists
+LI_486_Merge_K_Sorted_Arrays
+LE_151_Reverse_Words_In_A_String   变形 就是告诉你两个日期 比如04/23/19 05/01/18  比较两个日期大小
+LE_273_Integer_To_English_Words
+LE_252_Meeting_Rooms
+LE_253_Meeting_Rooms_II
+LE_200_Number_Of_Islands  Followup是输出岛的面积
+LE_282_Expression_Add_Operators   变形，只有加法和减法。虽然是hard的题，但是本质是DFS，递归解（指数级时间复杂度）就可以。
+LE_387_First_Unique_Character_In_A_String
+LE_560_Subarray_Sum_Equals_K
+第二题还有一个小的变式，我写的是 O(n) 空间 O(n) 时间的方法，最后还多了五分钟。
+面试官就问我有没有用O(1)空间的方法 我就随便写了个暴力的 O(n^2)时间但是O(1)时间的。
+不知道有没有O(n)时间 O(1) 空间的解法
+第二题O(1)如果他说数字都是非负的话可以sliding window, 要是原题的话还真不知道怎么搞
+这个follow up除了楼上说的两个指针 能不能先sort 再siding window sum小了 right向右 大了left向右啊
+
+Palindrome_By_Removing_Character
+
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
+follow up是如果是stream怎么弄
+k个长度的queue 或者circular array吧, 反正你最多只能放k个字母..
+是k个不同的字母，同一个字母可以有多个
 
 LE_636_Exclusive_Time_Of_Functions
+不过输出要求是hash map
 给了陆仨露的变体和多线程环境下不同的执行情况的题，总共两道一下给的，复习的时候就当成露三路就可以了。
 
+LE_986_Interval_List_Intersections
+merge interval变种，给两个sorted list a和b, list里面存的是长度为2的int array代表interval，
+求a和b两个list里所有的overlap的interval段
+
+LE_438_Find_All_Anagrams_In_A_String
+LE_269_Alien_Dictionary
+
+LE_31_Next_Permutation
+LE_114_Flatten_Binary_Tree_To_LinkedList
+LE_329_Longest_Increasing_Path_In_A_Matrix
+LE_236_Lowest_Common_Ancestor_Of_BT
+LE_438_Find_All_Anagrams_In_A_String
+LE_416_Partition_Equal_Subset_Sum    简化版，就是中间一刀切，切成的两个array之和相等，然后是正常版
+LE_548_Split_Array_With_Equal_Sum
+第一题是把一个array分成两个subarray with equal sum，follow up是能不能一遍traversal
+
+LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
+find kth smallest element in M sorted arrays. 跟蠡口那道 find kth smallest element in sorted matrix是类似的，区别就是array长度不一样。
+网上有两处讲这个算法的:
+https://www.youtube.com/watch?v=Q3JUfHpffIg
+https://stackoverflow.com/questions/8753345/finding-kth-smallest-number-from-n-sorted-arrays
+time complexity: O(m*mlgk*lgk)
+
+=========================
+
+523. Continuous Subarray Sum
+
+939. Minimum Area Rectangle
+
+665. Non-decreasing Array
+O(n)直接扫一遍就好。
+
+??
+两两交换链表的node
+725. Split Linked List in Parts
+LE_328_Odd_Even_Linked_List
+
+953. Verifying an Alien Dictionary
+外星人字典，刚看到吓一跳。后来仔细一看只是需要verify给出的order是否正确，并不需要自己写出正确的order.
+那就用个hash table把order的index和character存起来，挨个比对就可以了。所以这个题感觉是个easy难度吧
+
+=========================
+
+LE_133_Clone_Graph
+第一題是深度拷貝樹 這邊我有點蒙了寫了兩個版本才做好 第一次想層級遍歷但後來覺得怪怪的又改遞歸
+自己折騰了一下子最後寫出來了 但真的寫太久 哎 明明是很簡單的題 就這裡感覺有點涼
+
+
+!!!
+LE_23_Merge_k_Sorted_Lists
+unsorted的链表好像也只能先把每个小的链表排序(divide&conquer) 然后再merge K sorted list?
+就是linkedlist版的merge sort吧
+
+第二題是餐廳排隊等候單 讓客人留電話然後按順序叫號 不用考慮人數或重複填寫之類的 實現三個功能：
+註冊 刪除 叫號(要略過已經把自己從裡面刪除的人）反正用哈希表這題倒是解決得很快
+
+give an integer array that represents a list of building, the buildings right side is an ocean,
+output the index of the building that can see the ocean.
+ex:
+
+[4,4,2,3,1] output [1,3,4]
+[] output []
+
+我先用brute force 解，然後對方問有沒有辦法跑到O(n)
+然後想到從右到左去找，並且紀錄最高的值，如果有比最高的值大的就加到output array印出來
+
+恐龙题
+
+LRU Cache， 除了put 和 get 还要实现一个 evictCache(), 就是remove least recently used key
+
+For a cycle-linked list, which is sorted, given a node from this list and a target value, insert a new node after given node, to make sure the new list is still sorted.
+-baidu 1point3acres
+example1:
+-> 1 -> 2 -> 3, given 2 and target value 3, insert 3 after 2, new list is: -> 1 -> 2 -> 3 -> 3
+example2:
+-> 1 -> 2 -> 3, given 2 and target value 1, new list is: -> 1 -> 1-> 2 -> 3
+题不难，主要是小心处理边界判断。要求自己写test case，感觉面试官更看重test case。
+example 2 没有看懂。要求是 insert a new node after given node, 这个例子insert 到given node ...
+因为给的list其实是一个环，而且是sorted的，需要在给定的node后面找一个位置插入新的node，同时保证插入后这个list还是sorted的
+
+
+1. 炮儿， 输入可以认为是int，输出问了long够不够，答曰可以
+2. 中序遍历的iterator设计
+两道题都要求go through一些tests，做完不到30分钟，又给出了一个橄榄球得分可能性的题，就是
+1，2，3，6然后给个分数，问有多少种可能，写了code，还有五分钟，问他问题。这期间意识到
+1是要td后得6分才行，提了一下。最后又意识到6分后还可能得2分，对方说好说。应该没什么问题过吧。
+最后一个题其实加上7和8两种可能，递归就可以。
+不follow橄榄球会比较麻烦，就理解为有2，3，6三种得分方式，1要在得分6以后才可，其实把这个算成7就行，
+没有单独的1.递归可解
+
+
+621. Task Scheduler
+变形，要求相对顺序不能变，例如 tasks=“AAB"   idle=3,
+则应该输出   "A--AB"。
+int task(vector<int> tasks, int idle){
+//     use hash table to store last appearence
+    unordered_map<int,int> map;
+    int curr=0;
+    for(int i=0; i<tasks.size(); i++){
+        int task=tasks[i];
+//         appear before
+        if(map.find(task) != map.end()){
+            curr=max(curr+1, map[task]+idle);
+        }else{
+//             first appear
+            curr++;
+        }
+//      record in the map
+        map[task]=curr;
+    }
+    return curr;
+}
+
+1. 二维矩阵，只有一和零，每一行都是正序排好序的。找到1最多那行有多少1。
+请问第一题就是每一行用binary search找leftmost 1, 然后比较得到number of 1s by row的最大值么?
+2. 给一组数和k，找到这组数的任一个subarray，满足k<sum(subarray)<2k。len(subarray)一定是二的指数倍。
+我就是先来个running sum好求区域和。之后对于每个数字，设其为subarray开始，检查每 2^n 为大小的subarray的和，找到后就退出。
+第二题用双指针可以不，都从0开始，如sum小于k，右指针右移（就加下一个数字），大于2k了左指针右移，直到符合条件。
+
+572. Subtree of Another Tree
+1. check whether tree B is a subtree of tree A. 我用了个O(mn)的方法，Follow-up是有没有更快的方法。
+            eg:  A:   5               B: 2
+                      2   3               1  4    return true
+                    1  4
+  第一题貌似可以遍历preorder和inorder然后检查是不是两个都是subarray，如果是就是subtree，这个应该是O（n）的
+
+2. 给一个string：aaabc, 要求返回的string连续的两个char不能相同，（e.g. abaca, acaba), 返回一个即可。
+ （这道题很像task schedule，但我刷题时用了一种数学的方法求task长度，现在要求返回一个string，一时间没想到要怎么做，后来时间就到了）
+ 第二题用贪心算法把所有frequency排序从大到小隔一个往里插，简单想了一下应该是gurantee没连续一样的
+
+1.给一个 sorted 好的 array 和一个 target number， 返回 target number 在 array 中出现了几次， 不存在就返回0
+2.给一个 input String of brackets "((())", 让你添加括号，使得他能够 balance
+
+第二题：numeronym，给一个numeronym（类似于用字母和数字表示的简称）和一个单词，问前者是否能和后者匹配。
+eg: input: "f3b3", "facebook", output: true
+     input: "facebook", "facebook", output:true
+     input: "f10", "facebook",output:false
+
+public static boolean numeronym(String s, String t){
+        if(s == null)return t == null;
+        int j = 0;
+        int num= 0;
+        for(int i = 0;i< s.length();i++){
+            char c = s.charAt(i);
+            if(Character.isDigit(s.charAt(i))){
+                num = num*10+s.charAt(i)-'0';
+            }
+            if(!Character.isDigit(c)){
+                if(num != 0){
+                    j += num;
+                }
+                if(j > t.length())return false;
+                if(c != t.charAt(j))return false;
+                else{
+                    j++;
+                }
+                num = 0;
+            }
+        }
+        if(num != 0){
+            j+= num;
+        }
+        System.out.println(j);
+        if(j > t.length())return false;
+        return true;
+    }
+}
+ine 26是不是应该是 j != t.length()。原代码的话，会把"f3b2" 和 "facebook"也判断为true。谢谢
+
+LE_301_Remove_Invalid_Parentheses 不需要return 所有，只需要return 一个valid的解即可。
+返回一个结果只需要用stack， 不需要dfs，简单很多了
+变形，要求只输出一个有效结果，不用输出所有，用DFS/BFS面试官会觉得太复杂，我用的直接遍历两遍，欢迎讨论，C++：
+string removeParenth(string s) {
+    if (s.empty()) return "";
+    int numOpen = 0;
+    int numClose = 0;
+    string temp="";
+    for (int i = 0; i < int(s.size()); i++) {
+        if (s[i] == '(') numOpen++;
+        if (s[i] == ')') numClose++;
+        if (numClose > numOpen) {
+            numClose--;
+        }
+        else {
+            temp += s[i];
+        }
+    }
+    string res="";
+    numOpen = 0;
+    numClose = 0;
+    for (int i = int(temp.size()); i >= 0; i--) {
+        if (temp[i] == '(') numOpen++;
+        if (temp[i] == ')') numClose++;
+        if (numOpen > numClose) {
+            numOpen--;
+        }
+        else {
+            res += temp[i];
+        }
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+第二题处理csv文件，这个没得好说- -，有点像别人家的OA题，注意点比如有一行少一个列元素或者文件打不开怎么处理，和面试官交流就好了。
+
+1. 把tree store成list of integer。我用preorder traverse。大哥问为啥，我说因为dfs方便操作。又问了下时间复杂度
+2. 把之前存的list restore成树，返回根节点。这个用recursive写了个大概，时间不够了没写完整。但跟大哥说了下思路。
+必须存inorder和preorder/postorder才能复原吧
+经人指点和利口而酒气比较像，考serialize和deserialize
+LE_297_Serialize_And_Deserialize_Binary_Tree
+
+LE_311_Sparse_Matrix_Multiplication ??
+简单的数据结构设计/讨论题。实现稀疏向量之间的 dot product. 实际就需两个简单步骤，第一个部分拿嘴讲：如何处理和表达这些原始数据。
+第二部分是完成运算。不多说了吧。好像以前面经也有。如果大家不理解我再解释，逻辑上很简单。这题我感觉主要看沟通能力。没有任何提供的
+数据结构或要求的表达方式，所以无论知不知道正解，都是把能说的说一遍，分析一下好坏，讨论了一下一些问题，然后面试官给了一个答复我说
+“这个比较好”，才开始实现
+
+就先聊稀疏向量的定义，讨论用普通 array 做的话浪费的空间明显，以及跑 dot product algorithm 时浪费的时间
+然后随便提一些表达方式，先想到是 Map 表达应该最好，因为就是想标记一个 index : val 的关系。之后运算通过遍历 map 操作来找对应 index，
+没有则直接取 0. 面试官这时提醒说，原始数据是可以用任何 pre processing 的，爱怎样就怎样。我反应过来，接着说单纯为这题的话，
+用 array of index value pair 就可以了，只要按照 index 顺序排列（sorted)，那么用 2 pointer 走一遍，index 相等时 做个乘法 加到总和。
+但是我觉得用 int[] size 2 看起来很搓，code quality 很差。问可不可以做个简单的 data stucture class，她说可以啊。我就弄个简单的
+class 装 int index, int val。她说这样挺好。我就接着把 dot product 给做了。中间还有些细节，时间空间的讨论不过因为题很简单，都很基础
