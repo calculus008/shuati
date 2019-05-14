@@ -1,0 +1,88 @@
+#1
+Facebook Messanger
+我看过这个题，不过准备时间花在算法上了，系统设计准备的不充分，Grokking the system design面试前只花了两
+天浏览过了一遍，时间不够，看的太快，很多知识点没总结好，导致面试时知识点串了，database，caching用了其他譬
+如Design Twitter的解法到这个上来，结果自然而然不达标了。挂的有些可惜，不够准备不充分也算是自己失策了
+
+#2
+Design a distributed block storage
+
+#3
+Design Facebook search。
+比较常规的系统设计题，无非就是如何scale up，如何shard数据，如何handle突然变得popular的search，最后要求算需要几台机器。
+
+#4
+设计100K的web服务器到10K(1000qps)搜索服务器的最佳通讯方式，利用load balancer或者message queue来做，我是第一次onsite
+system design，直接懵了，恰好自己在做类似的工作，所以直接按照工作经验在找最好的解决方案，快结束的时候才想起来这是面试要多交流，
+，但是已经完了，估计国人小哥当时也是懵了，给的数据基本上都没怎么用上。。。
+
+#5
+设计类似利口的做题网站，每天可以提供若干次竞赛，用户需要注册之后登陆然后提交代码，关键是要快速列出ranking page，
+这也是我工作的一部分，感觉这两轮系统有点位我定制的感觉。
+
+#6
+用户每听一首歌，就调用一次API:  hit(userID，songID)，设计一个系统，返回用户最近7天听过最多的歌，
+
+#6
+10k台电脑 的爬虫设计, 要求不重复下载，机器间通迅最少
+让设计一个web crawler， 假设有10000台服务器，并且没有database。.
+
+当时大概就是有几个模块，crawl service, storage，但关键是有个de-duplicate的service，
+防止相同网站扒两次。我记得网上好像有个教程是讲web crawler的系统设计，你可以看看。
+
+#6
+fb食堂的订餐系统 员工和visitor可以从一个食堂order meals 订单的信息需要persistent。
+按照某章思路答，问下用户量 设计service和schema 比如meal可以存在no sql里，订单信息和user信息可以存在sql里，
+怎么scale。我觉得可以参考怎么设计黑车吃（lbs部分除外）
+
+#7
+系统设计 instagram
+
+#8
+design friend list online and offline feature
+比如你login了facebook,你的backend system 是如何handle 你的好友的在线和不在线的状态的。
+简单的思路：
+assumption: 针对的use-case是用户的朋友数量在1~1000个的情况，通常fB也限制朋友的最大数。
+1在用户初次登陆的时候：从server读取在线friend的列表，并更新自己的online friend列表。同时，
+用户的状态由offline变成online也作为statuschange的消息push到server。
+2当用户在线使用fB的时候：朋友都有自己的状态，如果一旦发生status change；把status change
+作为notification push到server，然后转给自己。例如，我正在使用fB，我的页面上显示了目前在
+线的friend，如果其中某个朋友下线了，他的状态改变会通过notification push到server再转给我，
+或者直接notify我的client端。
+你的思路对头。 细节问的很细， 你的列表肯定存在缓存里，比如redis， application server
+可以直接fetch, 比如 schema 的设计， web server and data access server , DB and redis
+具体如何同步。可以zoom in 的很细。还有-baidu 1point3acres
+DAU 给我的数据是 1billion 的用户。 我这没设计过tps 这么高的系统。
+
+对了场景，用户比较自由，一会在手机上等，一会在ipad,一会用电脑
+
+背景：我没有设计和开发分布式系统的经验，目前正在看design data-intesnive application那本书。同时在研究了很多论坛的总结帖子
+和油管的技术会议视频。我没有太多经验，只能根据看这些资料来讲我的理解了。
+1. 缓存： 缓存的使用应该是比较直接，用户登录系统之后，web server通过缓存获取自己全部信息（包括自己所有朋友列表），
+如果缓存没有，就去route to dB获取用户信息。在得到用户自己的朋友列表之后，再去访问另一个用户状态的缓存服务器（假设存在这样一
+个用户状态缓存服务器）。假设用户自己和朋友的社交网络graph的地域分布特征为本区域和本国家内的用户的connect较密集，国家之间、
+洲际之间用户的connect较稀疏； 所以这个用户在线状态缓存，主要保存本地区用户状态。同时少量的其他国家、地区的用户在线状态,方
+便那些具有多国朋友的人查询自己的好友是否在线。
+2. Schema的设计： 这里的schema，我理解的是用户是否在线状态的设计，这个应该是in-Mem的schema-less的JSON对象。如果只是为
+了online/offline这个应用，在设计schema的时候只需要用少数几个attribute，例如： userID，userName，country，Region etc
+这样也可以减少内存需求空间。至于脸书这个社交网络平台的其他schema的设计和考虑就比较宽了，设计的内容太多。
+3. web server与data access server的同步：不知道需要讨论那些问题。
+4. 数据库与缓存（例如Redis）的同步： 如我上面理解的，用户在线状态信息应该全部通过in-mem获取，如果仅仅是确定在线好友状态，
+不用去访问关系型数据库（RMDB)。如果是其他信息的话，遵从先缓存更新，后RDMS更新的基本原则。当然需要考虑读/写数据的request
+load来采取具体策略。
+5. 1B的用户数量： 还是需要考虑分片（sharding）。我前面假设脸书的用户具有很明显地域分布特征。在分片的时候，主要考虑把本国
+本区域的人的在线状态信息存储在附近的datacenter。
+
+#9
+design privacy content 是share 你的post 给specific group you want
+
+#10
+design聊天软件 不用考虑group chat和offline notification
+
+
+===========
+
+每天晚上去健身房做有氧运动的时候看一个Youtube视频，
+主要看Gaurav Sen, Tech Dummies - Narendra L 还有 Tushar Roy，都是天竺的Youtubers。-
+
+

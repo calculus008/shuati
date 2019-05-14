@@ -230,7 +230,7 @@ public static boolean numeronym(String s, String t){
         return true;
     }
 }
-ine 26是不是应该是 j != t.length()。原代码的话，会把"f3b2" 和 "facebook"也判断为true。谢谢
+line 26是不是应该是 j != t.length()。原代码的话，会把"f3b2" 和 "facebook"也判断为true。谢谢
 
 LE_301_Remove_Invalid_Parentheses 不需要return 所有，只需要return 一个valid的解即可。
 返回一个结果只需要用stack， 不需要dfs，简单很多了
@@ -269,11 +269,11 @@ string removeParenth(string s) {
 
 第二题处理csv文件，这个没得好说- -，有点像别人家的OA题，注意点比如有一行少一个列元素或者文件打不开怎么处理，和面试官交流就好了。
 
+LE_297_Serialize_And_Deserialize_Binary_Tree
 1. 把tree store成list of integer。我用preorder traverse。大哥问为啥，我说因为dfs方便操作。又问了下时间复杂度
 2. 把之前存的list restore成树，返回根节点。这个用recursive写了个大概，时间不够了没写完整。但跟大哥说了下思路。
 必须存inorder和preorder/postorder才能复原吧
 经人指点和利口而酒气比较像，考serialize和deserialize
-LE_297_Serialize_And_Deserialize_Binary_Tree
 
 LE_311_Sparse_Matrix_Multiplication ??
 简单的数据结构设计/讨论题。实现稀疏向量之间的 dot product. 实际就需两个简单步骤，第一个部分拿嘴讲：如何处理和表达这些原始数据。

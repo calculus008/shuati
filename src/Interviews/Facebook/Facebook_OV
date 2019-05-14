@@ -1,0 +1,300 @@
+LE_973_K_Closest_Points_To_Origin
+我讲了Sort和Heap两种O(nlgn)的做法，然后说可以用改装的Quick Sort做，这样可以O(n)。面试官说这样啊我觉得Quick Sort很难写的，
+你要不要回头看看之前的两种方法，在他们上面改进。我心里一想，那两种方法还怎么改进，不知道啊。反正quick sort的方法我也写过，
+就直接说我想挑战一下Quick Sort的写法。面试官说那你写吧，然后就打开电脑刷刷刷开始记笔记。
+
+LE_986_Interval_List_Intersections
+http://www.zrzahid.com/maximum-number-of-overlapping-intervals/
+主要应用是max cpu load，在哪个时间段最忙，处理的task最多
+
+LE_273_Integer_To_English_Words
+
+LE_29_Divide_Two_Integers   要求打印出结果，商是多少余数是多少
+
+LE_350_Intersection_Of_Two_Arrays_II
+用HashMap做了。
+Follow-up1: 有没别的做法，解释了双指针。
+Follow-up2：比较两种做法时间复杂度优劣，数据量达到什么tipping point的时候一种方法比另一种方法快（给出数学等式）。
+Follow-up3: 假设两个array中的元素有大量的连续整数的话如何优化，比如a = [(1 5), (8, 10), (15 20)]，
+            b = [(2 6), (45 100)]：return [(2, 5)]（这个例子从另一个面经上找的），没什么思路。
+
+844. Backspace String Compare   面试官要求in place
+
+LE_560_Subarray_Sum_Equals_K     (*****)
+区别是只需要打印true/false。
+Follow-up1: 有0怎么办。
+Follow-up2：有负数怎么办。
+当时还简化了题目，假如所有数都是非负的。我给了two pointer的sliding window方法。
+
+LE_621_Task_Scheduler
+但是要求task 执行order不能变。
+我觉得是hashtable记录每个task的时间。再扫一遍input list, count一下。面试官认同
+现场用hashMap做了一波，面试官说ok
+
+
+LE_42_Trapping_Rain_Water
+follow up：如果这个柱状图里面有个洞（所有这个index的水都会漏掉），要怎么解。
+我的思路是指数i的bar上的积水 = Math.min(maxLeft(i)maxRight(i)) - height[i]. 如果指数i的bar上有洞，
+那么maxLeft(i)到maxRight(i)两根柱子间的水会漏掉，把这之间的减掉应该就行了
+
+LE_22_Generate_Parentheses
+LE_24_Swap_Nodes_In_Pairs
+LE_33_Search_In_Rotated_Sorted_Array
+LE_48_Rotate_Image        丝芭（两种方法 itarative, recursive）
+LE_65_Valid_Number        只允许数字 小数点 正负号
+LE_125_Valid_Palindrome
+LE_215_Kth_Largest_Element_In_Array
+当时我先给了排序法，然后又说了O(n)的类似快排的方法，小哥说你还有没有方法，我说了用heap，感觉这个是他想要的，因为他说那你写下这个吧。。
+
+LE_221_Maximal_Square
+LE_253_Meeting_Rooms_II
+LE_415_Add_Strings                每个string可能是负数。有了负数之后corner case增加了
+LE_34_Search_For_A_Range
+LE_44_Wildcards_Matching          简化版没有 '?'，只有 '*'
+LE_76_Minimum_Window_Substring
+LE_92_Reverse_LinkedList_II
+LE_98_Validate_BST
+LE_110_Balanced_Binary_Tree
+LE_116_Populating_Next_Right_Pointers_In_Each_Node    follow up是不用额外空间做
+LE_158_Read_N_Char_Given_Read4_II
+LE_211_Add_And_Search_Word
+LE_314_Binary_Tree_Vertical_Order_Traversal
+Palindrome_By_Removing_Character
+LE_547_Friend_Circles
+LI_051_Previous_Permutation
+LE_680_Valid_Palindrome_II
+LE_721_Accounts_Merge             721 用Union Find不好， 不如DFS好
+LE_785_Is_Graph_Bipartite
+1027. Longest Arithmetic Sequence
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+follow up : LE_122_Best_Time_To_Buy_And_Sell_Stock_II
+
+LE_301_Remove_Invalid_Parentheses   (*****)
+只用输出一个结果
+我的解法是扫一遍，用两个stack，一个记录多余的左括号，一个记录多余的右括号。都记录了index。
+然后把两个stack长度加起来。
+follow up: 输出处理后的string. 把stack中存的index跳过就好了。
+
+LE_543_Diameter_Of_Binary_Tree
+我用的recursion，然后王者说不喜欢global variable，秒改return pair<int, int>,
+王者跟我思路不太一样，我又重写了一份neat 版本的。。。被王者夸了句move fast，王者这才很满意拍了照。。
+请问一下楼主max diameter of a binary tree这题不用global variable也不return pair的话是怎么做的呢~
+啊我没说清楚，我是用的return pair但是我判断了if root->left之类，王者希望我直接if(!root) return {0,0}.
+但是这样就需要考虑到空节点和叶节点返回值得区别，王者的意思是空节点返回（0，0), 叶节点返回（1，0），和我的思路不太一样
+
+LE_125_Valid_Palindrome
+follow up是如果input string全是invalid character要怎么处理（判断palindrome的时候只看valid letter）。
+
+LE_23_Merge_k_Sorted_Lists   先用priority queue 做 然后 考虑 k 很少 list length 很大 用了 divide and conquer
+LE_124_Binary_Tree_Max_Path_Sum
+LE_674_Longest_Continuous_Increasing_Subsequence
+LE_560_Subarray_Sum_Equals_K    只考虑正数  space 1
+LE_199_Binary_Tree_Right_Side_View
+LE_67_Add_Binary
+
+===================================
+#1
+一个二叉树，给出两个node和最近公共祖先之间（两条path）的sum。
+写了两个方法， 方法A找最近公共祖先，方法B算二叉树两个node之间的和。先跑方法A，再跑两次方法B。
+
+#2
+ Input = [word1, word2, word3...wordn]，就是一串words，这里简写了。找到所有不同的prefix words，words必须是input list里面有的。
+举个例子，[app,apple,banana,ban,bar]，这里的output -> [app, ban, bar]
+我的解法O(n^2)，面试官说OK，下一个。
+
+#3
+sparse vector dot product
+给的是两个vector<pair<index， value>>，然后楼主先说hashmap,要求O（1）space，楼主说排序后双指针。他问有啥corner case，
+我说如果一个贼大，可以用binary search，
+
+#4
+按副对⻆线输出矩阵元素。⽐如 :
+                 [[1,2,3],
+                  [4,5,6],
+                  [7,8,9]]
+输出 [[1],[2,4],[3,5,7],[6,8],[9]]
+
+#5
+maximum length of a path of a binary tree（类似蠡口diameter那题）
+Follow up: nth tree
+Define the tree node data structure and write code
+很快讲了思路，面试官让我跑test case。感觉这一块可能我讲得不太好？他开始好像有一点点不理解。然后写之前我问treenode的定义，
+他让我自己定义。很快写完，继续让我跑test case。接着问followup，有n个孩子怎么办。我当时有点懵好像（我面试完上地里才发现这
+个followup很常见。。。哭），只想到要把所有分支都算一下，然后记录下来找最大两个。写code前又让我定义treenode，写了code又
+跑test case。后面他问有没可能优化，我一想说其实可以不用记录所有的，只要算的过程记录最大两个就行。。。
+
+#6
+给一个input string和target length返回一个valid html。举个例子，给一个String比如<b>Hello</b>，target length是8，
+那么返回<b>H</b>。如果target length是9，返回长度为9的valid html，即<b>He</b>。我用的stack记录tag，最后写了一个估
+计还是有bug的版本。input保证语法正确，length可能小于tag长度
+
+#7
+是给一个array of interval 然后一个interval 在这个 array 里面找到弄够cover given array的最小size
+（这道题觉得很熟悉 但是面经 和 leet 好像都没有）
+第二题的话 是 给了一些 array of  interval【0，4】 [1,4], [1,2] [2,5], [2,4], [2,7] 然后 target interval 【0，7】
+return size = 2， 【0，4】 【2，7】 可以
+如果没法cover 就return -1；
+
+我是先sort array based on starting time
+then loop through it， keep tracking of the farthest range you could find，use a deque to record the interval
+ added， every time find the farthest range check if it will reduce the size of deque, if could pop dequeu and
+ push the new array.the result is the size of the deque.
+
+现在可以确定的是 time complexity 是 optimal 的 O(nlogn) 因为要sort 底下那个loop最多 visit each element twice push
+pop所以O（n). 但是我觉得 space complexity 还是 可以弄少点的
+
+#8
+给一个只含有disdinct char的string，打印出所有可能的string，每个string都包含unique chr，且是原string char 的子集。
+相同字符集的str只用打印一个。例子：{'abc'} ->{' ', 'a', 'b', 'c', 'ab', 'ac', 'bc', 'abc'}
+LE_78_Subsets
+LE_90_Subsets_II
+
+#9
+463. Island Perimeter
+请问楼主第一轮怎么定义的面积？什么follow up?谢谢！
+一个cell就代表1，但是被围绕了就没有面积，很简单；follow up主要就是如何避免用visitor数组，如何避免使用太多的参数等等。
+
+#10
+coding是给一个年收入和算税金的policy 算出这个人一年交的税 example：给一个 收入 超过 10000 收1%，超过 20000 收2% 。。。。。
+超过 50000收 5% 再高了就不收了
+我直接写了一个子函数，里面用了一个递归，复杂度o(n). check 1point3acres for more.
+
+#11
+给一堆边长，求哪一些边可以组成直角三角形
+我一开始用的hashmap，复杂度是o(n2)。 面试官问我还能不能优化，还没等我想一会儿，
+他就说可以用3sum的思路，我立刻知道了，就把解法写给他了
+
+#12
+LE_53_Maximum_Subarray
+1.要求需要用递归来做
+原题的解法是dp，根据之前node的值是否是非负数来判断current node的值。用递归就只要用一个子函数来实现，
+每一个函数用前一个node的值作为arg，来给现在的node判断和赋值。最后取最大值。
+2.变形 只不过返回的是最大sum subarray的最小长度
+
+#13
+考到轮HashMap和Trie
+给一大队单词，找出每个单词出现的次数并且排序。先用Map实现，之后讨论利弊。之后又做了一个我word search
+自己定义输入，我就按照二维char来做的，
+
+#14
+918. Maximum Sum Circular Subarray
+
+#15
+393. UTF-8 Validation
+
+#16
+max path in bt , follow up nth tree
+follow up nth tree 怎么答啊？
+这么做，二叉树的 math.Max(左边最长+右边最长+2) 多茶树，就是loop 一遍找出 math,max(孩子里最长 和第二长的 + 2 )  就行
+
+#17
+LE_301_Remove_Invalid_Parentheses 不需要return 所有，只需要return 一个valid的解即可。
+返回一个结果只需要用stack， 不需要dfs，简单很多了
+变形，要求只输出一个有效结果，不用输出所有，用DFS/BFS面试官会觉得太复杂，我用的直接遍历两遍，欢迎讨论，C++：
+string removeParenth(string s) {
+    if (s.empty()) return "";
+    int numOpen = 0;
+    int numClose = 0;
+    string temp="";
+    for (int i = 0; i < int(s.size()); i++) {
+        if (s[i] == '(') numOpen++;
+        if (s[i] == ')') numClose++;
+        if (numClose > numOpen) {
+            numClose--;
+        }
+        else {
+            temp += s[i];
+        }
+    }
+    string res="";
+    numOpen = 0;
+    numClose = 0;
+    for (int i = int(temp.size()); i >= 0; i--) {
+        if (temp[i] == '(') numOpen++;
+        if (temp[i] == ')') numClose++;
+        if (numOpen > numClose) {
+            numOpen--;
+        }
+        else {
+            res += temp[i];
+        }
+    }
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+#18
+Given a directed acyclic graph, write a function to compress this graph.
+The graph here is a DAG
+
+Original:
+(a), (b), (c) -> (d) -> (e) -> (f), (g)
+Compressed:
+(a), (b), (c) -> (d, e) -> (f), (g)
+
+(a), (b), (c) are parents of (d),
+(d) is parent of (e)
+(e) is parent of (f), (g)
+
+In the above case, we compress (e) into (d) and get (de).  We will assign the value of (e) to (d) to
+get (de) and remove node (e).
+In other words, we prune the edges while still retaining the order and directions of the DAG.
+In code, given (parent) -> (child) -> (grandchildren, could be many) it would be checking whether
+the child node has only a single child.  If yes, we would merge the child into the parent, and assign
+the grandchildren to the parent's children.
+
+#19
+Search word in a list. 有点儿像regular expression但不完全是，给定一个比如“b*y”，星号代表任意字符，
+在["boy","bob","aapl","whatever"]里头找然后返回bool
+不知道印度佬是想误导我还是怎么说，上来面试问我如果找一个东西最快用什么data structure，我说用dictionary或者hashmap啊。。。
+然而这题不止星号可以是26个字母。。。所以。。。我就用了Trie。。。做题的时候Trie给定了，没写
+
+#20
+给一个字典，然后check一个word是否存在，*代表任何字母，eg. dog, d*g (我用Trie做的）
+LE_79_Word_Search
+LE_212_Word_Search_II
+LE_211_Add_And_Search_Word
+
+#21
+两个Num String相加，可以有小数点，比如"3.14" + "2"
+
+有小数点怎么做呢？ 是把string split一下，先把小数点后面的计算出来，然后carry到整数部分，拼接到整数部分的结果去吗？
+如果小数点后面的计算结果是0怎么办呢？ 还需要保留小数点后面的string嘛？那还是直接保留整数部分的string就可以了啊？
+
+这题有点恶心，完全就是靠代码能力。
+
+先把String Split一下，我的代码策略是把两个数的整数和小数部分长度弄一样：整数部分在短的前面加0，小数部分在短的后面加0。
+
+小数部分如果长度变长代表了有carry, 加到整数部分。
+小数部分如果最后几位是0，我还Remove Trailing Zeros.
+
+
+#22
+给定一个有向图，和其中一个node，让输出所有的从这个点出发到终点的路径，终点就是只有指向它的edge, 没有出去的edge。
+
+用dfs和backtracking可以做，遇到终点node，记录下当前的路径， backtrack一下。 或者遇到已经见过的node，就backtrack一下。
+最后记录下的所有路径就是符合条件的路径。
+
+请问楼主这个有向图有没有环？如果有，要怎么考虑？谢谢。
+
+可能有环，当时我用了hashset记了一下见过的node，要是见过了下次就不再visit了
+
+如果图是这样：（*代表向下的箭头）
+1 --> 2 --> 3 --> 6
+          ^       |
+           |       *
+          4 <-- 5
+
+1 2 3 5 4 2 3 6 这条算valid的路径吗？如果是，2已经访问过了，就不能再继续访问了
+
+不算，end node 必须是像6这样的，只进不出的那种。
+
+对，访问过就不能再访问了，不含cycle
+
+
+
+
+
+
+
