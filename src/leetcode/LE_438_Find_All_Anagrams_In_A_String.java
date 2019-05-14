@@ -46,7 +46,56 @@ public class LE_438_Find_All_Anagrams_In_A_String {
          Same as LE_567_Permutation_In_String
      */
 
-    public List<Integer> findAnagrams(String s, String p) {
+    /**
+     * Best solution, just use 1 count array
+     */
+    public List<Integer> findAnagrams1(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        if (null == s || null == p || s.length() == 0 || p.length() == 0
+                || p.length() > s.length()) {
+            return res;
+        }
+
+        char[] chars1 = s.toCharArray();
+        char[] chars2 = p.toCharArray();
+
+        int[] count = new int[256];
+
+        for (int i = 0; i < p.length(); i++) {
+            count[chars2[i]]--;
+            count[chars1[i]]++;
+        }
+
+        int sum = 0;
+
+        for (int n : count) {
+            sum += Math.abs(n);
+        }
+
+        if (sum == 0) {
+            res.add(0);
+        }
+
+        for (int i = p.length(); i < s.length(); i++) {
+            int r = chars1[i];
+            int l = chars1[i - p.length()];
+
+            sum -= (Math.abs(count[r]) + Math.abs(count[l]));
+
+            count[r]++;
+            count[l]--;
+
+            sum +=  (Math.abs(count[r]) + Math.abs(count[l]));
+
+            if (sum == 0) {
+                res.add(i - p.length() + 1);
+            }
+        }
+
+        return res;
+    }
+
+    public List<Integer> findAnagrams2(String s, String p) {
         List<Integer> res = new ArrayList<>();
         int l1 = s.length();
         int l2 = p.length();

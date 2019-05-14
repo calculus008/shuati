@@ -32,6 +32,9 @@ public class LE_528_Random_Pick_With_Weight {
      * constructor has one argument, the array w. pickIndex has no arguments.
      * Arguments are always wrapped with a list, even if there aren't any.
      *
+     * Variation:
+     * 大致是给你一些城市和城市的人口，请写出一个函数，该函数可以根据人口比重随机地输出城市名。
+     *
      * Medium
      */
 
@@ -60,22 +63,28 @@ public class LE_528_Random_Pick_With_Weight {
             rand = new Random();
             sums = new int[w.length];
 
-            for (int i = 0; i < w.length; i++) {
-                sums[i] += w[i];
+            //prefix sum
+            sums[0] = w[0];
+            for (int i = 1; i < w.length; i++) {
+                sums[i] = sums[i - 1] + w[i];
             }
         }
 
         public int pickIndex() {
+            /**
+             * nextInt(int bound)
+             * Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive)
+             */
             int target = rand.nextInt(sums[sums.length - 1]) + 1;
             int l = 0;
-            int r = sums.length - 1;
+            int r = sums.length;
 
             while (l < r) {
                 int m = l + (r - l) / 2;
 
-                if (sums[target] == m) {
+                if (sums[m] == target) {
                     return m;
-                } else if (sums[target] < m) {
+                } else if (sums[m] < target) {
                     l = m + 1;
                 } else {
                     r = m;

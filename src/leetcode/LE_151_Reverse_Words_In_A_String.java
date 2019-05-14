@@ -75,7 +75,8 @@ public class LE_151_Reverse_Words_In_A_String {
         }
 
         /**
-         * Just keep on space between words
+         * Just keep one space between words,
+         * clean up the redundant spaces.
          */
         private String cleanup(char[] ch) {
             int i = 0, j = 0;

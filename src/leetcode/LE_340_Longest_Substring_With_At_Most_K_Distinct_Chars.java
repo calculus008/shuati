@@ -14,7 +14,9 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
         T is "ece" which its length is 3.
      */
 
-    //Sliding Window, Same as LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
+    /**
+     * Sliding Window, Same as LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
+     **/
     public int lengthOfLongestSubstringKDistinct1(String s, int k) {
         if(null == s || k <=0 )
             return 0;
@@ -105,7 +107,7 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
                 }
                 /**
                  * !!!
-                 * 最后才对j加一。应为上面的logic要reference当前的j值。
+                 * 最后才对j加一。因为上面的logic要reference当前的j值。
                  */
                 j++;
             }

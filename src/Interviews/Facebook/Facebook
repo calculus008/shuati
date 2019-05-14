@@ -5,7 +5,7 @@ LE_32_Longest_Valid_Parentheses
 LE_136_Single_Number
 LE_137_Single_Number_II
 LE_260_Single_Number_III
-LE_67_Add_Binary
+
 LE_338_Counting_Bits
 先2分钟写了个Brutle Force，直接每个整数移位算。后来面试官要求更好的解，然后写了个Hash Table的优化，每次算4位。继续要求更好的解，
 跪了。。。然后在提示下找到规律，然后大概花了5分钟左右写了个升级版的，过了……
@@ -20,14 +20,16 @@ LE_65_Valid_Number  (no E)
 LE_121_Best_Time_To_Buy_And_Sell_Stock
 LE_158_Read_N_Char_Given_Read4_II
 LE_161_One_Edit_Distance
+
 LE_173_Binary_Search_Tree_Iterator
 这道题常规解法用个vector存储inorder transverse的node value. 复杂度是O(1), O(n)
 我用的mirrors transversal（大家上讨论区直接搜就能搜到）， 把BST转换成sorted Linked list.复杂度瞬减O(1), O(1)， 教导了小哥一波。
+LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
+
 LE_211_Add_And_Search_Word
 LE_239_Sliding_Window_Maximum
 LE_278_First_Bad_Version
 LE_297_Serialize_And_Deserialize_Binary_Tree   变体，可能不是一个平衡树，要求恢复成原来的样子。
-LE_65_Valid_Number
 LE_314_Binary_Tree_Vertical_Order_Traversal    我一开始用map直接自动排序，面试官说有O(n)的办法么？用了bucket sort
 LE_304_Range_Sum_Query_2D_Immutable     问了一下有变化怎么办，说了一下indexed tree和segment tree
 LE_380_Insert_Delete_GetRandom_O1
@@ -42,6 +44,7 @@ LE_273_Integer_To_English_Words
 LE_252_Meeting_Rooms
 LE_253_Meeting_Rooms_II
 LE_200_Number_Of_Islands  Followup是输出岛的面积
+LE_695_Max_Area_Of_Island
 LE_282_Expression_Add_Operators   变形，只有加法和减法。虽然是hard的题，但是本质是DFS，递归解（指数级时间复杂度）就可以。
 LE_387_First_Unique_Character_In_A_String
 LE_560_Subarray_Sum_Equals_K
@@ -67,6 +70,7 @@ merge interval变种，给两个sorted list a和b, list里面存的是长度为2
 求a和b两个list里所有的overlap的interval段
 
 LE_438_Find_All_Anagrams_In_A_String
+LE_567_Permutation_In_String
 LE_269_Alien_Dictionary
 
 LE_31_Next_Permutation
@@ -85,21 +89,16 @@ https://www.youtube.com/watch?v=Q3JUfHpffIg
 https://stackoverflow.com/questions/8753345/finding-kth-smallest-number-from-n-sorted-arrays
 time complexity: O(m*mlgk*lgk)
 
+LE_19_Remove_Nth_Node_From_End_Of_List
+LE_24_Swap_Nodes_In_Pairs
+
 =========================
 
-523. Continuous Subarray Sum
-
-939. Minimum Area Rectangle
-
-665. Non-decreasing Array
-O(n)直接扫一遍就好。
-
-??
-两两交换链表的node
-725. Split Linked List in Parts
-LE_328_Odd_Even_Linked_List
-
-953. Verifying an Alien Dictionary
+LE_523_Continuous_Subarray_Sum
+LE_939_Minimum_Area_Rectangle
+LE_665_Non_Decreasing_Array   O(n)直接扫一遍就好。
+LE_24_Swap_Nodes_In_Pairs
+LE_953_Verifying_An_Alien_Dictionary
 外星人字典，刚看到吓一跳。后来仔细一看只是需要verify给出的order是否正确，并不需要自己写出正确的order.
 那就用个hash table把order的index和character存起来，挨个比对就可以了。所以这个题感觉是个easy难度吧
 
@@ -132,8 +131,8 @@ ex:
 
 LRU Cache， 除了put 和 get 还要实现一个 evictCache(), 就是remove least recently used key
 
-For a cycle-linked list, which is sorted, given a node from this list and a target value, insert a new node after given node, to make sure the new list is still sorted.
--baidu 1point3acres
+For a cycle-linked list, which is sorted, given a node from this list and a target value,
+insert a new node after given node, to make sure the new list is still sorted.
 example1:
 -> 1 -> 2 -> 3, given 2 and target value 3, insert 3 after 2, new list is: -> 1 -> 2 -> 3 -> 3
 example2:
@@ -151,6 +150,8 @@ example 2 没有看懂。要求是 insert a new node after given node, 这个例
 最后一个题其实加上7和8两种可能，递归就可以。
 不follow橄榄球会比较麻烦，就理解为有2，3，6三种得分方式，1要在得分6以后才可，其实把这个算成7就行，
 没有单独的1.递归可解
+
+LE_518_Coin_Change_II
 
 
 621. Task Scheduler

@@ -21,7 +21,7 @@ public class LE_34_Search_For_A_Range {
 
     /**
      * Similar
-     * Simple_Queries_With_Two_Arrays
+     * Simple_Queries_With_Two_Arrays  (upper bound/lower bound)
      *
      * 这里不能用binary serach找upper/lower bound的方法，
      * 因为我们需要知道target是否在nums中存在。

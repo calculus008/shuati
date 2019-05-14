@@ -42,6 +42,9 @@ public class LE_304_Range_Sum_Query_2D_Immutable {
             int m = matrix.length;
             int n = matrix[0].length;
 
+            /**
+             * padding the 2d Array to calculate cumulative sum
+             */
             sums = new int[m + 1][n + 1];
 
             for (int i = 1; i <= m; i++) {

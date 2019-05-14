@@ -28,6 +28,11 @@ public class LE_567_Permutation_In_String {
      Medium
      */
 
+    /**
+     * Best Solution
+     *
+     * Sliding Window and no need to iterate through map to compare if two arrays are identical
+     */
     public class Solution_JiuZhang_3 {
         /**
          * Variation:
@@ -73,6 +78,7 @@ public class LE_567_Permutation_In_String {
                     ans.add(i - p.length() + 1);
                 }
             }
+
             return ans;
         }
     }

@@ -41,7 +41,6 @@ public class Palindrome_By_Removing_Character {
      * Time  : O(n)
      * Space : O(1)
      */
-
     public static boolean isPalindrome_ByRemoveOneChar(String s) {
         for (int i = 0; i < s.length() / 2; i++) {
             if (s.charAt(i) != s.charAt((s.length() - 1) - i)) {
@@ -54,7 +53,9 @@ public class Palindrome_By_Removing_Character {
     }
 
 
-
+    /**
+     * Return the palindrome after removing one char
+     */
     public static String getPalindrome_ByRemoveOneChar(String s) {
         if (null == s) return "";
         System.out.println("========");
@@ -70,6 +71,7 @@ public class Palindrome_By_Removing_Character {
                 if ( isPalindrome(s, i + 1, s.length() - i - 1) ) {
                     System.out.println("1 -" + s.substring(0, i));
                     System.out.println("2 -" + s.substring(i + 1));
+
                     return s.substring(0, i) + s.substring(i + 1);
                 }
 

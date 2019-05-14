@@ -70,6 +70,15 @@ public class LE_548_Split_Array_With_Equal_Sum {
      *
      * Time complexity : O(n^2). One outer loop and two inner loops are used.
      * Space complexity : O(n).  HashSet size can go up to nn.
+     *
+     * 简化版，就是中间一刀切，切成的两个array之和相等，然后是正常版
+     *
+     *             for (int i = 1; i < n - 1; i++) {
+     *                 if (sum[i - 1] == sum[n - 1] - sum[i]) {
+     *                      return true;
+     *                 }
+     *             }
+     *
      */
     public class Solution {
         public boolean splitArray(int[] nums) {

@@ -100,7 +100,7 @@ public class Simple_Queries_With_Two_Arrays {
         while (l < r) {
             int mid = l + (r - l) / 2;
 
-            if (A[mid] >= target) {
+            if (A[mid] >= target) { //g(mid)
                 r = mid;
             } else {
                 l = mid + 1;

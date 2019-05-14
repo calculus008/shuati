@@ -99,5 +99,44 @@ public class LE_986_Interval_List_Intersections {
              */
             return res.toArray(new Interval[res.size()]);
         }
+
+        /**
+         * input and output in format of 2D array
+         */
+        public int[][] intervalIntersection1(int[][] A, int[][] B) {
+            List<int[]> res = new ArrayList<>();
+            if (A == null || A.length == 0 || B == null || B.length == 0) {
+                return new int[][]{};
+            }
+
+            int i = 0;
+            int j = 0;
+
+            while(i < A.length && j < B.length) {
+                int[] a = A[i];
+                int[] b = B[j];
+
+                int start = Math.max(a[0], b[0]);
+                int end = Math.min(a[1], b[1]);
+
+                if (start <= end) {
+                    res.add(new int[]{start, end});
+                }
+
+                if (a[1] < b[1]) {
+                    i++;
+                } else {
+                    j++;
+                }
+            }
+
+            int[][] ans = new int[res.size()][2];
+            int k = 0;
+            for (int[] r : res) {
+                ans[k] = r;
+            }
+
+            return ans;
+        }
     }
 }

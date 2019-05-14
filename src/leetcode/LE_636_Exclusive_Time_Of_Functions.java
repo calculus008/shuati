@@ -74,7 +74,7 @@ public class LE_636_Exclusive_Time_Of_Functions {
                  */
                 if (parts[1].equals("start")) {
                     stack.push(Integer.parseInt(parts[0]));
-                } else {//stop, pop and time for stopped function increase by 1
+                } else {//stop event, pop, time for stopped function increase by 1
                     res[stack.pop()]++;
                     prevTime++;
                 }
@@ -129,16 +129,25 @@ public class LE_636_Exclusive_Time_Of_Functions {
                     }
 
                     stack.push(Integer.parseInt(s[0]));
-                    prev = Integer.parseInt(s[2]);
+                    prev = Integer.parseInt(s[2]);//!!!
                 } else {
                     res[stack.peek()] += Integer.parseInt(s[2]) - prev + 1;//"end" is still the end of stop time stamp
                     stack.pop();
-                    prev = Integer.parseInt(s[2]) + 1;
+                    prev = Integer.parseInt(s[2]) + 1;//!!!
                 }
 
+                /**
+                 * !!!
+                 * Don't forget!!!
+                 */
                 i++;
             }
             return res;
         }
     }
+
+    /**
+     * FB
+     * 给了陆仨露的变体和多线程环境下不同的执行情况的题，总共两道一下给的，复习的时候就当成露三路就可以了。
+     */
 }

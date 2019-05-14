@@ -256,6 +256,10 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             }
         }
 
+        /**
+         * key - value
+         * vale - list of Integers, Integer is the index in the list for the value
+         */
         HashMap<Integer, List<Integer>> map;
         List<Element> list;
         java.util.Random rand = new java.util.Random();

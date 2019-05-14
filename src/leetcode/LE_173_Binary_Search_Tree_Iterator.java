@@ -9,11 +9,14 @@ import java.util.Stack;
  */
 public class  LE_173_Binary_Search_Tree_Iterator {
     /**
-        Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.
+        Implement an iterator over a binary search tree (BST).
+        Your iterator will be initialized with the root node of a BST.
 
         Calling next() will return the next smallest number in the BST.
 
-        Note: next() and hasNext() should run in average O(1) time and uses O(h) memory, where h is the height of the tree.
+        Note:
+        next() and hasNext() should run in average O(1) time and uses O(h) memory,
+        where h is the height of the tree.
      **/
 
     /**
@@ -41,7 +44,10 @@ public class  LE_173_Binary_Search_Tree_Iterator {
             /**
              * This is actually the outer while loop condition in LE_94_Binary_Tree_Inorder_Traversal
              */
-            if (!stack.isEmpty() || cur != null) return true;
+            if (!stack.isEmpty() || cur != null) {
+                return true;
+            }
+
             return false;
         }
 
@@ -87,5 +93,14 @@ public class  LE_173_Binary_Search_Tree_Iterator {
             return val;
         }
     }
+
+    /**
+     * 这道题常规解法用个vector存储inorder transverse的node value. 复杂度是O(1), O(n)
+     * 我用的mirrors transversal（大家上讨论区直接搜就能搜到）， 把BST转换成sorted Linked
+     * list.复杂度瞬减O(1), O(1)， 教导了小哥一波。
+     *
+     * 大概就是用 LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List，
+     * 把 BST convert to double linked list, 然后iterate.
+     */
 
 }
