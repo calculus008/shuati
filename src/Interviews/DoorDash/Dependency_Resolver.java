@@ -26,11 +26,11 @@ public class Dependency_Resolver {
      * ]
      *
      *       a
-     *
+     *      / |
      *     b   d
-     *
+     *    / |  |
      *   c  f   e
-     *
+     *   /
      *  g
      *
      * (possible) output:
@@ -57,6 +57,62 @@ public class Dependency_Resolver {
      * Then maintain parent map, once cycle is detected, DFS to backtrack circular path.
      *
      */
+
+    /**
+     * Solution with topological sort
+     */
+    public static List<String> resolveDependence_topological(Map<String, List<String>> dependency, Set<String> files) {
+        Map<String, Set<String>> graph = new HashMap<>();
+        Map<String, Integer> indegree = new HashMap<>();
+
+        List<String> res = new ArrayList<>();
+
+        //init indegree
+        for (String file : files) {
+            indegree.put(file, 0);
+        }
+
+        //convert input into adjacent list, key is file, value is set of files that depend on key
+        for (Map.Entry<String, List<String>> entry : dependency.entrySet()) {
+            String key = entry.getKey();
+            List<String> list  = entry.getValue();
+
+            for (String s : list) {
+                graph.putIfAbsent(s, new HashSet<>());
+                graph.get(s).add(key);
+            }
+            indegree.put(key, indegree.getOrDefault(key, 0) + list.size());//assume no duplicate in list
+        }
+
+        Queue<String> q = new LinkedList<>();
+        for (String key : indegree.keySet()) {
+            if (indegree.get(key) == 0) {
+                q.offer(key);
+            }
+        }
+
+        while (!q.isEmpty()) {
+            String cur = q.poll();
+            /**
+             * add to res when poll
+             */
+            res.add(cur);
+
+            if (!graph.containsKey(cur)) continue;
+
+            for (String s : graph.get(cur)) {
+                indegree.put(s, indegree.get(s) - 1);
+                if (indegree.get(s) == 0) {
+                    q.offer(s);
+                }
+            }
+        }
+
+        return res.size() == files.size() ? res : new ArrayList<>();
+    }
+
+
+
 
     public static List<String> resolveDependence(String A, Map<String, List<String>> adjlist) {
         List<String> res = new ArrayList<>();
@@ -169,11 +225,15 @@ public class Dependency_Resolver {
 
         List<String> f = new ArrayList<>();
         f.add("g");
-        f.add("a");
+//        f.add("a");
         map.put("f", f);
 
-        List<String> res = resolveDependence("a", map);
-        System.out.println(Arrays.toString(res.toArray()));
+//        List<String> res = resolveDependence("a", map);
+//        System.out.println(Arrays.toString(res.toArray()));
 
+        String[] files = {"a","b","c","d","e","f","g", "z"};
+        Set<String> set = new HashSet<>(Arrays.asList(files));
+        List<String> res = resolveDependence_topological(map, set);
+        System.out.println(Arrays.toString(res.toArray()));
     }
 }

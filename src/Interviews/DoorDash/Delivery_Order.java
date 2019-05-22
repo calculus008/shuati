@@ -124,6 +124,93 @@ public class Delivery_Order {
         return res;
     }
 
+    public static boolean isPathValid_practice(List<String> input) {
+        if (input == null || input.size() == 0) return false;
+
+        int size = input.size();
+
+        Set<Integer> set = new HashSet<>();
+        boolean isPickup = false;
+
+        for (String s : input) {
+            if (s.length() == 0) return false;
+
+            if (s.charAt(0) == 'p') {
+                isPickup = true;
+            } else {
+                isPickup = false;
+            }
+
+            int num = Integer.valueOf(s.substring(1));
+
+            if (isPickup) {
+                if (!set.add(num)) {
+                    return false;
+                }
+            } else {
+                if (set.contains(num)) {
+                    set.remove(num);
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return set.isEmpty() ? true : false;
+    }
+
+    public static List<List<String>> allPossibleRoutes_practice(int n) {
+        List<List<String>> res = new ArrayList<>();
+
+        if (n <= 0) return res;
+
+        List<String> l1 = new ArrayList<>();
+        l1.add("p1");
+        l1.add("d1");
+
+        res.add(l1);
+        if (n == 1) return res;
+
+        res.remove(0);
+
+        List<List<String>> last = new ArrayList<>();
+        last.add(l1);
+
+        for (int i = 2; i <= n; i++) {
+            List<List<String>> cur = new ArrayList<>();
+            int len = last.get(0).size();
+
+            for (int j = 0; j < last.size(); j++) {
+                for (int k = 0; k <= len + 1; k++) {
+                    List<String> temp = new LinkedList<>(last.get(j));
+
+                    /**
+                     * add pickup first
+                     */
+                    if (k == len + 1) {
+                        temp.add("p" + i);
+                    } else {
+                        temp.add(k, "p" + i);
+                    }
+
+                    for (int h = k; h <= len + 1; h++) {
+                        List<String> copy = new LinkedList<>(temp);
+                        copy.add(h, "d" + i);
+                        cur.add(copy);
+
+                        if (i == n) {
+                            res.add(copy);
+                        }
+                    }
+                }
+            }
+
+            last = cur;
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         List<List<String>> validCases = new ArrayList<>();
         String[][] ss = new String[][]{{"p1", "d1", "p2", "d2"},
@@ -139,7 +226,7 @@ public class Delivery_Order {
         }
 
         for (int i = 0; i < validCases.size(); i++) {
-            boolean res = isPathValid(validCases.get(i));
+            boolean res = isPathValid_practice(validCases.get(i));
             System.out.println(res);
         }
 
@@ -160,10 +247,9 @@ public class Delivery_Order {
         }
 
         for (int i = 0; i < invalidCases.size(); i++) {
-            boolean res = isPathValid(invalidCases.get(i));
+            boolean res = isPathValid_practice(invalidCases.get(i));
             System.out.println(res);
         }
-
 
         List<List<String>> res = allPossibleRoutes(3);
 

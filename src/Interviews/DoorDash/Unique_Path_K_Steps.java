@@ -129,4 +129,33 @@ public class Unique_Path_K_Steps {
 
         return dp[r2][c2];
     }
+
+    public double getNumberOfPaths_Practice(int[][] matrix, int r1, int c1, int r2, int c2, int K) {
+        if (null == matrix || matrix.length == 0) return 0;
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        double[][][] dp = new double[m][n][K + 1];
+        dp[r1][c1][0] = 1.0;
+
+        int[][] dirs = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1},{-1, -1}};
+
+        for (int k = 1; k <= K; k++) {
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    for (int[] dir : dirs) {
+                        int x = i + dir[0];
+                        int y = j + dir[1];
+
+                        if (x < 0 || x >= m || y < 0 || y >= n) continue;
+
+                        dp[k][i][j] += dp[k - 1][x][y];
+                    }
+                }
+            }
+        }
+
+        return dp[K][r2][c2];
+    }
 }

@@ -5,7 +5,8 @@ package leetcode;
  */
 public class LE_29_Divide_Two_Integers {
     /**
-         Given two integers dividend and divisor, divide two integers without using multiplication, division and mod operator.
+         Given two integers dividend and divisor, divide two integers without using
+         multiplication, division and mod operator.
 
          Return the quotient after dividing dividend by divisor.
 
@@ -23,8 +24,10 @@ public class LE_29_Divide_Two_Integers {
 
          Both dividend and divisor will be 32-bit signed integers.
          The divisor will never be 0.
-         Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1].
-         For the purpose of this problem, assume that your function returns 231 − 1 when the division result overflows.
+         Assume we are dealing with an environment which could only store integers within
+         the 32-bit signed integer range: [−231,  231 − 1].
+         For the purpose of this problem, assume that your function returns 231 − 1 when
+         the division result overflows.
 
         Very Important
      */
@@ -107,7 +110,7 @@ public class LE_29_Divide_Two_Integers {
 
 
     //Solution 2 : use bit operation
-    public int divide2(int dividend, int divisor) {
+    public static int divide2(int dividend, int divisor) {
         if (divisor == 0 || dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
 
         int res = 0;
@@ -115,15 +118,31 @@ public class LE_29_Divide_Two_Integers {
         long dvd = Math.abs((long) dividend);
         long dvs = Math.abs((long) divisor);
 
+        System.out.println("dvd="+dvd + ", dvs="+ dvs);
+
         while (dvs <= dvd) {
-            long temp = dvs, mul = 1;
+            long temp = dvs;
+            long mul = 1;
+
+            System.out.println("before inner while dvd="+dvd + ", temp="+ temp);
+
             while (dvd >= temp << 1) {
+//                System.out.println("dvd="+dvd + ", temp="+ temp);
+
                 temp <<= 1;
                 mul <<= 1;
             }
+
+            System.out.println("after inner while dvd="+dvd + ", temp="+ temp);
+
+
             dvd -= temp;
             res += mul;
         }
         return sign == 1 ? res : -res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("res=" + divide2(32, 5));
     }
 }

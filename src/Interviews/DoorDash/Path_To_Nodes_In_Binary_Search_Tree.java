@@ -28,6 +28,8 @@ public class Path_To_Nodes_In_Binary_Search_Tree {
      * care是不是最优，能做出来就行，
      *
      * Reference to LE_235_Lowest_Common_Ancestor_Of_BST
+     *
+     * Similar problem - Path_Sum_LCA
      */
 
     List<TreeNode> list = new LinkedList<>();

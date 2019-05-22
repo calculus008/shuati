@@ -56,6 +56,11 @@ public class LE_62_Unique_Path {
          a[0] = 1;
 
          for (int i = 0; i < n; i++) {
+             /**
+              * !!!
+              * here, m (row) is smaller, dp is defined as number of rows,
+              * it is in inner loop
+              */
              for (int j = 0; j < m; j++) {
                  if (i == 0 || j == 0) {
                      a[j] = 1;

@@ -133,7 +133,7 @@ public class LE_986_Interval_List_Intersections {
             int[][] ans = new int[res.size()][2];
             int k = 0;
             for (int[] r : res) {
-                ans[k] = r;
+                ans[k++] = r;
             }
 
             return ans;

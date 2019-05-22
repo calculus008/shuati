@@ -225,7 +225,11 @@ public class LE_772_Basic_Calculator_III {
                 } else if (chars[i] == '(') {
                     nums.push(Long.MAX_VALUE);
                     ops.push(op);
-                    op = '+';//!!!
+
+                    /**
+                     * !!!
+                     */
+                    op = '+';
                 } else if (chars[i] == ')') {
                     int temp = 0;
                     while (nums.peek() != Long.MAX_VALUE) {

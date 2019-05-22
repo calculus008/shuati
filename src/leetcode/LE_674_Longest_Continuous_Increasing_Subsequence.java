@@ -12,7 +12,8 @@ public class LE_674_Longest_Continuous_Increasing_Subsequence {
          Input: [1,3,5,4,7]
          Output: 3
          Explanation: The longest continuous increasing subsequence is [1,3,5], its length is 3.
-         Even though [1,3,5,7] is also an increasing subsequence, it's not a continuous one where 5 and 7 are separated by 4.
+         Even though [1,3,5,7] is also an increasing subsequence, it's not a continuous one where
+         5 and 7 are separated by 4.
 
          Example 2:
          Input: [2,2,2,2,2]
@@ -43,6 +44,32 @@ public class LE_674_Longest_Continuous_Increasing_Subsequence {
                 up = 1;
             }
             res = Math.max(res, up);
+        }
+
+        return res;
+    }
+
+    /**
+     * Time  : O(n)
+     * Space : O(n)
+     */
+    public int findLengthOfLCIS_1(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int n = nums.length;
+        int[] dp = new int[n];
+
+        dp[0] = 1;
+        int res = 1;
+
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > nums[i - 1]) {
+                dp[i] = dp[i - 1] + 1;
+            } else {
+                dp[i] = 1;
+            }
+
+            res = Math.max(res, dp[i]);
         }
 
         return res;

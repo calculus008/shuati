@@ -5,15 +5,8 @@ LE_32_Longest_Valid_Parentheses
 LE_136_Single_Number
 LE_137_Single_Number_II
 LE_260_Single_Number_III
-
-LE_338_Counting_Bits
-先2分钟写了个Brutle Force，直接每个整数移位算。后来面试官要求更好的解，然后写了个Hash Table的优化，每次算4位。继续要求更好的解，
-跪了。。。然后在提示下找到规律，然后大概花了5分钟左右写了个升级版的，过了……
-
-LE_528_Random_Pick_With_Weight
-Random 题目 - 大致是给你一些城市和城市的人口，请写出一个函数，该函数可以根据人口比重随机地输出城市名。
-这个题明显是一个probability的题目，楼主还是基础不扎实，有思路就是死活写不出code来。 最后follow up优化就没有时间了，估计就跪在这儿了。
-
+LE_19_Remove_Nth_Node_From_End_Of_List
+LE_24_Swap_Nodes_In_Pairs
 LE_03_Longest_Substring_Without_Repeating_Characters
 LE_34_Search_For_A_Range   變化是求一個數組裏大於給定數K的第一個occurrence的index
 LE_65_Valid_Number  (no E)
@@ -82,6 +75,16 @@ LE_416_Partition_Equal_Subset_Sum    简化版，就是中间一刀切，切成�
 LE_548_Split_Array_With_Equal_Sum
 第一题是把一个array分成两个subarray with equal sum，follow up是能不能一遍traversal
 
+==========================
+
+LE_338_Counting_Bits
+先2分钟写了个Brutle Force，直接每个整数移位算。后来面试官要求更好的解，然后写了个Hash Table的优化，每次算4位。继续要求更好的解，
+跪了。。。然后在提示下找到规律，然后大概花了5分钟左右写了个升级版的，过了……
+
+LE_528_Random_Pick_With_Weight
+Random 题目 - 大致是给你一些城市和城市的人口，请写出一个函数，该函数可以根据人口比重随机地输出城市名。
+这个题明显是一个probability的题目，楼主还是基础不扎实，有思路就是死活写不出code来。 最后follow up优化就没有时间了，估计就跪在这儿了。
+
 LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix
 find kth smallest element in M sorted arrays. 跟蠡口那道 find kth smallest element in sorted matrix是类似的，区别就是array长度不一样。
 网上有两处讲这个算法的:
@@ -89,8 +92,7 @@ https://www.youtube.com/watch?v=Q3JUfHpffIg
 https://stackoverflow.com/questions/8753345/finding-kth-smallest-number-from-n-sorted-arrays
 time complexity: O(m*mlgk*lgk)
 
-LE_19_Remove_Nth_Node_From_End_Of_List
-LE_24_Swap_Nodes_In_Pairs
+
 
 =========================
 

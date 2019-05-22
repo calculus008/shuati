@@ -172,6 +172,9 @@ public class  LE_23_Merge_k_Sorted_Lists {
                     }
                 }
 
+                /**
+                 * can't find valid minRow, means we finished merge, break
+                 */
                 if (minRow < 0) {
                     break;
                 }
@@ -184,4 +187,65 @@ public class  LE_23_Merge_k_Sorted_Lists {
             return dummy.next;
         }
     }
+
+    /**
+     * Divide and Conquer
+     * Improved from Solution2
+     *
+     * Solution 5
+     * https://leetcode.com/problems/merge-k-sorted-lists/solution/
+     *
+     * Pair up k lists and merge each pair.
+     *
+     * After the first pairing, k lists are merged into k/2 lists with
+     * average 2N/k length, then k/4, k/8 and so on.
+     *
+     * Repeat this procedure until we get the final sorted linked list.
+     *
+     * Thus, we'll traverse almost N nodes per pairing and merging, and repeat
+     * this procedure about logk
+     *
+     * Time complexity : O(Nlogk) where k is the number of linked lists.
+     *
+     * We can merge two sorted linked list in O(n) time where n is the total number
+     * of nodes in two lists. Sum up the merge process and we can get:
+     * O(Nlogk)
+     *
+     * Space complexity : O(1)  (!!!)
+     */
+    class Solution3 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if (lists.length < 1) {
+                return null;
+            }
+
+            return partition(lists, 0, lists.length - 1);
+        }
+
+        private ListNode partition(ListNode[] lists, int s, int e) {
+            if (s == e) {
+                return lists[s];
+            }
+
+            int h = (s + e) / 2;
+            return merge(partition(lists, s, h), partition(lists, h + 1, e));
+        }
+
+        private ListNode merge(ListNode l1, ListNode l2) {
+            if (l1 == null) return l2;
+            if (l2 == null) return l1;
+
+            ListNode result = null;
+            if (l1.val < l2.val) {
+                result = l1;
+                result.next = merge(l1.next, l2);
+            } else {
+                result = l2;
+                result.next = merge(l1, l2.next);
+            }
+
+            return result;
+        }
+    }
+
 }

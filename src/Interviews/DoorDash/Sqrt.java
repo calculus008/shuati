@@ -49,7 +49,7 @@ public class Sqrt {
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (mid == x / mid) {
-                return mid * mid == x ? mid : mid + 1;
+                return mid * mid == x ? mid : mid + 1;//#1 for round up
             } else if (mid < x / mid) {
                 start = mid;
             } else {
@@ -57,7 +57,7 @@ public class Sqrt {
             }
         }
 
-        return start + 1;
+        return start + 1;//#2 for round up
     }
 
     public static int mySqrt_Newton(int a) {
@@ -166,8 +166,52 @@ public class Sqrt {
         float res3 = myPrecisionSqrt2(30, 4);
         System.out.println(res3);
 
+        float res4 = precision_practice(30, 4);
+        System.out.println(res4);
+
+
+
 //        int res1 = sqrt_1(50);
 //        System.out.println(res1);
+    }
+
+    public static int sqrt_practice(int x) {
+        if (x == 1) return 1;
+
+        int l = 1;
+        int r = x;
+
+        while (l + 1 < r) {
+            int m = l + (r - l) / 2;
+
+            if (m == x / m) {
+                return m * m == x ? m : m + 1;
+            } else if (m < x / m) {
+                l = m;
+            } else {
+                r = m;
+            }
+        }
+
+        return l + 1;
+    }
+
+    public static float precision_practice(int num, int precision) {
+        int res = sqrt_practice(num);
+
+        double ans = res;
+        double increment = 0.1;
+
+        for (int i = 0; i < precision; i++) {
+            while (ans * ans > num) {
+                ans -= increment;
+            }
+
+            ans += increment;
+            increment /= 10;
+        }
+
+        return (float)ans;
     }
 
 }

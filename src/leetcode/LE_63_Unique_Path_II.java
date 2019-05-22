@@ -56,6 +56,48 @@ public class LE_63_Unique_Path_II {
     }
 
     /**
+     * 直接从Solution2 改过来的版本。
+     * Time : O(m * n)
+     * Space : O(m)
+     */
+    class Solution1_1 {
+        public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+            if (null == obstacleGrid || obstacleGrid.length == 0 || obstacleGrid[0][0] == 1) {
+                return 0;
+            }
+
+            int m = obstacleGrid.length;
+            int n = obstacleGrid[0].length;
+
+            int[] dp = new int[m];
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    /**
+                     * !!!
+                     * 注意，rwo现在在inner loop with variable j,
+                     * 所以, dp[j][i], 不是dp[i][j]
+                     */
+                    if (obstacleGrid[j][i] == 1) {
+                        dp[j] = 0;
+                    } else {
+                        if (i == 0 && j == 0) {
+                            dp[j] = 1;
+                        } else if (i == 0 && j != 0) {
+                            dp[j] = dp[j - 1];
+                        } else if (i != 0 && j == 0) {
+                            dp[j] = dp[j];
+                        } else {
+                            dp[j] = dp[j] + dp[j - 1];
+                        }
+                    }
+                }
+            }
+
+            return dp[m - 1];
+        }
+    }
+    /**
      * Time  : O(m * n)
      * Space : O(m * n)
      */

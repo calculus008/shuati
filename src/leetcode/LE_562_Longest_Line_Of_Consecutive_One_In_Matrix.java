@@ -73,4 +73,51 @@ public class LE_562_Longest_Line_Of_Consecutive_One_In_Matrix {
 
         return max;
     }
+
+    public int longestLine_Practice(int[][] M) {
+        if (M == null || M.length == 0) return 0;
+
+        int m = M.length;
+        int n = M[0].length;
+
+        int[][][] dp = new int[m][n][4];
+        int res = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (M[i][j] == 0) {
+                    continue;
+                }
+
+                for (int k = 0; k < 4; k++) {
+                    dp[i][j][k] = 1;
+                }
+
+                if (j - 1 >= 0) {
+                    dp[i][j][0] += dp[i][j - 1][0];
+                }
+
+                if (i - 1 >= 0) {
+                    dp[i][j][1] += dp[i - 1][j][1];
+                }
+
+                if (i - 1 >= 0 && j - 1 >= 0) {
+                    dp[i][j][2] += dp[i - 1][j - 1][2];
+                }
+
+                if (i - 1 >= 0 && j + 1 < n) {
+                    dp[i][j][3] += dp[i - 1][j + 1][3];
+                }
+
+                res = Math.max(res, dp[i][j][0]);
+                res = Math.max(res, dp[i][j][1]);
+                res = Math.max(res, dp[i][j][2]);
+                res = Math.max(res, dp[i][j][3]);
+            }
+        }
+
+
+        return res;
+    }
+
 }

@@ -255,4 +255,80 @@ public class LE_269_Alien_Dictionary {
         }
     }
 
+    class Solution_Practice {
+        public String alienOrder(String[] words) {
+            if (words == null || words.length == 0) return "";
+
+            Map<Character, Set<Character>> graph = new HashMap<>();
+            Map<Character, Integer> indegree = new HashMap<>();
+
+            /**
+             * #1.Must init indegree with 0 !!!
+             */
+            for (String word : words) {
+                for (char c : word.toCharArray()) {
+                    indegree.put(c , 0);
+                }
+            }
+
+            int n = words.length;
+
+            /**
+             * #2.For loop from o to n - 1, compare current with next one
+             */
+            for (int i = 0; i < n - 1; i++) {
+                String s1 = words[i];
+                String s2 = words[i + 1];
+                /**
+                 * #3.only need to loop for minLen times
+                 */
+                int minLen = Math.min(s1.length(), s2.length());
+
+                for (int j = 0; j < minLen; j++) {
+                    char c1 = s1.charAt(j);
+                    char c2 = s2.charAt(j);
+                    if (c1 != c2) {
+                        graph.putIfAbsent(c1, new HashSet<>());
+                        Set<Character> set = graph.get(c1);
+
+                        /**
+                         * #4.Only process when set does not contain c2
+                         */
+                        if (!set.contains(c2)) {
+                            set.add(c2);
+                            indegree.put(c2, indegree.getOrDefault(c2, 0) + 1);
+                        }
+
+                        break;
+                    }
+
+                }
+            }
+
+            Queue<Character> q = new LinkedList<>();
+            for (char key : indegree.keySet()) {
+                if (indegree.get(key) == 0) {
+                    q.offer(key);
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+            while (!q.isEmpty()) {
+                char cur = q.poll();
+                sb.append(cur);
+
+                if (!graph.containsKey(cur)) continue;
+
+                for (Character c : graph.get(cur)) {
+                    indegree.put(c, indegree.get(c) - 1);
+                    if (indegree.get(c) == 0) {
+                        q.offer(c);
+                    }
+                }
+            }
+
+            return sb.length() == indegree.size() ? sb.toString() : "";
+        }
+    }
+
 }

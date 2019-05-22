@@ -28,6 +28,10 @@ public class LE_273_Integer_To_English_Words {
         if(num < 20) {
             res =  below20[num];
         } else if(num < 100) {
+            /**
+             * !!!
+             * below100[num/10], not helper(num/100)
+             */
             res = below100[num/10] + " " + helper(num%10);
         } else if(num < 1000) {
             res = helper(num/100) + " Hundred " + helper(num%100);

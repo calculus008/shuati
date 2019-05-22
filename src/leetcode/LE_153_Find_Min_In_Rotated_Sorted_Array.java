@@ -26,6 +26,23 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
      *
      * Time : O(1) + T(n / 2) = O(logn)
      *
+     * Example :
+     *
+     * idx 0 1 2 3 4 5 6
+     *     4 5 6 7 0 1 2
+     *                              result = 0
+     *                       l = 0, r = 6, m = 3
+     *                   4 /                     \0
+     *          l = 0, r = 2                    l = 3, r = 6
+     *              m = 1                            m = 4
+     *            4 /   \ 5                     3 /            \ 0
+     *   l = 0, r = 0   l = 1, r = 2        l = 3, r = 3         l = 4, r = 6
+     *    min(nums[0],    min(nums[1],      min(nums[3],              m = 5
+     *        nums[0])        nums[2])          nums[3])        0 /            \ 1
+     *     return 4          return 5         return 7     l = 4, r = 4     l = 5, r = 6
+     *                                                       min(nums[4],     min(nums[5],
+     *                                                           nums[4])         nums[6])
+     *                                                          return 0         return 1
      */
     class Solution {
         public int findMin(int[] nums) {

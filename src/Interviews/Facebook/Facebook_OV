@@ -1,51 +1,19 @@
-LE_973_K_Closest_Points_To_Origin
-我讲了Sort和Heap两种O(nlgn)的做法，然后说可以用改装的Quick Sort做，这样可以O(n)。面试官说这样啊我觉得Quick Sort很难写的，
-你要不要回头看看之前的两种方法，在他们上面改进。我心里一想，那两种方法还怎么改进，不知道啊。反正quick sort的方法我也写过，
-就直接说我想挑战一下Quick Sort的写法。面试官说那你写吧，然后就打开电脑刷刷刷开始记笔记。
-
-LE_986_Interval_List_Intersections
-http://www.zrzahid.com/maximum-number-of-overlapping-intervals/
-主要应用是max cpu load，在哪个时间段最忙，处理的task最多
+2019 April
 
 LE_273_Integer_To_English_Words
-
 LE_29_Divide_Two_Integers   要求打印出结果，商是多少余数是多少
-
-LE_350_Intersection_Of_Two_Arrays_II
-用HashMap做了。
-Follow-up1: 有没别的做法，解释了双指针。
-Follow-up2：比较两种做法时间复杂度优劣，数据量达到什么tipping point的时候一种方法比另一种方法快（给出数学等式）。
-Follow-up3: 假设两个array中的元素有大量的连续整数的话如何优化，比如a = [(1 5), (8, 10), (15 20)]，
-            b = [(2 6), (45 100)]：return [(2, 5)]（这个例子从另一个面经上找的），没什么思路。
-
-844. Backspace String Compare   面试官要求in place
-
-LE_560_Subarray_Sum_Equals_K     (*****)
-区别是只需要打印true/false。
-Follow-up1: 有0怎么办。
-Follow-up2：有负数怎么办。
-当时还简化了题目，假如所有数都是非负的。我给了two pointer的sliding window方法。
-
-LE_621_Task_Scheduler
-但是要求task 执行order不能变。
-我觉得是hashtable记录每个task的时间。再扫一遍input list, count一下。面试官认同
-现场用hashMap做了一波，面试官说ok
-
-
-LE_42_Trapping_Rain_Water
-follow up：如果这个柱状图里面有个洞（所有这个index的水都会漏掉），要怎么解。
-我的思路是指数i的bar上的积水 = Math.min(maxLeft(i)maxRight(i)) - height[i]. 如果指数i的bar上有洞，
-那么maxLeft(i)到maxRight(i)两根柱子间的水会漏掉，把这之间的减掉应该就行了
-
+LE_23_Merge_k_Sorted_Lists   先用priority queue 做 然后 考虑 k 很少 list length 很大 用了 divide and conquer
+LE_124_Binary_Tree_Max_Path_Sum
+LE_674_Longest_Continuous_Increasing_Subsequence
+LE_560_Subarray_Sum_Equals_K    只考虑正数  space O(1)
+LE_199_Binary_Tree_Right_Side_View
+LE_67_Add_Binary
 LE_22_Generate_Parentheses
 LE_24_Swap_Nodes_In_Pairs
 LE_33_Search_In_Rotated_Sorted_Array
 LE_48_Rotate_Image        丝芭（两种方法 itarative, recursive）
 LE_65_Valid_Number        只允许数字 小数点 正负号
 LE_125_Valid_Palindrome
-LE_215_Kth_Largest_Element_In_Array
-当时我先给了排序法，然后又说了O(n)的类似快排的方法，小哥说你还有没有方法，我说了用heap，感觉这个是他想要的，因为他说那你写下这个吧。。
-
 LE_221_Maximal_Square
 LE_253_Meeting_Rooms_II
 LE_415_Add_Strings                每个string可能是负数。有了负数之后corner case增加了
@@ -65,10 +33,18 @@ LI_051_Previous_Permutation
 LE_680_Valid_Palindrome_II
 LE_721_Accounts_Merge             721 用Union Find不好， 不如DFS好
 LE_785_Is_Graph_Bipartite
-1027. Longest Arithmetic Sequence
-
 LE_121_Best_Time_To_Buy_And_Sell_Stock
 follow up : LE_122_Best_Time_To_Buy_And_Sell_Stock_II
+
+===================================
+
+LE_42_Trapping_Rain_Water
+follow up：如果这个柱状图里面有个洞（所有这个index的水都会漏掉），要怎么解。
+我的思路是指数i的bar上的积水 = Math.min(maxLeft(i)maxRight(i)) - height[i]. 如果指数i的bar上有洞，
+那么maxLeft(i)到maxRight(i)两根柱子间的水会漏掉，把这之间的减掉应该就行了
+
+LE_215_Kth_Largest_Element_In_Array
+当时我先给了排序法，然后又说了O(n)的类似快排的方法，小哥说你还有没有方法，我说了用heap，感觉这个是他想要的，因为他说那你写下这个吧。。
 
 LE_301_Remove_Invalid_Parentheses   (*****)
 只用输出一个结果
@@ -86,20 +62,41 @@ LE_543_Diameter_Of_Binary_Tree
 LE_125_Valid_Palindrome
 follow up是如果input string全是invalid character要怎么处理（判断palindrome的时候只看valid letter）。
 
-LE_23_Merge_k_Sorted_Lists   先用priority queue 做 然后 考虑 k 很少 list length 很大 用了 divide and conquer
-LE_124_Binary_Tree_Max_Path_Sum
-LE_674_Longest_Continuous_Increasing_Subsequence
-LE_560_Subarray_Sum_Equals_K    只考虑正数  space 1
-LE_199_Binary_Tree_Right_Side_View
-LE_67_Add_Binary
+LE_560_Subarray_Sum_Equals_K     (*****)
+区别是只需要打印true/false。
+Follow-up1: 有0怎么办。
+Follow-up2：有负数怎么办。
+当时还简化了题目，假如所有数都是非负的。我给了two pointer的sliding window方法。
+
+LE_621_Task_Scheduler
+但是要求task 执行order不能变。
+我觉得是hashtable记录每个task的时间。再扫一遍input list, count一下。面试官认同
+现场用hashMap做了一波，面试官说ok
+
+LE_350_Intersection_Of_Two_Arrays_II
+用HashMap做了。
+Follow-up1: 有没别的做法，解释了双指针。
+Follow-up2：比较两种做法时间复杂度优劣，数据量达到什么tipping point的时候一种方法比另一种方法快（给出数学等式）。
+Follow-up3: 假设两个array中的元素有大量的连续整数的话如何优化，比如a = [(1 5), (8, 10), (15 20)]，
+            b = [(2 6), (45 100)]：return [(2, 5)]（这个例子从另一个面经上找的），没什么思路。
+
+LE_973_K_Closest_Points_To_Origin
+我讲了Sort和Heap两种O(nlgn)的做法，然后说可以用改装的Quick Sort做，这样可以O(n)。面试官说这样啊我觉得Quick Sort很难写的，
+你要不要回头看看之前的两种方法，在他们上面改进。我心里一想，那两种方法还怎么改进，不知道啊。反正quick sort的方法我也写过，
+就直接说我想挑战一下Quick Sort的写法。面试官说那你写吧，然后就打开电脑刷刷刷开始记笔记。
+
+LE_986_Interval_List_Intersections
+http://www.zrzahid.com/maximum-number-of-overlapping-intervals/
+主要应用是max cpu load，在哪个时间段最忙，处理的task最多
 
 ===================================
-#1
+
+#1 Path_Sum_LCA
 一个二叉树，给出两个node和最近公共祖先之间（两条path）的sum。
 写了两个方法， 方法A找最近公共祖先，方法B算二叉树两个node之间的和。先跑方法A，再跑两次方法B。
 
 #2
- Input = [word1, word2, word3...wordn]，就是一串words，这里简写了。找到所有不同的prefix words，words必须是input list里面有的。
+Input = [word1, word2, word3...wordn]，就是一串words，这里简写了。找到所有不同的prefix words，words必须是input list里面有的。
 举个例子，[app,apple,banana,ban,bar]，这里的output -> [app, ban, bar]
 我的解法O(n^2)，面试官说OK，下一个。
 
@@ -107,6 +104,12 @@ LE_67_Add_Binary
 sparse vector dot product
 给的是两个vector<pair<index， value>>，然后楼主先说hashmap,要求O（1）space，楼主说排序后双指针。他问有啥corner case，
 我说如果一个贼大，可以用binary search，
+https://www.mathsisfun.com/algebra/vectors-dot-product.html
+https://www.careercup.com/question?id=5678837729853440
+https://stackoverflow.com/questions/32753310/how-to-get-dot-product-of-two-sparsevectors-in-omn-where-m-and-n-are-the-nu
+https://leetcode.com/discuss/interview-question/algorithms/124823/dot-product-of-sparse-vector
+https://www.glassdoor.com/Interview/Given-two-sparse-Vectors-compute-the-Dot-Product-Input-Format-The-first-line-will-contain-two-numbers-k-and-n-which-QTN_889750.htm
+https://algs4.cs.princeton.edu/35applications/SparseVector.java.html
 
 #4
 按副对⻆线输出矩阵元素。⽐如 :
@@ -114,6 +117,7 @@ sparse vector dot product
                   [4,5,6],
                   [7,8,9]]
 输出 [[1],[2,4],[3,5,7],[6,8],[9]]
+Similar : https://www.geeksforgeeks.org/print-matrix-diagonal-pattern/
 
 #5
 maximum length of a path of a binary tree（类似蠡口diameter那题）
@@ -179,9 +183,11 @@ LE_53_Maximum_Subarray
 
 #14
 918. Maximum Sum Circular Subarray
+1027. Longest Arithmetic Sequence
 
 #15
 393. UTF-8 Validation
+844. Backspace String Compare   面试官要求in place
 
 #16
 max path in bt , follow up nth tree

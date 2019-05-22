@@ -118,6 +118,40 @@ public class LE_200_Number_Of_Islands {
         }
     }
 
+    class Solution1_DFS_Practice {
+        public int numIslands(char[][] grid) {
+            if (grid == null || grid.length == 0) return 0;
+
+            int m = grid.length;
+            int n = grid[0].length;
+            int res = 0;
+            boolean[][] visited = new boolean[m][n];
+
+            for (int i = 0; i < m ; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == '1' && !visited[i][j]) {
+                        helper(grid, m, n, i, j, visited);
+                        res++;
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        private void helper(char[][] grid, int m, int n, int x, int y, boolean[][] visited) {
+            if (x < 0 || x >= m || y < 0 || y >= n || visited[x][y] || grid[x][y] != '1') {
+                return;
+            }
+
+            visited[x][y] = true;
+            helper(grid, m, n, x + 1, y, visited);
+            helper(grid, m, n, x - 1, y, visited);
+            helper(grid, m, n, x, y + 1, visited);
+            helper(grid, m, n, x, y - 1, visited);
+        }
+
+    }
 
     /**
      * Solution 2 : BFS, preferred. DFS has the danger of stack overflow if recursion depth is too big
@@ -237,6 +271,10 @@ public class LE_200_Number_Of_Islands {
 
                     /**
                      * !!!
+                     * Compare with DFS, validation happens when branching to 4 directions,
+                     * before adding element into q and mark visited
+                     * !!!
+                     *
                      * "grid[nx][ny] != '1' || visited[nx][ny]"
                      */
                     if (nx < 0 || nx >= m || ny < 0 || ny >= n || grid[nx][ny] != '1' || visited[nx][ny]) {

@@ -67,7 +67,10 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
         public int maxPathSum(TreeNode root) {
             if (root == null) return 0;
 
-            //!!! init with min value, otherwise, won't work for case [-3]
+            /**
+             * !!!
+             * init with min value, otherwise, won't work for case [-3]
+             */
             res = Integer.MIN_VALUE;
 
             helper(root);
@@ -91,7 +94,7 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
              *  Result should be 2 (root), not 1 (2 + (-1)), therefore, set threshold at 0.
              *  If path sum from one of my children will decrease total sum, ignore them!!!
              */
-            int l = Math.max(0, helper(root.left));
+            int l = Math.max(0, helper(root.left));//!!!
             int r = Math.max(0, helper(root.right));
 
             /**
