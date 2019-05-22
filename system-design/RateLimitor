@@ -1,0 +1,60 @@
+Algorithm
+https://hechao.li/2018/06/25/Rate-Limiter-Part1/
+
+
+https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/
+
+Synchronization Policies
+If you want to enforce a global rate limit when you are using a cluster of multiple nodes,
+you must set up a policy to enforce it. If each node were to track its own rate limit, then
+a consumer could exceed a global rate limit when requests are sent to different nodes.
+In fact, the greater the number of nodes, the more likely the user will be able to exceed
+the global limit.
+
+The simplest way to enforce the limit is to set up sticky sessions in your load balancer
+so that each consumer gets sent to exactly one node. The disadvantages include a lack of
+fault tolerance and scaling problems when nodes get overloaded.
+
+A better solution that allows more flexible load-balancing rules is to use a centralized
+data store such as Redis or Cassandra. This will store the counts for each window and consumer.
+The two main problems with this approach are increased latency making requests to the data store,
+and race conditions, which we will discuss next.
+
+
+Race Conditions
+One of the largest problems with a centralized data store is the potential for race conditions
+in high concurrency request patterns. This happens when you use a naïve “get-then-set” approach,
+wherein you retrieve the current rate limit counter, increment it, and then push it back to the
+datastore. The problem with this model is that in the time it takes to perform a full cycle of
+read-increment-store, additional requests can come through, each attempting to store the increment
+counter with an invalid (lower) counter value. This allows a consumer sending a very high rate
+of requests to bypass rate limiting controls.
+
+One way to avoid this problem is to put a “lock” around the key in question, preventing any other
+processes from accessing or writing to the counter. This would quickly become a major performance
+bottleneck, and does not scale well, particularly when using remote servers like Redis as the backing
+datastore.
+
+A better approach is to use a “set-then-get” mindset, relying on atomic operators that implement locks
+in a very performant fashion, allowing you to quickly increment and check counter values without letting
+the atomic operations get in the way.
+
+
+
+Optimizing for Performance
+The other disadvantage of using a centralized data store is increased latency when checking on the rate
+limit counters. Unfortunately, even checking a fast data store like Redis would result in milliseconds
+of additional latency for every request.
+
+In order to make these rate limit determinations with minimal latency, it’s necessary to make checks locally
+in memory. This can be done by relaxing the rate check conditions and using an eventually consistent model.(!!!)
+For example, each node can create a data sync cycle that will synchronize with the centralized data store.
+Each node periodically pushes a counter increment for each consumer and window it saw to the datastore,
+which will atomically update the values. The node can then retrieve the updated values to update it’s in-memory
+version. This cycle of converge → diverge → reconverge among nodes in the cluster is eventually consistent.
+
+The periodic rate at which nodes converge should be configurable. Shorter sync intervals will result in less
+divergence of data points when traffic is spread across multiple nodes in the cluster (e.g., when sitting behind
+a round robin balancer), whereas longer sync intervals put less read/write pressure on the datastore, and less
+overhead on each node to fetch new synced values.
+
