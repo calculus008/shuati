@@ -84,6 +84,11 @@ public class LE_409_Longest_Palindrome {
         if(null == s || s.length() == 0)
             return 0;
 
+        /**
+         * !!!
+         * Don't worry about upper case and lower case,
+         * just count frequency for all ASCII chars
+         */
         int[] map = new int[128];
         for (char c : s.toCharArray()) {
             map[c]++;
@@ -92,6 +97,14 @@ public class LE_409_Longest_Palindrome {
         int res = 0;
         int odd = 0;
 
+        /**
+         * !!!
+         * For each freq, use freq / 2 * 2 to get the number of chars
+         * that can be used to construct palindrome.
+         *
+         * Then we need to know if there's odd freq, if yes, the final
+         * res should be increased by one.
+         */
         for (int freq : map) {
             /**
              * equal to "res += freq / 2 * 2", set last bit to 0

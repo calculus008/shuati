@@ -51,10 +51,25 @@ public class LE_56_Merge_Intervals {
                     /**
                      * !!!
                      * add item, not last
-                     */
+                     **/
                     res.add(item);
+
+                    /**
+                     * Key point - Utilize Java characteristic - pass by reference,
+                     * here we set last point to item, at this moment, item is already
+                     * added to res, in the each iteration, we check if current interval
+                     * has overlapping part with last, if yes, update end.
+                     *
+                     * In other words, we first add item, then updating end value in each
+                     * iteration if current interval has overlapping part with item.
+                     */
                     last = item;
                 } else {
+                    /**
+                     * Since we already sort intervals based on start value, start value
+                     * here must be the min value, so we don't need to worry about it.
+                     * We just need to keep updating end value.
+                     */
                     last.end = Math.max(last.end, item.end);
                 }
             }

@@ -40,6 +40,9 @@ public class LE_408_Valid_Word_Abbreviation {
 
             while (i < s.length && j < t.length) {
                 if (Character.isDigit(t[j])) {
+                    /**
+                     * !!!
+                     */
                     if (t[j] == '0') {
                         return false;
                     }
@@ -50,6 +53,9 @@ public class LE_408_Valid_Word_Abbreviation {
                         j++;
                     }
 
+                    /**
+                     * !!!
+                     */
                     i += num;
                 } else {
                     if (s[i] != t[j]) {

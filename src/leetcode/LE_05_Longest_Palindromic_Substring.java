@@ -19,7 +19,7 @@ public class LE_05_Longest_Palindromic_Substring {
 
         Example:
 
-        Input: "cbbd"
+        Input: "cbbd
 
         Output: "bb"
      */
@@ -41,8 +41,21 @@ public class LE_05_Longest_Palindromic_Substring {
          return res;
      }
 
+    /**
+     * !!!
+     * Left and Right instead of Center:
+     * expand function takes left and right boundary indices, NOT the index of expanding center
+     */
      private void helper(String s, int left, int right) {
-         while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+         /**
+          * !!!
+          * Must check boundary in while loop to prevent boundary overflow.
+          * This is why we can iterate from index 0 to n - 1 in the function
+          * longestPalindrome1(). Since we do boundary check here, we don't
+          * need to worry about boundary overflow when calling help().
+          */
+         while (left >= 0 && right < s.length()
+                 && s.charAt(left) == s.charAt(right)) {
              left--;
              right++;
          }

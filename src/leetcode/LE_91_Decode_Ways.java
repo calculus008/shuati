@@ -58,6 +58,11 @@ public class LE_91_Decode_Ways {
          *
          * Answer:
          * dp[n]
+         *
+         * 就是说， 前i个字符的总共的解码方式，是：
+         * 将第i个数字（s.charAt(i - 1), 因为是zero based）单独映射为一个字母的解码方式的和，
+         * 加上
+         * 将第i个和第i-1个数字合在一起映射为一个字母 (如果这个两位的数字是在 10 ～ 26 的范围内）的解码方式的和。
          */
         public int numDecodings_JiuZhang(String s) {
             if (s == null || s.length() == 0) {
