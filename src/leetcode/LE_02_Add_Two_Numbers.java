@@ -6,7 +6,8 @@ package leetcode;
 public class LE_02_Add_Two_Numbers {
     /**
          You are given two non-empty linked lists representing two non-negative integers.
-         The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
+         The digits are stored in reverse order and each of their nodes contain a single digit.
+         Add the two numbers and return it as a linked list.
 
          You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
@@ -26,6 +27,10 @@ public class LE_02_Add_Two_Numbers {
         ListNode dummy = new ListNode(0);
         ListNode cur = dummy;
         int sum = 0;
+
+        /**
+         * "||" : it will take care the case that one number is longer than the other one
+         */
         while (p1 != null || p2 != null) {
             if (p1 != null) {
                 sum += p1.val;
@@ -45,6 +50,10 @@ public class LE_02_Add_Two_Numbers {
             cur.next = new ListNode(1);
         }
 
+        /**
+         * !!!
+         * return dummuy.next, NOT dummy
+         */
         return dummy.next;
     }
 }

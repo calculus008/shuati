@@ -75,6 +75,9 @@ public class LE_03_Longest_Substring_Without_Repeating_Characters {
         for (int i = 0, j = 0; i < s.length(); i++) {
             map[s.charAt(i)]++;
             while(map[s.charAt(i)] > 1) {
+                /**
+                 * must first do counter minus one, then move index j
+                 */
                 map[s.charAt(j)]--;
                 j++;
             }
