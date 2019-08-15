@@ -96,9 +96,12 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
                  *
                  *    Median = (C[k - 1] + C[k]) / 2
                  *
-                 *    so here m is m1, m2 = k - m1 = k - m, so m2 - 1 = k - m - 1
+                 * #5.Binary Search on m1, condition is nums1[m1] < nums2[m2 - 1]
+                 *    so here m is m1, m2 = k - m1 = k - m, so m2 - 1 = (k - m) - 1
+                 *
+                 *    Therefore : nums1[m] < nums2[k - m
                  */
-                if (nums1[m] < nums2[k - m - 1]) {
+                if (nums1[m] < nums2[(k - m) - 1]) {
                     l = m + 1;
                 } else {
                     r = m;
@@ -114,6 +117,10 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
 
             /**!!!
              * It's "nums1" and "nums2", NOT "nums"
+             *
+             * 找左中位数 -> max(nums1[m1 - 1], nums2[m2 - 1]
+             *
+             * m1 <= 0 : meaning no number in nums1 is used
              */
             int c1 = Math.max (m1 <= 0 ? Integer.MIN_VALUE : nums1[m1 - 1],
                     m2 <= 0 ? Integer.MIN_VALUE : nums2[m2 - 1]);
@@ -124,7 +131,9 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
 
             /**
              * !!!
-             * m1 >= l1
+             * 找右中位数 -> min(nums1[m1], nums2[m2]
+             *
+             * m1 >= l1 : use all number in nums1
              * m2 >= l2
              */
             int c2 = Math.min(m1 >= l1 ? Integer.MAX_VALUE : nums1[m1],
