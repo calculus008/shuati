@@ -28,6 +28,11 @@ public class LE_212_Word_Search_II {
     /**
      * Solution 1
      * Trie + DFS, Time : O(m * n * TrieNode), Space : O(TrieNode)
+     *
+     * https://zxi.mytechroad.com/blog/searching/leetcode-212-word-search-ii/
+     *
+     * Time  : O(m * n * 4 ^ l)
+     * Space : O(sum(l));
      **/
     class TrieNode {
         TrieNode[] next = new TrieNode[26]; //!!! TrieNode数组
@@ -68,6 +73,16 @@ public class LE_212_Word_Search_II {
         return root;
     }
 
+    /**
+     * !!!
+     * From buildTrieTree(), we know that root itself does not contain char in a world,
+     * it is just a dummy node pointing to the start of the words.
+     *
+     * Therefore in helper(),
+     * 1.we check if p.next[idx] is null
+     * 2.move p to p.next[idx]
+     * 3.Then check if p.word exists
+     */
     public void helper(char[][] board, List<String> res, TrieNode p, int i, int j) {
         if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) return;
 
@@ -75,7 +90,9 @@ public class LE_212_Word_Search_II {
         int idx = c - 'a';
         if (c == '#' || p.next[idx] == null) return;
 
-        //!!!
+        /**
+         * !!!
+         */
         p = p.next[idx];
 
         if (p.word != null) {

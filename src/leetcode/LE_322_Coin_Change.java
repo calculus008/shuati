@@ -30,12 +30,14 @@ public class LE_322_Coin_Change {
      *
      *   DP
      *   Time  : O(n * amount)
-     *   Space : O(amount)
+     *   Space : O(amount), optimized from Solution2_1
      */
     class Solution2 {
         /**
          Time : O(n * amount)
          Space : O(amount)
+
+         dp[i] : min number of coins to make up value i
 
          Preferred
          */
@@ -59,6 +61,37 @@ public class LE_322_Coin_Change {
             return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
         }
     }
+
+    /**
+     *   DP
+     *   Time  : O(n * amount)
+     *   Space : O(n * amount)
+     */
+    class Solution2_1 {
+        int res = Integer.MAX_VALUE;
+
+        public int coinChange(int[] coins, int amount) {
+            if (coins == null || coins.length == 0) return 0;
+
+            int n = coins.length;
+            int[][] dp = new int[n + 1][amount + 1];
+            for (int[] d : dp) {
+                Arrays.fill(d, Integer.MAX_VALUE);
+            }
+            dp[0][0] = 1;
+
+            for (int i = 1; i <= n; i++) {
+                for (int j = 0; j <= amount; j++) {
+                    // dp[i][j] = dp[i - 1][j];
+                    dp[i][j] = Math.min(dp[i][j - coins[i - 1]] + 1, dp[i][j]);
+                }
+            }
+
+            return dp[n][amount];
+        }
+
+    }
+
       //compare with LE_518_Coin_Change_II, which want total number of combinations that sum to amount
 //    class Solution {
 //        public int change(int amount, int[] coins) {

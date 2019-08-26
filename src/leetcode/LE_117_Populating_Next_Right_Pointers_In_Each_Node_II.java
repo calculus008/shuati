@@ -42,7 +42,7 @@ public class LE_117_Populating_Next_Right_Pointers_In_Each_Node_II {
           在第二个循环中
                      1
                    /  \
-                  2    3  - 移动层
+                  2 -> 3  - 移动层
                  / \    \
                 4   5    7 - 连接层
     */
