@@ -33,6 +33,9 @@ public class LE_06_ZigZag_Conversion {
          P     I
      */
 
+    /**
+     * 注意题意要求的输出，之字型走的空格是不用输出的。
+     */
     public String convert(String s, int numRows) {
         char[] ch = s.toCharArray();
         int len = ch.length;
@@ -43,6 +46,9 @@ public class LE_06_ZigZag_Conversion {
             sb[i] = new StringBuilder();
         }
 
+        /**
+         * 不能用for 循环，因为i的值要在两个内for 循环中递增，也就是说i 不能由外层的循环自动加一。
+         */
         int i = 0;
         while (i < len) {
             for (int n = 0; n < numRows && i < len; n++) {
@@ -50,6 +56,9 @@ public class LE_06_ZigZag_Conversion {
             }
 
             //!!! from bottom up
+            /**
+             * start from numRows - 2
+             */
             for (int m = numRows - 2; m > 0 && i < len; m--) {
                 sb[m].append(ch[i++]);
             }

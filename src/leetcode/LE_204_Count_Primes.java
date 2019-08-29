@@ -7,6 +7,12 @@ public class LE_204_Count_Primes {
     /**
         Count the number of prime numbers less than a non-negative number, n.
      */
+
+    /**
+     * it starts from 2, the first prime, then mark the multip of 2 as true in notPrime,
+     * so the loop of i will skip them. the next prime is 3, do the same thing. Then it
+     * is 4, which 2*2, so the not prime is true, and will skip to next.
+     */
     public int countPrimes(int n) {
         boolean notPrime[] = new boolean[n]; //!!!notPreim, NOT isPrime
         int res = 0;
@@ -31,18 +37,21 @@ public class LE_204_Count_Primes {
      * E.g when i = 2, 4,6,8 will be crossed out;
      * when i = 3; 9,15,21 need to be checked, instead of 6,9,12,15,18,21
      * increase j by 2*i to keep j as an odd number E.g. when i = 3 : 9,15,21 need to be checked, instead of 6,9,12,15,18,21
-
      */
     public int countPrimes2(int n) {
-        if(n <= 2) return 0;
+        if (n <= 2) return 0;
         int ans = 1;// don't forget to record 2. :-)
         boolean[] isCompositeArr = new boolean[n];
         int upper = (int) Math.sqrt(n);
-        for(int i = 3;i < n;i=i+2){//1.scan only odd number
-            if(isCompositeArr[i]) continue;
+
+        for (int i = 3; i < n; i = i + 2) {//1.scan only odd number
+            if (isCompositeArr[i]) continue;
+
             ans++;
-            if(i > upper) continue;//2. avoid i^2 overflow.
-            for(int j = i*i; j < n;j = j + 2*i){//3. initialize j to i^2
+
+            if (i > upper) continue;//2. avoid i^2 overflow.
+
+            for (int j = i * i; j < n; j = j + 2 * i) {//3. initialize j to i^2
                 //4. increase 2i to keep j as an odd number
 
                 isCompositeArr[j] = true;

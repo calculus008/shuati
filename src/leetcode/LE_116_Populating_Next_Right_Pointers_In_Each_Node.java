@@ -39,6 +39,35 @@ public class LE_116_Populating_Next_Right_Pointers_In_Each_Node {
             4->5->6->7 -> NULL
      */
 
+    /**
+     * Huahua's version:
+     * https://zxi.mytechroad.com/blog/tree/leetcode-116-populating-next-right-pointers-in-each-node/
+     *
+     * Time  : O(n)
+     * Space : O(logn), height of the tree
+     */
+    class Solution {
+        public TreeLinkNode connect(TreeLinkNode root) {
+            /**
+             * !!!
+             * since it's a complete tree, if left child is null, right child must be null.
+             * it is a leave node, we can return now.
+             */
+            if (root == null || root.left == null) return root;
+
+            root.left.next = root.right;
+
+            if (root.next != null) {
+                root.right.next = root.next.left;
+            }
+
+            connect(root.left);
+            connect(root.right);
+
+            return root;
+        }
+    }
+
     //Time and Space : O(n)
     //Solution 1 : Recursion
     public static void connect1(TreeLinkNode root) {
