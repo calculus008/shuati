@@ -36,7 +36,7 @@ public class LE_164_Maxium_Gap {
          a single bucket. It can only come from two adjacent buckets, or one bucket and (max or min).
 
      **/
-    public int maximumGap1(int[] nums) {
+    public static int maximumGap1(int[] nums) {
         if (nums.length < 2) return 0;
 
         int min = nums[0];
@@ -63,14 +63,21 @@ public class LE_164_Maxium_Gap {
             bucketMax[bucketIdx] = Math.max(bucketMax[bucketIdx], num);
         }
 
+        System.out.println("min :" + Arrays.toString(bucketMin));
+        System.out.println("max :" + Arrays.toString(bucketMax));
+
         int maxGap = 0;
         int pre = min;
         for (int i = 0; i < nums.length - 1; i++) {
             if (bucketMin[i] == Integer.MAX_VALUE && bucketMax[i] == Integer.MIN_VALUE) continue; //Empty Bucket
+
+            System.out.println("pre=" + pre + ", current="+bucketMin[i]);
             maxGap = Math.max(maxGap, bucketMin[i] - pre);
+
             pre = bucketMax[i];
         }
 
+        System.out.println("pre=" + pre + ", max="+max);
         return Math.max(maxGap, max - pre);
     }
 
@@ -81,36 +88,36 @@ public class LE_164_Maxium_Gap {
         4. do not need maxGap, gap is enough.
      */
     public int maximumGap2(int[] nums) {
-        if(nums==null || nums.length<2)
+        if (nums == null || nums.length < 2)
             return 0;
 
-        int min=nums[0];
-        int max=nums[0];
-        for(int n: nums){
-            min=Math.min(min, n);
-            max=Math.max(max, n);
+        int min = nums[0];
+        int max = nums[0];
+        for (int n : nums) {
+            min = Math.min(min, n);
+            max = Math.max(max, n);
         }
-        if(min==max)
+        if (min == max)
             return 0;
 
-        int n=nums.length;
+        int n = nums.length;
 
-        int gap = (int)Math.ceil((double)(max-min)/(n-1));
+        int gap = (int) Math.ceil((double) (max - min) / (n - 1));
         int bucketMin[] = new int[n];
         int bucketMax[] = new int[n];
         Arrays.fill(bucketMin, -1);
         Arrays.fill(bucketMax, -1);
 
-        for(int num: nums){
-            int i=(num-min)/gap;
+        for (int num : nums) {
+            int i = (num - min) / gap;
             bucketMin[i] = Math.min(bucketMin[i], num);
             bucketMax[i] = Math.max(bucketMax[i], num);
         }
 
 
-        for(int i=0;i<bucketMin.length;++i){
-            if(bucketMin[i]!=Integer.MAX_VALUE){
-                gap = Math.max(gap, bucketMin[i]-min);
+        for (int i = 0; i < bucketMin.length; ++i) {
+            if (bucketMin[i] != Integer.MAX_VALUE) {
+                gap = Math.max(gap, bucketMin[i] - min);
                 min = bucketMax[i];
             }
         }
@@ -238,6 +245,6 @@ public class LE_164_Maxium_Gap {
         int[] input = new int[]{1, 9, 2, 5};
         int[] input1 = new int[]{0, Integer.MAX_VALUE};
 
-        maximumGap4(input1);
+        System.out.println(maximumGap1(input));
     }
 }
