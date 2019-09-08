@@ -26,6 +26,7 @@ public class LI_1574_Music_Playlist {
      * 动态规划好题
      *
      * 假设dp[i][j]表示对于播放表的前i首歌，去除重复的歌曲后还剩下j首歌的方案数。（即使用j首歌来生成播放表的前i首歌）
+     * (dp[i][j] : construct the first i songs using j unique songs)
      *
      * 那么需要return的答案便为：dp[p][n] (因为每首歌必须至少出现一次，故这p首歌去除重复后一定有n首歌)
      *

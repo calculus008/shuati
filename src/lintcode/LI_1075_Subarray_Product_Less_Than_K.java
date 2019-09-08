@@ -57,4 +57,24 @@ public class LI_1075_Subarray_Product_Less_Than_K {
         }
         return res;
     }
+
+    public int numSubarrayProductLessThanK_myversion(int[] nums, int k) {
+        if (nums == null || nums.length == 0 || k <= 0) return 0;
+
+        int p = 1;
+        int res = 0;
+
+        for (int i = 0, j = 0; i < nums.length; i++) {
+            p *= nums[i];
+
+            while (p >= k) {
+                p /= nums[j];
+                j++;
+            }
+
+            res += i - j + 1;
+        }
+
+        return res;
+    }
 }

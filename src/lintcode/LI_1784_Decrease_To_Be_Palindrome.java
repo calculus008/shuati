@@ -43,4 +43,20 @@ public class LI_1784_Decrease_To_Be_Palindrome {
         }
         return cnt;
     }
+
+    public int numberOfOperations_myversion(String s) {
+        if (null == s || s.length() == 0) return 0;
+
+        int l = 0;
+        int r = s.length() - 1;
+
+        int sum = 0;
+        while (l < r) {
+            sum += Math.abs(s.charAt(l) - s.charAt(r));
+            l++;
+            r--;
+        }
+
+        return sum;
+    }
 }

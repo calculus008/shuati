@@ -86,4 +86,32 @@ public class LE_57_Insert_Interval {
 
         return res;
     }
+
+    public List<Interval> insert_practice(List<Interval> intervals, Interval newInterval) {
+        List<Interval> res = new ArrayList<>();
+        if (intervals == null) return res;
+
+        int n = intervals.size();
+
+        int i = 0;
+        while (i < n && intervals.get(i).end < newInterval.start) {
+            res.add(intervals.get(i));
+            i++;
+        }
+
+        while (i < n && intervals.get(i).start <= newInterval.end) {
+            newInterval.start = Math.min(newInterval.start, intervals.get(i).start);
+            newInterval.end = Math.max(newInterval.end, intervals.get(i).end);
+            i++;
+        }
+
+        res.add(newInterval);
+
+        while (i < n) {
+            res.add(intervals.get(i));
+            i++;
+        }
+
+        return res;
+    }
 }

@@ -9,7 +9,7 @@ import java.util.Comparator;
 public class LE_179_Largest_Number {
     //LE_175 - LE_179 are SQL qestions
 
-    /*
+    /**
         Given a list of non negative integers, arrange them such that they form the largest number.
 
         For example, given [3, 30, 34, 5, 9], the largest formed number is 9534330.
@@ -36,5 +36,30 @@ public class LE_179_Largest_Number {
         if (str[0].equals("0")) return "0";
 
         return String.join("", str);
+    }
+
+    public String largestNumber_practice(int[] nums) {
+        if (nums == null || nums.length == 0) return "0";
+
+        String[] strs = new String[nums.length];
+
+        for (int i = 0; i < nums.length; i++) {
+            strs[i] = String.valueOf(nums[i]);
+        }
+
+        /**
+         * "9", "23" : "923" > "239"
+         */
+        Arrays.sort(strs, (s1, s2) -> (s2 + s1).compareTo(s1 + s2));
+
+        /**
+         * strs[0] is String, use "equals", not "==" !!!
+         */
+        if (strs[0].equals("0")) return "0";
+
+        /**
+         * String.join() !!!
+         */
+        return String.join("", strs);
     }
 }
