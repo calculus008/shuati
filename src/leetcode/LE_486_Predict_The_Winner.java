@@ -33,6 +33,8 @@ public class LE_486_Predict_The_Winner {
      * 1 <= length of the array <= 20.
      * Any scores in the given array are non-negative integers and will not exceed 10,000,000.
      * If the scores of both players are equal, then player 1 is still the winner.
+     *
+     * Same Problem : LE_877_Stone_Game
      */
 
 
@@ -82,6 +84,10 @@ public class LE_486_Predict_The_Winner {
                 }
             }
 
+            /**
+             * !!!
+             * >= 0, because "If the scores of both players are equal, then player 1 is still the winner"
+             */
             return dp[0] >= 0;
         }
     }

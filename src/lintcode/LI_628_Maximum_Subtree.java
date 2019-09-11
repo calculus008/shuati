@@ -6,7 +6,6 @@ public class LI_628_Maximum_Subtree {
     /**
      * Given a binary tree, find the subtree with maximum sum. Return the root of the subtree.
      *
-     * Example
      * Example 1:
      *
      * Input:

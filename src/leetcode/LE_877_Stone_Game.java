@@ -43,6 +43,8 @@ public class LE_877_Stone_Game {
          to be the winner for corner case {0}. Just change "dp[0] >= 0" in Solution 3 can satisfy it.
 
          Medium
+
+         Same Problem : LE_486_Predict_The_Winner
      */
 
     /**
@@ -86,7 +88,7 @@ public class LE_877_Stone_Game {
      * dp[i][j] : best RELATIVE score for element from index i to j.
      *
      * Relative score : with the current player's choice - next player's best choice
-     *                  for the next round.
+     *                  for the next round. (!!!)
      */
     class Solution2 {
         public boolean stoneGame(int[] piles) {
@@ -124,10 +126,20 @@ public class LE_877_Stone_Game {
             for (int l = 2; l <= n; l++) {
                 for (int i = 0; i + l - 1 < n; i++) {
                     int j = i + l - 1;
+                    /**
+                     * !!!
+                     * piles[j] - dp[i] : here dp[i] is not updated, that's why
+                     * we can use 1-D array and save space.
+                     */
                     dp[i] = Math.max(piles[i] - dp[i + 1], piles[j] - dp[i]);
                 }
             }
 
+            /**
+             * Different from LE_486_Predict_The_Winner,
+             * because "return True if and only if Alex wins the game",
+             * therefore check relative score " > 0"
+             */
             return dp[0] > 0;
         }
     }

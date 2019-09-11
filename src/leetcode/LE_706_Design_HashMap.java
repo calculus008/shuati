@@ -63,7 +63,7 @@ public class LE_706_Design_HashMap {
 
         int getIdx(int key) {
             return Integer.hashCode(key) % nodes.length;
-        }
+        }//or return key % nodes.length;
 
         ListNode find(ListNode bucket, int key) {
             ListNode node = bucket, prev = null;

@@ -31,6 +31,111 @@ public class LE_44_Wildcards_Matching {
      * we need to move all the way back to the first 'a' in p
      * s = "aaaaaaaaaaaaaaaaaaaa" p = "*aaaaaaaaaaaaaaaaaab"
      **/
+
+    public boolean isMatch_practice(String str, String pattern) {
+        if (str == null || pattern == null) return false;
+
+        int p = 0, s = 0, starIdx = -1, match = 0;
+        int n = pattern.length();
+
+        while (s < str.length()) {
+            if (p < n && (str.charAt(s) == pattern.charAt(p) || pattern.charAt(p) == '?')) {
+                s++;
+                p++;
+            } else if (p < n && pattern.charAt(p) == '*') {
+                starIdx = p;
+                p++;
+                match = s;
+            } else if (starIdx != -1) {
+                p = starIdx;
+                match++;
+                s = match;
+            } else {
+                return false;
+            }
+        }
+
+        while (p < pattern.length() && pattern.charAt(p) == '*') {
+            p++;
+        }
+
+        return p == pattern.length();
+    }
+
+    /**
+     * Preferred version
+     * same version from leetocde discussion
+     * https://leetcode.com/problems/wildcard-matching/discuss/17810/Linear-runtime-and-constant-space-solution
+     *
+     * https://leetcode.com/problems/wildcard-matching/solution/
+     * Approach 3: Backtracking (!!!)
+     *
+     * "Let's just pick up the first opportunity "matches zero characters" and proceed further.
+     * If this assumption would lead in "no match" situation, then backtrack : come back to the
+     * previous star, assume now that it matches one more character (one) and proceed again.
+     * Again "no match" situation? Backtrack again : come back to the previous star, and assume
+     * now that it matches one more character (two), etc."
+     */
+    boolean comparison(String str, String pattern) {
+        int s = 0, p = 0, match = 0, starIdx = -1;
+        while (s < str.length()){
+            /**
+             * advancing both pointers
+             */
+            if (p < pattern.length()  && (pattern.charAt(p) == '?' || str.charAt(s) == pattern.charAt(p))){
+                s++;
+                p++;
+            }
+
+            /**
+             * '*' found, only advancing pattern pointer
+             *
+             * check the situation when '*' matches no char
+             *
+             * starIdx : remember location of '*' in pattern
+             * match : remember index in s when the last '*" appears
+             */
+            else if (p < pattern.length() && pattern.charAt(p) == '*'){
+                starIdx = p;
+                match = s;
+                p++;
+            }
+
+            /**
+             * last pattern pointer was *, advancing string pointer
+             *
+             * !!!
+             * If pattern character != string character
+             *   OR
+             * pattern is used up
+             *     AND
+             * there was '*' character in pattern before :
+             *
+             * Backtrack check the situation when '*' matches one more character
+             */
+            else if (starIdx != -1){
+                p = starIdx + 1;
+                match++;
+                s = match;
+            }
+
+            /**
+             * current pattern pointer is not star, last pattern pointer was not *
+             * characters do not match
+             */
+            else return false;
+        }
+
+        /**
+         * check for remaining characters in pattern
+         */
+        while (p < pattern.length() && pattern.charAt(p) == '*') {
+            p++;
+        }
+
+        return p == pattern.length();
+    }
+
     class Solution1 {
         public boolean isMatch(String s, String p) {
             int sp = 0;
@@ -47,51 +152,58 @@ public class LE_44_Wildcards_Matching {
                     //star saves the indx in p for the last time we see '*'
                     star = pp;
 
-                    //save the comparison point in s when the last '*" appears, or the index in s when the last '*" appears
-                    //#1.sp does not increase here
-                    //reason: try to match case like :
-                    //       "abcdef"
-                    //       "abc*def"
-                    //        as '*' can match to empty string, we don't move sp in case we need to use '*' in p to match empty string.
-
-                    //#2.Why use 'match'? For case like:
-                    //     "aaaa"
-                    //     "***a"
-                    //     need to move pp back to the next of the last '*' after pp is already out of array bound by using "pp = start + 1".
-                    //     when bringing back pp, we need sp to stay at the location in the last loop. Therefore we can't simply increase sp in
-                    //     "post star" branch, we need to use "match" to remember the last location.
-
-                    //output for "sp++"
-                    //    star, sp=0, pp=1, match=0
-                    //    star, sp=0, pp=2, match=0
-                    //    star, sp=0, pp=3, match=0
-                    //    char match, sp=1, pp=4
-                    //    post star, sp=2, pp=3, match=1
-                    //    char match, sp=3, pp=4
-                    //    post star, sp=4, pp=3, match=2
-                    //    final pp=3
-                    //            false
-
-                    //output for using "sp = match"
-                    //    star, sp=0, pp=1, match=0
-                    //    star, sp=0, pp=2, match=0
-                    //    star, sp=0, pp=3, match=0
-                    //    char match, sp=1, pp=4
-                    //    post star, sp=1, pp=3, match=1
-                    //    char match, sp=2, pp=4
-                    //    post star, sp=2, pp=3, match=2
-                    //    char match, sp=3, pp=4
-                    //    post star, sp=3, pp=3, match=3
-                    //    char match, sp=4, pp=4
-                    //    final pp=4
-                    //            true
+                    /**
+                     * Save the comparison point in s when the last '*" appears,
+                     * or the index in s when the last '*" appears:
+                     *   #1.sp does not increase here
+                     *      reason: try to match case like :
+                     *        "abcdef"
+                     *        "abc*def"
+                     *      as '*' can match to empty string, we don't move sp in case
+                     *      we need to use '*' in p to match empty string.
+                     *
+                     *   #2.Why use 'match'? For case like:
+                     *         "aaaa"
+                     *         "***a"
+                     *      need to move pp back to the next of the last '*' after pp is
+                     *      already out of array bound by using "pp = start + 1".
+                     *
+                     *      when bringing back pp, we need sp to stay at the location in the last loop.
+                     *      Therefore we can't simply increase sp in "post star" branch, we need to use
+                     *      "match" to remember the last location.
+                     *
+                     *       output for "sp++"
+                     *       star, sp=0, pp=1, match=0
+                     *       star, sp=0, pp=2, match=0
+                     *       star, sp=0, pp=3, match=0
+                     *       char match, sp=1, pp=4
+                     *       post star, sp=2, pp=3, match=1
+                     *       char match, sp=3, pp=4
+                     *       post star, sp=4, pp=3, match=2
+                     *       final pp=3
+                     *       false
+                     *
+                     *       output for using "sp = match"
+                     *       star, sp=0, pp=1, match=0
+                     *       star, sp=0, pp=2, match=0
+                     *       star, sp=0, pp=3, match=0
+                     *       char match, sp=1, pp=4
+                     *       post star, sp=1, pp=3, match=1
+                     *       char match, sp=2, pp=4
+                     *       post star, sp=2, pp=3, match=2
+                     *       char match, sp=3, pp=4
+                     *       post star, sp=3, pp=3, match=3
+                     *       char match, sp=4, pp=4
+                     *       final pp=4
+                     *       true
+                     */
 
                     match = sp;
                     pp++;
 
                     System.out.println("star, start=" + star + " sp=" + sp + ", pp=" + pp + ", match=" + match);
                 } else if (star != -1) {//已经见过*了
-                    //move to the one nex to '*' in p
+                    //move to the one next to '*' in p
                     pp = star + 1;
                     match++;
                     sp = match;

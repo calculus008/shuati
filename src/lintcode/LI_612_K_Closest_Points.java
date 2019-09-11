@@ -24,6 +24,7 @@ public class LI_612_K_Closest_Points {
     //Time : O(nlogk), Space : O(n)
     public Point[] kClosest(Point[] points, Point origin, int k) {
         /**
+         * !!!
          * define a max heap of size k
          */
         PriorityQueue<Point> pq = new PriorityQueue<>(k, (a, b) -> {
@@ -44,10 +45,14 @@ public class LI_612_K_Closest_Points {
             }
         }
 
+        /**
+         * !!!
+         * sorted by distance, res[0] is the closest
+         */
         Point[] res = new Point[k];
         int i = k - 1;
         while (!pq.isEmpty()) {
-            res[i--] = pq.poll(); //!!! sorted by distance, res[0] is the closest
+            res[i--] = pq.poll();
         }
 
         return res;
