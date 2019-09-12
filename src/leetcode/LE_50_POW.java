@@ -16,6 +16,44 @@ public class LE_50_POW {
         Output: 9.26100
      */
 
+    /**
+     * https://zxi.mytechroad.com/blog/math/leetcode-50-powx-n/
+     *
+     * Recursion
+     *
+     * square x and cut n in half.
+     * if n is negative, compute 1.0 / pow(x, |n|)
+     *
+     * pow(x, n) := pow(x * x, n / 2) * (x if n % 2 else 1)
+     * pow(x, 0) := 1
+     *
+     * Example:
+     * pow(x, 5) = pow(x^2, 2) * x
+     *           = pow(x^4, 1) * x
+     *           = pow(x^8, 0) * x^4 * x
+     *           = 1 * x^4 * x = x^5
+     *
+     * Time complexity: O(logn)
+     * Space complexity: O(logn)
+     */
+    class Solution1 {
+        public double myPow(double x, int n) {
+            /**
+             * use long to prevent overflow
+             */
+            long m = (long)n;
+            return m >= 0 ? pow(x, m) : 1.0 / pow(x, Math.abs(m));
+        }
+
+        public double pow(double x, long n) {
+            if (n == 0) return 1.0;
+
+            return pow(x * x, n / 2) * (n % 2 == 1 ? x : 1);
+        }
+    }
+
+
+
     //Time : O(logn), Space : O(1)
     public double myPow(double x, int n) {
         if (n == 0) return 1.0;
@@ -41,7 +79,7 @@ public class LE_50_POW {
         }
     }
 
-    class Solution {
+    class Solution2 {
         private double fastPow(double x, long n) {
             if (n == 0) {
                 return 1.0;
