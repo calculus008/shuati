@@ -49,8 +49,17 @@ LE_258_Add_Digits
 LE_202_Happy_Number
 LE_69_Sqrt
 LE_13_Roman_To_Integer
-Lint 180 Binary Representation
+LI_180_Binary_Representation
 LE_08_String_To_Integer
+
+LE_246_Strobogrammatic_Number
+LE_20_Valid_Parentheses
+LE_161_One_Edit_Distance
+LE_150_Evaluate_Reverse_Polish_Notation     Evaluate_Reverse_Polish_Notation
+lintcode 206. Interval Sum
+LE_155_Min_Stack
+
+
 
 
 
