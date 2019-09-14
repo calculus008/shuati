@@ -31,7 +31,7 @@ LE_209_Minimum_Size_Subarray_Sum
 LE_179_Largest_Number
 LE_57_Insert_Interval
 
-LI_1574_Music_Playlist                 (**)
+LI_1574_Music_Playlist                 (**) (leetcode 920)
 LE_1024_Video_Stitching
 
 LE_44_Wildcards_Matching               (backtrack)
