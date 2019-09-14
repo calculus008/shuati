@@ -28,28 +28,37 @@ public class LI_628_Maximum_Subtree {
      * The tree is look like this:
      *    1
      * There is one and only one subtree in the tree. So we return 1.
+     * Notice
+     * LintCode will print the subtree which root is your return node.
+     * It's guaranteed that there is only one subtree with maximum sum and the given binary tree is not an empty tree.
      *
      * Easy
      */
 
-    int max = Integer.MIN_VALUE;
-    TreeNode node;
+    int maxVal = Integer.MIN_VALUE;
+    TreeNode maxNode = null;
 
     public TreeNode findSubtree(TreeNode root) {
-        if (root == null) return null;
+        if (root == null) return root;
+
         helper(root);
-        return node;
+
+        return maxNode;
     }
 
-    public int helper(TreeNode root) {
-        if (root == null) return 0;
+    public int helper(TreeNode node) {
+        if (node == null) return 0;
 
-        int sum = helper(root.left) + helper(root.right) + root.val;
-        if (sum > max) {
-            max = sum;
-            node = root;
+        int l = helper(node.left);
+        int r = helper(node.right);
+
+        int val = l + r + node.val;
+
+        if (val > maxVal) {
+            maxNode = node;
+            maxVal = val;
         }
 
-        return sum;
+        return val;
     }
 }

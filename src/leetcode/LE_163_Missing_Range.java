@@ -7,13 +7,13 @@ import java.util.List;
  * Created by yuank on 3/21/18.
  */
 public class LE_163_Missing_Range {
-    /*
+    /**
         Given a sorted integer array where the range of elements are in the inclusive range [lower, upper], return its missing ranges.
 
         For example, given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"].
      */
 
-    /*  Case 1 :
+    /**  Case 1 :
     [0, 1, 3, 50, 75]   lower = 0, upper = 99
 
     l = 0, r = 99
@@ -38,42 +38,79 @@ public class LE_163_Missing_Range {
 
     Special case, [], 1-99,3 then for loop does not execute, "1->99", or range "1", only gap is "1".
 */
-    public List<String> findMissingRanges(int[] nums, int lower, int upper) {
-        List<String> res = new ArrayList<>();
-        //!!! nums.length == 0 is valid case : [], should allow it to run
-        if (nums == null) return res;
+    class Solution1 {
+        public List<String> findMissingRanges(int[] nums, int lower, int upper) {
+            List<String> res = new ArrayList<>();
+            //!!! nums.length == 0 is valid case : [], should allow it to run
+            if (nums == null) return res;
 
-        //!!! need to use long type to prevent overflow
-        long left = (long)lower;
-        long right = (long)upper;
+            //!!! need to use long type to prevent overflow
+            long left = (long) lower;
+            long right = (long) upper;
 
-        for (int num : nums) {
-            long cur = (long)num;
-            if (cur < left) {
-                continue;
+            for (int num : nums) {
+                long cur = (long) num;
+                if (cur < left) {
+                    continue;
+                }
+
+                if (cur == left) {
+                    left++;
+                    continue;
+                }
+
+                res.add(getRange(left, cur - 1));
+                //!!! move cursor
+                left = cur + 1;
             }
 
-            if (cur == left) {
-                left++;
-                continue;
+            if (left <= right) {
+                res.add(getRange(left, right));
             }
 
-            res.add(getRange(left, cur - 1));
-            //!!! move cursor
-            left = cur + 1;
+            return res;
         }
 
-        if (left <= right) {
-            res.add(getRange(left, right));
+        private String getRange(long x, long y) {
+            if (x == y) {
+                return x + "";
+            }
+            return x + "->" + y;
         }
-
-        return res;
     }
 
-    private String getRange(long x, long y) {
-        if (x == y) {
-            return x + "";
+    public class Solution2 {
+
+        public List<String> findMissingRanges(int[] nums, int lower, int upper) {
+            List<String> result = new ArrayList<>();
+            if (nums == null || nums.length == 0) {
+                result.add(getRange(lower, upper));
+                return result;
+            }
+
+            if (nums[0] > lower) {
+                result.add(getRange(lower, nums[0] - 1));
+            }
+
+            for (int i = 1; i < nums.length; i++) {
+                long diff = (long) nums[i] - (long) nums[i - 1];
+                if (diff > 1L) {
+                    result.add(getRange(nums[i - 1] + 1, nums[i] - 1));
+                }
+            }
+
+            if (nums[nums.length - 1] < upper) {
+                result.add(getRange(nums[nums.length - 1] + 1, upper));
+            }
+            return result;
         }
-        return x + "->" + y;
+
+        private String getRange(int from, int to) {
+            if (from == to) {
+                return String.valueOf(from);
+            } else {
+                return from + "->" + to;
+            }
+        }
     }
 }

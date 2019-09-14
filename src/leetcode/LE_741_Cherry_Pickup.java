@@ -88,18 +88,31 @@ public class LE_741_Cherry_Pickup {
         private int dp(int x1, int y1, int x2) {
             final int y2 = x1 + y1 - x2;
 
+            /**
+             * we start from (m - 1, n - 1) and only move left and up,
+             * so only need to check if it is out of lower bound
+             */
             if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) {
                 return -1;
             }
 
+            /**
+             * if we can't go through  grid cell
+             */
             if (grid[y1][x1] < 0 || grid[y2][x2] < 0) {
                 return -1;
             }
 
+            /**
+             * we get to the start point
+             */
             if (x1 == 0 && y1 == 0) {
                 return grid[y1][x1];
             }
 
+            /**
+             * mem cache has the value
+             */
             if (memo[y1][x1][x2] != Integer.MIN_VALUE) {
                 return memo[y1][x1][x2];
             }
@@ -110,7 +123,7 @@ public class LE_741_Cherry_Pickup {
             if (memo[y1][x1][x2] >= 0) {
                 memo[y1][x1][x2] += grid[y1][x1];
 
-                if (x1 != x2) {//!!! if x1 == x2, by pass, meaning, if 2 rounts get to the same cell, cell value only applies to one of the route
+                if (x1 != x2) {//!!! if x1 == x2, by pass, meaning, if 2 routs get to the same cell, cell value only applies to one of the route
                     memo[y1][x1][x2] += grid[y2][x2];
                 }
             }
