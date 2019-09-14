@@ -87,6 +87,8 @@ public class LI_654_Sparse_Matrix_Multiplication {
      * 进一步改进
      *
      * 1.Pre-processing B, get the none-zero elements into "col", O(n ^ 2)
+     *   Here, what we put into col is not the value of the element, but the column index value
+     *   of the none-zero element
      * 2.Loop through A, only do calculation for none-zero elements in A and elements in "col",
      *   O(a * b) : a number of none zero in A , b number of none zero in B.
      *

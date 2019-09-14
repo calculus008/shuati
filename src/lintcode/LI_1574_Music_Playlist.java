@@ -18,9 +18,14 @@ public class LI_1574_Music_Playlist {
      * 1 ≤ p ≤ 100
      *
      * Hard
+     *
+     * Leetcode 920
      */
 
     /**
+     * https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-920-number-of-music-playlists/
+     *
+     *
      * https://www.jiuzhang.com/solution/music-playlist/
      *
      * 动态规划好题
