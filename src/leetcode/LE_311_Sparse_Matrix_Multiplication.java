@@ -115,6 +115,113 @@ public class LE_311_Sparse_Matrix_Multiplication {
          故方法二，就是基于此进行优化的。
      **/
 
+    /**
+     * Pre-process, save none-zero elements from A, B into list l1 and l2.
+     * Then iterator through l1, l2, do multiplication
+     *
+     * A size : m * n
+     * B size : n * k
+     * t1 : size of l1
+     * t2 : size of l2
+     *
+     * Time : O(m * n + n * k + t1 * t2)
+     * Space : O(t1 + t2)
+     */
+    public class Solution_mypractice {
+        class Element {
+            int x, y, val;
+            public Element(int x, int y, int val) {
+                this.x = x;
+                this.y = y;
+                this.val = val;
+            }
+        }
+
+        public int[][] multiply(int[][] A, int[][] B) {
+            int m = A.length;
+            int k = B[0].length;
+
+            int[][] res = new int[m][k];
+
+            List<Element> l1 = getVector(A);
+            List<Element> l2 = getVector(B);
+
+            for (Element e1 : l1) {
+                for (Element e2 : l2) {
+                    if (e1.y == e2.x) {//!!!
+                        int i = e1.x;
+                        int j = e2.y;
+                        res[i][j] += e1.val * e2.val;
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        private List<Element> getVector(int[][] A) {
+            int m = A.length;
+            int n = A[0].length;
+            List<Element> res = new ArrayList<>();
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (A[i][j] != 0) {
+                        res.add(new Element(i, j, A[i][j]));
+                    }
+                }
+            }
+
+            return res;
+        }
+
+    }
+    // 方法四 : Best Solution
+    public class Solution4 {
+        public int[][] multiply(int[][] A, int[][] B) {
+            // A(n, t) * B(t, m) = C(n, m)
+            int n = A.length;
+            int t = A[0].length;
+            int m = B[0].length;
+            int[][] C = new int[n][m];
+
+            List<Point> A_Points = getNonZeroPoints(A);
+            List<Point> B_Points = getNonZeroPoints(B);
+
+            for (Point pA : A_Points) {
+                for (Point pB : B_Points) {
+                    //!!!
+                    if (pA.j == pB.i) {
+                        C[pA.i][pB.j] += A[pA.i][pA.j] * B[pB.i][pB.j];
+                    }
+                }
+            }
+
+            return C;
+        }
+
+
+        private List<Point> getNonZeroPoints(int[][] matrix) {
+            List<Point> nonZeroPoints = new ArrayList<>();
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if (matrix[i][j] != 0) {
+                        nonZeroPoints.add(new Point(i, j));
+                    }
+                }
+            }
+            return nonZeroPoints;
+        }
+
+        class Point {
+            int i, j;
+            Point(int i, int j) {
+                this.i = i;
+                this.j = j;
+            }
+        }
+    }
+
     // 方法一
     public class Solution1 {
         /**
@@ -215,51 +322,6 @@ public class LE_311_Sparse_Matrix_Multiplication {
         }
     }
 
-    // 方法四 : Best Solution
-    public class Solution4 {
-        public int[][] multiply(int[][] A, int[][] B) {
-            // A(n, t) * B(t, m) = C(n, m)
-            int n = A.length;
-            int t = A[0].length;
-            int m = B[0].length;
-            int[][] C = new int[n][m];
-
-            List<Point> A_Points = getNonZeroPoints(A);
-            List<Point> B_Points = getNonZeroPoints(B);
-
-            for (Point pA : A_Points) {
-                for (Point pB : B_Points) {
-                    //!!!
-                    if (pA.j == pB.i) {
-                        C[pA.i][pB.j] += A[pA.i][pA.j] * B[pB.i][pB.j];
-                    }
-                }
-            }
-
-            return C;
-        }
-
-
-        private List<Point> getNonZeroPoints(int[][] matrix) {
-            List<Point> nonZeroPoints = new ArrayList<>();
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[0].length; j++) {
-                    if (matrix[i][j] != 0) {
-                        nonZeroPoints.add(new Point(i, j));
-                    }
-                }
-            }
-            return nonZeroPoints;
-        }
-
-        class Point {
-            int i, j;
-            Point(int i, int j) {
-                this.i = i;
-                this.j = j;
-            }
-        }
-    }
 
     /**
      * My version, similar to Solution4,

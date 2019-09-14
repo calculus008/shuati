@@ -17,7 +17,22 @@ public class LE_55_Jump_Game {
         A = [3,2,1,0,4], return false.
      */
 
-    //Greedy
+    /**
+     * https://zxi.mytechroad.com/blog/greedy/leetcode-55-jump-game/
+     *
+     * Greedy
+     * If you can jump to i, then you can jump to at least i + nums[i].
+     *
+     * Always jump as far as you can.
+     *
+     * Keep tracking the farthest index you can jump to.
+     *
+     * Init far = nums[0].
+     *
+     * far = max(far, i + nums[i])
+     *
+     * check far >= n – 1
+     */
     public static boolean canJump(int[] nums) {
         if (nums == null || nums.length == 0) return false;
 
@@ -28,6 +43,8 @@ public class LE_55_Jump_Game {
             }
             max = Math.max(max, i + nums[i]); //!!! i + mums[i]
         }
-        return true;
+
+        return max >= nums.length - 1;
+//        return true;
     }
 }

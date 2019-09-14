@@ -80,4 +80,36 @@ public class LE_138_Copy_List_With_Random_Pointer {
 
         return newHead;
     }
+
+    public RandomListNode copyRandomList_practice(RandomListNode head) {
+        if (head == null) return null;
+
+        RandomListNode cur = head;
+        while (cur != null) {
+            RandomListNode newNode = new RandomListNode(cur.label);
+            newNode.next = cur.next;
+            cur.next =  newNode;
+            cur = newNode.next;
+        }
+
+        cur = head;
+        while (cur != null) {
+            if (cur.random != null) {
+                cur.next.random = cur.random.next;
+            }
+            cur = cur.next.next;
+        }
+
+        cur = head;
+        RandomListNode newHead = cur.next;
+        RandomListNode newNode;
+        while (cur != null) {
+            newNode = cur.next;
+            cur.next = newNode.next;
+            newNode.next = cur.next == null ? null : cur.next.next;
+            cur = cur.next;
+        }
+
+        return newHead;
+    }
 }
