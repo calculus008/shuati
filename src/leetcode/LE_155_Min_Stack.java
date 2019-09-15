@@ -150,6 +150,7 @@ public class LE_155_Min_Stack {
                 next = null;
             }
         }
+
         Node head;
         public void push(int x) {
             if(null==head){

@@ -38,15 +38,19 @@ public class LE_20_Valid_Parentheses {
         public boolean isValid(String s) {
             Deque<Character> stack = new ArrayDeque<>(s.length());
 
-            for(char c: s.toCharArray()) {
-                if(c=='(') {
+            for (char c : s.toCharArray()) {
+                if (c == '(') {
                     stack.push(')');
-                } else if(c=='{') {
+                } else if (c == '{') {
                     stack.push('}');
-                } else if(c=='[') {
+                } else if (c == '[') {
                     stack.push(']');
                 } else {
-                    if(stack.isEmpty() || stack.pop() != c)
+                    /**
+                     * !!!
+                     * stack.isEmpty()
+                     */
+                    if (stack.isEmpty() || stack.pop() != c)
                         return false;
                 }
             }

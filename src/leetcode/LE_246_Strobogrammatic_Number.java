@@ -7,7 +7,7 @@ import java.util.Map;
  * Created by yuank on 4/4/18.
  */
 public class LE_246_Strobogrammatic_Number {
-    /*
+    /**
         A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
 
         Write a function to determine if a number is strobogrammatic. The number is represented as a string.
@@ -25,6 +25,10 @@ public class LE_246_Strobogrammatic_Number {
         map.put('8', '8');
 
         int left = 0, right = num.length() - 1;
+
+        /**
+         * left <= right !!! "<="
+         */
         while (left <= right) {
             if (!map.containsKey(num.charAt(left))) {
                 return false;

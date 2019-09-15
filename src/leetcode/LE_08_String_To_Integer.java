@@ -66,6 +66,9 @@ public class LE_08_String_To_Integer {
 
         //trim leading space
         int i = 0;
+        /**
+         * i < str.length()
+         */
         while(i < str.length() && str.charAt(i)==' ') {
             i++;
         }
@@ -85,6 +88,9 @@ public class LE_08_String_To_Integer {
                 return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
         }
 
+        /**
+         * converion : (int)base
+         */
         return sign * (int) base;
     }
 }

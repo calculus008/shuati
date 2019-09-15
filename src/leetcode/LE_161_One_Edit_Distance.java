@@ -47,4 +47,25 @@ public class LE_161_One_Edit_Distance {
          * **/
         return Math.abs(s.length() - t.length()) == 1;
     }
+
+    public boolean isOneEditDistance_practice(String s, String t) {
+        if (s == null || t == null) return false;
+
+        int l1 = s.length();
+        int l2 = t.length();
+
+        for (int i = 0; i < Math.min(l1, l2); i++) {
+            if (s.charAt(i) != t.charAt(i)) {
+                if (l1 == l2) {
+                    return s.substring(i + 1).equals(t.substring(i + 1));
+                } else if (l1 > l2) {
+                    return s.substring(i + 1).equals(t.substring(i));
+                } else {
+                    return s.substring(i).equals(t.substring(i + 1));
+                }
+            }
+        }
+
+        return Math.abs(l1 - l2) == 1;
+    }
 }
