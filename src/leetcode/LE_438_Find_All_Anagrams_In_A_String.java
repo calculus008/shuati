@@ -48,6 +48,18 @@ public class LE_438_Find_All_Anagrams_In_A_String {
 
     /**
      * Best solution, just use 1 count array
+     *
+     * s: "cbabcbacd" p: "abc"
+     *
+     * i = 3
+     * count[0], [1], [2], [3], [4]
+     *            1    -1
+     * sum = 2
+     *
+     * i = 4
+     * count[0], [1], [2], [3], [4]
+     *           0     0
+     * sum = 0
      */
     public List<Integer> findAnagrams1(String s, String p) {
         List<Integer> res = new ArrayList<>();
@@ -94,6 +106,52 @@ public class LE_438_Find_All_Anagrams_In_A_String {
 
         return res;
     }
+
+
+    public List<Integer> findAnagrams_practice(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        if (s == null || p == null || s.length() == 0 || p.length() == 0 || s.length() < p.length()) {
+            return res;
+        }
+
+        int[] count = new int[256];
+        int sum = 0;
+
+        char[] chars1 = s.toCharArray();
+        char[] chars2 = p.toCharArray();
+        int l1 = chars1.length;
+        int l2 = chars2.length;
+
+        for (int i = 0; i < l2; i++) {
+            count[chars1[i]]++;
+            count[chars2[i]]--;
+        }
+
+        for (int n : count) {
+            sum += Math.abs(n);
+        }
+
+        if (sum == 0) res.add(0);
+
+        for (int i = l2; i < l1; i++) {
+            int r = chars1[i];
+            int l = chars1[i - l2];
+
+            sum -= (Math.abs(count[r]) + Math.abs(count[l]));
+
+            count[r]++;
+            count[l]--;
+
+            sum += (Math.abs(count[r]) + Math.abs(count[l]));
+
+            if (sum == 0) {
+                res.add(i - l2 + 1);
+            }
+        }
+
+        return res;
+    }
+
 
     public List<Integer> findAnagrams2(String s, String p) {
         List<Integer> res = new ArrayList<>();
