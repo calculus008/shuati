@@ -43,6 +43,13 @@ public class LE_288_Unique_Word_Abbreviation {
         A possible follow up question - LI_639_Word_Abbreviation
      */
 
+    /**
+     * 重要的是理解题意：
+     *
+     * 当 word -> abbreviation 在字典的所有abbreviation中不存在时， return true
+     * 当 word 在字典中存在时, 如果没有其他字典中的词有相同的abbreviation, return true
+     */
+
     class ValidWordAbbr {
         HashMap<String, String> map;
 
