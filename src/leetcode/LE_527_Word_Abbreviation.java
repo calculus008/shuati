@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class LE_527_Word_Abbreviation {
     /**
@@ -35,55 +33,113 @@ public class LE_527_Word_Abbreviation {
     /**
      * "prefix[i]" records starting index for abbreviation for ith word
      */
-    public List<String> wordsAbbreviation(List<String> dict) {
-        int len = dict.size();
-        String[] ans = new String[len];
-        int[] prefix = new int[len];
+    class Solution1 {
+        public List<String> wordsAbbreviation(List<String> dict) {
+            int len = dict.size();
+            String[] ans = new String[len];
+            int[] prefix = new int[len];
 
-        for (int i = 0; i < len; i++) {
-            prefix[i] = 1;
-            ans[i] = makeAbbr(dict.get(i), 1); // make abbreviation for each string
+            for (int i = 0; i < len; i++) {
+                prefix[i] = 1;
+                ans[i] = makeAbbr(dict.get(i), 1); // make abbreviation for each string
+            }
+
+            for (int i = 0; i < len; i++) {
+                while (true) {//!!!
+                    /**
+                     * Set saves index for words have the same abbreviation
+                     */
+                    HashSet<Integer> set = new HashSet<>();
+
+                    for (int j = i + 1; j < len; j++) {
+                        if (ans[j].equals(ans[i])) {
+                            set.add(j); // check all strings with the same abbreviation
+                        }
+                    }
+
+                    if (set.isEmpty()) {
+                        break;
+                    }
+
+                    set.add(i);
+                    for (int k : set) {
+                        ans[k] = makeAbbr(dict.get(k), ++prefix[k]); // increase the prefix
+                    }
+                }
+            }
+            return Arrays.asList(ans);
         }
 
-        for (int i = 0; i < len; i++) {
-            while (true) {//!!!
-                /**
-                 * Set saves index for words have the same abbreviation
-                 */
-                HashSet<Integer> set = new HashSet<>();
+        /**
+         * Make abbreviate word, abbreviation starts from index k
+         */
+        private String makeAbbr(String s, int k) {
+            if (k + 2 >= s.length()) {
+                return s;
+            }
 
-                for (int j = i + 1; j < len; j++) {
-                    if (ans[j].equals(ans[i])) {
-                        set.add(j); // check all strings with the same abbreviation
+            StringBuilder builder = new StringBuilder();
+            builder.append(s.substring(0, k));
+            builder.append(s.length() - 1 - k);
+            builder.append(s.charAt(s.length() - 1));
+
+            return builder.toString();
+        }
+    }
+
+    public class Solution2 {
+        /**
+         * @param dict: an array of n distinct non-empty strings
+         * @return: an array of minimal possible abbreviations for every word
+         */
+        public String[] wordsAbbreviation(String[] dict) {
+            if (null == dict) return new String[]{};
+
+            int len = dict.length;
+            int[] idx = new int[len];
+            /**
+             * String array that has the final result
+             */
+            String[] res = new String[len];
+
+            /**
+             * HashMap
+             * key : abbreviated string
+             * value: count of the key
+             */
+            Map<String, Integer> map = new HashMap<>();
+
+            for (int i = 0; i < len; i++) {
+                idx[i] = 1;
+                res[i] = getAbbr(dict[i], 1);
+                map.put(res[i], map.getOrDefault(res[i], 0) + 1);
+            }
+
+            while (true) {
+                boolean unique = true;
+                for (int i = 0; i < len; i++) {
+                    if (map.get(res[i]) > 1) {
+                        idx[i]++;
+                        /**
+                         * always pass dict[i] when calling getAbbr()
+                         */
+                        res[i] = getAbbr(dict[i], idx[i]);
+                        map.put(res[i], map.getOrDefault(res[i], 0) + 1);
+                        unique = false;
                     }
                 }
 
-                if (set.isEmpty()) {
-                    break;
-                }
-
-                set.add(i);
-                for (int k : set) {
-                    ans[k] = makeAbbr(dict.get(k), ++prefix[k]); // increase the prefix
-                }
+                if (unique) break;
             }
-        }
-        return Arrays.asList(ans);
-    }
 
-    /**
-     * Make abbreviate word, abbreviation starts from index k
-     */
-    private String makeAbbr(String s, int k) {
-        if (k + 2 >= s.length()) {
-            return s;
+            return res;
         }
 
-        StringBuilder builder = new StringBuilder();
-        builder.append(s.substring(0, k));
-        builder.append(s.length() - 1 - k);
-        builder.append(s.charAt(s.length() - 1));
+        public String getAbbr(String s, int k) {
+            if (k + 2 >= s.length()) return s;
 
-        return builder.toString();
+            int x = s.length() - k - 1;
+            return s.substring(0, k) + x + s.charAt(s.length() - 1);
+        }
     }
 }
