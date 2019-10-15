@@ -30,16 +30,23 @@ public class LE_36_Valid_Sudoku {
         Ie 0,0 is start of first block, second block is 0,3 (not 0,1);
         Similarly, to move to next block vertically, use / and multiply by 3 as explained above.
 
+        Form the STARTING row and column index for each sub block
+         i        0 1 2 3 4 5 6 7 8
+         3*(i/3)  0 0 0 3 3 3 6 6 6 row
+         3*(i%3)  0 3 6 0 3 6 0 3 6 column
+
         Form the row and column in each sub block
-        j     0 1 2 3 4 5 6 7 8
-        j/3   0 0 0 1 1 1 2 2 2  row
-        j%3   0 1 2 0 1 2 0 1 2  column
+         j     0 1 2 3 4 5 6 7 8
+         j/3   0 0 0 1 1 1 2 2 2  row
+         j%3   0 1 2 0 1 2 0 1 2  column
 
 
-        Form the starting row and column index for each sub block
-        i        0 1 2 3 4 5 6 7 8
-        3*(i/3)  0 0 0 3 3 3 6 6 6 row
-        3*(i%3)  0 3 6 0 3 6 0 3 6 column
+        so sub-block from 0 to 8:
+         0 -> 1 -> 2
+
+         3 -> 4 -> 5
+
+         6 -> 7 -> 8
      */
 
     public boolean isValidSudoku(char[][] board) {
@@ -47,16 +54,16 @@ public class LE_36_Valid_Sudoku {
         HashSet<Character> column = new HashSet<>();
         HashSet<Character> subsquare = new HashSet<>();
 
-        for(int i=0; i<9; i++){
-            for(int j=0; j<9; j++){
-                if(board[i][j]!='.' && !row.add(board[i][j]))
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.' && !row.add(board[i][j]))
                     return false;
-                if(board[j][i]!='.' && !column.add(board[j][i]))
+                if (board[j][i] != '.' && !column.add(board[j][i]))
                     return false;
 
-                int r = 3*(i/3) + j/3;
-                int c = 3*(i%3) + j%3;
-                if(board[r][c]!='.' && !subsquare.add(board[r][c]))
+                int r = 3 * (i / 3) + j / 3;
+                int c = 3 * (i % 3) + j % 3;
+                if (board[r][c] != '.' && !subsquare.add(board[r][c]))
                     return false;
 
             }

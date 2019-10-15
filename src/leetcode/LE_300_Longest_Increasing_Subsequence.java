@@ -164,7 +164,7 @@ public class LE_300_Longest_Increasing_Subsequence {
         for (int i = 1; i < nums.length; i++) {
             if (nums[i] < tails[0]) {
                 tails[0] = nums[i];
-            } if (nums[i] > tails[tailIndex]) {
+            } if (nums[i] > tails[tailIndex]) {//!!! "nums[i] > tails[tailIndex", NOT "nums[i] > tailIndex" !!!
                 tailIndex++;
                 tails[tailIndex] = nums[i];
             } else {
@@ -193,5 +193,24 @@ public class LE_300_Longest_Increasing_Subsequence {
         //!!!
         if (tails[l] >= target) return l;
         return r;
+    }
+
+    /**
+     * Binary Search using Huahua's template
+     */
+    private int findIdx(int[] tails, int s, int e, int target) {
+        int l = s;
+        int r = e + 1;
+
+        while (l < r) {
+            int m = l + (r - l) / 2;
+            if (tails[m] < target) {
+                l = m + 1;
+            } else {
+                r = m;
+            }
+        }
+
+        return l;
     }
 }

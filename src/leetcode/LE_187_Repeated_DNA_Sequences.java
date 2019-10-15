@@ -50,6 +50,21 @@ public class LE_187_Repeated_DNA_Sequences {
         Set<String> set = new HashSet<>();
         Set<String> ans = new HashSet<>();
 
+        /**
+         * example with sequence length of 3:
+         *
+         * len = 6
+         * n = 3
+         *
+         * 0 1 2 3 4 5
+         * A A A A A A
+         *       *
+         *
+         * Last position is at index 3, 3 + 2 = 5 < len (6)
+         *
+         * !!!
+         * i + 9 < s.length()
+         */
         for (int i = 0 ; i + 9 < s.length(); i++) {
             String str = s.substring(i, i + 10);
             /**

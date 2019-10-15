@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yuank on 2/28/18.
@@ -23,33 +20,118 @@ public class LE_49_Group_Anagrams {
         Note: All inputs will be in lower-case.
      */
 
-    //Time : O(m * n), Space: O(n)  counting sort
-    public static List<List<String>> groupAnagrams(String[] strs) {
-        List<List<String>> res = new ArrayList<>();
-        if(null == strs || strs.length == 0) return res;
+    /**
+     * example:
+     * ["abc", "cba"]
+     *
+     * "abc":  count[0] = 1, count[1] = 1, count[2] = 1
+     * key : "0a1b2c", count of char + char itself.
+     *
+     * same for "cba"
+     *
+     * if it's "aaabbddd":
+     * key : "3a2b3d", since we go through count[] to generate key, it goes from 'a' to 'z'.
+     */
 
-        Map<String, List<String>> map = new HashMap<>();
-
-        for (String str : strs) {
-            int[] count = new int[26];
-            for (char c : str.toCharArray()) {
-                count[c - 'a']++;
+    /**
+     * Faster with only one StringBuilder(), 67%
+     */
+    public class Solution_best {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            List<List<String>> res = new ArrayList<>();
+            if (null == strs || strs.length == 0) {
+                return res;
             }
 
-            String s = "";
-            for (int i = 0; i < count.length; i++) {
-                if (count[i] > 0) {
-                    s += String.valueOf(count[i]) + String.valueOf((char)('a' + i));
+            Map<String, List<String>> map = new HashMap<>();
+            StringBuilder sb = new StringBuilder();
+
+
+            for (String str : strs) {
+                int[] count = new int[26];
+                for (char c : str.toCharArray()) {
+                    count[c - 'a']++;
                 }
+
+                /**
+                 * !!!
+                 * no "clear()" method for StringBuilder
+                 */
+                sb.setLength(0);
+
+                for (int i = 0; i < 26; i++) {
+                    sb.append(count[i]).append('a' + i);
+                }
+
+                String key = sb.toString();
+                if (!map.containsKey(key)) {
+                    map.put(key, new ArrayList<>());
+                }
+                map.get(key).add(str);
             }
 
-            if (!map.containsKey(s)) {
-                map.put(s, new ArrayList<String>());
+            for (List<String> list : map.values()) {
+                res.add(list);
             }
-            List<String> al = map.get(s);
-            al.add(str);
+
+            return res;
+        }
+    }
+
+    /**
+     * Time : O(m * n), Space: O(n)  counting sort
+     *
+     * 4.60%, slow with String append
+     */
+    class Solution1 {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            List<List<String>> res = new ArrayList<>();
+            if (null == strs || strs.length == 0) return res;
+
+            Map<String, List<String>> map = new HashMap<>();
+
+            for (String str : strs) {
+                int[] count = new int[26];
+                for (char c : str.toCharArray()) {
+                    count[c - 'a']++;
+                }
+
+                String s = "";
+                for (int i = 0; i < count.length; i++) {
+                    if (count[i] > 0) {
+                        s += String.valueOf(count[i]) + String.valueOf((char) ('a' + i));
+                    }
+                }
+
+                if (!map.containsKey(s)) {
+                    map.put(s, new ArrayList<String>());
+                }
+                List<String> al = map.get(s);
+                al.add(str);
+            }
+
+            return new ArrayList<>(map.values());
+        }
+    }
+
+    /**
+     * Sorting solution
+     *
+     * O(m * nlogn)  38.2%
+     */
+    public class Solution2 {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            // write your code here
+            Map<String, List<String>> map = new HashMap<>();
+            for (String s : strs) {
+                char[] sc = s.toCharArray();
+                Arrays.sort(sc);
+                String key = String.valueOf(sc);
+                map.putIfAbsent(key, new ArrayList<>());
+                map.get(key).add(s);
+            }
+            return new ArrayList<>(map.values());
         }
 
-        return new ArrayList<>(map.values());
     }
 }
