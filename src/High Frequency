@@ -67,10 +67,14 @@ LI_526_Load_Balancer
 LE_128_Longest_Consecutive_Sequence
 LE_527_Word_Abbreviation
 
+LI_646_First_Position_Unique_Character
 LE_36_Valid_Sudoku
+LE_187_Repeated_DNA_Sequences
 LE_03_Longest_Substring_Without_Repeating_Characters
 LE_49_Group_Anagrams
 
+LE_300_Longest_Increasing_Subsequence
+LE_336_Palindrome_Pairs                      ***
 
 
 
