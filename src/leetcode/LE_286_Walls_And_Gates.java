@@ -88,6 +88,76 @@ public class LE_286_Walls_And_Gates {
         }
     }
 
+
+    public class Solution1_Practice {
+        public void wallsAndGates(int[][] rooms) {
+            if (null == rooms || rooms.length == 0) return;
+
+            /**
+             * Or we can use 1 queue saving int[], as in Solution2
+             */
+            Queue<Integer> xq = new LinkedList<>();
+            Queue<Integer> yq = new LinkedList<>();
+            int m = rooms.length;
+            int n = rooms[0].length;
+            int[] mx = new int[]{0, 1, 0, -1};
+            int[] my = new int[]{1, 0, -1, 0};
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (rooms[i][j] == 0) {
+                        xq.offer(i);
+                        yq.offer(j);
+                    }
+                }
+            }
+
+            // int steps = 0;
+            while (!xq.isEmpty()) {
+                // steps++;
+                int size = xq.size();
+
+                /**
+                 * No need to count steps as explaoned below, therefore no need to do for loop with size()
+                 */
+                // for (int i = 0; i < size; i++) {
+                int x = xq.poll();
+                int y = yq.poll();
+
+                for (int i = 0; i < 4; i++) {
+                    int nx = x + mx[i];
+                    int ny = y + my[i];
+
+                    /**
+                     * The solution uses the property that gate cell has value '0',
+                     * so we don't need to count steps in BFS, just use " rooms[nx][ny] = rooms[x][y] + 1"
+                     * for all valid cells (valid means in range and it is a room).
+                     *
+                     * Important!!!
+                     * Since BFS garauntees shortest path, so no need to do
+                     * "rooms[nx][ny] == Math.min(rooms[nx][ny], steps);"
+                     *
+                     * For using steps, see Solution3
+                     */
+                    // if (rooms[nx][ny] == 2147483647) {
+                    //     rooms[nx][ny] = steps;
+                    //     xq.offer(mx);
+                    //     yq.offer(my);
+                    // } else if (rooms[nx][ny] != 0 && rooms[nx][ny] != -1) {
+                    //     rooms[nx][ny] == Math.min(rooms[nx][ny], steps);
+                    // }
+
+                    if (nx >= 0 && nx < m && ny >= 0 && ny >= 0 && ny < n && rooms[nx][ny] == 2147483647) {
+                        xq.offer(nx);
+                        yq.offer(ny);
+                        rooms[nx][ny] = rooms[x][y] + 1;
+                    }
+                }
+                // }
+            }
+        }
+    }
+
     class Solution2 {
         //BFS, Time and Space : O(mn)
         public void wallsAndGatesBFS(int[][] rooms) {
@@ -169,6 +239,47 @@ public class LE_286_Walls_And_Gates {
                 }
             }
 
+        }
+    }
+
+    public class Solution3_Practice {
+        public void wallsAndGates(int[][] rooms) {
+            if (rooms == null || rooms.length == 0) return;
+
+            int m = rooms.length;
+            int n = rooms[0].length;
+            Queue<int[]> q = new LinkedList<>();
+            int[][] dirs = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+            int steps = 0;
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (rooms[i][j] == 0) {
+                        q.offer(new int[]{i, j});
+                    }
+                }
+            }
+
+            while (!q.isEmpty()) {
+                steps++;
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    int[] cur = q.poll();
+                    int x = cur[0];
+                    int y = cur[1];
+
+                    for (int j = 0; j < 4; j++) {
+                        int nx = x + dirs[j][0];
+                        int ny = y + dirs[j][1];
+
+                        if (nx >= 0 && nx < m && ny >= 0 && ny < n && rooms[nx][ny] == 2147483647) {
+                            rooms[nx][ny] = steps;
+                            q.offer(new int[]{nx, ny});
+                        }
+                    }
+                }
+            }
         }
     }
 }
