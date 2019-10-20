@@ -96,7 +96,12 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
         public void bfs(int[][] grid, int[][] dist, int[][] nums, int row, int col, int m, int n) {
             //!!! "<int[]>"
             Queue<int[]> queue = new LinkedList<>();
+
+            /**
+             * !!!
+             */
             boolean[][] visited = new boolean[m][n];
+
             queue.offer(new int[]{row, col});
             int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
             /**
@@ -175,7 +180,12 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
         }
 
         private void bfs(int i, int j, int walk, int[][] grid, int[][] dist) {
+            /**
+             * !!!
+             * init with -1, for each level
+             */
             minDist = -1;
+
             Queue<int[]> q = new LinkedList<>();
             q.offer(new int[]{i, j});
             int depth = 0;
@@ -193,9 +203,20 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
 
                             if (r >= 0 && r < grid.length && c >= 0 && c < grid[0].length
                                     && grid[r][c] == walk) {
+                                /**
+                                 * 实际上，每次set cell的值，省去了用visited数组判断current cell是否被访问过。
+                                 * "walk"的值不是随便设的。当bfs第一个房子时，空地的值是"0"，walk 初始化为"1"，
+                                 * walk-- 后，恰好为"0"。实际上，我们只对空地感兴趣。
+                                 */
                                 grid[r][c] = walk - 1;//!!!, not "walk--", we don't want to change its value yet
                                 dist[r][c] += depth;
 
+                                /**
+                                 * minDist logic is tricky, use it to avoid iterate through m * n array to
+                                 * find the min value. So for each bfs, we act as if this is the last house,
+                                 * so we get the min value from dist[][], but we also need to consider if there's
+                                 * no valid cell, that's why we must init "minDist" to "-1".
+                                 */
                                 if (minDist < 0 || minDist > dist[r][c]) {
                                     minDist = dist[r][c];
                                 }

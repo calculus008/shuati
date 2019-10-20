@@ -74,13 +74,21 @@ LE_03_Longest_Substring_Without_Repeating_Characters
 LE_49_Group_Anagrams
 
 LE_300_Longest_Increasing_Subsequence
-LE_336_Palindrome_Pairs                      ***
+LE_336_Palindrome_Pairs                      (***)
 
 #4.Search BFS
 LE_286_Walls_And_Gates
 LI_598_Zombie_In_Matrix
 LE_130_Surrounded_Regions
+LE_752_Open_The_Lock
+LI_794_Sliding_Puzzle_II
 
+LE_200_Number_Of_Islands
+LI_611_Knight_Shortest_Path
+LE_261_Graph_Valid_Tree                   (Union Find)
+LE_305_Number_Of_Islands_II               (Union Find)
+LE_317_Shortest_Distance_From_All_Buildings  (LI 573)
+LE_127_Word_Ladder
 
 
 

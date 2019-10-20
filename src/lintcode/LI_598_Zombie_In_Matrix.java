@@ -32,7 +32,7 @@ public class LI_598_Zombie_In_Matrix {
      * 2. Here, checking number of people has to be done during BFS, if it is after BFS finished,
      *    it will add extra days (or number of levels)
      * 3. Here, one day is actually one level for BFS
-     * 4. Since each people (0) will be truned into zombie (1), so we don't need to record visited people,
+     * 4. Since each people (0) will be turned into zombie (1), so we don't need to record visited people,
      *    they are all zombies.
      * 5. Maintain two counters during BFS :
      *    Number of people left

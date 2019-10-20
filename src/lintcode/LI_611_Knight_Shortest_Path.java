@@ -35,6 +35,9 @@ public class LI_611_Knight_Shortest_Path {
 
     /**
      * BFS, Time : O(V + E), Space : O(V)
+     *
+     * !!!
+     * Not using HashSet to mark visited, simply set visited cell value to TRUE
      */
     public int shortestPath(boolean[][] grid, Point source, Point destination) {
         Queue<Point> queue = new LinkedList<>();

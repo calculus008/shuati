@@ -76,12 +76,7 @@ public class LI_794_Sliding_Puzzle_II {
      *
      * getNext() : 找到下一层的所有可能的状态。
      */
-
-        /**
-         * @param init_state: the initial state of chessboard
-         * @param final_state: the final state of chessboard
-         * @return: return an integer, denote the number of minimum moving
-         */
+     class Solution {
         public int minMoveStep_JiuZhang(int[][] init_state, int[][] final_state) {
             String source = matrixToString(init_state);
             String target = matrixToString(final_state);
@@ -157,4 +152,86 @@ public class LI_794_Sliding_Puzzle_II {
 
             return states;
         }
+    }
+
+    public class Solution_Practice {
+        public int minMoveStep(int[][] init_state, int[][] final_state) {
+            if (init_state == null || final_state == null) return -1;
+
+            String start = convert(init_state);
+            String end = convert(final_state);
+
+            if (start.length() != end.length()) return -1;
+
+            Set<String> visited = new HashSet<>();
+            Queue<String> q = new LinkedList<>();
+            q.offer(start);
+            visited.add(start);
+
+            int steps = 0;
+
+            while (!q.isEmpty()) {
+                steps++;
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    String cur = q.poll();
+
+                    List<String> list = getNext(cur);
+                    for (String next : list) {
+                        if (end.equals(next)) {
+                            return steps;
+                        }
+
+                        if (visited.contains(next)) continue;
+
+                        visited.add(next);
+                        q.offer(next);
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        public String convert(int[][] board) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    sb.append(board[i][j]);
+                }
+            }
+
+            return sb.toString();
+        }
+
+        public List<String> getNext(String cur) {
+            int pos = cur.indexOf('0');
+            int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+            List<String> res = new ArrayList<>();
+
+            for (int j = 0; j < 4; j++) {
+                int x = pos / 3;
+                int y = pos % 3;
+
+                int nx = x + dirs[j][0];
+                int ny = y + dirs[j][1];
+
+                if (nx < 0 || nx >= 3 || ny < 0 || ny >= 3) {
+                    continue;
+                }
+
+                int nPos = nx * 3 + ny;
+
+                char[] chars = cur.toCharArray();
+                chars[pos] = chars[nPos];
+                chars[nPos] = '0';
+                String next = new String(chars);
+
+                res.add(next);
+            }
+
+            return res;
+        }
+    }
 }

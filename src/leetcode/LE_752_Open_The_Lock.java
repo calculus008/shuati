@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 public class LE_752_Open_The_Lock {
     /**
@@ -155,6 +152,66 @@ public class LE_752_Open_The_Lock {
 
                             q.offer(next);
                             visited.add(next);
+                        }
+                    }
+                }
+            }
+
+            return -1;
+        }
+    }
+
+    /**
+     * use one set
+     */
+    public class Solution1_Practice {
+        public int openLock(String[] deadends, String target) {
+            if (target == null || target.length() != 4) return -1;
+
+            String start = "0000";
+            if (target.equals(start)) return 0;
+
+            Set<String> set = new HashSet<String>(Arrays.asList(deadends));
+
+            /**
+             * !!!
+             * "set.contains(start)"
+             */
+            if (set.contains(target) || set.contains(start)) {
+                return -1;
+            }
+
+            Queue<String> q = new LinkedList<>();
+
+            q.offer(start);
+            /**
+             * !!!
+             */
+            set.add(start);
+
+            int steps = 0;
+
+            while (!q.isEmpty()) {
+                steps++;
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    String cur = q.poll();
+
+                    for (int j = 0; j < 4; j++) {
+                        for (int k = -1; k <= 1; k += 2) {
+                            char[] chars = cur.toCharArray();
+                            chars[j] = (char)(((chars[j] - '0' + k) + 10) % 10 + '0');
+                            String next = new String(chars);
+
+                            if (next.equals(target)) {
+                                return steps;
+                            }
+
+                            if (!set.contains(next)) {
+                                q.offer(next);
+                                set.add(next);
+                            }
                         }
                     }
                 }
