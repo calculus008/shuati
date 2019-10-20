@@ -446,85 +446,214 @@ public class LE_127_Word_Ladder {
      * Time complexity: O(mn) + O(mn),
      * n - number of words, m- average length of word, first one is build buckets, second is BFS
      */
-    class Word_Ladder_1_5 {}
-    public List<String> ladderLengthSolutionBetter(String start, String end, Set<String> dict) {
-        Map<String, Set<String>> map = new HashMap<String, Set<String>>();
-        dict.add(start);
-        dict.add(end);
+    class Word_Ladder_1_5 {
+        public List<String> ladderLengthSolutionBetter(String start, String end, Set<String> dict) {
+            Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+            dict.add(start);
+            dict.add(end);
 
-        for (String s : dict) {
-            char[] arr = s.toCharArray();
-            for (int i = 0; i < arr.length; i++) {
-                char original = arr[i];
+            for (String s : dict) {
+                char[] arr = s.toCharArray();
+                for (int i = 0; i < arr.length; i++) {
+                    char original = arr[i];
 
-                arr[i] = '_';
-                String s2 = new String(arr);
+                    arr[i] = '_';
+                    String s2 = new String(arr);
 
-                if (!map.containsKey(s2)) {
-                    map.put(s2, new HashSet<String>());
-                }
-                map.get(s2).add(s);
-
-                arr[i] = original;
-            }
-        }
-
-        Queue<String> queue = new LinkedList<String>();
-        Set<String> visited = new HashSet<String>();
-        Map<String, String> res = new HashMap<String, String>();
-
-        queue.offer(start);
-        visited.add(start);
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-
-            for (int i = 0; i < size; i++) {
-                String cur = queue.poll();
-                char[] arr = cur.toCharArray();
-
-                for (int j = 0; j < arr.length; j++) {
-                    char original = arr[j];
-
-                    arr[j] = '_';
-                    String s2 = String.valueOf(arr);
-
-                    for (String s3 : map.get(s2)) {
-                        if (end.equals(s3)) {
-                            res.put(s3, cur);
-                            return convertMapToList(res, start, end);
-                        }
-
-                        if (!visited.contains(s3)) {
-                            visited.add(s3);
-                            res.put(s3, cur);
-                            queue.offer(s3);
-                        }
+                    if (!map.containsKey(s2)) {
+                        map.put(s2, new HashSet<String>());
                     }
+                    map.get(s2).add(s);
 
-                    arr[j] = original;
+                    arr[i] = original;
                 }
             }
+
+            Queue<String> queue = new LinkedList<String>();
+            Set<String> visited = new HashSet<String>();
+            Map<String, String> res = new HashMap<String, String>();
+
+            queue.offer(start);
+            visited.add(start);
+
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+
+                for (int i = 0; i < size; i++) {
+                    String cur = queue.poll();
+                    char[] arr = cur.toCharArray();
+
+                    for (int j = 0; j < arr.length; j++) {
+                        char original = arr[j];
+
+                        arr[j] = '_';
+                        String s2 = String.valueOf(arr);
+
+                        for (String s3 : map.get(s2)) {
+                            if (end.equals(s3)) {
+                                res.put(s3, cur);
+                                return convertMapToList(res, start, end);
+                            }
+
+                            if (!visited.contains(s3)) {
+                                visited.add(s3);
+                                res.put(s3, cur);
+                                queue.offer(s3);
+                            }
+                        }
+
+                        arr[j] = original;
+                    }
+                }
+            }
+
+            return null;
         }
 
-        return null;
-    }
 
+        List<String> convertMapToList(Map<String, String> map, String beginWord, String endWord) {
+            List<String> res = new ArrayList<String>();
 
-    List<String> convertMapToList(Map<String, String> map, String beginWord, String endWord) {
-        List<String> res = new ArrayList<String>();
+            while (!map.get(endWord).equals(beginWord)) {
+                res.add(0, endWord);
+                endWord = map.get(endWord);
+            }
 
-        while (!map.get(endWord).equals(beginWord)) {
             res.add(0, endWord);
-            endWord = map.get(endWord);
-        }
-
-        res.add(0, endWord);
-        res.add(0, beginWord);
+            res.add(0, beginWord);
 
 //        for (int i = res.size() - 1; i >= 0; i--) {
 //            System.out.print(res.get(i) + "==");
 //        }
-        return res;
+            return res;
+        }
+    }
+
+    public class Solution_BFS_Practice_1 {
+        /**
+         * start and end don't need to be in dict
+         */
+        public int ladderLength(String start, String end, Set<String> dict) {
+            if (start == null || end == null || dict == null) return 0;
+
+            Queue<String> q = new LinkedList<>();
+            q.offer(start);
+            /**
+             * a -> b: it is one change, but the path has two nodes,
+             * here we return number of nodes along the path, need to return "2".
+             * So steps init with "1".
+             */
+            int steps = 1;
+
+            while (!q.isEmpty()) {
+                steps++;
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    String cur = q.poll();
+                    List<String> list = getNext(cur);
+
+                    for (String next : list) {
+                        if (next.equals(end)) return steps;
+
+                        if (!dict.contains(next)) continue;
+
+                        q.offer(next);
+                        dict.remove(next);
+                    }
+                }
+            }
+
+            return 0;
+        }
+
+        List<String> getNext(String cur) {
+            int len = cur.length();
+            List<String> res = new ArrayList<>();
+            char[] chars = cur.toCharArray();
+
+            for (int i = 0; i < len; i++) {
+                char origin = chars[i];
+                for (char c = 'a'; c <= 'z'; c++) {
+                    if (c == origin) continue;
+
+                    chars[i] = c;
+                    res.add(new String(chars));
+                }
+                /**
+                 * !!!
+                 */
+                chars[i] = origin;
+            }
+
+            return res;
+        }
+    }
+
+    public class Solution_BFS_Practice_2 {
+        /**
+         * start and end don't need to be in dict
+         */
+        public int ladderLength(String start, String end, Set<String> dict) {
+            if (start == null || end == null || dict == null) return 0;
+
+            Queue<String> q = new LinkedList<>();
+            q.offer(start);
+            int steps = 1;
+
+            /**
+             * !!!
+             * since end may not be in the dict and now we check if a newly generated word
+             * is in dict in fucntion getNext(), therefore, must make sure end is in dict.
+             */
+            dict.add(end);
+
+            while (!q.isEmpty()) {
+                steps++;
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    String cur = q.poll();
+                    List<String> list = getNext(cur, dict);
+
+                    for (String next : list) {
+                        if (next.equals(end)) return steps;
+
+                        q.offer(next);
+                    }
+                }
+            }
+
+            return 0;
+        }
+
+        List<String> getNext(String cur, Set<String> dict) {
+            int len = cur.length();
+            List<String> res = new ArrayList<>();
+            char[] chars = cur.toCharArray();
+
+            for (int i = 0; i < len; i++) {
+                char origin = chars[i];
+
+                for (char c = 'a'; c <= 'z'; c++) {
+                    if (c == origin) continue;
+
+                    chars[i] = c;
+                    String next = new String(chars);
+
+                    if (!dict.contains(next)) continue;
+
+                    res.add(next);
+                    dict.remove(next);
+                }
+                /**
+                 * !!!
+                 * 在这里还原
+                 */
+                chars[i] = origin;
+            }
+
+            return res;
+        }
     }
 }
