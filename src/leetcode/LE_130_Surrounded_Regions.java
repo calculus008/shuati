@@ -32,64 +32,65 @@ public class LE_130_Surrounded_Regions {
      *  DFS
      *  Space and Time : O(m * n)
      **/
+    class Solution1 {
+        public void solve(char[][] board) {
+            if (board == null || board.length == 0) return;
 
-    public static void solve(char[][] board) {
-        if (board == null || board.length == 0) return;
+            int m = board.length;
+            int n = board[0].length;
 
-        int m = board.length;
-        int n = board[0].length;
+            /**
+             'O'只可能在四条边上才不能被'X'包围，而且所有和这个边上的'O'相邻的‘O'也不是被‘X'包围的。
+             所以:
+             1.遍历每一条边，找'O'，然后以它为起点进行DFS，把所有找到的相邻的'O'设置为'1'.
+             2.遍历整个矩阵，把所有还存在的'O'设置为'X',把'1'还原成'O'
+             **/
 
-        /**
-            'O'只可能在四条边上才不能被'X'包围，而且所有和这个边上的'O'相邻的‘O'也不是被‘X'包围的。
-            所以:
-            1.遍历每一条边，找'O'，然后以它为起点进行DFS，把所有找到的相邻的'O'设置为'1'.
-            2.遍历整个矩阵，把所有还存在的'O'设置为'X',把'1'还原成'O'
-        **/
-
-        for (int i = 0; i < n; i++) {
-            if (board[0][i] == 'O') {
-                helper(board, 0, i);
+            for (int i = 0; i < n; i++) {
+                if (board[0][i] == 'O') {
+                    helper(board, 0, i);
+                }
             }
-        }
 
-        for (int i = 0; i < n; i++) {
-            if (board[m - 1][i] == 'O') {
-                helper(board, m - 1, i);
+            for (int i = 0; i < n; i++) {
+                if (board[m - 1][i] == 'O') {
+                    helper(board, m - 1, i);
+                }
             }
-        }
 
-        for (int i = 0; i < m; i++) {
-            if (board[i][0] == 'O') {
-                helper(board, i, 0);
+            for (int i = 0; i < m; i++) {
+                if (board[i][0] == 'O') {
+                    helper(board, i, 0);
+                }
             }
-        }
 
-        for (int i = 0; i < m; i++) {
-            if (board[i][n - 1] == 'O') {
-                helper(board, i, n - 1);
+            for (int i = 0; i < m; i++) {
+                if (board[i][n - 1] == 'O') {
+                    helper(board, i, n - 1);
+                }
             }
-        }
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board[i][j] == 'O') {
-                    board[i][j] = 'X';
-                } else if (board[i][j] == '1') {
-                    board[i][j] = 'O';
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (board[i][j] == 'O') {
+                        board[i][j] = 'X';
+                    } else if (board[i][j] == '1') {
+                        board[i][j] = 'O';
+                    }
                 }
             }
         }
-    }
 
-    public static void helper(char[][] board, int i, int j) {
-        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] != 'O') return;
+        public void helper(char[][] board, int i, int j) {
+            if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || board[i][j] != 'O') return;
 
-        board[i][j] = '1';
+            board[i][j] = '1';
 
-        helper(board, i + 1, j);
-        helper(board, i - 1, j);
-        helper(board, i, j + 1);
-        helper(board, i, j - 1);
+            helper(board, i + 1, j);
+            helper(board, i - 1, j);
+            helper(board, i, j + 1);
+            helper(board, i, j - 1);
+        }
     }
 
     /**
@@ -98,7 +99,7 @@ public class LE_130_Surrounded_Regions {
      * Time and Space : O(m * n)
      *
      */
-    public class Solution {
+    public class Solution2 {
         public void surroundedRegions(char[][] board) {
             if (board == null || board.length == 0 || board[0].length == 0) return;
 
@@ -205,6 +206,9 @@ public class LE_130_Surrounded_Regions {
             Queue<Integer> qy = new LinkedList<>();
             qx.offer(sx);
             qy.offer(sy);
+            /**
+             * !!!
+             */
             board[sx][sy] = 'W'; // 'W' -> Water
 
             while (!qx.isEmpty()) {
@@ -222,6 +226,109 @@ public class LE_130_Surrounded_Regions {
                 }
             }
         }
+    }
+
+    public class Solution_DFS_Practice {
+        public void surroundedRegions(char[][] board) {
+            if (null == board || board.length == 0) return;
+
+            int m = board.length;
+            int n = board[0].length;
+
+            for (int i = 0; i < m; i++) {
+                dfs(board, i, 0, m, n);
+                dfs(board, i, n - 1, m , n);
+            }
+
+            for (int i = 0; i < n; i++) {
+                dfs(board, 0, i, m, n);
+                dfs(board, m - 1, i, m , n);
+            }
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (board[i][j] == 'O') {
+                        board[i][j] = 'X';
+                    } else if (board[i][j] == 'W') {
+                        board[i][j] = 'O';
+                    }
+                }
+            }
+        }
+
+        public void dfs(char[][] board, int x, int y, int m, int n) {
+            if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != 'O') return;
+
+            board[x][y] = 'W';
+
+            dfs(board, x + 1, y, m, n);
+            dfs(board, x - 1, y, m, n);
+            dfs(board, x, y + 1, m, n);
+            dfs(board, x, y - 1, m, n);
+        }
+    }
+
+    public class Solution_BFS_Practice {
+        public void surroundedRegions(char[][] board) {
+            if (null == board || board.length == 0) return;
+
+            int m = board.length;
+            int n = board[0].length;
+            Queue<int[]> q = new LinkedList<>();
+            int[][] dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+
+            for (int i = 0; i < m; i++) {
+                if (board[i][0] == 'O') {
+                    q.offer(new int[]{i, 0});
+                }
+
+                if (board[i][n - 1] == 'O') {
+                    q.offer(new int[]{i, n - 1});
+                }
+            }
+
+            for (int i = 0; i < n; i++) {
+                if (board[0][i] == 'O') {
+                    q.offer(new int[]{0, i});
+                }
+
+                if (board[m - 1][i] == 'O') {
+                    q.offer(new int[]{m - 1, i});
+                }
+            }
+
+            while (!q.isEmpty()) {
+                int[] cur = q.poll();
+                int x = cur[0];
+                int y = cur[1];
+
+                /**
+                 * !!!
+                 */
+                board[x][y] = 'W';
+
+                for (int i = 0; i < 4; i++) {
+                    int nx = x + dirs[i][0];
+                    int ny = y + dirs[i][1];
+
+                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && board[nx][ny] == 'O') {
+                        board[nx][ny] = 'W';
+                        q.offer(new int[]{nx, ny});
+                    }
+                }
+            }
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (board[i][j] == 'O') {
+                        board[i][j] = 'X';
+                    } else if (board[i][j] == 'W') {
+                        board[i][j] = 'O';
+                    }
+                }
+            }
+        }
+
     }
 
 }
