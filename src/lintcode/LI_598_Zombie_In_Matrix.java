@@ -38,6 +38,56 @@ public class LI_598_Zombie_In_Matrix {
      *    Number of people left
      *    Number of Steps
      */
+
+    public class Solution_Practice {
+        public int zombie(int[][] grid) {
+            if (null == grid || grid.length == 0) return -1;
+
+            int m = grid.length;
+            int n = grid[0].length;
+            Queue<int[]> q = new LinkedList<>();
+            int[][] dirs = { {1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+            int days = 0;
+            int count = 0;
+
+            for (int i = 0; i < m ; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == 0) {
+                        count++;
+                    } else if(grid[i][j] == 1) {
+                        q.offer(new int[]{i, j});
+                    }
+                }
+            }
+
+            while (!q.isEmpty()) {
+                days++;
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    int[] cur = q.poll();
+                    int x = cur[0];
+                    int y = cur[1];
+
+                    for (int j = 0; j < 4; j++) {
+                        int nx = x + dirs[j][0];
+                        int ny = y + dirs[j][1];
+
+                        if (nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 0) {
+                            grid[nx][ny] = 1;
+                            q.offer(new int[]{nx, ny});
+                            count--;
+
+                            if(count == 0) return days;
+                        }
+                    }
+                }
+            }
+
+            return -1;
+        }
+    }
+
     class Solution1 {
         public int zombie(int[][] grid) {
             if (grid == null) {
