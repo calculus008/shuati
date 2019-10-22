@@ -581,6 +581,13 @@ public class LE_749_Contain_Virus {
             return total_walls;
         }
 
+        /**
+         * DFS
+         * The key here is that DFS not only gets the connected component, here it
+         * als returns :
+         * 1.Number of walls needed ("walls"
+         * 2.The cells that will be infected ("Set<Integer> next)")
+         */
         private void helper(int x, int y, int m, int n,
                             int[][] grid,
                             int[] visited,
