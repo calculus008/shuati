@@ -1,7 +1,9 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class LE_417_Pacific_Atlantic_Water_Flow {
     /**
@@ -65,6 +67,11 @@ public class LE_417_Pacific_Atlantic_Water_Flow {
                 dfs(matrix, m - 1, j, visited2);
             }
 
+            /**
+             * !!!
+             * How to get the cells that can reach both oceans?
+             * Use two boolean arrays, then get the ones that are true in both.
+             */
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     if (visited1[i][j] && visited2[i][j]) {
@@ -155,6 +162,130 @@ public class LE_417_Pacific_Atlantic_Water_Flow {
 
         private boolean isValid(int x, int y, int m, int n) {
             return (x >= 0 && x < m && y >= 0 && y < n);
+        }
+    }
+
+    public class Solution_BFS {
+        public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (matrix == null || matrix.length == 0) return res;
+
+            int m = matrix.length;
+            int n = matrix[0].length;
+            boolean[][] visited1 = new boolean[m][n];
+            boolean[][] visited2 = new boolean[m][n];
+
+            Queue<int[]> q1 = new LinkedList<>();
+            Queue<int[]> q2 = new LinkedList<>();
+
+            for (int i = 0; i < m; i++) {
+                q1.offer(new int[]{i, 0});
+                visited1[i][0] = true;//!!!
+                q2.offer(new int[]{i, n - 1});
+                visited2[i][n - 1] = true;//!!!
+            }
+
+            for (int i = 0; i < n; i++) {
+                q1.offer(new int[]{0, i});
+                visited1[0][i] = true;//!!!
+                q2.offer(new int[]{m - 1, i});
+                visited2[m - 1][i] = true;//!!!
+            }
+
+            bfs(matrix, q1, visited1, m, n);
+            bfs(matrix, q2, visited2, m, n);
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (visited1[i][j] && visited2[i][j]) {
+                        List<Integer> elm = new ArrayList<>();
+                        elm.add(i);
+                        elm.add(j);
+                        res.add(elm);
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        public void bfs(int[][] matrix, Queue<int[]> q, boolean[][] visited, int m, int n) {
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+            while (!q.isEmpty()) {
+                int[] cur = q.poll();
+
+                for (int i = 0; i < 4; i++) {
+                    int x = cur[0];
+                    int y = cur[1];
+                    int nx = x + dirs[i][0];
+                    int ny = y + dirs[i][1];
+
+                    /**
+                     * !!!
+                     * "visited[nx][ny]"
+                     */
+                    if (nx < 0 || nx >= m || ny < 0 || ny >= n || matrix[x][y] > matrix[nx][ny] || visited[nx][ny]) {
+                        continue;
+                    }
+
+                    visited[nx][ny] = true;
+                    q.offer(new int[]{nx, ny});
+                }
+            }
+        }
+    }
+
+    public class Solution_DFS_Practice {
+        public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (matrix == null || matrix.length == 0) return res;
+
+            int m = matrix.length;
+            int n = matrix[0].length;
+            boolean[][] visited1 = new boolean[m][n];
+            boolean[][] visited2 = new boolean[m][n];
+
+            for (int i = 0; i < m; i++) {
+                dfs(matrix, visited1, i, 0);
+                dfs(matrix, visited2, i, n - 1);
+            }
+
+            for (int i = 0; i < n; i++) {
+                dfs(matrix, visited1, 0, i);
+                dfs(matrix, visited2, m - 1, i);
+            }
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (visited1[i][j] && visited2[i][j]) {
+                        List<Integer> elm = new ArrayList<>();
+                        elm.add(i);
+                        elm.add(j);
+                        res.add(elm);
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        public void dfs(int[][] matrix, boolean[][] visited, int x, int y) {
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+            visited[x][y] = true;
+            int m = matrix.length;
+            int n = matrix[0].length;
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dirs[i][0];
+                int ny = y + dirs[i][1];
+
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n || matrix[x][y] > matrix[nx][ny] || visited[nx][ny]) {
+                    continue;
+                }
+
+                dfs(matrix, visited, nx, ny);
+            }
         }
     }
 

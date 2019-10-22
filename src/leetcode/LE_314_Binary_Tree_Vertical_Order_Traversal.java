@@ -84,6 +84,156 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
      * A variation of the problem : LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
      */
 
+
+    /**
+     * Seems to be the best solution, pure BFS
+     */
+    public class Solution_JiuZhang_1 {
+        public List<List<Integer>> verticalOrder(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
+
+            Map<Integer, List<Integer>> map = new HashMap<>();
+
+            Queue<Integer> colQ = new LinkedList<>();
+            Queue<TreeNode> nodeQ = new LinkedList<>();
+            colQ.offer(0);
+            nodeQ.offer(root);
+
+            while (!colQ.isEmpty()) {
+                int col = colQ.poll();
+                TreeNode node = nodeQ.poll();
+
+                map.putIfAbsent(col, new ArrayList<>());
+                map.get(col).add(node.val);
+
+                /**
+                 * " If two nodes are in the same row and column, the order should be from left to right."
+                 * left first, right second,
+                 */
+                if (node.left != null) {
+                    colQ.offer(col - 1);
+                    nodeQ.offer(node.left);
+                }
+
+                if (node.right != null) {
+                    colQ.offer(col + 1);
+                    nodeQ.offer(node.right);
+                }
+            }
+
+            /**
+             * !!!
+             * "Collections.min(map.keySet())"
+             */
+            for (int i = Collections.min(map.keySet()); i <= Collections.max(map.keySet()); i++) {
+                res.add(map.get(i));
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * Only difference from Solution_JiuZhang_2
+     * Use TreeMap, instead of HashMa, so in the end, simply iterate through keySet
+     * and add to res. For TreeMap, keySet is sorted.
+     */
+    public class Solution_JiuZhang_2 {
+        public List<List<Integer>> verticalOrder(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
+
+            Map<Integer, List<Integer>> map = new TreeMap<>();
+
+            Queue<Integer> colQ = new LinkedList<>();
+            Queue<TreeNode> nodeQ = new LinkedList<>();
+            colQ.offer(0);
+            nodeQ.offer(root);
+
+            while (!colQ.isEmpty()) {
+                int col = colQ.poll();
+                TreeNode node = nodeQ.poll();
+
+                map.putIfAbsent(col, new ArrayList<>());
+                map.get(col).add(node.val);
+
+                if (node.left != null) {
+                    colQ.offer(col - 1);
+                    nodeQ.offer(node.left);
+                }
+
+                if (node.right != null) {
+                    colQ.offer(col + 1);
+                    nodeQ.offer(node.right);
+                }
+            }
+
+            for (Integer key : map.keySet()) {
+                res.add(map.get(key));
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * Improved from above 2 solutions:
+     * 因为TreeMap在插入新的key的时候需要做排序插入，所有会耗费额外的时间。
+     * 我们只需要用一个minCol和一个maxCol来记录最左和最右的col数值。
+     * 这样我们不需要TreeMap，而用一个HashMap就可以完成这个问题。
+     *
+     * 在最后从Map中取值的时候，只需要从minCol到maxCol遍历即可。
+     */
+    public class Solution_JiuZhang_3 {
+        public List<List<Integer>> verticalOrder(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
+
+            Map<Integer, List<Integer>> map = new HashMap<>();
+
+            Queue<Integer> colQ = new LinkedList<>();
+            Queue<TreeNode> nodeQ = new LinkedList<>();
+            colQ.offer(0);
+            nodeQ.offer(root);
+
+            int minCol = Integer.MAX_VALUE;
+            int maxCol = Integer.MIN_VALUE;
+
+            while (!colQ.isEmpty()) {
+                int col = colQ.poll();
+                TreeNode node = nodeQ.poll();
+
+                if (col < minCol) {
+                    minCol = col;
+                }
+
+                if (col > maxCol) {
+                    maxCol = col;
+                }
+
+                map.putIfAbsent(col, new ArrayList<>());
+                map.get(col).add(node.val);
+
+                if (node.left != null) {
+                    colQ.offer(col - 1);
+                    nodeQ.offer(node.left);
+                }
+
+                if (node.right != null) {
+                    colQ.offer(col + 1);
+                    nodeQ.offer(node.right);
+                }
+            }
+
+            for (int i = minCol; i <= maxCol; i++) {
+                res.add(map.get(i));
+            }
+
+            return res;
+        }
+    }
+
     /**
      * Similar to LE_655_Print_Binary_Tree, but not the same, can't use its solution for this problem directly,
      * because of the root position alignment.

@@ -65,6 +65,10 @@ public class LE_103_Binary_Tree_Zigzag_Level_Order_Traversal {
                     list.add(0, cur.val);
                 }
 
+                /**
+                 * !!!
+                 * Don't forget!!!
+                 */
                 if (cur.left != null) q.offer(cur.left);
                 if (cur.right != null) q.offer(cur.right);
             }

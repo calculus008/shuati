@@ -157,6 +157,9 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
         public int shortestPathAllKeys(String[] grid) {
             int m = grid.length;
             int n = grid[0].length();
+            /**
+             * 64 : 6 keys, total 2 ^ 6 possible states
+             */
             boolean[][][] visited = new boolean[m][n][64];
             int allKeys = 0;
             char[][] chars = new char[m][n];
