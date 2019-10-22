@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public interface LE_939_Minimum_Area_Rectangle {
+public class LE_939_Minimum_Area_Rectangle {
     /**
      * Given a set of points in the xy-plane, determine the minimum area of a rectangle
      * formed from these points, with sides parallel to the x and y axes.
