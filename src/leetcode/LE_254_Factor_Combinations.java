@@ -132,6 +132,10 @@ public class LE_254_Factor_Combinations {
                 }
             }
 
+            /**
+             * n = 26
+             * factor 2, remain 13, when i = 6, break, come here, add 13 to path
+             */
             path.add(remain);
             dfs(remain, 1);
             path.remove(path.size() - 1);
