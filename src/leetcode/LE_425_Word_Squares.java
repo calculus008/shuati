@@ -78,6 +78,76 @@ public class LE_425_Word_Squares {
          Hard
      */
 
+    public class Solution_JiuZhang_Practice {
+        Map<String, List<String>> map;
+
+        public List<List<String>> wordSquares(String[] words) {
+            List<List<String>> res = new ArrayList<>();
+            if (words == null || words.length == 0) return res;
+
+            map = new HashMap<>();
+            buildMap(words);
+
+            dfs(words, res, new ArrayList<>(), words[0].length(), 0);
+            return res;
+        }
+
+        private void dfs(String[] words, List<List<String>> res, List<String> list, int len, int pos) {
+            if (pos == len) {
+                res.add(new ArrayList(list));
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (String s : list) {
+                sb.append(s.charAt(pos));
+            }
+
+            String key = sb.toString();
+            if (!map.containsKey(key)) return;
+
+            int size = list.size();
+            for (String next : map.get(key)) {
+                if (!isValid(list, next, size)) continue;
+
+                list.add(next);
+                dfs(words, res, list, len, pos + 1);
+                list.remove(list.size() - 1);
+            }
+        }
+
+        private boolean isValid(List<String> list, String s, int l) {
+            for (int i = l; i < s.length(); i++) {
+                StringBuilder sb = new StringBuilder();
+
+                for (int j = 0; j < list.size(); j++) {
+                    sb.append(list.get(j).charAt(i));
+                }
+                sb.append(s.charAt(i));
+
+                if (!map.containsKey(sb.toString())) return false;
+            }
+            return true;
+        }
+
+        private void buildMap(String[] words) {
+            for (String word : words) {
+                /**
+                 * !!!
+                 */
+                map.putIfAbsent("", new ArrayList<>());
+                map.get("").add(word);
+
+                String prefix = "";
+                for (char c : word.toCharArray()) {
+                    prefix += c;
+                    map.putIfAbsent(prefix, new ArrayList<>());
+                    map.get(prefix).add(word);
+                }
+            }
+        }
+    }
+
     /**
      * Solution 1
      * Use HashMap to get the list of words that share the given common prefix.
@@ -86,6 +156,9 @@ public class LE_425_Word_Squares {
      **
      * 较为简短的DFS算法，不需要用到Trie。
      * 先将所有的prefixes存到Map中，然后在DFS中根据prefix来查询下一个可以被放在square中的词。
+     *
+     * Map : key - prefix, value - list of words that has this prefix.
+     *
      * 当square中包含的词数目达到正确的size时，加入进res中
      *
      * 整体思路是：
@@ -112,11 +185,16 @@ public class LE_425_Word_Squares {
             buildMap(words, map);
 
             //!!! it's temp, not res, that goes into helper
+            /**
+             * Try each word in words to be the first word in the square,
+             * see if there's a solution starting with this word (the first
+             * word in the square)
+             */
             List<String> temp = new ArrayList<>();
             for (String word : words) {
                 temp.add(word);
                 helper(res, map, size, temp);
-                temp.remove(temp.size() - 1);//!!!
+                temp.remove(temp.size() - 1);//!!!backtracking
             }
 
             return res;
@@ -151,7 +229,10 @@ public class LE_425_Word_Squares {
 
         private void buildMap(String[] words, HashMap<String, List<String>> map) {
             for (String word : words) {
-                //!!!only "< word.length - 1", only add prefix, not the complete word
+                /**
+                 * !!!
+                 * only "< word.length - 1", only add prefix, not the complete word
+                 */
                 for (int i = 0; i < word.length() - 1; i++) {
                     String key = word.substring(0, i + 1);
 
@@ -180,7 +261,7 @@ public class LE_425_Word_Squares {
      * Main logic is the same as Solution1, the only difference is that it stores prefix in Trie.
      * Call findByPrefix() in Trie class to get list of of words that share the given common prefix
      *
-     * Compare with HashMap, Trie saves space, Time complexcity is the same.
+     * Compare with HashMap, Trie saves space, Time complexity is the same.
      * Implementing Trie takes time, so if not required, use HashMap saves time.
      */
     public class Solution2 {
@@ -327,7 +408,6 @@ public class LE_425_Word_Squares {
         }
 
         public List<List<String>> wordSquares(String[] words) {
-            // Write your code here
             List<List<String>> ans = new ArrayList<>();
             if (words.length == 0) {
                 return ans;
