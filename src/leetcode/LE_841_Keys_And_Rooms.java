@@ -62,8 +62,21 @@ public class LE_841_Keys_And_Rooms {
                 return;
             }
 
+            /**
+             * !!!
+             * Add number here
+             * !!!
+             * 就是说，这是当前的处理逻辑
+             */
             visited.add(n);
+
             for (int room : rooms.get(n)) {
+                /**
+                 * !!!
+                 * Not add here.
+                 */
+                //visited.add(n);
+
                 dfs(rooms, visited, room);
             }
         }
