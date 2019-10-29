@@ -110,6 +110,68 @@ public class LE_863_All_Nodes_Distance_K_In_Binary_Tree {
                     }
                 }
                 steps++;
-            }}
+            }
+        }
+    }
+
+    class Solution_Practice {
+        Map<Integer, List<TreeNode>> map ;
+
+        public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
+            List<Integer> res = new ArrayList<>();
+            if (root == null || target == null) return res;
+
+            map = new HashMap<>();
+            dfs(root, null);
+
+            bfs(target, res, K);
+
+            return res;
+        }
+
+        private void dfs(TreeNode root, TreeNode parent) {
+            if (root == null) return;
+
+            if (!map.containsKey(root.val)) {
+                map.put(root.val, new ArrayList<>());
+
+                if (parent != null) {
+                    map.get(root.val).add(parent);
+                    map.get(parent.val).add(root);
+                }
+
+                dfs(root.left, root);
+                dfs(root.right, root);
+            }
+        }
+
+        private void bfs(TreeNode target, List<Integer> res, int k) {
+            Queue<TreeNode> q = new LinkedList();
+            q.offer(target);
+
+            Set<Integer> visited = new HashSet<>();
+            visited.add(target.val);
+
+            int steps = 0;
+
+            while (!q.isEmpty() && steps <= k) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    TreeNode cur = q.poll();
+                    visited.add(cur.val);
+
+                    if (steps == k) {
+                        res.add(cur.val);
+                    }
+
+                    for (TreeNode node : map.get(cur.val)) {
+                        if (visited.contains(node.val)) continue;
+                        q.offer(node);
+                    }
+                }
+                steps++;
+            }
+        }
     }
 }

@@ -34,13 +34,17 @@ LE_79_Word_Search (***)
 LE_212_Word_Search_II
 LE_494_Target_Sum (Best Solution is DP)
 
-LE_841_Keys_And_Rooms                     (*)
 
+#New Problems
 LE_675_Cut_Off_Trees_For_Golf_Event
 LE_753_Cracking_The_Safe                  (*)
 LE_967_Numbers_With_Same_Consecutive_Differences
 LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
 LE_815_Bus_Routes
+LE_841_Keys_And_Rooms                     (*)
+LE_863_All_Nodes_Distance_K_In_Binary_Tree
+LE_742_Closest_Leaf_In_A_Binary_Tree
+
 LE_943_Find_The_Shortest_Superstring
 
 LE_847_Shortest_Path_Visiting_All_Nodes

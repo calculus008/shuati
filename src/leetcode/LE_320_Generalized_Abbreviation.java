@@ -13,7 +13,7 @@ public class LE_320_Generalized_Abbreviation {
          Example:
          Given word = "word", return the following list (order does not matter):
          ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
-         Seen this question in a real interview before?
+
          Difficulty:Medium
 
          Medium
@@ -35,9 +35,15 @@ public class LE_320_Generalized_Abbreviation {
             return res;
         }
 
+        /**
+         * count : count the number of chars, use this count number in creating abbreviation
+         */
         public void helper(String word, List<String> res, int pos, String cur, int count) {
             if (pos == word.length()) {
-                if (count > 0) {//!!!
+                /**
+                 * !!!
+                 */
+                if (count > 0) {
                     cur += count;
                 }
                 res.add(cur);
@@ -45,12 +51,17 @@ public class LE_320_Generalized_Abbreviation {
             }
 
             /**
-             对每一个char有两种处理：1.保留， 2.压缩
+             * 对每一个char有两种处理：1.保留， 2.压缩
              */
-            //#2
+            /**
+             * #2 : 压缩，keep counting chars
+             */
             helper(word, res, pos + 1, cur, count + 1);
-            //!!! "cur + (count > 0 ? count : "") + word.charAt(pos)"
-            //#1, !!!要把count置为0
+            /**
+             * !!!
+             * #1 : 保留当前char.
+             * "cur + (count > 0 ? count : "") + word.charAt(pos)" : 要把count置为0
+             */
             helper(word, res, pos + 1, cur + (count > 0 ? count : "") + word.charAt(pos), 0);
         }
     }

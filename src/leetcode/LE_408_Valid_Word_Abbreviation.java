@@ -39,9 +39,17 @@ public class LE_408_Valid_Word_Abbreviation {
             if (t.length > s.length) return false;
 
             while (i < s.length && j < t.length) {
+                /**
+                 * !!!
+                 * If detect digit in abbreviation, extract the number,
+                 * then "i += num" will move word pointer to the position
+                 * that is right after the digit in abbreviation so that
+                 * we can check if they are the same.
+                 */
                 if (Character.isDigit(t[j])) {
                     /**
                      * !!!
+                     * '0' is invalid in abbreviation
                      */
                     if (t[j] == '0') {
                         return false;
