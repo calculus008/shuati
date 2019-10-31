@@ -61,7 +61,7 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
      * 4. Pop each Pair out of queue, first process, then expand to next level. In other words, all processing
      *    of Pair happens after it is popped out of the queue.
      *
-     * 5. Init queue by putting all nodes into the queue, since we can start any of those nodes.
+     * 5. Init queue by putting all nodes into the queue, since we can start from any of those nodes.
      *    Similar to LE_934_Shortest_Bridge
      */
 

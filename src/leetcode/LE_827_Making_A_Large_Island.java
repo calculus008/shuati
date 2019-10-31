@@ -145,4 +145,74 @@ public class LE_827_Making_A_Large_Island {
             return res;
         }
     }
+
+    class Solution_Practice {
+        public int largestIsland(int[][] grid) {
+            if (grid == null || grid.length == 0) return 0;
+
+            int res = 0;
+            int m = grid.length;
+            int n = grid[0].length;
+            int id = 2;
+            Map<Integer, Integer> map = new HashMap<>();
+            int max = 0;
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == 1) {
+                        int area = getArea(grid, m, n, i, j, id);
+                        map.put(id, area);
+                        id++;
+                        max = Math.max(max, area);
+                    }
+                }
+            }
+
+            /**
+             * If there's no "0" in grid
+             */
+            if (max == m * n) return max;
+
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == 0) {
+                        int x = 1;
+                        Set<Integer> set = new HashSet<>();
+
+                        for (int k = 0; k < 4; k++) {
+                            int nx = i + dirs[k][0];
+                            int ny = j + dirs[k][1];
+
+                            if (nx < 0 || nx >= m || ny < 0 || ny >= n || grid[nx][ny] < 2) {
+                                continue;
+                            }
+
+                            if (set.add(grid[nx][ny])) {
+                                x += map.get(grid[nx][ny]);
+                            }
+                        }
+                        res = Math.max(res, x);
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        private int getArea(int[][] grid, int m, int n, int x, int y, int id) {
+            if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != 1) return 0;//!!! return 0
+
+            grid[x][y] = id;
+
+            int res = 1;
+            res += getArea(grid, m, n, x + 1, y, id);
+            res += getArea(grid, m, n, x - 1, y, id);
+            res += getArea(grid, m, n, x, y + 1, id);
+            res += getArea(grid, m, n, x, y - 1, id);
+
+            return res;
+        }
+    }
 }

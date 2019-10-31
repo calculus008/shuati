@@ -79,7 +79,7 @@ public class LE_802_Find_Eventual_Safe_States {
              */
             if (status[id] == 1) {//1
                 /**
-                 * !!! Don't for get to set the state before retrun
+                 * !!! Don't forget to set the state before return
                  */
                 status[id] = 3;
                 return 3;
@@ -94,7 +94,7 @@ public class LE_802_Find_Eventual_Safe_States {
             for (int next : graph[id]) {
                 if (dfs(graph, status, next) == 3) {
                     /**
-                     * !!! Don't for get to set the state before retrun
+                     * !!! Don't forget to set the state before return
                      */
                     status[id] = 3;
                     return 3;
@@ -102,7 +102,7 @@ public class LE_802_Find_Eventual_Safe_States {
             }
 
             /**
-             * !!! Don't for get to set the state before retrun
+             * !!! Don't foget to set the state before return
              */
             status[id] = 2;
             return 2;
