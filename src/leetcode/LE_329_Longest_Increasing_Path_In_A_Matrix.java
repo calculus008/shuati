@@ -40,6 +40,56 @@ public class LE_329_Longest_Increasing_Path_In_A_Matrix {
          Variation - Max_Zigzag_Paths
      */
 
+    class Solution_DFS_Practice {
+        int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+        public int longestIncreasingPath(int[][] matrix) {
+            if (null == matrix || matrix.length == 0) return 0;
+
+            int m = matrix.length;
+            int n = matrix[0].length;
+            int[][] mem = new int[m][n];
+            int res = 0;
+
+            /**
+             * 在这里含糊了一下：如果每个cell 都找一遍，那岂不是O(MN *MN) 吗？
+             *
+             * 关键是 - memoization. 用 mem[][]存贮访问过的节点，所以每个cell只计算一次路径。
+             *
+             * O(MN)
+             */
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    res = Math.max(res, dfs(matrix, i, j, mem));
+                }
+            }
+            return res;
+        }
+
+        public int dfs(int[][] matrix, int x, int y, int[][] mem) {
+            if (mem[x][y] != 0) return mem[x][y];
+
+            int m = matrix.length;
+            int n = matrix[0].length;
+            int ret = 0;
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dirs[i][0];
+                int ny = y + dirs[i][1];
+
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n || matrix[nx][ny] <= matrix[x][y]) {
+                    continue;
+                }
+
+                ret = Math.max(ret, dfs(matrix, nx, ny, mem));
+            }
+
+            mem[x][y] = 1 + ret;
+
+            return 1 + ret;
+        }
+    }
+
     /**
          http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-329-longest-increasing-path-in-a-matrix/
 
@@ -88,6 +138,7 @@ public class LE_329_Longest_Increasing_Path_In_A_Matrix {
             return ret;
         }
     }
+
 
     /**
      * 9 ms

@@ -36,10 +36,13 @@ public class LI_639_Word_Abbreviation {
 
             /**
              * !!!
-             * For ith element in dict, the length of prefix used (in order to make unique in hashmap
+             * For ith element in dict, the length of prefix used (in order to make unique in hashmap)
              */
             int[] prefix = new int[len];
 
+            /**
+             * HashMap : count number of times a key that has appeared
+             */
             Map<String, Integer> count = new HashMap<>();
 
             for (int i = 0; i < len; i++) {
@@ -52,6 +55,10 @@ public class LI_639_Word_Abbreviation {
                 boolean unique = true;
                 for (int i = 0; i < len; i++) {
                     if (count.get(ans[i]) > 1) {
+                        /**
+                         * !!!
+                         * Not unique, increase length of prefix and re-generate abbreviation
+                         */
                         prefix[i]++;
                         ans[i] = getAbbr(dict[i], prefix[i]);
 

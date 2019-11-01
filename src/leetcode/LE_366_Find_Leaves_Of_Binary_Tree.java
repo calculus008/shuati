@@ -150,7 +150,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
         }
 
         /**
-         * 这个helper()实际上就是用来找tree的。
+         * 这个helper()实际上就是用来找tree的reversed height。
          */
         private int helper(TreeNode root, List<List<Integer>> res) {
             if (root == null) {

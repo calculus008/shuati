@@ -95,6 +95,31 @@ LE_314_Binary_Tree_Vertical_Order_Traversal   (***)
 LE_133_Clone_Graph
 LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 
+#5.Tree & Divide and Conquer
+LI_661_Convert_BST_To_Greater_Tree
+LE_366_Find_Leaves_Of_Binary_Tree
+LE_156_Binary_Tree_Upside_Down
+
+#6.Search DFS
+LE_254_Factor_Combinations
+LE_282_Expression_Add_Operators
+LE_425_Word_Squares                           (***)
+LE_126_Word_Ladder_II                         (***)
+LE_127_Word_Ladder
+
+LE_17_Letter_Combinations_Of_A_Phone_Number
+LE_51_N_Queens
+LE_52_N_Queens_II
+LE_37_Sudoku_Solver
+
+LE_320_Generalized_Abbreviation
+
+
+#Abbreviation
+LE_288_Unique_Word_Abbreviation
+LE_527_Word_Abbreviation               LI_639_Word_Abbreviation
+LE_320_Generalized_Abbreviation
+LE_408_Valid_Word_Abbreviation
 
 
 

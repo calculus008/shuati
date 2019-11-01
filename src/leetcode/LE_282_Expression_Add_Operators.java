@@ -53,6 +53,53 @@ public class LE_282_Expression_Add_Operators {
 
      */
 
+    public class Solution_Practice {
+        public List<String> addOperators(String num, int target) {
+            List<String> res = new ArrayList<>();
+            if (num == null || num.length() == 0) return res;
+
+            helper(num, res, target, "", 0, 0, 0);
+
+            return res;
+        }
+
+        /**
+         * !!!
+         * long for "pre" and "val"
+         */
+        private void helper(String s, List<String> res, int target, String temp, int pos, long pre, long val) {
+            if (pos == s.length()) {
+                if (val == target) {
+                    res.add(temp);
+                }
+                return;
+            }
+
+            /**
+             * !!!
+             * long
+             */
+            long cur = 0;
+
+            for (int i = pos; i < s.length(); i++) {
+                if (s.charAt(pos) == '0' && i != pos) {
+                    break;
+                }
+
+                cur = cur * 10 + s.charAt(i) - '0';
+
+                if (pos == 0) {
+                    helper(s, res, target, temp + cur, i + 1, cur, cur);
+                    continue;
+                }
+
+                helper(s, res, target, temp + "+" + cur, i + 1, cur, val + cur);
+                helper(s, res, target, temp + "-" + cur, i + 1, -cur, val - cur);
+                helper(s, res, target, temp + "*" + cur, i + 1, pre * cur, val - pre + pre * cur);
+            }
+        }
+    }
+
     /**
      * Solution with no optimization
      *

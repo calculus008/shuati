@@ -94,6 +94,10 @@ public class LE_943_Find_The_Shortest_Superstring {
 
             dfs(A, new int[n], 0, 0, new boolean[n]);
 
+            /**
+             * minPath[] has the index of the Strings on the path,
+             * here we need to assemble the final answer from minPath[].
+             */
             StringBuilder sb = new StringBuilder(A[minPath[0]]);
             for (int k = 1; k < minPath.length; k++) {
                 int i = minPath[k - 1];

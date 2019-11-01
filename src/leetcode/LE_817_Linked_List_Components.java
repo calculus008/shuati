@@ -37,6 +37,26 @@ public class LE_817_Linked_List_Components {
          Medium
      */
 
+    class Solution {
+        public int numComponents(ListNode head, int[] G) {
+            Set<Integer> set = new HashSet<>();
+            for (int g : G) {
+                set.add(g);
+            }
+
+            int res = 0;
+            ListNode cur = head;
+            while (cur != null) {
+                if (set.contains(cur.val) && (cur.next == null || !set.contains(cur.next.val))) {
+                    res++;
+                }
+
+                cur = cur.next;
+            }
+            return res;
+        }
+    }
+
     /**
      * http://zxi.mytechroad.com/blog/graph/leetcode-817-linked-list-components/
      *
@@ -87,7 +107,7 @@ public class LE_817_Linked_List_Components {
      *
      * We should build an undirected graph.
      */
-    class Solution {
+    class Solution_Graph {
         public int numComponents(ListNode head, int[] G) {
             if (null == head || G.length == 0) {
                 return 0;

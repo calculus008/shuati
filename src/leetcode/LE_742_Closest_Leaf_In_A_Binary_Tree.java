@@ -133,4 +133,71 @@ public class LE_742_Closest_Leaf_In_A_Binary_Tree {
             buildGraph(node.right, k, node, graph);
         }
     }
+
+    class Solution_Practice{
+        Map<Integer, List<TreeNode>> map;
+        TreeNode start;
+
+        public int findClosestLeaf(TreeNode root, int k) {
+            map = new HashMap<>();
+            dfs(root, null, k);
+            return bfs();
+        }
+
+        /**
+         * Build graph from a binary tree, same as LE_863_All_Nodes_Distance_K_In_Binary_Tree,
+         * only difference is that we also need to find the starting TreeNode here.
+         */
+        private void dfs(TreeNode root, TreeNode parent, int k) {
+            if (root == null) return;
+
+            if (root.val == k) {
+                start = root;
+            }
+
+            if (!map.containsKey(root.val)) {
+                map.put(root.val, new ArrayList<>());
+
+                if (parent != null) {
+                    map.get(root.val).add(parent);
+                    map.get(parent.val).add(root);
+                }
+
+                dfs(root.left, root, k);
+                dfs(root.right, root, k);
+            }
+        }
+
+        private int bfs() {
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(start);
+
+            Set<Integer> visited = new HashSet<>();
+            visited.add(start.val);
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    TreeNode cur = q.poll();
+
+                    if (cur.left == null && cur.right == null) {
+                        return cur.val;
+                    }
+
+                    for (TreeNode node : map.get(cur.val)) {
+                        if (visited.contains(node.val)) continue;
+
+                        /**
+                         * !!!
+                         */
+                        visited.add(node.val);
+                        q.offer(node);
+                    }
+                }
+            }
+
+            return 0;
+        }
+    }
 }

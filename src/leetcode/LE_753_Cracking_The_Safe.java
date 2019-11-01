@@ -1,5 +1,9 @@
 package leetcode;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 public class LE_753_Cracking_The_Safe {
     /**
          There is a box protected by a password. The password is n digits,
@@ -28,4 +32,68 @@ public class LE_753_Cracking_The_Safe {
 
          Hard
      */
+
+    /**
+     * http://zxi.mytechroad.com/blog/graph/leetcode-753-cracking-the-safe/
+     *
+     * Total number of possible passwords : k ^ n
+     * Total length : n * k ^ n
+     *
+     * If each password can share the last n - 1 chars of the previous passwords,
+     * Total length : k ^ n + (n - 1), for example:
+     *  aa, ab, ba, bb -> aa, b, b, a
+     *
+     * Every possible password is presented in the sequence once and only once -> De Bruijin Sequence.
+     * We don't need to know this to solve the problem. The solution problem is a generic DFS with backtracking.
+     *
+     * Time  : O(k ^ (k ^ n)) ~ O(k ^ n)
+     * Space : O(k ^ n)
+     */
+    class Solution {
+        String ans = "";
+
+        public String crackSafe(int n, int k) {
+            int len = (int)Math.pow(k, n) + n - 1;
+            Set<String> visited = new HashSet<>();
+
+            /**
+             * !!!
+             */
+            String pwd = String.join("", Collections.nCopies(n, "0"));
+            StringBuilder sb = new StringBuilder(pwd);
+            visited.add(pwd);
+
+            if (dfs(n, k, len, sb, visited)) {
+                return sb.toString();
+            }
+
+            return "";
+        }
+
+        private boolean dfs(int n, int k, int len, StringBuilder sb, Set<String> visited) {
+            if (sb.length() == len) {
+                return true;
+            }
+
+            String temp = sb.substring(sb.length() - (n - 1));//substring of the last n-1 chars
+            for (char c = '0'; c < '0' + k; c++) {
+                String cur = temp + c;
+                if (!visited.contains(cur)) {
+                    sb.append(c);
+                    visited.add(cur);
+
+                    if (dfs(n, k, len, sb, visited)) return true;
+
+                    visited.remove(cur);
+                    /**
+                     * !!!
+                     * "sb.deleteCharAt()"
+                     */
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+            }
+
+            return false;
+        }
+    }
 }
