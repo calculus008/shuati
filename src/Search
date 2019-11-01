@@ -1,6 +1,6 @@
 BFS and DFS
 
-LE_17_Letter_Combinations_Of_A_Phone_Number
+LE_17_Letter_Combinations_Of_A_Phone_Number   (***)
 
 LE_46_Permutation
 LE_78_Subsets
@@ -50,6 +50,16 @@ LE_943_Find_The_Shortest_Superstring
 LE_847_Shortest_Path_Visiting_All_Nodes
 LE_864_Shortest_Path_To_Get_All_Keys
 
+
+#Graph DFS
+LE_332_Reconstruct_Itinerary
+LE_690_Employee_Importance
+
+#Construct weighed directed graph and DFS
+LE_399_Evaluate_Division
+
+#Detect loop in graph
+LE_802_Find_Eventual_Safe_States
 
 * 488 Zuma Game
 * 818 Race Car
