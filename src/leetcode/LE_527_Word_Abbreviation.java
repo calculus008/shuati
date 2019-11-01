@@ -30,6 +30,73 @@ public class LE_527_Word_Abbreviation {
      * Hard
      */
 
+    class Solution_Practice {
+        public List<String> wordsAbbreviation(List<String> dict) {
+            List<String> res = new ArrayList<>();
+            if (dict == null || dict.size() == 0) return res;
+
+            int size = dict.size();
+            int[] prefix = new int[size];
+            Map<String, Integer> map = new HashMap<>();
+
+            for (int i = 0; i < size; i++) {
+                prefix[i] = 1;
+                String key = getAbbr(dict.get(i), 1);
+                res.add(key);
+                map.put(key, map.getOrDefault(key, 0) + 1);
+            }
+
+            /**
+             * !!!
+             * keep going through the result set to check if each abbr is unique (count in map equals to one),
+             * if not, increase prefix value, recreate the key, then go to the next round.
+             *
+             * For "dear", "door", in map:
+             * d2r -> 2
+             * res : {"d2r", "d2r"}
+             *
+             * When we get to "dear", in map:
+             * d2r  -> 2
+             * de1r -> 1
+             * res : {"de1r", "d2r"}
+             *
+             *
+             * When we get to "door", in map:
+             * d2r  -> 2
+             * de1r -> 1
+             * do1r -> 1
+             * res : {de1r, do1r}
+             *
+             * So no need to update the count number of existing key. If it's bigger than 1, we need to update
+             * with new key. The old one will still be in the map, only that we no longer check it since we only
+             * get the key from current res list. (!!!)
+             */
+            while (true) {
+                boolean unique = true;
+                for (int i = 0; i < size; i++) {
+                    if (map.get(res.get(i)) > 1) {
+                        unique = false;
+                        prefix[i]++;
+                        String newKey = getAbbr(dict.get(i), prefix[i]);
+                        res.set(i, newKey);
+                        map.put(newKey, map.getOrDefault(newKey, 0) + 1);
+                    }
+                }
+
+                if (unique) break;
+            }
+
+            return res;
+        }
+
+        private String getAbbr(String s , int x) {
+            int n = s.length();
+            if (x + 2 >= n) return s;
+
+            return s.substring(0, x) + String.valueOf(n - (x + 1)) + s.charAt(n - 1);
+        }
+    }
+
     /**
      * "prefix[i]" records starting index for abbreviation for ith word
      */

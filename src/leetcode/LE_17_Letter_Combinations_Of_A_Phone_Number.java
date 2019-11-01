@@ -85,12 +85,19 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
         String[] mapping = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
         int n = digits.length();
 
-        //!!!
+        /**
+         * !!!
+         */
         res.offer("");
 
         for (int i = 0; i < n; i++) {
             int x = Character.getNumericValue(digits.charAt(i));
 
+            /**
+             * !!!
+             * Not the regular BFS, here instead of using size of q to get next level elements,
+             * we check the length of the elements in linked list.
+             */
             while (res.peek().length() == i) {
                 /**
                  * !!!
@@ -105,5 +112,44 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
         }
 
         return res;
+    }
+
+    class Solution_DFS_Practice {
+        String[] mapping = new String[] {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+
+        public List<String> letterCombinations(String digits) {
+            List<String> res = new ArrayList<>();
+            if (digits == null || digits.length() == 0) return res;
+
+            int n = digits.length();
+            dfs(digits, new StringBuilder(), 0, res);
+            return res;
+        }
+
+        public void dfs(String s, StringBuilder sb, int idx, List<String> res) {
+            /**
+             * !!!
+             * s.length(), not sb.length()
+             */
+            if (idx == s.length()) {
+                res.add(sb.toString());
+                return;
+            }
+
+            int len = sb.length();
+            // for (int i = idx; i < s.length(); i++) {
+
+            /**
+             * !!!
+             */
+            int x = Character.getNumericValue(s.charAt(idx));
+
+            for (char c : mapping[x].toCharArray()) {
+                sb.append(c);
+                dfs(s, sb, idx + 1, res);
+                sb.setLength(len);
+            }
+            // }
+        }
     }
 }

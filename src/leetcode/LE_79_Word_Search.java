@@ -55,7 +55,8 @@ public class LE_79_Word_Search {
         }
 
         public boolean helper(char[][] board, String word, int i, int j, int idx) {
-            /**!!!This line must be the first line to execute (must before the logic checking boundary of i, j).
+            /**!!!
+             This line must be the first line to execute (must before the logic checking boundary of i, j).
              Otherwise, it will fail for case like "[[a]], 'a'" : first char match, then to all 4 directions, they are all
              out of boundary, so it returns false.
              **/
@@ -133,6 +134,61 @@ public class LE_79_Word_Search {
             board[x][y] = temp;
 
             return res;
+        }
+    }
+
+    public class Solution3 {
+
+        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+        public boolean exist(char[][] board, String word) {
+            if (null == board || word == null) return false;
+
+            int m = board.length;
+            int n = board[0].length;
+            char[] chars = word.toCharArray();
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (dfs(board, chars, i, j, m, n, 0)) return true;
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Use dirs[][] to go to 4 directions
+         */
+        private boolean dfs(char[][] board, char[] word, int x, int y, int m, int n, int pos) {
+            if (board[x][y] != word[pos]) return false;
+
+            /**
+             * !!!
+             * has to check "pos == word.length - 1", compare with Solution1
+             *
+             * If board has just one char, for example "z", we will not go to the next one
+             * since the index values are invalid.
+             */
+            if (pos == word.length - 1) return true;
+
+            char c = board[x][y];
+
+            for (int i = 0; i < dirs.length; i++) {
+                int nx = x + dirs[i][0];
+                int ny = y + dirs[i][1];
+
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
+
+                board[x][y] = '#';
+
+                if (dfs(board, word, nx, ny, m, n, pos + 1)) return true;
+
+                board[x][y] = c;
+
+            }
+
+            return false;
         }
     }
 }

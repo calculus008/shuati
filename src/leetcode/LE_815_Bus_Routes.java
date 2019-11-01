@@ -165,4 +165,65 @@ public class LE_815_Bus_Routes {
         }
     }
 
+    class Solution_Practice {
+        public int numBusesToDestination(int[][] routes, int S, int T) {
+            if (S == T) return 0;
+
+            int m = routes.length;
+
+            /**
+             * what bus routes pass through current station
+             */
+            Map<Integer, Set<Integer>> map = new HashMap<>();
+            for (int i = 0; i < m; i++) {
+                /**
+                 * 变长数组，每个子数组的长度是不同的。
+                 */
+                for (int j = 0; j < routes[i].length; j++) {
+                    int stop = routes[i][j];
+                    map.putIfAbsent(stop, new HashSet<>());
+                    map.get(stop).add(i);
+                }
+            }
+
+            // for (Map.Entry<Integer,Set<Integer>> entry : map.entrySet()) {
+            //     System.out.println(entry.getKey() + " -> " + Arrays.toString(entry.getValue().toArray()));
+            // }
+
+            Queue<Integer> q = new LinkedList<>();
+            boolean[] visited = new boolean[m];
+
+            q.offer(S);
+            for (int bus : map.get(S)) {
+                visited[bus] = true;
+                for (int stop : routes[bus]) {
+                    q.offer(stop);
+                }
+            }
+
+            int res = 1;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    int cur = q.poll();
+
+                    if (cur == T) return res;
+
+                    for (int bus : map.get(cur)) {
+                        if (visited[bus]) continue;
+
+                        visited[bus] = true;
+                        for (int stop : routes[bus]) {
+                            q.offer(stop);
+                        }
+                    }
+                }
+                res++;
+            }
+
+            return -1;
+        }
+    }
 }

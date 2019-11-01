@@ -141,4 +141,33 @@ public class LE_547_Friend_Circles {
             }
         }
     }
+
+    class Solution_Practice {
+        public int findCircleNum(int[][] M) {
+            if (M == null) return 0;
+
+            int n = M.length;
+            boolean[] visited = new boolean[n];
+            int res = 0;
+
+            for (int i = 0; i < n; i++) {
+                if (visited[i]) continue;
+                dfs(M, i, visited, n);
+                res++;
+            }
+
+            return res;
+        }
+
+        public void dfs(int[][] M, int cur, boolean[] visited, int n) {
+            if (visited[cur]) return;
+            visited[cur] = true;
+
+            for (int j = 0; j < n; j++) {
+                if (M[cur][j] == 1) {
+                    dfs(M, j, visited, n);
+                }
+            }
+        }
+    }
 }

@@ -34,12 +34,15 @@ public class LE_863_All_Nodes_Distance_K_In_Binary_Tree {
      */
 
     /**
-     * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-329-longest-increasing-path-in-a-matrix/
+     * http://zxi.mytechroad.com/blog/tree/leetcode-863-all-nodes-distance-k-in-binary-tree/
      *
      * DFS + BFS
      *
      * 1.DFS to build a undirected graph
      * 2.BFS traverse the graph, collect all nodes K steps from target.
+     *
+     * Distance : it's the number of EDGES
+     * The value in each Node is unique (so we can use it to uniquely identify a node in HashMap)
      *
      * Time  : O(n)
      * Space : O(n)
@@ -62,6 +65,9 @@ public class LE_863_All_Nodes_Distance_K_In_Binary_Tree {
          *
          * For binary tree, each node can have at most 3 neighbors.
          * We can go top down.
+         *
+         * The difference from a regular inorder DFS is that we need to pass
+         * on parent into the next level recursive call.
          */
         private void buildGraph(TreeNode node, TreeNode parent, Map<Integer, List<TreeNode>> graph) {
             if (node == null) {
@@ -109,7 +115,13 @@ public class LE_863_All_Nodes_Distance_K_In_Binary_Tree {
                         visited.add(t.val);
                     }
                 }
+
+                /**
+                 * Distance : it's the number of EDGES (NOT the number of nodes)
+                 * Therefore steps is increased at the end of while loop.
+                 */
                 steps++;
-            }}
+            }
+        }
     }
 }

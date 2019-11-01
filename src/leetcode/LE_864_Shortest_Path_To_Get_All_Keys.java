@@ -40,6 +40,42 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
      **/
 
     /**
+     * 要点：
+     * 1."Shortest Path" -> BFS
+     *   In BFS, while expanding, bypass invalid cases:
+     *     indexes are out of range
+     *     "#": walls
+     *     "A"~"F": Room, but without key
+     *
+     *   If we get all keys, return steps
+     *
+     * 2.Need to iterate through grid:
+     *   1.locate start ing point ("@")
+     *   2.convert String[] into char[][] so we can do BFS
+     *   3.get "allKeys" (used to tell when we find all keys in grid)
+     *
+     * 3.How to represent the state of keys in BFS:
+     *   The following 2 solutions all use bit operation to represent keys state.
+     *
+     * 4.While BFS through grid, we need to save the state of the visited cells.
+     *   In a normal BFS problem, it is just x and y indices, but here we also have
+     *   the state of the keys.
+     *
+     *   Regular solution (solution 2) : create a class which contains x, y and keys.
+     *   Huahua's solution (solution 1) : use bit operation to represent the full state
+     *                                    in a single 64 bit int. This depends on the
+     *                                    conditions given in the question:
+     *
+     *                                    1 <= grid.length <= 30
+     *                                    1 <= grid[0].length <= 30
+     *
+     * 5.BFS, remember use visited[][][] to prevent iterating visited cells.
+     *
+     * 6.Return answer polling from queue, not when visiting new cells. (for the purpose of returning steps, not steps + 1?)
+     */
+
+
+    /**
      * Huahua version
      * https://zxi.mytechroad.com/blog/searching/leetcode-864-shortest-path-to-get-all-keys/
      *
@@ -48,7 +84,7 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
      * Space : O(m * n * 64)
      **/
 
-    class Solution {
+    class Solution1 {
         public int shortestPathAllKeys(String[] grid) {
             int m = grid.length;
             int n = grid[0].length();
@@ -157,7 +193,10 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
         public int shortestPathAllKeys(String[] grid) {
             int m = grid.length;
             int n = grid[0].length();
+
             /**
+             * !!!
+             * visited[][]
              * 64 : 6 keys, total 2 ^ 6 possible states
              */
             boolean[][][] visited = new boolean[m][n][64];
@@ -173,6 +212,9 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
 
                     if (c == '@') {
                         q.offer(new Node(i, j, 0));
+                        /**
+                         * !!!
+                         */
                         visited[i][j][0] = true;
                     } else if (c >= 'a' && c <= 'f') {
                         allKeys |= (1 << (c - 'a'));
@@ -201,15 +243,16 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
                         int newX = x + dirs[j][0];
                         int newY = y + dirs[j][1];
 
+                        //#invalid case 1
                         if (newX < 0 || newX >= m || newY < 0 || newY >= n) {//!!!
                             continue;
                         }
-
+                        //#invalid case 2
                         char c = chars[newX][newY];
                         if (c == '#') {//wall
                             continue;
                         }
-
+                        //#invalid case 3
                         if (c >= 'A' && c <= 'F' && (keys & (1 << (c - 'A'))) == 0) {//room, but no key
                             continue;
                         }

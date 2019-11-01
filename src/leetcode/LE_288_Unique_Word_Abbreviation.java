@@ -48,6 +48,8 @@ public class LE_288_Unique_Word_Abbreviation {
      *
      * 当 word -> abbreviation 在字典的所有abbreviation中不存在时， return true
      * 当 word 在字典中存在时, 如果没有其他字典中的词有相同的abbreviation, return true
+     * dictionary只是个String Array, 里会有重复的词。
+     * Actually, we don't care if there are duplicate words, we only care if the abbreviation is unique.
      */
 
     class ValidWordAbbr {
@@ -58,6 +60,20 @@ public class LE_288_Unique_Word_Abbreviation {
             for (String s : dictionary) {
                 String key = getKey(s);
                 if (map.containsKey(key)) {
+                    /**
+                     * !!!
+                     * 这个逻辑是防止dictionary里有重复的词。比如， 字典里有两个"dear"，
+                     * 查询"dear"， 应该返回TRUE.
+                     *
+                     * #1.
+                     * 如果value 不是当前的词， 比如：
+                     * d2r -> dear
+                     *
+                     * now "door" comes in, use key "d2r", get "dear".
+                     * then we know its abbr is NOT unique, we set value to ""
+                     *
+                     * #2.如果value 是当前的词，do nothing.
+                     */
                     if (!map.get(key).equals(s)) {
                         map.put(key, "");//!!!
                     }
@@ -72,6 +88,10 @@ public class LE_288_Unique_Word_Abbreviation {
         }
 
         private String getKey(String s) {
+            /**
+             * !!!
+             * "<= 2" : example in the question itself, "dog" -> "d1g"
+             */
             if (s.length() <= 2) {
                 return s;
             } else {

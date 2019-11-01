@@ -150,7 +150,7 @@ public class LE_695_Max_Area_Of_Island {
                 int[] curr = q.poll();
                 /**
                  * !!!
-                 * 每次从queue里取出一个但愿就把面积加一。
+                 * 每次从queue里取出一个就把面积加一。
                  */
                 res++;
 

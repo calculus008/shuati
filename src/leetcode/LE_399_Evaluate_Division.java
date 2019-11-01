@@ -129,6 +129,16 @@ public class LE_399_Evaluate_Division {
 
     /**
      * Huahua's DFS version
+     *
+     * a / b = 2.0, b / c = 3.0
+     *
+     * Graph:
+     * a -> (b -> 2.0)
+     * b -> (c -> 3.0)
+     *
+     * a / c :
+     * divide(a / c) => divide(b / c) => divide(c / c)
+     *  2.0 * 3.0    <-   3.0 * 1.0   <-    1.0
      */
     class Solution2 {
         /**
@@ -184,6 +194,7 @@ public class LE_399_Evaluate_Division {
                 if (d > 0) {
                     /**
                      * !!!
+                     * d * (x / n)
                      */
                     return d * g.get(x).get(n);
                 }

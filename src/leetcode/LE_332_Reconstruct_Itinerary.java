@@ -77,37 +77,88 @@ public class LE_332_Reconstruct_Itinerary {
      *
      * ["JFK","ATL","JFK","SFO","ATL","SFO"].
      */
+    class Solution1 {
+        Map<String, PriorityQueue<String>> map;
+        List<String> res;
 
-    Map<String, PriorityQueue<String>> map;
-    List<String> res;
+        public List<String> findItinerary(String[][] tickets) {
+            res = new LinkedList<>();
+            map = new HashMap<>();
 
-    public List<String> findItinerary(String[][] tickets) {
-        res = new LinkedList<>();
-        map = new HashMap<>();
+            /**
+             * Build adjacent list
+             */
+            for (String[] ticket : tickets) {
+                map.computeIfAbsent(ticket[0], k -> new PriorityQueue<>()).add(ticket[1]);
+            }
 
-        /**
-         * Build adjacent list
-         */
-        for (String[] ticket : tickets) {
-            map.computeIfAbsent(ticket[0], k -> new PriorityQueue<>()).add(ticket[1]);
+            helper("JFK");
+            return res;
         }
 
-        helper("JFK");
-        return res;
+        private void helper(String s) {
+            while (map.containsKey(s) && !map.get(s).isEmpty()) {
+                /**
+                 * "poll()", try all destinations that can be reached from s,
+                 * pq in map guaranteed lexicon order.
+                 */
+                helper(map.get(s).poll());
+            }
+
+            /**
+             * DFS, go all the way down to the last, should add at index 0.
+             */
+            res.add(0, s);
+        }
     }
 
-    private void helper(String s) {
-        while (map.containsKey(s) && !map.get(s).isEmpty()) {
-            /**
-             * "poll()", try all destinations that can be reached from s,
-             * pq in map guaranteed lexicon order.
-             */
-            helper(map.get(s).poll());
+    class Solution_Practice {
+        Map<String, PriorityQueue<String>> map;
+        List<String> res;
+
+        public List<String> findItinerary(List<List<String>> tickets) {
+            res = new ArrayList<>();
+            if (tickets == null || tickets.size() == 0) return res;
+
+            map = new HashMap<>();
+
+            for (List<String> ticket : tickets) {
+                map.putIfAbsent(ticket.get(0), new PriorityQueue<>());
+                map.get(ticket.get(0)).offer(ticket.get(1));
+            }
+
+            dfs("JFK");
+
+            return res;
         }
 
-        /**
-         * DFS, go all the way down to the last, should add at index 0.
-         */
-        res.add(0, s);
+        private void dfs(String s) {
+            /**
+             * !!!
+             * Can't use the "if" line below, because it fails to add the airport
+             * that does not have a destination ("dead end"), for example:
+             *
+             * [["MUC","LHR"],
+             *  ["JFK","MUC"],
+             *  ["SFO","SJC"],
+             *  ["LHR","SFO"]]
+             *
+             *  It will generate wrong answer : ["JFK","MUC","LHR","SFO"].
+             *
+             *  The correct answer is ["JFK","MUC","LHR","SFO","SJC"]
+             *
+             */
+//            if (!map.containsKey(s)) return;
+
+            while (map.containsKey(s) && !map.get(s).isEmpty()) {
+                String e = map.get(s).poll();
+                dfs(e);
+            }
+
+            /**
+             * !!!
+             */
+            res.add(0, s);
+        }
     }
 }
