@@ -95,7 +95,6 @@ public class LE_1202_Smallest_String_With_Swaps {
 
                 Collections.sort(cur);
                 char[] temp = sb.toString().toCharArray();
-
                 Arrays.sort(temp);
 
                 for (int j = 0; j < temp.length; j++) {
