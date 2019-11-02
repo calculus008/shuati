@@ -110,7 +110,6 @@ public class LE_1202_Smallest_String_With_Swaps {
         private void dfs(String s, Set<Integer> seen, List<Integer> cur, int idx, StringBuilder sb) {
             if (seen.contains(idx)) return;
 
-
             seen.add(idx);
             cur.add(idx);
             sb.append(s.charAt(idx));
