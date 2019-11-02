@@ -40,6 +40,7 @@ LE_675_Cut_Off_Trees_For_Golf_Event
 LE_753_Cracking_The_Safe                  (*)
 LE_967_Numbers_With_Same_Consecutive_Differences
 LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
+LE_802_Find_Eventual_Safe_States
 LE_815_Bus_Routes
 LE_841_Keys_And_Rooms                     (*)
 LE_863_All_Nodes_Distance_K_In_Binary_Tree
@@ -50,10 +51,13 @@ LE_943_Find_The_Shortest_Superstring
 LE_847_Shortest_Path_Visiting_All_Nodes
 LE_864_Shortest_Path_To_Get_All_Keys
 
+LE_934_Shortest_Bridge                     (***)
+
 
 #Graph DFS
 LE_332_Reconstruct_Itinerary
 LE_690_Employee_Importance
+LE_1202_Smallest_String_With_Swaps
 
 #Construct weighed directed graph and DFS
 LE_399_Evaluate_Division
