@@ -69,36 +69,38 @@ public class LE_1202_Smallest_String_With_Swaps {
      * Time complexity: DFS: O(nlogn + k*(V+E)), Union-Find: O(nlogn + V+E)
      * Space complexity: O(n)
      */
-    class Solution {
+    class Solution1 {
         Map<Integer, List<Integer>> map;
 
         public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
-            if (s == null || s.length() == 0) return s;
+            if (s == null || s.length() == 0 || pairs == null || pairs.size() == 0) return s;
 
             map = new HashMap<>();
             char[] chars = new char[s.length()];
 
             for (List<Integer> pair : pairs) {
-                int l1 = pair.get(0);
-                int l2 = pair.get(1);
+                int index1 = pair.get(0);
+                int index2 = pair.get(1);
 
-                map.computeIfAbsent(l1, l -> new ArrayList<>()).add(l2);
-                map.computeIfAbsent(l2, l -> new ArrayList<>()).add(l1);
+                /**
+                 * Build undirected graph
+                 */
+                map.computeIfAbsent(index1, l -> new ArrayList<>()).add(index2);
+                map.computeIfAbsent(index2, l -> new ArrayList<>()).add(index1);
             }
 
             Set<Integer> seen = new HashSet<>();
             for (int i = 0; i < s.length(); i++) {
-                List<Integer> cur = new ArrayList<>();
-                StringBuilder sb = new StringBuilder();
+                List<Integer> indexList = new ArrayList<>();
+                List<Character> charList = new ArrayList<>();
 
-                dfs(s, seen, cur, i, sb);
+                dfs(s, seen, indexList, charList, i);
 
-                Collections.sort(cur);
-                char[] temp = sb.toString().toCharArray();
-                Arrays.sort(temp);
+                Collections.sort(indexList);
+                Collections.sort(charList);
 
-                for (int j = 0; j < temp.length; j++) {
-                    chars[cur.get(j)] = temp[j];
+                for (int j = 0; j < indexList.size(); j++) {
+                    chars[indexList.get(j)] = charList.get(j);
                 }
             }
 
@@ -106,18 +108,110 @@ public class LE_1202_Smallest_String_With_Swaps {
 
         }
 
-        private void dfs(String s, Set<Integer> seen, List<Integer> cur, int idx, StringBuilder sb) {
+        /**
+         * Graph DFS
+         */
+        private void dfs(String s, Set<Integer> seen, List<Integer> indexList, List<Character> charList, int idx) {
             if (seen.contains(idx)) return;
 
             seen.add(idx);
-            cur.add(idx);
-            sb.append(s.charAt(idx));
+            indexList.add(idx);
+            charList.add(s.charAt(idx));
 
+            /**
+             * !!!
+             * the case that the value at idx can't switch with value of any other index
+             */
             if (map.get(idx) == null) return;
 
             for (int n : map.get(idx)) {
-                dfs(s, seen, cur, n, sb);
+                dfs(s, seen, indexList, charList, n);
             }
         }
+    }
+
+    /**
+     * Union Find
+     *
+     * Time  : O(nlogn + V+E)
+     * Space : O(n)
+     */
+    class Solution2 {
+        private int[] parents;
+
+        private int find(int u) {
+            while (parents[u] != u) {
+                parents[u] = parents[parents[u]];
+                u = parents[u];
+            }
+
+            return u;
+        }
+
+        private boolean union(int u, int v) {
+            int pu = find(u);
+            int pv = find(v);
+
+            if (pu == pv) return false;
+
+            parents[pu] = pv;
+
+            return true;
+        }
+
+        public String smallestStringWithSwaps(String s, List<List<Integer>> pairs) {
+            if (s == null || s.length() == 0 || pairs == null || pairs.size() == 0) return s;
+
+            int n = s.length();
+
+            /**
+             * init union find set
+             */
+            parents = new int[n];
+            for (int i = 0; i < parents.length; i++) {
+                parents[i] = i;
+            }
+
+            Map<Integer, List<Integer>> map = new HashMap<>();
+            char[] chars = new char[s.length()];
+
+            /**
+             * union all pairs
+             */
+            for (List<Integer> pair : pairs) {
+                union(pair.get(0), pair.get(1));
+            }
+
+            /**
+             * base on root id in UFS, put connected components in hashmap
+             */
+            for (int i = 0; i < n; i++) {
+                int p = find(i);
+                map.computeIfAbsent(p, l -> new ArrayList<>()).add(i);
+            }
+
+            /**
+             * for each connected component, sort chars and put them to the correct position
+             */
+            for (Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
+                List<Integer> idxList = new ArrayList<>();
+                List<Character> charList = new ArrayList<>();
+
+                for (int val : entry.getValue()) {
+                    idxList.add(val);
+                    charList.add(s.charAt(val));
+                }
+
+                Collections.sort(idxList);
+                Collections.sort(charList);
+
+                for (int i = 0; i < idxList.size(); i++) {
+                    chars[idxList.get(i)] = charList.get(i);
+                }
+            }
+
+            return new String(chars);
+        }
+
     }
 }
