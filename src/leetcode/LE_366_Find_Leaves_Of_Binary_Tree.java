@@ -65,14 +65,22 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
              * 求出每个Node的height就是它在list中相对应的位置
              *
              * !!!
-             * 这是这道题的关键，实际上，这里的level是reverse height,
+             * 这是这道题的关键，实际上，这里的level是height(!!!),
              * 也就是，从叶子节点往上，依次返回 0, 1, 2..., 所以它可以被
              * 用作res里的下标。
+             *
+             * !!!
+             * "Math.max" not "Math.min"
              */
             int level = Math.max(left, right) + 1;
 
             /**
              * common trick for using DFS on level related problem
+             *
+             * !!!
+             * "res.size() == level"
+             *
+             * Can't use "res.get(i) == null", it will throw index out of range exception
              */
             if (res.size() == level) {
                 res.add(new ArrayList<>());

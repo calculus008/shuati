@@ -86,6 +86,10 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
             if (root == null) return 0;
 
             /**
+             * !!!
+             * !!!
+             * " Math.max(0, helper(root.left))"
+             *
              * For case :
              *    2
              *   /

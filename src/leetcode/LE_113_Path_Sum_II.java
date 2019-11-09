@@ -29,68 +29,80 @@ public class LE_113_Path_Sum_II {
         ]
      */
 
-    public static List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res;
 
-        helper(root, res, new ArrayList<>(), sum);
-        return res;
-    }
+    class Solution1 {
+        public List<List<Integer>> pathSum(TreeNode root, int sum) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
 
-    public static void helper(TreeNode root, List<List<Integer>> res, List<Integer> temp, int sum) {
-        if (root == null) return;
+            helper(root, res, new ArrayList<>(), sum);
+            return res;
+        }
 
-        temp.add(root.val);
-        /**
-         * for this version of DFS, this is not the base case - it won't return
-         * the only return is when we hit null. The action below is part of backtracking
-         */
-        if (root.left == null && root.right == null) {
-            if (sum == root.val) {
-                res.add(new ArrayList<>(temp));
+
+        public void helper(TreeNode root, List<List<Integer>> res, List<Integer> temp, int sum) {
+            if (root == null) {
+                return;
             }
-            /**!!!
-             *  Don't return here , if return, the "temp.remove(temp.size() - 1)" will not get executed and sequence is wrong
-             **/
-            // return;
-        }
 
-        helper(root.left, res, temp, sum - root.val);
-        helper(root.right, res, temp, sum - root.val);
-        temp.remove(temp.size() - 1);
-    }
+            if (root.left == null && root.right == null) {
+                if (sum == root.val) {
+                    //temp.add(root.val);
 
-    /**
-     * Another version of helper DFS method
-     */
-    public void helper2(TreeNode root, List<List<Integer>> res, List<Integer> temp, int sum) {
-        if (root == null) {
-            return;
-        }
+                    res.add(new ArrayList<>(temp));
+                    /**
+                     * add the last element (leaf node) to valid path after it is added
+                     * to res so that it won't impact the backtracking logic after return
+                     */
+                    res.get(res.size() - 1).add(root.val);
 
-        if (root.left == null && root.right == null) {
-            if (sum == root.val) {
-                //temp.add(root.val);
+                    //temp.remove(temp.size() - 1);
+                }
 
-                res.add(new ArrayList<>(temp));
                 /**
-                 * add the last element (leaf node) to valid path after it is added
-                 * to res so that it won't impact the backtracking logic after return
+                 * we can return here.
                  */
-                res.get(res.size() - 1).add(root.val);
-
-                //temp.remove(temp.size() - 1);
+                return;
             }
 
-            /**
-             * we can return here.
-             */
-            return;
+            temp.add(root.val);
+            helper(root.left, res, temp, sum - root.val);
+            helper(root.right, res, temp, sum - root.val);
+            temp.remove(temp.size() - 1);
+        }
+    }
+
+    class Solution2 {
+        public List<List<Integer>> pathSum(TreeNode root, int sum) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
+
+            helper(root, res, new ArrayList<>(), sum);
+            return res;
         }
 
-        temp.add(root.val);
-        helper2(root.left, res, temp, sum - root.val);
-        helper2(root.right, res, temp, sum - root.val);
-        temp.remove(temp.size() - 1);
+        public void helper(TreeNode root, List<List<Integer>> res, List<Integer> temp, int sum) {
+            if (root == null) return;
+
+            temp.add(root.val);
+            /**
+             * for this version of DFS, this is not the base case - it won't return
+             * the only return is when we hit null. The action below is part of backtracking
+             */
+            if (root.left == null && root.right == null) {
+                if (sum == root.val) {
+                    res.add(new ArrayList<>(temp));
+                }
+                /**!!!
+                 *  Don't return here , if return, the "temp.remove(temp.size() - 1)" will not get executed and sequence is wrong
+                 **/
+                // return;
+            }
+
+            helper(root.left, res, temp, sum - root.val);
+            helper(root.right, res, temp, sum - root.val);
+            temp.remove(temp.size() - 1);
+        }
     }
+
 }

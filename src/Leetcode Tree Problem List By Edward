@@ -15,14 +15,14 @@ LE_257_Binary_Tree_Paths
 LE_112_Path_Sum
 LE_113_Path_Sum_II
 LE_129_Sum_Root_To_Leaf_Numbers
-LE_298_Binary_Tree_Longest_Consecutive_Sequence
+LE_298_Binary_Tree_Longest_Consecutive_Sequence          (***)
 LE_111_Min_Depth_Of_Binary_Tree
 
 Postorder
 LE_104_Max_Depth_Of_Binary_Tree
 LE_110_Balanced_Binary_Tree
 LE_124_Binary_Tree_Max_Path_Sum                          (***)
-LE_687_Longest_Univalue_Path                             (***)
+LE_687_Longest_Univalue_Path                             (***)(***)
 LE_250_Count_Univalue_Subtrees
 LE_366_Find_Leaves_Of_Binary_Tree                        (***)
 LE_337_House_Robber_III
