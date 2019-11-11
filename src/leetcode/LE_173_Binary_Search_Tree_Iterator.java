@@ -96,8 +96,8 @@ public class  LE_173_Binary_Search_Tree_Iterator {
 
     /**
      * 这道题常规解法用个vector存储inorder transverse的node value. 复杂度是O(1), O(n)
-     * 我用的mirrors transversal（大家上讨论区直接搜就能搜到）， 把BST转换成sorted Linked
-     * list.复杂度瞬减O(1), O(1)， 教导了小哥一波。
+     * 我用的mirrors traversal（大家上讨论区直接搜就能搜到）， 把BST转换成sorted Linked
+     * list.复杂度瞬减O(1), 教导了小哥一波。
      *
      * 大概就是用 LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List，
      * 把 BST convert to double linked list, 然后iterate.

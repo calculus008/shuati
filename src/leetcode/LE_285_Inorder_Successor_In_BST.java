@@ -30,7 +30,7 @@ public class LE_285_Inorder_Successor_In_BST {
      * Here, if the left is null, then R is the answer.
      *       if the left is not null, keep recursing, until it hits null, we find the last parent of a left child.
      *
-     * example : find successor for 3
+     * example : find successor
      *
      *           3
      *          / \        3.return 4

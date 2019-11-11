@@ -28,6 +28,8 @@ public class LE_654_Maximum_Binary_Tree {
      */
 
     /**
+     * Same type as LE_108_Convert_Sorted_Array_To_BST
+     *
      * http://zxi.mytechroad.com/blog/leetcode/leetcode-654-maximum-binary-tree/
      *
      * Time  : O(nlogn) ~ O(n^2)

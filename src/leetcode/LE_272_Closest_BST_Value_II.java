@@ -34,6 +34,7 @@ public class LE_272_Closest_BST_Value_II {
 
     /**
       Solution 1 : Time : O(n), Space : O(n)
+      Inorder
      */
     class Solution1 {
         public List<Integer> closestKValues1(TreeNode root, double target, int k) {
@@ -160,10 +161,10 @@ public class LE_272_Closest_BST_Value_II {
         }
 
         /**
-         * 8
-         * / \
-         * 3   9
-         * / \
+         *     8
+         *    / \
+         *   3   9
+         *  / \
          * 2  7
          * <p>
          * target = 6
@@ -348,10 +349,10 @@ public class LE_272_Closest_BST_Value_II {
         }
 
         /**
-         * 8
-         * / \
-         * 3   9
-         * / \
+         *     8
+         *    / \
+         *   3   9
+         *  / \
          * 2  7
          * <p>
          * target = 6
