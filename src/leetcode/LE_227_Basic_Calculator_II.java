@@ -176,4 +176,44 @@ public class LE_227_Basic_Calculator_II {
         }
     }
 
+    class Solution_Recursion {
+        public int calculate(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            s = s.replaceAll(" ", "");
+            s += "#";
+
+            int cur = 0, pre = 0, sum = 0;
+            char preOp = '+';
+
+            for (char c : s.toCharArray()) {
+                if (c >= '0' && c <= '9') {
+                    cur = cur * 10 + c - '0';
+                } else {
+                    switch (preOp) {
+                        case '+':
+                            sum += pre;
+                            pre = cur;
+                            break;
+                        case '-':
+                            sum += pre;
+                            pre = -cur;
+                            break;
+                        case '*':
+                            pre *= cur;
+                            break;
+                        case '/':
+                            pre /= cur;
+                            break;
+                    }
+
+                    preOp = c;
+                    cur = 0;
+                }
+            }
+
+            return sum + pre;
+        }
+    }
+
 }
