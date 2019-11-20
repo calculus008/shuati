@@ -2,10 +2,7 @@ package leetcode;
 
 import common.TreeNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by yuank on 3/30/18.
@@ -34,6 +31,109 @@ public class LE_230_Kth_Smallest_Element_In_BST {
      * Variation , Kth largest element in BST
      * 只需要做reverse inorder traversal再带一个global counter）
      */
+
+    /**
+     * Recursive Inorder
+     * Time : O(n)
+     */
+    class Solution3_Practice {
+        List<Integer> list;
+        public int kthSmallest(TreeNode root, int k) {
+            list = new ArrayList<>();
+            helper(root, k);
+
+            /**
+             * !!!
+             * return "list.get(k-1)", not "list(list.size() - 1)"
+             * The answer is not necessarily the last one in the list.
+             */
+            return list.get(k - 1);
+        }
+
+        private void helper(TreeNode root, int k) {
+            if (root == null) return;
+
+            if (list.size() >= k) return;
+
+            helper(root.left, k);
+            list.add(root.val);
+            helper(root.right, k);
+        }
+    }
+
+    /**
+     * Iterative inorder
+     * Time : O(n)
+     */
+    class Solution2_Practice {
+        public int kthSmallest(TreeNode root, int k) {
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode cur = root;
+
+            while (cur != null || !stack.isEmpty()) {
+                while (cur != null) {
+                    stack.push(cur);
+                    cur = cur.left;
+                }
+
+                cur = stack.pop();
+
+                k--;
+                if (k == 0) return cur.val;
+
+                cur = cur.right;
+            }
+
+            return -1;
+        }
+    }
+
+    /**
+     * Time and Space : O(n) (building map for number of nodes under each node)
+     */
+    class Solution_Follow_UP_Practice {
+        Map<TreeNode, Integer> map;
+
+        public int kthSmallest(TreeNode root, int k) {
+            map = new HashMap<>();
+            getNodes(root);
+            return helper(root, k);
+        }
+
+        /**
+         * postorder, count number of nodes in each subtree starting from a given node.
+         * Time : O(n)
+         */
+        private int getNodes(TreeNode root) {
+            if (root == null) return 0;
+
+            int l = getNodes(root.left);
+            int r = getNodes(root.right);
+
+            int sum = l + r + 1;
+            map.put(root, sum);
+
+            return sum;
+        }
+
+        /**
+         * inorder, quick select, get the kth value
+         * Time : O(h), h is height of the BST, it's O(logn) if BST is balanced
+         */
+        private int helper(TreeNode root, int k) {
+            if (root == null) return -1;
+
+            int l = (root.left == null ? 0 : map.get(root.left));
+
+            if (l >= k) {
+                return helper(root.left, k);
+            }
+
+            if (l + 1 == k) return root.val;
+
+            return helper(root.right, k - l - 1);
+        }
+    }
 
     /**
         Solution 1 : DFS inorder traversal
@@ -91,6 +191,11 @@ public class LE_230_Kth_Smallest_Element_In_BST {
     public int kthSmallest3(TreeNode root, int k) {
         ArrayList<Integer> buffer = new ArrayList<Integer>();
         inorderSearch(root, buffer, k);
+        /**
+         * !!!
+         * return "buffer.get(k-1)", not "buffer(buffer.size() - 1)"
+         * The answer is not necessarily the last one in the list.
+         */
         return buffer.get(k-1);
     }
     public void inorderSearch(TreeNode node, ArrayList<Integer> buffer, int k){

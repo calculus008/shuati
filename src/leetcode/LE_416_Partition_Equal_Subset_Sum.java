@@ -65,6 +65,9 @@ public class LE_416_Partition_Equal_Subset_Sum {
                  * "j >= nums[i - 1]"
                  * This condition validates if "j - nums[i - 1]" is a valid
                  * index, therefore must be at the start.
+                 *
+                 * !!!
+                 * ">="
                  */
                 if (j >= nums[i - 1] && dp[i - 1][j - nums[i - 1]]) {//!!!
                     dp[i][j] = true;

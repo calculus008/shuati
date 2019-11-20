@@ -80,7 +80,10 @@ public class LE_305_Number_Of_Islands_II {
 
         for (int[] position : positions) {
             int pos = position[0] * n + position[1];
-            //!!! The cell with no land has value -1.
+            /**
+             * !!!
+             * The cell with no land has value -1.
+             */
             roots[pos] = pos;
             count++;
 
@@ -98,8 +101,14 @@ public class LE_305_Number_Of_Islands_II {
 
                 int clusterId = find(roots, curPos);
                 if (clusterId != pos) {//adjacent cells not in the same cluster, merge
+                    /**
+                     * the newly added land is merged to existing land
+                     */
                     roots[pos] = clusterId;
-                    //!!! Don't forget to update value in pos which will be used in the next loop
+                    /**
+                     * !!!
+                     * Don't forget to update value in pos which will be used in the next loop
+                     */
                     pos = clusterId;
                     count--;
                 }
@@ -249,6 +258,109 @@ public class LE_305_Number_Of_Islands_II {
         private int getIdx(int x, int y, int n) {
             return x * n + y;
         }
+    }
+
+    class Solution_Practice {
+        class UFS {
+            int[] parents;
+            int count;
+
+            public UFS(int n) {
+                count = 0;
+                parents = new int[n + 1];
+                for (int i = 0; i < parents.length; i++) {
+                    parents[i] = i;
+                }
+            }
+
+            public int find(int u) {
+                while (parents[u] != u) {
+                    parents[u] = parents[parents[u]];
+                    u = parents[u];
+                }
+                return u;
+            }
+
+            public boolean union(int u, int v) {
+                int pu = find(u);
+                int pv = find(v);
+
+                if (pu == pv) return false;
+
+                parents[pu] = pv;
+                count--;
+                return true;
+            }
+
+            public void setCount(int n) {
+                count = n;
+            }
+
+            public int getCount() {
+                return count;
+            }
+        }
+
+        int[] parents;
+
+        public List<Integer> numIslands2(int m, int n, int[][] positions) {
+            List<Integer> res = new ArrayList<>();
+            if (positions == null || positions.length == 0) return res;
+
+            int size = m * n;
+            UFS ufs = new UFS(size);
+
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+            boolean[][] grid = new boolean[m][n];
+
+            for (int[] position : positions) {
+                int r = position[0];
+                int c = position[1];
+
+                /**
+                 * can't use :
+                 * "if (!isValid(r,c,m,n) || grid[r][c]) continue"
+                 *
+                 * Because it will miss the line :
+                 * "res.add(ufs.getCount());"
+                 *
+                 * So if there's invalid cell, we will miss a value in res.
+                 */
+                if (isValid(r, c, m, n) && !grid[r][c]) {
+                    /**
+                     * !!!
+                     */
+                    grid[r][c] = true;
+                    /**
+                     * !!!
+                     */
+                    ufs.setCount(ufs.getCount() + 1);
+
+                    for (int[] dir : dirs) {
+                        int x = r + dir[0];
+                        int y = c + dir[1];
+
+                        if (isValid(x, y, m, n) && grid[x][y]) {
+                            ufs.union(getIdx(x, y, n), getIdx(r, c, n));
+                        }
+
+                    }
+                }
+
+                res.add(ufs.getCount());
+            }
+
+            return res;
+        }
+
+        private boolean isValid(int x, int y, int m, int n) {
+            return x >= 0 && x < m && y >= 0 && y < n;
+        }
+
+        private int getIdx(int x, int y, int n) {
+            return x * n + y;
+        }
+
     }
 
 }

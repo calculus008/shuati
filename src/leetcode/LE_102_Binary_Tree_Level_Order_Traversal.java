@@ -74,9 +74,8 @@ public class LE_102_Binary_Tree_Level_Order_Traversal {
         if (root == null) return;
 
         //!!!Difference from 102
-        if (level >= res.size()) res.add(0, new ArrayList<>());
-        //res.size() - level - 1
-        res.get(res.size() - level - 1).add(root.val);
+        if (level == res.size()) res.add(new ArrayList<>());
+        res.get(level).add(root.val);
 
         helper(res, root.left, level + 1);
         helper(res, root.right, level + 1);

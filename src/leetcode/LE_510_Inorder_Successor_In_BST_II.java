@@ -12,6 +12,12 @@ public class LE_510_Inorder_Successor_In_BST_II {
      * root of the tree. Each node will have a reference to its parent node.
      *
      * Medium
+     *
+     *       #2
+     *      /
+     *     x
+     *      \
+     *      #1
      */
 
     class Solution {
@@ -24,12 +30,12 @@ public class LE_510_Inorder_Successor_In_BST_II {
 
         public Node inorderSuccessor(Node x) {
             Node res = null;
-            if (x.right != null) {
+            if (x.right != null) {//#1
                 res = x.right;
                 while (res.left != null) {
                     res = res.left;
                 }
-            } else {
+            } else {//#2
                 res = x.parent;
                 while (res != null && res.val < x.val) {
                     res = res.parent;

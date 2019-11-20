@@ -30,7 +30,7 @@ public class LE_285_Inorder_Successor_In_BST {
      * Here, if the left is null, then R is the answer.
      *       if the left is not null, keep recursing, until it hits null, we find the last parent of a left child.
      *
-     * example : find successor for 3
+     * example : find successor
      *
      *           3
      *          / \        3.return 4
@@ -46,6 +46,11 @@ public class LE_285_Inorder_Successor_In_BST {
      *        2  4
      *          /          1.return null
      *         null
+     */
+    /**
+     * inorder, the successor is the left most node in the right subtree
+     *
+     * 走之字形。
      */
     //Solution 1 : Iterative
     public TreeNode inorderSuccessor1(TreeNode root, TreeNode p) {
@@ -68,6 +73,10 @@ public class LE_285_Inorder_Successor_In_BST {
             return null;
         }
 
+        /**
+         * !!!
+         * "root.val <= p.val", it's "<=", not "<"
+         */
         if (root.val <= p.val) {
             return inorderSuccessor(root.right, p);
         } else {

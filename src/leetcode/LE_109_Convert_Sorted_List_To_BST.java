@@ -39,16 +39,16 @@ public class LE_109_Convert_Sorted_List_To_BST {
      * Space : O(n)
      *
      * Time Complexity: O(NlogN)
-     * Suppose our linked list consists of NN elements. For every list we pass to our recursive function,
-     * we have to calculate the middle element for that list. For a list of size NN, it takes N / 2 steps
-     * to find the middle element i.e. O(N)O(N) to find the mid. We do this for every half of the original
+     * Suppose our linked list consists of N elements. For every list we pass to our recursive function,
+     * we have to calculate the middle element for that list. For a list of size N, it takes N / 2 steps
+     * to find the middle element i.e. O(N) to find the mid. We do this for every half of the original
      * linked list. From the looks of it, this seems to be an O(N^2) algorithm. However, on closer analysis,
      * it turns out to be a bit more efficient than O(N^2).
      *
      * Let's look at the number of operations that we have to perform on each of the halves of the linked list.
-     * As we mentioned earlier, it takes N/2steps to find the middle of a linked list with NN elements.
+     * As we mentioned earlier, it takes N/2 steps to find the middle of a linked list with N elements.
      * After finding the middle element, we are left with two halves of size N / 2 each. Then, we find the middle
-     * element for both of these halves and it would take a total of 2 times N / 4steps for that. And similarly
+     * element for both of these halves and it would take a total of 2 times N / 4 steps for that. And similarly
      * for the smaller sublists that keep forming recursively. This would give us the following series of
      * operations for a list of size N.
      *
@@ -83,6 +83,11 @@ public class LE_109_Convert_Sorted_List_To_BST {
             /**
              * !!!
              * list, use slow and fast pointers to find mid
+             *
+             * !!!
+             * "fast != tail && fast.next != tail"
+             *
+             * NOT "fast != null && fast.next != null"
              */
             while (fast != tail && fast.next != tail) {//!!!!!
                 fast = fast.next.next;

@@ -48,7 +48,7 @@ public class LE_261_Graph_Valid_Tree {
 
             UnionFindSet ufs = new UnionFindSet(n);
             for (int[] edge : edges) {
-                /**if two nodes are already in the same cluster - meaning the edges forms a loop,
+                /**if two nodes on the same edge are already in the same cluster - meaning the edges forms a loop,
                  * union() will return false
                  *
                  * By identifying two connected nodes (which has an edge between them) has the same parents,

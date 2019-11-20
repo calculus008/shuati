@@ -58,17 +58,17 @@ public class LE_351_Android_Unlock_Patterns {
         return res;
     }
 
-    private int helper(boolean[] visited, int[][] skip, int cur, int remain ) {
+    private int helper(boolean[] visited, int[][] skip, int cur, int remain) {
         if (remain < 0) return 0;
         if (remain == 0) return 1;
 
         visited[cur] = true;
         int res = 0;
 
-        for (int i = 1; i <=9; i++) {
+        for (int i = 1; i <= 9; i++) {
             /**
              "(skip[cur][i] == 0 || visited[skip[cur][i]])" - from cur to i, no need to cross,
-             OR, there's corss but the corss number is already touched.
+             OR, there's cross but the cross number is already touched.
              **/
             if (!visited[i] && (skip[cur][i] == 0 || visited[skip[cur][i]])) {
                 res += helper(visited, skip, i, remain - 1);

@@ -19,10 +19,10 @@ public class LE_111_Min_Depth_Of_Binary_Tree {
          * !!!
          **/
         if (root.left == null || root.right == null) {
-            return Math.max(minDepth(root.left), minDepth(root.right)) + 1;
+            return Math.max(minDepth(root.left), minDepth(root.right)) + 1;//!!! "+ 1"
         }
 
-        return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+        return Math.min(minDepth(root.left), minDepth(root.right)) + 1;//!!! " + 1"
     }
 
     public int minDepth2(TreeNode root) {
