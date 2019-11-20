@@ -65,6 +65,7 @@ public class LE_331_Verify_Preorder_Serialization_Of_A_Binary_Tree {
     public boolean isValidSerialization(String preorder) {
         String[] tokens = preorder.split(",");
 
+
         int diff = 1;
         for (String token : tokens) {
             if (--diff < 0) {

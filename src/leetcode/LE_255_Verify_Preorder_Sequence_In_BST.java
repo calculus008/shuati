@@ -37,16 +37,27 @@ public class LE_255_Verify_Preorder_Sequence_In_BST  {
        means we must never come across a smaller number anymore."
 
 
-       As for all other BST problems, we also use the special property of BST to solve the problem. BST inorder is in soorted order.
+       As for all other BST problems, we also use the special property of BST to solve the problem. BST inorder is in sorted order.
        For preorder, there's an interesting property, as above example show :
 
         6 | 1 0 3 2 5 | 8
 
       The separator shows root, left subtree and right subtree. The first element in preorder must be root, then it goes to left subtree,
-      those values are smaller than root, until there's a number bigger than root, then we know we reach right subtree. So just we this
+      those values are smaller than root, until there's a number bigger than root, then we know we reach right subtree. So just use this
       property, use a stack, start with root, keep pushing elements smaller than current number from preorder sequence, until it hits
       a bigger value, then push in that value, during the process, if a number is smaller than the last min value, it is wrong.
 
+
+        6
+        6 1
+        6 1 0   <= 3
+        pop 0, 1, min = 1
+        6 3
+        6 3 2   <= 5
+        pop 2, 3  min = 3
+        6 5     <= 8
+        pop 5, 6  min = 6
+        8
      */
     public boolean verifyPreorder1(int[] preorder) {
         if(null == preorder) return false;

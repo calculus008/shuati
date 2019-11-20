@@ -69,7 +69,10 @@ public class LE_333_Largest_BST_Subtree {
 
     private SearchNode helper(TreeNode root) {
         if (root == null) {
-            //!!!Bottom up, so this is the starting point (0, max, min)
+            /**
+             * Postorder
+             * Bottom up, so this is the starting point (0, max, min)
+             */
             return new SearchNode(0, Integer.MAX_VALUE, Integer.MIN_VALUE);
         }
 
@@ -77,7 +80,10 @@ public class LE_333_Largest_BST_Subtree {
         SearchNode right = helper(root.right);
 
         if (left.size == -1 || right.size == -1 || root.val <= left.upper || root.val >= right.lower) {
-            //!!! use -1 to tell that this is not a BST, therefore the value for lower and upper does not matter, just use 0.
+            /**
+             * !!!
+             * use -1 to tell that this is not a BST, therefore the value for lower and upper does not matter, just use 0.
+             */
             return new SearchNode(-1, 0, 0);
         }
 

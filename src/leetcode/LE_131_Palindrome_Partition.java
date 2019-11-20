@@ -212,4 +212,43 @@ public class LE_131_Palindrome_Partition {
             results.add(result);
         }
     }
+
+    class Solution2_Practice {
+        public List<List<String>> partition(String s) {
+            List<List<String>> res = new ArrayList<>();
+            if (s == null || s.length() == 0) return res;
+
+            helper(s, res, new ArrayList<>(), 0);
+
+            return res;
+        }
+
+        private void helper(String s, List<List<String>> res, List<String> temp, int pos) {
+            if (pos == s.length()) {
+                res.add(new ArrayList<>(temp));
+                return;
+            }
+
+            for (int i = pos; i < s.length(); i++) {
+                String cur = s.substring(pos, i + 1);
+                if (isPalindrome(cur)) {
+                    temp.add(cur);
+                    helper(s, res, temp, i + 1);
+                    temp.remove(temp.size() - 1);
+                }
+            }
+        }
+
+        private boolean isPalindrome(String s) {
+            int l = 0, r = s.length() - 1;
+            while (l < r) {
+                if (s.charAt(l) != s.charAt(r)) {
+                    return false;
+                }
+                l++;
+                r--;
+            }
+            return true;
+        }
+    }
 }

@@ -17,6 +17,113 @@ public class LE_64_Min_Path_Sum {
         Given the above grid map, return 7. Because the path 1→3→1→1→1 minimizes the sum.
      */
 
+    /**
+     * Space O(1), since no new space is used, only operate on input array.
+     * This may not be allowed.
+     */
+    class Solution_Practice_1 {
+        public int minPathSum(int[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (i == 0 && j == 0) {
+                        /**
+                         * !!!
+                         */
+                        continue;
+                    } else if (i == 0) {
+                        grid[i][j] += grid[i][j - 1];
+                    } else if (j == 0) {
+                        grid[i][j] += grid[i - 1][j];
+                    } else {
+                        /**
+                         * !!!
+                         * "+="
+                         */
+                        grid[i][j] += Math.min(grid[i - 1][j], grid[i][j - 1]);
+                    }
+                }
+            }
+
+            return grid[m - 1][n - 1];
+        }
+    }
+
+    /**
+     * If it's not allowed to operate on input array, this solution only uses 1D extra array,
+     * Space can be O(min(m, n))
+     */
+    class Solution_Practice_2 {
+        public int minPathSum(int[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+
+            int[] dp = new int[n];
+            dp[0] = grid[0][0];
+
+            //first row
+            for (int i = 1; i < n; i++) {
+                dp[i] = dp[i - 1] + grid[0][i];
+            }
+
+            for (int i = 1; i < m; i++) {
+                /**
+                 * keep adding for the first column
+                 */
+                dp[0] += grid[i][0];
+
+                for (int j = 1; j < n; j++) {
+                    /**
+                     * !!!
+                     * Each dp value is composed of two parts:
+                     * grid[i][j]: the value at current coordinates in grid.
+                     * min(a[j - 1], a[j]): the min of the sum values
+                     *                      from LEFT (a[j - 1], updated in previous iteration)
+                     *                      and IP (a[j] before update)
+                     */
+                    dp[j] = grid[i][j] + Math.min(dp[j - 1], dp[j]);
+                }
+            }
+
+            return dp[n - 1];
+        }
+    }
+
+    /**
+     * Use extra 2D dp array, time and space O(mn)
+     */
+    class Solution_Practice_3 {
+        public int minPathSum(int[][] grid) {
+            int m = grid.length;
+            int n = grid[0].length;
+
+            int[][] dp = new int[m][n];
+            dp[0][0] = grid[0][0];
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (i == 0 && j == 0) {
+                        /**
+                         * !!!
+                         */
+                        continue;
+                    } else if (i == 0) {
+                        dp[i][j] = grid[i][j] + dp[i][j - 1];
+                    } else if (j == 0) {
+                        dp[i][j] = grid[i][j] + dp[i - 1][j];
+                    } else {
+                        dp[i][j] = grid[i][j] + Math.min(dp[i - 1][j], dp[i][j - 1]);
+                    }
+                }
+            }
+
+            return dp[m - 1][n - 1];
+        }
+    }
+
+
     public static int minPathSum(int[][] grid) {
         if(null == grid || grid.length ==0) return 0;
 
