@@ -45,10 +45,18 @@ public class LE_98_Validate_BST {
             return true;
         }
 
+        /**
+         * !!!
+         * root.val <= min, "<="
+         */
         if (min != null && root.val <= min) {
             return false;
         }
 
+        /**
+         * !!!
+         * root.val >= max, ">="
+         */
         if (max != null && root.val >= max) {
             return false;
         }
@@ -61,6 +69,10 @@ public class LE_98_Validate_BST {
      * Same as Solution 1, use long type to prevent overflow
      */
     public boolean isValidBST2_JiuZhang(TreeNode root) {
+        /**
+         * !!!
+         * Long.MIN_VALUE, Long.MAX_VALUE
+         */
         return divConq(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 

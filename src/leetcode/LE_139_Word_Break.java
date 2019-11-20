@@ -197,7 +197,7 @@ public class LE_139_Word_Break {
     }
 
 
-    class Solution_practice{
+    class Solution_practice_1{
         public boolean wordBreak(String s, List<String> wordDict) {
             if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
                 return false;
@@ -244,36 +244,82 @@ public class LE_139_Word_Break {
         }
     }
 
+    class Solution_Practice_2 {
+        public boolean wordBreak(String s, List<String> wordDict) {
+            if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
+                return false;
+            }
+
+            Set<String> set = new HashSet<>(wordDict);
+
+            return helper(s, set, new HashMap<>());
+        }
+
+        private boolean helper(String s, Set<String> set, Map<String, Boolean> mem) {
+            if (mem.containsKey(s)) return mem.get(s);
+
+            if (s.equals("")) return true;
+
+            for (int i = 0; i < s.length(); i++) {
+                String l = s.substring(0, i);
+                String r = s.substring(i);
+
+                if (set.contains(r)) {
+                    if (helper(l, set, mem)) {
+                        mem.put(s, true);
+                        return true;
+                    }
+                }
+            }
+
+            mem.put(s, false);
+            return false;
+        }
+    }
+
     class Solution_Variation{
         /**
          * Just given wordDict, find the max length of the word in wordDict that can be
          * broken into words in the same wordDict
          */
 
-        public boolean wordBreak(String s, List<String> wordDict) {
-            if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
-                return false;
+        int res = Integer.MIN_VALUE;
+
+        public int wordBreak(List<String> wordDict) {
+            if (wordDict == null || wordDict.size() == 0) {
+                return 0;
             }
 
             Set<String> dict = new HashSet<>(wordDict);
 
-            return helper(s, dict, new HashMap<>());
-        }
-
-        private boolean helper(String s, Set<String> dict, Map<String, Boolean> mem) {
-            if (mem.containsKey(s)) return mem.get(s);
-
-            if (dict.contains(s)) {
-                mem.put(s, true);
-                return true;
+            /**
+             * Another way to prevent getting s itself from dict is
+             * to first remove s from dict before helper(), then after
+             * returning, add it back
+             */
+            for (String s : dict) {
+                if (helper(s, s, dict, new HashMap<>())) {
+                    res = Math.max(res, s.length());
+                }
             }
 
-            for (int i = 1; i < s.length(); i++) {
+            return res;
+        }
+
+        private boolean helper(String s, String org, Set<String> dict, Map<String, Boolean> mem) {
+            if (mem.containsKey(s)) return mem.get(s);
+
+            if (s.equals("")) return true;
+
+            for (int i = 0; i < s.length(); i++) {
                 String l = s.substring(0, i);
                 String r = s.substring(i);
 
-                if (dict.contains(r)) {
-                    if (helper(l, dict, mem)) {
+                /**
+                 * make sure the current s is not the original one from the dictionary
+                 */
+                if (dict.contains(r) && !s.equals(org)) {
+                    if (helper(l, org, dict, mem)) {
                         mem.put(s, true);
                         return true;
                     }

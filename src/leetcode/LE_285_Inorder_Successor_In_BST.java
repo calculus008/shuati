@@ -47,6 +47,11 @@ public class LE_285_Inorder_Successor_In_BST {
      *          /          1.return null
      *         null
      */
+    /**
+     * inorder, the successor is the left most node in the right subtree
+     *
+     * 走之字形。
+     */
     //Solution 1 : Iterative
     public TreeNode inorderSuccessor1(TreeNode root, TreeNode p) {
         TreeNode res = null;
@@ -68,6 +73,10 @@ public class LE_285_Inorder_Successor_In_BST {
             return null;
         }
 
+        /**
+         * !!!
+         * "root.val <= p.val", it's "<=", not "<"
+         */
         if (root.val <= p.val) {
             return inorderSuccessor(root.right, p);
         } else {

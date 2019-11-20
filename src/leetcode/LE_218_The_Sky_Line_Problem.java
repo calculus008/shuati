@@ -191,4 +191,136 @@ public class LE_218_The_Sky_Line_Problem {
         return res;
     }
 
+    class Solution_TreeMap_Practice {
+        public List<List<Integer>> getSkyline(int[][] buildings) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (buildings == null || buildings.length == 0) return res;
+
+            List<int[]> heights = new ArrayList<>();
+
+            for (int[] b : buildings) {
+                heights.add(new int[]{b[0], -b[2]});
+                heights.add(new int[]{b[1], b[2]});
+            }
+
+            /**
+             * !!!
+             */
+            Collections.sort(heights, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
+
+            TreeMap<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
+            /**
+             * !!!
+             * Must pad it with 0, otherwise will run into exception when process
+             * the first element.
+             */
+            map.put(0, 1);
+
+            int pre = 0;
+
+            for (int[] h : heights) {
+                if (h[1] < 0) {//enter
+                    map.put(-h[1], map.getOrDefault(-h[1], 0) + 1);
+                } else {
+                    if (map.get(h[1]) == 1) {
+                        map.remove(h[1]);
+                    } else {
+                        map.put(h[1], map.get(h[1]) - 1);
+                    }
+                }
+
+                /**
+                 * !!!
+                 * TreeMap.firstKey()
+                 */
+                int cur = map.firstKey();
+                if (pre != cur) {
+                    List<Integer> l = new ArrayList<>();
+                    l.add(h[0]);
+                    l.add(cur);
+                    res.add(l);
+
+                    /**
+                     * !!!
+                     */
+                    pre = cur;
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * TreeMap + PriorityQueue
+     *
+     * https://www.youtube.com/watch?v=tQiXaCT0ndE&t=1s
+     * https://docs.google.com/document/d/11rPTObi5sl_HrIwyHHSFAgk3Vx07RvTVvPATv5LEAbc/edit#
+     */
+    class Solution {
+        public List<List<Integer>> getSkyline(int[][] buildings) {
+            /**
+             * TreeMap: key -> x coordinate, value -> list of heights at current x coordinate
+             * 这里TreeMap的用处不同于前一个解法，它只是用来保存timeline。
+             * O(nlogn)
+             */
+            TreeMap<Integer, List<int[]>> map = new TreeMap<>();
+            for (int[] b : buildings) {
+                map.putIfAbsent(b[0], new ArrayList<>());
+                map.putIfAbsent(b[1], new ArrayList<>());
+                map.get(b[0]).add(b);
+                map.get(b[1]).add(b);
+            }
+
+            PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> b[2] - a[2]);
+            List<List<Integer>> res = new ArrayList<>();
+
+            /**
+             * Iterate through timeline in TreeMap, 每次拿出当前坐标所有的heights,
+             * 然后根据event type (enter or leave), 用maxHeap排序。
+             */
+            for (int a : map.keySet()) {
+                List<int[]> bs = map.get(a);
+
+                /**
+                 * 对比于solution1, 这里我们对同一坐标上的heights一起处理。这样不用
+                 * 考虑solution1里的corner cases.
+                 */
+                for (int[] b : bs) {
+                    /**
+                     * "b[0] == a", this is entering event
+                     */
+                    if (b[0] == a) {
+                        maxHeap.offer(b);
+                    } else {
+                        /**
+                         * maxHeap() takes O(n), 所以时间复杂度不是最优。
+                         */
+                        maxHeap.remove(b);
+                    }
+                }
+
+                if (maxHeap.size() == 0) {
+                    List<Integer> tmp = new ArrayList<>();
+                    tmp.add(a);
+                    tmp.add(0);
+                    res.add(tmp);
+                } else {
+                    int maxHeight = maxHeap.peek()[2];
+
+                    if (res.size() == 0 || res.get(res.size() - 1).get(1) != maxHeight) {
+                        List<Integer> tmp = new ArrayList<>();
+                        tmp.add(a);
+                        tmp.add(maxHeight);
+                        res.add(tmp);
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+
+
 }
