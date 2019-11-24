@@ -83,11 +83,59 @@ public class LE_72_Edit_Distance {
 
         Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1, therefore cost is 1.
 
+        !!!
         If cost for operations are different, ADD - 3, DELETE - 5, REPLACE - 7, then the equation becomes:
 
         Math.min(Math.min(dp[i][j - 1] + 5, dp[i - 1][j] + 3), dp[i - 1][j - 1] + 7) + 1
 
      **/
+
+    class Solution_DP_Practice {
+        public int minDistance(String word1, String word2) {
+            if (word1 == null || word2 == null) return -1;
+
+            int m = word1.length();
+            int n = word2.length();
+
+            int[][] dp = new int[m + 1][n + 1];
+
+            for (int i = 0; i < dp.length; i++) {
+                /**
+                 * !!!
+                 * "= i", NOT " = m"
+                 */
+                dp[i][0] = i;
+            }
+
+            for (int j = 0; j < dp[0].length; j++) {
+                /**
+                 * !!!
+                 * "= j", NOT " = n"
+                 */
+                dp[0][j] = j;
+            }
+
+            dp[0][0] = 0;
+
+            for (int i = 1; i <= m; i++) {
+                for (int j = 1; j <= n; j++) {
+                    if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                    } else {
+                        /**
+                         * !!!
+                         * "1 + Math.min(...)"
+                         *  加一!!!
+                         */
+                        dp[i][j] = 1 + Math.min(dp[i - 1][j], Math.min(dp[i][j - 1], dp[i - 1][j - 1]));
+                    }
+                }
+            }
+
+            return dp[m][n];
+
+        }
+    }
 
     /**
      * DP
