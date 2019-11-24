@@ -150,24 +150,58 @@ public class LE_218_The_Sky_Line_Problem {
         List<int[]> heights = new ArrayList<>();
 
         for (int[] b : buildings) {
+            /**
+             * set height values as negative for entering event,
+             * if two events are at the same x coordinate, they will
+             * be sorted increasingly, so the smallest negative number
+             * (the highest) will be at the front. This is for special cases:
+             *
+             * 1.Building A is leaving and B is entering at the same x coordinate
+             *   and A' height is lower than B's height. We want to make sure
+             *   only B's height is in res.
+             *
+             * 2.Multiple buildings leave at the same x coordinate, they have
+             *   different height, we want to make sure '0' is put into res.
+             *
+             * The negative value here only for ordering purpose of the swipe line
+             * order, when we put into TreeMap, it will be converted back to
+             * positive value.
+             *
+             * This is to guarantee that the entering event will
+             * be processed before leaving event.
+             */
             heights.add(new int[]{b[0], -b[2]});
             heights.add(new int[]{b[1],  b[2]});
         }
 
+        /**
+         * if two elements has the same x coordinate, sort it by height (2nd element in array),
+         * otherwise sort by x coordinate
+         */
         Collections.sort(heights, (a, b) -> a[0] == b[0] ? a[1] - b[1] : a[0] - b[0]);
 
         /**!!!
+         *  In TreeMap here, key is height, value is frequency of the height.(!!!)
            "Collections.reverseOrder()",. "<Integer, Integer>"
-            In TreeMap here, key is height, value is frequency of the height.
+            In TreeMap, sort it in reverse order (max to min) by frequency, so that
+            we can use map.firstKey() to get the biggest height.
          **/
         TreeMap<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
         map.put(0, 1);
+
+        /**
+         * biggest height before processing current event
+         */
         int pre = 0;
 
         for (int[] h : heights) {
-            if (h[1] < 0) {
+            /**
+             * Sweep line, first process current event, ADD for entering event,
+             * REMOVE for leaving event.
+             */
+            if (h[1] < 0) {//ADD
                 map.put(-h[1], map.getOrDefault(-h[1], 0) + 1);
-            } else {
+            } else {//REMOVE
                 int val = map.get(h[1]);
                 if (val == 1) {
                     /**!!!
@@ -180,7 +214,12 @@ public class LE_218_The_Sky_Line_Problem {
                 }
             }
 
-            //!!! TreeMap "firstKey()"
+            /**
+             * !!!
+             * TreeMap "firstKey()": this is to find the MAX
+             *
+             * cur : current biggest height, after current event is processed.
+             */
             int cur = map.firstKey();
             if (pre != cur) {
                 res.add(new int[]{h[0], cur});

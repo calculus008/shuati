@@ -118,6 +118,9 @@ public class LE_63_Unique_Path_II {
                         dp[i][j] = 0;
                     } else {
                         if (i == 0 && j == 0) {
+                            /**
+                             * !!!
+                             */
                             dp[i][j] = 1;
                         } else if (i == 0 && j != 0) {
                             dp[i][j] = dp[i][j - 1];

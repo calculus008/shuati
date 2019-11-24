@@ -37,12 +37,12 @@ public class LE_129_Sum_Root_To_Leaf_Numbers {
     public void helper(TreeNode root, int sum) {
         if (root == null) return;
 
-        helper(root.left, sum * 10 + root.val);
-        helper(root.right, sum * 10 + root.val);
-
         if (root.right == null && root.left == null) {
             res += sum * 10 + root.val;
         }
+
+        helper(root.left, sum * 10 + root.val);
+        helper(root.right, sum * 10 + root.val);
     }
 
     //Solution 2

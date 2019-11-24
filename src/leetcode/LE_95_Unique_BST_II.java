@@ -33,6 +33,9 @@ public class  LE_95_Unique_BST_II {
      *    2     1         2                 3
      */
 
+    /**
+     * List<TreeNode> : return list of root node
+     */
     public static List<TreeNode> generateTrees(int n) {
         List<TreeNode> res = new ArrayList<>();
         if (n == 0) return res;
