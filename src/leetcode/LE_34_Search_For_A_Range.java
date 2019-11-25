@@ -23,71 +23,137 @@ public class LE_34_Search_For_A_Range {
      * Similar
      * Simple_Queries_With_Two_Arrays  (upper bound/lower bound)
      *
-     * 这里不能用binary serach找upper/lower bound的方法，
+     * 这里不能用binary search找upper/lower bound的方法，
      * 因为我们需要知道target是否在nums中存在。
      */
-    public int[] searchRange(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return new int[]{-1, -1};
-        }
-
-        int start = findFirst(nums, target);
-        //!!!
-        if (start == -1) return new int[]{-1, -1};
-
-        int end = findLast(nums, target);
-
-        return new int[]{start, end};
-    }
-
-    private int findFirst(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
-
-        while (start + 1 < end) {
-            int mid = (end - start) / 2 + start;
-            if (nums[mid] < target) {
-                start = mid;
-            } else {
-                end = mid;
+    class Solution1 {
+        public int[] searchRange(int[] nums, int target) {
+            if (nums == null || nums.length == 0) {
+                return new int[]{-1, -1};
             }
-        }
 
-        if(nums[start] == target) {
-            return start;
-        }
-
-        if(nums[end] == target){
-            return end;
-        }
-
-        return -1;
-    }
-
-    private int findLast(int[] nums, int target) {
-        int start = 0;
-        int end = nums.length - 1;
-
-        while (start + 1 < end) {
-            int mid = (end - start) / 2 + start;
+            int start = findFirst(nums, target);
             //!!!
-            if (nums[mid] > target) {
-                end = mid;
-            } else {
-                start = mid;
+            if (start == -1) return new int[]{-1, -1};
+
+            int end = findLast(nums, target);
+
+            return new int[]{start, end};
+        }
+
+        private int findFirst(int[] nums, int target) {
+            int start = 0;
+            int end = nums.length - 1;
+
+            while (start + 1 < end) {
+                int mid = (end - start) / 2 + start;
+                if (nums[mid] < target) {
+                    start = mid;
+                } else {
+                    end = mid;
+                }
             }
+
+            /**
+             * !!!
+             * check start first, then end
+             */
+            if (nums[start] == target) {
+                return start;
+            }
+
+            if (nums[end] == target) {
+                return end;
+            }
+
+            return -1;
         }
 
-        //!!!
-        if(nums[end] == target){
-            return end;
+        private int findLast(int[] nums, int target) {
+            int start = 0;
+            int end = nums.length - 1;
+
+            while (start + 1 < end) {
+                int mid = (end - start) / 2 + start;
+                //!!!
+                if (nums[mid] > target) {
+                    end = mid;
+                } else {
+                    start = mid;
+                }
+            }
+
+            /**
+             * !!!
+             * check end first, then start
+             */
+            if (nums[end] == target) {
+                return end;
+            }
+
+            if (nums[start] == target) {
+                return start;
+            }
+
+            return -1;
+
         }
+    }
 
-        if(nums[start] == target) {
-            return start;
+    public class Solution_Jiuzhang {
+        public int[] searchRange(int[] A, int target) {
+            if (A.length == 0) {
+                return new int[]{-1, -1};
+            }
+
+            int start, end, mid;
+            int[] bound = new int[2];
+
+            // search for left bound
+            start = 0;
+            end = A.length - 1;
+            while (start + 1 < end) {
+                mid = start + (end - start) / 2;
+                if (A[mid] == target) {
+                    end = mid;
+                } else if (A[mid] < target) {
+                    start = mid;
+                } else {
+                    end = mid;
+                }
+            }
+            if (A[start] == target) {
+                bound[0] = start;
+            } else if (A[end] == target) {
+                bound[0] = end;
+            } else {
+                bound[0] = bound[1] = -1;
+                return bound;
+            }
+
+            // search for right bound
+            start = 0;
+            end = A.length - 1;
+            while (start + 1 < end) {
+                mid = start + (end - start) / 2;
+                if (A[mid] == target) {
+                    start = mid;
+                } else if (A[mid] < target) {
+                    start = mid;
+                } else {
+                    end = mid;
+                }
+            }
+            if (A[end] == target) {
+                bound[1] = end;
+            } else if (A[start] == target) {
+                bound[1] = start;
+            } else {
+                bound[0] = bound[1] = -1;
+                return bound;
+            }
+
+            return bound;
         }
-
-        return -1;
-
     }
 }
