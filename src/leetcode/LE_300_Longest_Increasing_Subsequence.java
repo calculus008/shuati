@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by yuank on 4/22/18.
@@ -84,10 +85,35 @@ public class LE_300_Longest_Increasing_Subsequence {
 
 
      前两种都很好处理，O(1)就能解决，主要是第三种情况，实际上我们观察直到6之前这四个不同长度的升序序列，他们末尾是递增的，所以可以用二分搜索来找到适合的更新位置。
-
-
-
      */
+
+    /**
+     * DP, time : O(n ^ 2)
+     */
+    class Solution_DP {
+        public int lengthOfLIS(int[] nums) {
+            if (nums == null || nums.length == 0) return 0;
+
+            int n = nums.length;
+            int[] dp = new int[n];
+
+            Arrays.fill(dp, 1);
+
+            int len = 1;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < i; j++)  {
+                    if (nums[j] < nums[i]) {
+                        dp[i] = Math.max(dp[i], dp[j] + 1);
+                    }
+                }
+                len = Math.max(len, dp[i]);
+            }
+
+            return len;
+        }
+    }
+
     public int lengthOfLIS(int[] nums) {
         if (nums == null || nums.length == 0)
             return 0;

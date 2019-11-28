@@ -64,4 +64,60 @@ public class LE_15_3Sum {
 
         return res;
     }
+
+    class Solution_Practice {
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (nums == null || nums.length < 3) return res;
+
+            Arrays.sort(nums);
+            int n = nums.length;
+
+            for (int i = 0; i < n - 2; i++) {
+                if (i > 0 && nums[i] == nums[i - 1]) {
+                    /**
+                     * !!!
+                     * "continue", NOT "i++"!!!
+                     */
+                    continue;
+                }
+
+                int l = i + 1;
+                int r = n - 1;
+
+                while (l < r) {
+                    if (nums[l] + nums[r] == -nums[i]) {
+                        /**
+                         * !!!
+                         * Arrays.asList
+                         */
+                        res.add(Arrays.asList(nums[i], nums[l], nums[r]));
+
+                        while (l < r && nums[l] == nums[l + 1]) {
+                            l++;
+                        }
+                        while(l < r && nums[r] == nums[r - 1]) {
+                            r--;
+                        }
+
+                        /**
+                         * !!!
+                         * l moves to left and r moves to right, one more step!!!
+                         */
+                        l++;
+                        r--;
+                    } else if (nums[l] + nums[r] > -nums[i]) {
+                        r--;
+                    } else {
+                        l++;
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+
+
 }
