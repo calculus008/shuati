@@ -40,16 +40,96 @@ LE_284_Peeking_Iterator
 LE_557_Reverse_Words_In_A_String_III
 
 #面筋
+LE_36_Valid_Sudoku
+LE_37_Sudoku_Solver
+LE_54_Spiral_Matrix
 LE_88_Merge_Sorted_Array
 LE_221_Maximal_Square
 LI_934_Unlock_Problem
 LE_319_Bulb_Switcher
-LE_345_Reverse_Vowels_Of_A_String
+LE_345_Reverse_Vowels_Of_A_String        (***)
+LE_268_Missing_Number
 
-给两个字符串，问这两个字符串的字符是不是对方字符的全排列
+
+#Anagram
+LE_49_Group_Anagrams    (***)
+LE_242_Valid_Anagram
 LE_438_Find_All_Anagrams_In_A_String
 
-LE_268_Missing_Number
+#Tree
+LE_102_Binary_Tree_Level_Order_Traversal
+LE_110_Balanced_Binary_Tree
+LE_112_Path_Sum
+LE_235_Lowest_Common_Ancestor_Of_BST
+LE_236_Lowest_Common_Ancestor_Of_BT
+Sum of non-leaf nodes in a tree
+https://www.geeksforgeeks.org/count-non-leaf-nodes-binary-tree/
+https://www.geeksforgeeks.org/sum-leaf-nodes-binary-tree/
+
+#Reverse LinkedList
+LE_92_Reverse_LinkedList_II
+LE_206_Reverse_LinkedList
+
+LE_387_First_Unique_Character_In_A_String
+LI_685_First_Unique_Number_In_Stream
+
+LE_347_Top_K_Frequent_Elements
+LE_692_Top_K_Frequent_Words
+LI_550_Top_K_Frequent_Words_II
+
+LE_39_Combination_Sum
+LE_17_Letter_Combinations_Of_A_Phone_Number
+
+LE_08_String_To_Integer                     (**)
+LE_20_Valid_Parentheses
+LE_394_Decode_String                        (**)
+LE_200_Number_Of_Islands
+
+LE_224_Basic_Calculator
+(Sum of number in a string (eg. a107b7hdgjdhgjd8 => 107 + 7 + 8 = 122))
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+LE_432_All_O_One_Data_Structure
+LE_146_LRU_Cache
+LE_287_Find_The_Duplicate_Number             (***)
+
+#Binary Search
+LE_33_Search_In_Rotated_Sorted_Array
+LE_81_Search_In_Rotated_Sorted_Array_II
+LE_41_First_Missing_Positive
+Find missing element in a sorted array of consecutive numbers  (***)
+https://www.geeksforgeeks.org/find-missing-element-in-a-sorted-array-of-consecutive-numbers/
+
+#Merge Intervals
+LE_56_Merge_Intervals
+LE_352_Data_Stream_As_Disjoint_Intervals
+
+Merge unsorted linked list
+https://stackoverflow.com/questions/5431672/merging-two-unsorted-singly-linked-lists
+
+QuikSort
+
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars   (***)
+Subarray with at most k distinct character
+https://aaronice.gitbooks.io/lintcode/content/two_pointers/longest_substring_with_at_most_k_distinct_characters.html
+https://zhengyang2015.gitbooks.io/lintcode/longest_substring_with_at_most_k_distinct_characte.html
+
+
+找到包含不重复单词的最长sequence
+举个例子 List<String> words: cars, turtles, cats, rats, dogs, rabitts,
+要求返回 List<String> 例子要返回turtles, cats, rats, dogs, rabitts,...
+因为第一个单词和第三个单词都是cats，所以要把第一个cats丢掉
+写的代码用的for loop里套while loop，双指针加set。
+
+
+#Design Pattern
+Singleton :
+Builder: https://www.geeksforgeeks.org/builder-pattern-in-java/
+         https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/
+
+
+
+
 第一轮：
 1. 给一个数字，找到下一个回文的数，比如9 -> 11, 129 -> 131 这样。
 https://www.geeksforgeeks.org/given-a-number-find-next-smallest-palindrome-larger-than-this-number/
@@ -159,6 +239,7 @@ employee:{
 5) security
 6) pagination
 */
+https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/
 
 Desgin Cache
 Tiny URL
