@@ -32,6 +32,10 @@ public class LE_54_Spiral_Matrix {
         int colBegin = 0;
         int colEnd = matrix[0].length - 1;
 
+        /**
+         * !!!
+         * outer while loop checks boundary condition
+         */
         while (rowBegin <= rowEnd && colBegin <= colEnd) {
             for (int i = colBegin; i <= colEnd; i++) {
                 res.add(matrix[rowBegin][i]);
@@ -43,7 +47,10 @@ public class LE_54_Spiral_Matrix {
             }
             colEnd--;
 
-            //!!! if
+            /**
+             * !!!
+             * if
+             */
             if (rowBegin <= rowEnd) {
                 for (int i = colEnd; i >= colBegin; i--) {
                     res.add(matrix[rowEnd][i]);
@@ -51,7 +58,10 @@ public class LE_54_Spiral_Matrix {
             }
             rowEnd--;
 
-            //!!! if
+            /**
+             * !!!
+             * if
+             */
             if (colBegin <= colEnd) {
                 for (int i = rowEnd; i >= rowBegin; i--) {
                     res.add(matrix[i][colBegin]);

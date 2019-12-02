@@ -28,6 +28,10 @@ public class LE_53_Maximum_Subarray {
         int res = nums[0];
 
         for (int i = 1; i < nums.length; i++) {
+            /**
+             * !!!
+             * "(dp[i - 1] < 0 ? 0 : dp[i - 1])", must be in "()"
+             */
             dp[i] = nums[i] + (dp[i - 1] < 0 ? 0 : dp[i - 1]);
             res = Math.max(res, dp[i]);
         }

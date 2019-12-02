@@ -3,6 +3,7 @@ package leetcode;
 import sun.jvm.hotspot.utilities.Interval;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class LE_56_Merge_Intervals {
     /**
      * Best version, concise, short and easy to remember
      */
-    class Solution {
+    class Solution1 {
         public List<Interval> merge(List<Interval> intervals) {
             List<Interval> res = new ArrayList<>();
             if (intervals == null || intervals.size() == 0) {
@@ -75,6 +76,32 @@ public class LE_56_Merge_Intervals {
             }
 
             return res;
+        }
+    }
+
+    class Solution1_New_Input_Type {
+        public int[][] merge(int[][] intervals) {
+            if (intervals.length <= 1) return intervals;
+
+            Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
+
+            int m = intervals.length;
+            List<int[]> res = new ArrayList<>();
+            int[] last = null;
+
+            for (int[] interval : intervals) {
+                if (last == null || last[1] < interval[0]) {
+                    res.add(interval);
+                    last = interval;
+                } else {
+                    last[1] = Math.max(last[1], interval[1]);
+                }
+            }
+
+            /**
+             * !!!
+             */
+            return res.toArray(new int[res.size()][]);
         }
     }
 
@@ -119,4 +146,5 @@ public class LE_56_Merge_Intervals {
             return res;
         }
     }
+
 }

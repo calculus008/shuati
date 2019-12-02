@@ -15,6 +15,43 @@ public class LE_253_Meeting_Rooms_II {
          return 2.
      */
 
+    class Solution_SweepLine_Practice {
+        class Pair {
+            int time;
+            int type;
+
+            public Pair(int time, int type) {
+                this.time = time;
+                this.type = type;
+            }
+        }
+
+
+        public int minMeetingRooms(int[][] intervals) {
+            if (intervals == null || intervals.length == 0) return 0;
+
+            int res = 0;
+            List<Pair> list = new ArrayList<>();
+            for (int[] interval : intervals) {
+                list.add(new Pair(interval[0], 1));
+                list.add(new Pair(interval[1], 0));
+            }
+
+            Collections.sort(list, (a, b) -> a.time != b.time ? a.time - b.time : a.type -b.type);
+
+            int count = 0;
+            for (Pair p : list) {
+                if (p.type == 1) {
+                    count++;
+                } else {
+                    count--;
+                }
+                res = Math.max(res, count);
+            }
+
+            return res;
+        }
+    }
 
     //Time : O(nlogn), Space : O(n)
 
