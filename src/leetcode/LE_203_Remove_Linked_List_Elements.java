@@ -44,6 +44,9 @@ public class LE_203_Remove_Linked_List_Elements {
         Here, cur does not move at all
     */
 
+    /**
+     * 考点 ：head 有可能就是要被remove的 （case 2 above)
+     */
     public ListNode removeElements1(ListNode head, int val) {
         if (head == null) {
             return head;

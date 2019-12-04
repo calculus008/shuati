@@ -1,0 +1,274 @@
+#Paypal leetcode tag questions
+LE_01_Two_Sum
+LE_02_Add_Two_Numbers
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_06_ZigZag_Conversion
+LE_07_Reverse_Integer
+LE_15_3Sum
+LE_20_Valid_Parentheses
+
+LE_23_Merge_k_Sorted_Lists      (***)
+LE_25_Reverse_Nodes_In_K_Group  (**)
+LE_46_Permutation               (***)
+
+LE_53_Maximum_Subarray
+LE_54_Spiral_Matrix
+LE_56_Merge_Intervals
+LE_102_Binary_Tree_Level_Order_Traversal
+LE_121_Best_Time_To_Buy_And_Sell_Stock5
+LE_134_Gas_Station
+LE_146_LRU_Cache
+LE_151_Reverse_Words_In_A_String
+LE_167_Two_Sum_II_Array_Is_Sorted
+LE_199_Binary_Tree_Right_Side_View
+LE_200_Number_Of_Islands
+LE_207_Course_Schedule          (**)
+LE_224_Basic_Calculator
+LE_237_Delete_Node_In_Linked_List
+LE_242_Valid_Anagram
+LE_243_Shortest_Word_Distance
+LE_244_Shortest_Word_Distance_II
+LE_245_Shortest_Word_Distance_III
+
+LE_253_Meeting_Rooms_II
+Variation: 他们有很多台机器想要 给你每天机器 start的时间点 和down的时间点 让你统计最多有多少太机器同时在线，
+然后follow up 问了如果重复的数据怎么去重，如果数据点特别多怎么handle
+
+LE_273_Integer_To_English_Words
+LE_283_Move_Zeroes
+LE_284_Peeking_Iterator
+LE_557_Reverse_Words_In_A_String_III
+
+#面筋
+LE_36_Valid_Sudoku
+LE_37_Sudoku_Solver
+LE_54_Spiral_Matrix
+LE_88_Merge_Sorted_Array
+LE_221_Maximal_Square
+LI_934_Unlock_Problem
+LE_319_Bulb_Switcher
+LE_345_Reverse_Vowels_Of_A_String        (***)
+LE_268_Missing_Number
+
+
+#Anagram
+LE_49_Group_Anagrams    (***)
+LE_242_Valid_Anagram
+LE_438_Find_All_Anagrams_In_A_String
+
+#Tree
+LE_102_Binary_Tree_Level_Order_Traversal
+LE_110_Balanced_Binary_Tree
+LE_112_Path_Sum
+LE_235_Lowest_Common_Ancestor_Of_BST
+LE_236_Lowest_Common_Ancestor_Of_BT
+Sum of non-leaf nodes in a tree
+https://www.geeksforgeeks.org/count-non-leaf-nodes-binary-tree/
+https://www.geeksforgeeks.org/sum-leaf-nodes-binary-tree/
+
+#Reverse LinkedList
+LE_92_Reverse_LinkedList_II
+LE_206_Reverse_LinkedList
+
+LE_387_First_Unique_Character_In_A_String
+LI_685_First_Unique_Number_In_Stream
+
+LE_347_Top_K_Frequent_Elements
+LE_692_Top_K_Frequent_Words
+LI_550_Top_K_Frequent_Words_II
+
+LE_39_Combination_Sum
+LE_17_Letter_Combinations_Of_A_Phone_Number
+
+LE_08_String_To_Integer                     (**)
+LE_20_Valid_Parentheses
+LE_394_Decode_String                        (**)
+LE_200_Number_Of_Islands
+
+LE_224_Basic_Calculator
+(Sum of number in a string (eg. a107b7hdgjdhgjd8 => 107 + 7 + 8 = 122))
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+LE_432_All_O_One_Data_Structure
+LE_146_LRU_Cache
+LE_287_Find_The_Duplicate_Number             (***)
+
+#Binary Search
+LE_33_Search_In_Rotated_Sorted_Array
+LE_81_Search_In_Rotated_Sorted_Array_II
+LE_41_First_Missing_Positive
+Find missing element in a sorted array of consecutive numbers  (***)
+https://www.geeksforgeeks.org/find-missing-element-in-a-sorted-array-of-consecutive-numbers/
+
+#Merge Intervals
+LE_56_Merge_Intervals
+LE_352_Data_Stream_As_Disjoint_Intervals
+
+Merge unsorted linked list
+https://stackoverflow.com/questions/5431672/merging-two-unsorted-singly-linked-lists
+
+QuikSort
+
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars   (***)
+Subarray with at most k distinct character
+https://aaronice.gitbooks.io/lintcode/content/two_pointers/longest_substring_with_at_most_k_distinct_characters.html
+https://zhengyang2015.gitbooks.io/lintcode/longest_substring_with_at_most_k_distinct_characte.html
+
+
+找到包含不重复单词的最长sequence
+举个例子 List<String> words: cars, turtles, cats, rats, dogs, rabitts,
+要求返回 List<String> 例子要返回turtles, cats, rats, dogs, rabitts,...
+因为第一个单词和第三个单词都是cats，所以要把第一个cats丢掉
+写的代码用的for loop里套while loop，双指针加set。
+
+
+#Design Pattern
+Singleton :
+Builder: https://www.geeksforgeeks.org/builder-pattern-in-java/
+         https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/
+
+
+
+
+第一轮：
+1. 给一个数字，找到下一个回文的数，比如9 -> 11, 129 -> 131 这样。
+https://www.geeksforgeeks.org/given-a-number-find-next-smallest-palindrome-larger-than-this-number/
+
+2. 设计一个可以提交和回滚的栈。比如栈内[1, 2, 3], 提交, 之后push 4， 5,
+栈为[1, 2, 3, 4, 5], 回滚, 变为[1, 2, 3]
+https://www.glassdoor.com/Interview/Implement-a-stack-data-structure-This-stack-should-support-transactions-begin-transaction-commit-rollback-The-stack-s-QTN_2282033.htm
+https://github.com/dimitrovvlado/misc/blob/master/src/main/java/com/vlado/stacks/TransactionalStack.java
+
+第二轮：都是小题，
+1. 翻转字符串。
+
+2. 给定一个函数，这个函数可以编码一个字符串，然后给一个文件，问用那个函数最快地编码整个文件。最后涉及到多线程
+
+3. 解Sudoku, 说思路
+LE_36_Valid_Sudoku
+LE_37_Sudoku_Solver
+
+4. 设计自动售货机
+第三轮：
+LE_54_Spiral_Matrix
+利口乌丝，然后followup是让这个函数变成configurable，比如可以顺时针，逆时针，从哪个点开始
+
+What is bubble sort
+How to improve chatbot
+Jvm/jdk/jre
+What are constructors
+Garbage collection, how to force gc (turn off database connection)
+Four principles of oop. Explain
+Rest service
+What is join in SQL
+
+Java基础比如HashMap，HashTable和ConcurrentHashMap的区别
+
+两个thread最后打印一个有序数组
+找到两个数组的交集。
+
+具体记不太清了一道题， 三叉树，求internal nodes
+internal nodes 定义， 就是周围必须有node包裹
+用了 bfs，root 和 最后一层肯定都不是，
+中间层，除了第一个和最后一个，中间的要是没有child就是internal nodes了
+
+1. 序列反序列树 要求写testcase
+2. mapreduce 是什么
+3. 设计股票系统 要求实时性
+4. 桶排序 一堆年龄 on 排序
+5. 多线程实现singleton
+6. 堆插入的实现
+7. anagram
+
+LE_07_Reverse_Integer
+
+
+经理轮： 过一下简历和项目细节，讲一下 CAP 理论，TCP 的 flow control，consistency hash， 了解不了解 Mesos Kubernetes 这些。见一下 DS 里 Mutex 实现的几种方式，Paxos 和 Raft，灾难恢复怎么做。对 Container 的了解。
+第一轮：很简单的题，忘记了。然后是 Tiny URL。Two Phase Commit 实现，Strong/Causal/Weak consistency 所代表的意义，用数据库举例说明。给了一个场景，设计一个 cloud autoscaling 的 policy。
+第二轮：旋转过的数组里找目标数字，找和最大的连续子数组。问一下 Linux ACL 的东西，Linux 中 SIGTERM 和 SKIGKILL 的区别。说一下常见的 Unix error code，比如 1， 137 这些。Docker 的东西。
+第三轮：给颗树节点，找从根到节点的路径。讲一下对 golang 协程的理解，对比 thread 的优劣。实现线程安全的单例模式。实现一个 go 的 RPC 调用。 继续是 docker，container的东西....
+第四轮：合并 K 个有序数组，一个很简单的 BFS 题。
+
+SOA和microservices
+
+给你一个老板和员工的关系表（每名员工只有一个老板，但一个老板可以有多个员工），让你找出两个员工的closestCommonManager，就是一个搭general树和找两个树节点LCA的题。但因为是有任意多子节点的树，我光把树搭出来了，LCA没找出来。。。
+
+【第一题】
+给一个数组，每次将组内除1个元素外的所有元素+1，求需要多少次(长整形)使得数组内所有元素相等？
+* 例1:[5,6,8,8,5] -> [6,7,9,8,6] -> [7,8,9,9,7] ... -> [11,11,12,11,11] -> [12,12,12,12,12] 共7次
+* 例2:[2,2,2] 0次
+
+
+【第二题】
+给两个字串，求第一个字串改多少个字母再变换顺序就可以得到另一个。无法变换则返回-1
+* 例：["a","jk","abb"] ["bb","kj","bbc"] -> [-1,0,1]
+  a无法变换得到bb；
+  jk不改字母，只变换顺序就能得到kj；
+  abb变一个字母就能得到bbc
+
+
+【第三题】
+给一个int数组，判断数组内元素是否为单调递增或单调递减
+
+* 例：
+[1,1,1,2] -> true
+[1,2,3,4] -> true
+[1,2,1,0] -> false
+
+
+3. REST API的问题，感觉这些都整明白了，应该就没问题了，之前问API的问题，都第一步就跪了，本来问了问周围的小伙伴，
+感觉已经整明白了，现在看着这些具体的问题，才知道就是应该跪啊，之前做的时候根本都没想过这些。。。
+/*CRUD operations on employee
+employee:{
+    firstname,
+    lastName,
+    addresses:[
+        {
+            street,
+            city,
+            zip
+            country
+            type:[‘HOME’, ‘OFFICE’]
+        }
+    ]
+}
+1) Define the endpoints
+2) request/response
+3) possible http return codes
+4) error response
+5) security
+6) pagination
+*/
+https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/
+
+Desgin Cache
+Tiny URL
+Stack implement(?)
+
+nput 2个 int Array,  要求out put 一个 Interval Array。例子：arr1 = [1, 2, 3]  arr2 = [4, 5, 8],  output: [1-5, 8]
+              follow up: input一个stream, 输出interval, 参照LC352
+LE_352_Data_Stream_As_Disjoint_Intervals
+
+
+java重写 equal；很大的list返回sum，如何优化，楼主答得是mapreduce；java 里边hashmap实现; comparator&comparable; 多个任务abcde， ab可以同时工作，de   可以同时工作，c只能在ab，de之后，用什么可以实现优化。
+里扣的249
+合并两个排序好的数组， java static， finally，final， finalize，JVM， GCC， interface， abstract， 图书馆ood
+系统设计电梯
+
+SQL
+第一个就是找最大，然后第二个是什么找某个条件下倒序前几个最大的。
+
+电面：算法是数组里找subarray和为0.  平时用的design pattern，问了几种情景该用什么pattern，然后让写了一个builder pattern，写了几行代码问怎么unit test，java 8，"abc" new String("abc")区别，简单说了下restapi。
+
+onsite 1 实现heap，social network里好友距离多少跳
+2. 设计order后端，number of island，设计vending machine
+3. LRU，设计KV store
+4. 一些基础知识，一个sql，算法string to int，file里出现最多次数单词
+
+然后问了一道OOD设计题，如何设计一个RESTful架构的vending machine，可惜之前没好好准备，想的复杂了，答得一塌糊涂，事后查了一下才知道思路还挺简单的。
+https://github.com/HuascarMC/vending-machine-server
+https://javarevisited.blogspot.com/2016/06/design-vending-machine-in-java.html
+https://leetcode.com/discuss/interview-question/125218/design-a-vending-machine
+
+第二个问题是简单go through一下设计模式里的singleton pattern。总体来说还比较简单，自己没准备好，move on了。
+

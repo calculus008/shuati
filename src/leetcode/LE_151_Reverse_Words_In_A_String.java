@@ -28,7 +28,56 @@ public class LE_151_Reverse_Words_In_A_String {
          Output: "example good a"
          Explanation: You need to reduce multiple spaces between two words to a single space
                       in the reversed string.
+
+
+        A simplified version: LE_186_Reverse_Words_In_String_II
      */
+
+    class Solution_Practice_2 {
+        public String reverseWords(String s) {
+            if (null == s || s.length() == 0) return s;
+
+            char[] ch = s.toCharArray();
+            int n = ch.length;
+
+            reverse(ch, 0, n - 1);
+
+            int l = 0, r = 0;
+            while (l < n && r < n) {
+                while (l < n && ch[l] == ' ') l++;
+                r = l + 1;
+                while (r < n && ch[r] != ' ') r++;
+                reverse(ch, l, r - 1);
+                l = r;
+            }
+
+            return cleanup(ch);
+        }
+
+        private void reverse(char[] ch, int l, int r) {
+            while (l < r) {
+                char temp = ch[l];
+                ch[l] = ch[r];
+                ch[r] = temp;
+                l++;
+                r--;
+            }
+        }
+
+        private String cleanup(char[] ch) {
+            int i = 0, j = 0;
+            int n = ch.length;
+
+            while (j < n) {
+                while (j < n && ch[j] == ' ') j++;
+                while (j < n && ch[j] != ' ') ch[i++] = ch[j++];
+                while (j < n && ch[j] == ' ') j++;
+                if (j < n) ch[i++] = ' ';
+            }
+
+            return new String(ch).substring(0, i);
+        }
+    }
 
     //Time : O(n), Space : O(n)
     public String reverseWords1(String s) {
@@ -145,6 +194,66 @@ public class LE_151_Reverse_Words_In_A_String {
 
                 left++;
                 right--;
+            }
+        }
+    }
+
+    class Solution_Practice {
+        public String reverseWords(String s) {
+            if (null == s || s.length() == 0) return s;
+
+            char[] chars = s.toCharArray();
+            int n = chars.length;
+            reverse(chars, 0, n - 1);
+
+            int i = 0;//runner
+            int j = 0;
+            while (i < n) {
+                /**
+                 * !!!
+                 * In inner while loop, always check if it's "< n"
+                 */
+                while (i < j || i < n && chars[i] == ' ') i++;
+                while (j < i || j < n && chars[j] != ' ') j++;
+                /**
+                 * !!1
+                 * "j - 1"
+                 */
+                reverse(chars, i, j - 1);
+            }
+
+            return cleanup(chars);
+        }
+
+        /**
+         * remove extra spaces
+         */
+        private String cleanup(char[] chars) {
+            int n = chars.length;
+            int i = 0, j = 0;
+
+            while (j < n) {
+                while (j < n && chars[j] == ' ') j++;
+                while (j < n && chars[j] != ' ') chars[i++] = chars[j++];
+                while (j < n && chars[j] == ' ') j++;
+
+                if (j < n) chars[i++] = ' ';
+            }
+
+            /**
+             * !!!
+             * return substring
+             */
+            return new String(chars).substring(0, i);
+        }
+
+        private void reverse(char[] chars, int l, int r) {
+            while (l < r) {
+                char temp = chars[l];
+                chars[l] = chars[r];
+                chars[r] = temp;
+                l++;
+                r--;
             }
         }
     }

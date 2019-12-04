@@ -34,6 +34,48 @@ public class LE_06_ZigZag_Conversion {
      */
 
     /**
+     * 关键：
+     * 1.Use array of StringBuilders, each sb builds the string on each row.
+     * 2.Simulate the process of making the zigzag, first top-down, then bottom up,....
+     *   To do so, use while outer loop and two for inner loops
+     */
+    class Solution_Practice {
+        public String convert(String s, int numRows) {
+            if (s == null || s.length() == 0) return s;
+
+            StringBuilder[] sbs = new StringBuilder[numRows];
+            for (int i = 0; i < numRows; i++) {
+                sbs[i] = new StringBuilder();
+            }
+
+            int i = 0;
+            int n = s.length();
+
+            while (i < n) {
+                /**
+                 *  两个for loop 都要check "i < n"
+                 */
+                for (int j = 0; j < numRows && i < n; j++) {
+                    sbs[j].append(s.charAt(i));
+                    i++;
+                }
+
+                for (int j = numRows - 2; j > 0 && i < n; j--) {
+                    sbs[j].append(s.charAt(i));
+                    i++;
+                }
+            }
+
+            StringBuilder res = new StringBuilder();
+            for (StringBuilder sb : sbs) {
+                res.append(sb.toString());
+            }
+
+            return res.toString();
+        }
+    }
+
+    /**
      * 注意题意要求的输出，之字型走的空格是不用输出的。
      */
     public String convert(String s, int numRows) {

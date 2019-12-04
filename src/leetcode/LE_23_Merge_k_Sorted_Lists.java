@@ -128,7 +128,11 @@ public class  LE_23_Merge_k_Sorted_Lists {
             ListNode cur = dummy;
 
             for (ListNode list : lists) {
-                if (list != null) {//!!!
+                /**
+                 * !!!
+                 * list != null
+                 */
+                if (list != null) {
                     pq.add(list);
                 }
             }

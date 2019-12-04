@@ -274,7 +274,10 @@ public class LE_772_Basic_Calculator_III {
                 }
             }
 
-            q.offer(' ');
+            /**
+             * !!!
+             */
+            q.offer('#');
 
             return helper(q);
         }
