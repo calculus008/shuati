@@ -44,6 +44,55 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
      *                                                           nums[4])         nums[6])
      *                                                          return 0         return 1
      */
+
+    /**
+     * Huahua's version, divide and conquer, recursion
+     */
+    class Solution_Practice_1 {
+        public int findMin(int[] nums) {
+            return helper(nums, 0, nums.length - 1);
+        }
+
+        private int helper(int[] nums, int l, int h) {
+            /**
+             * !!!
+             * "h - l <= 1", "<="
+             */
+            if (h - l <= 1) return Math.min(nums[l], nums[h]);
+
+            if (nums[l] < nums[h]) return nums[l];
+
+            int m = l + (h - l) / 2;
+
+            return Math.min(helper(nums, l, m), helper(nums, m, h));
+        }
+    }
+
+    /**
+     * Binary Search, iterative, with Jiuzhang template
+     */
+    class Solution_Practice_2 {
+        public int findMin(int[] nums) {
+            int l = 0;
+            int h = nums.length - 1;
+
+            while (l + 1 < h) {
+                int m = l + (h - l) / 2;
+
+                if (nums[m] < nums[h]) {
+                    h = m;
+                } else {
+                    l = m;
+                }
+            }
+
+            if (nums[l] > nums[h]) return nums[h];
+
+            return nums[l];
+        }
+    }
+
+
     class Solution {
         public int findMin(int[] nums) {
             return findMin(nums, 0, nums.length - 1);
@@ -69,9 +118,9 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
         }
     }
 
-
-
-
+    /**
+     * Iterative binary search
+     */
     public int findMin(int[] nums) {
         int start = 0;
         int end = nums.length - 1;
@@ -123,4 +172,6 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
             return nums[end];
         }
     }
+
+
 }

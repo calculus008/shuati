@@ -29,3 +29,9 @@ LE_218_The_Sky_Line_Problem                          (****) revisit
 Simple_Queries_With_Two_Arrays
 
 LE_852_Peak_Index_In_A_Mountain_Array
+
+#Rotated Sorted Array
+LE_153_Find_Min_In_Rotated_Sorted_Array             (***)
+LE_154_Find_Min_In_Rotated_Sorted_Array_II
+LE_33_Search_In_Rotated_Sorted_Array                (***)
+LE_81_Search_In_Rotated_Sorted_Array_II
