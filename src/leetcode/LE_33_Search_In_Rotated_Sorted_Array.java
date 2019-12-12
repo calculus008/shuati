@@ -14,6 +14,48 @@ public class LE_33_Search_In_Rotated_Sorted_Array {
         You may assume NO DUPLICATE exists in the array.
      */
 
+    class Solution_Practice {
+        public int search(int[] nums, int target) {
+            if (nums == null || nums.length == 0) return - 1;
+
+            int l = 0, h = nums.length - 1;
+
+            while (l + 1 < h) {
+                int m = l + (h - l) / 2;
+
+                /**
+                 * !!!
+                 * "<="
+                 *
+                 * when calculating m, (h - l) / 2 may be rounded, so it's possible m can be equal to h or l.
+                 * So need to use "<=" here.
+                 */
+                if (nums[m] <= nums[h]) {
+                    /**
+                     * "<="
+                     */
+                    if (nums[m] <= target && target <= nums[h]) {
+                        l = m;
+                    } else {
+                        h = m;
+                    }
+                } else {
+                    if (nums[l] <= target && target <= nums[m]) {
+                        h = m;
+                    } else {
+                        l = m;
+                    }
+                }
+            }
+
+            if (nums[l] == target) return l;
+
+            if (nums[h] == target) return h;
+
+            return -1;
+        }
+    }
+
     public int search(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return -1;

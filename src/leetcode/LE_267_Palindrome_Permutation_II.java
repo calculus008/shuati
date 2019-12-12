@@ -22,7 +22,58 @@ public class LE_267_Palindrome_Permutation_II {
          Medium
      */
 
-    class Solution {
+    class Solution1 {
+        public List<String> generatePalindromes(String s) {
+            List<String> res = new ArrayList<>();
+            if (null == s || s.length() == 0) return res;
+
+            int[] count = new int[256];
+            int odd = 0;
+            for (char c : s.toCharArray()) {
+                count[c]++;
+                if (count[c] % 2 == 1) {
+                    odd++;
+                } else {
+                    odd--;
+                }
+            }
+
+            if (odd > 1) return res;
+
+            String tmp = "";
+            for (int i = 0; i < 256; i++) {
+                if (count[i] % 2 == 1) {
+                    tmp += (char)i;
+                    count[i]--;
+                    break;
+                }
+            }
+
+            helper(res, s.length(), count, tmp);
+
+            return res;
+        }
+
+        private void helper(List<String> res, int n, int[] count, String tmp) {
+            if (tmp.length() == n) {
+                res.add(tmp);
+                return;
+            }
+
+            for (int i = 0; i < 256; i++) {
+                if (count[i] > 0) {
+                    count[i] -= 2;
+                    helper(res, n, count, (char)i + tmp + (char)i);
+                    count[i] += 2;
+                }
+            }
+        }
+    }
+
+    /**
+     * HashMap
+     */
+    class Solution2 {
         public List<String> generatePalindromes(String s) {
             String mid = "";
             List<String> res = new ArrayList<>();
