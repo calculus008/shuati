@@ -193,4 +193,33 @@ public class LE_611_Valid_Triangle_Number {
         }
     }
 
+    /**
+     * 变形题
+     * 给一个array，找能形成的三角形的最小周长
+     */
+    class Solution_1 {
+        public int triangleNumber(int[] nums) {
+            if(nums == null || nums.length < 3) return 0;
+            Arrays.sort(nums);
+            int res = 0;
+
+            for(int i = 0; i < nums.length - 2 ; i++) {
+                if(nums[i] == 0) continue;
+                int j = i + 1, k = i + 2;
+
+                while(k < nums.length && j < k) {
+                    if(nums[i] + nums[j] > nums[k]) {
+                        res = Math.min(res, nums[i] + nums[j] + nums[k]);
+                        k++;
+                    }else {
+                        j++;
+                    }
+                }
+            }
+            return res;
+        }
+    }
+
+
+
 }

@@ -18,6 +18,11 @@ public class LE_49_Group_Anagrams {
           ["bat"]
         ]
         Note: All inputs will be in lower-case.
+
+         变形题：
+         按输入list的顺序，输出所有有anagram关系的string
+         E.g. 输入[cat, taco, ape, tac, game, tcoa, tca]
+         输出[cat, taco, tac, tcoa, tca] //cat和tac和tca为anagram，taco和tcoa为anagram
      */
 
     /**

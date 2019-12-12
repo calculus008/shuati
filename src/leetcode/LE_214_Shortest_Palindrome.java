@@ -44,6 +44,11 @@ public class LE_214_Shortest_Palindrome {
 
         a a c b + a a b c a a =  a a c b a a b c a a
     */
+
+    /**
+     * The key point is to find the longest palindrome starting from the first character,
+     * and then reverse the remaining part as the prefix to s.
+     */
     public String shortestPalindrome(String s) {
         if (s == null || s.length() < 2) return s;
 
