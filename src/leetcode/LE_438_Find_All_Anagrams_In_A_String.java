@@ -194,4 +194,46 @@ public class LE_438_Find_All_Anagrams_In_A_String {
 
         return res;
     }
+
+    class Solution_Practice {
+        public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> res = new ArrayList<>();
+            if (null == s || null == p || s.length() < p.length()) return res;
+
+            int[] count = new int[256];
+            int sl = s.length();
+            int pl = p.length();
+            int sum = 0;
+            for (int i = 0; i < pl; i++) {
+                count[p.charAt(i)]--;
+                count[s.charAt(i)]++;
+            }
+
+            for (int num : count) {
+                sum += Math.abs(num);
+            }
+
+            if (sum == 0) {
+                res.add(0);
+            }
+
+            for (int i = 1; i <= sl - pl; i++) {
+                int l = i - 1;
+                int r = i + pl - 1;
+
+                sum -= (Math.abs(count[s.charAt(l)]) + Math.abs(count[s.charAt(r)]));
+
+                count[s.charAt(l)]--;
+                count[s.charAt(r)]++;
+
+                sum += (Math.abs(count[s.charAt(l)]) + Math.abs(count[s.charAt(r)]));
+
+                if (sum == 0) {
+                    res.add(i);
+                }
+            }
+
+            return res;
+        }
+    }
 }

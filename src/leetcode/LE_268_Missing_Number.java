@@ -20,6 +20,10 @@ public class LE_268_Missing_Number {
          Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?
      */
 
+    /**
+     * Exclusive-OR
+     * Key : use the hidden numbers - the indices of the array
+     */
     public int missingNumber(int[] nums) {
         int res = nums.length;
         for (int i = 0; i < nums.length; i++) {
