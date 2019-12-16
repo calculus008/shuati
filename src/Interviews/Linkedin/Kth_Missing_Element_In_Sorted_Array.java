@@ -24,6 +24,8 @@ public class Kth_Missing_Element_In_Sorted_Array {
      */
 
     /**
+     * LE_1060_Missing_Element_In_Sorted_Array
+     *
      * Solution 1
      * Approach: Start iterating over the array elements, and for every
      * element check if next element is consecutive or not, if not, then

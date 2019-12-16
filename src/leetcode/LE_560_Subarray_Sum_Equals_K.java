@@ -25,7 +25,11 @@ public class LE_560_Subarray_Sum_Equals_K {
     /**
      * http://zxi.mytechroad.com/blog/hashtable/leetcode-560-subarray-sum-equals-k/
      *
-     * Prefix Sum + HashTable
+     * Prefix Sum + HashMap
+     *
+     * HashMap :
+     * key - num
+     * number - Frequency of num
      *
      * Optimized for Time (O(n))
      *

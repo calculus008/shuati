@@ -48,7 +48,6 @@ LE_221_Maximal_Square
 LI_934_Unlock_Problem
 LE_319_Bulb_Switcher
 LE_345_Reverse_Vowels_Of_A_String        (***)
-LE_268_Missing_Number
 
 
 #Anagram
@@ -59,7 +58,7 @@ LE_438_Find_All_Anagrams_In_A_String
 #Tree
 LE_102_Binary_Tree_Level_Order_Traversal
 LE_110_Balanced_Binary_Tree
-LE_112_Path_Sum
+LE_112_Path_Sum         (***)
 LE_235_Lowest_Common_Ancestor_Of_BST
 LE_236_Lowest_Common_Ancestor_Of_BT
 Sum of non-leaf nodes in a tree
@@ -70,9 +69,11 @@ https://www.geeksforgeeks.org/sum-leaf-nodes-binary-tree/
 LE_92_Reverse_LinkedList_II
 LE_206_Reverse_LinkedList
 
+#First Unique                               (***)
 LE_387_First_Unique_Character_In_A_String
 LI_685_First_Unique_Number_In_Stream
 
+#Top K Frequency                            (***)
 LE_347_Top_K_Frequent_Elements
 LE_692_Top_K_Frequent_Words
 LI_550_Top_K_Frequent_Words_II
@@ -82,9 +83,10 @@ LE_17_Letter_Combinations_Of_A_Phone_Number
 
 LE_08_String_To_Integer                     (**)
 LE_20_Valid_Parentheses
-LE_394_Decode_String                        (**)
 LE_200_Number_Of_Islands
 
+#Calulator
+LE_394_Decode_String                        (**)
 LE_224_Basic_Calculator
 (Sum of number in a string (eg. a107b7hdgjdhgjd8 => 107 + 7 + 8 = 122))
 
@@ -96,27 +98,30 @@ LE_287_Find_The_Duplicate_Number             (***)
 #Binary Search
 LE_33_Search_In_Rotated_Sorted_Array
 LE_81_Search_In_Rotated_Sorted_Array_II
+
+#Missing Numnber
 LE_41_First_Missing_Positive
-Find missing element in a sorted array of consecutive numbers  (***)
-https://www.geeksforgeeks.org/find-missing-element-in-a-sorted-array-of-consecutive-numbers/
+LE_268_Missing_Number
+LE_1060_Missing_Element_In_Sorted_Array     (***)
+FirstMissingNumberInSortedArray
 
 #Merge Intervals
 LE_56_Merge_Intervals
 LE_352_Data_Stream_As_Disjoint_Intervals
 
+LE_560_Subarray_Sum_Equals_K   (***)
+
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars   (***)
+
+====================================================================
+
 Merge unsorted linked list
-https://stackoverflow.com/questions/5431672/merging-two-unsorted-singly-linked-lists
+https://www.geeksforgeeks.org/merging-two-unsorted-arrays-sorted-order/
 
 QuikSort
 
-LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars   (***)
-Subarray with at most k distinct character
-https://aaronice.gitbooks.io/lintcode/content/two_pointers/longest_substring_with_at_most_k_distinct_characters.html
-https://zhengyang2015.gitbooks.io/lintcode/longest_substring_with_at_most_k_distinct_characte.html
-
-
 找到包含不重复单词的最长sequence
-举个例子 List<String> words: cars, turtles, cats, rats, dogs, rabitts,
+举个例子 List<String> words: cats, turtles, cats, rats, dogs, rabitts,
 要求返回 List<String> 例子要返回turtles, cats, rats, dogs, rabitts,...
 因为第一个单词和第三个单词都是cats，所以要把第一个cats丢掉
 写的代码用的for loop里套while loop，双指针加set。
@@ -126,8 +131,6 @@ https://zhengyang2015.gitbooks.io/lintcode/longest_substring_with_at_most_k_dist
 Singleton :
 Builder: https://www.geeksforgeeks.org/builder-pattern-in-java/
          https://howtodoinjava.com/design-patterns/creational/builder-pattern-in-java/
-
-
 
 
 第一轮：
@@ -183,7 +186,8 @@ internal nodes 定义， 就是周围必须有node包裹
 LE_07_Reverse_Integer
 
 
-经理轮： 过一下简历和项目细节，讲一下 CAP 理论，TCP 的 flow control，consistency hash， 了解不了解 Mesos Kubernetes 这些。见一下 DS 里 Mutex 实现的几种方式，Paxos 和 Raft，灾难恢复怎么做。对 Container 的了解。
+经理轮：
+过一下简历和项目细节，讲一下 CAP 理论，TCP 的 flow control，consistency hash， 了解不了解 Mesos Kubernetes 这些。见一下 DS 里 Mutex 实现的几种方式，Paxos 和 Raft，灾难恢复怎么做。对 Container 的了解。
 第一轮：很简单的题，忘记了。然后是 Tiny URL。Two Phase Commit 实现，Strong/Causal/Weak consistency 所代表的意义，用数据库举例说明。给了一个场景，设计一个 cloud autoscaling 的 policy。
 第二轮：旋转过的数组里找目标数字，找和最大的连续子数组。问一下 Linux ACL 的东西，Linux 中 SIGTERM 和 SKIGKILL 的区别。说一下常见的 Unix error code，比如 1， 137 这些。Docker 的东西。
 第三轮：给颗树节点，找从根到节点的路径。讲一下对 golang 协程的理解，对比 thread 的优劣。实现线程安全的单例模式。实现一个 go 的 RPC 调用。 继续是 docker，container的东西....
@@ -258,12 +262,15 @@ java重写 equal；很大的list返回sum，如何优化，楼主答得是mapred
 SQL
 第一个就是找最大，然后第二个是什么找某个条件下倒序前几个最大的。
 
-电面：算法是数组里找subarray和为0.  平时用的design pattern，问了几种情景该用什么pattern，然后让写了一个builder pattern，写了几行代码问怎么unit test，java 8，"abc" new String("abc")区别，简单说了下restapi。
+电面：
+LE_560_Subarray_Sum_Equals_K   (***)
+算法是数组里找subarray和为0.  平时用的design pattern，问了几种情景该用什么pattern，然后让写了一个builder pattern，写了几行代码问怎么unit test，java 8，"abc" new String("abc")区别，简单说了下restapi。
 
-onsite 1 实现heap，social network里好友距离多少跳
-2. 设计order后端，number of island，设计vending machine
-3. LRU，设计KV store
-4. 一些基础知识，一个sql，算法string to int，file里出现最多次数单词
+onsite
+1 实现heap，social network里好友距离多少跳
+2 设计order后端，number of island，设计vending machine
+3.LRU，设计KV store
+4.一些基础知识，一个sql，算法string to int，file里出现最多次数单词
 
 然后问了一道OOD设计题，如何设计一个RESTful架构的vending machine，可惜之前没好好准备，想的复杂了，答得一塌糊涂，事后查了一下才知道思路还挺简单的。
 https://github.com/HuascarMC/vending-machine-server

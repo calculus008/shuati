@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -26,6 +28,44 @@ public class LE_394_Decode_String {
 
          Medium
      */
+
+    /**
+     * Preferred solution
+     *
+     * Queue + Recursion
+     *
+     * Same algorithm as LE_772_Basic_Calculator_III
+     */
+    class Solution {
+        public String decodeString(String s) {
+            Deque<Character> queue = new LinkedList<>();
+            for (char c : s.toCharArray()) queue.offer(c);
+            return helper(queue);
+        }
+
+        public String helper(Deque<Character> queue) {
+            StringBuilder sb = new StringBuilder();
+            int num = 0;
+            while (!queue.isEmpty()) {
+                char c= queue.poll();
+                if (Character.isDigit(c)) {
+                    num = num * 10 + c - '0';
+                } else if (c == '[') {
+                    String sub = helper(queue);
+                    for (int i = 0; i < num; i++) {
+                        sb.append(sub);
+                    }
+                    num = 0;
+                } else if (c == ']') {
+                    break;
+                } else {
+                    sb.append(c);
+                }
+            }
+            return sb.toString();
+        }
+    }
+
 
     /**
      * Solution 1 : Stack

@@ -72,6 +72,44 @@ public class LE_387_First_Unique_Character_In_A_String {
     }
 
     /**
+     * 1。利用LinkedHashMap的特性，它保留元素的插入顺序。如果当前char已经出现过，则从
+     * map中删掉。
+     * 2。为什么要用set? 当char出现第二次时，已经被从map中删除，如果char出现第三次，单从map看，我们无法
+     * 知道它是否出现过。所以要用set记录出现过的chars.
+     * 3。最后，如果map为空，则所有char都重复出现过，返回-1.
+     *    如果map不为空，则其iterator返回的第一个元素为答案。
+     *
+     *
+     * One pass solution 可以用于对该问题on-line version的求解。这个解法不算最优，最优解法参照
+     * LI_685_First_Unique_Number_In_Stream 中的Solution2.
+     *
+     * 实际上使用double linkedlist和set保存unique和repeated chars. 如果不要求自己实现double linkedlist,
+     * 可以用LinkedHashSet (实际上这里并不需要用LinkedHashMap保存下标）。
+     *
+     * 这样，并不需要每次都做 set.add().
+     */
+    class Solution2_Practice {
+        public int firstUniqChar(String s) {
+            Map<Character, Integer> map = new LinkedHashMap<>();
+            Set<Character> set = new HashSet<>();
+
+            char[] ch = s.toCharArray();
+            for (int i = 0; i < ch.length; i++) {
+                char c = ch[i];
+                if (!set.add(c)) {
+                    if (map.containsKey(c)) {
+                        map.remove(c);
+                    }
+                } else {
+                    map.put(c, i);
+                }
+            }
+
+            return map.size() == 0 ? -1 : map.entrySet().iterator().next().getValue();
+        }
+    }
+
+    /**
      * One pass with array
      *
      * Time wise, better than the Solution1, we just need to scan input String once
@@ -114,6 +152,9 @@ public class LE_387_First_Unique_Character_In_A_String {
      * Space : O(1),
      *
      * Optimized for space.
+     *
+     * fast pointer keeps moving and updates count[]
+     * slow pointer moves only when encounter repeated char.
      */
     class Solution4 {
         public int firstUniqChar(String s) {
