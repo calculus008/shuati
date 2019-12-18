@@ -28,6 +28,8 @@ public class LE_03_Longest_Substring_Without_Repeating_Characters {
          Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
          Median
+
+         变形题  LongestSubsequenceWithoutRepeatingWord
      */
 
     /**

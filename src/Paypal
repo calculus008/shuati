@@ -102,7 +102,7 @@ LE_81_Search_In_Rotated_Sorted_Array_II
 #Missing Numnber
 LE_41_First_Missing_Positive
 LE_268_Missing_Number
-LE_1060_Missing_Element_In_Sorted_Array     (***)
+LE_1060_Missing_Element_In_Sorted_Array                  (***)
 FirstMissingNumberInSortedArray
 
 #Merge Intervals
@@ -112,6 +112,16 @@ LE_352_Data_Stream_As_Disjoint_Intervals
 LE_560_Subarray_Sum_Equals_K   (***)
 
 LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars   (***)
+
+#Searialze/Deserialize Tree
+LE_297_Serialize_And_Deserialize_Binary_Tree
+LE_449_Serialize_And_Deserialize_BST
+LE_331_Verify_Preorder_Serialization_Of_A_Binary_Tree
+LE_428_Serialize_And_Deserialize_Nary_Tree
+
+LI_486_Merge_K_Sorted_Arrays
+LE_23_Merge_k_Sorted_Lists
+
 
 ====================================================================
 
@@ -174,6 +184,7 @@ Java基础比如HashMap，HashTable和ConcurrentHashMap的区别
 internal nodes 定义， 就是周围必须有node包裹
 用了 bfs，root 和 最后一层肯定都不是，
 中间层，除了第一个和最后一个，中间的要是没有child就是internal nodes了
+https://www.geeksforgeeks.org/print-all-internal-nodes-of-a-binary-tree/
 
 1. 序列反序列树 要求写testcase
 2. mapreduce 是什么

@@ -35,6 +35,25 @@ public class LE_238_Product_Of_Array_Except_Self {
 
      Time and Space : O(n), if output space is not counted, it is space O(1)
      */
+
+    /**
+     * Given numbers [2, 3, 4, 5], regarding the third number 4, the product of array except 4 is 2*3*5
+     * which consists of two parts: left 2*3 and right 5. The product is left*right.
+     *
+     * We can get lefts and rights:
+     *
+     * Numbers:     2    3    4     5
+     * Lefts:            2  2*3 2*3*4
+     * Rights:  3*4*5  4*5    5
+     *
+     * Let’s fill the empty with 1:
+     *
+     * Numbers:     2    3    4     5
+     * Lefts:       1    2  2*3 2*3*4
+     * Rights:  3*4*5  4*5    5     1
+     *
+     * We can calculate lefts and rights in 2 loops. The time complexity is O(n).
+     */
     public int[] productExceptSelf(int[] nums) {
         if (nums == null || nums.length == 0) return nums;
 
