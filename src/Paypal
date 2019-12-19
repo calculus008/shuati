@@ -122,6 +122,9 @@ LE_428_Serialize_And_Deserialize_Nary_Tree
 LI_486_Merge_K_Sorted_Arrays
 LE_23_Merge_k_Sorted_Lists
 
+462. Minimum Moves to Equal Array Elements II
+453. Minimum Moves to Equal Array Elements
+
 
 ====================================================================
 
@@ -212,6 +215,8 @@ SOA和microservices
 给一个数组，每次将组内除1个元素外的所有元素+1，求需要多少次(长整形)使得数组内所有元素相等？
 * 例1:[5,6,8,8,5] -> [6,7,9,8,6] -> [7,8,9,9,7] ... -> [11,11,12,11,11] -> [12,12,12,12,12] 共7次
 * 例2:[2,2,2] 0次
+462. Minimum Moves to Equal Array Elements II
+LE_453_Minimum_Moves_To_Equal_Array_Elements
 
 
 【第二题】
