@@ -152,6 +152,7 @@ public class GraphQuesitons {
         int d = 0;
         Queue<Integer> q = new LinkedList<>();
         q.offer(v);
+        Set<Integer> set = new HashSet<>();
 
         while (!q.isEmpty()) {
             d++;
@@ -159,6 +160,9 @@ public class GraphQuesitons {
 
             for (int i = 0; i < size; i++) {
                 int cur = q.poll();
+                if (set.contains(cur)) continue;
+
+                set.add(cur);
 
                 if (map.get(cur).size() == 0) {
                     if (max < d) {
