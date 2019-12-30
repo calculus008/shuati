@@ -255,4 +255,51 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
             return left;
         }
     }
+
+    /**
+     * Binary Search Solution based on the same algorithm of LE_668_Kth_Smallest_Number_In_Multiplication_Table
+     *
+     * Same as Solution3
+     */
+    public class Solution {
+        public int kthSmallest(int[][] matrix, int k) {
+            int m = matrix.length;
+            int n = matrix[0].length;
+
+            int l = matrix[0][0];
+            int r = matrix[m - 1][n - 1];
+
+            while (l < r) {
+                int mid = l + (r - l) / 2;
+                if (count(matrix, k, mid)) {
+                    r = mid;
+                } else {
+                    l = mid + 1;
+                }
+            }
+
+            return l;
+        }
+
+        private boolean count(int[][] matrix, int k, int x) {
+            int n = matrix[0].length;
+            int m = matrix.length;
+            int count = 0;
+
+            for (int i = 0; i < m; i++) {
+                int j = n - 1;
+                while (j >= 0 && matrix[i][j] > x) {
+                    j--;
+                }
+                count += j + 1;
+
+
+                if (count >= k) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
 }

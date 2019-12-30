@@ -34,6 +34,34 @@ public class LE_668_Kth_Smallest_Number_In_Multiplication_Table {
          The k will be in the range [1, m * n]
      */
 
+    class Solution_Pratice {
+        public int findKthNumber(int m, int n, int k) {
+            int l = 1;
+            int r = m * n + 1;
+
+            while (l < r) {
+                int mid = l + (r - l) / 2;
+                if (hasK(m, n, mid, k)) {
+                    r = mid;
+                } else {
+                    l = mid + 1;
+                }
+            }
+
+            return l;
+        }
+
+        private boolean hasK(int m, int n, int x, int k) {
+            int count = 0;
+            for (int i = 1; i <= m; i++) {
+                count += Math.min(x / i, n);
+
+                if (count >= k) return true;
+            }
+
+            return false;
+        }
+    }
     /**
      * https://zxi.mytechroad.com/blog/algorithms/binary-search/leetcode-668-kth-smallest-number-in-multiplication-table/
      *

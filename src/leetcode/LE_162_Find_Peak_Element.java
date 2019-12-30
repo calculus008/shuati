@@ -16,6 +16,25 @@ public class LE_162_Find_Peak_Element {
         For example, in array [1, 2, 3, 1], 3 is a peak element and your function should return the index number 2.
      */
 
+    class Solution1 {
+        public int findPeakElement(int[] nums) {
+            int l = 0;
+            int h = nums.length - 1;
+
+            while (l < h) {
+                int m = l + (h - l) / 2;
+
+                if (nums[m] > nums[m + 1]) {
+                    h = m;
+                } else {
+                    l = m + 1;
+                }
+            }
+
+            return l;
+        }
+    }
+
     //Time : O(logn), Space : O(1)
     public int findPeakElement(int[] nums) {
         int start = 0;

@@ -3,7 +3,7 @@ package leetcode;
 public class LE_633_Sum_Of_Square_Numbers {
     /**
      * Given a non-negative integer c, your task is to decide whether
-     * there're two integers a and b such that a2 + b2 = c.
+     * there're two integers a and b such that a^2 + b^2 = c.
      *
      * Example 1:
      *
