@@ -152,6 +152,43 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
     }
 
     /**
+     * Use int[] instead of Node object in pq
+     * In the updated description, size of matrix is n * n.
+     */
+    public class Solution2_Pratice {
+        public int kthSmallest(int[][] matrix, int k) {
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> matrix[a[0]][a[1]] - matrix[b[0]][b[1]]);
+
+            int n = matrix.length;
+            int[][] dirs = {{1, 0}, {0, 1}};
+            boolean[][] visited = new boolean[n][n];
+
+            pq.offer(new int[]{0, 0});
+
+            while (k-- > 1 && !pq.isEmpty()) {
+                int[] cur = pq.poll();
+
+                for (int[] dir : dirs) {
+                    int x = cur[0] + dir[0];
+                    int y = cur[1] + dir[1];
+
+                    /**
+                     * !!!
+                     * Whenever use dirs moving around, MUST check boundary conditions!!!
+                     */
+                    if (x < 0 || x >= n || y < 0 || y >= n || visited[x][y]) continue;
+
+                    pq.offer(new int[]{x, y});
+                    visited[x][y] = true;
+                }
+            }
+
+            int[] res = pq.peek();
+            return matrix[res[0]][res[1]];
+        }
+    }
+
+    /**
      * Solution 3
      * Binary Search
      * https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
@@ -267,7 +304,7 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
             int n = matrix[0].length;
 
             int l = matrix[0][0];
-            int r = matrix[m - 1][n - 1];
+            int r = matrix[m - 1][n - 1];// matrix[m - 1][n - 1] + 1 also works
 
             while (l < r) {
                 int mid = l + (r - l) / 2;
@@ -293,7 +330,10 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
                 }
                 count += j + 1;
 
-
+                /**
+                 * !!!
+                 * ">= k"
+                 */
                 if (count >= k) {
                     return true;
                 }

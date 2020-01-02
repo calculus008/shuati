@@ -311,6 +311,7 @@ LE_692_Top_K_Frequent_Words                               (lint 471)
 LE_460_LFU_Cache                                          (lint 24)
 LE_173_Binary_Search_Tree_Iterator
 LE_284_Peeking_Iterator
+LE_604_Design_Compressed_String_Iterator
 
 #Design Questions
 LE_146_LRU_Cache

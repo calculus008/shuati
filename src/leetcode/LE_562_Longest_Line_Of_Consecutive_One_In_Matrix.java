@@ -45,7 +45,9 @@ public class LE_562_Longest_Line_Of_Consecutive_One_In_Matrix {
                     continue;
                 }
 
-                for (int k = 0; k < 4; k++) table[i][j][k] = 1;
+                for (int k = 0; k < 4; k++) {
+                    table[i][j][k] = 1;
+                }
 
                 if (j > 0) {//horizontal
                     table[i][j][0] += table[i][j - 1][0];

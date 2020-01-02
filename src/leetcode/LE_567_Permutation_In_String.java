@@ -23,13 +23,97 @@ public class LE_567_Permutation_In_String {
      The input strings only contain lower case letters.
      The length of both given strings is in range [1, 10,000].
 
-     Same as LE_438_Find_All_Anagrams_In_A_String
+     !!! Same as LE_438_Find_All_Anagrams_In_A_String
 
      Medium
      */
 
     /**
-     * Best Solution
+     * Time : O(l1 + (l2 - l1) * 26), for every sliding window position, "Arrays.equals(map1, map2)" need to
+     * iterate through map, which has size 26, so it's constant.
+     */
+    class Solution1 {
+        public boolean checkInclusion(String s1, String s2) {
+            if (null == s1 || null == s2) return false;
+
+            int l1 = s1.length();
+            int l2 = s2.length();
+
+            if (l2 < l1) return false;
+
+            int[] map1 = new int[26];
+            int[] map2 = new int[26];
+
+            for (char c : s1.toCharArray()) {
+                map1[c - 'a']++;
+            }
+
+            char[] chars = s2.toCharArray();
+            for (int i = 0; i < l2; i++) {
+                if (i >= l1) {
+                    map2[chars[i - l1] - 'a']--;
+                }
+
+                map2[chars[i] - 'a']++;
+
+                if (Arrays.equals(map1, map2)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Time : O(l1 + l2)
+     */
+    class Solution2 {
+        public boolean checkInclusion(String s1, String s2) {
+            if (null == s1 || null == s2) return false;
+
+            int l1 = s1.length();
+            int l2 = s2.length();
+
+            if (l2 < l1) return false;
+
+            char[] chs1 = s1.toCharArray();
+            char[] chs2 = s2.toCharArray();
+
+            int[] map = new int[26];
+
+            int sum = 0;
+            for (int i = 0; i < l1; i++) {
+                map[chs1[i] - 'a']--;
+                map[chs2[i] - 'a']++;
+            }
+
+            for (int n : map) {
+                sum += Math.abs(n);
+            }
+
+            if (sum == 0) return true;
+
+            for (int i = l1; i < l2; i++) {
+                int idx1 = chs2[i - l1] - 'a';
+                int idx2 = chs2[i] - 'a';
+
+                sum -= (Math.abs(map[idx1]) + Math.abs(map[idx2]));
+
+                map[idx1]--;
+                map[idx2]++;
+
+                sum += (Math.abs(map[idx1]) + Math.abs(map[idx2]));
+
+                if (sum == 0) return true;
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Best Solution for LE_438_Find_All_Anagrams_In_A_String
      *
      * Sliding Window and no need to iterate through map to compare if two arrays are identical
      */

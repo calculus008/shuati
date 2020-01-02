@@ -68,6 +68,31 @@ public class LE_560_Subarray_Sum_Equals_K {
         return result;
     }
 
+    public int subarraySum1_1(int[] nums, int k) {
+        int sum = 0;
+        int res = 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+        /**
+         * deal with case the subarray starting from 0, with this entry in map,
+         * no need to do "if (sum == k)"
+         */
+        map.put(0, 1);
+
+        for (int num : nums) {
+            sum += num;
+
+            if (map.containsKey(sum - k)) {
+                res += map.get(sum -k);
+            }
+
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+
+        return res;
+    }
+
+
     /**
      * Can be in followup question, how to make it work with constant space.
      *
@@ -102,7 +127,7 @@ public class LE_560_Subarray_Sum_Equals_K {
 
         /**
          * Use padded sum array, so we don't need to
-         * deal subarray sum starting from index 0 separately
+         * deal with the case subarray sum starting from index 0 separately
          */
         int[] sum = new int[nums.length + 1];
         sum[0] = 0;
