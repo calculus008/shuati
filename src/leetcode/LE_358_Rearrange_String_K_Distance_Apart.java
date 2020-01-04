@@ -1,6 +1,9 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class LE_358_Rearrange_String_K_Distance_Apart {
     /**
@@ -42,6 +45,49 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
      *
      * Time : O(n)
      */
+
+    class Solution1_Practice {
+        public String rearrangeString(String s, int k) {
+            if (k == 0 || null == s || s.length() < k) return s;
+
+            int n = s.length();
+            int[] count = new int[26];
+            int[] pos = new int[26];
+
+            char[] chs = s.toCharArray();
+            for (char c : chs) {
+                count[c - 'a']++;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < n; i++) {
+                int next = getNext(count, pos, i);
+                if (next == -1) return "";
+
+                sb.append((char)(next + 'a'));
+                /**
+                 * !!!
+                 */
+                count[next]--;
+                pos[next] = i + k;
+            }
+            return sb.toString();
+        }
+
+        private int getNext(int[] count, int[] pos, int idx) {
+            int next = -1;
+            int max = 0;
+
+            for (int i = 0; i < 26; i++) {
+                if (count[i] > max && pos[i] <= idx) {
+                    next = i;
+                    max = count[i];
+                }
+            }
+            return next;
+        }
+    }
+
     public class Solution1 {
         public String rearrangeString(String str, int k) {
             int length = str.length();
@@ -142,6 +188,91 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
             }
 
             return res;
+        }
+    }
+
+    /**
+     * PriorityQueue Solution, easier to understand.
+     * "Every time we want to find the best candidate: which is the character with
+     * the largest remaining count." --> use PriorityQueue
+     *
+     * Time : O(n), since size of the heap is bounded by 26, so it is constant.
+     */
+    class Solution3 {
+        public String rearrangeString(String s, int k) {
+            if (k == 0 || null == s || s.length() < k) return s;
+
+            int[] count = new int[26];
+
+            char[] chs = s.toCharArray();
+            for (char c : chs) {
+                count[c - 'a']++;
+            }
+
+            /**
+             * Entity saved in pq:
+             * First element  : int, offset of char from 'a'
+             * Second element : frequency of the char.
+             *
+             * So in pq, if frequency is different, sort by frequency, bigger value first (it is a max heap),
+             * if frequency is the same, sort by alphabetic order.
+             */
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] != b[1] ? b[1] - a[1] : a[0] - b[0]);
+
+            /**
+             * max heap, size is bounded by 26 (lower case letters)
+             */
+            for (int i = 0; i < 26; i++) {
+                if (count[i] > 0) {
+                    pq.offer(new int[]{i, count[i]});
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            while (!pq.isEmpty()) {
+                /**
+                 * remember what k chars are used in the next for loop,
+                 * then add them back to heap if necessary
+                 */
+                List<Integer> used = new ArrayList<>();
+
+                /**
+                 * iterate k time, every time get a char from heap,
+                 * this makes sure we have unique char for each
+                 * iteration to fill k positions.
+                 */
+                for (int i = 0; i < k; i++) {
+                    if (pq.isEmpty()) {
+                        /**
+                         * run out of char for current k loop,
+                         * so we can't have result as expected
+                         */
+                        if (sb.length() < s.length()) {
+                            return "";
+                        } else {
+                            break;
+                        }
+                    }
+
+                    int[] cur = pq.poll();
+                    sb.append((char)('a' + cur[0]));
+                    used.add(cur[0]);
+                }
+
+                for (int j : used) {
+                    /**
+                     * char is used, decrease its frequency, if it is not 0,
+                     * add back to heap
+                     */
+                    count[j]--;
+                    if (count[j] > 0) {
+                        pq.offer(new int[]{j, count[j]});
+                    }
+                }
+            }
+
+            return sb.toString();
         }
     }
 }

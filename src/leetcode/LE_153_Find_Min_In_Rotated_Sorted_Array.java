@@ -46,6 +46,30 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
      */
 
     /**
+     * Binary Search solution using Huahua's template
+     */
+    class solution {
+        public int findmin(int[] nums) {
+            int l = 0;
+            int h = nums.length - 1;
+
+            while (l < h) {
+                int m = l + (h - l) / 2;
+
+                if (nums[m] < nums[h]) {
+                    h = m;
+                } else {
+                    l = m + 1;
+                }
+            }
+
+            // if (nums[l] > nums[h]) return nums[h];
+
+            return nums[l];
+        }
+    }
+
+    /**
      * Huahua's version, divide and conquer, recursion
      */
     class Solution_Practice_1 {
