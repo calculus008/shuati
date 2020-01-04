@@ -30,6 +30,24 @@ public class LE_413_Arithmetic_Slices {
      * return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
      */
 
+    /**
+     * 等差数列长度 >= 3的个数
+     *
+     * 1 2 3  ： 1
+     *
+     * 1 2 3 4 ： 1 + 2 （ 1 2 3， 1 2 3 4）
+     *
+     * 1 2 3 4 5 ： 1 + 2 + 3  （3 4 5， 2 3 4 5， 1 2 3 4 5）
+     *
+     * ......
+     *
+     * 所以在长度为n的等差数列中，长度 >= 3的等差数列的个数：
+     *
+     * 1 + 2 + 3 .... + n = n * (n + 1) / 2
+     *
+     * Variation : ValidSubarray
+     */
+
     class Solution {
         public int numberOfArithmeticSlices(int[] A) {
             if (null == A || A.length < 3) return 0;
@@ -37,9 +55,16 @@ public class LE_413_Arithmetic_Slices {
             int res = 0;
             int count = 0;
 
+            /**
+             * !!!
+             * 我们需要往回看两个前面相邻的元素，所以从i=2开始循环
+             */
             for (int i = 2; i < A.length; i++) {
                 if (A[i] - A[i - 1] == A[i - 1] - A[i - 2]) {
                     count++;
+                    /**
+                     * 1 + 2 + 3....
+                     */
                     res += count;
                 } else {
                     count = 0;
