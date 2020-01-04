@@ -4,7 +4,8 @@ LE_28_Implementing_Strstr
 LE_125_Valid_Palindrome
 LI_627_LongestPalindrome
 
-LE_516_Longest_Palindromic_SubsequenceLI_625_Partition_Array_II
+LE_516_Longest_Palindromic_Subsequence
+LI_625_Partition_Array_II
 LI_841_String_Replace
 LI_594_StrStr_2 (O(n+m))
 
@@ -16,13 +17,12 @@ LE_81_Search_In_Rotated_Sorted_Array_II
 LE_278_First_Bad_Version                     (lint 74)
 LE_153_Find_Min_In_Rotated_Sorted_Array
 LE_154_Find_Min_In_Rotated_Sorted_Array_II
-LE_278_First_Bad_Version                     (lint 74)
 LE_162_Find_Peak_Element                     (lint 75)
-LE_658_Find_K_Closest_Elements               (lint 460)  (****)
+LE_658_Find_K_Closest_Elements 8              (lint 460)  (****)
 LI_585_Maximum_Number_In_Mountain_Sequence
-LI_458_Last_Position_Of_Target
+LI_458_Last_Position_Of_Target9
 LI_447_Search_In_A_Big_Sorted_Array          (**)
-LE_633_Sum_Of_Square_Numbers
+LE_633_Sum_Of_Square_Numbers                 (***)
 
 #Upper/Lower Bound
 Simple_Queries_With_Two_Arrays
@@ -44,7 +44,10 @@ LE_34_Search_For_A_Range                     (lint 61)
 LE_29_Divide_Two_Integers                    (lint 414)   (***)
 
 #Binary Search on Values
+LE_410_Split_Array_Largest_Sum                            (***)
+LE_643_Maximum_Average_Subarray_I
 LE_644_Maximum_Average_Subarray_II           (lint 617)   (****)
+
 LI_183_Wood_Cut
 LI_437_Copy_Books
 
@@ -292,6 +295,10 @@ LE_128_Longest_Consecutive_Sequence                       (lint 124)
 
 LE_946_Validate_Stack_Sequences
 
+#mono stack
+LE_239_Sliding_Window_Maximum
+LE_739_Daily_Temperatures
+
 #Iterators
 LE_251_Flatten_2D_Vector                                  (lint 601)
 LE_281_Zigzag_Iterator                                    (lint 540)
@@ -304,6 +311,7 @@ LE_692_Top_K_Frequent_Words                               (lint 471)
 LE_460_LFU_Cache                                          (lint 24)
 LE_173_Binary_Search_Tree_Iterator
 LE_284_Peeking_Iterator
+LE_604_Design_Compressed_String_Iterator
 
 #Design Questions
 LE_146_LRU_Cache
@@ -334,6 +342,7 @@ LE_438_Find_All_Anagrams_In_A_String
 LI_647_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
 LE_643_Maximum_Average_Subarray_I
+LE_424_Longest_Repeating_Character_Replacement
 
 ====================================================
 
@@ -668,7 +677,7 @@ LE_382_Linked_List_Random_Node
 #Mono Stack
 LE_1019_Next_Greater_Node_In_Linked_List
 LE_901_Online_Stock_Span
-739. Daily Temperatures
+LE_739_Daily_Temperatures
 
 #Array and String
 LE_55_Jump_Game

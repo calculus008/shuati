@@ -41,7 +41,20 @@ public class LE_410_Split_Array_Largest_Sum {
      * Solution 1
      * DP
      * Similar to LE_813_Largest_Sum_Of_Averages
+     *
      * dp[i][j] : sub problem answer for the first j elements and they are divided into i groups
+     *
+     * [0, ....., k, k + 1, ...., n - 1]
+     *  |_________|    |____________|
+     *    sub problem    sum(a[k + 1]..a[n - 1])
+     *  split a[0] to a[k]    |
+     *  into m -  groups      |
+     *       |________________|
+     *              |
+     *             max()
+     *              |
+     *             min()
+     *
      * Transition - 找分割点:
      *  dp[i][j] = min(max(dp[i - 1][k], sum(k + 1, j)))
      * init:
@@ -68,8 +81,8 @@ public class LE_410_Split_Array_Largest_Sum {
                 dp[1][i] = sums[i];
             }
 
-            for (int i = 2; i <= m; i++) {
-                for (int j = i; j <= n; j++) {
+            for (int i = 2; i <= m; i++) {//elements
+                for (int j = i; j <= n; j++) {//groups
                     for (int k = i - 1; k < j; k++) {
                         dp[i][j] = Math.min(dp[i][j], Math.max(dp[i - 1][k], sums[j] - sums[k]));
                     }

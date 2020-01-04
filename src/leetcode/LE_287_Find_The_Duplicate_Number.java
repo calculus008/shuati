@@ -20,7 +20,11 @@ public class LE_287_Find_The_Duplicate_Number {
         Medium
      */
 
-    //Important
+    /**
+     * Important
+     * 关键是要求both space O(1)
+     */
+
 
     /**
      * This one works, but it needs Space O(n).So it does not meet the requirement for space O(n)
@@ -140,41 +144,76 @@ public class LE_287_Find_The_Duplicate_Number {
      * 因此可以证明，斜率超过1 的折线只会出现1次，且会将折线整体带上 y=x 这条虚线的上方。(!!!)因此第一个在 y=x 上方的 x 点，就是我们要找的重复的数。
      *
      */
-    public int findDuplicate(int[] nums) {
-        /**
-         * !!!
-         * l = 1, earch range 1 ~ n
-         */
-        int l = 1;
-        int r = nums.length - 1;  // n
+    class Solution_Jiuzhang {
+        public int findDuplicate(int[] nums) {
+            /**
+             * !!!
+             * l = 1, earch range 1 ~ n
+             */
+            int l = 1;
+            int r = nums.length - 1;  // n
 
-        while (l + 1 < r) {
-            int mid = l + (r - l) / 2;
-            if (count(nums, mid) <= mid) {
-                l = mid;
-            } else {
-                r = mid;
+            while (l + 1 < r) {
+                int mid = l + (r - l) / 2;
+                if (count(nums, mid) <= mid) {
+                    l = mid;
+                } else {
+                    r = mid;
+                }
             }
+
+            /**
+             * return r or l, NOT nums[r] or nums[l],
+             * here l and r are number of elements in nums
+             * that are smaller than a certain index number.
+             */
+            if (count(nums, l) <= l) {
+                return r;
+            }
+            return l;
         }
 
-        /**
-         * return r or l, NOT nums[r] or nums[l],
-         * here l and r are number of elements in nums
-         * that are smaller than a certain index number.
-         */
-        if (count(nums, l) <= l) {
-            return r;
+        private int count(int[] nums, int mid) {
+            int cnt = 0;
+            for (int item : nums) {
+                if (item <= mid) {
+                    cnt++;
+                }
+            }
+            return cnt;
         }
-        return l;
     }
 
-    private int count(int[] nums, int mid) {
-        int cnt = 0;
-        for (int item : nums) {
-            if (item <= mid) {
-                cnt++;
+
+    /**
+     * use huahua's binary search template
+     */
+    class Solution_Jiuzhang_1 {
+        public int findDuplicate(int[] nums) {
+            int n = nums.length;
+            int l = 0;
+            int r = n - 1;
+
+            while (l < r) {
+                int m = l + (r - l) / 2;
+                if (count(nums, m) <= m) {
+                    l = m + 1;
+                } else {
+                    r = m;
+                }
             }
+
+            return l;
         }
-        return cnt;
+
+        private int count(int[] nums, int m) {
+            int count = 0;
+            for (int num : nums) {
+                if (num <= m) {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }

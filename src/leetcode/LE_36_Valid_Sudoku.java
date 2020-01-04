@@ -30,16 +30,27 @@ public class LE_36_Valid_Sudoku {
         Ie 0,0 is start of first block, second block is 0,3 (not 0,1);
         Similarly, to move to next block vertically, use / and multiply by 3 as explained above.
 
-        Form the STARTING row and column index for each sub block
+        1.Form the STARTING row and column index for each sub block (A)
          i        0 1 2 3 4 5 6 7 8
          3*(i/3)  0 0 0 3 3 3 6 6 6 row
          3*(i%3)  0 3 6 0 3 6 0 3 6 column
 
-        Form the row and column in each sub block
+         so use pair of row and column above, we get the start point (left upper corner) of each sub-square:
+         (0, 0), (0, 3), (0, 6),
+         (3, 0), (3, 3), (3, 6),
+         (6, 0), (6, 3), (6, 6)
+
+        2.Form the row and column delta in each sub block (B)
          j     0 1 2 3 4 5 6 7 8
          j/3   0 0 0 1 1 1 2 2 2  row
          j%3   0 1 2 0 1 2 0 1 2  column
 
+         Add the following delta to the starting coordinates in #1:
+         (0, 0), (0, 1), (0, 2)
+         (1, 0), (1, 1), (1, 2)
+         (2, 0), (2, 1), (2, 2)
+
+         So the final coordinates will be A + B
 
         so sub-block from 0 to 8:
          0 -> 1 -> 2
@@ -47,6 +58,8 @@ public class LE_36_Valid_Sudoku {
          3 -> 4 -> 5
 
          6 -> 7 -> 8
+
+        Another trick - check duplicate : if set.add() is false.
      */
 
     public boolean isValidSudoku(char[][] board) {

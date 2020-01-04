@@ -1,0 +1,53 @@
+HashMap 技巧典型应用
+
+#1.Buckets
+LE_347_Top_K_Frequent_Elements
+            Map<Integer, Integer> map = new HashMap<>();
+            List<Integer>[] bucket = new ArrayList[nums.length + 1];//!!!"nums.length + 1", bucket, 1-based!!!
+
+            //create frequency map
+            for (int num : nums) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+            }
+
+            //create bucket
+            for (int key : map.keySet()) {
+                int freq = map.get(key);
+                if (bucket[freq] == null) {
+                    bucket[freq] = new ArrayList<>();
+                }
+                bucket[freq].add(key);
+            }
+
+#2.Return Lists in map in a new list
+          Map<Integer, List<Integer>> map = new HashMap<>();
+          .....
+          return new ArrayList<>(map.values());
+
+#3.Use MapEntry in PriorityQueue
+LE_347_Top_K_Frequent_Elements
+            ....
+            PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>((a, b) -> a.getValue() - b.getValue());
+
+            //iterate through entrySet
+            for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+                pq.offer(e);
+                if (pq.size() > k) {
+                    pq.poll();
+                }
+            }
+
+#4.Iterate through map:
+            for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+                int key = e.getKey();
+                int val = e.getValue();
+                ...
+            }
+
+            for (String key : map.keySet()) {
+                int val = map.get(key);
+                ...
+            }
+
+#5
+LE_560_Subarray_Sum_Equals_K

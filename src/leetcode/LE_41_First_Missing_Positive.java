@@ -135,6 +135,10 @@ public class LE_41_First_Missing_Positive {
         if (null == nums || nums.length == 0) return 1;
 
         for (int i = 0; i < nums.length; i++) {
+            /**
+             * !!!
+             * "nums[i] <= nums.length" : 此处， nums[i]是作为下标值的。
+             */
             while (nums[i] > 0 && nums[i] <= nums.length && nums[nums[i] - 1] != nums[i]) {
                 int temp = nums[i];
                 nums[i] = nums[nums[i] - 1];

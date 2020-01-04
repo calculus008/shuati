@@ -66,6 +66,44 @@ public class LE_373_Find_K_Pairs_With_Smallest_Sums {
         }
     }
 
+    class Solution_Return_ListOfList {
+        public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0 || k <0) return res;
+
+
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> (nums1[a[0]] + nums2[a[1]]) - (nums1[b[0]] + nums2[b[1]]));
+
+            int n1 = nums1.length;
+            int n2 = nums2.length;
+
+            for (int i = 0; i < n1; i++) {
+                pq.offer(new int[]{i, 0});
+                if (i == k - 1) break;
+            }
+
+            while (k != 0 && !pq.isEmpty()) {
+                int[] cur = pq.poll();
+                List<Integer> l = new ArrayList<>();
+                l.add(nums1[cur[0]]);
+                l.add(nums2[cur[1]]);
+                res.add(l);
+                /**
+                 * !!!
+                 * can't do it after the next if
+                 */
+                k--;
+
+                if (cur[1] == n2 - 1) continue;
+
+                cur[1]++;
+                pq.offer(cur);
+            }
+
+            return res;
+        }
+    }
+
     /**
      * Solution 1
      * Exact same as Solution 1 in LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix

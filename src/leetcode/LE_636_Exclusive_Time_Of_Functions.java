@@ -46,6 +46,51 @@ public class LE_636_Exclusive_Time_Of_Functions {
      * 1 <= n <= 100
      */
 
+    class Solution1_Practice {
+        public int[] exclusiveTime(int n, List<String> logs) {
+            if (logs == null || logs.size() == 0) return new int[]{};
+
+            int[] res = new int[n];
+            Deque<Integer> stack = new ArrayDeque<>();
+            int pre = 0;
+
+            for (String log : logs) {
+                String[] s = log.split(":");
+                int id = Integer.valueOf(s[0]);
+                String type = s[1];
+                int cur = Integer.valueOf(s[2]);
+
+                if (!stack.isEmpty()) {
+                    /**
+                     * !!!
+                     * "+="
+                     */
+                    res[stack.peek()] += cur - pre;
+                }
+
+                pre = cur;
+
+                if (type.equals("start")) {
+                    stack.push(id);
+                } else {
+                    /**
+                     * !!!
+                     *
+                     * 把1秒看成一个宽为1的柱体，start从左侧开始，end则在右侧结束，所以此处pre和res都要加一。
+                     *      __
+                     *     | |
+                     *     | |
+                     * -----------
+                     */
+                    res[stack.pop()]++;
+                    pre++;
+                }
+            }
+
+            return res;
+        }
+    }
+
     /**
      * Stack
      *

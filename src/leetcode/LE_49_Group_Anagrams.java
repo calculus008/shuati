@@ -18,6 +18,11 @@ public class LE_49_Group_Anagrams {
           ["bat"]
         ]
         Note: All inputs will be in lower-case.
+
+         变形题：
+         按输入list的顺序，输出所有有anagram关系的string
+         E.g. 输入[cat, taco, ape, tac, game, tcoa, tca]
+         输出[cat, taco, tac, tcoa, tca] //cat和tac和tca为anagram，taco和tcoa为anagram
      */
 
     /**
@@ -133,5 +138,42 @@ public class LE_49_Group_Anagrams {
             return new ArrayList<>(map.values());
         }
 
+    }
+
+    class Solution_Practice {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            List<List<String>> res = new ArrayList<>();
+            if (strs == null || strs.length == 0) return res;
+
+            Map<String, List<String>> map = new HashMap<>();
+            StringBuilder sb = new StringBuilder();
+
+            for (String str : strs) {
+                /**
+                 * !!!
+                 * Must inside the for loop here
+                 */
+                int[] count = new int[26];
+
+                for (char c : str.toCharArray()) {
+                    count[c - 'a']++;
+                }
+
+                for (int i = 0;i < 26; i++) {
+                    if (count[i] > 0) {
+                        sb.append('a' + i).append(count[i]);
+                    }
+                }
+
+                String key = sb.toString();
+                sb.setLength(0);
+                if (!map.containsKey(key)) {
+                    map.put(key, new ArrayList<>());
+                }
+                map.get(key).add(str);
+            }
+
+            return new ArrayList<>(map.values());
+        }
     }
 }

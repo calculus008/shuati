@@ -37,6 +37,9 @@ public class LE_253_Meeting_Rooms_II {
                 list.add(new Pair(interval[1], 0));
             }
 
+            /**
+             * !!!
+             */
             Collections.sort(list, (a, b) -> a.time != b.time ? a.time - b.time : a.type -b.type);
 
             int count = 0;

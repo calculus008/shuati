@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yuank on 11/29/18.
@@ -116,5 +114,61 @@ public class LE_792_Number_Of_Matching_Subsequences {
 
             return true;
         }
+    }
+
+    class Solution2_Pratice {
+        Map<Integer, List<Integer>> map;
+
+        public int numMatchingSubseq(String S, String[] words) {
+            if (null == S || S.length() == 0 || null == words || words.length == 0) return 0;
+
+            int res = 0;
+            char[] chs = S.toCharArray();
+            map = new HashMap<>();
+
+            for (int i = 0; i < 26; i++) {
+                map.put(i, new ArrayList<>());
+            }
+
+            for (int i = 0; i < chs.length; i++) {
+                map.get(chs[i] - 'a').add(i);
+            }
+
+            for (String word : words) {
+                if (isMatch(word)) {
+                    res++;
+                }
+            }
+
+            return res;
+        }
+
+        private boolean isMatch(String word) {
+            int l = -1;
+
+            for (char c : word.toCharArray()) {
+                List<Integer> list = map.get(c - 'a');
+                int idx = Collections.binarySearch(list, l + 1);
+
+                /**
+                 * !!!
+                 */
+                idx = idx < 0 ? -idx-1 : idx;
+                /**
+                 * !!!
+                 */
+                if (idx >= list.size()) {
+                    return false;
+                }
+
+                /**
+                 * !!!
+                 */
+                l = list.get(idx);
+            }
+
+            return true;
+        }
+
     }
 }

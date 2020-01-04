@@ -51,7 +51,7 @@ public class LE_786_Kth_Smallest_Prime_Fraction {
      *  A = [1, 2, 3, 5]
      *
      *    decrease
-     * -------------->
+     * -------------->  ^
      * 1/2   1/3   1/5  |
      *       2/3   2/5  | decrease
      *             3/5  |
@@ -217,7 +217,10 @@ public class LE_786_Kth_Smallest_Prime_Fraction {
      *
      * So now the problem becomes "find the kth smallest element of (n-1) sorted list" (!!!)
      *
-     * Following is my implementation using PriorityQueue, running time is O(max(n,k) * logn), space is O(n):
+     * PriorityQueue<int[]>, it saves the index pair in given array which the values form the fraction, for example:
+     * [1, 7, 23, 29, 47], {0, n - 1} represents 1/47
+     *
+     * Following is my implementation using PriorityQueue, running time is O(max(n,k) * logn), space is O(n)
      */
     public int[] kthSmallestPrimeFraction3(int[] A, int k) {
         int[] res = new int[2];

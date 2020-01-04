@@ -20,6 +20,29 @@ public class LE_242_Valid_Anagram {
         What if the inputs contain unicode characters? How would you adapt your solution to such case?
      */
 
+    class Solution_Practice {
+        public boolean isAnagram(String s, String t) {
+            if (null == s || null == t || s.length() != t.length()) return false;
+
+            int[] count = new int[256];
+            char[] ch1 = s.toCharArray();
+            char[] ch2 = t.toCharArray();
+
+            for (int i = 0; i < ch1.length; i++) {
+                count[ch1[i]]++;
+                count[ch2[i]]--;
+            }
+
+            for (int i = 0; i < count.length; i++) {
+                if (count[i] != 0) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
     //Time : O(n), Space : O(1)
     public boolean anagram(String s, String t) {
         /**

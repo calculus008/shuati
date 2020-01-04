@@ -56,6 +56,10 @@ public class LE_692_Top_K_Frequent_Words {
                 bucket[freq].offer(key);
             }
 
+            /**
+             * !!!
+             * Iterate backward to get highest frequency word
+             */
             for (int i = bucket.length - 1; i >= 0 && res.size() < k; i--) {
                 if (bucket[i] != null) {
                     while (bucket[i].size() != 0 && res.size() < k) {
