@@ -2,8 +2,8 @@ package Interviews.Google;
 
 public class ValidMatrics {
     /**
-     * Find valid sub-arrays. Given matrix A of length N. Each element A can only be 0 or 1.
-     * If a sub-array only contains 0, we call it valid. How many sub-arrays are there in A?
+     * Find valid matrix. Given matrix A of length N * M. Each element A can only be 0 or 1.
+     * If a sub-matrix only contains 0, we call it valid. How many sub-matrices are there in A?
      *
      * Example:
      * input: A = [[1, 0, 0, 0, 1, 0],
