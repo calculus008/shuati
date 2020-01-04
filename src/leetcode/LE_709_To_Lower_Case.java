@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_709_To_Lower_Case {
     /**

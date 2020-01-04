@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_708_Insert_Into_A_Sorted_Circular_Linked_List {
     /**

@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_686_Repeated_String_Match {
     /**

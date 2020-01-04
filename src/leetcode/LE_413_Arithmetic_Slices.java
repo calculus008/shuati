@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_413_Arithmetic_Slices {
     /**

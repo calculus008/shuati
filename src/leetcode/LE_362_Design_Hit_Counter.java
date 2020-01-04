@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 import java.util.concurrent.atomic.AtomicIntegerArray;
 

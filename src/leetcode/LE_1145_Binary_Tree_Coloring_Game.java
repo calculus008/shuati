@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_1145_Binary_Tree_Coloring_Game {
     /**
