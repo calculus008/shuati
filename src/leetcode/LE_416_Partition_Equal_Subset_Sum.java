@@ -109,4 +109,26 @@ public class LE_416_Partition_Equal_Subset_Sum {
 
         return dp[m];
     }
+
+    public boolean canPartition2_Practice(int[] nums) {
+        int n = nums.length;
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+
+        if (sum % 2 != 0) return false;
+
+        int m = sum / 2;
+        boolean[] dp = new boolean[m + 1];
+        dp[0] = true;
+
+        for (int num : nums) {
+            for (int j = m; j - num >= 0; j--) {
+                dp[j] = dp[j - num] || dp[j];
+            }
+        }
+
+        return dp[m];
+    }
 }

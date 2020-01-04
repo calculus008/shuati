@@ -32,7 +32,7 @@ public class LE_658_Find_K_Closest_Elements {
     /**
      * Best solution
      *
-     * 时间复杂度 O(logn + k)O(logn+k)
+     * 时间复杂度 O(logn + k)
      *
      * 直接在数组中二分查找 target, 如果不存在则返回大于 target 的最小的或者小于 target 的最大的元素均可.
      *
@@ -354,5 +354,49 @@ public class LE_658_Find_K_Closest_Elements {
             }
         }
     }
+
+    /**
+     * Binary Search + Two Pointers
+     * Use existing binarySearch() in Collections.
+     * Convert arr[] to list, do binary search, move left and right
+     *
+     * It's actually O(n), since we first convert array to list
+     * if given input is a list, it is O(logn + k)
+     *
+     * arr[idx] is the first number which is euqal to or geater than x
+     * (if all numbers are less than x, index is arr.size()),
+     * and the result is arr[i+1, i+2, ... j].
+     */
+    class Solution {
+        public List<Integer> findClosestElements(int[] arr, int k, int x) {
+            List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+
+            int idx = Collections.binarySearch(list, x);
+
+            if (idx < 0) {
+                idx = -(idx + 1);
+            }
+
+            int n = arr.length;
+            /**
+             * !!!
+             * "i = idx - 1"
+             */
+            int i = idx - 1, j = idx;
+
+            while (k > 0) {
+                if (i < 0 || (j < n && Math.abs(list.get(j) - x) < Math.abs(list.get(i) - x))) {
+                    j++;
+                } else {
+                    i--;
+                }
+
+                k--;
+            }
+
+            return list.subList(i + 1, j);
+        }
+    }
+
 }
 

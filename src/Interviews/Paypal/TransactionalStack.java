@@ -2,8 +2,19 @@ package Interviews.Paypal;
 
 import java.util.Stack;
 
+/**
+ * https://github.com/dimitrovvlado/misc/blob/master/src/main/java/com/vlado/stacks/TransactionalStack.java
+ *
+ * https://leetcode.com/discuss/interview-question/143371/forusall-transactional-stack
+ *
+ */
+
 public class TransactionalStack {
     private Stack<Integer> content;
+
+    /**
+     * transaction lives in this stack after begin() and before commit() or rollback()
+     */
     private Stack<TransactionalStack> transactions;
 
     public TransactionalStack() {
@@ -14,6 +25,10 @@ public class TransactionalStack {
         content = new Stack<Integer>();
         if (!internal) {
             transactions = new Stack<TransactionalStack>();
+            /**
+             * The first element in transactions, used later
+             * to tell if there's still transactions left.
+             */
             transactions.push(this);
         }
     }
@@ -32,6 +47,13 @@ public class TransactionalStack {
         return cn.empty() ? 0 : cn.pop();
     }
 
+    /**
+     * So the transaction begin means to make a SNAPSHOT of the current
+     * internal stack and put into a new TransactionStack object,
+     * push to transactions stack.
+     *
+     *
+     */
     public void begin() {
         TransactionalStack newTransaction = new TransactionalStack();
         newTransaction.content = (Stack<Integer>) content.clone();
@@ -40,6 +62,9 @@ public class TransactionalStack {
 
     public boolean rollback() {
         TransactionalStack lastTransaction = transactions.peek();
+        /**
+         * if lastTransaction == this), means there's no more transactions for rollback
+         */
         if (lastTransaction != this) {
             transactions.pop();
             return true;
@@ -47,8 +72,14 @@ public class TransactionalStack {
         return false;
     }
 
+    /**
+     * pop the top of transactions, put its content into the current top transaction
+     */
     public boolean commit() {
         TransactionalStack lastTransaction = transactions.peek();
+        /**
+         * if lastTransaction == this, means no more transaction left to be committed
+         */
         if (lastTransaction != this) {
             lastTransaction = transactions.pop();
             transactions.peek().content = lastTransaction.content;

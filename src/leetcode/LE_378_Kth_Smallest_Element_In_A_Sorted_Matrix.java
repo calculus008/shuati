@@ -234,6 +234,62 @@ public class LE_378_Kth_Smallest_Element_In_A_Sorted_Matrix {
     }
 
     /**
+     * Tricky part:
+     *
+     * The lo we returned is guaranteed to be an element in the matrix is because:
+     * Let us assume element m is the kth smallest number in the matrix, and x is the number of element m in the matrix.
+     * When we are about to reach convergence, if mid=m-1, its count value (the number of elements which are <= mid)
+     * would be k-x, so we would set lo as (m-1)+1=m, in this case the hi will finally reach lo; and if mid=m+1, its
+     * count value would be k+x-1, so we would set hi as m+1, in this case the lo will finally reach m.
+     *
+     * To sum up, because the number lo found by binary search find is exactly the element which has k number of elements
+     * in the matrix that are <= lo, The equal sign guarantees there exists and only exists one number in range satisfying
+     * this condition. So lo must be the only element satisfying this element in the matrix.
+     */
+    class Solution3_Practice {
+        public int kthSmallest(int[][] matrix, int k) {
+            if (null == matrix || matrix.length == 0) return -1;
+
+            int m = matrix.length;
+            int n = matrix[0].length;
+
+            int l = matrix[0][0];
+            int h = matrix[m - 1][n - 1] + 1;
+
+            while (l < h) {
+                int mid = l + (h - l) / 2;
+
+                int count = 0;
+                int j = n - 1;
+                for (int i = 0; i < m; i++) {
+                    /**
+                     * !!!
+                     * "j >= 0"
+                     */
+                    while (j >= 0 && matrix[i][j] > mid) {
+                        j--;
+                    }
+                    count += (j + 1);
+                }
+
+
+                if (count < k) {
+                    /**
+                     * !!!
+                     * "l = mid + 1"
+                     */
+                    l = mid + 1;
+                } else {
+                    h = mid;
+                }
+            }
+
+            return l;
+        }
+    }
+
+
+    /**
      * Solution 4
      * Binary Search version by JiuZhang
      */

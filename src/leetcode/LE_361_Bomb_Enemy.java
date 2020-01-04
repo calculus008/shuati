@@ -46,61 +46,128 @@ public class LE_361_Bomb_Enemy {
      * 所以等于做了2次扫描 - 2 x mn -> O(mn)
      *
      */
-    public int maxKilledEnemies(char[][] grid) {
-        if (null == grid || grid.length == 0 || grid[0].length == 0) {
-            return 0;
-        }
+    class Solution {
+        public int maxKilledEnemies(char[][] grid) {
+            if (null == grid || grid.length == 0 || grid[0].length == 0) {
+                return 0;
+            }
 
-        int m = grid.length;
-        int n = grid[0].length;
-        int res = 0;
-        int[] col = new int[n];
+            int m = grid.length;
+            int n = grid[0].length;
+            int res = 0;
+            int[] col = new int[n];
 
-        for (int i = 0; i < m; i++) {
-            int row = 0;
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == 'W') {
-                    continue;
-                }
+            for (int i = 0; i < m; i++) {
+                int row = 0;
+                for (int j = 0; j < n; j++) {
+                    if (grid[i][j] == 'W') {
+                        continue;
+                    }
 
-                if (j == 0 || grid[i][j - 1] == 'W') {
-                    row = getRowHits(grid, i, j);
-                }
+                    if (j == 0 || grid[i][j - 1] == 'W') {
+                        row = getRowHits(grid, i, j);
+                    }
 
-                if (i == 0 || grid[i - 1][j] == 'W') {
-                    col[j] = getColHits(grid, i, j);
-                }
+                    if (i == 0 || grid[i - 1][j] == 'W') {
+                        col[j] = getColHits(grid, i, j);
+                    }
 
-                if (grid[i][j] == '0') {
-                    res = Math.max(res, row + col[j]);
+                    if (grid[i][j] == '0') {
+                        res = Math.max(res, row + col[j]);
+                    }
                 }
             }
+
+            return res;
         }
 
-        return res;
-    }
-
-    private int getRowHits(char[][] grid, int i, int j) {
-        int count = 0;
-        while (j < grid[0].length && grid[i][j] != 'W') {
-            if (grid[i][j] == 'E') {
-                count++;
+        private int getRowHits(char[][] grid, int i, int j) {
+            int count = 0;
+            while (j < grid[0].length && grid[i][j] != 'W') {
+                if (grid[i][j] == 'E') {
+                    count++;
+                }
+                j++;
             }
-            j++;
+            return count;
         }
-        return count;
-    }
 
-    private int getColHits(char[][] grid, int i, int j) {
-        int count = 0;
-        while (i < grid.length && grid[i][j] != 'W') {
-            if (grid[i][j] == 'E') {
-                count++;
+        private int getColHits(char[][] grid, int i, int j) {
+            int count = 0;
+            while (i < grid.length && grid[i][j] != 'W') {
+                if (grid[i][j] == 'E') {
+                    count++;
+                }
+                i++;
             }
-            i++;
+            return count;
         }
-        return count;
     }
 
+    class Solution_Practice {
+        public int maxKilledEnemies(char[][] grid) {
+            if (null == grid || grid.length == 0) return 0;
 
+            int res = 0;
+            int m = grid.length;
+            int n = grid[0].length;
+
+            int[] col = new int[n];
+
+            for (int i = 0; i < m; i++) {
+                int row = 0;
+                for (int j = 0; j < n; j++) {
+                    /**
+                     * !!!
+                     * Must do this way, otherwise, the logic next to check if
+                     * previous col or row element is 'W' will not work properly
+                     *
+                     * 就是手，开始COUNT的trigger是：
+                     * 1.i = 0, start count current col
+                     * 2.j = 0, start count current row
+                     * 3.Previous element in the same row is 'W', start count current row.
+                     * 4.Previous element in the same col is 'W, start count current col.
+                     */
+                    if (grid[i][j] == 'W') continue;
+
+                    if (i == 0 || grid[i - 1][j] == 'W') {
+                        col[j] = countCol(grid, i, j);
+                    }
+
+                    if (j == 0 || grid[i][j - 1] == 'W') {
+                        row = countRow(grid, i, j);
+                    }
+
+                    if (grid[i][j] == '0') {
+                        int kill = col[j] + row;
+                        res = Math.max(res, kill);
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        private int countCol(char[][] grid, int i, int j) {
+            int res = 0;
+            int m = grid.length;
+            while (i < m && grid[i][j] != 'W') {
+                if (grid[i][j] == 'E') res++;
+                i++;
+            }
+
+            return res;
+        }
+
+        private int countRow(char[][] grid, int i, int j) {
+            int res = 0;
+            int n = grid[0].length;
+            while (j < n && grid[i][j] != 'W') {
+                if (grid[i][j] == 'E') res++;
+                j++;
+            }
+
+            return res;
+        }
+    }
 }

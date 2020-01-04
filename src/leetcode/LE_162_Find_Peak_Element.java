@@ -16,7 +16,10 @@ public class LE_162_Find_Peak_Element {
         For example, in array [1, 2, 3, 1], 3 is a peak element and your function should return the index number 2.
      */
 
-    class Solution1 {
+    /**
+     * Binary search uses huahua's template
+     */
+    class Solution {
         public int findPeakElement(int[] nums) {
             int l = 0;
             int h = nums.length - 1;
