@@ -69,6 +69,9 @@ public class LE_726_Number_Of_Atoms {
      * Space : O(n)
      */
     class Solution1 {
+        /**
+         * !!!
+         */
         private int i;
 
         public String countOfAtoms(String formula) {
@@ -109,6 +112,10 @@ public class LE_726_Number_Of_Atoms {
         }
 
         private String getName(char[] f) {
+            /**
+             * The first char of name is in upper case,
+             * append it Name, then the rest will be in lower case
+             */
             String name = "" + f[i++];
             while (i < f.length && 'a' <= f[i] && f[i] <= 'z') {
                 name += f[i++];
@@ -191,6 +198,76 @@ public class LE_726_Number_Of_Atoms {
             }
 
             return sb.toString();
+        }
+
+        /**
+         * Recursive solution
+         * https://leetcode.com/problems/number-of-atoms/solution/
+         */
+        class Solution3 {
+            int i;
+
+            public String countOfAtoms(String formula) {
+                if (formula == null || formula.length() == 0) return "";
+
+                StringBuilder sb = new StringBuilder();
+                i = 0;
+                Map<String, Integer> map = parse(formula);
+
+                for (String name : map.keySet()) {
+                    sb.append(name);
+                    int num = map.get(name);
+                    if (num > 1) {
+                        sb.append("" + num);
+                    }
+                }
+
+                return sb.toString();
+            }
+
+            private Map<String, Integer> parse(String formula) {
+                int n = formula.length();
+                Map<String, Integer> map = new TreeMap<>();
+
+                while (i < n && formula.charAt(i) != ')') {
+                    if (formula.charAt(i) == '(') {
+                        i++;
+                        Map<String, Integer> m = parse(formula);
+                        for (String key : m.keySet()) {
+                            map.put(key, map.getOrDefault(key, 0) + m.get(key));
+                        }
+                    } else {
+                        int start = i++;
+                        while (i < n && Character.isLowerCase(formula.charAt(i))) {
+                            i++;
+                        }
+                        String name = formula.substring(start, i);
+
+                        start = i;
+                        while (i < n && Character.isDigit(formula.charAt(i))) {
+                            i++;
+                        }
+
+                        int num = start < i ? Integer.parseInt(formula.substring(start, i)) : 1;
+                        map.put(name, map.getOrDefault(name, 0) + num);
+                    }
+                }
+
+                i++;
+                int idx = i;
+
+                while (i < n && Character.isDigit(formula.charAt(i))) {
+                    i++;
+                }
+
+                if (idx < i) {
+                    int num1 = Integer.parseInt(formula.substring(idx, i));
+                    for (String key : map.keySet()) {
+                        map.put(key, map.get(key) * num1);
+                    }
+                }
+                return map;
+            }
         }
     }
 
