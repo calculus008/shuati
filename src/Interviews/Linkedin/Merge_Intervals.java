@@ -179,6 +179,8 @@ public class Merge_Intervals {
             Collections.sort(intervals, (a, b) -> a.start - b.start);
             int totalLen = 0;
 
+            if (intervals.size() == 0) return 0;
+
             int start = intervals.get(0).start;
             int end = intervals.get(0).end;
 
@@ -202,7 +204,14 @@ public class Merge_Intervals {
         }
     }
 
-    // Above is based on call frequency. what about using TreeSet, which could sort as well.
+    /**
+     * !!!
+     * O(logn) add(), O(n) getLength()
+     *
+     * Use TreeSet to keep intervals in sorted order while doing add()
+     *
+     * Above is based on call frequency. what about using TreeSet, which could sort as well.
+     **/
     class IntervalTreeSet {
         // Here we can use TreeSet to sort based on start time/end time
         TreeSet<Interval> treeSet = new TreeSet<Interval>((a, b) ->

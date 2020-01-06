@@ -114,4 +114,31 @@ public class LE_57_Insert_Interval {
 
         return res;
     }
+
+    public int[][] insert_new_interface(int[][] intervals, int[] newInterval) {
+        if (intervals == null || newInterval == null) return intervals;
+
+        int n = intervals.length;
+        List<int[]> res = new ArrayList<>();
+
+        int i = 0;
+        while (i < n && newInterval[0] > intervals[i][1]) {
+            res.add(intervals[i]);
+            i++;
+        }
+
+        while (i < n && newInterval[1] >= intervals[i][0]) {
+            newInterval[0] = Math.min(newInterval[0], intervals[i][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[i][1]);
+            i++;
+        }
+
+        res.add(newInterval);
+
+        while (i < n) {
+            res.add(intervals[i++]);
+        }
+
+        return res.toArray(new int[res.size()][2]);
+    }
 }

@@ -8,10 +8,17 @@ LE_986_Interval_List_Intersections                        Same as LI_821_Time_In
                                                           LE_986 is O(n)
                                                           LI_821 using line sweep is O(nlogn)
 
+#line sweep
 LE_252_Meeting_Rooms                                      (lint 920)
 LE_253_Meeting_Rooms_II                                   (lint 919)
+LE_729_My_Calendar_I
+LE_731_My_Calendar_II
+LE_732_My_Calendar_III
 LI_391_Number_Of_Airplanes_In_The_Sky
+
 LE_218_The_Sky_Line_Problem                               (*****)   Revisit
 LI_131_The_Skyline_Problem
 
-LE_352_Data_Stream_As_Disjoint_Intervals
+LE_352_Data_Stream_As_Disjoint_Intervals                  (******)
+
+Merge_Intervals                                           (*******)

@@ -68,7 +68,7 @@ public class LE_729_My_Calendar_I {
 
                 /**
                  * !!!
-                 * trick to tell if tell intervals have overlap
+                 * trick to tell if two intervals have overlap
                  */
                 if (Math.max(start, start1) < Math.min(end, end1)) {
                     return false;

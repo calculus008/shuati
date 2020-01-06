@@ -35,13 +35,15 @@ public class ValidMatrics {
         int n = matrix[0].length;
 
         for (int i = 1; i < m; i++) {
+            int[] b = new int[n];
+
             for (int j = i - 1; j >= 0; j--) {
-                int[] b = new int[n];
                 for (int k = 0; k < n; k++) {
                     b[k] = matrix[i][k] | matrix[j][k];
                 }
                 res += validSubarray(b);
             }
+
         }
 
         return res;

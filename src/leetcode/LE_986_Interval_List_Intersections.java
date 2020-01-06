@@ -6,7 +6,7 @@ import java.util.List;
 public class LE_986_Interval_List_Intersections {
     /**
      * Given two lists of closed intervals, each list of intervals is pairwise
-     * disjoint and in sorted order.
+     * disjoint and in SORTED order.
      *
      * Return the intersection of these two interval lists.
      *
@@ -78,6 +78,7 @@ public class LE_986_Interval_List_Intersections {
                 /**
                  * !!!
                  * "<="
+                 * Because "a closed interval [a, b] (with a <= b)"
                  */
                 if (start <= end) {
                     res.add(new Interval(start, end));

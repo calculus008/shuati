@@ -26,6 +26,8 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
      **/
 
     /**
+     *   Solution in Merge_Intervals
+     *
          Possible variation?
          "给一个Interval class:
          class Interval {int start, int end}

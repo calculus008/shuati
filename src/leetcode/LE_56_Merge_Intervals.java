@@ -19,6 +19,36 @@ public class LE_56_Merge_Intervals {
         return [1,6],[8,10],[15,18].
      */
 
+    class Solution1_New_Input_Type {
+        public int[][] merge(int[][] intervals) {
+            if (intervals.length <= 1) return intervals;
+
+            /**
+             * !!!!!!
+             */
+            Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
+
+            List<int[]> res = new ArrayList<>();
+            int[] last = null;
+
+            for (int[] interval : intervals) {
+                if (last == null || last[1] < interval[0]) {
+                    res.add(interval);
+                    last = interval;
+                } else {
+                    /**
+                     * !!!
+                     * here last is already in res, we just keep
+                     * modifying its end time.
+                     */
+                    last[1] = Math.max(last[1], interval[1]);
+                }
+            }
+
+            return res.toArray(new int[res.size()][]);
+        }
+    }
+
     public class Interval {
         int start;
         int end;
@@ -79,31 +109,6 @@ public class LE_56_Merge_Intervals {
         }
     }
 
-    class Solution1_New_Input_Type {
-        public int[][] merge(int[][] intervals) {
-            if (intervals.length <= 1) return intervals;
-
-            Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
-
-            int m = intervals.length;
-            List<int[]> res = new ArrayList<>();
-            int[] last = null;
-
-            for (int[] interval : intervals) {
-                if (last == null || last[1] < interval[0]) {
-                    res.add(interval);
-                    last = interval;
-                } else {
-                    last[1] = Math.max(last[1], interval[1]);
-                }
-            }
-
-            /**
-             * !!!
-             */
-            return res.toArray(new int[res.size()][]);
-        }
-    }
 
     //Time : O(nlogn) (use sorting), Space : O(n)
     class Solution2 {

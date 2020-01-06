@@ -15,6 +15,34 @@ public class LE_253_Meeting_Rooms_II {
          return 2.
      */
 
+    /**
+     * Best solution
+     * Same solution for LE_731_My_Calendar_II and LE_732_My_Calendar_III
+     *
+     * Time  : O(nlogn)
+     * Space : O(n)
+     */
+    class Solution {
+        public int minMeetingRooms(int[][] intervals) {
+            TreeMap<Integer, Integer> map = new TreeMap<>();
+
+            for (int[] interval : intervals) {
+                map.put(interval[0], map.getOrDefault(interval[0], 0) + 1);
+                map.put(interval[1], map.getOrDefault(interval[1], 0) - 1);
+            }
+
+            int count = 0;
+            int max = 0;
+
+            for (int key : map.keySet()) {
+                count += map.get(key);
+                max = Math.max(max, count);
+            }
+
+            return max;
+        }
+    }
+
     class Solution_SweepLine_Practice {
         class Pair {
             int time;
