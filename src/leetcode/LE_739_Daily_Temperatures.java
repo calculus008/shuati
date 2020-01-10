@@ -67,6 +67,15 @@ public class LE_739_Daily_Temperatures {
                 stack.push(i);
             }
 
+            /**
+             * After for loop, stack may not be empty, but we don't need to do
+             * the following while loop, because ret[] is init with value 0,
+             * we don't need to do anything, just leave the rest of ret[] as 0.
+             */
+            // while (!stack.isEmpty()) {
+            //     ret[stack.pop()] = 0;
+            // }
+
             return ret;
         }
     }
