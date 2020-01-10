@@ -79,7 +79,13 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
             int max = 0;
 
             for (int i = 0; i < 26; i++) {
-                if (count[i] > max && pos[i] <= idx) {
+                /**
+                 * pos[i] : next position for char ('a' + i) must be
+                 *          greater than pos[i]
+                 *
+                 * So given an idx, it is valid only when idx >= pos[i].
+                 */
+                if (count[i] > max && idx >= pos[i]) {
                     next = i;
                     max = count[i];
                 }
@@ -268,6 +274,66 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
                     count[j]--;
                     if (count[j] > 0) {
                         pq.offer(new int[]{j, count[j]});
+                    }
+                }
+            }
+
+            return sb.toString();
+        }
+    }
+
+    class Solution3_Practice {
+        public String rearrangeString(String s, int k) {
+            if (k == 0 || null == s || s.length() < k) return s;
+
+            int[] count = new int[26];
+            for (char c : s.toCharArray()) {
+                count[c - 'a']++;
+            }
+
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] != b[0] ? b[0] - a[0] : a[1] - b[1]);
+
+            for (int i = 0; i < 26; i++) {
+                /**
+                 * !!!
+                 * check count[i] > 0
+                 */
+                if (count[i] > 0) {
+                    pq.offer(new int[]{count[i], i});
+                }
+            }
+
+            StringBuilder sb = new StringBuilder();
+            while (!pq.isEmpty()) {
+                List<Integer> used = new ArrayList<>();
+
+                for (int i = 0; i < k; i++) {
+                    /**
+                     * !!!
+                     * Must first check pq empty, then processing.
+                     * For example : "aabbcc, 3", if we put this section
+                     * after processing, it will return "" when sb is "abc".
+                     *
+                     * If we do if first, pq will be refilled in the for loop
+                     * next.
+                     */
+                    if (pq.isEmpty()) {
+                        if (sb.length() < s.length()) {
+                            return "";
+                        } else {
+                            break;
+                        }
+                    }
+
+                    int[] cur = pq.poll();
+                    sb.append((char)('a' + cur[1]));
+                    used.add(cur[1]);
+                }
+
+                for (int idx : used) {
+                    count[idx]--;
+                    if (count[idx] > 0) {
+                        pq.offer(new int[]{count[idx], idx});
                     }
                 }
             }

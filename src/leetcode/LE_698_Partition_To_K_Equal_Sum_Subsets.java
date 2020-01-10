@@ -17,10 +17,59 @@ public class LE_698_Partition_To_K_Equal_Sum_Subsets {
      * Note:
      *
      * 1 <= k <= len(nums) <= 16.
-     * 0 < nums[i] < 10000.
+     * 0 < nums[i] < 10000.(!!!)
      *
      * Medium
      */
+
+    /**
+     * Same logic as LE_473_Matchsticks_To_Square
+     *
+     * We can use the same solution because " 0 < nums[i] < 10000", the numbers
+     * are all positive
+     *
+     * Time  : O(k ^ N) ?
+     * Space : O(N)
+     */
+    class Solution_DFS {
+        public boolean canPartitionKSubsets(int[] nums, int k) {
+            if (null == nums || nums.length < k || k <= 0) return false;
+
+            int sum = 0;
+            for (int num : nums) {
+                sum += num;
+            }
+
+            if (sum % k != 0) return false;
+
+            Arrays.sort(nums);
+
+            return helper(nums, new boolean[nums.length], k, sum / k, 0, 0, 1);
+        }
+
+        private boolean helper(int[] nums, boolean[] visited, int k, int target, int pos, int cur, int groupId) {
+            if (groupId == k) return true;
+            if (cur == target) {
+                return helper(nums, visited, k, target, 0, 0, groupId + 1);
+            }
+
+            if (cur > target) return false;
+
+            for (int i = pos; i < nums.length; i++) {
+                if (visited[i]) continue;
+
+                if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) continue;
+
+                visited[i] = true;
+                if (helper(nums, visited, k, target, i + 1, cur + nums[i], groupId)) {
+                    return true;
+                }
+                visited[i] = false;
+            }
+
+            return false;
+        }
+    }
 
     /**
      * Top-Down DFS Search
@@ -78,6 +127,7 @@ public class LE_698_Partition_To_K_Equal_Sum_Subsets {
     }
 
     /**
+     * !!!
      * Same DFS search solution from leetcode discussion which works if given set
      * has negative values.
      *

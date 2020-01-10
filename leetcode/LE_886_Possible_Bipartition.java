@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class LE_886_Possible_Bipartition {
     /**
@@ -50,6 +49,46 @@ public class LE_886_Possible_Bipartition {
      *
      * The same problem as LE_785_Is_Graph_Bipartite
      */
+    class SolutionDFS_With_AdjacentList {
+        ArrayList<Integer>[] graph;
+        Map<Integer, Integer> color;
+
+        public boolean possibleBipartition(int N, int[][] dislikes) {
+            graph = new ArrayList[N + 1];
+            for (int i = 1; i <= N; ++i)
+                graph[i] = new ArrayList();
+
+            for (int[] edge : dislikes) {
+                graph[edge[0]].add(edge[1]);
+                graph[edge[1]].add(edge[0]);
+            }
+
+            color = new HashMap();
+            for (int node = 1; node <= N; ++node) {
+                if (!color.containsKey(node) && !dfs(node, 0)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public boolean dfs(int node, int c) {
+            if (color.containsKey(node)) {
+                return color.get(node) == c;
+            }
+
+            color.put(node, c ^ 1);
+
+            for (int nei : graph[node]) {
+                if (!dfs(nei, c )) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
     class SolutionDFS  {
         public boolean possibleBipartition(int N, int[][] dislikes) {
             if (null == dislikes || dislikes.length == 0) {
@@ -70,7 +109,7 @@ public class LE_886_Possible_Bipartition {
                 graph[d[1] - 1][d[0] - 1] = 1;
             }
 
-            //0 : unkown, 1 : red, -1 : blud
+            //0 : unkown, 1 : red, -1 : blue
             int[] group = new int[N];
 
             /**

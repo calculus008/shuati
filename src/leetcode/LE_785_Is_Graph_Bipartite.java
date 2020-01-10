@@ -1,7 +1,9 @@
 package leetcode;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class LE_785_Is_Graph_Bipartite {
     /**
@@ -53,6 +55,10 @@ public class LE_785_Is_Graph_Bipartite {
     /**
      * DFS coloring
      *
+     * Color a node blue if it is part of the first set, else red. We should be able to greedily
+     * color the graph if and only if it is bipartite: one node being blue implies all it's
+     * neighbors are red, all those neighbors are blue, and so on
+     *
      * This solution goes without building a adjacent matrix (as LE_886_Possible_Bipartition does).
      * Because the difference with 886 is that the inputs are different, for this problem:
      *
@@ -73,10 +79,13 @@ public class LE_785_Is_Graph_Bipartite {
     class SolutionDFS {
         public boolean isBipartite(int[][] graph) {
             int n = graph.length;
-            int[] group = new int[n];
+            int[] color = new int[n];
 
             for (int i = 0; i < n; i++) {
-                if (group[i] == 0 && !helper(graph, group, i, 1)) {
+                /**
+                 * color[i] == 0 : node i is not colored yet
+                 */
+                if (color[i] == 0 && !helper(graph,   color, i, 1)) {
                     return false;
                 }
             }
@@ -84,16 +93,49 @@ public class LE_785_Is_Graph_Bipartite {
             return true;
         }
 
-        private boolean helper(int[][] graph, int[] group, int idx, int c) {
-            if (group[idx] != 0) {
-                return group[idx] == c;
+        private boolean helper(int[][] graph, int[] color, int idx, int c) {
+            if (color[idx] != 0) {
+                return color[idx] == c;
             }
 
-            group[idx] = c;
+            color[idx] = c;
 
             for (int node : graph[idx]) {
-                if (!helper(graph, group, node, -c)) {
+                if (!helper(graph, color, node, -c)) {
                     return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    /**
+     * https://leetcode.com/problems/is-graph-bipartite/solution/
+     */
+    class SolutionDFS_Iterative {
+        public boolean isBipartite(int[][] graph) {
+            int n = graph.length;
+            int[] color = new int[n];
+            Arrays.fill(color, -1);
+
+            for (int start = 0; start < n; ++start) {
+                if (color[start] == -1) {
+                    Stack<Integer> stack = new Stack();
+                    stack.push(start);
+                    color[start] = 0;
+
+                    while (!stack.empty()) {
+                        Integer node = stack.pop();
+                        for (int nei: graph[node]) {
+                            if (color[nei] == -1) {
+                                stack.push(nei);
+                                color[nei] = color[node] ^ 1;
+                            } else if (color[nei] == color[node]) {
+                                return false;
+                            }
+                        }
+                    }
                 }
             }
 
