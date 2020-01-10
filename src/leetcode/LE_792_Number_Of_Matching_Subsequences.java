@@ -71,6 +71,13 @@ public class LE_792_Number_Of_Matching_Subsequences {
      * S: length of S
      * W: number of words
      * L: length of a word
+     *
+     * Given S, indexing:
+     * 'abcca' -> {
+     *     'a' : [0, 4]
+     *     'b' : [2]
+     *     'c' : [1, 3]
+     * }
      */
     class Solution2 {
         List<List<Integer>> pos;
