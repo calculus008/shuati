@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_821_Shortest_Distance_To_A_Character {
     /**
