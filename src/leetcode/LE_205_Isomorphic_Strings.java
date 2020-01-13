@@ -23,6 +23,8 @@ public class LE_205_Isomorphic_Strings {
 
         Note:
         You may assume both s and t have the same length.
+
+        Same question - LE_890_Find_And_Replace_Pattern
      */
 
 
@@ -32,7 +34,7 @@ public class LE_205_Isomorphic_Strings {
      * 建立s中char和t中char的映射关系。假定s和t是isomorphic, 则s和t在同一位置的char必然有一一对应的关系。
      * 不满足这一条件则必然为false
      *
-     * Time  : O(n * l), l is length of s. So this is ideal, best solution is Solution2
+     * Time  : O(n * l), l is length of s. So this is NOT ideal, best solution is Solution2
      * Space : O(n)
      * **/
     public boolean isIsomorphic1(String s, String t) {

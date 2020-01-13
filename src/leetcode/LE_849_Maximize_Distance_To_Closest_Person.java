@@ -85,6 +85,9 @@ public class LE_849_Maximize_Distance_To_Closest_Person {
      * exception. i - prev should be considered infinite if there is no person to
      * the left of seat i, and similarly future - i is infinite if there is no one
      * to the right of seat i.
+     *
+     * Time  : O(n)
+     * Space : O(1)
      */
     class Solution2 {
         public int maxDistToClosest(int[] seats) {
@@ -106,6 +109,32 @@ public class LE_849_Maximize_Distance_To_Closest_Person {
             }
 
             return ans;
+        }
+    }
+
+    class Solution2_Practice {
+        public int maxDistToClosest(int[] seats) {
+            int n = seats.length;
+            int left = -1;
+            int right = 0;
+
+            int res = 0;
+            for (int i = 0; i < n; i++) {
+                if (seats[i] == 0) {
+                    while (right < n && (seats[right] == 0 || right < i)) {
+                        right++;
+                    }
+
+                    int lDist = left == -1 ? n : i - left;
+                    int rDist = right == n ? n : right - i;
+
+                    res = Math.max(res, Math.min(lDist, rDist));
+                } else {
+                    left = i;
+                }
+            }
+
+            return res;
         }
     }
 }
