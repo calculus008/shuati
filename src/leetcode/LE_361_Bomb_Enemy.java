@@ -43,6 +43,10 @@ public class LE_361_Bomb_Enemy {
      * 所以对每个点，不用把行和列都从新扫描，只有当从第一行和第一列，以及同列上一行和
      * 同行左别的列为‘W'时，才需要把hits reset 为 0， 统计从当前位置到下一个边界的hits.
      *
+     * There are 3 values in grid : "0", "E", "W". When iterating grid :
+     * "W" - do nothing, skip
+     * "0" or "E" - run count logic for row and col
+     *
      * 所以等于做了2次扫描 - 2 x mn -> O(mn)
      *
      */
@@ -122,7 +126,7 @@ public class LE_361_Bomb_Enemy {
                      * Must do this way, otherwise, the logic next to check if
                      * previous col or row element is 'W' will not work properly
                      *
-                     * 就是手，开始COUNT的trigger是：
+                     * 开始COUNT的trigger是：
                      * 1.i = 0, start count current col
                      * 2.j = 0, start count current row
                      * 3.Previous element in the same row is 'W', start count current row.
