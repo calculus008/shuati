@@ -56,6 +56,11 @@ public class LE_408_Valid_Word_Abbreviation {
                     }
 
                     int num = 0;
+                    /**
+                     * !!!
+                     * "j < t.length"
+                     * For while loop in side an outer loop, must check if it's outside boundary
+                     */
                     while (j < t.length && Character.isDigit(t[j])) {
                         num = num * 10 + t[j] - '0';
                         j++;
@@ -63,6 +68,14 @@ public class LE_408_Valid_Word_Abbreviation {
 
                     /**
                      * !!!
+                     * Example:
+                     * abbr : a3b
+                     * word : adbeb
+                     *
+                     * When abbr gets to '3' at index 1, word also gets to index 1,
+                     * therefore, after get num value 3, for word, next stop is 1 + 3 = 4
+                     *
+                     * So it is : i += num, NOT i += num + 1
                      */
                     i += num;
                 } else {
