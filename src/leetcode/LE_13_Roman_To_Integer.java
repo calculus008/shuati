@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LE_13_Roman_To_Integer {
     /**
      * Roman numerals are represented by seven different
@@ -53,6 +56,37 @@ public class LE_13_Roman_To_Integer {
      *
      * Medium
      */
+
+    /**
+     * Huahua's version
+     */
+    class Solution {
+        public int romanToInt(String s) {
+            Map<Character, Integer> map = new HashMap<>();
+
+            map.put('I', 1);
+            map.put('V', 5);
+            map.put('X', 10);
+            map.put('L', 50);
+            map.put('C', 100);
+            map.put('D', 500);
+            map.put('M', 1000);
+
+            int pre = 0;
+            int sum = 0;
+            char[] chs = s.toCharArray();
+            for (int i = 0; i < s.length(); i++) {
+                int cur = map.get(chs[i]);
+                sum += cur;
+                if (i > 0 && pre < cur) {
+                    sum -= 2 * pre;
+                }
+                pre = cur;
+            }
+
+            return sum;
+        }
+    }
 
     /**
      * key is to handle special case: IV (5 -1 = 4), XL (50 -10 = 40), CD (500 - 100 = 400)

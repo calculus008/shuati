@@ -77,6 +77,8 @@ LE_146_LRU_Cache
 
 LE_155_Min_Stack
 
+LE_287_Find_The_Duplicate_Number
+
 Min_Difference_In_Two_Arrays
 
 867. Transpose Matrix
@@ -135,3 +137,4 @@ implement a hashmap，只需要implement put() 和 hash() , 不用get()
 不要排序　扫一遍数据　拿到５个最大正数　４个最小负数　然后比较就行
 
 
+LE_729_My_Calendar_I
