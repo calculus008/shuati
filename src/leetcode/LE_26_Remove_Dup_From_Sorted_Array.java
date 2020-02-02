@@ -58,7 +58,7 @@ public class LE_26_Remove_Dup_From_Sorted_Array {
 
         /**
          * !!!
-         * count 必须出初始化为1，for case [1,1,1,1,1], not copy ever happens,
+         * count 必须出初始化为1，for case [1,1,1,1,1], no copy ever happens,
          * count stays at 1.
          */
         int count = 1;
@@ -73,5 +73,18 @@ public class LE_26_Remove_Dup_From_Sorted_Array {
             }
         }
         return count;
+    }
+
+    public int removeDuplicates_Practice(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int j = 1;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[i - 1]) {
+                nums[j++] = nums[i];
+            }
+        }
+
+        return j;
     }
 }

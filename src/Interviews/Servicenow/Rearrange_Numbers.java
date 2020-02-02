@@ -1,6 +1,6 @@
 package Interviews.Servicenow;
 
-public class RearrangeNumbers {
+public class Rearrange_Numbers {
     /**
      * An array contains both positive and negative numbers in random order.
      * Rearrange the array elements so that positive and negative numbers

@@ -46,7 +46,7 @@ public class LE_140_Word_Break_II {
     */
 
     /**
-     * Time complexity : O(n^3) Size of recursion tree can go up to n ^ 2. The creation of list takes nn time.
+     * Time complexity : O(n^3) Size of recursion tree can go up to n ^ 2. The creation of list takes O(n) time.
      *
      * Space complexity : O(n^3)  The depth of the recursion tree can go up to n and each activation record
      *                            can contains a string list of size n

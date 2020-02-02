@@ -61,7 +61,12 @@ public class LE_105_Construct_Binary_Tree_From_Preorder_Inorder {
 
         root.left = buildTree(preorder, prestart + 1, inorder, instart, i - 1);
 
-        //lenLT = (i - 1) - instart + 1 = i - instart
+        /**
+         * next prestart for right substree = cur prestart + length of left subtree + 1
+         *
+         * In inorder[]:
+         * lenLT = (i - 1) - instart + 1 = i - instart
+         **/
         root.right = buildTree(preorder, prestart + ((i - 1) - instart + 1) + 1, inorder, i + 1, inend);
 
         return root;

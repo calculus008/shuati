@@ -98,7 +98,7 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
        Use solution 2 (without sorting), Time : O(m + n)
 
      2.What if nums1's size is small compared to nums2's size? Which algorithm is better?
-       Use  solution 1, run through nums1 and put in HashMap, ??
+       Use  solution 1, run through nums1 and put in HashMap, ?? (can save space since m < n)
 
      3.What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
          If only nums2 cannot fit in memory, put all elements of nums1 into a HashMap,

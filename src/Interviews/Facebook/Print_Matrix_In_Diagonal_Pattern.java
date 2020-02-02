@@ -54,6 +54,8 @@ public class Print_Matrix_In_Diagonal_Pattern {
     /**
      * Diagonal ZigZag
      *
+     * LE_498_Diagonal_Traverse
+     *
      * https://www.geeksforgeeks.org/print-matrix-diagonal-pattern/
      */
     public static void printMatrixDiagonalZigZag(int mat[][]) {

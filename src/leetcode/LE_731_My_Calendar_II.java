@@ -49,6 +49,65 @@ public class LE_731_My_Calendar_II {
      */
 
     /**
+     *          LE_252_Meeting_Rooms
+     *          LE_253_Meeting_Rooms_II
+     *          LE_729_My_Calendar_I
+     *          LE_731_My_Calendar_II
+     *          LE_732_My_Calendar_III
+     *
+     * 类似于LE_729_My_Calendar_I solution 2, use TreeMap to achieve log(n) for insert/delete.
+     *
+     * A much better solution than solution1
+     *
+     * Key:
+     * 1.This is basically a sweep line solution, but using TreeMap, instead of a sorted Collection.
+     *  TreeMap<Integer, Integer>:
+     *  key - time
+     *  val - number of meetings at the time, 注意，这是离散化的，就是说这个值只是在这个特定的时间点。
+     *
+     * 2.Unique strategy : Insert first, then detect if there is any triple booking, if yes, then
+     *                     remove.
+     * 3.For each booking call, insert first, then iterate through TreeMap, keys (time) are sorted,
+     *   try to detect if there's case for triple booking.
+     *
+     * Time  : O(nlogn)
+     * Space : O(n)
+     */
+    class MyCalendarTwo_2 {
+        TreeMap<Integer, Integer> map;
+
+        public MyCalendarTwo_2() {
+            map = new TreeMap<>();
+        }
+
+        public boolean book(int start, int end) {
+            map.put(start, map.getOrDefault(start, 0) + 1);
+            map.put(end, map.getOrDefault(end, 0) -1);
+
+            int count = 0;
+            for (int key : map.keySet()) {
+                count += map.get(key);
+
+                if (count > 2) {
+                    map.put(start, map.get(start) - 1);
+                    if (map.get(start) == 0) {
+                        map.remove(start);
+                    }
+
+                    map.put(end, map.get(end) + 1);
+                    if (map.get(end) == 0) {
+                        map.remove(end);
+                    }
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    /**
      * 类似于LE_729_My_Calendar_I solution 1, 基于max(start) and min(end).
      *
      * Time  : O(n ^ 2)
@@ -111,58 +170,4 @@ public class LE_731_My_Calendar_II {
             return true;
         }
     }
-
-    /**
-     * 类似于LE_729_My_Calendar_I solution 2, use TreeMap to achieve log(n) for insert/delete.
-     *
-     * A much better solution than solution1
-     *
-     * Key:
-     * 1.This is basically a sweep line solution, but using TreeMap, instead of a sorted Collection.
-     *  TreeMap<Integer, Integer>:
-     *  key - time
-     *  val - number of meetings at the time, 注意，这是离散化的，就是说这个值只是在这个特定的时间点。
-     *
-     * 2.Unique strategy : Insert first, then detect if there is any triple booking, if yes, then
-     *                     remove.
-     * 3.For each booking call, insert first, then iterate through TreeMap, keys (time) are sorted,
-     *   try to detect if there's case for triple booking.
-     *
-     * Time  : O(nlogn)
-     * Space : O(n)
-     */
-    class MyCalendarTwo_2 {
-        TreeMap<Integer, Integer> map;
-
-        public MyCalendarTwo_2() {
-            map = new TreeMap<>();
-        }
-
-        public boolean book(int start, int end) {
-            map.put(start, map.getOrDefault(start, 0) + 1);
-            map.put(end, map.getOrDefault(end, 0) -1);
-
-            int count = 0;
-            for (int key : map.keySet()) {
-                count += map.get(key);
-
-                if (count > 2) {
-                    map.put(start, map.get(start) - 1);
-                    if (map.get(start) == 0) {
-                        map.remove(start);
-                    }
-
-                    map.put(end, map.get(end) + 1);
-                    if (map.get(end) == 0) {
-                        map.remove(end);
-                    }
-
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    }
-
 }

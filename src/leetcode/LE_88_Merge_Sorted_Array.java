@@ -27,6 +27,16 @@ public class LE_88_Merge_Sorted_Array {
             }
         }
 
+        /**
+         * !!!
+         * Must check i (index in nums1[]), can't do "if (j > 0)", for case:
+         * nums1 : [0]
+         * 0
+         * nums2 : [1]
+         * 1
+         *
+         * if check j > 0, will return [0], while the correct answer is [1]
+         */
         if (i < 0) {
             while (j >= 0) {
                 nums1[cur--] = nums2[j--];

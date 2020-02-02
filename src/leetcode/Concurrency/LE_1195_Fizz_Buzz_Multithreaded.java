@@ -113,7 +113,8 @@ public class LE_1195_Fizz_Buzz_Multithreaded {
      * Else, wait() on this thread until another thread processes num.
      * Once 1 of the 4 threads processes num, that thread will call notifyAll() to wake up all 4 threads.
      *
-     * The while (num <= n) is in the code to ensure each thread has the current number num in valid range [1 to n] to process.
+     * The while (num <= n) is in the code to ensure each thread has the current number num in valid range
+     * [1 to n] to process.
      */
     class FizzBuzz {
         private int n;

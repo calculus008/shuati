@@ -39,6 +39,14 @@ public class LE_729_My_Calendar_I {
      */
 
     /**
+     * Similar Problems:
+     *
+     *          LE_252_Meeting_Rooms
+     *          LE_253_Meeting_Rooms_II
+     *          LE_729_My_Calendar_I
+     *          LE_731_My_Calendar_II
+     *          LE_732_My_Calendar_III
+     *
      * https://zxi.mytechroad.com/blog/algorithms/binary-search/leetcode-729-my-calendar-i/
      *
      * Related Problems:

@@ -34,6 +34,10 @@ public class LE_387_First_Unique_Character_In_A_String {
             }
 
             for (int i = 0; i < chars.length; i++) {
+                /**
+                 * !!!
+                 * "count[chars[i]]"
+                 */
                 if (count[chars[i]] == 1) {
                     return i;
                 }

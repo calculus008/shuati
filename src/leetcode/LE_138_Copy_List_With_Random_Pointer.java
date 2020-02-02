@@ -13,103 +13,118 @@ public class LE_138_Copy_List_With_Random_Pointer {
 
         Return a deep copy of the list.
      */
+    class Solution1 {
+        public RandomListNode copyRandomList2(RandomListNode head) {
+            if (null == head)
+                return null;
+
+            /**
+             * 1.copy node
+             */
+            RandomListNode cur = head;
+            while (null != cur) {
+                RandomListNode newNode = new RandomListNode(cur.label);
+                newNode.next = cur.next;
+                cur.next = newNode;
+                cur = newNode.next;
+            }
+
+            /**
+             * 2.point random pointer to copied node
+             */
+            cur = head;
+            RandomListNode copiedNode;
+            while (null != cur) {
+                copiedNode = cur.next;
+                copiedNode.random = (null == cur.random ? null : cur.random.next);
+                cur = copiedNode.next;
+            }
+
+            /**
+             * 3.split
+             */
+            cur = head;
+            RandomListNode newHead = cur.next;
+            RandomListNode newNode;
+            while (null != cur) {
+                newNode = cur.next;
+                cur.next = newNode.next;
+
+                /**
+                 * !!!!!!
+                 * check for null!!!
+                 */
+                newNode.next = null == cur.next ? null : cur.next.next;
+
+                cur = cur.next;
+                newNode = newNode.next;
+            }
+
+            return newHead;
+        }
+    }
 
     //Time and Space : O(n)
-    public RandomListNode copyRandomList1(RandomListNode head) {
-        if (head == null) return head;
+    class Solution2 {
+        public RandomListNode copyRandomList1(RandomListNode head) {
+            if (head == null) return head;
 
-        Map<RandomListNode, RandomListNode> map = new HashMap<>();
-        RandomListNode cur = head;
-        while (cur != null) {
-            map.put(cur, new RandomListNode(cur.label));
-            cur = cur.next;
+            Map<RandomListNode, RandomListNode> map = new HashMap<>();
+            RandomListNode cur = head;
+            while (cur != null) {
+                map.put(cur, new RandomListNode(cur.label));
+                cur = cur.next;
+            }
+
+            cur = head;
+            while (cur != null) {
+                map.get(cur).next = map.get(cur.next);
+                map.get(cur).random = map.get(cur.random);
+                cur = cur.next;
+            }
+
+            return map.get(head);
         }
-
-        cur = head;
-        while (cur != null) {
-            map.get(cur).next = map.get(cur.next);
-            map.get(cur).random = map.get(cur.random);
-            cur = cur.next;
-        }
-
-        return map.get(head);
     }
 
     //copy and split
-    public RandomListNode copyRandomList2(RandomListNode head) {
-        if(null == head)
-            return null;
 
-        /**
-         * 1.copy node
-         */
-        RandomListNode cur = head;
-        while(null != cur) {
-            RandomListNode newNode = new RandomListNode(cur.label);
-            newNode.next = cur.next;
-            cur.next = newNode;
-            cur = newNode.next;
-        }
+    class Solution2_Practice {
+        public RandomListNode copyRandomList_practice(RandomListNode head) {
+            if (head == null) return null;
 
-        /**
-         * 2.point random pointer to copied node
-         */
-        cur = head;
-        RandomListNode copiedNode;
-        while(null != cur) {
-            copiedNode = cur.next;
-            copiedNode.random = (null == cur.random ? null : cur.random.next);
-            cur = copiedNode.next;
-        }
-
-        /**
-         * 3.split
-         */
-        cur = head;
-        RandomListNode newHead = cur.next;
-        RandomListNode newNode;
-        while(null != cur) {
-            newNode = cur.next;
-            cur.next = newNode.next;
-
-            newNode.next = null == cur.next?null:cur.next.next;
-
-            cur = cur.next;
-            newNode = newNode.next;
-        }
-
-        return newHead;
-    }
-
-    public RandomListNode copyRandomList_practice(RandomListNode head) {
-        if (head == null) return null;
-
-        RandomListNode cur = head;
-        while (cur != null) {
-            RandomListNode newNode = new RandomListNode(cur.label);
-            newNode.next = cur.next;
-            cur.next =  newNode;
-            cur = newNode.next;
-        }
-
-        cur = head;
-        while (cur != null) {
-            if (cur.random != null) {
-                cur.next.random = cur.random.next;
+            RandomListNode cur = head;
+            while (cur != null) {
+                RandomListNode newNode = new RandomListNode(cur.label);
+                newNode.next = cur.next;
+                cur.next = newNode;
+                cur = newNode.next;
             }
-            cur = cur.next.next;
-        }
 
-        cur = head;
-        RandomListNode newHead = cur.next;
-        RandomListNode newNode;
-        while (cur != null) {
-            newNode = cur.next;
-            cur.next = newNode.next;
-            newNode.next = cur.next == null ? null : cur.next.next;
-            cur = cur.next;
-        }
+            cur = head;
+            while (cur != null) {
+                if (cur.random != null) {
+                    cur.next.random = cur.random.next;
+                }
+                cur = cur.next.next;
+            }
 
-        return newHead;
+            cur = head;
+            RandomListNode newHead = cur.next;
+            RandomListNode newNode;
+            while (cur != null) {
+                newNode = cur.next;
+                cur.next = newNode.next;
+
+                /**
+                 * !!!
+                 */
+                newNode.next = cur.next == null ? null : cur.next.next;
+
+                cur = cur.next;
+            }
+
+            return newHead;
+        }
     }
 }

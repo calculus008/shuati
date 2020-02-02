@@ -45,7 +45,8 @@ public class LE_498_Diagonal_Traverse {
                         c++;
                     } else if (r - 1 < 0 && c + 1 < n) {//for example, going form [0, 0] to [0, 1]
                         c++;
-                    } else if (r + 1 <= m && c + 1 >= n - 1) {
+//                    } else if (r + 1 <= m && c + 1 >= n - 1) {//for example, from [0, 2] to [1, 2] in example above
+                    } else if (r + 1 < m && c + 1 >= n) {
                         r++;
                     }
                 } else {
@@ -54,7 +55,8 @@ public class LE_498_Diagonal_Traverse {
                         c--;
                     } else if (r + 1 < m && c - 1 < 0) {
                         r++;
-                    } else if (r + 1 >= m - 1 && c + 1 < n) {
+//                    } else if (r + 1 >= m - 1 && c + 1 < n) {
+                    } else if (r + 1 >= m  && c + 1 < n) {
                         c++;
                     }
                 }

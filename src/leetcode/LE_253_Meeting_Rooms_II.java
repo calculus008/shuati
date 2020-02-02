@@ -13,11 +13,41 @@ public class LE_253_Meeting_Rooms_II {
          For example,
          Given [[0, 30],[5, 10],[15, 20]],
          return 2.
+
+         LE_252_Meeting_Rooms
+         LE_253_Meeting_Rooms_II
+         LE_729_My_Calendar_I
+         LE_731_My_Calendar_II
+         LE_732_My_Calendar_III
      */
 
     /**
-     * Best solution
+     * Best solution !!!
      * Same solution for LE_731_My_Calendar_II and LE_732_My_Calendar_III
+     *
+     * In essence, it is using same sweep line idea, it uses TreeMap instead of sorting collections.
+     * Very elegant and simple solution.
+     *
+     * Example: [[0, 30],[5, 10],[15, 20]],
+     *
+     * TreeMap:
+     * 0  -> 1
+     * 5  -> 1
+     * 10 -> -1
+     * 15 -> 1
+     * 20 -> -1
+     * 30 -> -1
+     *
+     * Iterate through TreeMap
+     * Count:
+     * 0  : 1
+     * 5  : 2
+     * 10 : 1
+     * 15 : 2
+     * 20 : 1
+     * 20 : 0
+     *
+     * Max is 2
      *
      * Time  : O(nlogn)
      * Space : O(n)

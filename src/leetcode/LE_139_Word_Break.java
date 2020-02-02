@@ -171,7 +171,7 @@ public class LE_139_Word_Break {
     private boolean isValid(String s, Set<String> wordDict, Map<String, Boolean> cache) {
         //!!! This is wrong!!!, if use getOrDefault, it means that it will only return
         // true when cache has the key and value is true. The correct logic is that you need
-        // to return the value (regardless it is ture or false) if the key exists.
+        // to return the value (regardless it is true or false) if the key exists.
         //!!!
         // if(cache.getOrDefault(s, false)) return true;
 

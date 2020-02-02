@@ -7,12 +7,12 @@ import java.util.List;
  * Created by yuank on 3/30/18.
  */
 public class LE_229_Majority_Element_II {
-    /*
+    /**
         Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
         The algorithm should run in linear time and in O(1) space.
      */
 
-    /*
+    /**
     Time : O(n), Space : O(1)
 
     Key points

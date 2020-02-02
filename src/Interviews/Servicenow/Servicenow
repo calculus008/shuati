@@ -10,6 +10,7 @@ LE_428_Serialize_And_Deserialize_Nary_Tree
 LE_449_Serialize_And_Deserialize_BST
 
 LE_105_Construct_Binary_Tree_From_Preorder_Inorder
+LE_106_Construct_Binary_Tree_From_Postorder_Inorder
 
 LE_168_Excel_Sheet_Column_Title
 LE_171_Excel_Sheet_Column_Number
@@ -31,6 +32,8 @@ LE_151_Reverse_Words_In_A_String
 LE_186_Reverse_Words_In_String_II
 LE_344_Reverse_String
 LE_345_Reverse_Vowels_Of_A_String
+
+LE_20_Valid_Parentheses
 
 LE_238_Product_Of_Array_Except_Self
 
@@ -68,6 +71,8 @@ LE_140_Word_Break_II
 LE_138_Copy_List_With_Random_Pointer
 
 LE_94_Binary_Tree_Inorder_Traversal
+LE_144_Binary_Tree_Preorder_Traversal
+LE_145_Binary_Tree_Postorder_Traversal
 
 LI_235_Prime_Factorization
 
@@ -81,20 +86,25 @@ LE_287_Find_The_Duplicate_Number
 
 Min_Difference_In_Two_Arrays
 
-867. Transpose Matrix
-
 LE_679_24_Game
+
+LE_282_Expression_Add_Operators
 Given a string of numbers separated by spaces, devise an algorithm to figure out whether or not
 you can arrive at 42 with the numbers using only addition, subtraction, and multiplication.
+(variation of LE_282_Expression_Add_Operators)
 
 #Graph BFS
 https://www.geeksforgeeks.org/shortest-path-unweighted-graph/
 
-#Find the middle element of an array without using its length.
+#Finding the middle of an array without knowing the length.
+https://stackoverflow.com/questions/7862163/finding-the-middle-of-an-array-without-knowing-the-length
 
+LE_394_Decode_String
+LE_726_Number_Of_Atoms (***)
 #Decode a string to find the count of each character’s appearance in the string.
 
 #
+RearrangeLinkedList
 给一个链表，按某种顺序重新组织：
 输入：
 1 -> 2 -> 3 -> 4 -> 5 -> 6
@@ -104,6 +114,7 @@ https://www.geeksforgeeks.org/shortest-path-unweighted-graph/
 1 -> 2 -> 3
 输出：
 1 -> 3 -> 2
+https://www.geeksforgeeks.org/rearrange-a-given-linked-list-in-place/
 
 #
 https://www.geeksforgeeks.org/find-a-fixed-point-in-a-given-array/
@@ -121,10 +132,19 @@ value: 3 3 3
 在查看 arr[mid] 的时候， 下一个可以从 arr[arr[mid]] 作为边界，这样有机会少判断一些（相比于arr[mid-1] 和 arr[mid+1]）。
 
 #
+LE_252_Meeting_Rooms
+LE_253_Meeting_Rooms_II
+LE_729_My_Calendar_I
+LE_731_My_Calendar_II
+LE_732_My_Calendar_III
+
 输入一个List<Line>和n， Line有起点，有终点，比如说(1,10)和(2,8)， 1和10之间有线，2和8之间有线，所以2和8这个区间就有两条线，
 求线数大于等于n的区间
 
 #
+LI_612_K_Closest_Points
+LE_973_K_Closest_Points_To_Origin
+K_Closest_Points_To_A_Given_Point
 有一个vector of locations，请你写一个algorithm，得到离你最近的五个location，用priority queue就可以了，不是很难
 
 #
@@ -136,5 +156,4 @@ implement a hashmap，只需要implement put() 和 hash() , 不用get()
 没啥算法，就是模拟法　５个最大正数　２个最小负数×３个最大正数　　４个最小负数×１个最大正数　　里面挑一个最大。
 不要排序　扫一遍数据　拿到５个最大正数　４个最小负数　然后比较就行
 
-
-LE_729_My_Calendar_I
+867. Transpose Matrix

@@ -62,6 +62,9 @@ public class LE_08_String_To_Integer {
      * 1.处理符号 - 正数 or 负数
      * 2.trim empty space at the start
      * 3.处理 Integer overflow 的情况
+     *
+     * Important : Aassumption is that possible sign ('+' or '-') and all the
+     *             digits are together without any spaces or chars other than digits.
      */
     public int myAtoi(String str) {
         if (null == str || str.length() == 0) return 0;
@@ -78,6 +81,9 @@ public class LE_08_String_To_Integer {
             i++;
         }
 
+        /**
+         * !!!
+         */
         if (i == str.length()) return 0;
 
         //check possible sign

@@ -31,7 +31,10 @@ public class LE_106_Construct_Binary_Tree_From_Postorder_Inorder {
         return helper1(postorder, 0, postorder.length - 1, inorder, 0, inorder.length - 1);
     }
 
-    //Same method as LE_105 : get root from postorder, find root in inorder, calculate length of the left subtree string, then recurse..
+    /**
+     * Same method as LE_105 : get root from postorder, find root in inorder,
+     * calculate length of the left subtree string, then recurse...
+     **/
     private TreeNode helper1(int[] postorder, int poststart, int postend,  int[] inorder, int instart, int inend) {
         if(instart > inend || poststart > postend) {
             return null;
@@ -50,7 +53,10 @@ public class LE_106_Construct_Binary_Tree_From_Postorder_Inorder {
     }
 
 
-    //Only difference from helper1(), only pass "postend", no need to pass "poststart" calculate length of the RIGHT subtree string, then recurse..
+    /**
+     * Only difference from helper1(), only pass "postend", no need to pass "poststart"
+     * calculate length of the RIGHT subtree string, then recurse...
+     **/
     private TreeNode helper2(int[] postorder, int postend,  int[] inorder, int instart, int inend) {
         if(instart > inend || postend < 0)
             return null;
