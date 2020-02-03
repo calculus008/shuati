@@ -1,6 +1,8 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class LE_973_K_Closest_Points_To_Origin {
@@ -91,6 +93,44 @@ public class LE_973_K_Closest_Points_To_Origin {
 
         private long dist(int[] A) {
             return A[0] * A[0] + A[1] * A[1];
+        }
+    }
+
+    /**
+     * Use in[] x to simulate K closest points to a given point
+     */
+    class Solution1_Practice {
+        public int[][] kClosest(int[][] points, int K) {
+            if (null == points) return new int[][]{};
+
+            int[] x = new int[]{0, 0};
+
+            /**
+             * !!!
+             * "new PriorityQueue<>((a, b) -> Long.compare(dist(b, x), dist(a, x)));"
+             *
+             * Don't forget "<>"
+             */
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Long.compare(dist(b, x), dist(a, x)));
+
+            for (int[] point : points) {
+                pq.offer(point);
+
+                if (pq.size() > K) {
+                    pq.poll();
+                }
+            }
+
+            List<int[]> res = new ArrayList<>();
+            while (!pq.isEmpty()) {
+                res.add(pq.poll());
+            }
+
+            return res.toArray(new int[res.size()][2]);
+        }
+
+        private long dist(int[] a, int[] x) {
+            return (a[0] - x[0]) * (a[0] - x[0]) + (a[1] - x[1]) * (a[1] - x[1]);
         }
     }
 
