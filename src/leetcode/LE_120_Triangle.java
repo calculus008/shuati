@@ -6,7 +6,7 @@ import java.util.List;
  * Created by yuank on 3/13/18.
  */
 public class LE_120_Triangle {
-    /*
+    /**
         Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
 
         For example, given the following triangle
@@ -22,7 +22,7 @@ public class LE_120_Triangle {
         Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
      */
 
-    /*
+    /**
         1.For ith level, jth element, in i+1 level, its adjacent elements are at poition j and j+1
         2.If total level is n, then the last level has n elements.
         3.DP from bottom to top
@@ -41,13 +41,23 @@ public class LE_120_Triangle {
 
         Time : O(n ^ 2), Space : O(n)
 
+        Similar porblem : LE_931_Minimum_Falling_Path_Sum
+
     */
     public static int minimumTotal(List<List<Integer>> triangle) {
         int[] dp = new int[triangle.size() + 1];
 
         for (int i = triangle.size() - 1; i >= 0; i--) {
+            /**
+             * !!!
+             * triangle.get(i).size()
+             */
             for (int j = 0; j < triangle.get(i).size(); j++) {
-                dp[j] = Math.min(dp[j], dp[j + 1]) + triangle.get(i).get(j);
+                /**
+                 * !!!
+                 * 当前元素加上相邻两条路径的累加的最小值 (in dp[])
+                 */
+                dp[j] = triangle.get(i).get(j) + Math.min(dp[j], dp[j + 1]);
             }
         }
 

@@ -53,4 +53,38 @@ public class LE_345_Reverse_Vowels_Of_A_String {
         c = Character.toLowerCase(c);
         return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
     }
+
+    class Solution_Practice {
+        public String reverseVowels(String s) {
+            if (s == null || s.length() == 0) return s;
+
+            char[] chs = s.toCharArray();
+            int n = chs.length;
+
+            int i = 0, j = n - 1;
+
+            /**
+             * !!!
+             * " i < j" !!!
+             */
+            while (i < j) {
+                while (i < j && !isVowel(chs[i])) i++;
+                while (i < j && !isVowel(chs[j])) j--;
+
+                char temp = chs[i];
+                chs[i] = chs[j];
+                chs[j] = temp;
+
+                i++;
+                j--;
+            }
+
+            return new String(chs);
+        }
+
+        private boolean isVowel(char input) {
+            char c = Character.toLowerCase(input);
+            return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+        }
+    }
 }

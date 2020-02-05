@@ -119,6 +119,10 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
     private void encode(TreeNode root, StringBuilder sb) {
         if(root == null) {
             sb.append("#").append(" ");
+            /**
+             * !!!
+             * must return here!!!
+             */
             return;
         }
 

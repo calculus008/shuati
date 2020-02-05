@@ -1,0 +1,138 @@
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_50_POW (不過變成乘法 然後只能用加法來做)
+LE_39_Combination_Sum
+
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
+LE_281_Zigzag_Iterator
+
+LE_297_Serialize_And_Deserialize_Binary_Tree
+LE_428_Serialize_And_Deserialize_Nary_Tree
+LE_449_Serialize_And_Deserialize_BST
+
+LE_105_Construct_Binary_Tree_From_Preorder_Inorder
+
+LE_168_Excel_Sheet_Column_Title
+LE_171_Excel_Sheet_Column_Number
+
+LE_33_Search_In_Rotated_Sorted_Array
+LE_81_Search_In_Rotated_Sorted_Array_II
+LE_153_Find_Min_In_Rotated_Sorted_Array
+LE_154_Find_Min_In_Rotated_Sorted_Array_II
+Find_Min_Element_Index_In_Rotated_Sorted_Array
+
+LE_498_Diagonal_Traverse
+Print_Matrix_In_Diagonal_Pattern
+
+LE_08_String_To_Integer
+LE_65_Valid_Number
+LE_07_Reverse_Integer
+
+LE_151_Reverse_Words_In_A_String
+LE_186_Reverse_Words_In_String_II
+LE_344_Reverse_String
+LE_345_Reverse_Vowels_Of_A_String
+
+LE_238_Product_Of_Array_Except_Self
+
+LE_283_Move_Zeroes
+
+LE_387_First_Unique_Character_In_A_String
+
+LE_26_Remove_Dup_From_Sorted_Array
+LE_80_Remove_Dup_From_Sorted_Array_II
+LE_82_Remove_Dup_From_SortedList_II
+LE_83_Remove_Dup_From_SortedList
+LE_316_Remove_Duplicate_Letters
+
+LE_349_Intersection_Of_Two_Arrays
+LE_350_Intersection_Of_Two_Arrays_II
+LE_160_Intersection_Of_Tow_Linked_List
+Intersection_Union_Of_K_Sorted_Lists
+
+LE_412_Fizz_Buzz
+LE_1195_Fizz_Buzz_Multithreaded
+
+LE_169_Majority_Element
+LE_229_Majority_Element_II
+
+LE_88_Merge_Sorted_Array
+LE_21_Merge_Two_Sorted_Lists
+LE_23_Merge_k_Sorted_Lists
+
+LE_141_Linked_List_Cycle
+LE_142_Linked_List_Cycle_II
+
+LE_139_Word_Break
+LE_140_Word_Break_II
+
+LE_138_Copy_List_With_Random_Pointer
+
+LE_94_Binary_Tree_Inorder_Traversal
+
+LI_235_Prime_Factorization
+
+LE_174_Dungeon_Game
+
+LE_146_LRU_Cache
+
+LE_155_Min_Stack
+
+Min_Difference_In_Two_Arrays
+
+867. Transpose Matrix
+
+LE_679_24_Game
+Given a string of numbers separated by spaces, devise an algorithm to figure out whether or not
+you can arrive at 42 with the numbers using only addition, subtraction, and multiplication.
+
+#Graph BFS
+https://www.geeksforgeeks.org/shortest-path-unweighted-graph/
+
+#Find the middle element of an array without using its length.
+
+#Decode a string to find the count of each character’s appearance in the string.
+
+#
+给一个链表，按某种顺序重新组织：
+输入：
+1 -> 2 -> 3 -> 4 -> 5 -> 6
+输出：
+1 -> 6 -> 2 -> 5 -> 3 -> 4
+输入：
+1 -> 2 -> 3
+输出：
+1 -> 3 -> 2
+
+#
+https://www.geeksforgeeks.org/find-a-fixed-point-in-a-given-array/
+https://www.geeksforgeeks.org/find-fixed-point-value-equal-index-given-array-duplicates-allowed/
+给一个有序的数组，可能与重复元素，找index 和值相等的第一个元素。
+输入：
+index: 0 1 2 3 4 5 6 7 8 9
+value: 1 2 3 3 3 3 4 8 9 9
+输出：3
+输入：
+index: 0 1 2
+value: 3 3 3
+输出：-1
+我做的磕磕巴巴的，对方hint了好几次。。。还好最后写出来了。 要用一些二分的思想，然后要用递归。还一个比较tricky 的地方是，
+在查看 arr[mid] 的时候， 下一个可以从 arr[arr[mid]] 作为边界，这样有机会少判断一些（相比于arr[mid-1] 和 arr[mid+1]）。
+
+#
+输入一个List<Line>和n， Line有起点，有终点，比如说(1,10)和(2,8)， 1和10之间有线，2和8之间有线，所以2和8这个区间就有两条线，
+求线数大于等于n的区间
+
+#
+有一个vector of locations，请你写一个algorithm，得到离你最近的五个location，用priority queue就可以了，不是很难
+K_Closest_Points_To_A_Given_Point
+
+#
+implement a hashmap，只需要implement put() 和 hash() , 不用get()
+注意key和value都是string，所以要自己implement string 的hash function
+
+#
+在 Array 里面求５个数乘积最大。
+没啥算法，就是模拟法　５个最大正数　２个最小负数×３个最大正数　　４个最小负数×１个最大正数　　里面挑一个最大。
+不要排序　扫一遍数据　拿到５个最大正数　４个最小负数　然后比较就行
+
+

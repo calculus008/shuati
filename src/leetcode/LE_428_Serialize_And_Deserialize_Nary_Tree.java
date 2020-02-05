@@ -101,6 +101,9 @@ public class LE_428_Serialize_And_Deserialize_Nary_Tree {
         Node root = new Node();
         root.val = Integer.parseInt(q.poll());
         int size = Integer.parseInt(q.poll());
+        /**
+         * !!!
+         */
         root.children = new ArrayList<Node>(size);
 
         for (int i = 0; i < size; i++) {

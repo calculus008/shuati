@@ -49,7 +49,8 @@ public class LE_449_Serialize_And_Deserialize_BST {
             if (root == null) {
                 /**
                  * !!!
-                 * for , we do "sb.append("#").append(" ")", here we just return.
+                 * for LE_297_Serialize_And_Deserialize_Binary_Tree,
+                 * we do "sb.append("#").append(" ")", here we just return.
                  */
                 return;
             }

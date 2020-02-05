@@ -33,6 +33,11 @@ public class LE_151_Reverse_Words_In_A_String {
         A simplified version: LE_186_Reverse_Words_In_String_II
      */
 
+    /**
+     * Compare with LE_186_Reverse_Words_In_String_II, we need to deal with
+     * cases of leading and trailing spaces and there may be multiple spaces
+     * between words
+     */
     class Solution_Practice_2 {
         public String reverseWords(String s) {
             if (null == s || s.length() == 0) return s;
@@ -44,9 +49,17 @@ public class LE_151_Reverse_Words_In_A_String {
 
             int l = 0, r = 0;
             while (l < n && r < n) {
+                /**
+                 * find left side of a word
+                 */
                 while (l < n && ch[l] == ' ') l++;
                 r = l + 1;
+
+                /**
+                 * find right side of a word
+                 */
                 while (r < n && ch[r] != ' ') r++;
+
                 reverse(ch, l, r - 1);
                 l = r;
             }
@@ -64,6 +77,9 @@ public class LE_151_Reverse_Words_In_A_String {
             }
         }
 
+        /**
+         * Remove extra spaces between words
+         */
         private String cleanup(char[] ch) {
             int i = 0, j = 0;
             int n = ch.length;
