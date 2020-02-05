@@ -1,4 +1,4 @@
-package Interviews.Paypal;
+package Interviews.Karat;
 
 import java.util.*;
 
@@ -12,14 +12,14 @@ public class GraphQuesitons {
      * 3   5  8  9
      * \ / \     \
      * 6   7    11
-     * <p>
+     *
      * Input: parent child relation
      * [
      * (1, 3), (2, 3), (3, 6), (5, 6),
      * (5, 7), (4, 5), (4, 8), (4, 9), (9, 11)
-     * <p>
+     *
      * ]
-     * <p>
+     *
      * Output:
      * [
      * [1, 2, 4],        // Individuals with zero parents
@@ -79,6 +79,9 @@ public class GraphQuesitons {
     public boolean hasCommonAncestor(int v1, int v2, List<int[]> input) {
         Map<Integer, List<Integer>> map = new HashMap<>();
 
+        /**
+         * Create adjacent list, child -> list of its parents
+         */
         for (int[] pair : input) {
             int parent = pair[0];
             int child = pair[1];
@@ -97,6 +100,9 @@ public class GraphQuesitons {
         Queue<Integer> q = new LinkedList<>();
         q.offer(v1);
 
+        /**
+         * coloring v1's ancestors using BFS
+         */
         while (!q.isEmpty()) {
             int cur = q.poll();
             set.add(cur);
@@ -106,10 +112,17 @@ public class GraphQuesitons {
             }
         }
 
+        /**
+         * coloing v2's ancestors using BFS
+         */
         q.offer(v2);
         while (!q.isEmpty()) {
             int cur = q.poll();
-            if (!set.add(cur)) return true;
+
+            /**
+             * see the other color
+             */
+            if (!set.contains(cur)) return true;
 
             for (int p : map.get(cur)) {
                 q.offer(p);
@@ -121,7 +134,7 @@ public class GraphQuesitons {
 
     /**
      * 3.Earliest ancestor
-     * Write a function that, for a given individual in our dataset, returns their earliest known ancestor
+     * Write a function that, for a given individual in our data set, returns their earliest known ancestor
      * -- the one at the farthest distance from the input individual. If there is more than one ancestor
      * tied for "earliest", return any one of them. If the input individual has no parents, the function
      * should return null (or -1).

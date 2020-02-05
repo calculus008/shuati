@@ -2,6 +2,8 @@ LE_03_Longest_Substring_Without_Repeating_Characters
 LE_50_POW (不過變成乘法 然後只能用加法來做)
 LE_39_Combination_Sum
 
+LE_322_Coin_Change
+
 LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 LE_281_Zigzag_Iterator
 
@@ -75,6 +77,7 @@ LE_144_Binary_Tree_Preorder_Traversal
 LE_145_Binary_Tree_Postorder_Traversal
 
 LI_235_Prime_Factorization
+LE_254_Factor_Combinations
 
 LE_174_Dungeon_Game
 
@@ -82,7 +85,11 @@ LE_146_LRU_Cache
 
 LE_155_Min_Stack
 
-LE_287_Find_The_Duplicate_Number
+LE_287_Find_The_Duplicate_Number  (***)
+
+LE_170_Two_Sum_III_Data_Structure_Design
+
+LE_215_Kth_Largest_Element_In_Array
 
 Min_Difference_In_Two_Arrays
 
@@ -92,6 +99,23 @@ LE_282_Expression_Add_Operators
 Given a string of numbers separated by spaces, devise an algorithm to figure out whether or not
 you can arrive at 42 with the numbers using only addition, subtraction, and multiplication.
 (variation of LE_282_Expression_Add_Operators)
+
+Alice has invented a new card game to play with Bob. Alice made a deck of cards with random values
+between 1 and 52. Bob picks 5 cards. Then, he has to rearrange the cards so that by utilizing the
+operations plus, minus, or times, the value of the cards reach Alice's favorite number, 42.
+More precisely, find operations such that ((((val1 op1 val2) op2 val3) op3 val4) op4 val5) = 42.
+
+Help Bob by writing a program to determine whether it is possible to reach 42 given 5 card values.
+
+For example, Bob picks 5 cards out of the deck containing 60, 1, 3, 5, and 20. Bob rearranges the cards
+and supplies four operations, so that 5 * 20 - 60 + 3 - 1 = 42.
+Input:
+The input consists of five integers on a line, separated by spaces. Each integer V is 0 <= V <= 52.
+Output:
+Print a line containing "YES" if it is possible to reach the value 42 according to the rules of the game,
+or "NO" otherwise.
+楼主的解法是用permutation的方法，将所有可能出现的数字排列都遍历一遍，每次遍历的时候分别进行四则运算，
+并将四个结果分别传入下一层。层数等于5的时候，检查结果是否为42.了。
 
 #Graph BFS
 https://www.geeksforgeeks.org/shortest-path-unweighted-graph/
@@ -141,6 +165,8 @@ LE_729_My_Calendar_I
 LE_731_My_Calendar_II
 LE_732_My_Calendar_III
 
+LE_19_Remove_Nth_Node_From_End_Of_List
+
 输入一个List<Line>和n， Line有起点，有终点，比如说(1,10)和(2,8)， 1和10之间有线，2和8之间有线，所以2和8这个区间就有两条线，
 求线数大于等于n的区间
 
@@ -161,3 +187,43 @@ implement a hashmap，只需要implement put() 和 hash() , 不用get()
 不要排序　扫一遍数据　拿到５个最大正数　４个最小负数　然后比较就行
 
 LE_867_Transpose_Matrix
+
+1. 给一个binary tree, 写一个function看是不是一个binary search tree(left < root, root <= right)
+LE_98_Validate_BST
+
+2. 类似LC 103但是是用N-ary tree做 ＆
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
+
+find the largest and second largest element in an int array.
+
+Boggle Game, 类似LC 2124.
+
+给一个int array 跟一个数字求哪两个index相加会等于给的数字 ＆
+
+Reverse LinkedList题目
+
+1. 数据结构，问得非常详细。基本上各种数据结构都问到了，有什么特点，而且要会implement，并实现主要功能；比如hashmap；
+2. max stack; implement queue with 2 stacks; implement stack with 2 queues;
+3. reverse string using iteration and recursion;
+4. given a manager find all its subordinates, given a subordinate find all its supervisors; 应用题一样，给定问题，选用数据结构去解
+    follow-up 还有没有别的数据结构可以用？怎么解？比较一下这两个方法，说一下时间和空间的big O;
+5. pow(x, n) 然后假装自己是qa，如何去test这个功能对不对；
+
+总体来说，面试属于容易的级别，但是需要对各种情况有充分的把握，下面是面经：
+1. 阿三，英文口音比较好，属于听着一点不费力那种，年纪稍大，幽默（会在面试中开玩笑），在乎CS基础。时长： 1个小时
+Question 1: height of binary tree，这题recursive就三行代码加上error checking。
+但是三哥很重视基础，问recursive有什么不好，我说call stack会很大。他就问怎样教call stack，我说进入进城之后，程序会保存在程序栈里，如果树很深，会stackoverflow。他说有什么办法解决，我说iterative；然后继续问，为什么iterative会解决stackoverflow的问题，我说因为我们模拟的stack是放在堆里面的，所以这样会比较好。然后写代码。
+Question2：remove duplicate from sorted array； 我给了三个思路，hash，bitset，in-place remove（两个指针，copy值然后移动指针就可以）。分别说了优缺点之后，代码写的是in-place removal的。
+Question3：给一个TB级别的text file,每行是一个word，让按字母序排序。我给了两个思路，一个是切割外排，一个是map-reduce。分别陈述之后，三哥很开心我能提出map-reduce，我说我做过Hadoop和AWS的相关应用。没写代码。
+Question4：这题更无奈，考等差数列之和。。。 给100个数，其中是0-98 但是有一个数字重复了，问我怎么解决。我说先等差数列求和，然后顺次加element得出一个和，两个和相减就可以。代码没写。
+Question5：问我最近是否在professional area里有很重要的事情记忆尤甚，或者说让我自己很proud。我说在工作的时候，我的一个优化让软件跑快了三倍，省了近200倍内存。他很开心，问咋弄的，我就描述咋弄的了。
+结束之后，三哥很开心，说我会得到通知soon。
+
+2. 阿三，校友，嘿嘿，感觉RP爆棚，能遇到校友面试，还是很幸运的。就问了一道coding题。不过此校友口音异常难以听懂，我往往是听懂几个字猜的，好在在学校做project的时候，跟阿三一起干过活，对口音产生部分免疫。
+Question1：两个list，求和。（跟leetcode唯一不同的是，这两个list都是正序的，所以需要两次reverse返回。）
+这题代码偏大，加上注释小50行。 加上时间复杂度空间复杂度分析，小60行。
+Follow up：写test case；我就写了6个，大致是处理null，carry处理，长度不一的list处理，正常处理的case；写完之后每次给过一遍程序给他。他还比较满意。
+然后问问题结束了今天的面试。
+
+总体感觉，题目不难，跟面经问的不是一个难度；其他的面经有问各种npc和np hard区别，图论啊，java gc如何弄的，multithreading，mutex和信号啥区别神马神马的 我这算水了一次了，期待好消息吧
+现在养成写面经攒rp的习惯，希望大家能多提宝贵意见，祝大家早日offer，offer多多。
