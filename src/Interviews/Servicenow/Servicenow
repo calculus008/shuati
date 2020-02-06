@@ -197,16 +197,26 @@ LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 find the largest and second largest element in an int array.
 
 Boggle Game, 类似LC 2124.
+LE_214_Shortest_Palindrome
+
 
 给一个int array 跟一个数字求哪两个index相加会等于给的数字 ＆
+LE_01_Two_Sum
 
-Reverse LinkedList题目
+Reverse LinkedList
 
 1. 数据结构，问得非常详细。基本上各种数据结构都问到了，有什么特点，而且要会implement，并实现主要功能；比如hashmap；
 2. max stack; implement queue with 2 stacks; implement stack with 2 queues;
+LE_716_Max_Stack
+
 3. reverse string using iteration and recursion;
+LE_344_Reverse_String
+
 4. given a manager find all its subordinates, given a subordinate find all its supervisors; 应用题一样，给定问题，选用数据结构去解
     follow-up 还有没有别的数据结构可以用？怎么解？比较一下这两个方法，说一下时间和空间的big O;
+LE_690_Employee_Importance
+
+
 5. pow(x, n) 然后假装自己是qa，如何去test这个功能对不对；
 
 总体来说，面试属于容易的级别，但是需要对各种情况有充分的把握，下面是面经：
@@ -220,6 +230,7 @@ Question5：问我最近是否在professional area里有很重要的事情记忆
 结束之后，三哥很开心，说我会得到通知soon。
 
 2. 阿三，校友，嘿嘿，感觉RP爆棚，能遇到校友面试，还是很幸运的。就问了一道coding题。不过此校友口音异常难以听懂，我往往是听懂几个字猜的，好在在学校做project的时候，跟阿三一起干过活，对口音产生部分免疫。
+LE_02_Add_Two_Numbers
 Question1：两个list，求和。（跟leetcode唯一不同的是，这两个list都是正序的，所以需要两次reverse返回。）
 这题代码偏大，加上注释小50行。 加上时间复杂度空间复杂度分析，小60行。
 Follow up：写test case；我就写了6个，大致是处理null，carry处理，长度不一的list处理，正常处理的case；写完之后每次给过一遍程序给他。他还比较满意。

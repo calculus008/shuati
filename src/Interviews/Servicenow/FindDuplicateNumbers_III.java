@@ -30,6 +30,7 @@ public class FindDuplicateNumbers_III {
     void printfrequency(int arr[], int n) {
         /**
          * Subtract 1 from every element so that the elements become in range from 0 to n-1
+         * " integers from 1 to n"
          **/
         for (int j = 0; j < n; j++) {
             arr[j] = arr[j] - 1;

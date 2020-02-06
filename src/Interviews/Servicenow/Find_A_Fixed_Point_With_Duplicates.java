@@ -22,6 +22,8 @@ public class Find_A_Fixed_Point_With_Duplicates {
      */
 
     /**
+     * No dup version: LE_1064_Fixed_Point
+     *
      * If elements are not distinct, then we see arr[mid] < mid, we cannot conclude which side
      * the fixed is on. It could be on left side or on the right side.
      *
