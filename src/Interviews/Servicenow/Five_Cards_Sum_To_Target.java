@@ -45,7 +45,6 @@ public class Five_Cards_Sum_To_Target {
     private static boolean helper1(int[] nums, List<Integer> temp, boolean[] visited, int count, int cur, int target, String s) {
         if (count == nums.length) {
             if (cur == target) {
-                System.out.println(cur);
                 System.out.println(s);
                 return true;
             } else {
