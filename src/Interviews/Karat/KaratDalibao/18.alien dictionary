@@ -1,0 +1,118 @@
+package Interviews.Karat.KaratDalibao;
+
+class Solution {
+    public String alienOrder(String[] words) {
+        //bfs
+        
+        //build graph
+        Map<Integer,Integer> inDegree = new HashMap<>();
+        Map<Integer,Set<Integer>> adj = new HashMap<>();
+        for(String s: words){
+            for(char c: s.toCharArray()){
+                inDegree.put(c-'a',0);
+            }
+        }
+        for(int i = 0; i < words.length -1; i++){
+            String cur = words[i];
+            String nxt = words[i+1];
+            int length = Math.min(cur.length(),nxt.length());
+            for(int j = 0; j < length; j++){
+                int a = cur.charAt(j)-'a';
+                int b = nxt.charAt(j)-'a';
+                Set<Integer> temp = new HashSet<>();
+                if (a!=b){
+                    if (adj.containsKey(a)) temp = adj.get(a);
+                    if(!temp.contains(b)){
+                        temp.add(b);
+                        inDegree.put(b,inDegree.get(b)+1);
+                        adj.put(a,temp);
+                    }
+                    break;
+                }
+            }
+            if(cur.length() > nxt.length() && nxt.equals(cur.substring(0,nxt.length())))
+                return "";
+        }
+        
+        // queue
+        Queue<Integer> q = new LinkedList<>();
+        String res = "";
+        for (Integer i: inDegree.keySet()){
+            if(inDegree.get(i) == 0) q.offer(i);
+        }
+        while(!q.isEmpty()){
+            int i = q.poll();
+            res += (char)(i+'a');
+            if(adj.containsKey(i)){
+               for (Integer i2 : adj.get(i)){
+                inDegree.put(i2,inDegree.get(i2)-1);
+                if(inDegree.get(i2) == 0) q.offer(i2);
+                } 
+            }
+        }
+        if(res.length() != inDegree.size()) return "";
+        return res;
+    }
+}
+
+
+class Solution {
+    public String alienOrder(String[] words) {
+        //dfs
+        
+        //build graph
+        Map<Integer,Set<Integer>> adj = new HashMap<>();
+        int[] state = new int[26]; // 0 initiate
+        StringBuilder sb = new StringBuilder();
+        
+        for(String s: words){
+            for(char c: s.toCharArray()){
+                state[c-'a'] = 1; // 1 exist
+            }
+        }
+        
+        for(int i = 0; i < words.length -1; i++){
+            String cur = words[i];
+            String nxt = words[i+1];
+            int length = Math.min(cur.length(),nxt.length());
+            for(int j = 0; j < length; j++){
+                int a = cur.charAt(j)-'a';
+                int b = nxt.charAt(j)-'a';
+                Set<Integer> temp = new HashSet<>();
+                if (a!=b){
+                    if (adj.containsKey(a)) temp = adj.get(a);
+                    if(!temp.contains(b)){
+                        temp.add(b);
+                        adj.put(a,temp);
+                    }
+                    break;
+                }
+            }
+            if(cur.length() > nxt.length() && nxt.equals(cur.substring(0,nxt.length())))
+                return "";
+        }
+        
+        for(int i = 0; i < 26; i++){
+            if(state[i] == 1) {
+                if (!dfs(i,sb,state,adj)) return "";
+            }
+        }
+        return sb.reverse().toString();     
+    }
+    
+    
+    public boolean dfs(int i,StringBuilder sb,int[] state, Map<Integer, Set<Integer>> adj){
+        state[i] = 2; // 2 visiting
+        if(adj.containsKey(i)){
+            for(Integer i2 : adj.get(i)){
+                if(state[i2] == 2) return false;
+                if(state[i2]== 1 && !dfs(i2,sb,state, adj)) return false;
+            }
+        }
+        sb.append((char)(i+'a'));
+        state[i]=3;
+        return true;
+    }
+}
+
+

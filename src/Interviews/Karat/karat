@@ -468,3 +468,54 @@ class TrieNode {
         words = new ArrayList<String>();
     }
 }
+
+
+#Maximum product of 4 adjacent elements in matrix
+Given a square matrix, find the maximum product of four adjacent elements of matrix.
+The adjacent elements of matrix can be top, down, left, right, diagonal or anti diagonal.
+The four or more numbers should be adjacent to each other.
+Note: n should be greater than or equal to 4 i.e n >= 4
+#Project Euler Problem 11
+g = [map(int, s.split()) for s in open('pe11.in').readlines()]
+maxp = 0
+rows, cols, path_size = len(g), len(g[0]), 4
+for i in range(rows):
+    for j in range(cols - path_size + 1):
+        phv = max(g[i][j] * g[i][j+1] * g[i][j+2] * g[i][j+3],
+                  g[j][i] * g[j+1][i] * g[j+2][i] * g[j+3][i])
+        if i < rows - path_size:
+           pdd = max(g[i][j] * g[i+1][j+1] * g[i+2][j+2] * g[i+3][j+3],
+                     g[i][j+3] * g[i+1][j+2] * g[i+2][j+1] * g[i+3][j])
+maxp = max(maxp, phv, pdd)
+print "Greatest product of", path_size, "adjacent numbers:", maxp 
+
+#
+给⼀一个由单个字符串串表示的log string, 每⼀一⾏行行都是(PIN，BOARD, SEARCH). 将三个操作看做⼀一个sequence，
+⽐比如(P, B, S), 要求返回⼀一个log file⾥里里⾯面频 率最⾼高的sequence
+
+hashmap + queue 秒了了。
+
+coding的follow up说是如果有很多很多这样的log files, 内存盛不不下，我现在 想找所有Logs⾥里里⾯面最Popular的sequence，
+应该怎么做。
+
+答，⽤用map reduce。每个machine尽可能多的处理理files, mapping 的时候emit 所有locally 最好的 (sequence, count) pairs，
+reduce的时候把sequence作为key来 reduce。
+
+def find_popular_sequence_0(s_lst): from collections import Counter
+c = Counter(s_lst)
+return c.most_common()[0][0]
+def find_popular_sequence_1(s_lst): d = {}
+m_val, m_s = 0, '' for s in s_lst:
+if s not in d: d[s] = 1
+else:
+d[s] += 1
+if d[s] > m_val: m_val = d[s] m_s = s
+return m_s 
+
+
+#
+第三题是给个map, key 和 map的值是字符串（单词），字符串对应一个数字。题目的输入是一个长字符串，
+如果字符串中的单词在map里则将其替换成对应的数字，否则返回本身
+
+#
+1. substring count， 这个地里已经有很多解答。
