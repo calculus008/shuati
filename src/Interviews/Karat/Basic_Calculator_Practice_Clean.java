@@ -1,4 +1,4 @@
-package src.Interviews.Karat;
+package Interviews.Karat;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -253,6 +253,17 @@ public class Basic_Calculator_Practice_Clean {
         map.put("temperature", 5);
         map.put("e", 1);
         map.put("y", 2);
+
+        /**
+         * //import com.google.common.collect.ImmutableMap;
+         *
+         * ImmutableMap<String, Integer> imap =
+         *      ImmutableMap.<String, Integer>builder()
+         *                              .put("temperature, 5)
+         *                              .put("e", 1)
+         *                              .put("y", 2)
+         *                              .build();
+         */
 
         String s3 = "(e+8)-(pressure+3-(temperature+8)+y)+yy";
         //Correct result - "17-pressure+yy"

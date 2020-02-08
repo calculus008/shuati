@@ -1,4 +1,4 @@
-package src.Interviews.Karat;
+package Interviews.Karat;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
