@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Basic_Calculator {
     /**
-     * 1. 给一个string包括数字和+ -， 求结果。（简单版计算器）.留学论坛-一亩-三分地
+     * 1. 给一个string包括数字和+ -， 求结果。（简单版计算器）
      * 2.follow up：如果包括括号怎么做。
      * 3.follow up： 不光有数字和operator，还有一些变量，这些变量有些可以表示为一个数值，
      *   需要从给定的map里去get这个变量的value。然后有的变量不能转为数字，所以结果要包含这

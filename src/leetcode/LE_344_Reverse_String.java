@@ -13,13 +13,13 @@ public class LE_344_Reverse_String {
          Easy
      */
     public String reverseString(String s) {
-        if(null == s || s.length() == 0) return "";
+        if (null == s || s.length() == 0) return "";
 
-        int i=0;
+        int i = 0;
         int j = s.length() - 1;
         char[] ch = s.toCharArray();
 
-        while(i<j) {
+        while (i < j) {
             char temp = ch[i];
             ch[i] = ch[j];
             ch[j] = temp;
@@ -28,5 +28,24 @@ public class LE_344_Reverse_String {
         }
 
         return String.valueOf(ch);
+    }
+
+    /**
+     * in-place recursion
+     */
+    class Solution {
+        public void helper(char[] s, int left, int right) {
+            if (left >= right) return;
+
+            char tmp = s[left];
+            s[left++] = s[right];
+            s[right--] = tmp;
+
+            helper(s, left, right);
+        }
+
+        public void reverseString(char[] s) {
+            helper(s, 0, s.length - 1);
+        }
     }
 }

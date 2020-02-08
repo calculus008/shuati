@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/27/18.
  */
 public class LE_214_Shortest_Palindrome {
-    /*
+    /**
         Given a string S, you are allowed to convert it to a palindrome by adding characters in front of it.
         Find and return the shortest palindrome you can find by performing this transformation.
 
@@ -14,33 +14,33 @@ public class LE_214_Shortest_Palindrome {
 
         Given "abcd", return "dcbabcd".
      */
-    /*
+    /**
         Time : O(n ^ 2)
         Worst Case :
         i         j
         a a b c a a
-        e
+                  e
         i     j
         a a b c a a
-        e
-        i j
+                  e
+            i j
         a a b c a a
-        e
+                  e
         i       j
         a a b c a a
-        e
-        i   j
+                e
+          i   j
         a a b c a a
-        e
+                e
         i     j
         a a b c a a
-        e
+              e
         i   j
         a a b c a a
-        e
+            e
         i j
         a a b c a a
-        e
+          e
 
         a a c b + a a b c a a =  a a c b a a b c a a
     */

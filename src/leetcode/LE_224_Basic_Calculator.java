@@ -118,6 +118,69 @@ public class LE_224_Basic_Calculator {
         }
     }
 
+    class Solution_Recursion_1 {
+        /**
+         * Not an efficient one, but best for Karat test, it only needs
+         * to add the 2nd "else if" from its first question answer.
+         */
+        public int calculate(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            int sign = 1;
+
+            char[] chs = s.toCharArray();
+            int res = 0;
+            int num = 0;
+            for (int i = 0; i < chs.length; i++) {
+                if (Character.isDigit(chs[i])) {
+                    while (i < chs.length && Character.isDigit(chs[i])) {
+                        num = num * 10 + chs[i] - '0';
+                        i++;
+                    }
+                    i--;
+                } else if (chs[i] == '+' || chs[i] == '-') {
+                    System.out.println(sign + "," + num);
+                    res += sign * num;
+                    num = 0;
+                    sign = chs[i] == '+' ? 1 : -1;
+                } else if (chs[i] == '(') {
+                    int start = i;
+                    int count = 1;
+
+                    /**
+                     * #1
+                     */
+                    i++;
+                    while (i < chs.length && count > 0) {
+                        if (chs[i] == '(') {
+                            count++;
+                        } else if (chs[i] == ')') {
+                            count--;
+                        }
+                        i++;
+                    }
+
+                    /**
+                     * #2
+                     * when recurse to the next level, remove the outside parenthese,
+                     * hence, substring(start + 1, i - 1)
+                     */
+                    res += sign * calculate(s.substring(start + 1, i - 1));
+
+                    /**
+                     * #3
+                     */
+                    i--;
+                }
+            }
+
+            System.out.println(sign + "," + num);
+            res += sign * num;
+
+            return res;
+        }
+    }
+
     class Solution_Recursion {
         public int calculate(String s) {
             if (null == s || s.length() == 0) {

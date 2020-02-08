@@ -14,11 +14,11 @@ public class LE_706_Design_HashMap {
     /**
      * String hash function
      *
-     * Usually hashes wouldn't do sums, otherwise stop and pots will have the same hash.
+     * Usually hashes wouldn't do sums, otherwise "stop" and "pots" will have the same hash.
      * and you wouldn't limit it to the first n characters because otherwise house and
      * houses would have the same hash.
      *
-     * Generally hashs take values and multiply it by a prime number (makes it more likely
+     * Generally hash take values and multiply it by a prime number (makes it more likely
      * to generate unique hashes) So you could do something like:
      *
      * int hash = 7;
