@@ -103,7 +103,7 @@ public class Basic_Calculator_Practice_Clean {
             }
         }
 
-        return res += sign * num;
+        return res + sign * num;
     }
 
     public static int calculateWithQueue2(String s) {
@@ -137,7 +137,7 @@ public class Basic_Calculator_Practice_Clean {
             }
         }
 
-        return res += sign * num;
+        return res + sign * num;
     }
 
 
@@ -265,7 +265,7 @@ public class Basic_Calculator_Practice_Clean {
          *                              .build();
          */
 
-        String s3 = "(e+8)-(pressure+3-(temperature+8)+y)+yy";
+        String s3 = "(e+18)-(pressure+3-(temperature+8)+y)+yy";
         //Correct result - "17-pressure+yy"
         System.out.println(calculateWithQueue3(s3, map));
     }
