@@ -50,7 +50,7 @@ public class LE_864_Shortest_Path_To_Get_All_Keys {
      *   If we get all keys, return steps
      *
      * 2.Need to iterate through grid:
-     *   1.locate start ing point ("@")
+     *   1.locate starting point ("@")
      *   2.convert String[] into char[][] so we can do BFS
      *   3.get "allKeys" (used to tell when we find all keys in grid)
      *

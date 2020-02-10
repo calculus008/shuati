@@ -79,7 +79,7 @@ public class LE_146_LRU_Cache {
         /**
          No need to fully implement a Double Linkedlist class,
          we only need a Node class for the DL, then head and tail is private to current
-         soution class, all operation can be satisfied.So DL we have is actually like :
+         solution class, all operation can be satisfied.So DL we have is actually like :
 
          head <=> n1 <=> n2 <=> n3 <=> tail
 
@@ -124,7 +124,7 @@ public class LE_146_LRU_Cache {
 
                 //!!! Remember to update the 2 data structures (map and DL) in each operation, here is DELETE
                 map.remove(m.key);
-                removeNode(m);//always remove the tail.pre, this is teh least recent used one
+                removeNode(m);//always remove the tail.pre, this is the least recent used one
 
                 count--;
             }

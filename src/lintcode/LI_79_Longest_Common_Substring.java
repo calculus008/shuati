@@ -3,7 +3,7 @@ package lintcode;
 /**
  * Created by yuank on 10/26/18.
  */
-public class LI_79_Longest_Common_Substrin {
+public class LI_79_Longest_Common_Substring {
     /**
          Given two strings, find the longest common substring.
 

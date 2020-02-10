@@ -102,6 +102,7 @@ public class LE_811_Subdomain_Visit_Count {
                 idx++;
 
                 String url = d.substring(idx);
+
                 map.put(url, map.getOrDefault(url, 0) + num);
                 for (int i = idx; i < d.length(); i++) {
                     if (d.charAt(i) == '.') {

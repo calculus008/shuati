@@ -198,7 +198,7 @@ public class LE_139_Word_Break {
 
 
     class Solution_practice_1{
-        public boolean wordBreak(String s, List<String> wordDict) {
+            public boolean wordBreak(String s, List<String> wordDict) {
             if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
                 return false;
             }

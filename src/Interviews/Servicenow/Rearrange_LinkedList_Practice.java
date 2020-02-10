@@ -1,4 +1,4 @@
-package src.Interviews.Servicenow;
+package Interviews.Servicenow;
 
 import common.ListNode;
 
