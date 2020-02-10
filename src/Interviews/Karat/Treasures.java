@@ -7,10 +7,10 @@ import java.util.Set;
 
 public class Treasures {
     /**
-     * Now we also have treasures, denoted by 1. Given a board and start and end positions for the player,
+     * Now we have treasures, denoted by 1. Given a board and start and end positions for the player,
      * write a function to return the shortest simple path from start to end that includes all the treasures,
      * if one exists. A simple path is one that does not revisit any location.
-     * <p>
+     *
      * board3 = [
      * [  1,  0,  0, 0, 0 ],
      * [  0, -1, -1, 0, 0 ],
@@ -19,10 +19,9 @@ public class Treasures {
      * [  0,  1, -1, 0, 0 ],
      * [  0,  0,  0, 0, 0 ],
      * ]
-     * <p>
-     * <p>
+     *
      * treasure(board3, (5, 0), (0, 4)) -> None
-     * <p>
+     *
      * treasure(board3, (5, 1), (2, 0)) ->
      * [(5, 1), (4, 1), (3, 1), (3, 2), (2, 2), (2, 3), (1, 3), (0, 3), (0, 2),
      * (0, 1), (0, 0), (1, 0), (2, 0)]
@@ -149,7 +148,19 @@ public class Treasures {
                 {0, 1, 0, 0},
                 {0, 1, 0, 0}
         };
-        treasure(matrix, 0, 0, 2, 3);
+//        treasure(matrix, 0, 0, 2, 3);
+
+        int[][] matrix1 = new int[][]{
+                {1,  0,  0, 0, 0},
+                {0, -1, -1, 0, 0},
+                {0, -1,  0, 1, 0},
+                {-1, 0,  0, 0, 0},
+                {0,  1, -1, 0, 0},
+                {0,  0,  0, 0, 0 },
+        };
+
+        treasure(matrix1, 5, 1, 2, 0);
+
     }
 
 }

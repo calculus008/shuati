@@ -311,8 +311,8 @@ public class Parent_Children_Relationship {
         getRelationship(edges);
         System.out.println(hasCommonAncestor(6,7, edges));
         System.out.println(findEarliestAncestor(3, edges));
-
         graph(edges, 4, 1, 3);
+
 //        graph(edges, 4, 5, 7);
 //        graph(edges, 6, 7, 7);
 //        graph(edges, 3, 7, 7);

@@ -84,7 +84,15 @@ public class Rectangles_In_Matrix_Practice {
         return res;
     }
 
-    public static List<List<int[]>> rectangle3(int[][] matrix) {
+    public static void mark(int[][] visited, int i, int j, int k, int l) {
+        for (int a = i; a <= k; a++) {
+            for (int b = j; b <= l; b++) {
+                visited[a][b] = 1;
+            }
+        }
+    }
+
+    public static List<List<int[]>> irregular(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
 
@@ -93,19 +101,37 @@ public class Rectangles_In_Matrix_Practice {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-
+                if (matrix[i][j] == 0 && visited[i][j] == 0) {
+                    List<int[]> cur = new ArrayList<>();
+                    dfs(matrix, visited, cur, i, j);
+                    if (cur.size() > 0) {
+                        res.add(cur);
+                    }
+                }
             }
         }
 
         return res;
     }
 
-    public static void mark(int[][] visited, int i, int j, int k, int l) {
-        for (int a = i; a <= k; a++) {
-            for (int b = j; b <= l; b++) {
-                visited[a][b] = 1;
-            }
-        }
+
+
+    public static void dfs(int[][] matrix, int[][] visited, List<int[]> cur, int x, int y) {
+        if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length) return;
+
+        if (matrix[x][y] == 1 || visited[x][y] == 1) return;
+
+        cur.add(new int[]{x, y});
+
+        visited[x][y] = 1;
+        dfs(matrix, visited, cur, x + 1, y);
+        dfs(matrix, visited, cur, x - 1, y);
+        dfs(matrix, visited, cur, x, y + 1);
+        dfs(matrix, visited, cur, x, y - 1);
+        /**
+         * !!!
+         * No need to do backtrack, just dfs and mark all the cells visited
+         */
     }
 
     private static void printArray(String title, int[] arr) {
@@ -118,6 +144,17 @@ public class Rectangles_In_Matrix_Practice {
         System.out.println(title);
         for (int[] e : list) {
             System.out.println(Arrays.toString(e));
+        }
+    }
+
+    private static void printListOfList(String title, List<List<int[]>> lists) {
+        System.out.println(title);
+        for (List<int[]> list : lists) {
+            System.out.println("--shape---");
+            for (int[] e : list) {
+                System.out.println(Arrays.toString(e));
+            }
+            System.out.println("------");
         }
     }
 
@@ -159,8 +196,7 @@ public class Rectangles_In_Matrix_Practice {
          */
         printList("Multiple ", rectangle2(matrix));
 
-//        rectangleMulti(matrix);
-//        irregular(matrix2);
+        printListOfList("irregular", irregular(matrix2));
     }
 
 
