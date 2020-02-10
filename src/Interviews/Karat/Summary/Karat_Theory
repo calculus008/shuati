@@ -1,0 +1,56 @@
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=464099&highlight=karat
+ 
+## Abstraction
+Abstraction is selecting data from a larger pool to show only the relevant details to the object.
+It helps to reduce programming complexity and effort. In Java, abstraction is accomplished using
+Abstract classes and interfaces.
+ 
+## Composition vs Inheritance
+Inheritance and Composition provides code reusablility, main difference between Composition and
+Inheritance in Java is that Composition allows reuse of code without extending it but for Inheritance
+you must extend the class for any reuse of code or functionality.
+ 
+When you use Inheritance, you have to define which class you are extending in code, it cannot be changed
+at runtime, but with Composition you just define a Type which you want to use, which can hold its different
+implementation.
+ 
+with Inheritance you can only extend one class, which means you code can only reuse just one class, not more
+than one. If you want to leverage functionalities from multiple class, you must use Composition.
+ 
+Though both Inheritance and Composition allows code reuse, Inheritance breaks encapsulation because in case
+of Inheritance, subclass is dependent upon super class behavior.
+ 
+## Dependency Injection
+A technique whereby one object supplies the dependencies of another object. A dependency is an object that
+can be used (a service). An injection is the passing of a dependency to a dependent object (a client)
+that would use it.
+
+#
+设计一个新的collections 文档需要注意什么
+遇到一些production 的metrics怎么debug什么的。
+
+#
+关于OOP两小问
+1. 简单描述下composition 跟inheritance 以及他们的区别。
+2. 描述下DI(dependence injection) 以及它的优点：（我补充说明了di的缺点。。小哥很认同）
+关于testing的问题：
+1. 简单描述下mock，要用它理由。
+2. 给一个fuction设计unit test cases。
+3. 有些CI里面的test suite 很慢，分析原因，并给出解决措施。
+3. 设计一个新的类型，文档如何写？跟一般API文档相比，看重的是细节，比如返回数据是否有序，接受input的range，是不是线程safe
+  （线程safe我面的时候忘了，现在想起来送给大家）等等
+
+
+#
+product issues的问题：
+给一个图，cpu和mem的曲线图，cpu不怎么变，mem越来越高，问可能的问题，怎么trouble shoot
+又问了一个thread exhaustion 是什么，怎么解决
+
+OOD的问题：
+composition vs inheritence
+我看还有人问过 dependency injection
+
+一个系统，一台机器能handle 1 request per second， 问怎么测试，保证系统是scalable，能handle 1000 requests per second
+
+
+
