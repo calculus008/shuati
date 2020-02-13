@@ -4,6 +4,60 @@ import java.util.*;
 
 public class Parent_Children_Relationship {
     /**
+     * Original Question
+     * Suppose we have some input data describing a graph of relationships between parents
+     * and children over multiple generations. The data is formatted as a list of (parent, child)
+     * pairs, where each individual is assigned a unique integer identifier.
+     *
+     * # For example, in this diagram, 3 is a child of 1 and 2, and 5 is a child of 4:
+     *
+     * # 1   2   4
+     * #  \ /   / \
+     * #   3   5   8
+     * #    \ / \   \
+     * #     6   7   9
+     *
+     * # ancestors = [6]
+     * # ancestors = [3,5]
+     * # ancestors = [3,4]
+     * # ancestors = [3]
+     * # ancestors = [1,2]
+     *
+     * # Write a function that takes this data as input and returns two collections:
+     *  one containing all individuals with zero known parents, and one containing all
+     *  individuals with exactly one known parent.
+     *
+     * # Sample output (pseudocode):
+     * # [
+     * #   [1, 2, 4],   // Individuals with zero parents
+     * #   [5, 7, 8, 9] // Individuals with exactly one parent
+     * # ]
+     *
+     * # Write a function that, for two given individuals in our dataset, returns true if
+     * and only if they share at least one ancestor.
+     *
+     * # Sample input and output:
+     * # parentChildPairs, 3, 8 => false
+     * # parentChildPairs, 5, 8 => true
+     * # parentChildPairs, 6, 8 => true
+     *
+     *
+     * # Write a function that, for a given individual in our dataset, returns their
+     * earliest known ancestor -- the one at the farthest distance from the input individual.
+     * If there is more than one ancestor tied for "earliest", return any one of them. If the
+     * input individual has no parents, the function should return null (or -1).
+     *
+     * # Sample input and output:
+     *
+     *
+     * # 8 => 4
+     * # 7 => 4
+     * # 6 => 1, 2, or 4
+     *
+     */
+
+
+    /**
      * 1.Group by number of parents:
      * <p>
      * For graph

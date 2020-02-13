@@ -21,6 +21,15 @@ public class Badge_And_Employee {
      * Write a function that finds anyone who badged into the room 3 or more times in a
      * 1-hour period, and returns each time that they badged in during that period.
      * (If there are multiple 1-hour periods where this was true, just return the first one.)
+     *
+     *
+     * NEW!!!
+     * Given a list of people who enter and exit, find the maximal group of people who were inside
+     * together at least 2 times and output the group and the times they were in together.
+     *
+     * All enters/exits are valid.
+     *
+     * 第三道大概是同时在屋里的最大的group，而且要求group出现两会。输出group而且group在一起的那段时间.
      */
 
     static void getGroup(String[][] records) {

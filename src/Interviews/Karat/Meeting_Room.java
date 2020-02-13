@@ -13,7 +13,16 @@ public class Meeting_Room {
      *
      * 第二题：类似merge interval，唯一的区别是输出，输出空闲的时间段，merge完后，再把两两个之间的
      * 空的输出就好，注意要加上0 - 第一个的start time
+     * 第二题input是多个人的schedule组成的list，会有重合，要求输出所有空闲的时间段
      *
+     * 第三题：是给会议分配房间。已知每个会议的人数、开始时间、结束时间，以及每个房间的容量。
+     * 输入：
+     *     会议列表：每个会议有名称、人数、开始时间、结束时间
+     *     房间列表：每个房间有名称、容量。.本文原创自1point3acres论坛
+     *
+     *     输出：
+     *     每个会议安排在哪个房间，格式是“会议名:房间名”
+     *     如果没法都安排，输出"impossible"
      *
      * Variation:
      * You and your friend are going to hang out together, but you are all very busy. Your

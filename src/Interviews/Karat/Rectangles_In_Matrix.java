@@ -38,6 +38,14 @@ public class Rectangles_In_Matrix {
      * 那个图是1,0组成的矩阵，0组成的就是各种图形。
      *
      * 跟前面关系的确不大,如果矩阵里有多个不规则的形状，返回这些形状。这里需要自己思考并定义何谓“返回这些形状”
+     *
+     * #
+     * 题目是给一个matrix由01构成，其中有一个0组成的矩形，其余都是1，找出这个矩形的左上及右下坐标。
+     * 遍历matrix碰到第一个0就上下左右四个方向找(?)，得到上左下右边界后break。
+     * 提问时空间复杂度。测试所有能想到的corner cases，就是这一步耽误了不少时间。
+     *
+     * follow up： matrix中不止一个0矩阵，找出所有矩阵的上左下右坐标并返回。. visit 1point3acres for more.
+     * 想法是用boolean[][] color来对矩阵元素进行标记，dfs找到未被标记0元素的所有邻接0，然后color设为true，避免重复查找
      */
 
     static int[] rectangle1(int[][] matrix) {

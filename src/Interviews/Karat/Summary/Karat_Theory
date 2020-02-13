@@ -52,5 +52,51 @@ composition vs inheritence
 
 一个系统，一台机器能handle 1 request per second， 问怎么测试，保证系统是scalable，能handle 1000 requests per second
 
+#
+1，假如你有一个类似Facebook的应用 用户超级多, 现在需要实时在每个post下显示发post的人有多少好友，如果实现这一功能
+2，假如你设计Google doc, 现在有100个server, 每一个文件只能在一个server上被处理，当用户多了以后，会出现什么performance issue？如果解决
 
+#
+1.Which Principle that you are using, and why?
+2.undo/redo , which data structure is good for this?
+3.boolean flag. if you have too much flag, how to store in limited space device? which data structure
+  is good for that.
+4. how do you do the performance test and load test?
+
+
+#
+1.cpu 不变 memory上升
+2.堆栈区别
+3.线程耗尽
+4.1tps的服务，上1000tps的系统（这纯属扯淡）
+
+system internal
+process thread
+how they talk
+GC shisha
+不希望的 GC model
+
+#
+200个机器分布式系统  随意有机器在特定时间挂掉 这是为什呢么
+给个图 500的error特别起起伏伏 为什么
+给个图 系统反应时间特别起起伏伏 为什么
+
+#
+1. 两个function: O(m+n) v.s. O(mlogn) 什么情况下前者快，什么情况下后者快
+2. 想从一个file中uniformly随机选取一行，能否用“先把file读成bytes后，随机选取一个byte，向前后找到newline，然后选取这行”来实现
+3. 第三题不太记得了，好像也是跟complexity有关
+
+#
+记得的问题有，best data structure for a specific problem, race condition, why object
+
+#
+三个关于production service的：
+1.给了我一个图，问我这个图出现了什么问题。CPU不怎么变，Memory飞快上升。
+2.如果一台机器线程耗尽了会有什么症状怎么解决。
+3.有一个目前承载1tps的服务，怎么来确定它能否承担1000tps的客户请求。
+
+三个关于测试的：
+1.什么时候用mock，什么时候不用mock
+2.如果一个测试特别慢怎么
+3.写了一个最短路径的算法，怎么测试
 
