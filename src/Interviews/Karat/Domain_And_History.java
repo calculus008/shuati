@@ -81,18 +81,18 @@ public class Domain_And_History {
      *
      *
      *
-     * Question3
-     *  The people who buy ads on our network don't have enough data about how ads are working for
+     * #Question3
+     * The people who buy ads on our network don't have enough data about how ads are working for
      * their business. They've asked us to find out which ads produce the most purchases on their website.
      *
-     *  Our client provided us with a list of user IDs of customers who bought something on a landing page
+     * Our client provided us with a list of user IDs of customers who bought something on a landing page
      * after clicking one of their ads:
      *
      *  # Each user completed 1 purchase.
      *  completed_purchase_user_ids = [
      *    "3123122444","234111110", "8321125440", "99911063"]
      *
-     *  And our ops team provided us with some raw log data from our ad server showing every time a
+     * And our ops team provided us with some raw log data from our ad server showing every time a
      * user clicked on one of our ads:
      *  ad_clicks = [
      *   #"IP_Address,Time,Ad_Text",
@@ -108,7 +108,7 @@ public class Domain_And_History {
      *
      * all_user_ips = [
      *   #"User_ID,IP_Address",
-     *    "2339985511,122.121.0.155",
+     *   "2339985511,122.121.0.155",
      *   "234111110,122.121.0.1",
      *   "3123122444,92.130.6.145",
      *   "39471289472,2001:0db8:ac10:fe01:0000:0000:0000:0000",
@@ -116,7 +116,7 @@ public class Domain_And_History {
      *   "99911063,92.130.6.144"
      * ]
      *
-     *  Write a function to parse this data, determine how many times each ad was clicked,
+     * Write a function to parse this data, determine how many times each ad was clicked,
      * then return the ad text, that ad's number of clicks, and how many of those ad clicks
      * were from users who made a purchase.
      *
@@ -127,9 +127,9 @@ public class Domain_And_History {
      *  0 of 1  The Best Hollywood Coats
      *  3 of 3  Buy wool coats for your pets
      *
-     *     用几个map来回倒腾就行。
+     *  用几个map来回倒腾就行。
      *
-     *  Another one:
+     * Another one:
      * 第三题:
      * 这道题好像没在地里看到过. 统计点击广告的数量以及最后购买的数量. given 三个 list, 包括 purchasedUser(所有购买用户id),
      * ipaddressUser(IP地址和用户对应列表), history(浏览记录, 包括IP地址, 时间 和 商品(广告)). 应该就 split 一下,

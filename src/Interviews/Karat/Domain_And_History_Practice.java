@@ -68,6 +68,70 @@ public class Domain_And_History_Practice {
         return res;
     }
 
+    /**
+     *  userids : userids whoc did a purcase
+     *  clicks : "IP_Address,Time,Ad_Text",
+     *  ips: #"User_ID,IP_Address"
+     *
+     *  Output:
+     *
+     *  Expected output:
+     *  Bought Clicked Ad Text
+     *  1 of 2  2017 Pet Mittens
+     *  0 of 1  The Best Hollywood Coats
+     *  3 of 3  Buy wool coats for your pets
+     */
+    public static List<String> getAdData(String[] userids, String[] clicks, String[] ips) {
+        /**
+         * map ip to user id
+         */
+        Map<String, String> ipMap = new HashMap<>();
+        for (String ip : ips) {
+            String[] e = ip.split(",");
+            ipMap.put(e[1], e[0]);
+        }
+
+        Map<String, Integer> clickMap = new HashMap<>();//count map for total clicks
+        Map<String, Integer> convertMap = new HashMap<>();//count map for conversion
+        Map<String, Set<String>> activityMap = new HashMap<>();//userid -> set of ads the user did purchase on
+
+        for (String c : clicks) {
+            String[] e = c.split(",");
+            String ip = e[0];
+            String ad = e[2];
+
+            clickMap.put(ad, clickMap.getOrDefault(ad, 0) + 1);
+
+            if (!ipMap.containsKey((ip))) continue;
+
+            String userid = ipMap.get(ip);
+
+            if (!activityMap.containsKey(userid)) {
+                activityMap.put(userid, new HashSet<>());
+            }
+            activityMap.get(userid).add(ad);
+        }
+
+        for (String userid : userids) {
+            if (!activityMap.containsKey(userid)) continue;
+
+            for (String ad : activityMap.get(userid)) {
+                convertMap.put(ad, convertMap.getOrDefault(ad, 0) + 1);
+            }
+        }
+
+        List<String> res = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (String ad : clickMap.keySet()) {
+            int convert = convertMap.containsKey(ad) ? convertMap.get(ad) : 0;
+
+            res.add(convert + "-" + clickMap.get(ad) + "-" + ad);
+        }
+
+        return res;
+    }
+
     public static void printMap(String title, Map<String, Integer> map) {
         System.out.println(title);
         for (String key : map.keySet()) {
@@ -100,5 +164,24 @@ public class Domain_And_History_Practice {
         printStrList("user0 and user3", longestCommonHistory(user0, user3));
         printStrList("user1 and user2", longestCommonHistory(user1, user2));
 
+        String[] userids = {"3123122444","234111110", "8321125440", "99911063"};
+        String[] clicks = {
+                 "122.121.0.1,2016-11-03 11:41:19,Buy wool coats for your pets",
+                 "96.3.199.11,2016-10-15 20:18:31,2017 Pet Mittens",
+                 "122.121.0.250,2016-11-01 06:13:13,The Best Hollywood Coats",
+                 "82.1.106.8,2016-11-12 23:05:14,Buy wool coats for your pets",
+                 "92.130.6.144,2017-01-01 03:18:55,Buy wool coats for your pets",
+                 "92.130.6.145,2017-01-01 03:18:55,2017 Pet Mittens"
+        };
+        String[] ips = {
+                "2339985511,122.121.0.155",
+                "234111110,122.121.0.1",
+                "3123122444,92.130.6.145",
+                "39471289472,2001:0db8:ac10:fe01:0000:0000:0000:0000",
+                "8321125440,82.1.106.8",
+                "99911063,92.130.6.144"
+        };
+
+        printStrList("conversion data", getAdData(userids, clicks, ips));
     }
 }

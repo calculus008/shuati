@@ -85,10 +85,10 @@ reflowAndJustify(lines, 24) ... "reflow lines and justify to length 24" =>
 #
 Karat好好准备不难的，都能找到前辈的面经。都是三道题一套一起出，我总结了一下常见的几套，大家搜一下就搜得到啦。
 
-领域套	每题单独条件	subdomain	lcs	ads conversion rate
-会议套	给会议intervals	新会议是否可行	所有空闲时间	给房间容量会议细节，如何安排会议
+领域套	每题单独条件	subdomain	lcs	ads conversion rate (**)
+会议套	给会议intervals	新会议是否可行	所有空闲时间	给房间容量会议细节，如何安排会议 (**)
 计算器套	给string算结果	+ - digit	+ - ( ) digit	+ - ( ) variables
-学生套	给学生上的课	学生共有课程	给上课顺序，找一个中间课	找所有中间课
+学生套(**)	给学生上的课	学生共有课程	给上课顺序，找一个中间课	找所有中间课
 宝藏套	给二维矩阵	返回某点邻居	返回某点出发可抵达区域	给起点终点，最短路径获得所有宝藏
 矩形套	给二维矩阵	找到一个矩形	找到所有矩形	找到所有连通量
 

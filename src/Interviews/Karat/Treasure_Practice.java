@@ -1,8 +1,6 @@
 package Interviews.Karat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Treasure_Practice {
     /**
@@ -15,6 +13,85 @@ public class Treasure_Practice {
      * along the path, therefore BFS won't work here.
      *
      * So the solution is to do DFS to get all valid paths, then find the shortest one.
+     */
+
+    /**
+     * Question 1
+     */
+    public static List<int[]> nextMove(int[][] matrix, int x, int y) {
+        List<int[]> res = new ArrayList<>();
+        if (!isValid(matrix, x, y)) return res;
+
+        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        for (int[] dir : dirs) {
+            int nx = x + dir[0];
+            int ny = y + dir[1];
+
+            if (isValid(matrix, nx, ny)) {
+                res.add(new int[]{nx, ny});
+            }
+        }
+
+        return res;
+    }
+
+    public static boolean isValid(int[][] matrix, int x, int y) {
+        if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length) return false;
+        if (matrix[x][y] == -1) return false;
+        return true;
+    }
+
+    /**
+     * Question 2
+     * Time  : O(mn)
+     * Space : O(mn)
+     */
+    public static boolean isReachable(int[][] board, int x, int y) {
+        if (!isValid(board, x, y)) return false;
+
+        int m = board.length;
+        int n = board[0].length;
+
+        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[]{x, y});
+        boolean[][] visited = new boolean[m][n];
+        visited[x][y] = true;
+
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+
+            for (int[] dir : dirs) {
+                int nx = cur[0] + dir[0];
+                int ny = cur[1] + dir[1];
+
+                if (!isValid(board, nx, ny)) continue;
+
+                /**
+                 * !!!
+                 */
+                if (visited[nx][ny]) continue;
+
+                q.offer(new int[]{nx, ny});
+                visited[nx][ny] = true;
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n ; j++) {
+                if (board[i][j] == 0 && !visited[i][j]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Question 3
+     * Time : O(2 ^ (mn)) ??
+     * Space : O(mn)
      */
     public static List<int[]> treasurePath(int[][] matrix, int[] start, int[] end) {
         List<int[]> res = new ArrayList<>();
@@ -107,8 +184,26 @@ public class Treasure_Practice {
     public static void main(String args[]) {
         int[][] matrix = new int[][]{
                 {0, -1, -1, 0},
-                {0, 1, 0, 0},
-                {0, 1, 0, 0}
+                {0, 0, 0, 0},
+                {0, -1, 0, 0}
+        };
+
+        int[][] matrix2 = new int[][]{
+                {0,  0,  0, 0, 0},
+                {0, -1, -1, 0, 0},
+                {-1, -1,  0, 0, 0},
+                {-1, 0,  0, 0, 0},
+                {0,  0, -1, 0, 0},
+                {0,  0,  0, 0, 0 },
+        };
+
+        int[][] matrix3 = new int[][]{
+                {0,  -1,  0, 0, 0},
+                {0, -1, -1, 0, 0},
+                {-1, -1,  0, 0, 0},
+                {-1, 0,  0, 0, 0},
+                {0,  -1, -1, 0, 0},
+                {0,  -1,  0, 0, 0 },
         };
 
         int[][] matrix1 = new int[][]{
@@ -120,8 +215,13 @@ public class Treasure_Practice {
                     {0,  0,  0, 0, 0 },
                 };
 
+        printList(nextMove(matrix, 0, 3));
+        printList(nextMove(matrix, 1, 1));
 //        printList(treasurePath(matrix, new int[]{0, 0}, new int[]{2, 3}));
 
+        System.out.println(isReachable(matrix2, 2,4));
+        System.out.println(isReachable(matrix3, 1,1));
+        System.out.println(isReachable(matrix3, 4,0));
         /**
          * [(5, 1), (4, 1), (3, 1), (3, 2), (2, 2), (2, 3), (1, 3), (0, 3), (0, 2),
          *  (0, 1), (0, 0), (1, 0), (2, 0)]
