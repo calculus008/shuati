@@ -65,5 +65,14 @@ public class Text_Wrap {
      *           "as--the--night--abruptly",
      *           "lighted--with--brilliant",
      *           "flame" ] // <--- a single word on a line is not padded with spac
+     *
+     *
+     * ####
+     * 第一题: 是要求把尽量多的词用‘-’串起来，但要求长度在某个数之内。我的主要时间就卡在了这道题，
+     *        在最后5分钟做出来了，哎，手太生疏了。。。要想清楚需要维护的变量是什么就会很简单。。
+     * 第二题: 就是基于第一题把给的句子拆开，然后再用类似task schedule的方式逐一插入‘-’直到达到最大长度。。
+     *
+     *
+     * Reference : LE_68_Text_Justification
      */
 }
