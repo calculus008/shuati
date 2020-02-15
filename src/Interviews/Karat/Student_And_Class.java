@@ -199,6 +199,13 @@ public class Student_And_Class {
         return cur;
     }
 
+    /**
+     * Question 3
+     * Multiple class paths, there are possible multiple start classes.
+     *
+     * For each start class, dfs to find all possible paths, each path
+     * is saved in a list, we can get mid one use index size / 2
+     */
     public static List<String> midClass1(String[] classes) {
         List<String> res = new ArrayList<>();
 
@@ -241,7 +248,9 @@ public class Student_And_Class {
 
         for (List<String> path : paths) {
             int size = path.size();
-            res.add(path.get(size / 2));
+            int mid = size / 2;
+            int idx = mid % 2 == 0 ? mid - 1 : mid;
+            res.add(path.get(idx));
         }
 
         return res;
