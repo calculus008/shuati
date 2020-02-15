@@ -72,6 +72,9 @@ public class Rectangles_In_Matrix_Practice {
                     }
                     l--;
 
+                    /**
+                     * !!!
+                     */
                     mark(visited, i, j, k, l);
                     res.add(new int[]{i, j, k, l});
 

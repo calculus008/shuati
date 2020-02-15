@@ -121,7 +121,6 @@ public class Domain_And_History_Practice {
         }
 
         List<String> res = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
 
         for (String ad : clickMap.keySet()) {
             int convert = convertMap.containsKey(ad) ? convertMap.get(ad) : 0;

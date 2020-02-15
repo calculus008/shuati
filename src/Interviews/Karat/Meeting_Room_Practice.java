@@ -22,7 +22,9 @@ public class Meeting_Room_Practice {
 
 
     /**
-     * Quesiton 2
+     * Question 2
+     * First merge given interval list.
+     * Create idle slot from the merged list, notice the start and end slots should be added
      */
     public static List<int[]> idleTime2(int[][] meetings) {
         List<int[]> res = new ArrayList<>();

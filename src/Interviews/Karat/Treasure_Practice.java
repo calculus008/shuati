@@ -45,6 +45,9 @@ public class Treasure_Practice {
      * Question 2
      * Time  : O(mn)
      * Space : O(mn)
+     *
+     * Walk from destination to other 0 value cell, then check if
+     * there's any cell is not reachable.
      */
     public static boolean isReachable(int[][] board, int x, int y) {
         if (!isValid(board, x, y)) return false;

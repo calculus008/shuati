@@ -67,6 +67,9 @@ public class Friend_Circle_Practice {
         return res;
     }
 
+    /**
+     * Start from any id, BFS, see if visited set contains all employees
+     */
     public static boolean isInOneCircle(String[] employee, String[] friendship) {
         Map<Integer, Set<Integer>> map = getFriendsLists(employee, friendship);
 

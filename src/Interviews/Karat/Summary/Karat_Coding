@@ -120,3 +120,38 @@ Karat好好准备不难的，都能找到前辈的面经。都是三道题一套
 #   [ "Hello",  "world" ]
 
 # n = number of words / total characters
+
+
+#HashMap Type question
+Parent_Children_Relationship
+Badge_And_Employee
+Domain_And_History
+Friend_Circle
+Domain_And_History(#3)
+Student_And_Class
+
+#Interval
+Meeting_Room
+Badge_And_Employee(#3)
+
+#Grid DFS BFS
+Treasures
+Rectangles_In_Matrix
+
+#DP
+Domain_And_History(#2)
+
+#Stack
+Basic_Calculator
+
+#Not finished
+Student_And_Class
+Design_Sparse_Vector
+Text_Wrap
+
+
+
+
+
+
+

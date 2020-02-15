@@ -4,6 +4,7 @@ import java.util.*;
 
 public class Badge_And_Employee {
     /**
+     * #1
      * We are working on a security system for a badged-access room in our company's building.
      * Given an ordered list of employees who used their badge to enter or exit the room, write
      * a function that returns two collections:
@@ -13,6 +14,7 @@ public class Badge_And_Employee {
      * 2. All employees who didn't use their badge while entering the room  
      * – they recorded an exit without a matching enter.
      *
+     * #2
      * We want to find employees who badged into our secured room unusually often.
      * We have an unordered list of names and access times over a single day. Access
      * times are given as three or four-digit numbers using 24-hour time, such as "800"
@@ -22,14 +24,14 @@ public class Badge_And_Employee {
      * 1-hour period, and returns each time that they badged in during that period.
      * (If there are multiple 1-hour periods where this was true, just return the first one.)
      *
-     *
+     * #3
      * NEW!!!
      * Given a list of people who enter and exit, find the maximal group of people who were inside
      * together at least 2 times and output the group and the times they were in together.
      *
      * All enters/exits are valid.
      *
-     * 第三道大概是同时在屋里的最大的group，而且要求group出现两会。输出group而且group在一起的那段时间.
+     * 第三道大概是同时在屋里的最大的group，而且要求group出现两次。输出group而且group在一起的那段时间.
      */
 
     static void getGroup(String[][] records) {
