@@ -258,7 +258,7 @@ public class Student_And_Class {
 
     private static void dfs(List<List<String>> paths, List<String> temp, String cur, Map<String, List<String>> map) {
         if (!map.containsKey(cur)) {
-            temp.add(cur)
+            temp.add(cur);
             paths.add(new ArrayList<>(temp));
             temp.remove(temp.size() - 1);
             return;

@@ -14,7 +14,7 @@
 #3
 算法题：
 1. substring count， 这个地里已经有很多解答。 (!!!)
-https://www.geeksforgeeks.org/number-substrings-string/
+https://www.geeksforgeeks.org/number-of-substrings-of-one-string-present-in-other/
 
 2. 给定一个graph（是一个2D input array），第一问：写一个function返回graph里面只有一个parent的集合，跟没有parent的集合。
    solution ： 2 hashmaps 第二问：给定两个leaf，写一个function判断这两个leaf是不是有共同的parent。solution： BFS
@@ -129,6 +129,7 @@ Domain_And_History
 Friend_Circle
 Domain_And_History(#3)
 Student_And_Class
+Design_Sparse_Vector
 
 #Interval
 Meeting_Room
@@ -144,9 +145,10 @@ Domain_And_History(#2)
 #Stack
 Basic_Calculator
 
-#Not finished
+#Graph
 Student_And_Class
-Design_Sparse_Vector
+
+#
 Text_Wrap
 
 
