@@ -31,6 +31,28 @@ public class Badge_And_Employee {
      *
      * All enters/exits are valid.
      *
+     * ###
+     * 1. 一个公司记录了门禁系统的log，检查是否有人非法进入，log是个list，list有order，每一项是一个pair，
+     * 前面是string人名，后面是string "enter" 或 "exit"，一个人的出入记录形成先enter后exit的情况视为合法
+     *
+     * input: 上面描述的list
+     * return: 两个list记录非法出入的人, 第一个list记录只有enter记录但是没有exit记录的人，第二个list记录只有exit
+     *         记是但是没有enter记录的人
+     * 注意：1. 同一人，enter必须出现在exit前面，如果一个人先exit后enter，说明有问题，这个人应在两个返回list都出现一次
+     *      2. 每个人可以多次进出，只要有一次违反上面的要求，就需要依据情况加入返回的list
+     *
+     *
+     * 2. 背景和第一题是一样的，只是log记录的内容有所不同，list每一项还是一个pair，前面是string人名，不会重复，后面是另一个list，
+     * list里记录这个人进门的时间log（不再考虑出去）
+     *
+     * input: 上面描述的list
+     * return:  一个list，每一项是一个pair，前项是人名，后项是个list，list的内容是对这个人的时间log做filter，
+     *          如果有三个或以上连续的记录出现在一个小时范围之内，这些记录需要出现在返回的list里面，所有不overlap
+     *          的这种case都要记录
+     * 注意：1. 时间显示方式1350代表1点50, 1400代表两点时间是60进位，但是给的数字是正常的100才进位，算时差的时候要考虑
+     *      2. 如果时间log里记录有overlap的话（[1350, 1400, 1450, 1500] 前三个记录和后三个记录都在一小时范围之内），
+     *         返回前三个记录就好，面试官告诉我的是testcase不会有这种情况
+     *
      * 第三道大概是同时在屋里的最大的group，而且要求group出现两次。输出group而且group在一起的那段时间.
      */
 

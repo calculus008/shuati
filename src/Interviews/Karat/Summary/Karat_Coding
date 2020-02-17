@@ -1,3 +1,45 @@
+#
+一个ArrayList只有两个元素，其中一个只出现一次，找出这个元素即可 {1, 1, 1, 2, 1, 1}，秒了
+
+#
+给IDE设计一个autocomplete功能。给出一个如下的String[]。要求输入大写字母和几个小写字母后，实现autocomplete。大写字母必须全部match。感觉是用Trie，但怎么存怎么查没想明白。欢迎大家讨论。
+
+String[]  className {
+        "GraphView",
+        "DataGraphView",
+        "DataController",
+        "GraphViewController",
+        "DataScienceView"
+}
+
+autocomplete(String[] className, "Data");  --> {"DataGraphView", "DataController", "DataScienceView"};
+autocomplete(String[] className, "GVi");   -->  {"GraphView",  "GraphViewController"};
+autocomplete(String[] className, "GraphController");   -->  {""};
+
+第一种，正常的建立字典树，只是在搜索的时候，需要处理：凡是在两个大写字母中间都要加一个*，在搜索字典树的时候，遇到*，表示可以继续递归所有小写字母的节点，有点类似于LC上的带有*的操作；
+第二种，就是给大写字母建字典树，然后在每个TrieNode里在挂一个map<"小写字母组成的串"，Set<TrieNode>>，比如对“GraphView”， 建两个TrieNode: G 和V， 然后在G的节点上，挂一个map: [r, G], [ra, G], [rap, G], [raph, G]，就这样GraV就能指导V这个节点了。
+
+和正常的trie一樣，只對大寫字母建trie，每個node保存一個word list，然後搜索的時候直接搜索大寫字母的縮寫，然後返回最後的一個node的word list
+
+#
+input:
+[{time, user id, resource id},
+{time, user id, resource id},
+{time, user id, resource id}]
+
+第一題：求每個user session start & end time
+output:
+[{user: [start time, end time]},
+{user: [start time, end time]}]
+
+第二題：求五分鐘內被accessed最多次的resource id
+
+#
+我只完成了2道题，第一题input是一个string，string里有一个数字和一个string（比如"111, dddddd"）。要输出substring和对应出现的次数。
+第二题是输入两个string array，输出长度最大的共同sub array。
+
+
+
 3.bug free 要求高
 
 #1

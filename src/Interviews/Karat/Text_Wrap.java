@@ -75,6 +75,10 @@ public class Text_Wrap {
      * 在最后5分钟做出来了，哎，手太生疏了。。。要想清楚需要维护的变量是什么就会很简单。。
      * 第二题: 就是基于第一题把给的句子拆开，然后再用类似task schedule的方式逐一插入‘-’直到达到最大长度。。
      *
+     * ###
+     * 第一题：给了若干个string和最大长度，重新排列字符串，让每行长度不超过最大长度（同一行字符串之间有空格）
+     * （str1\n str2\n str3\n -> str1 str2\n str3\n）
+     * 第二题：找到一个string里面最长的重复substring的长度 （aaaaaaaabbbbbaaa -> a 8) (***)
      *
      * Reference : LE_68_Text_Justification
      */

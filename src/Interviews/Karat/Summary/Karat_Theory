@@ -100,3 +100,69 @@ GC shisha
 2.如果一个测试特别慢怎么
 3.写了一个最短路径的算法，怎么测试
 
+#
+一上来问了三组关于system design 的问题， 都是口头表述就可以， 不需写code， 都跟fault tolerance， distributed system，
+load balance相关的一共大概过了15分钟
+
+#
+. Basic questions (Production issue, OOD)
+   - graph with ram keep increasing and how to locate the issue
+   - how to handle thread poll exhaustion
+   - how to test web service QPS when it scale up
+
+   - what's the different between Composition and inhertence
+   - what need to be write in javadoc when you creat a new collection class
+   - what is dependency injection and how it reduce software complexity
+
+
+#
+然后是五分钟4道问答题，大概就是一些工作场景中的问题。
+比如，隔壁组说要想吧release cycle加快到一天一次，该怎么办。
+（我答的是那就要实现continuous deployment, 加pipelien,加integration test, 加alarm,加monitors etc.)
+再比如，一次release之后200个服务器里总有随机的某一个down，customer又没有complain，这是为啥。
+（这个我也不知道怎么答，我说这个得看release里有啥code change,然后才知道）
+还有两个是给个图让分析spike的原因，然后怎么debug。这个感觉答的不确定好不好
+
+#
+1. 是200个instances 在200太机器上， 有一个随机instance 隔几分钟挂一次， 问可能原因是什么
+2. 给一个图是 http response code 的qps， 其中500 有几个spike， 问怎么分析错误原因
+3. 给一个图 上面是 不同percentile的latency，其中p99和p90 latency很大，问怎么分析错误原因
+4. 问要每天release一次，需要注意哪些问题
+
+#
+问题一 database俩table 第一个是 user 第二个是 friends，这个friends table 是单个的case 比如说 user01 和user02 是基友
+ 那就会有个table id；user01；user02。若use01还有其他朋友 就会有其他table 让我说如何在前端显示时时朋友总数。。。
+问题二 有个load balancing system 实现方法基本上就是hashmap，100个机器，让我说用户增多后会出现神马问题，怎么解决。
+
+#
+OOP
+1) Composition vs Inheritence
+2) Depedency Injection
+3) 如果向Collection framwork里面加入一个新的class，documentation应该注意什么
+
+#
+what is the most important object oriented programming principle for complex system
+
+#
+聊个项目
+设计模式（singleton啥的）
+
+#
+普通编程，
+1. 问你什么样的oop属性对程序的模块化有帮助。
+2. 他列出一些问题让我选最适合的数据结构， 比如要保存和查询文件用什么最好等， 记不起其他了，列出了五个。
+3. 也是数据结构题， 具体忘了。
+
+系统效率呀
+1. 给你一个图， cpu 和 memory， 让你判断出了什么问题。
+2.系统在一定时间老是挂点， 什么原因。
+3. 具体忘了
+
+#
+一些基础知识 hashcode vs equal， override vs overwrite，dependency inject && conversion of control，
+how to make code scalable，test tactics you often use in your daily work
+
+#
+1. what is dependency injection, pros and cons to use it
+2. compare composition and inheritance
+3. what is mock, why use it, cons

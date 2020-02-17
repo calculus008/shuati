@@ -100,9 +100,74 @@ public class Student_And_Class {
      * #
      * Q1. 给一个student id => list of taking courses 这样一个input，求每一对学生之间的commonly taking courses。
      *
-     * Q2. 给一个[prerequisite course, next course]的vector，保证有唯一一个starting course和ending course，并且所有非starting course有唯一一个前驱，所有非ending course有唯一一个后继（i.e. prerequisite的关系是一个包含所有课程简单的路径）。然后middle course定义为这个路径的中间那个，如果有偶数个course那么就是中间两个靠前面那个。求middle course。
+     * Q2. 给一个[prerequisite course, next course]的vector，保证有唯一一个starting course和ending course，并且所有非starting course有唯一一个前驱，
+     *     所有非ending course有唯一一个后继（i.e. prerequisite的关系是一个包含所有课程简单的路径）。然后middle course定义为这个路径的中间那个，
+     *     如果有偶数个course那么就是中间两个靠前面那个。求middle course。
      *
      * Q3. Q2的follow up，prerequisite的关系是一张有向无环图，求所有可能的middle courses。我的做法是直接对于每个starting course做dfs。
+     *
+     * Students may decide to take different "tracks" or sequences of courses in the Computer Science curriculum. There may be more than one track that includes the same course, but each student follows a single linear track from a "root" node to a "leaf" node. In the graph below, their path always moves left to right.
+     *
+     * Write a function that takes a list of (source, destination) pairs, and returns the name of all of the courses that the students could be taking when they are halfway through their track of courses.
+     *
+     * Sample input:
+     * all_courses = [
+     *     ["Logic", "COBOL"],
+     *     ["Data Structures", "Algorithms"],
+     *     ["Creative Writing", "Data Structures"],
+     *     ["Algorithms", "COBOL"],
+     *     ["Intro to Computer Science", "Data Structures"],
+     *     ["Logic", "Compilers"],
+     *     ["Data Structures", "Logic"],
+     *     ["Creative Writing", "System Administration"],
+     *     ["Databases", "System Administration"],
+     *     ["Creative Writing", "Databases"],
+     * ]
+     *
+     * Sample output (in any order):
+     *      ["Creative Writing", "Databases", "Data Structures"]
+     *
+     * Visual representation:
+     *                                           ______________
+     * ____________                              |            |
+     * |          |        ______________     -->| Algorithms |--\     _____________
+     * | Intro to |        |            |    /   |____________|   \    |           |
+     * | C.S.     |---\    | Data       |   /                      >-->| COBOL     |
+     * |__________|    \   | Structures |--+     ______________   /    |___________|
+     *                  >->|____________|   \    |            |  /
+     * ____________    /                     \-->| Logic      |-+      _____________
+     * |          |   /    ______________        |____________|  \     |           |
+     * | Creative |  /     |            |                         \--->| Compilers |
+     * | Writing  |-+----->| Databases  |                              |___________|
+     * |__________|  \     |____________|-\     _________________________
+     *                \                    \    |                       |
+     *                 \--------------------+-->| System Administration |
+     *                                          |_______________________|
+     *
+     *
+     * '''
+     *
+     * all_courses = [
+     *     ["Logic", "COBOL"],
+     *     ["Data Structures", "Algorithms"],
+     *     ["Creative Writing", "Data Structures"],
+     *     ["Algorithms", "COBOL"],
+     *     ["Intro to Computer Science", "Data Structures"],
+     *     ["Logic", "Compilers"],
+     *     ["Data Structures", "Logic"],
+     *     ["Creative Writing", "System Administration"],
+     *     ["Databases", "System Administration"],
+     *     ["Creative Writing", "Databases"],
+     * ]
+     *
+     * !!!
+     * 如果path长度是偶数，取靠左的为中间
+     *
+     *
+     * ###
+     * 1. 俩人share哪些课程，每个人maintain一个set做intersection就完事。
+     * 2. 一条path找middle，建个dict maintain 链表relation，找到最开头往后数半条路长度就完事。注意路径长度为奇偶数的情况。
+     * 3. 多条path找middle，就拓扑排序的BFS版本，reuse部分第二题的代码就可以了。
      */
 
     public static Map<String, List<String>> sharedClasses(String[] records) {
@@ -125,7 +190,11 @@ public class Student_And_Class {
 
         for (String key : map.keySet()) {
             names.add(key);
-            classes.add(map.get(key));
+            List<String> l = map.get(key);
+
+            Collections.sort(l, (a, b) -> a.compareTo(b));
+
+            classes.add(l);
         }
 
         for (int i = 0; i < names.size() - 1; i++) {
@@ -149,8 +218,8 @@ public class Student_And_Class {
         List<String> res = new ArrayList<>();
         if (l1.size() == 0 || l2.size() == 0) return res;
 
-        Collections.sort(l1, (a, b) -> a.compareTo(b));
-        Collections.sort(l2, (a, b) -> a.compareTo(b));
+//        Collections.sort(l1, (a, b) -> a.compareTo(b));
+//        Collections.sort(l2, (a, b) -> a.compareTo(b));
 
         int m = l1.size();
         int n = l2.size();

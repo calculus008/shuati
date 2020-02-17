@@ -38,6 +38,14 @@ public class Friend_Circle {
      * 4：2
      * 6：1
      * 9：
+     *
+     * ###
+     * 题目是原先OA的拓展，employee的问题。给两个list，第一个list存了每个人的id，名字，公司名称。
+     * 第二个list存friendship tuples。
+     *
+     * 然后有两问，第一问是返回每个人的friendlist。
+     * 第二问是返回每个公司有多少员工，以及这些员工中有多少有外公司的朋友。
+     * 然后两问都要给时间空间复杂度。图的问题，第二问时间复杂度是O(E+V)
      */
 
     public static Map<Integer, Set<Integer>> generateMap(String[] employees, String[] friendships) {

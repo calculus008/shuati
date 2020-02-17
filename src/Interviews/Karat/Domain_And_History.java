@@ -22,6 +22,57 @@ public class Domain_And_History {
      *             ["sports.yahoo.com", "80"]
      *          ]
      *
+     * Original Question:
+     * We have some clickstream data that we gathered on our client's website. Using cookies, we collected snippets of users' anonymized URL histories while they browsed the site. The histories are in chronological order and no URL was visited more than once per person.
+     *
+     * Write a function that takes two user’s browsing histories as input and returns the longest contiguous sequence of URLs that appears in both.
+     *
+     * Sample input:
+     * user0 = [ "/start.html", "/pink.php", "/register.asp", "/orange.html", "/red.html" ]
+     * user1 = [ "/red.html", "/green.html", "/blue.html", "/pink.php", "/register.asp" ]
+     * user2 = [ "/start.html", "/green.html", "/blue.html", "/pink.php", "/register.asp",
+     *           "/orange.html" ]
+     * user3 = [ "/blue.html", "/logout.php" ]
+     *
+     * Sample output:
+     *
+     * f(user0, user2):
+     *    /pink.php
+     *    /register.asp
+     *    /orange.html
+     *
+     * f(user1, user2):
+     *    /green.html
+     *    /blue.html
+     *    /pink.php
+     *    /register.asp
+     *
+     * f(user0, user3):
+     *    (empty)
+     *
+     * f(user1, user3):
+     *    /blue.html
+     * """
+     *
+     * !!!
+     * edge case是如果某个domain的名字一样，但是所在subdomain的位置不一样不能算成一个，
+     * 所以yahoo.com和yahoo.yahoo.com第一个yahoo算成位置为二的domain name,第二个里面
+     * 的yahoo要分别算成三和二的位置，不能全部加起来算一个，面试官会测试这种情况，
+     *
+     *
+     * 2.
+     * """
+     * Sample input:
+     * counts = [ "900,google.com",
+     *      "60,mail.yahoo.com",
+     *      "10,mobile.sports.yahoo.com",
+     *      "40,sports.yahoo.com",
+     *      "300,yahoo.com",
+     *      "10,stackoverflow.com",
+     *      "2,en.wikipedia.org",
+     *      "1,es.wikipedia.org",
+     *      "1,mobile.sports"]
+     *
      * LE_811_Subdomain_Visit_Count
      *
      * 2.给每个user访问历史记录，找出两个user之间longest continuous common history
@@ -221,6 +272,7 @@ public class Domain_And_History {
         Map<String, Integer> map = new HashMap<>();
         map.put("google.com", 60);
         map.put("yahoo.com", 50);
+        map.put("yahoo.yahoo.com", 10);
         map.put("sports.yahoo.com", 80);
 
         count(map);
