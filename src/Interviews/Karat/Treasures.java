@@ -58,7 +58,9 @@ public class Treasures {
      *  这个是第三问，前一问也很简单，我记得就是给两个点判断能不能从A走到B。第一问就更简单了，给一个点返回能走通的neighbors
      *  Now the board also includes treasures, denoted by 1.
      *
-     *  Given a board and start and end positions for the player, write a function to return the shortest simple path from start to end that includes all the treasures, if one exists. If multiple shortest paths exist, return any of them. A simple path is one that does not revisit any location.
+     *  Given a board and start and end positions for the player, write a function to return the shortest simple
+     *  path from start to end that includes all the treasures, if one exists. If multiple shortest paths exist,
+     *  return any of them. A simple path is one that does not revisit any location.
      *
      *  board3 = [
      *      [  1,  0,  0, 0, 0 ],
