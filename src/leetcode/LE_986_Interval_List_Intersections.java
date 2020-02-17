@@ -32,74 +32,102 @@ public class LE_986_Interval_List_Intersections {
      *
      * Same as LI_821_Time_Intersection ??
      */
+    class Solution {
+        public int[][] intervalIntersection(int[][] A, int[][] B) {
+            if (A == null || B == null || A.length == 0 || B.length == 0) return new int[][]{};
+
+            int m = A.length;
+            int n = B.length;
+
+            int p1 = 0, p2 = 0;
+            List<int[]> res = new ArrayList<>();
+
+            while (p1 < m && p2 < n) {
+                int startMax = Math.max(A[p1][0], B[p2][0]);
+                int endMin = Math.min(A[p1][1], B[p2][1]);
+
+                if (startMax <= endMin) {
+                    res.add(new int[]{startMax, endMin});
+                }
+
+                if (A[p1][1] == endMin) {
+                    p1++;
+                } else {
+                    p2++;
+                }
+            }
+
+            return res.toArray(new int[res.size()][]);
+        }
+    }
 
     /**
      * Time  : O(n)
      * Space : O(1) (not consider space of return value)
      */
-    class Solution {
-        public Interval[] intervalIntersection(Interval[] A, Interval[] B) {
-            List<Interval> res = new ArrayList<>();
-            if (A == null || A.length == 0 || B == null || B.length == 0) return new Interval[]{};
-
-            int i = 0;
-            int j = 0;
-
-            /**
-             * !!!
-             * "&&", NOT "||", otherwise will be out of boundary
-             */
-            while(i < A.length && j < B.length) {
-                Interval a = A[i];
-                Interval b = B[j];
-
-                /**
-                 * !!!
-                 * check if two intervals has intersection
-                 *
-                 * start1    end1    start2     end2
-                 *      *******        ***********
-                 * -----------------------------
-                 *
-                 * start1    end1
-                 *      *******
-                 *        start2       end2
-                 *         *************
-                 * -----------------------------
-                 * so we get:
-                 * start = max(start1, start2)
-                 * end   = min(end1, end2)
-                 *
-                 * if start > end, there's no intersection
-                 */
-                int start = Math.max(a.start, b.start);
-                int end = Math.min(a.end, b.end);
-
-                /**
-                 * !!!
-                 * "<="
-                 * Because "a closed interval [a, b] (with a <= b)"
-                 */
-                if (start <= end) {
-                    res.add(new Interval(start, end));
-                }
-
-                /**
-                 * !!!
-                 * "<:
-                 */
-                if (a.end < b.end) {
-                    i++;
-                } else {
-                    j++;
-                }
-            }
-
-            /**
-             * Convert list to array
-             */
-            return res.toArray(new Interval[res.size()]);
-        }
+    class Solution1 {
+//        public Interval[] intervalIntersection(Interval[] A, Interval[] B) {
+//            List<Interval> res = new ArrayList<>();
+//            if (A == null || A.length == 0 || B == null || B.length == 0) return new Interval[]{};
+//
+//            int i = 0;
+//            int j = 0;
+//
+//            /**
+//             * !!!
+//             * "&&", NOT "||", otherwise will be out of boundary
+//             */
+//            while(i < A.length && j < B.length) {
+//                Interval a = A[i];
+//                Interval b = B[j];
+//
+//                /**
+//                 * !!!
+//                 * check if two intervals has intersection
+//                 *
+//                 * start1    end1    start2     end2
+//                 *      *******        ***********
+//                 * -----------------------------
+//                 *
+//                 * start1    end1
+//                 *      *******
+//                 *        start2       end2
+//                 *         *************
+//                 * -----------------------------
+//                 * so we get:
+//                 * start = max(start1, start2)
+//                 * end   = min(end1, end2)
+//                 *
+//                 * if start > end, there's no intersection
+//                 */
+//                int start = Math.max(a.start, b.start);
+//                int end = Math.min(a.end, b.end);
+//
+//                /**
+//                 * !!!
+//                 * "<="
+//                 * Because "a closed interval [a, b] (with a <= b)"
+//                 */
+//                if (start <= end) {
+//                    res.add(new Interval(start, end));
+//                }
+//
+//                /**
+//                 * !!!
+//                 * "<:
+//                 */
+//                if (a.end < b.end) {
+//                    i++;
+//                } else {
+//                    j++;
+//                }
+//            }
+//
+//            /**
+//             * Convert list to array
+//             */
+//            return res.toArray(new Interval[res.size()]);
+//        }
 
         /**
          * input and output in format of 2D array

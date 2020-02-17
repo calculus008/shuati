@@ -95,6 +95,9 @@ public class Treasure_Practice {
      * Question 3
      * Time : O(2 ^ (mn)) ??
      * Space : O(mn)
+     *
+     * LE_980_Unique_Paths_III
+     *
      */
     public static List<int[]> treasurePath(int[][] matrix, int[] start, int[] end) {
         List<int[]> res = new ArrayList<>();
@@ -142,8 +145,10 @@ public class Treasure_Practice {
         visited[x][y] = true;
         temp.add(new int[]{x, y});
 
-        if (x == end[0] && y == end[1] && count == 0) {
-            all.add(new ArrayList<>(temp));
+        if (x == end[0] && y == end[1]) {
+            if (count == 0) {
+                all.add(new ArrayList<>(temp));
+            }
 
             /**
              * !!!
@@ -171,7 +176,7 @@ public class Treasure_Practice {
 
 
         visited[x][y] = false;
-//        if (matrix[x][y] == 1) count++;
+        if (matrix[x][y] == 1) count++;
         temp.remove(temp.size() - 1);
     }
 

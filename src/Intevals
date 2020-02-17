@@ -24,3 +24,6 @@ LE_352_Data_Stream_As_Disjoint_Intervals                  (******)
 Merge_Intervals                                           (*******)
 
 LE_855_Exam_Room
+
+LE_986_Interval_List_Intersections
+Merge_Two_Sorted_Interval_Lists
