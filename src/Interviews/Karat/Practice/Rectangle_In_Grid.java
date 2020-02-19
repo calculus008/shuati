@@ -45,6 +45,9 @@ public class Rectangle_In_Grid {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
+                /**
+                 * !!!
+                 */
                 if (grid[i][j] == 0 && !visited[i][j]) {
                     int k = i;
                     while (k < m && grid[k][j] == 0) {

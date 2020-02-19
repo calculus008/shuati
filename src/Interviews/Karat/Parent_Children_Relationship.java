@@ -130,8 +130,8 @@ public class Parent_Children_Relationship {
      * (5, 7), (4, 5), (4, 8), (4, 9), (9, 11)
      * ]
      * <p>
-     * hasCommonAncestor(3, 7) => false
-     * hasCommonAncestor( 6, 7) => true
+     * hasCommonAncestorBFS(3, 7) => false
+     * hasCommonAncestorBFS( 6, 7) => true
      */
 
     private static Map<Integer, List<Integer>> getGraph(int[][] input) {
