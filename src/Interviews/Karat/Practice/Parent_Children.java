@@ -118,7 +118,7 @@ class Parent_Children {
     }
 
     public static void getAll(Map<Integer, List<Integer>> map, Set<Integer> set, int v) {
-        set.add(v);
+        if (!set.add(v)) return;
 
         if (!map.containsKey(v) || map.get(v).size() == 0) return;
 
@@ -174,6 +174,13 @@ class Parent_Children {
         System.out.println(hasCommonAncestorBFS(edges2, 11, 3));
         System.out.println(hasCommonAncestorBFS(edges2, 3, 3));
 
+        /**
+         *      * 1   2    4
+         *      * \ /   / | \
+         *      * 3   5  8  9
+         *      * \ / \     \
+         *      * 6   7    11
+         */
         System.out.println("---hasCommonAncestorDFS---");
         System.out.println(hasCommonAncestorDFS(edges1, 6, 7));
         System.out.println(hasCommonAncestorDFS(edges1, 4, 7));
