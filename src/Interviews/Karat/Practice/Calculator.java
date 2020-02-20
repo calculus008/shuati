@@ -174,6 +174,17 @@ public class Calculator {
         System.out.println(calculate1(input1));
         System.out.println(calculate2(input2));
 
+        /**
+         * //import com.google.common.collect.ImmutableMap;
+         *
+         * ImmutableMap<String, Integer> imap =
+         *      ImmutableMap.<String, Integer>builder()
+         *                              .put("temperature, 5)
+         *                              .put("e", 1)
+         *                              .put("y", 2)
+         *                              .build();
+         */
+
         Map<String, Integer> map = new HashMap<>();
         map.put("temperature", 5);
         map.put("e", 1);
