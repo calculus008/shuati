@@ -18,6 +18,7 @@ public class Friend_Circle_Practice {
             int p2 = Integer.parseInt(s[1]);
 
             /**
+             * !!!
              * Undirected Graph
              */
             adj.get(p1).add(p2);

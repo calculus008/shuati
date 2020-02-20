@@ -83,7 +83,7 @@ public class Domain_And_History_Practice {
      */
     public static List<String> getAdData(String[] userids, String[] clicks, String[] ips) {
         /**
-         * map ip to user id
+         * #1 map ip to user id
          */
         Map<String, String> ipMap = new HashMap<>();
         for (String ip : ips) {
@@ -91,9 +91,9 @@ public class Domain_And_History_Practice {
             ipMap.put(e[1], e[0]);
         }
 
-        Map<String, Integer> clickMap = new HashMap<>();//count map for total clicks
-        Map<String, Integer> convertMap = new HashMap<>();//count map for conversion
-        Map<String, Set<String>> activityMap = new HashMap<>();//userid -> set of ads the user did purchase on
+        Map<String, Integer> clickMap = new HashMap<>();//#2.count map for total clicks
+        Map<String, Integer> convertMap = new HashMap<>();//#3.count map for conversion
+        Map<String, Set<String>> activityMap = new HashMap<>();//#4.userid -> set of ads the user did purchase on
 
         for (String c : clicks) {
             String[] e = c.split(",");
@@ -126,6 +126,54 @@ public class Domain_And_History_Practice {
             int convert = convertMap.containsKey(ad) ? convertMap.get(ad) : 0;
 
             res.add(convert + "-" + clickMap.get(ad) + "-" + ad);
+        }
+
+        return res;
+    }
+
+    public static List<String> getAdsData(String[] userids, String[] logs, String[] ips) {
+        Map<String, String> ipMap = new HashMap<>();
+        for (String ip : ips) {
+            String[] parts = ip.split(",");
+            String userid = parts[0];
+            String ipadr = parts[1];
+            ipMap.put(ipadr, userid);
+        }
+
+        Map<String, Integer> clickMap = new HashMap<>();
+        Map<String, Integer> conversionMap = new HashMap<>();
+        Map<String, Set<String>> userActMap = new HashMap<>();
+
+        for (String log : logs) {
+            String[] parts = log.split(",");
+            String ip = parts[0];
+            String ad = parts[2];
+
+            clickMap.put(ad, clickMap.getOrDefault(ad, 0) + 1);
+
+            String userid = ipMap.get(ip);
+            if (userid == null) continue;
+
+            if (!userActMap.containsKey(userid)) {
+                userActMap.put(userid, new HashSet<>());
+            }
+            userActMap.get(userid).add(ad);
+        }
+
+        for (String userid : userids) {
+            if (!userActMap.containsKey(userid)) continue;
+
+            for (String ad : userActMap.get(userid)) {
+                conversionMap.put(ad, conversionMap.getOrDefault(ad, 0) + 1);
+            }
+        }
+
+        List<String> res = new ArrayList<>();
+        for (String ad : clickMap.keySet()) {
+            int click = clickMap.get(ad);
+            int conversion = conversionMap.get(ad);
+            String s = conversion + "-" + click + "-" + ad;
+            res.add(s);
         }
 
         return res;
@@ -182,5 +230,7 @@ public class Domain_And_History_Practice {
         };
 
         printStrList("conversion data", getAdData(userids, clicks, ips));
+
+
     }
 }

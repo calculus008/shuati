@@ -1,4 +1,4 @@
-package Interviews.Karat;
+package src.Interviews.Karat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,13 +74,20 @@ public class Manage_Meeting_Rooms {
 
         for (int i = 0; i < rooms.length; i++) {
             List<String> l = new ArrayList<>();
-            l.add(rooms[i][0]);
+            l.add(rooms[i][0]);//meeting room name
             res.add(l);
 
+            /**
+             * init schedule
+             */
             List<Integer> s = new ArrayList<>();
             schedule.add(s);
         }
 
+        /**
+         * Now meetings is sorted by size, try to fit from the largest size into the
+         * largest possible rooms.
+         */
         for (int i = 0; i < meetings.length; i++) {
             int meetingSize = Integer.parseInt(meetings[i][1]);
 
