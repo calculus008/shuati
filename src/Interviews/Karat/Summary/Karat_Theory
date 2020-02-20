@@ -58,7 +58,19 @@ composition vs inheritence
 
 #
 1.Which Principle that you are using, and why?
+  SOLID
+  Single Responsibility : A class should only have a single responsibility, that is, only changes to one part of
+                          the software's specification should be able to affect the specification of the class
+  Open and Close : be open for extension, but closed for modification
+  Liskov substitution : Objects in a program should be replaceable with instances of their subtypes without altering
+                        the correctness of that program.
+  Interface Segregation : Many client-specific interfaces are better than one general-purpose interface
+  Depdedence Inversion : depend upon abstractions, [not] concretions
+
 2.undo/redo , which data structure is good for this?
+  Stack
+  https://www.quora.com/What-kind-of-data-structures-do-undo-and-redo-uses
+
 3.boolean flag. if you have too much flag, how to store in limited space device? which data structure
   is good for that.
 4. how do you do the performance test and load test?
@@ -67,6 +79,23 @@ composition vs inheritence
 #
 1.cpu 不变 memory上升
 2.堆栈区别
+  heap vs stack
+  https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html
+#Stack
+very fast access
+don't have to explicitly de-allocate variables
+space is managed efficiently by CPU, memory will not become fragmented
+local variables only
+limit on stack size (OS-dependent)
+variables cannot be resized
+#Heap
+variables can be accessed globally
+no limit on memory size
+(relatively) slower access
+no guaranteed efficient use of space, memory may become fragmented over time as blocks of memory are allocated, then freed
+you must manage memory (you're in charge of allocating and freeing variables)
+variables can be resized using realloc()
+
 3.线程耗尽
 4.1tps的服务，上1000tps的系统（这纯属扯淡）
 
@@ -166,3 +195,7 @@ how to make code scalable，test tactics you often use in your daily work
 1. what is dependency injection, pros and cons to use it
 2. compare composition and inheritance
 3. what is mock, why use it, cons
+Mock is a method/object that simulates the behavior of a real method/object in controlled ways.
+Mock objects are used in unit testing. Often a method under a test calls other external services
+or methods within it. These are called dependencies. Once mocked, the dependencies behave the way
+we defined them.
