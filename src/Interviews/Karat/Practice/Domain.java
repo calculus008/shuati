@@ -1,4 +1,4 @@
-package src.Interviews.Karat.Practice1;
+package Interviews.Karat.Practice;
 
 import java.util.*;
 
