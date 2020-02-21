@@ -1,0 +1,205 @@
+首先说下indeed这个公司的面试风格，就是面试题题库万年不变，题目偏简单，所以我感觉有时候面试真的是随缘，
+大家都碰到简单题了怎么办呢？ 很难说，所以细节很重要，我总结了几点需要注意的：
+
+1. Bug free 这个是特别特别重要的。 题目难点还好，面试官容忍度高一些，但是你要考虑到这家公司万年不变的题库，
+   大家都在写原题啊，拼的是什么呢？ 所以基本上你只要没做到bug free， 你就凉了一半了。
+   尤其简单题，只要写出bug，基本就再见了。所以一定要做好准备，题要刷熟练。
+2. 交流， 交流这个东西真的很难说，我觉得对于在国外留学的同学来说没啥问题，但是如果是在国内往国外走，
+   有可能就有问题了，我就是这种情况，而且我估计我是在这点跪的，因为我那个面试官一口日式英语，以我有限
+   的听力实在是听起来特别费劲。。他估计也觉得我英语比较差。
+3. 意愿， 什么意思呢，就是hr如果问你google和indeed都给你offer，你去哪家？  你一定要毫不犹豫的说我选indeed，脸皮就是要这么厚
+4. 演技，碰到原题也不要喜形于色，给人一种你见过题的感觉，演技一定要过关，我看到有人写的帖子里就是演技不过关被挂的。
+   这么说吧，我一直觉得面试就跟相亲似的，你一定要跟面试官有循序渐进的过程，并且话题也是逐渐深入，你要是一上来把话全说了，
+   话题直接聊死，可不就凉了吗？
+5. 加分项，如果你有什么加分项，一定要引导面试官，把自己的加分项展示出来，比方你有这个分布式系统下工作的经验，
+  你可以将话题向一些多机多进程多线程的思路上引，或者你对某些题有独到的见解，一定要把控好节奏，展示出来。
+
+
+题目都是鸡精（平均+爬虫tab+k个数据流）
+
+白板题是一道Auto Completion,用Trie解决了，还有一道是unrolled linked list，每一个节点存一个array，
+然后实现get(index) 和 insert(index, item).
+比如说已知每个node max array size 为5，现在有 [a,b,c] -> [d,e], 那么get(3)要返回d，
+insert(3,f) 可以变成 [a,b,c,f] -> [d,e]或者[a,b,c] -> [f,d,e]或者[a,b,c] -> [f] -> [d,e],
+ 但是如果max size是3，那么第一种答案就不行。
+
+HackerRank上做的是给定一堆document和一堆query，返回每个query的top10 documents，按match降序，
+如果有tie就按doc id升序。如果有个query term出现在某个doc里就算一次match，同一个term出现多次只算一个。
+
+Code Review大概就是给你看一段code然后需要你在gitlab里写comments，这个比较没谱到底需要注意什么，得到的反馈也是一正一副
+
+系统设计是设计一个click tracking system，需要根据click算每个sponsored client还剩多少budget以及每个月应该
+bill sponsored client多少钱.
+#大概就是S3存activity，一个DB实时update budget，然后bill就用spark aggregate
+
+
+#
+On campus: expiration map
+onsite:
+第一轮：word break + word break II 这个貌似不是题库题，所以印象最深刻
+第二轮：unrolled LinkedList, 其他帖子里有详细描述, 背就完事了，很简单
+第三轮：Root to Leaf min cost: Given a tree,(binary tree possibily) every tree edge has a cost，
+       find the least cost or find the leaf node that the cost of path that from root to leaf is
+       the least.用dfs解follow up: 改树为DAG，用dijkstra
+上机：这个有点忘了，不好意思，没记错的话应该是query recommendation那题. 据说上机题不影响结果，随便做
+
+#
+coding interview题目都是地里的面经，没有新题。想说说自己的心得。time/space complexity非常非常非常重要，
+各种数据结构的时间空间复杂度大家一定要好好掌握，会问得很深。code review interview可以上网查，有些细节拿不
+准的可以Google一下，有一些bug要能找到。system design推荐大家看看Gaurav Sen这个小哥的油管视频，感觉蛮有用的。
+
+
+#Tokyo Office
+1. system design: 设计一个Company/Job Review系统，可以查看reviews，发新的review
+
+2. Code Review: 选了 Python，内容是实际业务上的一些 OOP 代码
+
+3. Coding: 给一个合法 word 的列表以及需要 tokenize 的字符串，输出结果，比如：
+input: validWords = ["hi", "my", "name", "bob", "is", "his"], s = "hisnameisbob"
+output: ["his", "name", "is", "bob"]
+多组解给任意一组
+
+4. 深入 Resume
+
+5. Expire job id and how to compress memory (地里的经典题)
+
+#
+1. 两个stringA, B，return B里面跟A match 的部分，类似https://www.geeksforgeeks.org/bo ... -pattern-searching/
+2. 也是一个LeetCode easy level的题，不过真的太久了我忘记具体是什么了，很快能写出来的那种
+3. 给2-dimension data, 问你用什么方法clustering
+
+#
+题目比较经典，有整形数据流，求过去五分钟来的所有整数的mean。
+写了个List，创建了自己的数据类来存val和timeStamp，新的后面加List，过期的在头部删除。
+把删除的部分放在了mean()函数里，follow-up说这样太慢，就提出来放到一个cleaner()函数里，同时写了个Thread
+没过一段时间跑一次cleaner()，
+同时mean()里面也要先调用cleaner。然后被问到多线程需要注意啥，就指出一段code是critical section，要用锁保护。
+
+小贴士：要写注释，把和面试官讨论到但是没写的follow-up，都加到注释里，as good evidence。
+
+public Solution {
+    static final WINDOW = 5*60*1000;
+    long now();
+    double mean();
+    void put(int value);
+}
+
+感觉Indeed的面试官很喜欢把多线程的东西作为follow-up，比如ExpiringMap，比如我这个。
+交流起来很舒服，给面试官点个赞。
+
+多线程的话 是不是要不这几个方法都上锁呢
+都上锁比较影响效率。
+可以考虑用synchronized关键字，把需要Thread-safe的东西保护起来。
+可以用Collections.synchronizedcList 给List加一层保护，再用 synchronized关键字
+
+
+#
+就是一个sentence,给keyword,在keyword两侧加<b></b>（加粗）的题。。
+all and all, I have two alls -> <b>all</b> and <b>all</b>, I have two alls.
+只考虑完全相同的单词。只有字母空格逗号
+并不知道为什么脑抽了会选择split之后判断的方法，可能就是看那个单词要完全匹配吧。面试官国人小哥之后提醒说keyword可能是多个词，
+我说那我们把keyword也split好了，，我觉得他可能就是想提醒我别split。
+结果就是写起来特别麻烦，加上通话质量特别差，我这边经常听到噪音，心绪很乱写得磕磕绊绊，贼慢，还经常细节一通改。最后也没写完，
+思路倒是讲清了。后来想想直接substring去扫一遍多好，写起来方便多了。。
+
+想问楼主一个问题
+完全相同就是如果是all，tall里面的all是不算的对吗？
+如果keyword是几个单词，也是用空格分开吗？
+
+你的理解是对的。tall不算，alls也不算. word级的完全相等。多个keyword用空格隔开
+
+
+#
+1.Python 格式检查器。 注意最后一行不能有冒号结尾。第一行前面不能有空格。 可以用stack做
+2.有一个数据流， 不停的把数输进来（带有timestamp）。设计数据结构 使得 取前五分钟的 平均数 最高效。补充题就是，如果要中位数怎么办？如果数据量很大怎么办
+3.每个节点都是一个一维矩阵的单向链表。 实现 get 和 insert 函数。每个节点的矩阵大小有上限，但是不一定会填满。index是全局适用的。
+举个栗子： 每个节点矩阵上限是5. 如果第一个节点里有三个，第二个节点里有四个。那么get(5)就应当取第二个节点里的第三个值。
+插入函数会把原矩阵里的每一个元素都向后挤一位。如果当前矩阵已经满了，创建一个新节点，把当前节点里面矩阵里的最后一个元素挤到新节点里
+4.工作标题。他家的经典上机题。唯一不同的就是要输出最好的10个。top10. 用大小为10的heap取top10。 lz这里把整个结果全部heapify了结果少过了两个case。最后还是给了offer
+
+
+#
+一轮白板，unrolled linked list，小哥讲解很细，问了很多分析structure的问题，比如insert几种方式，你想选哪种。
+等写代码就很晚了，好像follow up都没怎么写。
+
+
+二轮troubleshooting，两个sre面的。我就诉苦啊，说我完全不知道有这轮完全没准备啊，他俩倒是很nice，说什么都可以问，
+他会guide我。最后也不知道做出了多少，两个sre还非常非常认真的给我介绍了他们的工作。
+
+
+午饭后三轮白板，moving average，两个小哥比较严肃。然后就做题，get average完了get median，还好我出门前看了眼quick select代码。
+
+
+最后上机，虽然安排了两个面试官，但是一个那天没来公司remote，另一个在我开始做以后也溜了，留了邮箱说可以问问题，
+结果我中间发邮件问，没人理我，最后自己解决了（...）
+题目是:
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=298088&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D26%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+但是我的要求如果输出两个词，比如 java python，要按字母顺序输出。
+那会感觉好累啊，从开始写脑子就是晕了，最后一堆bug，改了半天跑过了1个test case，还没剩多少时间，后面三道分析瞎写了写。
+
+
+#
+1.unrolled linked list
+2.root的最短路径
+3.上机题是关联词
+给出user和query，每次有新的query就找出搜索次数最多的关联词。地里面经有的
+A java
+B python
+A javascript
+C java
+
+output:
+0
+0
+0
+1 javascript
+4.get average
+
+上机题要注意一下输出的顺序（alphabetical)和空格格式，lz就是因为最后没时间改输出格式所以test cases全fail。。
+但是跟面试官小哥说了一下输出的和sample outout一样只是格式不对小哥说没问题他们会看代码
+
+#
+1. 就是那个expire id
+2. 自动补全
+3. unrolled linked list， 实现get和insert
+4. 就是万年不变的job description
+上机题第二题一定要好好写，别随便就水过去了！！！！！ 这些题目大家都会做，不同人的区分度就是看第二题。
+
+#
+1. merge two sorted array -> merge k sorted array
+onsite:
+1. unrolled linked list， get 和 insert
+2. 五分钟内的mean/median
+3. n个sorted stream，数字可重复，找出出现在至少k个不同stream中的数字
+上机：
+1. job description， top 10 match
+尽量每道题都自己过一遍，followup + time + space 都要考虑。上机题务必自己亲自写一遍，千万别眼高手低！
+
+#
+都是原题，然而惨败。
+一轮：一个白人大哥主面，白人小姐姐shadow一直在抄代码。merge k sorted streams，白人大哥上来就说主要看
+解体思路而不是看show，于是开始失败的表演之路。之后才意识到我写一行她抄一行，我上来先写低配解，之后还剩不
+到15分钟被提醒时间才开始写高配解，又在原代码上改动，演戏非常失败。准备了几个followup都没用得上，勉强写
+完题到点了。当初还想做演员，然而在面试的道路上一败再败。
+二轮：两个白人大哥。经过上一轮意识到了简历面不用浪费太多时间，最后反正都是看题，随便聊了十分钟开始写题。
+moving average的那道题，中规中矩，都是面经，没啥问题
+三轮：word break，简单一个dp搞定
+
+中午吃饭确实不错，下午上机是简历系统补充三个api：update，get，getfield。
+用了最基础的三层map，test跑了一半吧，剩下的都超时，然而写完也没有时间优化了。到点，收拾书包回家！
+
+
+#
+1. Find the number of matched substring. 譬如，给一个string = “abc dedef”, target = "de"，
+   要求返回string中match target的subsequence的个数。 以上例子则返回2。就是简单的循环，one-pass
+   扫一下string就可以了。写完code之后让想了几个test case
+2. 给一个数组和一个target number，寻找一个subarray，要求这个subarry的和不大于target number，
+   返回满足这个要求的最长的subarray的长度。比如 nums =  [2, 5, 1, 6, 7, 9], target =9, 则返回 3,
+   因为满足条件的最长subarray是[2, 5, 1]。解法是用两个pointer做一遍scan
+3. 一个简单的classification。一个平面上有红蓝两种颜色的点，并且坐标已知。加入一个新的点，要求预测这个新点的颜色。
+   这个题目我之前没见到过，可后来翻了一下前几天的面经，果然也是超高频。扯了neural network, 用 logistic regression
+   做二元的classification。
+coding考的是个data structure，综合了hash table 和linked list 大概好像是每个node可以存若干个数据，
+超过这个数量就要存到下一个node上
+
+
