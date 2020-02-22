@@ -203,3 +203,660 @@ coding考的是个data structure，综合了hash table 和linked list 大概好�
 超过这个数量就要存到下一个node上
 
 
+#
+第一题是Tree找minimal path cost leaf，就是一个Tree，每个edge都有cost，让找到从root到leaf一路上path cost最小的那个leaf。
+Tree不一定是Binary Tree。用DFS做了，途中不断更新当前找到的minimal path cost node和对应的cost。然后面试官问如果cost都是
+positive能不能优化，回答发现到一分node的cost已经大于当前找到的minimal cost的话就不必再在这条path上走下去。然后加了两行代码
+实现了下。
+
+第二题，其实算是第一题的follow up，但我相当于是完全重写的，不知道是不是跑偏了？内容是，如果这不是一个Tree而是一个
+Undirected Graph，给一个source和一个destination，找到连接这两点的minimal cost path。我用了Uniform Cost Search来做，
+跟BFS差不多，只不过不是用fifo保存node而是用priority queue，同时也要存下到这个node为止的cost和path，然后根据到每个
+nodecost来排序，先visit当前cost最小的node，这样当遇到destination的时候，对应的path就是cost最小的。Follow up是因
+为我有一个visited set，凡是visit过的node就不再走了，面试官问如果经过这个node有多个path那后面的不就被忽略了吗？
+我说的是第一次遇到一个node时是path cost最小的，后面如果还有path路过它那cost肯定比第一次大，就不用考虑了。面试官似乎是认可了的。
+
+途中不断更新当前找到的minimal path cost leaf和对应的cost。
+
+回答一旦发现node的cost已经大于当前
+
+#
+LE_616_Add_Bold_Tag_In_String
+给一个word的set，给一个句子，把所有该word左右加上tag(<b><\b>)注意必须是单词匹配，不能是substring，
+follow up是，如果要考虑一些比如复数s, 逗号这种，怎么做比较好
+(比如，如果你要找job这个单词，那么jobs job,这种，也需要找出来)
+
+基本就是“ all” ，“ There        is        all        in        all,        two        all”
+输出：“ There        is        <b>all</b>        in        <b>all</b>,        two
+all” ; 处理一下大小写
+
+
+#
+还是老题summary range， 用了stringbuilder， 遍历一遍，o(n)时间复杂度。 然后问，如果输入为[1,2,3,4,5,.......100000, 300000]
+这种情况怎么办，有没有更好的方式，回答binary search，然后将核心部分写了一下，并且告诉了他这种方式的最坏情况和最好情况。
+
+        public static void main(String[] args) {
+                int[] digit = new int[12];
+                for (int i = 0; i < digit.length - 1; i++) {
+                        digit[i] = i;
+                }
+                digit[digit.length - 1] = Integer.MAX_VALUE;
+                System.out.println(binarySearch(digit, 0, digit.length - 1));
+        }
+
+        public static int binarySearch(int[] arr, int l, int r) {
+                while (l < r) {
+                        int mid = l + (r - l)/2 + 1;
+                        if (arr[mid] - arr[l] == mid - l) {
+                                l = mid;
+                        } else {
+                                r = mid - 1;
+                        }
+                }
+                return r;
+        }
+
+
+#
+题还是那个老题，就是ExpiringMap, 这个题本身不难，但是follow up 特别多， 有4个。我当时就醉了，感觉要挂，不过面试官人很nice一直给提示，最后还是把题做出来了，不知道结果咋样。
+
+给一个expiring map， 你可以一直往里面put东西，这些东西都有个过期值，一旦过期就get不到了。
+//put(null, null, 2000);
+
+// 10:00:00 - put(10, 25, 5000)
+/**
+* (10, (25, 10:00:05))
+*
+// 10:00:04 - get(10) -> 25
+// 10:00:05 - get(10) -> null
+// 10:00:06 - get(10) -> null
+
+public class ExpiringMap<K, V> {
+    HashMap<K, <Duration>> map = new HashMap();
+    private class Duration {
+        private V value;
+        private long expirationTime;
+        public Duration(V val, long durationMillis) {
+            this.value = val;
+            this.expirationTime = durationMillis + System.currentTimeMillis();
+        }
+    }
+    void put(final K key, final V value, final long durationMillis) {
+        map.put(key, new Duration(value, durationMillis);
+    }
+
+    V get(final K key) {
+        //if map does not have it
+        if(!map.containsKey(key)) {
+            return null;
+        } else {
+        //map contains key
+            Duration temp = map.get(key);
+            //is valid entry
+            if(temp.expirationTime > System.currentTimeMillis()) {
+                return temp.value;
+            } else {
+                map.remove(key);
+                return null;
+            }
+        }
+    }
+}
+//put(null, null, 2000);
+
+// 10:00:00 - put(10, 25, 5000)
+/**
+* (10, (25, 10:00:05))
+*
+// 10:00:04 - get(10) -> 25
+/**
+*
+// 10:00:05 - get(10) -> null
+// 10:00:06 - get(10) -> null
+
+第二个 follow up： 如果用heap的话可以解决上面的问题，但是put时间变成了 O(k log n）怎么办？
+lz是在put的时候remove 已经expired的东西，这样会remove k个已经expired的东西，每次remove时间是log n，
+所以put 从原来o（1） 变成了O(k log n）， 怎么解决
+
+第三 follow up： put 从原来o（1） 变成了O(k log n）， 怎么解决？
+lz说用多线程，put 只是put 到 hashmap 和 heap 里面， 但是不从heap remove。 put 从原来的 O(1）变成了 O(log n），
+然后用另外一个线程来做remove 操作。（幸好没叫写多线程代码，不然死定了）
+
+
+#
+Valid python code
+
+Oniste三轮白板：
+K steam
+Clean Up Expired Data
+Min Sum Tree/Graph
+
+上机：
+Most Related Word
+
+公司既然敢面原题，考察的点肯定就不只是你把答案写出来了。。
+
+比如我面K stream那题，明显面试官不想让我直接用Heap的方法去做（虽然各种面经上都说直接给出这个方案），
+面试官想要直观一点的方法先做完这个题，然后分析完复杂度，再讨论如何提高，以及可能的trade off。很明显这
+个过程我没处理好。。。还有就是code review当时没有利用好google，给的代码如果有看不懂的部分或者没接触过
+的语言，可以现场查的，我猜这也是他们想看看有没有解决问题的能力吧。
+其他轮面得感觉还行，不过这两轮任何一轮的表现都可以挂我了，并不意外。
+
+K Stream 那一轮？如果假设有M个Stream，每个Stream的平均长度是N的话，那么如果用HashMap来做的话，
+时间复杂度的话是O(MN + MNlog(MN)) 遍历+排序，空间复杂度是O(MN), 如果用heap来做的话，时间复杂度是O(MNlog(M))，
+空间复杂度是 O(M), 请问楼主这么分析是不是就够了？
+
+
+#
+**
+上机题貌似就万年不变的query与job description去match。
+具体来说，给了一堆job description，每个是一个string，确保了没有标点符号、只有小写字母，
+比如{"we want someone good at java and spring", "are you good at cpp"}；
+然后给一堆query，要求对每个query找出最match的最多10个job description的id，依次输出这些id，
+如果一个都没有就输出-1。对于match程度的定义，是有一个叫match count的概念，就是query与某个jd匹配了多少单词。
+例如一条query是"good at java"，那么对于上述的两条jd的match count分别是2和1。match count越大的jd，
+就代表match程度越高，如果有两个jd具有相同的match count，那就认为id小的比id大的更match。
+
+另外给了一些限定条件使得问题简单了很多，例如每个query都保证没有重复单词；每个jd可能有重复，但计算match count时
+每个单词只match一次；对于一个单词的不同形态当做不同的单词处理（get, gets）等等。
+
+我是用inverted index的思路去做的，建了一个对于所有jd里每个word到出现这个word的jd的map，给了一个query就traverse
+这个query里的每个单词，重建每个jd的match count，最后再按规格取前10就行。test case都跑通了。
+
+然后后面还有两道主观题，一个是问如果给你一天时间做这题你要怎么优化，然后如果这个东西每个月会被query billion次你要怎么优化；
+另一个是说说你的思路，以及分析时间、空间的复杂度。
+
+楼主那个Match count为什么是2和1，而不是3和2呢？
+query的good at java和第一个"we want someone good at java and spring"匹配到了三个单词（good, at, java）；
+和第二个“are you good at cpp”匹配到了两个单词（good, at)
+
+
+你说得对，就是3和2，我脑抽了
+
+**
+第一轮白板是unrolled linked list，前面面经里说的很详细了就不赘述了。。。
+
+第二轮白板和这个面经的第一轮是一样的，连follow up都一样：https://www.1point3acres.com/bbs/thread-166760-1-1.html。
+不过面试官让证明用这个方法实现的话average time complexity是O(1)，我只想到主观上感觉如果record和avg函数至少有一个被call
+的很频繁，那么每次要pop掉的旧的值就很少；如果都被call的很少，那么queue里本身就不存在太多值。然后面试官上来教我了，
+通过某个数学方法能证明每次call record和avg时平均需要pop掉的值的数量是1。对于getMediam那个follow up我答的比较脑洞大开，
+说维持一个size是queue的size的一半的heap，但是自己去用数组去手写实现，然后在queue里不仅存值、timestamp，还存对应的
+heap node的数组index，当pop掉一个旧的值得时候把heap里对于的node也移除掉然后重新heapify一下。
+这样的结果就是record和avg的average complexity变成的O(logN)，因为根据上面的证明平均每次都是pop掉一个旧值，
+也就需要重新heapify一次。getMedian的complexity则可以是O(1)，只要输出heap的top值就行了。然后面试官又问，
+在什么情况下我们宁愿每次sort queue里的node来得到median？我说就是当getMedian被call的很少但是avg和record被call的很频繁的时候，
+因为这样前两者可以是O(1), 即使getMedian变成O(NlogN)。面试官貌似还挺认同的，说现在我们得到了一个完备的可以应对各种情况的
+solution。但我现在想想getMedian的这个follow up我答得很扯啊，特别是看了上面那个面经里的做法的时候。。。
+
+第三轮白板是力扣刘思尔 (LE_642_Design_Search_Autocomplete_System)，但问题简化了，不需要考虑顺序问题，
+只要返回所有的以给定string开头的string。但是string不仅仅是26个小写字母了，而是所有的ascii字符都有可能。
+那就不能用array来做而要用hashmap了，当然强行用256的array也是可以的。。。这轮比较戏剧的地方在于，面试官说完问题后问我有没有做过，
+我尴尬了一下说用类似的方法解决过其他问题但不是一样的题目，然后面试官就问我要换一题还是就做这个，我想了一下说就做这个吧。。。
+写完以后问了很多follow up，都是针对我具体的implementation细节的，比如我原本在Trie Node里的每个string结束的那个node里
+又存下了string的值，他问我memory能不能优化，我后来说了这个可以去掉。然后又问我去掉这个也没有缺点？
+我一开始是每次recursive的call的时候都类似于用currString + currChar这样的，这就需要每次重新构建string，大大的增加时间复杂度。
+他问能不能优化，我说用list每次只要O(1)时间去push back，最后到了结尾再重建string。
+（其实感觉就相当于在java里用string builder，但是cpp没有这东西。。。）。他表示满意。最后就差不多是问问题了。
+
+#
+三道白板题
+1. Auto Complete
+就是Trie，代码很长，需要写TrieNode, Trie, 以及dfs。写完面试只剩下3min，没有follow up，随便聊了聊结束。
+
+2. Unrolled Linked List
+先讨论各种corner case，讨论好了之后才让写代码。先写get()，被指出了一个小bug，curr = curr.next应该在update size之后。
+然后写insert()。整体很顺利。
+
+3. Moving Average
+感觉就是这一轮跪的，被阿三黑了......一开始很简单秒了，然后要求getMedian()，提出可以quickSelect或者两个heap，
+他想要两个heap的解法，问了怎么实现，没有写代码因为时间不够，最后问到了heap的细节，删除是如何实现的，
+因为需要删掉expired event，时间复杂度是多少。还要问amortized time complexity。这个阿三真的是问了一堆time complexity。
+
+上机题
+Normalize Tile
+我是用Map存，key: document ID, value: word。这种解法只能过14/20。想要全部都过的话需要用key: word, value: document ID。
+据说Indeed上机题是一阵一阵的，可能今年下半年的上机题全是这个。
+
+#
+第一轮： moving avg，就是一个stream输入，给一个int getNow()API获取当前timestamp，完成两个函数void record(int value)
+和double getAvg()，有输入时会自动call record，然后call getAvg()时返回5分钟内的平均值。用一个queue来存数据，一个sum存当前和，
+每次record和getAvg时pop掉过期的数据就好了。follow up： 如果还要getMedium呢？我说用two heap，他说太慢了因为record要o(logN)，
+说这个getMedium call得很少，可以直接在当前的数据结构上implement，于是其实就是求unsorted list的medium，用quick select
+能O(n)时间得到，面试官表示很满意。
+
+第二轮：这个地里面经没看到过，写一个函数float sumPossibility(int dice, int target)，就是投dice个骰子，求最后和为target的概率。
+因为总共的可能性是6^dice，所以其实就是combination sum，求dice个骰子有多少种组合，使其和为target。先用brute force的dfs
+来一个O(6^dice)指数复杂度的，然后要求优化，用dp，最后结束代码写的是两者结合的memorized search吧，面试官走的时候还说了句
+such a good solution。
+
+第三轮：git commit的题，也是面经题。第一问给一个commit（node），BFS输出所有commits (nodes)。第二问，两个commits （nodes），
+找到他们的最近的公共parent，就是先BFS一个，然后用map记录下其各个parent到这个commit(node)的距离，然后BFS第二个commit(node)，
+碰到在map里的node，就算一个总距离，然后更新最短距离和的点，最后最短距离和的点就是结果了，写完面试官也表示很满意。
+这个注意解释下BFS的复杂度为什么是O（V+E），他会问为什么不是O(V)之类的。
+
+上机：面经题，就是那个search A或者A|B或者A&B的题。hackrank上做，有详细的解释。我暴力做的。。就一个个读然后判断符不符合，
+然后10个test case有两个超时了。不过据说他家面试主要看三轮白板，上机不太重要，然后根据我两个test case没过也有offer来看应该
+还真是白板更重要吧。
+
+第二题挺有意思，写了三种实现练手. 感觉面试官可能期望的是buttom-up的DP解, LZ写了memorization令他眼前一亮.
+https://gist.github.com/diegozeng/6c964f623bbeaa716526
+
+哈哈，应该memorization是他期望的，因为他说优化的时候我说了buttom-up的dp，然后还没有写，他说你能把这两个解法结合吗？
+我就给了这种，他说了句this is exactly what I want
+
+那个第一题对于queue 怎么进行quickSelect算法呢，  需要写出代码吗？  还是只要说下思路?
+我只说了思路，和array是一样的咯
+
+
+#
+昂赛:
+重点来了。他家onsite的题库，来来回回就那么不到20道题目，稍微在地里搜下就能全部找到，楼主把每一题都仔仔细细写过，
+包括follow up都仔细研究过和人讨论过。面试当天每一组都是一个面试官加一个影子，三轮白板下来五个白人一个国人。考的三个白板题目是
+(1) unrolled linkedlist
+这题其实就是一个linkedlist和array的结合，问了很多复杂度都对答如流，关键点就是Insert的时候如果当前node的array满了怎么办，
+楼主早就准备过，和面试官讨论了各种情况，最后得出较好的解法是加一个新node然后把当前node一半的内容移过去，整体交流下来面试官也很满意，
+没写出什么bug
+(2) k streams
+就是给你k 个stream, 然后让你统计至少在m个不同stream出现过的数，这题也没啥好说的，heap做就好了，也没出啥Bug，复杂度也都答上来了，
+就是剩一分钟的时候问了个ouput太大的话怎么办，我说转成generator这种大概描述了下，他又问我知不知道yield，我说知道这个但平常没怎么
+用过。
+(3) moving average
+这个题目前面average很简单，重点是follow up找median很麻烦，楼主先提出quick select，然后说是O(N)，问能不能更快，抛出two heap解法，
+楼主知道two heap移除过期元素很麻烦，就先分析了假设不需要移除的情况下的复杂度，面试官表示认同。然后分析了如果要移除过期元素的话需要
+重新heapify，用lazy appraoch更好，面试官表示十分满意。
+
+最后还有一个上机题，就是近期面经提到过的那个给一堆job id 对应job description，给你一组query词让求最相关的job id，这个就是存成
+word -> job ids 这种形式的map就好了，楼主过了全部testcase。
+
+#
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=453388&highlight=indeed
+9:00am - 10:00am - Resume Deep Dive
+我先是道歉，让面试官等了20多分钟，非常不好意思。面试官很nice，对迟到表示理解。接着就是问简历，然后挑一个project详细讲一讲。
+问题都比较常规，比如在做的过程中有什么难点，如果再做一遍，哪些部分会用不同的方法做，诸如此类。
+
+10:00am - 11:00am - Architecture
+设计给公司打分的功能，比如 https://www.indeed.com/cmp/Micro ... univSerpCompanyLogo ，MS的评分是 4.2 。
+题目是说用户可以在公司的page上留言和打分，公司的评分就是所有评分的平均数。我就先从DB开始，面试官说user table和company table都有了，
+我就加了review table，里面有id，userid，companyid，comments，stars，timestamp ，平均数就是先 select * 然后再 average 。
+然后说有什么 API ，传什么样子的 JSON 给前端。面试官觉得行，就开始scale了。先说review table里有1 billion rows，
+我说那就按月partition吧，，所有的review都从最近的那个月里读，如果用户想看更老的review就再从别的partition里读。
+面试官又说公司的分数是所有partition里的分数的平均，算起来会慢。我说那就加一个cron job每天夜里算一算，把结果放在另一个table里，
+虽然会有一天的delay，如果这个公司已经有很多review了，每天新增的review不会有太多影响。面试官觉得也还行，就说现在有
+10 million requests per sec。我问了读写的比例，说是95%是读。我说那就加replication吧，single leader and multiple
+followers，每个replication上再加上cache，再加一个load balancer，把读请求分配到leader和follower上，写请求只能去learder。
+简单说了下eventual consistency，leader需要时间把新的review发到follower上。到这时间就差不多了，面试官就没再问了。
+现在还不知道面试结果，不知道这么做对不对，大家就看着玩儿吧。每个人的思路不一样，可能面试的走向也不一样。
+
+11:00am - 12:00pm - Whiteboard
+https://www.geeksforgeeks.org/nu ... erse-an-n-ary-tree/ ，可以参考这张图。不同点在于node里面没有value，
+每条edge上有weight，问题就是找到所有root to leaf path里sum of weight的最小值。需要自己设计数据结构。我就设计了Node，
+里面有一个child_to_weight_map。然后就是dfs。面试官又说有没有什么优化，我说如果所有的weight都是正值可以剪枝什么的，
+倒是不用写代码。问完了tree又问dag，唯一的区别可能就是会有重复访问的问题。我就在Node里又加了一个min，记录如果从这个点开始
+能达到的最小值，遍历完更新一下。下次再到这个点如果发现有值了就不用继续了。面试官说行，我就写了。最后问了问复杂度什么的。
+题目挺清楚的，就用了dfs，面试官也没有刁难。
+
+12:00pm - 12:45pm - Lunch
+那天的饭不错，lunch buddy也说很好。吃完饭看了看office，很新，挺不错的。
+
+12:45pm - 2:30pm - Programming Exercise
+在hacker rank上做题，progex6，search index。我刚听说这题的时候以为是tf idf呢，结果发现根本不是。其实是根据一段描述去
+实现其要求的功能，感觉更像是考implementation的能力。做题的时候旁边没有人，面试官帮我login后留了个邮箱就走了，
+说是可以问问题。。。，发邮件问问题感觉会很慢的样子。。。做的时候可以反复run，尽情debug。我用的是Python，为了面试现学的，
+平时都不用的，所以不是很熟练，但最后还是跑通了11/13 test case，最后两个挂了。面试官说不用想着把所有的case都跑完，
+他们会看代码的，但尼玛谁知道真的假的啊。。。我就用了dict和collections.Counter，Counter里就用了most_common，
+其它都是常规操作。后之后觉把dict换成collections.defaultdict更好写一些。我用Python确实不熟，有的API都是在terminal
+里当场试出来的。如果大家熟练掌握自己用的语言，应该都没问题的。
+
+2:30pm - 3:30pm - Code Review
+这一轮最神奇，完全不知道在干啥，不知道他们想考察什么。给你一个pull request，说你可以写comment，就跟在公司一样。
+我都不知道要关注什么，是error，还是coding style，面试官也不说，真是服气了。我一开始只关注coding style，
+结果发现java comparator写错了，应该是desc，结果是asc。。。我刚开始以为功能应该是对的，不应该有这种错误，
+还上网查了查确定一下（面试结束后跟面试官确定了就是错的）。里面还有前端JSP（如果没听错的话）的code，完全没见过，
+review个屁啊。面试完面试官告诉我这是好几年前的code，他们也不太知道。。。
+
+3:30pm - 4:30pm - Whiteboard
+在Google搜Moving Average From Data Stream，有个expiration window，超时的就不用算了。我就用了deque(as queue),
+ dict, running_sum(int), running_cnt(int)。分析了复杂度什么的，面试官也没说不对。
+
+4:30pm - 5:00pm - Close
+
+一个在Indeed干了九年的老哥问了些问题也回答了些问题，然后就结束了。
+
+出停车场的时候忘要发票了，不知道能不能报销，大家要注意啊。。。
+
+感觉算法考得不算难，反正自我感觉还可以。design也还行，算是常规套路吧，先work再scale。其它没见过，不知道咋样了。
+现在还不知道结果，也说不好。
+
+大家要是看着还行记得赏点大米小米啥的，有的帖子要积分200才能看，要是天天签到得签到2019年了。。。
+谢谢各位，祝各位工作顺利。
+
+
+补充内容 (2018-10-31 02:08):
+10/30/2018
+recruiter刚打来电话说是跪了。moving那题没有bug free，code review除了major problem还有minor problem，
+system design说是少了product什么的，programming exercise is just good。
+
+
+#
+早上做hackerrank的上机题，是关于user query的，给一堆的query（A search python；B search java； A search java；….）
+如果 用户A 既search了java 又search了python，那么python和java之间的relation score就+1，然后对于当前新进来的这个query，
+返回一个跟那个关键词relation score最高的另一个关键词（optimal query）
+
+下午是三轮白板，刚刚去地里搜了一下，好像之前的面经里都提到过了。。。地里搜一下就好，都有。早知道我应该先刷一遍面经再去啊
+。。sad。。。实际面试的时候就是每道题都写出来了但是都花了40多分钟。。。如果刷过面经再去的话可能可以写得更快一些然后面试官
+还能有时间问问follow up吧？不管了。。。去austin两日游还是挺开心的哈哈哈
+
+一道是 unrolled linked list，就是把array 变成unrolled linked list，写一个get 和 一个 insert 函数
+一道是validate python indentation，就是给三个rules，（1. 第一行indentation必须是0 2. 上一行是冒号，
+   当前这一行的indentation要比上一行大，3. 上一行是普通行，这一行的indentation可以小于等于上一行的），
+   然后判断给你的这段python 代码是不是valid的
+一道是description snippet，就是给定一段description，和两个keyword，找到同时含有这两个keyword的位置，
+  并往前往后多保留两个单词，返回那一段string作为snippet
+
+
+#
+第一轮 上机
+就是地里找相关查询的那题，结果通过11/13， 有两个大数据的没过
+
+第二轮 白板
+题目有点忘了，有点类似leetcode word break，但不完全一样，先说了思路， 觉得可以，但最后卡在一个地方，没有写完，估计挂在这里
+
+中午吃饭
+
+第三轮 系统设计
+设计一个简历存储系统，从一个数据中心扩展到多个
+
+第四轮 白板
+LC找单词最小距离的那题，没什么难度
+
+第五轮 简历
+有一些行为问题和项目介绍
+
+#
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=353285&highlight=indeed
+
+1面一个白人大叔，看起来年纪比较大，穿拖鞋。问的python indention那题。因为我用了stack，一个比较有趣的
+follow-up是stack装不下会自动扩展，自动扩展需要把原来的数据复制到一个新的大一些的stack里面，
+问这个复制的过程会影响时间复杂度吗？
+当然不会，X insertions take O(2X) time, 所以insertion的amortized time仍然是O(1).
+面试官还问了我几遍are you sure.我sure的一笔，怎么会上你的当。
+
+2面是一个华裔小哥主面。非面经题，国际象棋里面的knight只能走日字型(跟中国象棋里的马一样)。给一个无限大的平面，起点和终点，
+以及不能一些obstacles不能走。问最少需要几步从起点能到终点？
+首先无限大的平面怎么表示这个需要和面试官讨论，我给的一种方案是不用二维数组表示，只用一个set标出obstacles的位置，
+面试官表示ok。然后就是一个普通的bfs了，秒之。
+接着我分析了一下bi-directional的BFS。还有20分钟，面试官问我听说过A*算法吗。我确实听过，但从来没写过。
+然后面试官给我介绍了10分钟什么是A*算法，我觉得他介绍的不清楚，就反问他一些细节，结果主面试官卡住了。。shadow接着帮他解释。
+最后10分钟让我设计一个Loss function一样的东西，我就设计了几个loss function，但感觉都不是面试官想要的答案。
+最后面试官让我don't worry, 他只是想看看我对以前没见过的东西是什么反应。感觉气氛还挺和谐。
+
+3面是Root to Leaf Min Cost那题。两个美国小哥，都挺年轻的。我用的bottom-up的方法，改成DAG后加了个memorization来存储之前的结果，
+其他什么都不用变。不提dijkstra完全没问题。有趣的是我cache的是边，主面试官表示赞同，shadow说这样cache不行，要cache node。
+但主面试官表示可以，然后他们争论了一分钟，结论是我的方案可行。
+其实这题我也没写过，随手写的，感谢主面试官让我不用推倒重写。
+
+下午上机就是query那题。
+
+
+#
+题目是给多个已经排序的stream，列出所有在多于x个stream中出现的数字。如1 3 4 5 7 7
+2 3 3 6 8 10
+4 6 9 10 11 11
+x = 2
+输出 3，4， 6， 10。因为这几个数字在x以上个stream出现过，不输出7，11 是因为虽然虽然它们都出现了两次，
+但是是在同一个stream中。Stream是个iterator，有3个方法，peek(), next(), hasNext()
+
+如果按照数字第一次出现的index顺序输出，需要维护个linkedhashmap，如果按第x次出现的先后顺序输出，则一个hashmap+list就可以了，
+如果需要，peek可以cache起来用作下一个next输出。不知道楼主怎么答的？
+
+我用了TreeMap<Integer, List<Stream>>这个结构，大概代码是：
+public List<Integer> print(List<Stream> data, int numToAgree) {
+  List<Integer> result = new ArrayList<>();
+  TreeMap<Integer, List<Stream>> queue = new TreeMap<>();
+   for(Stream st : data) {
+     int header = st.peek();
+     if(!queue.containKey(header)) {
+          queue.put(header. new ArrayList<>());
+     }
+     queue.get(header).add(st);
+   }
+   int done = 0;
+   while(queue.size() > 0 && data.size() - done > numToAgree) {
+    Entry<Integer, List<Stream>> top = queue.getTop();
+    result.add(top.getKey());
+     for(Stream st : top.getValue()) {
+       while(queue.hasNext()) {
+          st.next();
+          if(top.getKey() != st.peek()) {
+             break;
+          }
+       }
+       if(!st.hasNext()) {
+          done++;
+          continue;
+        }
+         if(!queue.containKey(st.peek())) {
+          queue.put(st.peek(). new ArrayList<>());
+         }
+         queue.get(st.peek()).add(st);
+    }
+  }
+}
+
+我想说的更详细一点，这题的要求是 一个stream很大，所以要空间复杂度低而不是时间复杂度上做文章。
+
+我觉得，用heap（priorityqueue）来做，根据各个stream的peek进行排序。然后每次从heap里面poll出最小的。
+答案出现的时候，heap的状态是这样的。
+heap［（stream1: peek=10）（stream3: peek=10）（stream2: peek=10）（stream0: peek=11）（stream4: peek=12）］
+遍历完所有元素，也找出了所有答案。空间复杂度O（K），时间复杂度 O（lgK＊N）
+
+我觉得这个题有点像multiway merge sort，不过从每个stream取值的时候要先除去重复的……空间复杂度应该是O(K)吧，
+K是stream的数量，不算stream本身的存储空间。
+
+#
+第一轮:
+白人小姐姐 + 亚裔小姐姐shadow
+考面经: unrolled linked list
+面试官出题后要你先写个get function, 并要你想想有哪些case要考虑
+get写完后 在写insert, 同样问你有什麽case要考虑
+
+第二轮:
+印度哥 + 国人小哥shadow (听口音感觉美本)
+考面经moving average
+follow up : moving median
+get median的方法 我第一个方法说用一个heap去存items, 并且分析这个做法的複杂度(insert , remove等等的...)
+面试官好像很困惑如何从heap裡面Remove特定的item, 一直问这个问题, 反而shadow后来提醒他 heap是提供这样的方法的.
+然后又问还有没有其他方法, 就说了quick select了并分析了用这个的複杂度.
+
+第三轮:
+印度哥 + 白人小哥shadow
+非面经
+给List<List<Integer>> 要求出前k个最常出现的数字
+有点像merge k streams吧 但这个要求同个stream的也算
+这轮最后一轮了面试官看起来很累, 写白板的时候跟他交流感觉他已经在恍神了
+写完后跑case 并分析複杂度
+讨论了几个极值的的case  comparator会怎麽样 (min integer之类的)
+一时之前没想到 面试官提示了下回答出来了
+
+下午上机 一样是query那题   但LZ没有准备而且早上面完太累了写得坑坑巴巴的
+
+
+#
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=280495&highlight=indeed
+
+1： 利口243-245
+
+2 : 合并n个流 问了各种corner case，不同case用什么解法比较好
+
+3：设计一个点击量计费系统。简单来说就是用户点了链接之后，会跳到这个系统，系统首先会decrypt过来的链接得到3个参数，
+分别是职位id，职位发布人的id和这条点击的单价。要做的就是每个月发一份报告，报告里包含了各个职位发布人和他们应该付
+的钱送到另外一个service。lz先问了下点击量大概会有多少，算了下qps和存储需要的容量。最后聊了下怎么分成几个micro services，
+主要是存储，跳转，生成报告。后面加了一问问了下如果职位发布人设置了每月开销的上限怎么办，那就需要另一个服务实时去算开销了，
+如果到了给的上限就要停止发布他们的职位。
+
+4：审查新码农的代码，是实现他们家工作的筛选器。就是去他们网站随便搜个职位，最左边那一列。要按搜到工作的数量排序，
+一样的话就按工作名字的首字母。一共2个页面一个是java写的后台，另一个是jsp的前台。刚开始lz思路有点错，以为是查代码风格，
+后来经提醒主要是debug。两个页面都有错，jsp主要是html跳转的问题，java是排序的问题。当然后面聊一下一些结构上的优化，
+就比较考验java基本功了。总体感觉答得一般，估计国人小哥抬了一手
+
+5：上机题还是profile id，之前面经有一个很重要的遗漏，就是get（profileid，version）需要返回的是所有小于等于给定version
+那个profile的fieldname和fieldvalue， 而不是只是那个version下的，而且返回值需要按fieldname排序，所以用treemap的floor
+会很有效率，
+思路讲一下把：map<profileId, treemap<fieldname, treemap<version, fieldvalue>>>, 这样好处就是去掉了fieldname的重复，
+节省了空间。 代码就不贴了，建议大家先写好，时间挺紧的
+
+6：各种bq行为问题
+另外附上他没有完成的jobid那道题的code，我自己码的，跑了几个case都过了
+
+以往面经题汇总大家请看，非常感谢这哥们，你也是英雄：
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=223228&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3046%5D%5Bvalue%5D%3D26%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+
+
+#
+白板有新题
+第一题是auto-complete， 题目：
+/* =============================================================================
+Question Description
+Say I'm typing on a phone. Given a prefix String,and a dictionary.
+Find all auto-complete word for the given prefix string
+=============================================================================*/
+没什么新意，但是写出了trie 解法后，面试官一定要我想个其他的解法，然后我写了bst， 然后他还要我想个解法。。。我就用hashtable了。。。
+
+
+第二题是unrolledlinkedlist， 题目：
+============================================================================
+Given a LinkedList, every node contains a array. Every element of the array is char
+implement two functions
+1. get(int index) find the char at the index
+2. insert(char ch, int index) insert the char to the index
+============================================================================
+
+解法也就是硬做吧。。比较直接
+
+第三题是新题，新题很简单，就是给你一个List 里面有ads，然后写一个get（） function，来随机get一个list里面的ad，
+不能重复，而且get 完了后 return null。
+
+解法：我开始就说random 一个 number，然后get 后， 就把get的ad 删掉。但是说这种时间复杂度比较高，要优化。
+我就把我get到的这个ad swap到我的arraylist最后，就可以了
+
+
+#
+老題, exist map, 寫get 和 put 同時給now()回傳當前時間. lz 表示需要建class來存 duration, 並寫了個 isExpired(),
+面試官表示滿意寫完後 followup問有memory leak怎辦, 答曰再寫個clean, 不定時呼叫. clean就把掃map的key, 如果過期的話 就移除,
+ 面試官表示滿意.
+
+
+#
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=311760&highlight=indeed
+
+#
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=298088&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3089%5D%5Bvalue%5D%5B3%5D%3D3%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%3D26%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+第三轮：hackerrank做题，这道题是以前题的变形，输入是一堆query，每个query包含了user + query word, 输出是每当进来一个query时，根据之前的query，要返回一个最相关的单词，这题能够保证同一个user，只会query某个单词一次。
+具体看例子：
+Input:
+7
+A python
+B java
+A java
+B php
+C python
+C java
+D java
+
+Output:
+0
+0
+0
+0
+1 java(因为目前A: pyhon java, B: java php, search过python的人中还search最多的是java，1次)
+1 python php(此时 A: pyhon java, B: java php, C: python)
+2 python(此时A: pyhon java, B: java php, C: python java)
+这道题我一开始一直在map如何设计上纠结着，naive的方法最后一直有三个case过不了，所以思考的过程是：
+map1<String, Set<String>> // user => the words he searched before
+大概能过6个case，开始优化
+加了个map2<String, List<String>> // word => list of users who searched this word before
+这个的话大概又过了4个，还是有三个过不了，此时我心怀侥幸，一直在优化中间的过程，而不是在优化思想了，结果没成功。直到最后还有20分钟时，换掉了思路，用了一个这个map
+map3<String, Map<String, Integer>> // word => related word and times
+这样的话，每次一个新词进来，直接就能找到相关的词，然后找到出现次数最多的就好。然后再利用map1中这个user之前query的结果，去update map3。这个思路没有debug完，思路讲给了面试官听，他肯定了这个想法。
+
+
+#
+因为面的是Data Engineer
+题目是Rearrange Lists each list cannot have duplicate
+["a", "b", "c", "a", "a", "b"] -> [ ["a", "b", "c"], ["a", "b"], ["a"] ]
+Your solution should minimize the number of inner lists.
+# [ ["a"], ["a"], ["b"] ] would not be a correct solution for ["a", "a", "b"].
+# The correct solution would be [ ["a", "b"], ["a"] ]
+
+BruteForce的方法是HashMap计数，然后遍历Map，count-=1
+优化的方法可以考虑是bucket count，建一个长26的arraylist，
+当时时间紧张，没想出来优化算法....上午面下午拒，效率堪比TwoSigma那次了
+
+1个小时，1道题目，之前聊天很久。题目没在面经里看到过。
+给一个list， 如何把里面的字符分配到尽量少的子list里，并且每个子list没有重复元素。
+比如
+['a','b','c','a','a','b']， 可以分成['a', 'b', 'c'], ['a', 'b'], ['a']
+['a', 'a', 'a', 'b', 'b', 'b']，可以分成['a', 'b'], ['a', 'b'], ['a', 'b']
+
+先给出了O(n*2)的解法，后来发现可以先数一遍字符个数，找到出现最多的，比如a出现3次，就建3个子list，
+然后把每种字符round robin那样放进各个list就行了， 这样是O(n)
+
+O(n*2) 的解法是啥
+就是扫一遍，每次都查当前元素是否在现有的某个list里，比如n个a的情况，每次可能最多要检查之前n－1
+个list
+
+这个题是indeed经典面经题，开n个list，挨个放就可以(n是出现次数最多的那个char的出现次数)。
+
+
+#
+上午先上机，还是那道题， query, A|B ,A&B,A那道题就是stduin处理比较麻烦。 最后有两个test case没有过，
+不知道影响不影响大局，好担心。下午白板：第一个题，是git commit，follow－up是个lowest common anscester，
+写第一问的时候竟然脑残出了个小bug，在面试官提示下改了，不知道影响不影响结果阿，
+第二题，jobid storage, 就是给你jobid type是long，然后在64 bit的操作系统里，16gb内存 如何能存下4 Billion个jobid。
+然后实现expire 和isExpire的操作，这个其实比较次要的 ，更多的是比较open的讨论。
+第三题，merge k sorted streams，原题，但是楼主对iterator不是特别熟悉，所以还是犯了一个小错误，不过在面试官的提示下改了，
+还是不知道会不会影响offer阿。。这些题的答案之前的面经应该都有，过段时间忙完了把我的总结发给大家，
+
+现在更新一下input，说的更清楚一点，第一题第一问input是一个parent pointer的node，
+def __init__(self,id): self.parent = [] self.id = id.
+第二问 让实现方法 isExpire ,和expire 但是其实这不是重点，hashmap，大家都能实现，关键是如何用最节省内存的方法存下来，
+第三题stream 的type是iterator，input是（streams，k）
+
+#
+面经题目expiremap. Follow up问了clean up的问题，楼主提出了一个o(n)的方法但是好像不是他想要的结果，
+我一开始写的code只在get时候会删除过期数据，然后她问如果有个server用你的东西过了一小时了没人get东西会怎么样，你该怎么解决它？
+具体回答我也不知道其实，因为我回答后感觉他不满意因为他问我怎么改进，后来我支支吾吾也说的不太好。
+
+clean up应该是想让你写一个函数，每次调用就把应该expire的项目全pop掉吧。如果是的话你可以一开始用 Linkedlist + hashMap，
+也就是把hashmap中的东西都用指针连在一起
+
+
+#
+题目就是leetcode summer range。
+follow up 就是万一不是连续的。例子 {1，3，5，6，10，14}
+要输出 “1-5/2 , 6-14/4”
+使用逗号分隔开。
+2和4代表的是这些数的差，也就是steps
+    public String summaryRanges(int[] nums) {
+        StringBuilder sb = new StringBuilder();
+        int start = 0;
+        int end = 0;
+        int curSteps = 0;
+        while(end < nums.length){
+            if( end + 1 < nums.length)
+                  curSteps = nums[end+1] - nums[end];
+            while(end + 1 < nums.length && nums[end] + curSteps == nums[end+1]){
+                end++;
+            }
+            if(end == nums.length - 1)
+                sb.append(getRange(nums,start,end, curSteps));
+            else
+                 sb.append(getRange(nums,start,end, curSteps)+",");
+            end++;
+            start = end;
+        }
+        return sb.toString();
+    }
+    public String getRange(int[] nums,int start,int end,int steps){
+        return (start == end) ? String.valueOf(nums[start]) : nums[start] + "-"+nums[end]+"/"+steps;
+    }

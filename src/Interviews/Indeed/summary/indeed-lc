@@ -6,7 +6,26 @@ LE_171_Excel_Sheet_Column_Number
 LE_151_Reverse_Words_In_A_String
 
 LE_243_Shortest_Word_Distance
+LE_244_Shortest_Word_Distance_II
+LE_245_Shortest_Word_Distance_III
 
 LE_04_Median_Of_Two_Sorted_Arrays
 
+LE_616_Add_Bold_Tag_In_String
 leetcode question 563 binary tilt tre
+
+LI_77_Longest_Common_Subsequence
+
+LE_523_Continuous_Subarray_Sum
+变形，输出的是小于某个target的最大sum
+assumption
+1. 元素为非负整数
+
+LE_349_Intersection_Of_Two_Arrays
+变形，array是sort好的
+assumption：
+1. list的元素可以为任何整型数
+2. list的元素可以有重复
+3. 输出的结果不能有重复
+
+
