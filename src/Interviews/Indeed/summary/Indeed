@@ -860,3 +860,157 @@ follow up 就是万一不是连续的。例子 {1，3，5，6，10，14}
     public String getRange(int[] nums,int start,int end,int steps){
         return (start == end) ? String.valueOf(nums[start]) : nums[start] + "-"+nums[end]+"/"+steps;
     }
+
+#
+2017
+第一轮：572. Subtree of Another Tree
+第二轮：输入字符带括号的四则混合运算。(参见逆波兰表达式)
+第三轮：257. Binary Tree Paths
+第四轮：Dungeon games
+第五轮：设计Tweet信息派送
+
+
+#
+非常累的一整天, 昂赛面的不好,贡献给各位,应该是跪了.
+
+1. 履历的deep dive. 问很深,要準備好.
+2. 系统设计, 设计公司review 系统, 用户可上传review, 搜寻review. 用什麽资料库,怎麽scale. 面试时就感觉面试官不满意.
+3. expire map, 给了circular array 解法 但要求我用list. 也面不好,出了很多小错.
+4. 午餐, 陪吃的小哥人很nice.
+5. 上机: resume profile id, query update題,
+6. 给个多叉树,树的edge都有个weight, 求root到leaf的最小cost, 返回min cost leaf.
+7. 给n个sorted的 iterator, 给一个K, 一个 在所有iterator出限次数 >=K 的元素的list, 同一个iterator中间若有重複要skip.
+
+Expire map
+circular 解法主要就是 create 一个固定size for 5分钟的array, keep 一个lastTimeStamp, 每次放入的位置为 timestamp % size. 然后因为有lastTimeStamp, 可以算出哪些array裡面的范围是invalid,不要算进去.
+list 解法主要就是 用list maintain 所有timestamp, 每次要算sum的时候 从最尾,扫到第一个过期的时间,斩断.
+
+follow up 没有问到multithread, follow up 主要就是时间空间複杂度
+
+#
+whiteboard：
+第一轮，面经题 jobid storage，主要就是讨论怎么存储省空间
+第二轮，似乎是新题，Normlize title
+
+输入一组 raw titles, 例如"senior software engineer"，还有一组clean title "software engineer", "mechanical engineer"
+每个raw title 求匹配得分最高的clean title，这里 senior software enginner 和software engineer 有两个词匹配，
+得分2；和mechanical engineer有一个词匹配，得分1，返回software engineer
+follow up 是raw title和clean title中有duplicate word怎么办
+
+第三轮，面经题, unrolled linkedlist
+
+楼主前两轮答得很好，第三轮碰到国人大哥，讲思路的时候就问题不断，最后就一点时间写题，结果没写完，而且紧张下还写出了bug
+
+
+#
+Store a binary tree to array, 怎么存节省空间？
+
+我的理解是如果只寸binary tree的话，一个TreeNode 要存一个value, 已经两个pointer to left and right child, 大约占 12 byte。
+如果假设一个Pointer 也是４byte的话（３２位系统）。
+我看网上大家的答案大部分都是用一个heap. 大体意思是如果这个tree 比较满的话，用一个array 来存就行, Node i 的 两个孩子的index
+是 2*i, 2 * i + 1. 如果 i 从１开始的话。这样子一个node 只寸值，也就是只用了4 byte空间，原来的1/3.
+但是如果这个tree比较稀疏的话，可以把这个稀疏Array 转化成 dense format，也就是说用两个array, 一个存值，一个存 值对应的index.
+不知道还有没有其他更好的方法？
+另外我把用 heap 表示 binary tree的答案写出来。不知道对不对？
+
+也可以用两个array，preorder存一个，inorder存一个， 回复起来也比较方便
+
+请问  “用heap的方法”是什么意思？lz的code里并没有看到heap呀？
+heap  底层结构是数组  他在数组里的实现是左儿子 是2*i 右儿子是2*i + 1  希望你懂了~  如果不懂请看这个链接~
+http://www.cse.hut.fi/en/researc ... ial/taulukkona.html
+
+如果是比较稀疏的BT,可以存一下pre/post order+inorder.我觉得这样不错，因为只存了non-null的结点，size只是所有non-null节点的两倍而已。
+
+是的，如果有duplicate的话，就不能用inorder+preorder了。
+
+用int[] 比较好，因为每个node从12byte降到了4个byte，相对位置用index就可以表示。目前来看，上面的heap方法是最佳办法，就是用int数组来实现，左右孩子就是2i，2i+1。
+
+
+#
+LE_162_Find_Peak_Element
+题目：
+给一个数组，例如[8,5,3,6,1,4,7], 返回任意一个local minimum，也就是任意一个谷值，比如在这个例子里，返回3和1都是正确的。
+数组没有重复的数，所以不会出现[1,1,1,1,1]这种没有结果的情况情况。
+
+楼主先用了一个O(n)的方法，很快写完。然后楼主感觉是可以用二分法的，但是12月过后圣诞太久没刷题了竟然蒙蔽了没写出来。。。。
+尴尬。后面基本上是靠面试官提醒才想出来，可是时间不够了没写就结束了。
+这题的corner case也要注意，比如说一头一尾也会出现谷值，比如只有一个数字可以直接返回。
+
+#
+第一轮： 白人小哥： 给一个链表，每个Node里有定长的数组，存的是char，然后问的就是关于插入删除等等一系列的操作，面经原题
+，关键点在于操作的时候要考虑node为空的或者满了的情况。
+
+这个没有固定的解，只要让面试官满意就行。比如说Node满了，还要往这个node插入的话，那就得新建一个Node插入在这个Node后面。
+比如让你插入的Index是x,  x指的并不是第x个Node, 而是总的elements中第x个位置。
+online coding我用的是hashmap统计频率
+
+第二轮：白人小哥：parse 一段Python代码，根据缩进规则，比如第一行不能有空格，前一行以冒号结尾的话，下一行空格数要比上一行多。。。
+第三轮：白人大叔，merge k sorted streams。但是要求是合并的结果中只包含出现在K个stream以上的元素，同一个stream中重复的次数不算。
+
+online coding: 原题： 给一串query， 查找 a&b 或者a||b之类的frequency。不难，但是时间可能要抓紧，我处理cin cout花了半小时，
+最后五分钟才写完的。。。
+
+总结：题都不难，我觉得面试官考察的不只是代码，更强调的是交流，你怎么表述你的算法，因为大家可能都知道怎么做了。
+
+#
+https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=176965&highlight=indeed
+implement linked list with arraylist
+他让写两个method，get和insert。get给一个index，你就check每个node接的那个array里面有多少个character，数一数，
+数到index所在的那个node然后就输出了。insert给一个index，一个char，这个稍微麻烦一点，先找到你要插入char的那个node，
+看它是不是满了，如果满了就新建一个node，然后接到原来的node后面。
+
+把一个binary tree用一个好一点的data structure implement出来
+
+#
+第一轮：给一颗binary tree，有以下数据结构
+class Edge {
+        Node node;
+        int cost; //大于等于0
+}
+class Node {
+        List<Edge> edges;
+}
+找从root到叶节点cost之和最小的路径，返回该leaf node。（dfs）
+follow-up：如果不是binary tree的结构，而是任意的单向图，问代码还是否work（yes）
+有没有优化的地方？（我用hashmap存下每个节点到叶节点的distance，这样再次访问到该叶节点就不必dfs下去）。
+时间复杂度？（优化后是O（V+E））
+
+第二轮：Unrolled Linked List，有以下数据结构：
+class Node {
+        char[] chars = new char[5]; //固定大小5
+        int len;
+}
+class LinkedList {
+        Node head;
+        int totalLen;
+}
+实现以下成员函数：char get(int index), void insert(char ch, int index)
+get比较容易，就是从head traverse，定位第index个char；insert有点麻烦，有几种情况需要考虑。
+时间有点不太够，所以insert函数没完全实现 T.T
+
+第三轮：get K apearances numbers in N sorted streams。
+这道没什么说的，和其他面经出入不大，我直接给出用min heap的solution，他问了下时间复杂度，然后说这就是想要的最好solution，
+没什么问的了。
+
+下午online coding，也是面经题，用STDIN和STDOUT，输入如下：
+N
+...
+...  --> document，有N行string，每一个string是space delimited
+...
+M
+...
+A
+B & C  --> M行query
+D | E
+...
+要求输出如下：对每一个query，依次print document中满足query条件的行号，其中行号根据key word出现频率排序，对于频率一样的，
+小的行号优先。
+其中出现的频率按照如下定义：如果string中单词A cnt1次，单词B cnt2次，则A&B和A | B的频率都按照cnt1 + cnt2计算。
+后面还有几道文字题目：分析时间和空间复杂度；如果给你一天时间完成，你还有什么优化，如果有很多很多记录，很多很多user querys，
+有什么优化。
+
+#
+上机题最近都是同一道，地里翻翻就知道了。大数据要用counting sort才能过，输入输出处理很烦很花时间，其它部分比较好写。
+我用C++写的，getline(cin,aString)不会读取最后一个换行符，这个很重要，当时卡了很久，一定要注意。
+
+

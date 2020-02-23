@@ -1,4 +1,4 @@
-package Interviews.Indeed;
+package Interviews.Indeed.References;
 
 import java.util.Stack;
 
