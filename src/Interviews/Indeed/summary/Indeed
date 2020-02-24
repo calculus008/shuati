@@ -919,11 +919,13 @@ Store a binary tree to array, 怎么存节省空间？
 heap  底层结构是数组  他在数组里的实现是左儿子 是2*i 右儿子是2*i + 1  希望你懂了~  如果不懂请看这个链接~
 http://www.cse.hut.fi/en/researc ... ial/taulukkona.html
 
-如果是比较稀疏的BT,可以存一下pre/post order+inorder.我觉得这样不错，因为只存了non-null的结点，size只是所有non-null节点的两倍而已。
+如果是比较稀疏的BT,可以存一下pre/post order+inorder.我觉得这样不错，因为只存了non-null的结点，
+size只是所有non-null节点的两倍而已。
 
 是的，如果有duplicate的话，就不能用inorder+preorder了。
 
-用int[] 比较好，因为每个node从12byte降到了4个byte，相对位置用index就可以表示。目前来看，上面的heap方法是最佳办法，就是用int数组来实现，左右孩子就是2i，2i+1。
+用int[] 比较好，因为每个node从12byte降到了4个byte，相对位置用index就可以表示。目前来看，上面的heap方法是最佳办法，
+就是用int数组来实现，左右孩子就是2i，2i+1。
 
 
 #

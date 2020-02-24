@@ -73,6 +73,10 @@ public class Reverse_String_But_Html_Entities {
         int start = s;
         int end = s;
 
+        /**
+         * !!!
+         * end <= e
+         */
         while (end <= e) {
             /**
              * find a potential reversed html entity
