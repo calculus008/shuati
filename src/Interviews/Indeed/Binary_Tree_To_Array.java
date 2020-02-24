@@ -33,5 +33,10 @@ public class Binary_Tree_To_Array {
      * #
      * 给你⼀一个树，让你设计⼀一个数据结构来保存树的结构，⽤用array就好了了，
      * follow up就是如果树不不full怎么办
+     *
+     * #
+     * https://stackoverflow.com/questions/2675756/efficient-array-storage-for-binary-tree
+     *
+     * LE_297_Serialize_And_Deserialize_Binary_Tree
      */
 }

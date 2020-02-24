@@ -74,6 +74,7 @@ public class BT_to_Array {
             TreeNode cur = queue.poll();
             int idx = idxQueue.poll();
             record.put(idx, cur.val);
+
             if (cur.left != null) {
                 queue.offer(cur.left);
                 idxQueue.offer(2 * idx);
