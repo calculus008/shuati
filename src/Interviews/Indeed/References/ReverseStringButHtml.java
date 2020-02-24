@@ -41,6 +41,10 @@ public class ReverseStringButHtml {
 	        
 	          String s = "1234&eur;o;5677&&eu;567&";
 	       // String s = "&euro4321";
+		 /**
+		  * result:
+		  * &765&eu;&7765;o&eur;4321
+		  */
 	        System.out.println(sol.reverseHtml2(s));
 	        System.out.println(sol.reverseHtml(s));
 	    }

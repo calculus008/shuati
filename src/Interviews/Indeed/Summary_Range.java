@@ -128,7 +128,7 @@ public class Summary_Range {
         for (int key : map.keySet()) {
             int val = map.get(key);
 
-            System.out.println(key + "->" + val);
+//            System.out.println(key + "->" + val);
 
 
             if (key < val) {
@@ -164,7 +164,7 @@ public class Summary_Range {
 
         int[] input5 = {10, 1, 3, 11, 12, 3, 14, 3, 13, 2, 7};
 
-        int[] input6 = {100, 5, 1};
+        int[] input6 = {100, 5, 1, 6, 7, 1, 8};
 
         printRes(summaryRangesWithDuplicates(input1));
         printRes(summaryRangesWithDuplicates(input2));
