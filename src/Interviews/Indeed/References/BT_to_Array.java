@@ -40,7 +40,12 @@ public class BT_to_Array {
         while (!queue.isEmpty()) {
             TreeNode cur = queue.poll();
             Integer curI = idxQueue.poll();
+
+            /**
+             * !!!
+             */
             heap[curI] = cur.val;
+
             if (cur.left != null) {
                 queue.offer(cur.left);
                 idxQueue.offer(2 * curI);

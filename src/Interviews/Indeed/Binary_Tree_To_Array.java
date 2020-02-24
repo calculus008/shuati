@@ -4,7 +4,8 @@ public class Binary_Tree_To_Array {
     /**
      * Store a binary tree to array, 怎么存节省空间？
      *
-     * 我的理解是如果只寸binary tree的话，一个TreeNode 要存一个value, 已经两个pointer to left and right child, 大约占 12 byte。
+     * 我的理解是如果只寸binary tree的话，一个TreeNode 要存一个value,
+     * 已经两个pointer to left and right child, 大约占 12 byte。
      * 如果假设一个Pointer 也是４byte的话（３２位系统）。
      * 我看网上大家的答案大部分都是用一个heap. 大体意思是如果这个tree 比较满的话，用一个array 来存就行, Node i 的 两个孩子的index
      * 是 2*i, 2 * i + 1. 如果 i 从１开始的话。这样子一个node 只寸值，也就是只用了4 byte空间，原来的1/3.
@@ -25,5 +26,12 @@ public class Binary_Tree_To_Array {
      *
      * 用int[] 比较好，因为每个node从12byte降到了4个byte，相对位置用index就可以表示。目前来看，上面的heap方法是最佳办法，
      * 就是用int数组来实现，左右孩子就是2i，2i+1。
+     *
+     * http://www.cse.hut.fi/en/research/SVG/TRAKLA2/tutorials/heap_tutorial/taulukkona.html
+     *
+     *
+     * #
+     * 给你⼀一个树，让你设计⼀一个数据结构来保存树的结构，⽤用array就好了了，
+     * follow up就是如果树不不full怎么办
      */
 }
