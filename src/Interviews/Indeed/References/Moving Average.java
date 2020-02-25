@@ -1,3 +1,6 @@
+import java.util.Deque;
+import java.util.LinkedList;
+
 //package Interviews.Indeed;/* =============================================================================
 //Question Description
 //=============================================================================*/
@@ -44,6 +47,7 @@
 //        return 0.0;
 //    }
 //}
+//
 //class Event{
 //    int val;
 //    int time;
@@ -67,7 +71,7 @@
 ///* =============================================================================
 //Follow Up code
 //=============================================================================*/
-////应付内存不够的办法。
+//应付内存不够的办法。
 //public class Moving_Average {
 //    //queue的容量被限制
 //    private Deque<Event> queue = new LinkedList<>(); //改成deque的话，可以从后面查
@@ -123,11 +127,11 @@
 //        this.size = 1;
 //    }
 //}
-//
-////实现find Median，其实O1操作的话，要始终维护两个heap，这样塞进去会很慢
-////原有基础上实现的话，那就直接quick select的办法了。
-////复杂度是On，因为每次average case是去掉一半，就是O(n)+O(n/2)+O(n/4)+... 最后出来是O(2n)
-//    //那这个需要把整个queue给倒出来再塞回去。
+
+//实现find Median，其实O1操作的话，要始终维护两个heap，这样塞进去会很慢
+//原有基础上实现的话，那就直接quick select的办法了。
+//复杂度是On，因为每次average case是去掉一半，就是O(n)+O(n/2)+O(n/4)+... 最后出来是O(2n)
+    //那这个需要把整个queue给倒出来再塞回去。
 //    public double getMedian(){
 //        removeExpireEvent();
 //        int[] temp = new int[queue.size()];
