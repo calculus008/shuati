@@ -143,10 +143,14 @@ public class Moving_Average {
          */
 
         /**
-         * LI_461_Kth_Smallest_Number
+         * 这个题目前面average很简单，重点是follow up找median很麻烦，楼主先提出quick select，然后说是O(N)，问能不能更快，抛出two heap解法，
+         * 楼主知道two heap移除过期元素很麻烦，就先分析了假设不需要移除的情况下的复杂度，面试官表示认同。然后分析了如果要移除过期元素的话需要
+         * 重新heapify，用lazy appraoch更好，面试官表示十分满意。
          */
 
-
+        /**
+         * LI_461_Kth_Smallest_Number
+         */
         public double getMedian(){
             ArrayList<Integer> list = new ArrayList(queue);
             int[] nums = new int[list.size()];
