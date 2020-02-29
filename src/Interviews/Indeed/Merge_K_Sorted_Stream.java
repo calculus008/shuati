@@ -76,7 +76,7 @@ public class Merge_K_Sorted_Stream {
                 if (num != pre) {
                     cur.val = num;
                     pq.offer(cur);
-                    break;
+                    break;//!!!
                 }
             }
 
