@@ -2,7 +2,7 @@ package Interviews.Indeed;
 
 import java.util.Stack;
 
-public class Python_Indent_Validatiaon {
+public class Python_Indent_Validation {
     /**
      * 1.第一行无缩进
      * 2.前一行是冒号结尾，下一行缩进要比这一行多
