@@ -17,28 +17,29 @@ public class Python_Indent_Validation_1 {
 
             if (temp.isEmpty()) continue;
 
-            int level = getIndent(temp);
+            int numberOfIndenets = getIndent(temp);
             boolean isControl = isControl(temp);
 
-            System.out.println("i=" + i + ", level=" + level + ", isControl=" + isControl);
+            System.out.println("i=" + i + ", level=" + numberOfIndenets + ", isControl=" + isControl);
 
             if (stack.isEmpty()) {
-                if (level != 0) return i;
+                if (numberOfIndenets != 0) return i;
             } else if (stack.peek().isControl) {
-                if (level <= stack.peek().level) return i;
+                if (numberOfIndenets <= stack.peek().level) return i;
             } else {
-                while (!stack.isEmpty() && stack.peek().level >= level) {
+                while (!stack.isEmpty() && stack.peek().level >= numberOfIndenets) {
                     stack.pop();
                 }
                 if (!stack.isEmpty() && !stack.peek().isControl) return i;
             }
 
-            stack.push(new Node(level, isControl));
+            stack.push(new Node(numberOfIndenets, isControl));
             lastline = i;
         }
 
         /**
-         * the last line is control block
+         * !!!
+         * Follow up : the last line is control block
          */
         if (!stack.isEmpty() && stack.peek().isControl) return lastline;
 

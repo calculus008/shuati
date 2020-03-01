@@ -14,6 +14,17 @@ public class Python_Indent_Validation {
      *
      * follow up1: what is the last line is control block?
      * follow up2: what if there is comment line (" #")
+     *
+     * follow-up是stack装不下会自动扩展，自动扩展需要把原来的数据复制到一个新的大一些的stack里面，
+     * 问这个复制的过程会影响时间复杂度吗？
+     * 当然不会，X insertions take O(2X) time, 所以insertion的amortized time仍然是O(1).
+     * 面试官还问了我几遍are you sure.我sure的一笔，怎么会上你的当。
+     *
+     * n - number line lines
+     * m - average length of lines
+     *
+     * Time  : O(n * m)
+     * Space : O(n)
      */
 
     static int base = 0;
@@ -98,6 +109,8 @@ public class Python_Indent_Validation {
     /**
      * Here the assumption is that for each level, the indent spaces will increase by
      * the same number (base). For example, each level will be indented for two more spaces.
+     *
+     * "这里如果它说n个空格算一次tab的话，就最后返回的时候res/n好了"
      */
     private static int getIndent(String s) {
         char[] chs = s.toCharArray();
