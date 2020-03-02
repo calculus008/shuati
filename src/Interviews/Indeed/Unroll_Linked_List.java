@@ -9,12 +9,12 @@ public class Unroll_Linked_List {
      * 1. get(int index) find the char at the index
      * 2. insert(char ch, int index) insert the char to the index
      *
-     * * class Node {
+     * * class Node2 {
      * *         char[] chars = new char[5]; //固定大小5
      * *         int len;
      * * }
      * * class LinkedList {
-     * *         Node head;
+     * *         Node2 head;
      * *         int totalLen;
      * * }
      *

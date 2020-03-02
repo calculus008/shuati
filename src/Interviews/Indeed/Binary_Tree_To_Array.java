@@ -12,7 +12,7 @@ public class Binary_Tree_To_Array {
      * 我的理解是如果只寸binary tree的话，一个TreeNode 要存一个value,
      * 已经两个pointer to left and right child, 大约占 12 byte。
      * 如果假设一个Pointer 也是４byte的话（３２位系统）。
-     * 我看网上大家的答案大部分都是用一个heap. 大体意思是如果这个tree 比较满的话，用一个array 来存就行, Node i 的 两个孩子的index
+     * 我看网上大家的答案大部分都是用一个heap. 大体意思是如果这个tree 比较满的话，用一个array 来存就行, Node2 i 的 两个孩子的index
      * 是 2*i, 2 * i + 1. 如果 i 从１开始的话。这样子一个node 只寸值，也就是只用了4 byte空间，原来的1/3.
      * 但是如果这个tree比较稀疏的话，可以把这个稀疏Array 转化成 dense format，也就是说用两个array, 一个存值，一个存 值对应的index.
      * 不知道还有没有其他更好的方法？
@@ -337,4 +337,16 @@ public class Binary_Tree_To_Array {
         TreeNode node = new TreeNode(value);
         return node;
     }
+
+    /**
+     * https://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/
+     *
+     * For a general weighted graph, we can calculate single source shortest distances in O(VE) time
+     * using Bellman–Ford Algorithm. For a graph with no negative weights, we can do better and calculate
+     * single source shortest distances in O(E + VLogV) time using Dijkstra’s algorithm. Can we do even better
+     * for Directed Acyclic Graph (DAG)? We can calculate single source shortest distances in O(V+E) time for DAGs.
+     * The idea is to use Topological Sorting.
+     */
+
+
 }

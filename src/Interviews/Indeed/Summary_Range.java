@@ -62,30 +62,30 @@ public class Summary_Range {
      * Unsorted array
      *
      * Key:
-     * 1.use map to track left and right boundary of an interval, when add interval, add both ends:
-     *  map.put(left, right);
-     *  map.put(right, left);
+     * 1.use dist to track left and right boundary of an interval, when add interval, add both ends:
+     *  dist.put(left, right);
+     *  dist.put(right, left);
      * 2.When there's new boundary remove the old one (!!!)
      *
      * Example :
      *
      * {4, 3, 5}
      * i = 0:
-     * map
+     * dist
      * 4 -> 4
      *
      * i = 1;
-     * map
+     * dist
      * 3 -> 4
      * 4 -> 3
      *
      * i = 2
-     * map
+     * dist
      * 5 -> 3
      * 3 -> 5
      *
      *
-     * Time  : O(n + mlogm), n is number of numbers in nums[], m is number intervals in map
+     * Time  : O(n + mlogm), n is number of numbers in nums[], m is number intervals in dist
      * Space : O(n)
      */
     public static List<String> summaryRangesUnsorted(int[] nums) {

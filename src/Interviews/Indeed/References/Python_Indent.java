@@ -16,7 +16,7 @@ public class Python_Indent {
      * 1.第一行无缩进
      * 2.前一行是冒号结尾，下一行缩进要比这一行多
      * 3.同一个块里面缩进相同
-     * 4. 如果下一行缩进变少，必须要变少到之前出现过的有效缩进。
+     * 4.如果下一行缩进变少，必须要变少到之前出现过的有效缩进。
      *
      * 做法应该就是stack
      *
@@ -42,15 +42,16 @@ public class Python_Indent {
     public static boolean identification(String[] strs) {
         if (strs == null || strs.length == 0)   return true;
         if (countTab(strs[0]) != 0)     return false;
+
         Stack<Integer> stack = new Stack<>();
         stack.push(countTab(strs[0]));
+
         for (int i = 1; i < strs.length; i++) {
             int cur = countTab(strs[i]);
             // 需要缩进
             if (strs[i-1].charAt(strs[i-1].length()-1) == ':') {
                 if (cur <= stack.peek())   return false;
-            }
-            else {
+            } else {
                 // 同一个块，不用缩进
                 if (cur > stack.peek())     return false;
                 // 比之前的tab少，需要把stack之前的strs pop出来
@@ -68,18 +69,22 @@ public class Python_Indent {
         char[] arr = s.toCharArray();
         int cnt = 0;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == ' ')     cnt++;
-            else    break;
+            if (arr[i] == ' ') {
+                cnt++;
+            } else {
+                break;
+            }
         }
         return cnt;
     }
 
     public static void main(String[] args) {
         String[] strs = {"def function():",
-                "  print(\"Hello world\")",
-                "  print(\"Hello world\")",
-                "  if i==1:",
-                "    print(\"asdf\")"};
+                         "  print(\"Hello world\")",
+                         "  print(\"Hello world\")",
+                         "  if i==1:",
+                         "#comment",
+                         "    print(\"asdf\")"};
         System.out.print(identification(strs));
     }
 }

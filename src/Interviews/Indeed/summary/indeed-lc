@@ -32,4 +32,11 @@ assumption：
 
 LE_162_Find_Peak_Element
 
-Intersection_Union_Of_K_Sorted_Lists
+Intersection_Union_Of_K_Sorted_Lists (***)
+
+#related with merge K streams
+LE_347_Top_K_Frequent_Elements
+LE_692_Top_K_Frequent_Words
+LI_549_Top_K_Frequent_Words_Map_Reduce
+LI_550_Top_K_Frequent_Words_II
+
