@@ -45,6 +45,20 @@ public class Binary_Tree_To_Array {
      * LE_297_Serialize_And_Deserialize_Binary_Tree
      */
 
+    /**
+     * Use heap like representation of a tree - put node value into array. For a 32 bit system, for each node,
+     * node value takes 4 bytes, each pointer to children takes 4 bytes, total is 12 bytes. Use array, we use
+     * array index to track between parent and children, therefore, we only need to use 4 bytes to save value
+     * of the node, so for each node, we just 4 bytes (1/3 of the tree node space).
+     *
+     * Root value is in index 1, for a give parent in index i, its left child is in heap[2 *1], right child is
+     * in heap[2 * i + 1]. For a given child in idx k, its parent is in heap[k / 2].
+     *
+     * But when we init the array, we will init it as a complete tree, the size is 2 ^ height. So it is good for
+     * condense tree, not good for sparse tree.
+     *
+     * http://www.cse.hut.fi/en/research/SVG/TRAKLA2/tutorials/heap_tutorial/taulukkona.html
+     */
     public int[] compressDenseBT(TreeNode root) {
         int height = getHeight(root);
 
@@ -90,6 +104,14 @@ public class Binary_Tree_To_Array {
         return Math.max(l, r) + 1;
     }
 
+    /**
+     * For sparse tree, we don't use array, instead we use map :
+     * index in a full tree -> node value
+     *
+     * By doing this we don't need to allocate array of size 2 ^ height of the tree,
+     * instead, we just have a map with n entries, n is the number of nodes in the tree.
+     *
+     */
     public Map<Integer, Integer> compressSparseBT(TreeNode root) {
         Map<Integer, Integer> map = new HashMap<>();
 
@@ -119,6 +141,12 @@ public class Binary_Tree_To_Array {
         return map;
     }
 
+    /**
+     * Another way to represent sparse tree, use the same method in LE_297_Serialize_And_Deserialize_Binary_Tree,
+     * use BFS or DFS to put all node values (and null) into a string representation (with n - 1 separators).
+     *
+     * Space : 32 * n + 32 * (n - 1) = 64 * n - 32
+     */
     public String serializeBTBFS(TreeNode root) {
         if (root == null) return "";
 
@@ -173,6 +201,20 @@ public class Binary_Tree_To_Array {
         return root;
     }
 
+
+    /**
+     * More compression
+     *
+     * Use bit to compress, each value take 32 bit (suppose we are on 32 bit system), for n code. all
+     * values take 32n bits, each node will use one bit to tell if the child is null (bit value 1 means
+     * the child node is null, 0 means it's not), so the total bits the representation uses:
+     *
+     * 32 * n + 2 * n = 34 * n
+     *
+     * compress():
+     * Just use BFS method of the last solution, instead,we put them in an ArrayList, then go through
+     * this list to do bit compression.
+     */
     public String serializeBT(TreeNode root) {
         if (root == null) return "";
 
