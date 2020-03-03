@@ -263,6 +263,9 @@ public class LE_425_Word_Squares {
      *
      * Compare with HashMap, Trie saves space, Time complexity is the same.
      * Implementing Trie takes time, so if not required, use HashMap saves time.
+     *
+     * Say there are n words, the words' length is l, and each trie node has c children on average. buildTrie() takes O(ln).
+     * wordSquares() helper method takes O(c^l). So the for loop takes O(nc^l). The overall time complexity is O(ln + nc^l).
      */
     public class Solution2 {
         class TrieNode {
