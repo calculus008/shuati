@@ -37,10 +37,10 @@ bill sponsored client多少钱.
 On campus: expiration map
 onsite:
 第一轮：word break + word break II 这个貌似不是题库题，所以印象最深刻
-第二轮：unrolled LinkedList, 其他帖子里有详细描述, 背就完事了，很简单
+第二轮：unrolled LinkedList, 其他帖子里有详细描述, 背就完事了，很简单用dijkstra
 第三轮：Root to Leaf min cost: Given a tree,(binary tree possibily) every tree edge has a cost，
        find the least cost or find the leaf node that the cost of path that from root to leaf is
-       the least.用dfs解follow up: 改树为DAG，用dijkstra
+       the least.用dfs解follow up: 改树为DAG，
 上机：这个有点忘了，不好意思，没记错的话应该是query recommendation那题. 据说上机题不影响结果，随便做
 
 #
