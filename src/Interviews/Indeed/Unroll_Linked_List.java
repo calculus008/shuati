@@ -18,6 +18,8 @@ public class Unroll_Linked_List {
      * *         int totalLen;
      * * }
      *
+     * https://www.geeksforgeeks.org/unrolled-linked-list-set-1-introduction/
+     * https://en.wikipedia.org/wiki/Unrolled_linked_list
      *
      */
     static class Node {

@@ -115,6 +115,10 @@ public class Root_To_Leave_Min_Cost {
      *
      * https://leetcode.com/problems/course-schedule/discuss/287866/DFS-on-DAG
      *
+     * 3面是Root to Leaf Min Cost那题。两个美国小哥，都挺年轻的。我用的bottom-up的方法，改成 DAG后加了个memorization来存储之前的结果
+     * ，其他什么都不用变。不提dijkstra完全没问题。有 趣的是我cache的是边，主面试官表示赞同，shadow说这样cache不行，要cache node。
+     * 但主面试 官表示可以，然后他们争论了一分钟，结论是我的方案可行。 其实这题我也没写过，随手写的，感谢主面试官让我不用推倒重写。
+     *
      */
     Map<Node2, Integer> dist = new HashMap<>();
     Map<Node2, Integer> visited = new HashMap<>();

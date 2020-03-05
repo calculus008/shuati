@@ -13,6 +13,35 @@ import java.util.Map;
 
 /**
  * Trie.insert() : O(L), L is length of the inserted word
+ *
+ * The worst-case runtime for creating a trie is a combination of m, the length of the longest key in the trie,
+ * and n, the total number of keys in the trie. Thus, the worst case runtime of creating a trie is O(mn).
+ *
+ * The time complexity of searching, inserting, and deleting from a trie depends on the length of the word
+ * a that’s being searched for, inserted, or deleted, and the number of total words, n, making the runtime
+ * of these operations O(an).
+ *
+ * If the memory footprint of a single node is K references, and the trie has N nodes, then obviously its space
+ * complexity is O(N*K). This accounts for the fact that null pointers do occupy their space. Actually whether
+ * an array entry is null or any other value doesn't change anything in terms of memory consumption.
+ *
+ * O(K^L) is a completely different measure because it uses different parameters. Basically K^L is the estimate
+ * on the number of nodes in a densely populated trie, whereas in O(N*K) the number of nodes is explicitly given.
+ *
+ * https://zhu45.org/posts/2018/Jun/02/trie/
+ *
+ * Tries are more space efficient when they contain a large number of short keys, because nodes are shared
+ * between keys with common initial subsequences.
+ *
+ * Tries tend to be faster on average at insertion than hash tables because hash tables must rebuild their
+ * index when it becomes full – a very expensive operation. Tries therefore have much better bounded worst
+ * case time costs, which is important for latency sensitive programs.
+ *
+ * Tries facilitate longest-prefix matching, but hashing does not, as a consequence of the above. Performing
+ * such a “closest fit” find can, depending on implementation, be as quick as an exact find.
+ *
+ * By avoiding the hash function, tries are generally faster than hash tables for small keys like integers
+ * and pointers.
  */
 class TrieNode {
     TrieNode[] children;
@@ -57,8 +86,6 @@ class Trie {
         cur.word = w;
     }
 
-
-
     /**
      * LE_425_Word_Squares
      */
@@ -80,6 +107,40 @@ class Trie {
 
         return res;
     }
+
+    public List<String> findByDFS(String prefix){
+        List<String> res = new ArrayList<>();
+        if (prefix == null || prefix.isEmpty()) return res;
+
+        TrieNode cur = root;
+        for (char c : prefix.toCharArray()) {
+            int idx = c - 'a';
+            if (cur.children[idx] == null) {
+                return res;
+            }
+
+            cur = cur.children[idx];
+        }
+
+        helper(res, cur, prefix);
+        return res;
+    }
+
+    public void helper(List<String> res, TrieNode pRoot, String curS){
+        if (pRoot == null){
+            return;
+        }
+
+        if (pRoot.isWord) {
+            res.add(curS);//!!!
+        }
+
+        String tempS = curS;
+        for (int i = 0; i < 26; i++){
+            char c = (char)('a' + i); //!!!
+            helper(res, pRoot.children[i], tempS + c);
+        }
+    }
 }
 
 /**
@@ -88,10 +149,12 @@ class Trie {
 class TrieNode1 {
     Map<Character, TrieNode1> children;
     List<String> startWith;
+    boolean isWord;
 
     public TrieNode1() {
         children = new HashMap<>();
         startWith = new ArrayList<>();
+        isWord = false;
     }
 }
 
@@ -117,6 +180,8 @@ class Trie1 {
             cur = next;
             cur.startWith.add(s);
         }
+
+        cur.isWord = true;
     }
 
     public List<String> findByPrefix(String prefix) {
@@ -136,6 +201,35 @@ class Trie1 {
         res.addAll(cur.startWith);
 
         return res;
+    }
+
+    public List<String> findByDFS(String prefix) {
+        List<String> res = new ArrayList<>();
+        if (prefix == null || prefix.length() == 0) return res;
+
+        TrieNode1 cur = root;
+        for (char c : prefix.toCharArray()) {
+            TrieNode1 next = cur.children.get(c);
+            if (next == null) {
+                return res;
+            }
+            cur = next;
+        }
+
+        helper(cur, prefix, res);
+        return res;
+    }
+
+    private void helper(TrieNode1 cur, String prefix, List<String> res) {
+        if (cur == null) return;
+
+        if (cur.isWord) {
+            res.add(prefix);
+        }
+
+        for (char c : cur.children.keySet()) {
+            helper(cur.children.get(c), prefix + c, res);
+        }
     }
 }
 
