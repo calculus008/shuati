@@ -1,0 +1,1957 @@
+class Stream{
+    Iterator<Integer> iterator;
+    public Stream(List<Integer> list){
+        this.iterator = list.iterator();
+    }
+    public boolean move(){
+        return iterator.hasNext();
+    }
+    public int getValue(){
+        return iterator.next();
+    }
+}
+
+
+class Num{
+    int val;
+    Stream stream;
+    public Num(Stream stream){
+        this.stream = stream;
+        this.val = stream.getValue();
+    }
+}
+
+
+public class MergeKSortedStreams {
+
+    public List<Integer> getNumberInAtLeastKStream(List<Stream> lists, int k){
+        List<Integer> res = new ArrayList<>();
+        if (lists == null || lists.size() == 0) return res;
+        PriorityQueue<Num> minHeap = new PriorityQueue<>(new Comparator<Num>() {
+            @Override
+            public int compare(Num o1, Num o2) {
+                return o1.val - o2.val;
+            }
+        });
+        //Ïè°ÑËùóDμÄstream·Å½øheapàïÃæ
+        for (Stream s: lists) {
+            if (s.move()){ //ÕaàïÏèÅD¶Ïò»ÏÂòa2»¾í±àáË
+                minHeap.offer(new Num(s));
+            }
+        }
+
+        while (!minHeap.isEmpty()){
+            Num cur = minHeap.poll();
+            int curValue = cur.val;
+            int count = 1;
+            while (cur.stream.move()){
+                int nextVal = cur.stream.getValue();
+                if (nextVal == curValue){
+                    continue;
+                }else{
+                    cur.val = nextVal;
+                    minHeap.offer(cur);
+                    break;
+                }
+            }
+            //¸üDÂÆäËûstreamμÄí·2¿￡¬¾íêÇ°ÑÖ¸ÕëíùoóÅ2￡¬Ïàí¬μÄêy×Ö¾í¼ÆêyáË¡￡
+            while (!minHeap.isEmpty() && curValue == minHeap.peek().val){
+                count++;
+                Num num = minHeap.poll();
+                while(num.stream.move()){
+                    int nextVal = num.stream.getValue();
+                    if(curValue == nextVal){
+                        continue;
+                    }else{
+                        num.val = nextVal;
+                        minHeap.offer(num);
+                        break;
+                    }
+                }
+            }
+            if (count >= k){
+                res.add(curValue);
+            }
+        }
+        return res;
+    }
+
+
+public static void main(String[] args) {
+  // TODO Auto-generated method stub
+  MergeKSortedStreams test = new MergeKSortedStreams();
+       // Integer[] arr1 = {-1, 3, 5, 6, 6, 7, 9, 12, 14,15,16,17,18,19,21,29,22,51};
+  Integer[] arr1 = {-1, 3, 5, 6, 6, 7, 9, 12,51};
+        Integer[] arr2 = {0, 3, 5, 5, 9, 13, 15,51};
+        Integer[] arr3 = {5, 5, 7,11, 19, 21, 51};
+
+        List<Integer> l1 = Arrays.asList(arr1);
+        List<Integer> l2 = Arrays.asList(arr2);
+        List<Integer> l3 = Arrays.asList(arr3);
+
+        List<Stream> lists = new ArrayList<>();
+        lists.add(new Stream(l1));
+        lists.add(new Stream(l2));
+        lists.add(new Stream(l3));
+
+        List<Integer> res = test.getNumberInAtLeastKStream(lists, 3);
+        System.out.println(res);
+}
+
+
+
+class Event{
+    int val;
+    int time;
+    int size;
+    public Event(int val, int time){
+        this.val = val;
+        this.time = time;
+        this.size = 1;
+    }
+}
+
+/*1.memory不够大怎么办（数据点非常密集，5分钟就把内存爆了）
+2.getMedium方法实现
+需要注意的是follow up都是在原有的代码基础上做改进。
+
+对于1的方法，数据点密集的话，选择10秒的时间段，合并数据，得到一个10秒的和和数据数量，那么queue
+size就被一个int变量替换掉，这样丢掉过期数据的时候要更新sum和数据总和。这样会造成一定的偏差，
+但是没办法，条件不好内存不够就忍忍吧。
+
+对于2，就是quick select的find kth in an array的方法。复杂度是O(n).*/
+
+
+public class MovingAverage_followUp {
+
+    private Deque<Event> queue = new LinkedList<>(); //改成deque的话，可以从后面查
+    private long sum = 0;
+    int dataNum = 0;
+
+    //这个是每次记录读进来的时间的,这个不用自己写,就是直接返回当前系统时间
+    //假设它返回的是秒
+    private int getNow(){
+        return 0;
+    }
+
+    private boolean isExpired(int curTime, int preTime){
+        return curTime - preTime > 300;
+    }
+
+    private void removeExpireEvent(){
+        while (!queue.isEmpty() && isExpired(getNow(), queue.peekFirst().time)){
+            Event curE = queue.poll();
+            sum -= curE.val;
+            dataNum -= curE.size;
+        }
+    }
+
+    //其实就是record这里有了两种办法，一种是建个新的，另一种就是合起来
+    public void record(int val){
+        Event last = queue.peekLast();
+        if (getNow() - last.time < 10){
+            last.size += 1;
+            last.val += val;
+        }
+        else {
+            Event event = new Event(getNow(), val);
+            queue.offer(event);
+        }
+        dataNum += 1;
+        sum += val;
+        removeExpireEvent();
+    }
+
+    public double getAvg(){
+        removeExpireEvent();
+        if (!queue.isEmpty()){
+            return (double) sum/dataNum;
+        }
+        return 0.0;
+    }
+
+
+    //实现find Median，其实O1操作的话，要始终维护两个heap，这样塞进去会很慢
+    //原有基础上实现的话，那就直接quick select的办法了。
+    //复杂度是On，因为每次average case是去掉一半，就是O(n)+O(n/2)+O(n/4)+... 最后出来是O(2n)
+    //那这个需要把整个queue给倒出来再塞回去。
+    public double getMedian(){
+        removeExpireEvent();
+        int[] temp = new int[queue.size()];
+        for (int i = 0; i<queue.size(); i++){
+            temp = queue.poll().val;
+        }
+        //这里还得把queue还原回去,先不写了。
+        int len = temp.length;
+        if (len % 2 == 0){
+            return 0.5*(findKth(temp, len/2, 0, len-1) + findKth(temp, len/2-1, 0, len-1));
+        }
+        return (double)findKth(temp, len/2, 0, len-1);
+    }
+
+    public int findKth(int[] temp, int k, int start, int end){
+        int pivot = temp[start];
+        int left = start, right = end;
+        while (left < right){
+            while (temp[right] > pivot && left < right){
+                right--;
+            }
+            while (temp[left] <= pivot && left < right){
+                left++;
+            }
+            swap(temp, left, right);
+        }
+        swap(temp, start, right);
+        if (k == right){
+            return pivot;
+        }
+        else if (k < right){
+            return findKth(temp, k, start, right-1);
+        }
+        return findKth(temp, k, right+1, end);
+    }
+
+    public void swap(int[] temp, int left, int right){
+        int i = temp[left];
+        temp[left] = temp[right];
+        temp[right] = i;
+    }
+
+
+
+public class MovingAverage {
+
+    private Queue<Event> queue = new LinkedList<>();
+    private int sum = 0;
+
+    //这个是每次记录读进来的时间的,这个不用自己写,就是直接返回当前系统时间
+    private int getNow(){
+        return 0;
+    }
+
+    private boolean isExpired(int curTime, int preTime){
+        return curTime - preTime > 300;
+    }
+
+    private void removeExpireEvent(){
+        while (!queue.isEmpty() && isExpired(getNow(), queue.peek().time)){
+            Event curE = queue.poll();
+            sum -= curE.val;
+        }
+    }
+
+    public void record(int val){
+        Event event = new Event(getNow(), val);
+        queue.offer(event);
+        sum += val;
+        removeExpireEvent();
+    }
+
+    public double getAvg(){
+        removeExpireEvent();
+        if (!queue.isEmpty()){
+            return (double) sum/queue.size();
+        }
+        return 0.0;
+    }
+}
+
+public class MovingAverageTotal {
+
+public class Event{
+     int val;
+     int time;
+     public Event(int val,int time){
+         this.val=val;
+         this.time=time;
+     }
+}
+
+
+LinkedList<Event> queue;
+    private int sum = 0;
+public MovingAverageTotal() {
+  queue=new LinkedList<>();
+}
+
+public int getNow() {
+  return 0;
+}
+
+
+
+private void removeExpired(){
+     while(!queue.isEmpty() && (getNow()-queue.peek().time>300)){
+         Event curE=queue.poll();
+         sum-=curE.val;
+     }
+}
+
+
+public void record(int val){
+     if(getNow()-queue.peekLast().time<10){
+         queue.peekLast().val+=val;
+     }else{
+         Event newEvent=new Event(val,getNow());
+         sum+=newEvent.val;
+         addNum(val);  //insert to two heaps for getMedian
+         queue.offer(newEvent);
+         removeExpired();
+     }
+
+}
+
+
+public double getAvg(){
+     removeExpired();
+     if(queue.isEmpty())return 0.0;
+     return (double)sum*1.0/queue.size();
+}
+
+
+    int[] timestamps = new int[300];
+    int[] values = new int[300];
+    int[] counts = new int[300];
+
+    public void record(int timestamp, int val) {
+        int index = timestamp % 300;
+        if (timestamps[index] != timestamp) {
+            timestamps[index] = timestamp;
+            values[index] = val;
+            counts[index] = 1;
+        } else {
+            values[index] += val;
+            counts[index]++;
+        }
+    }
+
+    public double getAvg(int timestamp) {
+        int sum = 0, count = 0;
+        for (int i = 0; i < 300; i++) {
+            if (timestamps + 300 >= timestamp) {
+                sum += values;
+                count += counts;
+            }
+        }
+        return sum * 1.0 / count;
+    }
+
+
+
+public double getMedian(){
+  removeExpired();
+        int[] temp = new int[queue.size()];
+        for (int i = 0; i<queue.size(); i++){
+            temp = queue.poll().val;
+        }
+        //Õaàï»1μÃ°Ñqueue»1Ô-»Øè￥,Ïè2»D′áË¡￡
+        int len = temp.length;
+        if (len % 2 == 0){
+            return 0.5*(findKth(temp, len/2, 0, len-1) + findKth(temp, len/2-1, 0, len-1));
+        }
+        return (double)findKth(temp, len/2, 0, len-1);
+    }
+
+    public int findKth(int[] nums, int k, int left, int right){
+        int pivot = nums[left];
+        int i = left, j = right;
+        while (i < j){
+            while (nums[j] > pivot && i < j){
+                j--;
+            }
+            while (nums <= pivot && i < j){
+                i++;
+            }
+            swap(nums, i, j);
+        }
+        swap(nums, left, j);
+        if (k == j){
+            return pivot;
+        }
+        else if (k < j){
+            return findKth(nums, k, left, j-1);
+        }
+
+        return findKth(nums, k, j+1, right);
+    }
+
+    public void swap(int[] nums, int left, int right){
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
+
+
+
+
+
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();;
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+
+    public void addNum(int num) {
+        minHeap.offer(num);
+        maxHeap.offer(minHeap.poll());
+        if(minHeap.size()<maxHeap.size()){
+            minHeap.offer(maxHeap.poll());
+        }
+    }
+
+    public double getMedian_2Heap(){
+  removeExpired();
+        if(minHeap.size() > maxHeap.size()){
+            return minHeap.peek();
+        }else {
+            return (minHeap.peek()+maxHeap.peek())/2.0;
+        }
+    }
+
+}
+
+
+private static final class ArrayBackedStream implements SortedStream {
+        final int[] data;
+        int index = -1;
+        ArrayBackedStream(final int[] data) {
+            this.data = data;
+        }
+
+        @Override
+        public boolean move() {
+            return (++index < data.length);
+        }
+
+        @Override
+        public int value() {
+            return data[index];
+        }
+
+    }
+
+    public interface SortedStream {
+        /*
+        * Positions the stream at the next valid integer.
+        * @return true iff the stream was positioned at a valid integer.
+        */
+        boolean move();
+        /*
+        *
+        *@return the integer at the current position.
+        *@throws RuntimeException if called before calling move() at least once or called
+        *        after move() returned false.
+        */
+        int value();
+
+    }
+
+    public static List<Integer> usingHashMap(final List<SortedStream> streams, int k) {
+        Map<Integer,Integer> map = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        if(streams == null || streams.size() ==0 || k < 0){
+            return result;
+        }
+        for(SortedStream stream : streams) {
+            Set<Integer> curSet = new HashSet<>();
+            while(stream.move()){
+                int current = stream.value();
+                if(!curSet.contains(current)){
+                    curSet.add(current);
+                    if(map.containsKey(current)){
+                        map.put(current, map.get(current)+1);
+                        if(map.get(current) >= k && !result.contains(current)){
+                            result.add(current);
+                        }
+                    } else {
+                        map.put(current,1);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // public  SortedStream readyFromSoruece (SortedStream largeSteam , int size) {
+    //     SortedStream shortSteam = new SortedStream( new int[size]);
+    //     int index = 0;
+    //     int[] data  = new int[size];
+    //   while( i< size0 && shortSteam.move() )  {
+    //       data[i++] = shortSteam.value();
+    //   }
+    //   return shortStream;
+    // }
+
+  public static void main(String[] args) {
+       List<SortedStream> testList = new ArrayList<>();
+       int[] data1 = {-1, 3, 5, 6, 6, 7, 9, 12,51};
+      SortedStream stream1 = new ArrayBackedStream(data1);
+      testList.add(stream1);
+     int[] data2 = {0, 3, 5, 5, 9, 13, 15};
+      SortedStream stream2 = new ArrayBackedStream(data2);
+      testList.add(stream2);
+      int[] data3 = {5, 5, 7,11, 19,51};
+      SortedStream stream3 = new ArrayBackedStream(data3);
+      testList.add(stream3);
+      System.out.println(usingHeapAndWrapClass(testList,2));
+    //  System.out.println(usingHashMap(testList,2));
+  }
+
+    //-1 3 5 6 6 7 9 12 14
+    //0 3 5 5 9 13 15
+    //5 5 7 11 19 21 51
+
+    //k = 3
+
+    //streams.size() (m) is small
+    //but number of elements in stream is large
+
+    //3 5 7 9
+
+    //Imhotep
+
+  public static List<Integer> usingHeapAndWrapClass(List<SortedStream> list, int k) {
+      List<Integer> res = new ArrayList<>();
+      PriorityQueue<Wrap> minHeap = new PriorityQueue<>((a,b)->(a.val-b.val));
+      for (SortedStream stm: list) {
+          if (stm.move()) {
+              minHeap.offer(new Wrap(stm));
+          }
+      }
+      if (minHeap.isEmpty()) {
+       return res;
+      }
+
+      while (!minHeap.isEmpty()) {
+       Wrap cur = minHeap.poll();
+          int curVal = cur.val, count = 1;
+          while(cur.stream.move()){
+               int val = cur.stream.value();
+               if (val == curVal){
+                   continue;
+               }
+               cur.val = val;
+               minHeap.add(cur);
+               break;
+          }
+          while(!minHeap.isEmpty() && curVal == minHeap.peek().val){
+              count++;
+              cur = minHeap.poll();
+              while(cur.stream.move()){
+                  int nextVal = cur.stream.value();
+                  if(curVal == nextVal){
+                      continue;
+                  }else{
+                   cur.val = nextVal;
+                      minHeap.offer(cur);
+                      break;
+                  }
+              }
+          }
+          if (count >= k){
+              res.add(curVal);
+          }
+      }
+      return res;
+  }
+
+
+
+final static  class Wrap {
+      int val;
+      SortedStream stream;
+      public Wrap(SortedStream strm) {
+           this.stream = strm;
+           this.val = strm.value();
+      }
+}
+
+
+
+
+public class diceSum {
+int count;
+int totaldfs;
+Map<String,Integer> cache = new HashMap<>();
+Map<String,Integer> dfsMap = new HashMap<>();
+public float sumPossibilityButtomUpDP(int dice, int target) {
+  int total = (int) Math.pow(6,dice);
+
+  int[][] dp = new int[dice+1][target+1];
+  for(int i = 1; i <= Math.min(target,6); i++) {
+     dp[1] = 1;
+  }
+  for (int i = 2; i <= dice; i++)
+       for (int j = 1; j <= target; j++)
+           for (int k = 1; k <= 6 && k < j; k++)
+              dp[j] += dp[i-1][j-k];
+
+  return (float)dp[dice][target]/total;
+}
+
+public float sumPossibilityTopDownDP(int dice, int target) {
+  int total = (int) Math.pow(6,dice);
+  int res = helperTopDownDP(target,dice);
+  return (float)res/total;
+}
+
+public int helperTopDownDP(int target, int dice) {
+  if(dice == 0) {
+   return target == 0 ? 1:0;
+  }
+  if(cache.containsKey(String.valueOf(dice) + "*" + String.valueOf(target))) {
+   return cache.get(String.valueOf(dice) + "*" + String.valueOf(target));
+  }
+  int res = 0;
+  for(int k = 1; k<=6; k++) {
+   int tmp = helperTopDownDP(target-k,dice-1);
+   res+=tmp;
+  }
+  cache.put(String.valueOf(dice) + "*" + String.valueOf(target), res);
+  return res;
+}
+
+public float sumPossibility(int dice, int target) {
+  int total = (int) Math.pow(6,dice);
+   helper(target,0,dice, 0);
+  return (float)count/total;
+}
+public float sumWithDFS(int dice,int target) {
+  int total = (int) Math.pow(6,dice);
+   dfs(dice, target);
+  return (float)totaldfs/total;
+}
+public void helper(int target, int trial, int dice, int sum) {
+  if(trial == dice) {
+   if(target == sum)
+    count++;
+   return;
+  }
+  for(int i = 1; i<=6; i++) {
+   helper(target, trial+1, dice, sum+i);
+  }
+}
+
+
+
+public void dfs(int dice, int target) {
+  if(target == 0 && dice == 0) {
+   totaldfs++;
+   return;
+  }
+  if(dice == 0 || target <= 0){
+   return;
+  }
+  for(int i=1; i<=6;i++){
+   dfs(dice-1,target-i);
+  }
+}
+
+public   float sumwithDFSMap(int dice, int target){
+  int totalsol = dfsMapApp(dice,target);
+  int total = (int) Math.pow(6,dice);
+  return (float)totalsol/total;
+}
+private int dfsMapApp(int dice, int target) {
+   if(6*dice < target){
+    return 0;
+   }
+  if(dice == 0 ) {
+   return target ==0?1:0;
+  }
+  if(target<=0){
+   return 0;
+  }
+  String  key =  dice+"*"+ target;
+
+  if(dfsMap.containsKey(key)){
+   System.out.println(key);
+    return dfsMap.get(key);
+  }
+  int result = 0;
+  for(int i = 1; i <= 6;i++){
+   int temp = dfsMapApp(dice-1,target-i);
+   result+=temp;
+  }
+  dfsMap.put(key, result);
+  return result;
+}
+
+public static void main(String[] args) {
+  diceSum dc = new diceSum();
+  System.out.println(dc.sumPossibility(10,35));
+  System.out.println(dc.sumPossibilityTopDownDP(10,35));
+  System.out.println(dc.sumPossibilityButtomUpDP(10,25));
+  System.out.println(dc.sumWithDFS(10,25));
+  System.out.println(dc.sumwithDFSMap(10,25));
+  System.out.println(dc.sumwithDFSMap(10,35));
+
+}
+}
+
+
+public class GitCommit {
+
+public List<Integer> findCommits(GitNode root) {
+        List<Integer> result = new ArrayList<>();
+        Set<GitNode> visited = new HashSet<>();
+        Queue<GitNode> queue = new LinkedList<>();
+
+        findCommitsHelper(root, visited, queue, result);
+
+        return result;
+    }
+
+    private void findCommitsHelper(GitNode root, Set<GitNode> visited,   Queue<GitNode> queue, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+         GitNode curr = queue.poll();
+            if (!visited.contains(curr)) {
+                visited.add(curr);
+                result.add(curr.id);
+
+                for (GitNode neighbor : curr.parents) {
+                    queue.offer(neighbor);
+                }
+            }
+        }
+    }
+
+    private GitNode buildGraph(int[][] commits) {
+          if (commits == null || commits.length == 0) {
+            return null;
+        }
+
+        // step 1: constrcut the graph
+        Map<Integer, GitNode> map = new HashMap<>();
+
+        for (int[] commit : commits) {
+            int from = commit[0];
+            int to = commit[1];
+
+            GitNode fromNode = null;
+            if (map.containsKey(from)) {
+                fromNode = map.get(from);
+            } else {
+                fromNode = new GitNode(from);
+            }
+
+            if (map.containsKey(to)) {
+             GitNode toNode = map.get(to);
+                fromNode.parents.add(toNode);
+
+            } else {
+             GitNode toNode = new GitNode(to);
+                fromNode.parents.add(toNode);
+                map.put(to, toNode);
+            }
+
+            map.put(from, fromNode);
+        }
+
+        // Step 2: find out the root of the graph
+        GitNode root = null;
+        Map<GitNode, Integer> inDegree = new HashMap<>();
+        for (GitNode node : map.values()) {
+            if (!inDegree.containsKey(node)) {
+                inDegree.put(node, 0);
+            }
+
+            for (GitNode parents : node.parents) {
+                if (inDegree.containsKey(parents)) {
+                    int degree = inDegree.get(parents);
+                    inDegree.put(parents, degree + 1);
+                } else {
+                    inDegree.put(parents, 1);
+                }
+            }
+        }
+
+        for (GitNode node : inDegree.keySet()) {
+            if (inDegree.get(node) == 0) {
+                root = node;
+                break;
+            }
+        }
+
+        System.out.println("Root is " + root.id);
+
+        return root;
+    }
+
+    public static void main(String[] args) {
+     GitCommit sol = new GitCommit();
+        int[][] commits = new int[][]{{0, 1}, {1, 3}, {3, 5}, {0, 2}, {2, 4}, {4, 5}};
+
+        GitNode root = sol.buildGraph(commits);
+
+        List<Integer> result = sol.findCommits(root);
+
+        for (Integer elem : result) {
+            System.out.println(elem);
+        }
+    }
+
+
+
+}
+
+
+public List<GitNode> findAllCommits(GitNode node){
+         List<GitNode> res = new ArrayList<>();
+         Queue<GitNode> queue = new LinkedList<>();
+         Set<GitNode> visited = new HashSet<>(); //è￥ÖØ
+
+         queue.offer(node);
+         visited.add(node);
+
+         while (!queue.isEmpty()){
+             GitNode cur = queue.poll();
+             res.add(cur);
+             for (GitNode par: cur.parents){
+                 if (!visited.contains(par)){
+                     queue.offer(par);
+                     visited.add(par);
+                 }
+             }
+         }
+         return res;
+     }
+
+
+/*
+Follow Up
+Õòμ½á½¸öcommitμÄ×î½ü1«12parent commit¡￡¶øÇò±»òaÇóóÅ»ˉ￡¬òòÎaêÇfollow up￡¬ËùòÔμ½ê±oòê±¼ä¿Ï¶¨
+ê￡ÏÂ2»¶à￡¬ÃæêÔê±oòòaÖ±½ó3ö×îóÅ½a¡￡
+Follow Up code
+    */
+     public GitNode findLCA(GitNode node1, GitNode node2){
+         if (node1 == null || node2 == null) return null;
+
+         Queue<GitNode> q1 = new LinkedList<>();
+         q1.offer(node1);
+         Queue<GitNode> q2 = new LinkedList<>();
+         q2.offer(node2);
+
+         Set<GitNode> s1 = new HashSet<>();
+         Set<GitNode> s2 = new HashSet<>();
+         s1.add(node1);
+         s2.add(node2);
+//                int len1 = 1, len2 = 1; //íòò»êÇòaÇó×î¶ìÂ·¾¶3¤¶èÄØ¡￡
+
+         //whileàïÃæêÇ&&,òòÎaò»μ©ÆäÖDò»¸öÖÕ½áÄÇò22»óÃËÑáË¡￡
+         while (!q1.isEmpty() && !q2.isEmpty()){
+             //Ã¿¸öBFS¶¼êÇò»2ãò»2ãμÄé¨
+             int size1 = q1.size();
+             while (size1-- > 0){
+                 GitNode cur1 = q1.poll();
+                 for (GitNode par1 : cur1.parents) {
+                     if (s2.contains(par1)){
+                         return par1;
+                     }
+                     if (!s1.contains(par1)){
+                         q1.offer(par1);
+                         s1.add(par1);
+                     }
+                 }
+             }
+
+             int size2 = q2.size();
+             while (size2-- > 0){
+                 GitNode cur2 = q2.poll();
+                 for (GitNode par2 : cur2.parents) {
+                     if (s1.contains(par2)){
+                         return par2;
+                     }
+                     if (!s2.contains(par2)){
+                         q2.offer(par2);
+                         s2.add(par2);
+                     }
+                 }
+             }
+         }
+         return null;
+     }
+
+     public static void main(String[] args) {
+      GitCommitLowestCommonAncestor test = new GitCommitLowestCommonAncestor();
+         /*
+         *
+         *   5 <-  4  <- 2
+         *    \       \
+         *     \ <- 3 <- 1
+         * */
+      GitNode g1 = new GitNode(1);
+         GitNode g2 = new GitNode(2);
+         GitNode g3 = new GitNode(3);
+         GitNode g4 = new GitNode(4);
+         GitNode g5 = new GitNode(5);
+
+         g1.parents.add(g3);
+         g1.parents.add(g4);
+         g2.parents.add(g4);
+         g3.parents.add(g5);
+         g4.parents.add(g5);
+
+         GitNode res = test.findLCA(g2, g3);
+         System.out.println(res.id);
+     }
+
+
+}
+
+
+public class RootToLeafMinCost_dijkstra {
+//¸Äá¼μÄDFS￡¬¾íêÇóÃmap¼ÇÂ¼μÄDFS
+    int minCost = Integer.MAX_VALUE;
+    Map<Node, Integer> memory = new HashMap<>(); //memory to increase speed
+    List<Edge> resE ;
+    public void getMinPathInGraph(Node root){
+     resE = new ArrayList<>();
+        List<Edge> temp = new ArrayList<>();
+        DFS(resE, temp, root, 0);
+    }
+
+
+    public void DFS(List<Edge> res, List<Edge> temp, Node node, int curCost){
+        if (node == null) return;
+        if (memory.containsKey(node) && curCost >= memory.get(node)) return;
+        memory.put(node, curCost);
+        if (node.edges.size() == 0){
+            if (curCost < minCost){
+                minCost = curCost;
+                res.clear();
+                res.addAll(temp);
+            }
+            return;
+        }
+
+        for (Edge e : node.edges){
+            Node next = e.node;
+            temp.add(e);
+            DFS(res, temp, next, curCost + e.cost);
+            temp.remove(temp.size()-1);
+        }
+    }
+
+    //dijkstra￡¬D′μÄÕæÄÑ¿′
+    public List<Edge> dijkstra(Node src,Node dst){
+        int minCost = Integer.MAX_VALUE;
+        Node resNode = null;
+        List<Edge> res = new ArrayList<>();
+        Map<Node, Integer> dist = new HashMap<>();
+        Map<Node, Node> findPrior = new HashMap<>();
+        PriorityQueue<Node> pq = new PriorityQueue<>((a,b)->(dist.get(a)-dist.get(b)));
+        dist.put(src, 0);
+        findPrior.put(src, null);
+        pq.offer(src);
+        while (!pq.isEmpty()){
+            Node cur = pq.poll();
+            if (cur==dst){
+                if (dist.get(cur) < minCost){
+                    minCost = dist.get(cur);
+                    resNode = cur;
+                }
+            }
+            for (Edge e : cur.edges) {
+                Node adj = e.node;
+                int tempD = e.cost + dist.get(cur);
+                if (!dist.containsKey(adj)){
+                    dist.put(adj, tempD);
+                    findPrior.put(adj, cur);
+                    pq.offer(adj);
+                }
+                else {
+                    if (tempD < dist.get(adj)){
+                        pq.remove(adj);
+                        dist.put(adj, tempD);
+                        findPrior.put(adj, cur);
+                        pq.offer(adj);
+                    }
+                }
+            }
+        }
+
+//      ÏÂÃæ¶¼êÇÎaáËêä3öËùóDμÄ±ß2ÅD′μÄ￡¬¾íêÇ°ÑËùóDμÄnode¶¼×￥3öà′￡¬è»oóè￥Õòá¬½óμÄ±ß
+        List<Node> tempList = new ArrayList<>();
+        while (resNode != null){
+            tempList.add(0, resNode);
+            resNode = findPrior.get(resNode);
+        }
+
+        for (int i = 0; i < tempList.size()-1; i++){
+            Node cur = tempList.get(i);
+            for (Edge e : cur.edges) {
+                if (e.node.equals(tempList.get(i+1))){
+                    res.add(e);
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+     RootToLeafMinCost_dijkstra test = new RootToLeafMinCost_dijkstra();
+        /*
+        *                 n1
+        *        e1 5 /         \e2 4
+        *           n2           n3
+        *      e3 2/ \e4 3  e5 5/ \e6 6
+        *         n4 n5        n6  n7
+        *
+        *    e7 /
+        *      n8
+        *
+        *
+        * */
+        Node n1 = new Node("n1");
+        Node n2 = new Node("n2");
+        Node n3 = new Node("n3");
+        Node n4 = new Node("n4");
+        Node n5 = new Node("n5");
+        Node n6 = new Node("n6");
+        Node n7 = new Node("n7");
+        Node n8 = new Node("n8");
+        Node n9 = new Node("n9");
+        Node n10 = new Node("n10");
+        Edge e1 = new Edge("e1",n2,5);
+        Edge e2 = new Edge("e2",n3,4);
+        Edge e3 = new Edge("e3",n4,2);
+        Edge e4 = new Edge("e4",n5,3);
+        Edge e5 = new Edge("e5",n6,5);
+        Edge e6 = new Edge("e6",n7,6);
+        Edge e7 = new Edge("e7",n8,5);
+        Edge e8 = new Edge("e8",n8,5);
+        Edge e9 = new Edge("e9",n9,5);
+        Edge e10 = new Edge("e10",n9,4);
+        Edge e11 = new Edge("e11",n10,3);
+        Edge e12 = new Edge("e12",n10,1);
+        Edge e13=new Edge("e13",n6,2);
+        n1.edges.add(e1);
+        n1.edges.add(e2);
+        n2.edges.add(e3);
+        n2.edges.add(e13);
+        n2.edges.add(e4);
+        n3.edges.add(e5);
+        n3.edges.add(e6);
+        n4.edges.add(e7);
+        n5.edges.add(e8);
+        n5.edges.add(e9);
+        n6.edges.add(e10);
+        n6.edges.add(e11);
+        n7.edges.add(e12);
+
+        //test.getMinPathInGraph(n1);
+        List<Edge> res=test.dijkstra(n1,n10);
+        for(Edge E: res)
+         System.out.print(E.e+" ");
+       // System.out.print(test.minCost);
+    }
+
+}
+
+
+class Edge{
+String e;
+    Node node; //±íê¾Õa¸öedgeμÄÎ2°íÖ¸ÏòÄÄàï¡￡
+    int cost;
+    public Edge(String e,Node n, int cost) {
+        this.e=e;
+     this.node = n;
+        this.cost = cost;
+    }
+}
+
+class Node {
+String ndName;
+    List<Edge> edges; //±íê¾′óÕa¸öí·3ö·￠μÄËùóDedge
+    public Node(String ndName){
+     this.ndName=ndName;
+        this.edges = new ArrayList<>();
+    }
+}
+
+public class RootToLeafMinCost {
+     int minCost = Integer.MAX_VALUE;
+     List<Edge> resE ;
+     //·μ»Ø×î¶ìÂ·¾¶éÏÃæμÄËùóDEdge
+     public void getMinPath(Node root){
+      resE=new ArrayList<>();
+         List<Edge> temp = new ArrayList<>();
+         DFS(resE, temp, root, 0);
+     }
+
+
+
+
+     //¾íêÇÆÕí¨μÄDFS
+     public void DFS(List<Edge> res, List<Edge> temp, Node root, int curCost){
+         if (root == null){
+             return;
+         }
+         if (root.edges.size() == 0){
+             if (curCost < minCost){
+                 minCost = curCost;
+                 res.clear();
+                 res.addAll(temp);
+                 return;
+             }
+         }
+         for (Edge e : root.edges){
+             Node next = e.node;
+             temp.add(e);
+             DFS(res, temp, next, curCost+e.cost);
+             temp.remove(temp.size()-1);
+         }
+     }
+
+
+     //Õa¸öÖ»·μ»Ø¸ö×îD¡cost
+     public int getMinCost(Node root){
+         if (root == null) {
+             return 0;
+         }
+         helper(root, 0);
+         return minCost;
+     }
+
+
+     public void helper(Node root, int curCost){
+         if (root.edges.size() == 0){
+             minCost = Math.min(minCost, curCost);
+             return;
+         }
+         for (Edge e : root.edges){
+             Node next = e.node;
+             helper(next, curCost + e.cost);
+         }
+     }
+
+
+     public static void main(String[] args) {
+      RootToLeafMinCost test = new RootToLeafMinCost();
+         /*
+         *           n1
+         *   e1 5 /       \e2 4
+         *     n2           n3
+         * e3 2/ \e4 3  e5 5/ \e6 6
+         *   n4 n5         n6  n7
+         *
+         * */
+
+         Node n1 = new Node("n1");
+         Node n2 = new Node("n2");
+         Node n3 = new Node("n3");
+         Node n4 = new Node("n4");
+         Node n5 = new Node("n5");
+         Node n6 = new Node("n6");
+         Node n7 = new Node("n7");
+         Edge e1 = new Edge("e1",n2,5);
+         Edge e2 = new Edge("e2",n3,4);
+         Edge e3 = new Edge("e3",n4,2);
+         Edge e4 = new Edge("e4",n5,3);
+         Edge e5 = new Edge("e5",n6,5);
+         Edge e6 = new Edge("e6",n7,6);
+         n1.edges.add(e1);
+         n1.edges.add(e2);
+         n2.edges.add(e3);
+         n2.edges.add(e4);
+         n3.edges.add(e5);
+         n3.edges.add(e6);
+
+
+
+
+        test.getMinPath(n1);
+       //  int res = test.getMinCost(n1);
+     //    System.out.println(res);
+        // test.dijkstra(n1);
+     //    List<Edge> res=test.dijkstra(n1);
+     //    for(Edge E: res)
+     //            System.out.print(E.e+" ");
+                //for(Edge E: test.resE)
+                //        System.out.print(E.e+" ");
+         System.out.println(test.resE.get(test.resE.size()-1).node.ndName);
+        //    System.out.print(test.minCost);
+     }
+}
+
+
+
+class Node{
+    char[] arr = new char[5]; //定长5,反正总要有定长。
+    int len; //表示数组里面实际有几个字母
+    Node next;
+    public Node(){};
+}
+
+class UnrolledLinkedList{
+
+
+
+    Node head;
+    int totalLen; //这个totalLen代表所有char的个数
+    public UnrolledLinkedList(Node head, int total){
+        this.head = head;
+        this.totalLen = total;
+        //可能totalLen是不给的，要遍历一遍去求。
+        int count = 0;
+        Node cur = head;
+        while (cur != null) {
+            count += cur.len;
+            cur = cur.next;
+        }
+        totalLen = count;
+    }
+
+
+    public char get(int index){
+        if (index < 0 || index >= totalLen || totalLen == 0) {
+            return ' ';
+        }
+        Node cur = head;
+        while(cur != null && index >= 0){
+            if (index >= cur.len) {
+                index -= cur.len;
+            }
+            else {
+                return cur.arr[index];
+            }
+            //总忘了往后爬一步cur
+            cur = cur.next;
+        }
+        return ' ';
+    }
+
+    //insert需要考虑1.普通插进去。2.插入的node满了，要在后面加个node。
+    //3.插入的node是空的，那就要在尾巴上加个新node。
+    //还需要考虑每个node的len，以及totalLen的长度变化。
+    public void insert_newOne(char ch, int index){
+        if (index > totalLen) {
+            return;
+        }
+        Node cur = head;
+        while(cur != null && index >= 0){
+
+            if (index >= cur.len) {
+                index -= cur.len;
+            }
+            else {
+                if (cur.len == 5) {
+                    Node newNode = new Node();
+                    newNode.arr[0] = cur.arr[4];
+                    newNode.len = 1;
+                    newNode.next = cur.next;
+                    cur.next = newNode;
+                    cur.len -= 1;
+                }
+                cur.len += 1;
+                int i = cur.len-1;
+                for(; i > index; i--){
+                    cur.arr = cur.arr[i-1];
+                }
+                cur.arr = ch;
+                break;
+            }
+            cur = cur.next;
+        }
+        if (cur == null) {
+            Node newNode = new Node();
+            newNode.arr[0] = ch;
+            newNode.len = 1;
+            Node tail = new Node();
+            tail.next = head;
+            while(tail.next != null){
+                tail = tail.next;
+            }
+            tail.next = newNode;
+        }
+        totalLen += 1;
+    }
+
+
+    public void insert_half(char ch, int index){
+        if (index > totalLen) {
+            return;
+        }
+        Node cur = head;
+        while(cur != null && index >= 0){
+
+            if (index >= cur.len) {
+                index -= cur.len;
+            }
+            else {
+                if(cur.len<5) {
+                    cur.len += 1;
+                    int i = cur.len-1;
+                    for(; i > index; i--){
+                        cur.arr = cur.arr[i-1];
+                    }
+                    cur.arr = ch;
+                }else {
+                    Node newNode = new Node();
+                    newNode.arr[2] = cur.arr[4];
+                    newNode.len = 3;
+                    newNode.next = cur.next;
+                    cur.next = newNode;
+                    int i=4;
+                    for(; i > index; i--){
+                        cur.arr = cur.arr[i-1];
+                    }
+                    cur.arr = ch;
+                    newNode.arr[1] = cur.arr[4];
+                    newNode.arr[0] = cur.arr[3];
+                    cur.len =3;
+                    cur.arr[4]='n';
+                    cur.arr[3]='n';
+                }
+                break;
+            }
+            cur = cur.next;
+        }
+        if (cur == null) {
+            Node newNode = new Node();
+            newNode.arr[0] = ch;
+            newNode.len = 1;
+            Node tail = new Node();
+            tail.next = head;
+            while(tail.next != null){
+                tail = tail.next;
+            }
+            tail.next = newNode;
+        }
+        totalLen += 1;
+    }
+
+
+/*删除一个数怎么处理，需要注意的地方也就是如果node空了就删掉吧。
+那就需要记录前一个node了，这样比较好删掉当前node。
+/* =============================================================================
+Follow Up code
+=============================================================================*/
+    //类似insert，先考虑清楚delete的情况
+    //1.普通的去掉一个node里面的点。2.去掉node之后，这个点空了，那就把点删掉。
+    //也要考虑每个node里面长度的变化。*/
+
+    public void delete(int index){
+        if (index < 0 || index >= totalLen) {
+            return;
+        }
+        Node prev = new Node();
+        prev.next = head;
+        Node cur = head;
+        while(cur != null && index >= 0){
+            if (index >= cur.len) {
+                index -= cur.len;
+            }
+            else {
+                if (cur.len == 1) {
+                    prev.next = cur.next;
+                }
+                else {
+                    for (int i = index; i < cur.len-1; i++) {
+                        cur.arr = cur.arr[i+1];
+                    }
+                    cur.len -= 1;
+                }
+            }
+
+            prev = prev.next;
+            cur = cur.next;
+        }
+        totalLen -= 1;
+    }
+
+  //链表题到时候画一个下面的小case，就能对准index了。
+    public static void main(String[] args) {
+
+        Node n1 = new Node(); //a b
+        Node n2 = new Node(); //b
+        Node n3 = new Node(); //a b c d e
+        Node n4 = new Node();
+
+        n1.arr[0] = '2';
+        n1.arr[1] = '3';
+        n1.arr[2] = '1';
+        n1.arr[3] = '4';
+        n1.arr[4] = '6';
+
+        n2.arr[0] = '3';
+        n2.arr[1] = '4';
+
+        n3.arr[0] = '6';
+        n3.arr[1] = '7';
+        n3.arr[2] = '8';
+        n3.arr[3] = '1';
+        n3.arr[4] = '2';
+
+        n4.arr[0] = '1';
+        n4.arr[1] = '2';
+
+
+
+        n1.next = n2;
+        n2.next = n3;
+        n3.next = n4;
+        n1.len = 5;
+        n2.len = 2;
+        n3.len = 5;
+        n4.len=2;
+        UnrolledLinkedList test=new UnrolledLinkedList(n1,14);
+        char res1=test.get(1);
+        test.insert_half('6',14);
+        char res2=test.get(6);
+        System.out.println(res2);
+    }
+
+
+}
+
+/*地里面经总结
+<A> 给一个链表，每个Node里有定长的数组，存的是char，然后问的就是关于插入删除等等一系列的操作，面经原题，
+    关键点在于操作的时候要考虑node为空的或者满了的情况。
+<B> 一个链表 每个node有一个array， 让你实现 查找 插入 参考: 这个没啥太复杂的吧，主要就是list的添加/删除节点啥的
+<C> 给了一个自定义的数据结构，是一个链表，链表的每个节点是一个array，要求实现插入删除操作，很简单，直接travel就好。
+<D> 问的题是implement linked list with arraylist. 他让写两个method，get和insert。get给一个index，
+    你就check每个node接的那个array里面有多少个character，数一数，数到index所在的那个node然后就输出了。
+    insert给一个index，一个char，这个稍微麻烦一点，先找到你要插入char的那个node，看它是不是满了，
+    如果满了就新建一个node，然后接到原来的node后面。
+<E> Given a linked list, of which all the nodes have an array of integers,
+    as well as the current number of ints in that array, write two functions.
+    The first one is get a number of a specific index,
+    the second one is to insert a number at certain index. Not a hard problem but be careful with edge cases.
+<F> linked list，但是每个节点是一个class，class里有linked list node还有size等attribute。让实现插入删除操作
+<G> Manager 面的，然后他自己定义了一个结构类似Hash Table with linked list的结构，（LRU？）
+    然后让你写一个function插入一个数，然后继续问删除一个数
+<H> linkedelist中的每个节点里存了个固定长度的数组，但是数组未必满。
+    进行插入操作的时候，如果要插入的节点的数组满了，可以考虑新建个节点插当前节点的数组的溢出的元素。
+<J> Unrolled Linked List，有以下数据结构：
+    class Node {
+            char[] chars = new char[5]; //固定大小5
+            int len;
+    }
+    class LinkedList {
+            Node head;
+            int totalLen;
+    }
+    实现以下成员函数：char get(int index), void insert(char ch, int index)
+    get比较容易，就是从head traverse，定位第index个char；insert有点麻烦，有几种情况需要考虑。
+    时间有点不太够，所以insert函数没完全实现 T.T
+<K> 第一个是设计一个fixed size cache的数据结构。（这句话不知所云）*/
+
+
+
+
+
+List<Integer> getTop10(String[] jobs, String query){
+  List<Integer>  res=new ArrayList<>();
+  HashMap <String, List<Integer>> map=new HashMap<>();
+  HashMap <Integer,Integer> index=new HashMap<>();
+  String[] words=query.split("");
+  for(String word:words) {
+   for(int i=0;i<jobs.length;i++) {
+    if(jobs.contains(word)) {
+     map.computeIfAbsent(jobs, x-> new ArrayList<>()).add(i);
+    }
+   }
+  }
+
+        for(Map.Entry<String,List<Integer>> entry:map.entrySet()) {
+         for(Integer i:entry.getValue()) {
+          index.put(i,index.getOrDefault(i, 0)+1);
+         }
+        }
+        for(Map.Entry<Integer,Integer> entry:index.entrySet()) {
+         if(entry.getValue()!=0)
+          res.add(entry.getKey());
+        }
+        res.sort((a,b)->  (index.get(b)-index.get(a)==0?(a-b):(index.get(b)-index.get(a)) ) );
+  if(res.size()>10) {
+   res=res.subList(0, 10);
+  }
+  return res;
+}
+
+
+
+public class matchTitle_followUp {
+public String getHightestTitleWithDup(String rawTitle, String[] cleanTitles){
+        String res = "";
+        int highScore = 0;
+        String[] rA = rawTitle.split(" ");
+        for (String ct: cleanTitles) {
+            String[] cA = ct.split(" ");
+            int temp = getScoreWithDup(rA, cA);
+            System.out.println("temp is "+ temp);
+            if (temp > highScore){
+                highScore = temp;
+                res = ct;
+            }
+        }
+        return res;
+    }
+
+    //¶tÎ¬¾ØÕóàïÃæÃ¿¸öÎ»ÖÃ¶¼òa2é,òòÎa2»ò»¶¨êÇ′óÄÄ¸öÎ»ÖÃ¿aê¼Æ￥ÅäμÄ,·′Õy¸′Ôó¶è¶¼êÇò»ÑùμÄ¡￡
+    public int getScoreWithDup(String[] rA, String[] cA){
+        int col = rA.length;
+        int row = cA.length;
+        int res = 0;
+        int[][] dp = new int[row][col];
+        for (int i = 0; i < row; i++){
+            String cCur = cA;
+            for (int j = 0; j < col; j++){
+                String rCur = rA[j];
+                if (rCur.equals(cCur)){
+                    if (i == 0 || j == 0) {
+                        dp[j] = 1;
+                    }
+                    else {
+                        dp[j] = Math.max(1, dp[i-1][j-1] + 1);
+                    }
+                }
+                res = Math.max(res, dp[j]);
+            }
+        }
+        return res;
+    }
+
+
+}
+
+public class matchTitle {
+    public String getHighestTitle(String rawTitle, String[] cleanTitles){
+        String res = "";
+        int highScore = 0;
+        for (String ct : cleanTitles){
+            int curScore = getScore(rawTitle, ct);
+            if (curScore > highScore){
+                highScore = curScore;
+                res = ct;
+            }
+        }
+        return res;
+    }
+    //Ë¼Â··Ç3￡¼òμ￥,á½¸ötitle·Ö±eè￥2éò»ÏÂ¾íDDáË¡￡
+    //Õa¸öÏÂÃæóDÎêìa￡¬±èèça b coíd cμÄày×ó￡¬ÄÇÖ»Äü¿a¶tÎ¬¾ØÕóè￥ËÑ×î¸ß·Ö¡￡
+    //2»¿¼ÂÇË3DòμÄ»°￡¬¾íóÃmapà′¼ÇÂ¼′êoíÎ»ÖÃ°é¡￡￡¨¶øÇòËüËμÃ»óDÖØ¸′μÄ′ê￡¬ò2êÇ°μê¾óÃmap￡©
+    public int getScore(String raw, String ct){
+        int s = 0, temp = 0;
+        int rIdx = 0, cIdx = 0;
+        String[] rA = raw.split(" ");
+        String[] cA = ct.split(" ");
+        while (rIdx < rA.length){
+            String rCur = rA[rIdx];
+            String cCur = cA[cIdx];
+            if (!rCur.equals(cCur)){
+                cIdx = 0;
+                temp = 0;
+            }
+            else {
+                temp++;
+                cIdx++;
+            }
+            rIdx++;
+            s = Math.max(s, temp);
+            if (cIdx == cA.length) break;
+        }
+
+        return s;
+    }
+    public static void main(String[] args) {
+     matchTitle test = new matchTitle();
+        String rawTitle = "senior software engineer";
+        String[] cleanTitles = {
+            "software engineer",
+                "mechanical engineer",
+                "senior software engineer"};
+
+        String result = test.getHighestTitle(rawTitle, cleanTitles);
+        System.out.println(result);
+    }
+}
+
+public String getHighestTitle(String rawTitle, String[] cleanTitles){
+        String res = "";
+        int highScore = 0;
+        for (String ct : cleanTitles){
+            int curScore = getScore(rawTitle, ct);
+            if (curScore > highScore){
+                highScore = curScore;
+                res = ct;
+            }
+        }
+        return res;
+    }
+
+    public int getScore(String raw, String ct){
+        int s = 0, temp = 0;
+        int rIdx = 0, cIdx = 0;
+        String[] rA = raw.split(" ");
+        String[] cA = ct.split(" ");
+        while (rIdx < rA.length){
+            String rCur = rA[rIdx];
+            String cCur = cA[cIdx];
+            if (!rCur.equals(cCur)){
+                cIdx = 0;
+                temp = 0;
+            }
+            else {
+                temp++;
+                cIdx++;
+            }
+            rIdx++;
+            s = Math.max(s, temp);
+            if (cIdx == cA.length) break;
+        }
+
+        return s;
+    }
+    public static void main(String[] args) {
+     NormalizedTitle test = new NormalizedTitle();
+        String rawTitle = "senior software engineer";
+        String[] cleanTitles = {
+            "software engineer",
+                "mechanical engineer",
+                "senior software engineer"};
+
+        String result = test.getHighestTitle(rawTitle, cleanTitles);
+        System.out.println(result);
+    }
+
+
+    public String getHightestTitleWithDup(String rawTitle, String[] cleanTitles){
+        String res = "";
+        int highScore = 0;
+        String[] rA = rawTitle.split(" ");
+        for (String ct: cleanTitles) {
+            String[] cA = ct.split(" ");
+            int temp = getScoreWithDup(rA, cA);
+            System.out.println("temp is "+ temp);
+            if (temp > highScore){
+                highScore = temp;
+                res = ct;
+            }
+        }
+        return res;
+    }
+
+    public int getScoreWithDup(String[] rA, String[] cA){
+        int col = rA.length;
+        int row = cA.length;
+        int res = 0;
+        int[][] dp = new int[row][col];
+        for (int i = 0; i < row; i++){
+            String cCur = cA;
+            for (int j = 0; j < col; j++){
+                String rCur = rA[j];
+                if (rCur.equals(cCur)){
+                    if (i == 0 || j == 0) {
+                        dp[j] = 1;
+                    }
+                    else {
+                        dp[j] = Math.max(1, dp[i-1][j-1] + 1);
+                    }
+                }
+                res = Math.max(res, dp[j]);
+            }
+        }
+        return res;
+    }
+
+}
+
+public class ProfileSystem {
+    class Profile {
+        String id;
+        int version;
+        Map<Integer, Map<String, String>> versionToMap;
+        public Profile(String id) {
+            this.id = id;
+            this.version = 1;
+            versionToMap = new HashMap<>();
+            versionToMap.put(1, new HashMap<>());
+        }
+    }
+
+    Map<String, Profile> profiles;
+    public ProfileSystem() {
+        profiles = new HashMap<>();
+    }
+
+    public void update(String profileId, String field, String value) {
+        if (!profiles.containsKey(profileId)) {
+            Profile profile = new Profile(profileId);
+            profile.versionToMap.get(profile.version).put(field, value);
+            profiles.put(profileId, profile);
+        } else {
+            Profile profile = profiles.get(profileId);
+            Map<String, String> fields = profile.versionToMap.get(profile.version);
+            if (fields.containsKey(field)) {
+                profile.versionToMap.put(profile.version + 1, new HashMap<>(fields));
+                profile.version++;
+                profile.versionToMap.get(profile.version).put(field, fields.get(field) + ", " + value);
+            } else {
+                fields.put(field, value);
+            }
+        }
+    }
+
+    public String get(String profileId, int version) {
+        if (!profiles.containsKey(profileId))
+            return null;
+        else {
+            Profile profile = profiles.get(profileId);
+            Map<String, String> fields = profile.versionToMap.get(version);
+            StringBuilder sb = new StringBuilder();
+            sb.append("{\"" + profileId + "\": ");
+            for (String field : fields.keySet()) {
+                sb.append("\"" + field + "\": " + "\"" + fields.get(field) + "\",");
+            }
+            sb.append("}");
+            return sb.toString();
+        }
+    }
+
+    public String getField(String profileId, int version, String field) {
+        if (!profileId.contains(profileId))
+            return null;
+        else {
+            Profile profile = profiles.get(profileId);
+            if (!profile.versionToMap.containsKey(version))
+                return null;
+            else {
+                Map<String, String> fields = profile.versionToMap.get(version);
+                if (fields.containsKey(field)) {
+                    return fields.get(field);
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
+}
+
+public class queryWord{
+   class Pair {
+         int maxCount;
+         List<String> words;
+         public Pair() {
+             maxCount = 0;
+             words = new ArrayList<>();
+         }
+     }
+     Map<String, Set<String>> users;
+     Map<String, Map<String, Integer>> wordR;
+     Map<String, Pair> ans;
+
+     public queryWord() {
+         users = new HashMap<>();
+         wordR = new HashMap<>();
+         ans = new HashMap<>();
+     }
+
+     public String search(String user, String word) {
+         if (!users.containsKey(user))
+             users.put(user, new HashSet<>());
+         if (!wordR.containsKey(word))
+          wordR.put(word, new HashMap<>());
+         if (!ans.containsKey(word))
+             ans.put(word, new Pair());
+
+         Pair max = ans.get(word);
+
+         // update maps
+         for (String each : users.get(user)) {
+
+             // update word -> each
+             if (!wordR.get(word).containsKey(each))
+              wordR.get(word).put(each, 1);
+             else
+              wordR.get(word).put(each, wordR.get(word).get(each) + 1);
+
+             if (ans.get(word).maxCount == wordR.get(word).get(each))
+                 ans.get(word).words.add(each);
+             else if (ans.get(word).maxCount < wordR.get(word).get(each)) {
+                 ans.put(word, new Pair());
+                 ans.get(word).maxCount = wordR.get(word).get(each);
+                 ans.get(word).words.add(each);
+             }
+
+             // update each -> word
+             if (!wordR.get(each).containsKey(word))
+              wordR.get(each).put(word, 1);
+             else
+              wordR.get(each).put(word, wordR.get(each).get(word) + 1);
+
+             if (ans.get(each).maxCount == wordR.get(each).get(word))
+                 ans.get(each).words.add(word);
+             else if (ans.get(each).maxCount < wordR.get(each).get(word)) {
+                 ans.put(each, new Pair());
+                 ans.get(each).maxCount = wordR.get(each).get(word);
+                 ans.get(each).words.add(word);
+             }
+         }
+         users.get(user).add(word);  // do not forget this
+
+         StringBuilder sb = new StringBuilder();
+         sb.append(max.maxCount);
+         for (String each : max.words) {
+             sb.append(" " + each);
+         }
+         return sb.toString();
+     }
+
+     public static void main(String[] args) {
+      queryWord qr = new queryWord();
+         Scanner sc = new Scanner(System.in);
+         int numLines = Integer.parseInt(sc.nextLine());
+         for (int i = 0; i < numLines; i++) {
+             String[] parts = sc.nextLine().split(" ");
+             System.out.println(qr.search(parts[0], parts[1]));
+         }
+     }
+
+}
+
+
+
+public class resumeSystem{
+
+class Profile {
+    String id;
+    int version;
+    Map<Integer, Map<String, String>> versionToMap;
+    public Profile(String id) {
+        this.id = id;
+        this.version = 1;
+        versionToMap = new HashMap<>();
+        versionToMap.put(1, new HashMap<>());
+    }
+}
+
+Map<String, Profile> profiles;
+public resumeSystem() {
+    profiles = new HashMap<>();
+}
+
+public void update(String profileId, String field, String value) {
+    if (!profiles.containsKey(profileId)) {
+        Profile profile = new Profile(profileId);
+        profile.versionToMap.get(profile.version).put(field, value);
+        profiles.put(profileId, profile);
+    } else {
+        Profile profile = profiles.get(profileId);
+        Map<String, String> fields = profile.versionToMap.get(profile.version);
+        if (fields.containsKey(field)) {
+            profile.versionToMap.put(profile.version + 1, new HashMap<>(fields));
+            profile.version++;
+            profile.versionToMap.get(profile.version).put(field, fields.get(field) + ", " + value);
+        } else {
+            fields.put(field, value);
+        }
+    }
+}
+
+public String get(String profileId, int version) {
+    if (!profiles.containsKey(profileId))
+        return null;
+    else {
+        Profile profile = profiles.get(profileId);
+        Map<String, String> fields = profile.versionToMap.get(version);
+        StringBuilder sb = new StringBuilder();
+        sb.append("{\"" + profileId + "\": ");
+        for (String field : fields.keySet()) {
+            sb.append("\"" + field + "\": " + "\"" + fields.get(field) + "\",");
+        }
+        sb.append("}");
+        return sb.toString();
+    }
+}
+
+public String getField(String profileId, int version, String field) {
+    if (!profileId.contains(profileId))
+        return null;
+    else {
+        Profile profile = profiles.get(profileId);
+        if (!profile.versionToMap.containsKey(version))
+            return null;
+        else {
+            Map<String, String> fields = profile.versionToMap.get(version);
+            if (fields.containsKey(field)) {
+                return fields.get(field);
+            } else {
+                return null;
+            }
+        }
+    }
+}
+
+}
+
+
+class TrieNode {
+        String word;
+        TrieNode[] arr = new TrieNode[26];
+    }
+    TrieNode root;
+
+    public autoComplete(String[] words) {
+        root = new TrieNode();
+        for (String word : words)
+         insert(root, word);
+    }
+
+    public void insert(TrieNode root, String word) {
+        TrieNode p = root;
+        for (char c : word.toCharArray()) {
+            if (p.arr[c-'a'] == null)
+             p.arr[c-'a'] = new TrieNode();
+            p = p.arr[c-'a'];
+        }
+        p.word = word;
+    }
+
+    public List<String> findAllWords(String prefix) {
+        List<String> res = new ArrayList<>();
+        if (prefix == null || prefix.length() == 0)
+         return res;
+
+        TrieNode p = root;
+        for (char c : prefix.toCharArray()) {
+            if (p.arr[c-'a'] == null)
+             return null;
+            p = p.arr[c-'a'];
+        }
+        DFS(res, p);
+        return res;
+    }
+
+    private void DFS(List<String> res, TrieNode root) {
+        if (root.word != null) {
+            res.add(root.word);
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (root.arr != null) {
+                DFS(res, root.arr);
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+        String[] words = {
+                //"marketing",
+                //"make",
+               // "stop",
+              //  "development",
+                "develop",
+                "dev"
+        };
+        autoComplete sol = new autoComplete(words);
+        System.out.println(sol.findAllWords("dev"));
+    }
+}
