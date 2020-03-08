@@ -16,6 +16,10 @@ public class Most_Related_Query {
      * 如果一个都没有就输出-1。对于match程度的定义，是有一个叫match count的概念，就是query与某个jd匹配了多少单词。
      * 例如一条query是"good at java"，那么对于上述的两条jd的match count分别是2和1。match count越大的jd，
      * 就代表match程度越高，如果有两个jd具有相同的match count，那就认为id小的比id大的更match。
+     *
+     * #
+     * HackerRank上做的是给定一堆document和一堆query，返回每个query的top10 documents，按match降序，
+     * 如果有tie就按doc id升序。如果有个query term出现在某个doc里就算一次match，同一个term出现多次只算一个(!!!)。
      */
 
     /**
