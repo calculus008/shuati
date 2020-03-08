@@ -111,9 +111,9 @@ public class 血洗 {
  * 第三轮，最短路径道题，面试官默认是所有cost都是正数，然后也没有环。所以N个点，每个都能连N-1，继续连N-2，所以复杂度是N！
  *
  *
- *lz请问关于 job id这个interval， 1，2，3存成1-3 ，那不是要把id先sort一遍吗？
+ * lz请问关于 job id这个interval， 1，2，3存成1-3 ，那不是要把id先sort一遍吗？
  * 是job storage的时候用interval存，还是expire的时候用interval存呢？
- * 是expire，第一个其实两种方法都行，不用太考虑时间复杂度
+ * 是expire，第一个其实两种方法都行，不用太考虑时间复杂度(!!!)
  *
  *
  */

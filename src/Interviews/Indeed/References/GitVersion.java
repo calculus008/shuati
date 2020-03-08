@@ -9,6 +9,19 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+/**
+ * git commit 的题，也是面经题。第一问给一个 commit（node），BFS 输出所有 commits
+ * (nodes)。第二问，两个 commits （nodes），找到他们的最近的公共 parent，就是先 BFS 一个，然后
+ * 用 map 记录下其各个 parent 到这个 commit(node)的距离，然后 BFS 第二个 commit(node)，碰到在
+ * map 里的 node，就算一个总距离，然后更新最短距离和的点，最后最短距离和的点就是结果了，写完
+ * 面试官也表示很满意。这个注意解释下 BFS 的复杂度为什么是 O（V+E），他会问为什么不是 O(V)之
+ * 类的。
+ *
+ * git version。找到全部 commits，让实现 bfs。然后让找两个 commit 最早的公共 commit，先
+ * bfs 搜索其中一个 commit 的所有 ancestor，用 hashmap 存一下，然后 bfs 搜索第二个 commit 的祖先
+ * 。这里有两个地方可以提前结束搜索，提出来应该很好。-go
+ */
+
 public class GitVersion {
 	 public List<Integer> findCommits(GraphNode root) {  
 	        List<Integer> result = new ArrayList<>();
