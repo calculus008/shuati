@@ -1,4 +1,4 @@
-package src.Interviews.Indeed.上机;
+package Interviews.Indeed.上机;
 
 import java.util.*;
 
@@ -9,6 +9,7 @@ public class Most_Related_Query {
      * 找相关词那道，就是A输⼊入java，php，B输⼊入java，python，然后C输⼊入了了 php，问你给C推荐的下⼀一个单词应该是什什么。
      * 搜词，然后按关联度推荐词 (??)
      *
+     * #A
      * 上机题貌似就万年不变的query与job description去match。
      * 具体来说，给了一堆job description，每个是一个string，确保了没有标点符号、只有小写字母，
      * 比如{"we want someone good at java and spring", "are you good at cpp"}；
@@ -17,16 +18,33 @@ public class Most_Related_Query {
      * 例如一条query是"good at java"，那么对于上述的两条jd的match count分别是2和1。match count越大的jd，
      * 就代表match程度越高，如果有两个jd具有相同的match count，那就认为id小的比id大的更match。
      *
-     * #
+     * 另外给了一些限定条件使得问题简单了很多，例如每个query都保证没有重复单词；每个jd可能有重复，
+     * 但计算match count时每个单词只match一次；对于一个单词的不同形态当做不同的单词处理（get, gets）等等。
+     *
+     * 我是用inverted index的思路去做的，建了一个对于所有jd里每个word到出现这个word的jd的map，
+     * 给了一个query就traverse这个query里的每个单词，重建每个jd的match count，最后再按规格取前10就行。
+     * test case都跑通了。
+     *
+     * 然后后面还有两道主观题，一个是问如果给你一天时间做这题你要怎么优化，然后如果这个东西每个月会被
+     * query billion次你要怎么优化；另一个是说说你的思路，以及分析时间、空间的复杂度。
+     *
+     * #B
      * HackerRank上做的是给定一堆document和一堆query，返回每个query的top10 documents，按match降序，
      * 如果有tie就按doc id升序。如果有个query term出现在某个doc里就算一次match，同一个term出现多次只算一个(!!!)。
-     */
+     * */
 
     /**
      * Query_Word的变形题。唯一区别是query multiple words and the result is union,
      * so we need to use k-way merge, instead of linear merge for two lists in Query_Word
      *
      * For big data test case, use counting sort??
+     *
+     * This solution does not use the condition "每个jd可能有重复，但计算match count时每个单词只match一次".
+     * For example, if query has "java" and one jd is "java java java", the match count is 3.
+     *
+     * This is more complicated, so have to use Pair class.
+     *
+     * For solution use the above condition, see Most_Related_Query_1
      */
     class Pair {
         int line;
