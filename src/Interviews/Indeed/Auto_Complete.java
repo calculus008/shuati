@@ -18,7 +18,7 @@ import java.util.Map;
  * and n, the total number of keys in the trie. Thus, the worst case runtime of creating a trie is O(mn).
  *
  * The time complexity of searching, inserting, and deleting from a trie depends on the length of the word
- * a that’s being searched for, inserted, or deleted, and the number of total words, n, making the runtime
+ * (a) that’s being searched for, inserted, or deleted, and the number of total words, n, making the runtime
  * of these operations O(an).
  *
  * If the memory footprint of a single node is K references, and the trie has N nodes, then obviously its space
@@ -31,7 +31,10 @@ import java.util.Map;
  * https://zhu45.org/posts/2018/Jun/02/trie/
  *
  * Tries are more space efficient when they contain a large number of short keys, because nodes are shared
- * between keys with common initial subsequences.
+ * between keys with common initial sub-sequences.
+ *
+ * Enumerating a dataset of strings in lexicographical order. There is a sorting on all strings (i.e. keys)
+ * and thus O(nlogn). However, trie takes O(n) time only.
  *
  * Tries tend to be faster on average at insertion than hash tables because hash tables must rebuild their
  * index when it becomes full – a very expensive operation. Tries therefore have much better bounded worst
@@ -42,6 +45,12 @@ import java.util.Map;
  *
  * By avoiding the hash function, tries are generally faster than hash tables for small keys like integers
  * and pointers.
+ *
+ * "写完以后问了很多follow up，都是针对我具体的implementation细节的，比如我原本在Trie Node里的每个string结束的那个
+ * node里又存下了string的值，他问我memory能不能优化，我后来说了这个可以去掉。然后又问我去掉这个也没有缺点？
+ * 我一开始是每次recursive的call的时候都类似于用currString + currChar这样的，这就需要每次重新构建string，
+ * 大大的增加时间复杂度。他问能不能优化，我说用list每次只要O(1)时间去push back，最后到了结尾再重建string。
+ * （其实感觉就相当于在java里用string builder，但是cpp没有这东西。。。）。他表示满意。最后就差不多是问问题了。"
  */
 class TrieNode {
     TrieNode[] children;
@@ -216,19 +225,41 @@ class Trie1 {
             cur = next;
         }
 
+        /**
+         * Can further optimize by using StringBuilder here
+         *
+         * StringBuilder sb = new StringBuilder();
+         * sb.append(prefix);
+         * helper(cur, sb, res);
+         */
         helper(cur, prefix, res);
         return res;
     }
 
+    /**
+     *  private void helper(TrieNode1 cur, StringBuilder sb, List<String> res) {
+     */
     private void helper(TrieNode1 cur, String prefix, List<String> res) {
         if (cur == null) return;
 
         if (cur.isWord) {
+            /**
+             * res.add(sb.toString());
+             */
             res.add(prefix);
         }
 
+        /**
+         *  int n = sb.length();
+         */
         for (char c : cur.children.keySet()) {
+            /**
+             * helper(cur.children.get(c), sb.append(c), res);
+             */
             helper(cur.children.get(c), prefix + c, res);
+            /**
+             *  sb.setLength(n);
+             */
         }
     }
 }
@@ -238,7 +269,7 @@ public class Auto_Complete {
     Trie trie;
 
     /**
-     * O(N * l) : N is total number of words, l is the average length of the word, upper bound is 26 ^ l.
+     * O(N * l) : N is total number of words, l is the max length of the word, upper bound is 26 ^ l.
      */
     public Auto_Complete(String[] words) {
         trie = new Trie();
