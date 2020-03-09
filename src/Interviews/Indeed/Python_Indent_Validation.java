@@ -51,21 +51,22 @@ public class Python_Indent_Validation {
                 if (level != 0) return i;
             } else if (stack.peek().isControl) {
                 /**
-                 * #2.The last line is control, current level should be last level + 1
+                 * #2.The previous line is control, current level should be last level + 1
                  */
                 if (level != stack.peek().level + 1) return i;
             } else {
                 /**
+                 * #3.同一个块里面缩进相同
                  * #4.Back to smaller level, pop up levels bigger than or EQUAL to the current level.
                  */
+                int tmp = 0;
                 while (!stack.isEmpty() && stack.peek().level >= level) {
-                    stack.pop();
+                    tmp = stack.pop().level;
                 }
 
-                /**
-                 * Leagl case : either no line left in stack. OR, a control block on a smaller level.
-                 */
                 if (!stack.isEmpty() && !stack.peek().isControl) return i;
+
+                if (!stack.isEmpty() && (stack.peek().level != level && tmp != level)) return i;
             }
 
             stack.push(new Node(level, isControl));
@@ -155,13 +156,15 @@ public class Python_Indent_Validation {
     }
 
     public static void main(String[] args) {
-        String[] strs = {"def function():",
+        String[] strs = {
+                "def function():",
                 "  print(\"Hello world\")",
                 "  print(\"Hello world\")",
                 "  if i==1:",
                 "#comment",
-                "       print(\"asdf\")",
-                "       if a = 1:"};
+                "    print(\"asdf\")",
+                "    print(\"aa\")",
+                "    if a = 1:"};
         System.out.print(checkValid(strs));
     }
 }

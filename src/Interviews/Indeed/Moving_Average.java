@@ -7,6 +7,12 @@ public class Moving_Average {
      * Given a stream of input, and a API int getNow() to get the current time stamp,finish two methods:
      * 1. void record(int val) to save the record.
      * 2. double getAvg() to calculate the averaged value of all the records in 5 minutes.
+     *
+     * 题目比较经典，有整形数据流，求过去五分钟来的所有整数的mean。
+     * 写了个List，创建了自己的数据类来存val和timeStamp，新的后面加List，过期的在头部删除。
+     * 把删除的部分放在了mean()函数里，follow-up说这样太慢，就提出来放到一个cleaner()函数里，同时写了个Thread
+     * 没过一段时间跑一次cleaner()，
+     * 同时mean()里面也要先调用cleaner。然后被问到多线程需要注意啥，就指出一段code是critical section，要用锁保护。
      */
     public class MoveingAverage1 {
         class Event {

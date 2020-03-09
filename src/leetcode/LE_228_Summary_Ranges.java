@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yuank on 3/28/18.
  */
 public class LE_228_Summary_Ranges {
-    /*
+    /**
         Given a sorted integer array without duplicates, return the summary of its ranges.
 
         Example 1:
@@ -24,6 +24,14 @@ public class LE_228_Summary_Ranges {
 
         for (int i = 0; i < nums.length; i++) {
             int num = nums[i];
+
+            /**
+             * Another question of two pointers: one point stays and another pointer runs
+             *
+             * Here we need to find continuous increasing sequence. Therefore "nums[i] + 1 == nums[i + 1]"
+             *
+             * Since we reference to "nums[i + 1]", must use condition "i < nums.length - 1" for while loop
+             */
             while (i < nums.length - 1 && nums[i] + 1 == nums[i + 1]) {
                 i++;
             }

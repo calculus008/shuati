@@ -46,7 +46,7 @@ public class Python_Indent_Validation_Practice {
 
             if (stack.isEmpty()) {
                 if (indent != 0) return false;
-            } else if (!stack.isEmpty() && stack.peek().isControl) {
+            } else if (stack.peek().isControl) {
                 if (indent <= stack.peek().indent) {
                     System.out.println("#1");
                     return false;
@@ -55,17 +55,13 @@ public class Python_Indent_Validation_Practice {
                 /**
                  * ">="
                  */
+                int tmp = 0;
                 while (!stack.isEmpty() && stack.peek().indent >= indent) {
-                    stack.poll();
+                    tmp = stack.pop().indent;
                 }
+                if (!stack.isEmpty() && !stack.peek().isControl) return false;
 
-                /**
-                 * !!!
-                 */
-                if (!stack.isEmpty() && !stack.peek().isControl) {
-                    System.out.println("#2");
-                    return false;
-                }
+                if (!stack.isEmpty() && (stack.peek().indent != indent && tmp != indent)) return false;
             }
 
             stack.push(new Node(indent, isControl));

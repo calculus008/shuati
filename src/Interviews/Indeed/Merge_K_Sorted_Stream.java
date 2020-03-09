@@ -14,7 +14,7 @@ public class Merge_K_Sorted_Stream {
      * n - number of streams
      * m - average length of streams
      *
-     * Time  : O(n*mlogn)
+     * Time  : O(n * m * logn)
      * Space : O(n)
      */
     class Node {

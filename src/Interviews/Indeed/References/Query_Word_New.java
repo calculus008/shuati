@@ -1,4 +1,4 @@
-package src.Interviews.Indeed.References;
+package Interviews.Indeed.References;
 
 import java.util.*;
 
@@ -24,10 +24,9 @@ public class Query_Word_New {
      * 0
      * 0
      * 0
-     *
-     * 1 java(因为目前A: pyhon java, B: java php, search过python的人中还search最多的是java，1次)
-     * 1 python php(此时 A: pyhon java, B: java php, C: python)
-     * 2 python(此时A: pyhon java, B: java php, C: python java)
+     * 1 java       : 因为目前A: pyhon java, B: java php, search过python的人中还search最多的是java，1次
+     * 1 python php : 此时 A: pyhon java, B: java php, C: python
+     * 2 python     : 此时 A: pyhon java, B: java php, C: python java
      *
      * 这道题我一开始一直在map如何设计上纠结着，naive的方法最后一直有三个case过不了，所以思考的过程是：
      * map1<String, Set<String>> // user => the words he searched before
@@ -51,12 +50,12 @@ public class Query_Word_New {
     }
 
     /**
-     * User -> the set of words for the user
+     * User -> the set of words the user has queried
      */
     Map<String, Set<String>> users;
 
     /**
-     * word -> map : user -> count
+     * word -> map : related word -> count
      */
     Map<String, Map<String, Integer>> wordR;
 
@@ -80,11 +79,15 @@ public class Query_Word_New {
             ans.put(word, new Pair());
 
         Pair max = ans.get(word);
+//        int maxCount = max.maxCount;
+//        System.out.println(maxCount);
+//        List<String> words = max.words;
 
         // update maps
         for (String each : users.get(user)) {
 
-            // update word -> each (user)
+            // update word -> each, each is word the user has queried
+            // For current user, update his related words info for the current search word
             if (!wordR.get(word).containsKey(each))
                 wordR.get(word).put(each, 1);
             else
@@ -98,7 +101,8 @@ public class Query_Word_New {
                 ans.get(word).words.add(each);
             }
 
-            // update each (user) -> word
+            // update each (related word) -> current word
+            // "related" is bi-directional, need to update both ends
             if (!wordR.get(each).containsKey(word))
                 wordR.get(each).put(word, 1);
             else

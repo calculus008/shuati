@@ -29,6 +29,10 @@ public class Merge_K_Sorted_Stream_Practice {
         }
     }
 
+    /**
+     * Time  : O(k * m * logk), k is number streams, m is number of unique values in a stream.
+     * Space : O(k)
+     */
     public List<Integer> merge(List<Stream> streams, int k) {
         List<Integer> res = new ArrayList<>();
         if (k <= 0 || k > streams.size()) return res;
@@ -42,7 +46,7 @@ public class Merge_K_Sorted_Stream_Practice {
             pq.offer(n);
         }
 
-        if (pq.size() < k) return res;
+        if (pq.size() < k) return res;//!!!
 
         Integer pre = null;
         int count = 0;
@@ -109,6 +113,13 @@ public class Merge_K_Sorted_Stream_Practice {
         source1.add(s3);
         source1.add(s4);
 
-        System.out.println(Arrays.toString(test.merge(source1, 1).toArray()));
+        Integer[] arr1 = {3, 4, 4, 4, 12, 14, 14, 14, 18, 18};
+        List<Integer> list1 = Arrays.asList(arr1);
+        Stream s11 = new Stream(list1.iterator());
+        List<Stream> source = new ArrayList<>();
+        source.add(s11);
+
+
+        System.out.println(Arrays.toString(test.merge(source, 1).toArray()));
     }
 }
