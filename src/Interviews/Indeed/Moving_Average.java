@@ -13,6 +13,15 @@ public class Moving_Average {
      * 把删除的部分放在了mean()函数里，follow-up说这样太慢，就提出来放到一个cleaner()函数里，同时写了个Thread
      * 没过一段时间跑一次cleaner()，
      * 同时mean()里面也要先调用cleaner。然后被问到多线程需要注意啥，就指出一段code是critical section，要用锁保护。
+     *
+     * 补充题就是，如果要中位数怎么办？如果数据量很大怎么办
+     *
+     * #
+     * moving avg，就是一个stream输入，给一个int getNow()API获取当前timestamp，完成两个函数void record(int value)
+     * 和double getAvg()，有输入时会自动call record，然后call getAvg()时返回5分钟内的平均值。用一个queue来存数据，一个sum存当前和，
+     * 每次record和getAvg时pop掉过期的数据就好了。follow up： 如果还要getMedium呢？我说用two heap，他说太慢了因为record要o(logN)，
+     * 说这个getMedium call得很少，可以直接在当前的数据结构上implement，于是其实就是求unsorted list的medium，用quick select
+     * 能O(n)时间得到，面试官表示很满意。
      */
     public class MoveingAverage1 {
         class Event {
