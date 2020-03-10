@@ -43,7 +43,10 @@ public class LE_244_Shortest_Word_Distance_II {
 
         //Time and Space : O(m + n)
         public int shortest(String word1, String word2) {
-            //!!!
+            /**
+             * !!!
+             * "List<Integer> l1", NOT "List l1"!!!!!!
+             */
             List<Integer> l1 = map.get(word1);
             List<Integer> l2 = map.get(word2);
 

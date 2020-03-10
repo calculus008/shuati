@@ -14,12 +14,19 @@ public class Resume_System {
      * 再 update version 变成 2，依此类推。
      * 虽然是 online HackerRank，但是是有面试官坐旁边随时解答问题的。我习惯了 HackerRank 就闷头做题，想了两个思路，
      * 没有和面试官交流就直接写了一种（他倒也说了不用和他讲思路，直接做题就好）。
+     *
+     * 上机题还是profile id，之前面经有一个很重要的遗漏，就是get（profileid，version）需要返回的是所有小于等于给定version
+     * 那个profile的fieldname和fieldvalue， 而不是只是那个version下的，而且返回值需要按fieldname排序，所以用treemap的floor
+     * 会很有效率，(!!!)
+     * 思路讲一下把：map<profileId, treemap<fieldname, treemap<version, fieldvalue>>>, 这样好处就是去掉了fieldname的重复，
+     * 节省了空间。 代码就不贴了，建议大家先写好，时间挺紧的
      */
 
     class Profile {
         String profileId;
         int curVersion;
 
+//        TreeMap!!!
         Map<Integer, Map<String, String>> versions;
 
         public Profile(String profileId) {

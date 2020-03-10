@@ -24,6 +24,72 @@ public class LE_155_Min_Stack {
         minStack.getMin();   --> Returns -2.
      */
 
+    /**
+     * !!!
+     * Memory optimal solution, use one stack and it saves n numbers (not 2 * n)
+     *
+     * push 5
+     * stack : 5
+     * min : 5
+     *
+     * push 2
+     * stack :  3, 5
+     * min : 2
+     *
+     * top() : stack.peek() = 3 > 0, return 2
+     *
+     * push 4
+     * stack: -2, 3, 5
+     * min : 2
+     *
+     * pop()
+     * stack: 3, 5
+     * min: 2
+     *
+     * pop()
+     * stack : 5
+     * min: 2
+     *
+     */
+    class MinStack4 {
+        private Stack<Integer> stack;
+        int min;
+
+        public MinStack4() {
+            stack = new Stack<>();
+            min = 0;
+        }
+
+        public void push(int x) {
+            if (stack.isEmpty()) {
+                stack.push(0);
+                min = x;
+            } else {
+                int diff = min - x;
+                stack.push(diff);
+                min = Math.min(min, x);
+            }
+        }
+
+        public void pop() {
+            int x = stack.pop();
+            if (x > 0) {
+                min += x;
+            }
+        }
+
+        public int top() {
+            if (stack.peek() > 0) {
+                return min;
+            }
+
+            return min - stack.peek();
+        }
+
+        public int min() {
+            return min;
+        }
+    }
 
     //Solution 1 : Two Stacks
     class MinStack1 {

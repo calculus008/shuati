@@ -37,6 +37,17 @@ public class LE_616_Add_Bold_Tag_In_String {
      *
      * Time  : O(n * m * l), m is dict size, l is length of word.
      * Space : O(n);
+     *
+     *example :
+     *idx 0 1 2 3 4 5 6 7 8
+     *    a b c x y z 1 2 3
+     *i=0       ^
+     *    T
+     *      T
+     *        T
+     *i=6             T      ^
+     *                  T
+     *                    T
      */
 
     public String addBoldTag(String s, String[] dict) {
@@ -52,7 +63,7 @@ public class LE_616_Add_Bold_Tag_In_String {
                     end = Math.max(end, i + word.length());
                 }
 
-                if (i < end) {
+                if (i < end) {//meaning current char is inside a section that should be taggged
                     b[i] = true;
                 }
             }

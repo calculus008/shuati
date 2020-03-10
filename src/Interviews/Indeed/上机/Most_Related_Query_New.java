@@ -38,14 +38,19 @@ public class Most_Related_Query_New {
      * map3<String, Map<String, Integer>> // word => related word and times
      * 这样的话，每次一个新词进来，直接就能找到相关的词，然后找到出现次数最多的就好。然后再利用map1中这
      * 个user之前query的结果，去update map3。这个思路没有debug完，思路讲给了面试官听，他肯定了这个想法。
+     *
+     * 上机题要注意一下输出的顺序（alphabetical)和空格格式，
      */
     class Pair {
         int count;
-        List<String> words;
+        /**
+         * require result to be in alphabetic order
+         */
+        TreeSet<String> words;
 
         public Pair() {
             this.count = 0;
-            words = new ArrayList<>();
+            words = new TreeSet<>();
         }
     }
 
@@ -102,7 +107,8 @@ public class Most_Related_Query_New {
          * find max
          */
         int max = 0;
-        List<String> res = new ArrayList<>();
+        TreeSet<String> res = new TreeSet<>();
+
         for (String key : related.keySet()) {
             if (related.get(key) > max) {
                 max = related.get(key);
