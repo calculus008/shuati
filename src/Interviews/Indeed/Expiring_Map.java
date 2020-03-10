@@ -86,7 +86,9 @@ public class Expiring_Map {
      *
      * (!!!)
      * Expire map
-     * circular 解法主要就是 create 一个固定size for 5分钟的array, keep 一个lastTimeStamp, 每次放入的位置为 timestamp % size. 然后因为有lastTimeStamp, 可以算出哪些array裡面的范围是invalid,不要算进去.
+     * circular 解法主要就是 create 一个固定size for 5分钟的array, keep 一个lastTimeStamp, 每次放入的位置为
+     * timestamp % size. 然后因为有lastTimeStamp, 可以算出哪些array裡面的范围是invalid,不要算进去.
+     *
      * list 解法主要就是 用list maintain 所有timestamp, 每次要算sum的时候 从最尾,扫到第一个过期的时间,斩断.
      *
      * follow up 没有问到multithread, follow up 主要就是时间空间複杂度
@@ -115,7 +117,7 @@ public class Expiring_Map {
 
             Item it = map.get(k);
 
-            if (it.expirationTime > System.currentTimeMillis()) {
+            if (it.expirationTime < System.currentTimeMillis()) {
                 return it.val;
             }
 

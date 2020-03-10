@@ -1,4 +1,4 @@
-package src.Interviews.Indeed.上机;
+package Interviews.Indeed.上机;
 
 import java.util.*;
 
@@ -9,8 +9,7 @@ public class Normalize_Title {
  * and clean titles are "software engineer" and "mechanical engineer", the "match point" will be
  * 2 and 1. In this case we return "software engineer" because it has higher "match point”.
  *
- * 我是用Map存，key: document ID, value: word。这种解法只能过14/20。
- * 想要全部都过的话需要用key: word, value: document ID。
+ * 我是用Map存，key: document ID, value: word。这种解法只能过14/20。想要全部都过的话需要用key: word, value: document ID。
  * 据说Indeed上机题是一阵一阵的，可能今年下半年的上机题全是这个。
  *
  * 这题我的思路路就是建倒排链
@@ -69,6 +68,9 @@ public class Normalize_Title {
     public String getNormalizeTitleWithDup(String t, String[] strs) {
         Map<String, List<Pair>> map = new HashMap<>();
 
+        /**
+         * build inverted index
+         */
         for (int i = 0; i < strs.length; i++) {
             String[] parts = strs[i].split(" ");
 
