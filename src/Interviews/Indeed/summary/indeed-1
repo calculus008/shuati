@@ -1,0 +1,85 @@
+#
+一道是description snippet，就是给定一段description，和两个keyword，找到同时含有这两个keyword的位置，
+  并往前往后多保留两个单词，返回那一段string作为snippet
+
+#
+非面经
+给List<List<Integer>> 要求出前k个最常出现的数字
+有点像merge k streams吧 但这个要求同个stream的也算
+这轮最后一轮了面试官看起来很累, 写白板的时候跟他交流感觉他已经在恍神了
+写完后跑case 并分析複杂度
+讨论了几个极值的的case  comparator会怎麽样 (min integer之类的)
+一时之前没想到 面试官提示了下回答出来了
+
+#
+因为面的是Data Engineer
+题目是Rearrange Lists each list cannot have duplicate
+["a", "b", "c", "a", "a", "b"] -> [ ["a", "b", "c"], ["a", "b"], ["a"] ]
+Your solution should minimize the number of inner lists.
+# [ ["a"], ["a"], ["b"] ] would not be a correct solution for ["a", "a", "b"].
+# The correct solution would be [ ["a", "b"], ["a"] ]
+
+BruteForce的方法是HashMap计数，然后遍历Map，count-=1
+优化的方法可以考虑是bucket count，建一个长26的arraylist，
+当时时间紧张，没想出来优化算法....上午面下午拒，效率堪比TwoSigma那次了
+
+1个小时，1道题目，之前聊天很久。题目没在面经里看到过。
+给一个list， 如何把里面的字符分配到尽量少的子list里，并且每个子list没有重复元素。
+比如
+['a','b','c','a','a','b']， 可以分成['a', 'b', 'c'], ['a', 'b'], ['a']
+['a', 'a', 'a', 'b', 'b', 'b']，可以分成['a', 'b'], ['a', 'b'], ['a', 'b']
+
+先给出了O(n*2)的解法，后来发现可以先数一遍字符个数，找到出现最多的，比如a出现3次，就建3个子list，
+然后把每种字符round robin那样放进各个list就行了， 这样是O(n)
+
+O(n*2) 的解法是啥
+就是扫一遍，每次都查当前元素是否在现有的某个list里，比如n个a的情况，每次可能最多要检查之前n－1
+个list
+
+这个题是indeed经典面经题，开n个list，挨个放就可以(n是出现次数最多的那个char的出现次数)。
+
+
+!!!
+#System Design
+系统设计是设计一个click tracking system，需要根据click算每个sponsored client还剩多少budget以及每个月应该
+bill sponsored client多少钱.
+大概就是S3存activity，一个DB实时update budget，然后bill就用spark aggregate
+
+system design: 设计一个Company/Job Review系统，可以查看reviews，发新的review
+
+设计给公司打分的功能，比如 https://www.indeed.com/cmp/Micro ... univSerpCompanyLogo ，MS的评分是 4.2 。
+题目是说用户可以在公司的page上留言和打分，公司的评分就是所有评分的平均数。我就先从DB开始，面试官说user table和company table都有了，
+我就加了review table，里面有id，userid，companyid，comments，stars，timestamp ，平均数就是先 select * 然后再 average 。
+然后说有什么 API ，传什么样子的 JSON 给前端。面试官觉得行，就开始scale了。先说review table里有1 billion rows，
+我说那就按月partition吧，，所有的review都从最近的那个月里读，如果用户想看更老的review就再从别的partition里读。
+面试官又说公司的分数是所有partition里的分数的平均，算起来会慢。我说那就加一个cron job每天夜里算一算，把结果放在另一个table里，
+虽然会有一天的delay，如果这个公司已经有很多review了，每天新增的review不会有太多影响。面试官觉得也还行，就说现在有
+10 million requests per sec。我问了读写的比例，说是95%是读。我说那就加replication吧，single leader and multiple
+followers，每个replication上再加上cache，再加一个load balancer，把读请求分配到leader和follower上，写请求只能去learder。
+简单说了下eventual consistency，leader需要时间把新的review发到follower上。到这时间就差不多了，面试官就没再问了。
+现在还不知道面试结果，不知道这么做对不对，大家就看着玩儿吧。每个人的思路不一样，可能面试的走向也不一样。
+
+system design说是少了product什么的，
+
+面是一个华裔小哥主面。非面经题，国际象棋里面的knight只能走日字型(跟中国象棋里的马一样)。给一个无限大的平面，起点和终点，
+以及不能一些obstacles不能走。问最少需要几步从起点能到终点？
+首先无限大的平面怎么表示这个需要和面试官讨论，我给的一种方案是不用二维数组表示，只用一个set标出obstacles的位置，
+面试官表示ok。然后就是一个普通的bfs了，秒之。
+
+设计一个简历存储系统，从一个数据中心扩展到多个
+
+设计一个点击量计费系统。简单来说就是用户点了链接之后，会跳到这个系统，系统首先会decrypt过来的链接得到3个参数，
+分别是职位id，职位发布人的id和这条点击的单价。要做的就是每个月发一份报告，报告里包含了各个职位发布人和他们应该付
+的钱送到另外一个service。lz先问了下点击量大概会有多少，算了下qps和存储需要的容量。最后聊了下怎么分成几个micro services，
+主要是存储，跳转，生成报告。后面加了一问问了下如果职位发布人设置了每月开销的上限怎么办，那就需要另一个服务实时去算开销了，
+如果到了给的上限就要停止发布他们的职位。
+
+!!!
+Code Review
+审查新码农的代码，是实现他们家工作的筛选器。就是去他们网站随便搜个职位，最左边那一列。要按搜到工作的数量排序，
+一样的话就按工作名字的首字母。一共2个页面一个是java写的后台，另一个是jsp的前台。刚开始lz思路有点错，以为是查代码风格，
+后来经提醒主要是debug。两个页面都有错，jsp主要是html跳转的问题，java是排序的问题。当然后面聊一下一些结构上的优化，
+就比较考验java基本功了。总体感觉答得一般，估计国人小哥抬了一手
+
+
+第五轮：设计Tweet信息派送

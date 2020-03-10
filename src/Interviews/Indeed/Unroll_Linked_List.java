@@ -1,4 +1,4 @@
-package Interviews.Indeed;
+package src.Interviews.Indeed;
 
 import java.util.Arrays;
 
@@ -20,6 +20,18 @@ public class Unroll_Linked_List {
      *
      * https://www.geeksforgeeks.org/unrolled-linked-list-set-1-introduction/
      * https://en.wikipedia.org/wiki/Unrolled_linked_list
+     *
+     * 小哥讲解很细，问了很多分析structure的问题，比如insert几种方式，你想选哪种。
+     *
+     * 先讨论各种corner case，讨论好了之后才让写代码。先写get()，被指出了一个小bug，curr = curr.next应该在update size之后。
+     *
+     * 关键点就是Insert的时候如果当前node的array满了怎么办，
+     * 楼主早就准备过，和面试官讨论了各种情况，最后得出较好的解法是加一个新node然后把当前node一半的内容移过去，
+     * 整体交流下来面试官也很满意，
+     * 没写出什么bug
+     *
+     * 面试官出题后要你先写个get function, 并要你想想有哪些case要考虑
+     * get写完后 在写insert, 同样问你有什麽case要考虑
      *
      */
     static class Node {
@@ -115,10 +127,30 @@ public class Unroll_Linked_List {
          *      一头一尾
          *
          *   #3 insertion node is full
-         *      we need to move the last element to the next node, then shift to make space for the new value.
+         *      we need to move the last element in current node to the next node, then shift to make space
+         *      for the new value.
+         *        0  1  2  3      4  5  6  7  8     9  10  11
+         *       [a, b, x, c] -> [a, b, c, d, e] -> [a, b, c]
+         *
+         *       now insert (y, 6)
+         *        0  1  2  3      4  5  6  7  8      9 10 11 12
+         *       [a, b, x, c] -> [a, b, c, d, e] -> [e, a, b, c]
+         *
+         *        0  1  2  3      4  5  6  7  8      9 10 11 12
+         *       [a, b, x, c] -> [a, b, y, c, d] -> [e, a, b, c]
          *
          *      if next is null or also full, we need to create new node and insert after insertion node so
          *      that we can move the last element to the new node.
+         *       0  1  2  3      4  5  6  7  8     9  10  11 12 13
+         *      [a, b, x, c] -> [a, b, c, d, e] -> [a, b, c, d, e]
+         *
+         *      now insert(y, 6)
+         *       0  1  2  3      4  5  6  7  8      9      10 11 12 13 14
+         *      [a, b, x, c] -> [a, b, c, d, e] -> [e] -> [a, b, c, d, e]
+         *
+         *       0  1  2  3      4  5  6  7  8      9      10 11 12 13 14
+         *      [a, b, x, c] -> [a, b, y, c, d] -> [e] -> [a, b, c, d, e]
+         *
          *
          *   Finally, we move to #1 case and do the normal insertion.
          *
@@ -128,6 +160,7 @@ public class Unroll_Linked_List {
             if (index > totalLen) return;
 
             Node cur = head;
+            Node pre = null;
 
             /**
              * locate the insertion node
@@ -136,6 +169,11 @@ public class Unroll_Linked_List {
                 if (index >= cur.len) {
                     index -= cur.len;
 
+                    /**
+                     * if current node is not full and index is 0 after deduction,
+                     * we can just put new element at the end of the current node,
+                     * no need to move to the next node.
+                     */
                     if (index == 0 && cur.len < MAX_ARRAY_SIZE) {
                         index = cur.len;
                         break;
@@ -144,6 +182,7 @@ public class Unroll_Linked_List {
                     break;
                 }
 
+                pre = cur;
                 cur = cur.next;
             }
 
@@ -155,11 +194,12 @@ public class Unroll_Linked_List {
                 if (head == null) {
                     head = newNode;
                 } else {
-                    Node tail = head;
-                    while (tail.next != null) {
-                        tail = tail.next;
-                    }
-                    tail.next = newNode;
+//                    Node tail = head;
+//                    while (tail.next != null) {
+//                        tail = tail.next;
+//                    }
+//                    tail.next = newNode;
+                    pre.next = newNode;
                 }
 
                 /**
@@ -169,7 +209,7 @@ public class Unroll_Linked_List {
             }
 
             /**
-             * #3
+             * #3 insertion node is full
              */
             if (cur.len == MAX_ARRAY_SIZE) {
                 if (cur.next == null || cur.next.len == MAX_ARRAY_SIZE) {

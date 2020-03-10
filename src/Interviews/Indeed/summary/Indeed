@@ -1016,8 +1016,3 @@ D | E
 我用C++写的，getline(cin,aString)不会读取最后一个换行符，这个很重要，当时卡了很久，一定要注意。
 
 
-!!!
-#System Design
-系统设计是设计一个click tracking system，需要根据click算每个sponsored client还剩多少budget以及每个月应该
-bill sponsored client多少钱.
-大概就是S3存activity，一个DB实时update budget，然后bill就用spark aggregate

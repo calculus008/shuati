@@ -5,10 +5,35 @@ import java.util.*;
 public class Summary_Range {
     /**
      * 给⼀一个排序(!!!)的Integer的array， [1,2,3,5,6,8,9,12] 输出⼀一个string: “1->3,5->6,8->9,12′′
-     * Followup，如果输⼊入有deplicate numbers，怎么办? [1,2,2,3] ==>”1->3′′
+     * Followup，如果输⼊入有duplicate numbers，怎么办? [1,2,2,3] ==>”1->3′′
      * [1,2,2,5] ==>”1->2,5′′
      *
      * LE_228_Summary_Ranges
+     *
+     * #
+     * 还是老题summary range， 用了stringbuilder， 遍历一遍，o(n)时间复杂度。 然后问，如果输入为[1,2,3,4,5,.......100000, 300000]
+     * 这种情况怎么办，有没有更好的方式，回答binary search，然后将核心部分写了一下，并且告诉了他这种方式的最坏情况和最好情况。
+     *
+     *         public static void main(String[] args) {
+     *                 int[] digit = new int[12];
+     *                 for (int i = 0; i < digit.length - 1; i++) {
+     *                         digit[i] = i;
+     *                 }
+     *                 digit[digit.length - 1] = Integer.MAX_VALUE;
+     *                 System.out.println(binarySearch(digit, 0, digit.length - 1));
+     *         }
+     *
+     *         public static int binarySearch(int[] arr, int l, int r) {
+     *                 while (l < r) {
+     *                         int mid = l + (r - l)/2 + 1;
+     *                         if (arr[mid] - arr[l] == mid - l) {//arr[l] ~ arr[mid] is continuous increasing
+     *                                 l = mid;
+     *                         } else {
+     *                                 r = mid - 1;
+     *                         }
+     *                 }
+     *                 return r;
+     *         }
      */
 
     /**

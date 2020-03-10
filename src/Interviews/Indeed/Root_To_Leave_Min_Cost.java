@@ -6,6 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 第一题是Tree找minimal path cost leaf，就是一个Tree，每个edge都有cost，让找到从root到leaf一路上path cost最小的那个leaf。
+ * Tree不一定是Binary Tree。用DFS做了，途中不断更新当前找到的minimal path cost node和对应的cost。然后面试官问如果cost都是
+ * positive能不能优化，回答发现一旦node的cost已经大于当前找到的minimal cost的话就不必再在这条path上走下去。然后加了两行代码
+ * 实现了下。
+ *
+ * 第二题，其实算是第一题的follow up，但我相当于是完全重写的，不知道是不是跑偏了？内容是，如果这不是一个Tree而是一个
+ * Undirected Graph，给一个source和一个destination，找到连接这两点的minimal cost path。我用了Uniform Cost Search来做，
+ * 跟BFS差不多，只不过不是用fifo保存node而是用priority queue，同时也要存下到这个node为止的cost和path，然后根据到每个
+ * nodecost来排序，先visit当前cost最小的node，这样当遇到destination的时候，对应的path就是cost最小的。Follow up是因
+ * 为我有一个visited set，凡是visit过的node就不再走了，面试官问如果经过这个node有多个path那后面的不就被忽略了吗？
+ * 我说的是第一次遇到一个node时是path cost最小的，后面如果还有path路过它那cost肯定比第一次大，就不用考虑了。面试官似乎是认可了的。
+ *
  * Edge和Node2都是给好的，里面的变量类型到时候和面试官讨论吧。
  **/
 class Edge{
@@ -34,6 +46,12 @@ public class Root_To_Leave_Min_Cost {
      * Given a tree, every tree edge has a cost， find the least
      * cost or find the leaf node that the cost of path that from root to leaf is the
      * least.
+     *
+     * 每条edge上有weight，问题就是找到所有root to leaf path里sum of weight的最小值。需要自己设计数据结构。我就设计了Node，
+     * 里面有一个child_to_weight_map。然后就是dfs。面试官又说有没有什么优化，我说如果所有的weight都是正值可以剪枝什么的，
+     * 倒是不用写代码。问完了tree又问dag，唯一的区别可能就是会有重复访问的问题。我就在Node里又加了一个min，记录如果从这个点开始
+     * 能达到的最小值，遍历完更新一下。下次再到这个点如果发现有值了就不用继续了。面试官说行，我就写了。最后问了问复杂度什么的。
+     * 题目挺清楚的，就用了dfs，面试官也没有刁难。
      */
 
     /**
@@ -95,6 +113,11 @@ public class Root_To_Leave_Min_Cost {
             minCost = Math.min(minCost, curCost);
             return;
         }
+
+        /**
+         * if edge cost is positive, pruning by returning when current cost is already bigger than minCost.
+         */
+        if (curCost > minCost) return;
 
         for (Edge e : root.edges) {
             helper(e.node, curCost + e.cost);
