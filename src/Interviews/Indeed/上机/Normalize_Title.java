@@ -1,4 +1,4 @@
-package src.Interviews.Indeed;
+package Interviews.Indeed.上机;
 
 import java.util.*;
 
@@ -68,6 +68,9 @@ public class Normalize_Title {
     public String getNormalizeTitleWithDup(String t, String[] strs) {
         Map<String, List<Pair>> map = new HashMap<>();
 
+        /**
+         * build inverted index
+         */
         for (int i = 0; i < strs.length; i++) {
             String[] parts = strs[i].split(" ");
 

@@ -109,8 +109,11 @@ public class Moving_Average_Practice {
     }
 
     /**
+     * ------------
      * Follow up 3
      * getMedian(), quickSelect, O(n)
+     *
+     * Only for case that memory is enough (1st case)
      */
     public double getMedian() {
         removeExpired();

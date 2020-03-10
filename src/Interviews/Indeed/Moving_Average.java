@@ -11,7 +11,7 @@ public class Moving_Average {
      * 题目比较经典，有整形数据流，求过去五分钟来的所有整数的mean。
      * 写了个List，创建了自己的数据类来存val和timeStamp，新的后面加List，过期的在头部删除。
      * 把删除的部分放在了mean()函数里，follow-up说这样太慢，就提出来放到一个cleaner()函数里，同时写了个Thread
-     * 没过一段时间跑一次cleaner()，
+     * 每过一段时间跑一次cleaner()，
      * 同时mean()里面也要先调用cleaner。然后被问到多线程需要注意啥，就指出一段code是critical section，要用锁保护。
      *
      * 补充题就是，如果要中位数怎么办？如果数据量很大怎么办
@@ -75,7 +75,7 @@ public class Moving_Average {
     }
 
     /**
-     * 注意这⾥里里有个问题，如果对record和getaverage的性能要求特别⾼高，不不想出现突刺刺情况，就是某个请求要等⽐比较久
+     * 注意这⾥里里有个问题，如果对record和getaverage的性能要求特别⾼高，不想出现突刺刺情况，就是某个请求要等⽐比较久
      * 可以把removeExpired函数拿出来专⻔门⽤用⼀一个线程去跑，每秒调⽤用⼀一次
      */
 
@@ -180,12 +180,12 @@ public class Moving_Average {
 
         /**
          * LI_461_Kth_Smallest_Number
-         *
+         * <p>
          * Find_Median_In_Unsorted_Array
          */
 
 
-        public double getMedian(){
+        public double getMedian() {
             ArrayList<Integer> list = new ArrayList(queue);
             int[] nums = new int[list.size()];
             for (int i = 0; i < nums.length; i++) {
@@ -194,42 +194,46 @@ public class Moving_Average {
 
             int n = nums.length;
             if (n % 2 == 0) {
-                return 0.5 * (findKth(nums, n / 2, 0, n - 1) + findKth(nums, n / 2 - 1, 0, n - 1));
+                return 0.5 * (quickSelect(nums, 0, n - 1, n / 2) + quickSelect(nums, 0, n - 1, n / 2 - 1));
             }
 
-            return (double)findKth(nums, n / 1, 0, n - 1);
+            return (double) quickSelect(nums, 0, n - 1, n / 2);
         }
 
-        private int findKth(int[] nums, int k, int start, int end) {
-            int pivot = nums[start];
+        public int quickSelect(int[] nums, int start, int end, int k) {
+            if (start >= end) {
+                return nums[start];
+            }
+
             int l = start;
             int r = end;
+            int pivot = nums[(start + end) / 2];
 
-            while (l < r) {
-                while (l < r && nums[r] > pivot) {
-                    r--;
-                }
-                while (l < r && nums[l] <= pivot) {
+            while (l <= r) {
+                while (l <= r && nums[l] < pivot) {
                     l++;
                 }
-                swap(nums, l, r);
+                while (l <= r && nums[r] > pivot) {
+                    r--;
+                }
+
+                if (l <= r) {
+                    int temp = nums[l];
+                    nums[l] = nums[r];
+                    nums[r] = temp;
+
+                    l++;
+                    r--;
+                }
             }
 
-            swap(nums, start, r);
-
-            if (k == r) {
-                return pivot;
-            } else if (k < r) {
-                return findKth(nums, k, start, r - 1);
+            if (r >= k && r >= start) {
+                return quickSelect(nums, start, r, k);
+            } else if (l <= k && l <= end) {
+                return quickSelect(nums, l, end, k);
+            } else {
+                return nums[k];
             }
-
-            return findKth(nums, k,r + 1, end);
-        }
-
-        private void swap(int[] nums, int l, int r) {
-            int temp = nums[l];
-            nums[l] = nums[r];
-            nums[r] = temp;
         }
     }
 
