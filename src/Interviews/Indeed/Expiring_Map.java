@@ -70,6 +70,26 @@ public class Expiring_Map {
      * 第三 follow up： put 从原来o（1） 变成了O(k log n）， 怎么解决？
      * lz说用多线程，put 只是put 到 hashmap 和 heap 里面， 但是不从heap remove。 put 从原来的 O(1）变成了 O(log n），
      * 然后用另外一个线程来做remove 操作。（幸好没叫写多线程代码，不然死定了）
+     *
+     * 老題, exist map, 寫get 和 put 同時給now()回傳當前時間. lz 表示需要建class來存 duration, 並寫了個 isExpired(),
+     * 面試官表示滿意寫完後 followup問有memory leak怎辦, 答曰再寫個clean, 不定時呼叫. clean就把掃map的key, 如果過期的話 就移除,
+     *  面試官表示滿意.
+     *
+     * 大家都能实现，关键是如何用最节省内存的方法存下来，
+     *
+     * 面经题目expiremap. Follow up问了clean up的问题，楼主提出了一个o(n)的方法但是好像不是他想要的结果，
+     * 我一开始写的code只在get时候会删除过期数据，然后她问如果有个server用你的东西过了一小时了没人get东西会怎么样，你该怎么解决它？
+     * 具体回答我也不知道其实，因为我回答后感觉他不满意因为他问我怎么改进，后来我支支吾吾也说的不太好。
+     *
+     * clean up应该是想让你写一个函数，每次调用就把应该expire的项目全pop掉吧。如果是的话你可以一开始用 Linkedlist + hashMap，
+     * 也就是把hashmap中的东西都用指针连在一起
+     *
+     * (!!!)
+     * Expire map
+     * circular 解法主要就是 create 一个固定size for 5分钟的array, keep 一个lastTimeStamp, 每次放入的位置为 timestamp % size. 然后因为有lastTimeStamp, 可以算出哪些array裡面的范围是invalid,不要算进去.
+     * list 解法主要就是 用list maintain 所有timestamp, 每次要算sum的时候 从最尾,扫到第一个过期的时间,斩断.
+     *
+     * follow up 没有问到multithread, follow up 主要就是时间空间複杂度
      */
 
     public class ExpiringMap<K, V> {
