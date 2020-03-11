@@ -1,4 +1,4 @@
-package src.Interviews.Indeed.Practice;
+package Interviews.Indeed.Practice;
 
 import java.util.*;
 
