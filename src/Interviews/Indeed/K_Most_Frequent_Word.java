@@ -76,7 +76,7 @@ public class K_Most_Frequent_Word {
                 if (cur.val == pre) {
                     count++;
                 } else {
-                    System.out.println("val="+pre + ", count="+count);
+//                    System.out.println("val="+pre + ", count="+count);
                     ans.offer(new Element(pre, count));
                     if (ans.size() > k) {
                         ans.poll();
