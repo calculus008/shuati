@@ -1,7 +1,9 @@
-package src.Interviews.Indeed.上机;
+package Interviews.Indeed.上机;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Resume_System {
     /**
@@ -26,13 +28,20 @@ public class Resume_System {
         String profileId;
         int curVersion;
 
-//        TreeMap!!!
-        Map<Integer, Map<String, String>> versions;
+        /**
+         * TreeMap
+         * " The map is sorted according to the natural ordering of its keys,
+         * or by a Comparator provided at map creation time"
+         *
+         * here,key is version, so keys in "versions" (version number) will be in
+         * ascending order
+         */
+        TreeMap<Integer, Map<String, String>> versions;
 
         public Profile(String profileId) {
             this.profileId = profileId;
             curVersion = 1;
-            versions = new HashMap<>();
+            versions = new TreeMap<>();
             versions.put(1, new HashMap<>());
         }
     }
@@ -75,6 +84,45 @@ public class Resume_System {
             sb.append(key).append(":").append(fields.get(key)).append(",");
         }
 
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
+    }
+
+    /**
+     * 就是get（profileid，version）需要返回的是所有小于等于给定version
+     * 那个profile的fieldname和fieldvalue， 而不是只是那个version下的，而且返回值需要按fieldname排序，
+     * 所以用treemap的floor会很有效率，(!!!)
+     */
+    public String getAll(String profileId, int version) {
+        if (!map.containsKey(profileId)) return null;
+
+        Profile p = map.get(profileId);
+        if (p.curVersion < version || version <= 0) return null;
+
+        Iterator<Integer> it = p.versions.keySet().iterator();
+        TreeMap<String, String> tm = new TreeMap<>();
+
+        while (it.hasNext()) {
+            int cur = it.next();
+            if (cur <= version) {
+                Map<String, String> curFileds = p.versions.get(cur);
+                for (String key : curFileds.keySet()) {
+                    tm.put(key, curFileds.get(key));
+                }
+            } else {
+                break;
+            }
+        }
+
+        Iterator<String> it1 = tm.keySet().iterator();
+        StringBuilder sb = new StringBuilder();
+
+        while (it1.hasNext()) {
+            String key = it1.next();
+            String val = tm.get(key);
+            sb.append(key).append(":").append(val).append(",");
+        }
         sb.deleteCharAt(sb.length() - 1);
 
         return sb.toString();
