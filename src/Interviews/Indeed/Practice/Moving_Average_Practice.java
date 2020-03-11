@@ -49,6 +49,11 @@ public class Moving_Average_Practice {
      * Follow up 1
      * 如果对record和getaverage的性能要求特别⾼高，不想出现突刺刺情况，就是某个请求要等⽐比较久
      * 可以把removeExpired函数拿出来专⻔门⽤用⼀一个线程去跑，每秒调⽤用⼀一次
+     *
+     * 多线程的话 是不是要不这几个方法都上锁呢
+     * 都上锁比较影响效率。
+     * 可以考虑用synchronized关键字，把需要Thread-safe的东西保护起来。
+     * 可以用Collections.synchronizedcList 给List加一层保护，再用 synchronized关键字
      */
 
     /**
