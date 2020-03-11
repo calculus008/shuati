@@ -9,13 +9,13 @@ public class Dice_Sum {
      */
     int count = 0;
     public double getPossibilityDFS(int dice, int target) {
-        if (dice <= 0 || target < dice || target > target * 6) return 0.0;
+        if (dice <= 0 || target < dice || target > dice * 6) return 0.0;
 
-        int total = (int)Math.pow(6, dice);
+        double total = Math.pow(6, dice);
 
         dfs(dice, target);
 
-        return (float)count / total;
+        return (double)count / total;
     }
 
 

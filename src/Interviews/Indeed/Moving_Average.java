@@ -22,6 +22,11 @@ public class Moving_Average {
      * 每次record和getAvg时pop掉过期的数据就好了。follow up： 如果还要getMedium呢？我说用two heap，他说太慢了因为record要o(logN)，
      * 说这个getMedium call得很少，可以直接在当前的数据结构上implement，于是其实就是求unsorted list的medium，用quick select
      * 能O(n)时间得到，面试官表示很满意。
+     *
+     * 多线程的话 是不是要不这几个方法都上锁呢
+     * 都上锁比较影响效率。
+     * 可以考虑用synchronized关键字，把需要Thread-safe的东西保护起来。
+     * 可以用Collections.synchronizedcList 给List加一层保护，再用 synchronized关键字
      */
     public class MoveingAverage1 {
         class Event {
@@ -48,7 +53,7 @@ public class Moving_Average {
             return curTime - preTime > 300;
         }
 
-        private void removeExpiredEvent() {
+        private synchronized void removeExpiredEvent() {
             while (!queue.isEmpty() && isExpired(getNow(), queue.peek().time)) {
                 Event event = queue.poll();
                 sum -= event.val;

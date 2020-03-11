@@ -11,30 +11,6 @@
 讨论了几个极值的的case  comparator会怎麽样 (min integer之类的)
 一时之前没想到 面试官提示了下回答出来了
 
-#
-因为面的是Data Engineer
-题目是Rearrange Lists each list cannot have duplicate
-["a", "b", "c", "a", "a", "b"] -> [ ["a", "b", "c"], ["a", "b"], ["a"] ]
-Your solution should minimize the number of inner lists.
-# [ ["a"], ["a"], ["b"] ] would not be a correct solution for ["a", "a", "b"].
-# The correct solution would be [ ["a", "b"], ["a"] ]
-
-BruteForce的方法是HashMap计数，然后遍历Map，count-=1
-优化的方法可以考虑是bucket count，建一个长26的arraylist，
-当时时间紧张，没想出来优化算法....上午面下午拒，效率堪比TwoSigma那次了
-
-1个小时，1道题目，之前聊天很久。题目没在面经里看到过。
-给一个list， 如何把里面的字符分配到尽量少的子list里，并且每个子list没有重复元素。
-比如
-['a','b','c','a','a','b']， 可以分成['a', 'b', 'c'], ['a', 'b'], ['a']
-['a', 'a', 'a', 'b', 'b', 'b']，可以分成['a', 'b'], ['a', 'b'], ['a', 'b']
-
-先给出了O(n*2)的解法，后来发现可以先数一遍字符个数，找到出现最多的，比如a出现3次，就建3个子list，
-然后把每种字符round robin那样放进各个list就行了， 这样是O(n)
-
-O(n*2) 的解法是啥
-就是扫一遍，每次都查当前元素是否在现有的某个list里，比如n个a的情况，每次可能最多要检查之前n－1
-个list
 
 这个题是indeed经典面经题，开n个list，挨个放就可以(n是出现次数最多的那个char的出现次数)。
 
