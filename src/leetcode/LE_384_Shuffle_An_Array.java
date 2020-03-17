@@ -98,17 +98,27 @@ public class LE_384_Shuffle_An_Array {
 
         public Solution2(int[] nums) {
             array = nums;
+            /**
+             * !!!
+             */
             original = nums.clone();
         }
 
         public int[] reset() {
             array = original;
+            /**
+             * !!!
+             */
             original = original.clone();
             return original;
         }
 
         public int[] shuffle() {
             for (int i = 0; i < array.length; i++) {
+                /**
+                 * !!!
+                 * for range, max value should be array.length, not array.length - 1
+                 */
                 swapAt(i, randRange(i, array.length));
             }
             return array;
