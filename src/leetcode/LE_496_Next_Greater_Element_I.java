@@ -50,6 +50,31 @@ public class LE_496_Next_Greater_Element_I {
      * Mono Stack O(n) : each element just in/out stack once
      *
      * Iterate nums2 from left to right
+     *
+     * Example:  nums1 = [2,4], nums2 = [1,2,3,4].
+     *
+     * 1
+     * stack: 1
+     * map:
+     *
+     * 2
+     * stack: 2
+     * map: 1 -> 2
+     *
+     * 3
+     * stack: 3
+     * map: 1 -> 2
+     *      2 -> 3
+     *
+     * 4
+     * stack: 4
+     * map: 1 -> 2
+     *      2 -> 3
+     *      3 -> 4
+     *
+     * nums1: 2 => 3
+     *        4 => -1
+     *
      */
     class Solution1 {
         public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -85,9 +110,11 @@ public class LE_496_Next_Greater_Element_I {
     class Solution1_1 {
         public int[] nextGreaterElement(int[] nums1, int[] nums2) {
             Map<Integer, Integer> map = new HashMap<>();
-
             Deque<Integer> stack = new ArrayDeque<>();
 
+            /**
+             * #1
+             */
             for (int i = 0; i < nums2.length; i++) {
                 while (!stack.isEmpty() && nums2[i] > nums2[stack.peek()]) {
                     map.put(nums2[stack.pop()], nums2[i]);
@@ -95,10 +122,16 @@ public class LE_496_Next_Greater_Element_I {
                 stack.push(i);
             }
 
+            /**
+             * #2
+             */
             while (!stack.isEmpty()) {
                 map.put(nums2[stack.pop()], -1);
             }
 
+            /**
+             * #3
+             */
             int[] res = new int[nums1.length];
             for (int i = 0; i < nums1.length; i++) {
                 res[i] = map.get(nums1[i]);
@@ -111,6 +144,30 @@ public class LE_496_Next_Greater_Element_I {
     /**
      * Mono stack
      * Iterate from right to left
+     *
+     * Example:  nums1 = [2,4], nums2 = [1,2,3,4].
+     *
+     * 4
+     * stack: 4
+     * map: 4 -> -1
+     *
+     * 3
+     * stack: 4 3
+     * map: 4 -> -1
+     *      3 -> 4
+     *
+     * 2
+     * stack: 4 3 2
+     * map: 4 -> -1
+     *      3 -> 4
+     *      2 -> 3
+     *
+     * 1
+     * stack: 4 3 2 1
+     * map: 4 -> -1
+     *      3 -> 2
+     *      2 -> 3
+     *      1 -> 2
      */
     class Solution2 {
         public int[] nextGreaterElement(int[] nums1, int[] nums2) {
@@ -118,7 +175,12 @@ public class LE_496_Next_Greater_Element_I {
             Deque<Integer> stack = new ArrayDeque<>();
 
             for (int i = nums2.length - 1; i >= 0; i--) {
-                while (!stack.isEmpty() && nums2[i] > stack.peek()) {
+                /**
+                 * !!!
+                 * Since the question says "no duplicate", we can use ">" or ">=",
+                 * otherwise, need to use ">="
+                 */
+                while (!stack.isEmpty() && nums2[i] >= stack.peek()) {
                     stack.pop();
                 }
                 map.put(nums2[i], stack.isEmpty() ? -1 : stack.peek());

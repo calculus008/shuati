@@ -96,6 +96,7 @@ public class LE_694_Number_Of_Distinct_Islands {
 
             /**
              * !!!
+             * record backtrack path
              */
             sb.append("b"); // back
         }

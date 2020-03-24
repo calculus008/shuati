@@ -25,6 +25,8 @@ public class LE_523_Continuous_Subarray_Sum {
      * You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
      *
      * Medium
+     *
+     * Similar : LE_974_Subarray_Sums_Divisible_By_K
      */
 
     /**

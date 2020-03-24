@@ -34,6 +34,8 @@ public class LE_277_Find_The_Celebrity {
      *    person who have chance to be celebrity.
      * (3)Thus, for second pass, what we need to do is just check i's qualification
      *    that he/she does not know anyone and everyone knows him/she.
+     *
+     * Same problem : LE_997_Find_The_Town_Judge
      */
     public int findCelebrity(int n) {
         int candidate = 0;

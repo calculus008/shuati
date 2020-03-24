@@ -57,6 +57,9 @@ public class LE_523_Continuous_Subarray_Sum {
             int n = nums.length;
             int sums = 0;
 
+            /**
+             * map : prefix sum -> index value when this prefix sum value appears
+             */
             Map<Integer, Integer> map = new HashMap<>();
             /**
              * !!!

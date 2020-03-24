@@ -439,6 +439,10 @@ LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars    (lint 386)
 LE_76_Minimum_Window_Substring                            (lint 32)
 LE_611_Valid_Triangle_Number                              (lint 382)     (****)
 LI_609_Two_Sum_Less_Than_Or_Equal_To_Target                              (****)
+LE_438_Find_All_Anagrams_In_A_String
+LE_992_Subarrays_With_K_Different_Integers
+LE_567_Permutation_In_String
+LE_480_Sliding_Window_Median
 
 #Matrix, DFS
 LI_778_Pacific_Atlantic_Water_Flow
@@ -666,6 +670,7 @@ LI_541_Zigzag_Iterator_II
 #Shortest Distance From All
 LE_317_Shortest_Distance_From_All_Buildings              (lint 573)
 LE_286_Walls_And_Gates
+LE_542_01_Matrix
 LE_296_Best_Meeting_Point
 LI_574_Build_Post_Office   (2D)                                            ***
 LI_435_Post_Office_Problem (1D)  (DP)

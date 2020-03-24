@@ -1,5 +1,6 @@
 #Intervals : Merge/Insert and Line Sweep
 
+#Merge
 LE_57_Insert_Interval                                     (lint 30)   insert one interval into an existing list
 LE_56_Merge_Intervals                                     (lint 156)  merge a given unsorted interval list
 LI_839_Merge_Two_Sorted_Interval_Lists                    (***) Revisit
@@ -19,11 +20,9 @@ LI_391_Number_Of_Airplanes_In_The_Sky
 LE_218_The_Sky_Line_Problem                               (*****)   Revisit
 LI_131_The_Skyline_Problem
 
+#Combination of Insert,merge and remove
 LE_352_Data_Stream_As_Disjoint_Intervals                  (******)
-
 Merge_Intervals                                           (*******)
-
 LE_855_Exam_Room
 
-LE_986_Interval_List_Intersections
-Merge_Two_Sorted_Interval_Lists
+
