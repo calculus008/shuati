@@ -192,3 +192,4 @@ LI_91_Minimum_Adjustment_Cost           State:        f[i][v] 前i个数，第
                                             res = Math.min(res, dp[A.size()][i]);
                                         }
                                         return res;
+

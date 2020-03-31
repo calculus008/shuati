@@ -5,7 +5,13 @@ LE_739_Daily_Temperatures
 RunningTemperature
 LE_239_Sliding_Window_Maximum
 LE_456_132_Pattern
+LE_1130_Minimum_Cost_Tree_From_Leaf_Values    (***)
+
 
 LE_42_Trapping_Rain_Water
 LE_84_Largest_Rectangle_In_Histogram
 LE_85_Max_Rectangle
+
+856 Score of Parentheses
+901 Online Stock Span
+907 Sum of Subarray Minimums

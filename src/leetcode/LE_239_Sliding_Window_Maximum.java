@@ -32,6 +32,43 @@ public class LE_239_Sliding_Window_Maximum {
         Could you solve it in linear time?
      */
 
+    class Solution_Practice {
+        public int[] maxSlidingWindow(int[] nums, int k) {
+            if (null == nums || nums.length == 0 || k == 0) {
+                return new int[]{};
+            }
+
+            int n = nums.length;
+            int[] res = new int[n - k + 1];
+
+            Deque<Integer> dq = new LinkedList<>();
+
+            int idx = 0;
+            for (int i = 0; i < n; i++) {
+                //1.Add
+                while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {
+                    dq.pollLast();
+                }
+                dq.offer(i);
+
+                //2.remove when window starts to move
+                if (i >= k) {
+                    if (dq.peekFirst() == i - k) {
+                        dq.pollFirst();
+                    }
+                }
+
+                //3.fill answer array after we have a full window
+                if (i >= k - 1) {
+                    res[idx] = nums[dq.peekFirst()];
+                    idx++;
+                }
+            }
+
+            return res;
+        }
+    }
+
     /**
       https://www.youtube.com/watch?v=2SXqBsTR6a8&t=6s
 
@@ -245,42 +282,5 @@ public class LE_239_Sliding_Window_Maximum {
         }
 
         return res;
-    }
-
-    class Solution_Practice {
-        public int[] maxSlidingWindow(int[] nums, int k) {
-            if (null == nums || nums.length == 0 || k == 0) {
-                return new int[]{};
-            }
-
-            int n = nums.length;
-            int[] res = new int[n - k + 1];
-
-            Deque<Integer> dq = new LinkedList<>();
-
-            int idx = 0;
-            for (int i = 0; i < n; i++) {
-                //1.Add
-                while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {
-                    dq.pollLast();
-                }
-                dq.offer(i);
-
-                //2.remove when window starts to move
-                if (i >= k) {
-                    if (dq.peekFirst() == i - k) {
-                        dq.pollFirst();
-                    }
-                }
-
-                //3.fill answer array after we have a full window
-                if (i >= k - 1) {
-                    res[idx] = nums[dq.peekFirst()];
-                    idx++;
-                }
-            }
-
-            return res;
-        }
     }
 }

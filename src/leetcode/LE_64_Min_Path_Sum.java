@@ -18,6 +18,28 @@ public class LE_64_Min_Path_Sum {
      */
 
     /**
+     * Brutal Force
+     * The Brute Force approach involves recursion. For each element, we consider two paths,
+     * rightwards and downwards and find the minimum sum out of those two. It specifies whether
+     * we need to take a right step or downward step to minimize the sum.
+     *
+     * Time  : O(2^(m+n))
+     * Space : O(m+n)
+     */
+    public class Solution_Brutal_Force {
+        public int minPathSum(int[][] grid) {
+            return calculate(grid, 0, 0);
+        }
+
+        public int calculate(int[][] grid, int i, int j) {
+            if (i == grid.length || j == grid[0].length) return Integer.MAX_VALUE;
+            if (i == grid.length - 1 && j == grid[0].length - 1) return grid[i][j];
+
+            return grid[i][j] + Math.min(calculate(grid, i + 1, j), calculate(grid, i, j + 1));
+        }
+    }
+
+    /**
      * Space O(1), since no new space is used, only operate on input array.
      * This may not be allowed.
      */
@@ -52,6 +74,7 @@ public class LE_64_Min_Path_Sum {
     }
 
     /**
+     * 1D DP Array
      * If it's not allowed to operate on input array, this solution only uses 1D extra array,
      * Space can be O(min(m, n))
      */
@@ -80,8 +103,8 @@ public class LE_64_Min_Path_Sum {
                      * Each dp value is composed of two parts:
                      * grid[i][j]: the value at current coordinates in grid.
                      * min(a[j - 1], a[j]): the min of the sum values
-                     *                      from LEFT (a[j - 1], updated in previous iteration)
-                     *                      and IP (a[j] before update)
+                     *                      from LEFT column (dp[j - 1], updated in previous iteration)
+                     *                      and current column (dp[j] before update)
                      */
                     dp[j] = grid[i][j] + Math.min(dp[j - 1], dp[j]);
                 }
@@ -92,7 +115,11 @@ public class LE_64_Min_Path_Sum {
     }
 
     /**
+     * 2D DP array
      * Use extra 2D dp array, time and space O(mn)
+     *
+     * dp[i][j] : represents the minimum sum of the path from the index (i, j)
+     *            to the bottom rightmost element
      */
     class Solution_Practice_3 {
         public int minPathSum(int[][] grid) {

@@ -1,0 +1,126 @@
+LE_20_Valid_Parentheses
+LE_56_Merge_Intervals
+LE_62_Unique_Path
+LE_64_Min_Path_Sum       (***) Brutal Force, 2D DP, 1D DP, variation - from bottom left to top right
+                         但多給一個一樣大小的array 記錄炸彈位置 1 表示炸彈不能行走，0表示可行走的區域
+                         Minimum Path Sum 找出到達終點時的最小值
+                         然後再給你一個一樣大小的array
+                         記錄哪些點是不能走的
+                         ex:
+                            在新的array 裡
+                            1 表示有炸彈不能行走，0表示可行走的區域
+
+LE_54_Spiral_Matrix      给你一个N*N的数组，返回顺时针和逆时针traverse数组的顺序，注意考虑奇数和偶数不同的情况
+
+LE_155_Min_Stack
+LE_146_LRU_Cache
+
+LE_510_Inorder_Successor_In_BST_II
+
+LE_211_Add_And_Search_Word            (***)  要准备unicode, 在trie里用hashmap
+LE_1268_Search_Suggestions_System
+
+
+LE_387_First_Unique_Character_In_A_String       Require solution with 1 iteration (use LinkedHashMap and Set)
+LE_75_Set_Colors
+LE_79_Word_Search
+LE_139_Word_Break
+LE_140_Word_Break_II
+LI_683_Word_Break_III     (***)
+
+LE_02_Add_Two_Numbers
+LE_445_Add_Two_Numbers_II
+
+LE_189_Rotate_Array + LE_01_Two_Sum ??
+
+LE_102_Binary_Tree_Level_Order_Traversal
+LE_101_Symmetric_Tree
+LE_1120_Maximum_Average_Subtree
+
+LE_628_Maximum_Product_Of_Three_Numbers
+LE_152_Maximum_Product_Subarray
+
+LE_151_Reverse_Words_In_A_String
+LE_186_Reverse_Words_In_String_II
+
+https://leetcode.com/discuss/interview-question/488887/amazon-final-interview-questions-sde1
+
+LE_127_Word_Ladder
+LE_253_Meeting_Rooms_II
+
+LE_341_Flatten_Nested_List_Iterator
+LI_647_Find_All_Anagrams_In_A_String
+
+LE_121_Best_Time_To_Buy_And_Sell_Stock
+
+LE_297_Serialize_And_Deserialize_Binary_Tree    变形，string里包括 *，？space 这些符号
+                                                楼主请问一下第一轮是序列化树那题么？是说node的value是string的时候怎么做吗？
+                                                是的，但是是把list 和string转化
+                                                比如说这个list是{“a”, “ “, “,” }
+                                                换成一个string 就是 “a ,”
+                                                是，考点就是怎么样把list转换成一个string. 我想转换的时候用 逗号分开，
+                                                但是卡在如果list里面有逗号怎么办。最后面试官的hint是Java 里面有一种方法
+                                                是遇见\就只提取\后面的东西。是我做题太少了没见过
+
+LE_1298_Maximum_Candies_You_Can_Get_From_Boxes  就是有一堆房间， 有的是互相有门的，有的没有， 然后一些房间有特定的KEY TO OTHER ROOMS，can you reach room Y from room X。
+                                                比如说 从room1开始，ROOM1 有KEY{2,3}， 我就能开2,3 ROOM的门，当然也要看ROOM1 和这些ROOMS 有没有connection。
+LE_1038_Binary_Search_Tree_To_Greater_Sum_Tree    follow up让我实现add()，就是生成完sum tree之后要在original tree上再加一个值，
+                                                update sum tree accordingly。
+                                                我说那就是update node的时候要存一下original value，用hashmap
+                                                他说不用extra memory要怎么写，我解释了一下用减法，他说可以
+
+                                                请问一下减法是怎么做的呀？
+                                                在sum tree上做一下inorder，pre减去curr就是curr这个位置的original value
+LE_769_Max_Chunks_To_Make_Sorted
+LE_1074_Number_Of_Submatrices_That_Sum_To_Target
+
+LE_210_Course_Schedule_II      包装成 tasks 完成的顺序, follow up, 有 deadlock 的状况出现
+
+LE_235_Lowest_Common_Ancestor_Of_BST
+LE_236_Lowest_Common_Ancestor_Of_BT
+LI_474_Lowest_Common_Ancestor_II
+LI_578_Lowest_Common_Ancestor_III
+
+LE_21_Merge_Two_Sorted_Lists
+LE_23_Merge_k_Sorted_Lists
+
+LE_994_Rotting_Oranges         变体，更新文件，grid为0/1
+
+LE_120_Triangle
+
+LE_200_Number_Of_Islands
+LE_305_Number_Of_Islands_II
+LE_463_Island_Perimeter
+LE_695_Max_Area_Of_Island
+LE_827_Making_A_Large_Island
+LE_694_Number_Of_Distinct_Islands
+
+LE_102_Binary_Tree_Level_Order_Traversal         但不给用Queue，要求递归
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal  在之前的基础上用双向队列+判断level单复数即可解决
+
+LE_653_Two_Sum_IV_Input_Is_A_BST
+
+LE_206_Reverse_LinkedList
+LE_92_Reverse_LinkedList_II
+
+LE_252_Meeting_Rooms
+LE_253_Meeting_Rooms_II
+
+LE_135_Candy
+
+LE_238_Product_Of_Array_Except_Self
+
+LE_611_Valid_Triangle_Number               找出一个数列里是否有仨数能组成一个直角三角形
+LE_472_Concatenated_Words                  reverse版本的思器耳， 把input 和 return 倒一下
+
+LE_428_Serialize_And_Deserialize_Nary_Tree
+LE_727_Minimum_Window_Subsequence          给你一个很长的文本，和一个query，找到文本中最短的，包含这个 query的 内容，
+                                           比如，文本是:  This is a river and this river has a drowning dog.
+                                           query 是：this river,  包含这个query的文本有 （this is a river,
+                                           this river）， 最短的是 this river，类似利口727
+
+LE_307_Range_Sum_Query_Mutable
+LE_239_Sliding_Window_Maximum
+LE_510_Inorder_Successor_In_BST_II
+
+Make_Sorted_By_One_Swap

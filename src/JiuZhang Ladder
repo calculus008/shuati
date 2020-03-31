@@ -343,6 +343,8 @@ LI_647_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
 LE_643_Maximum_Average_Subarray_I
 LE_424_Longest_Repeating_Character_Replacement
+LE_1004_Max_Consecutive_Ones_III
+LE_1100_Find_K_Length_Substrings_With_No_Repeated_Characters
 
 ====================================================
 
@@ -614,6 +616,7 @@ LI_563_Backpack_V
 LE_377_Combination_Sum_IV                                 (lint 564)    ***
 LE_416_Partition_Equal_Subset_Sum
 LE_518_Coin_Change_II
+LE_1155_Number_Of_Dice_Rolls_With_Target_Sum
 LE_926_Flip_String_To_Monotone_Increasing
 
 LI_89_k_Sum                                                             ***

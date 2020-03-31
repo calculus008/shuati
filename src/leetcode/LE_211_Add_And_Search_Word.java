@@ -36,7 +36,7 @@ public class LE_211_Add_And_Search_Word {
 
     /** Initialize your data structure here. */
     public LE_211_Add_And_Search_Word() {
-        //注意!!!, 不是 “leetcode.TrieNode root = new leetcode.TrieNode();"
+        //注意!!!, 不是 “TrieNode root = new TrieNode();"
         root = new TrieNode();
     }
 
@@ -56,7 +56,10 @@ public class LE_211_Add_And_Search_Word {
         cur.word = word;
     }
 
-    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+    /**
+     * Returns if the word is in the data structure.
+     * A word could contain the dot character '.' to represent any one letter.
+     */
     public boolean search(String word) {
         if (word == null || word.length() == 0) return false;
 
@@ -67,14 +70,19 @@ public class LE_211_Add_And_Search_Word {
     private boolean helper(String word, int start, TrieNode cur) {
         if (start == word.length()) return cur.isWord; //or cur.word.equals(word)
 
-        if (word.charAt(start) == '.') {//因为'.'可以代表任何char,所以需要在下一层对所有字母遍历。
-            // for (int i = 0; i < 26; i++) {
+        /**
+         * !!!
+         * 因为'.'可以代表任何char,所以需要在下一层对所有字母遍历。
+         */
+        if (word.charAt(start) == '.') {//
             for (TrieNode child : cur.children) {
                 if (child != null && helper(word, start + 1, child)) {
                     return true;
                 }
             }
-            //要在这里返回false, for loop执行万后仍然没有返回，必定为false.
+            /**
+             * 要在这里返回false, for loop执行后仍然没有返回，必定为false.
+             */
             return false;
         } else {
             int idx = word.charAt(start) - 'a';

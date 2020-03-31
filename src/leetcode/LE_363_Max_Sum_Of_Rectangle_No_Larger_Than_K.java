@@ -13,8 +13,8 @@ public class LE_363_Max_Sum_Of_Rectangle_No_Larger_Than_K {
      * Output: 2
      * Explanation: Because the sum of rectangle [[0, 1], [-2, 3]] is 2,
      *              and 2 is the max number no larger than k (k = 2).
-     * Note:
      *
+     * Note:
      * The rectangle inside the matrix must have an area > 0.
      * What if the number of rows is much larger than the number of columns?
      *
