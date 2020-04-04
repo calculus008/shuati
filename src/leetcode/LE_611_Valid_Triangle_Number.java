@@ -31,6 +31,90 @@ public class LE_611_Valid_Triangle_Number {
      */
 
     /**
+     * 4ms solution from leetcode
+     *
+     * Same as Soluion1 below
+     */
+    class Solution_Preferred {
+        public int triangleNumber(int[] nums) {
+            Arrays.sort(nums);
+            int res = 0;
+
+            for (int i = nums.length - 1; i >= 2; i--) {
+                int l = 0, r = i - 1;
+
+                while (l < r) {
+                    if (nums[l] + nums[r] > nums[i]) {
+                        res += r - l;
+                        r--;
+                    } else {
+                        l++;
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * 变形题1
+     * 给一个array，找能形成的三角形的最小周长
+     */
+    class Solution_Variation_1 {
+        public int triangleNumber(int[] nums) {
+            Arrays.sort(nums);
+            int res = 0;
+
+            for (int i = nums.length - 1; i >= 2; i--) {
+                int l = 0, r = i - 1;
+
+                while (l < r) {
+                    if (nums[l] + nums[r] > nums[i]) {
+                        res = Math.min(res, nums[l] + nums[r] + nums[i]);
+                        r--;
+                    } else {
+                        l++;
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * 变形题2
+     * 给一个array, 找出一个数列里是否有仨数能组成一个直角三角形
+     */
+    class Solution_Variation_2 {
+        public boolean triangleNumber(int[] nums) {
+            Arrays.sort(nums);
+            int res = 0;
+
+            for (int i = nums.length - 1; i >= 2; i--) {
+                int l = 0, r = i - 1;
+
+                while (l < r) {
+                    if (nums[l] + nums[r] > nums[i]) {
+                        if (nums[l] * nums[l] + nums[r] * nums[r] == nums[i] * nums[i]) {
+                            return true;
+                        }
+
+                        r--;
+                    } else {
+                        l++;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
+
+
+
+    /**
      * Time : O(n ^ 2), Space : O(1)
      **/
     class Solution1 {
@@ -192,34 +276,4 @@ public class LE_611_Valid_Triangle_Number {
             return res;
         }
     }
-
-    /**
-     * 变形题
-     * 给一个array，找能形成的三角形的最小周长
-     */
-    class Solution_1 {
-        public int triangleNumber(int[] nums) {
-            if(nums == null || nums.length < 3) return 0;
-            Arrays.sort(nums);
-            int res = 0;
-
-            for(int i = 0; i < nums.length - 2 ; i++) {
-                if(nums[i] == 0) continue;
-                int j = i + 1, k = i + 2;
-
-                while(k < nums.length && j < k) {
-                    if(nums[i] + nums[j] > nums[k]) {
-                        res = Math.min(res, nums[i] + nums[j] + nums[k]);
-                        k++;
-                    }else {
-                        j++;
-                    }
-                }
-            }
-            return res;
-        }
-    }
-
-
-
 }

@@ -26,34 +26,42 @@ public class LE_155_Min_Stack {
 
     /**
      * !!!
+     * https://leetcode.com/problems/min-stack/discuss/49031/Share-my-Java-solution-with-ONLY-ONE-stack
+     *
      * Memory optimal solution, use one stack and it saves n numbers (not 2 * n)
      *
      * push 5
-     * stack : 5
+     * stack : 0
      * min : 5
      *
      * push 2
-     * stack :  3, 5
+     * stack :  0, 3
      * min : 2
      *
      * top() : stack.peek() = 3 > 0, return 2
      *
      * push 4
-     * stack: -2, 3, 5
+     * stack: 0, 3, -2
      * min : 2
      *
+     * top() : stack.peek() = -2 < 0, return 2 - (-2) = 4
+     *
      * pop()
-     * stack: 3, 5
+     * stack: 0, 3
      * min: 2
      *
      * pop()
-     * stack : 5
-     * min: 2
+     * stack : 0
+     * min: 2 + 3 = 5
      *
      */
     class MinStack4 {
-        private Stack<Integer> stack;
-        int min;
+        /**
+         *!!!
+         * Both stack and min should use long
+         */
+        private long min;
+        private Stack<Long> stack;
 
         public MinStack4() {
             stack = new Stack<>();
@@ -62,17 +70,26 @@ public class LE_155_Min_Stack {
 
         public void push(int x) {
             if (stack.isEmpty()) {
-                stack.push(0);
+                stack.push(0L);
                 min = x;
             } else {
-                int diff = min - x;
+                long diff = min - x;
                 stack.push(diff);
                 min = Math.min(min, x);
             }
         }
 
+        /**
+         * we save min - x in stack :
+         * if it's > 0, meaning, incoming x is smaller than min, x will become new min
+         * if it's <= 0, min value will not change.
+         *
+         * So when we pop, if top value x in stack is positive, meaning, we push the value,
+         * we have a new min value, there's a change in min value.So we need to recover
+         * the previous min value, which is current min plus x
+         */
         public void pop() {
-            int x = stack.pop();
+            long x = stack.pop();
             if (x > 0) {
                 min += x;
             }
@@ -80,16 +97,17 @@ public class LE_155_Min_Stack {
 
         public int top() {
             if (stack.peek() > 0) {
-                return min;
+                return (int)min;
             }
 
-            return min - stack.peek();
+            return (int)(min - stack.peek());
         }
 
-        public int min() {
-            return min;
+        public int getMin() {
+            return (int)min;
         }
     }
+
 
     //Solution 1 : Two Stacks
     class MinStack1 {

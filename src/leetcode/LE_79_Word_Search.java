@@ -26,15 +26,96 @@ public class LE_79_Word_Search {
         Medium
      **/
 
+    class Solution {
+        public boolean exist(char[][] board, String word) {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    if (helper(board, word, i, j, 0)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        }
+
+        private boolean helper(char[][] board, String word, int x, int y, int pos) {
+            if (x < 0 || x >= board.length || y < 0 || y >= board[0].length || board[x][y] != word.charAt(pos)) {
+                return false;
+            }
+
+            if(pos == word.length() - 1) {
+                return true;
+            }
+
+            board[x][y] = '^';
+
+            boolean res = helper(board, word, x + 1, y, pos + 1) ||
+                    helper(board, word, x - 1, y, pos + 1) ||
+                    helper(board, word, x, y + 1, pos + 1) ||
+                    helper(board, word, x, y - 1, pos + 1);
+
+            board[x][y] = word.charAt(pos);
+
+            return res;
+        }
+    }
+
     /**
      * http://zxi.mytechroad.com/blog/leetcode/leetcode-79-word-search/
      *
      * DFS
      *
      * Time  : O(m * n * 4 ^ l), l is length of word, also the depth of recursion, each call to helper : O(4 ^ l)
-     * Space : O(m * n + l)
-     *
+     * Space : O(l)
      */
+    class Solution2 {
+        public boolean exist(char[][] board, String word) {
+            if (null == board || board.length == 0 || null == word || word.length() == 0) {
+                return false;
+            }
+
+            int m = board.length;
+            int n = board[0].length;
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (helper(board, word.toCharArray(), m, n, i, j, 0)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private boolean helper(char[][] board, char[] word, int m , int n, int x, int y, int pos) {
+            if (pos == word.length) {
+                return true;
+            }
+
+            if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != word[pos]) {
+                return false;
+            }
+
+            char temp = board[x][y];
+            board[x][y] = '*';
+
+            /**
+             * !!!
+             * Or of the results of recursion to 4 directions.
+             */
+            boolean res = helper(board, word, m, n, x + 1, y, pos + 1)
+                    || helper(board, word, m, n, x - 1, y, pos + 1)
+                    || helper(board, word, m, n, x, y + 1, pos + 1)
+                    || helper(board, word, m, n, x, y - 1, pos + 1);
+
+            board[x][y] = temp;
+
+            return res;
+        }
+    }
+
     class Solution1 {
         public boolean exist(char[][] board, String word) {
             if (board == null || board.length == 0 || board[0].length == 0 || word == null || word.length() == 0)
@@ -86,54 +167,6 @@ public class LE_79_Word_Search {
             }
 
             return false;
-        }
-    }
-
-
-    class Solution2 {
-        public boolean exist(char[][] board, String word) {
-            if (null == board || board.length == 0 || null == word || word.length() == 0) {
-                return false;
-            }
-
-            int m = board.length;
-            int n = board[0].length;
-
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (helper(board, word.toCharArray(), m, n, i, j, 0)) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        private boolean helper(char[][] board, char[] word, int m , int n, int x, int y, int pos) {
-            if (pos == word.length) {
-                return true;
-            }
-
-            if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != word[pos]) {
-                return false;
-            }
-
-            char temp = board[x][y];
-            board[x][y] = '*';
-
-            /**
-             * !!!
-             * Or of the results of recursion to 4 directions.
-             */
-            boolean res = helper(board, word, m, n, x + 1, y, pos + 1)
-                    || helper(board, word, m, n, x - 1, y, pos + 1)
-                    || helper(board, word, m, n, x, y + 1, pos + 1)
-                    || helper(board, word, m, n, x, y - 1, pos + 1);
-
-            board[x][y] = temp;
-
-            return res;
         }
     }
 

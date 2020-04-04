@@ -28,6 +28,7 @@ public class LE_567_Permutation_In_String {
      Medium
      */
 
+
     /**
      * Time : O(l1 + (l2 - l1) * 26), for every sliding window position, "Arrays.equals(map1, map2)" need to
      * iterate through map, which has size 26, so it's constant.
@@ -112,60 +113,7 @@ public class LE_567_Permutation_In_String {
         }
     }
 
-    /**
-     * Best Solution for LE_438_Find_All_Anagrams_In_A_String
-     *
-     * Sliding Window and no need to iterate through map to compare if two arrays are identical
-     */
-    public class Solution_JiuZhang_3 {
-        /**
-         * Variation:
-         * return starting index of anagram
-         */
 
-        public List<Integer> findAnagrams(String s, String p) {
-            List<Integer> ans = new ArrayList<>();
-            if (s.length() < p.length()) {
-                return ans;
-            }
-
-            char[] sc = s.toCharArray();
-            char[] pc = p.toCharArray();
-
-            int[] det = new int[256];
-
-            for (int i = 0; i < p.length(); i++) {
-                det[pc[i]]--;
-                det[sc[i]]++;
-            }
-
-            int absSum = 0;
-
-            for (int item : det) {
-                absSum += Math.abs(item);
-            }
-
-            if (absSum == 0) {
-                ans.add(0);
-            }
-
-            for (int i = p.length(); i < s.length(); i++) {
-                int r = sc[i];
-                int l = sc[i - p.length()];
-                absSum = absSum - Math.abs(det[r]) - Math.abs(det[l]);
-
-                det[r]++;
-                det[l]--;
-
-                absSum = absSum + Math.abs(det[r]) + Math.abs(det[l]);
-                if (absSum == 0) {
-                    ans.add(i - p.length() + 1);
-                }
-            }
-
-            return ans;
-        }
-    }
 
     /**
      * http://zxi.mytechroad.com/blog/hashtable/leetcode-567-permutation-in-string/

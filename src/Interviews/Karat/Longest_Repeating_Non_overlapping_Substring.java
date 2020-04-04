@@ -1,4 +1,4 @@
-package src.Interviews.Karat;
+package Interviews.Karat;
 
 public class Longest_Repeating_Non_overlapping_Substring {
     /**

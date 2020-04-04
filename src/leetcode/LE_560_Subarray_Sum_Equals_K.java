@@ -122,30 +122,30 @@ public class LE_560_Subarray_Sum_Equals_K {
      * Time  : O(n ^ 2)
      * Space : O(n)
      */
-    public int subarraySum3(int[] nums, int k) {
-        int count = 0;
+    class Solution {
+        public int subarraySum3(int[] nums, int k) {
+            int count = 0;
 
-        /**
-         * Use padded sum array, so we don't need to
-         * deal with the case subarray sum starting from index 0 separately
-         */
-        int[] sum = new int[nums.length + 1];
-        sum[0] = 0;
-        for (int i = 1; i <= nums.length; i++) {
-            sum[i] = sum[i - 1] + nums[i - 1];
-        }
+            /**
+             * Use padded sum array, so we don't need to
+             * deal with the case subarray sum starting from index 0 separately
+             */
+            int[] sum = new int[nums.length + 1];
+            sum[0] = 0;
+            for (int i = 1; i <= nums.length; i++) {
+                sum[i] = sum[i - 1] + nums[i - 1];
+            }
 
-        for (int start = 0; start < nums.length; start++) {
-            for (int end = start + 1; end <= nums.length; end++) {
-                if (sum[end] - sum[start] == k) {
-                    count++;
+            for (int start = 0; start < nums.length; start++) {
+                for (int end = start + 1; end <= nums.length; end++) {
+                    if (sum[end] - sum[start] == k) {
+                        count++;
+                    }
                 }
             }
+
+            return count;
         }
-
-        return count;
     }
-
-
 
 }

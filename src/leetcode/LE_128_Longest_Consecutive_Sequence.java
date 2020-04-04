@@ -20,6 +20,36 @@ public class LE_128_Longest_Consecutive_Sequence {
         Hard
      */
 
+    //Same algorithm, my version
+    public int longestConsecutive1(int[] num) {
+        if (num == null || num.length == 0) return 0;
+
+        int res = 0;
+
+        Set<Integer> set = new HashSet<>();
+        for (int n : num) {
+            set.add(n);
+        }
+
+        for (int n : num) {
+            int down = n - 1;
+            while (set.contains(down)) {
+                set.remove(down);
+                down--;//!!!
+            }
+
+            int up = n + 1;
+            while (set.contains(up)) {
+                set.remove(up);
+                up++;//!!!
+            }
+
+            res = Math.max(res, (up - 1) - (down + 1) + 1);
+        }
+
+        return res;
+    }
+
     /**
      * Key Insights
      * 我们要找"sequence",也就是说这些数值上相邻的元素在数组中的位置并不一定相邻。
@@ -58,36 +88,6 @@ public class LE_128_Longest_Consecutive_Sequence {
             //length of sequence : max - min + 1 = (up - 1) - (down + 1) + 1 = up - 1 - down - 1 + 1 = up - down - 1
             res = Math.max(res, up - down - 1);
         }
-        return res;
-    }
-
-    //Same algorithm, my version
-    public int longestConsecutive1(int[] num) {
-        if (num == null || num.length == 0) return 0;
-
-        int res = 0;
-
-        Set<Integer> set = new HashSet<>();
-        for (int n : num) {
-            set.add(n);
-        }
-
-        for (int n : num) {
-            int down = n - 1;
-            while (set.contains(down)) {
-                set.remove(down);
-                down--;//!!!
-            }
-
-            int up = n + 1;
-            while (set.contains(up)) {
-                set.remove(up);
-                up++;//!!!
-            }
-
-            res = Math.max(res, (up - 1) - (down + 1) + 1);
-        }
-
         return res;
     }
 }

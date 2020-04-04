@@ -36,7 +36,8 @@ public class LE_931_Minimum_Falling_Path_Sum {
      * https://leetcode.com/problems/minimum-falling-path-sum/discuss/186666/C%2B%2BJava-4-lines-DP
      *
      * The minimum path to get to element A[i][j] is the minimum of A[i - 1][j - 1], A[i - 1][j] and A[i - 1][j + 1].
-     * Starting from row 1, we add the minumum path to each element. The smallest number in the last row is the miminum path sum.
+     * Starting from row 1, we add the minimum path to each element. The smallest number in the last row is the minimum
+     * path sum.
      * Example:
      * [1, 2, 3]
      * [4, 5, 6] => [5, 6, 8]

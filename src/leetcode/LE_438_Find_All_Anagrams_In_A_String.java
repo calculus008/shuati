@@ -51,12 +51,12 @@ public class LE_438_Find_All_Anagrams_In_A_String {
      *
      * s: "cbabcbacd" p: "abc"
      *
-     * i = 3
+     * i = 3, count[c]--, count[b]++
      * count[0], [1], [2], [3], [4]
      *            1    -1
      * sum = 2
      *
-     * i = 4
+     * i = 4, count[b]--, count[c]++
      * count[0], [1], [2], [3], [4]
      *           0     0
      * sum = 0
@@ -81,6 +81,9 @@ public class LE_438_Find_All_Anagrams_In_A_String {
         int sum = 0;
 
         for (int n : count) {
+            /**
+             * Math.abs!!!
+             */
             sum += Math.abs(n);
         }
 
@@ -194,6 +197,46 @@ public class LE_438_Find_All_Anagrams_In_A_String {
 
         return res;
     }
+
+    class Solution_Practice_1 {
+        public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> res = new ArrayList<>();
+            if (p == null || s == null || s.length() < p.length()) return res;
+
+            int sl = s.length();
+            int pl = p.length();
+
+            int[] count = new int[26];
+            for (int i = 0; i < pl; i++) {
+                count[p.charAt(i) - 'a']--;
+                count[s.charAt(i) - 'a']++;
+            }
+
+            int sum = 0;
+            for (int c : count) {
+                sum += Math.abs(c);
+            }
+
+            if (sum == 0) {
+                res.add(0);
+            }
+
+            for (int i = pl; i < sl ; i++) {
+                int l = s.charAt(i - pl) - 'a';
+                int r = s.charAt(i) - 'a';
+
+                sum -= (Math.abs(count[r]) + Math.abs(count[l]));
+                count[l]--;
+                count[r]++;
+                sum += (Math.abs(count[r]) + Math.abs(count[l]));
+
+                if (sum == 0) res.add(i - pl + 1);
+            }
+
+            return res;
+        }
+    }
+
 
     class Solution_Practice {
         public List<Integer> findAnagrams(String s, String p) {

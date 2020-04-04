@@ -4,7 +4,7 @@ public class Make_Sorted_By_One_Swap {
     /**
      * https://www.geeksforgeeks.org/check-if-array-can-be-sorted-with-one-swap/
      *
-     * Given an array containing N elements. Find if it is possible to sort it in non-decreasing order using atmost one swap.
+     * Given an array containing N elements. Find if it is possible to sort it in non-decreasing order using at most one swap.
      *
      * Examples:
      *

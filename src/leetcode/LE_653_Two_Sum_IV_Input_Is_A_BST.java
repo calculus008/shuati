@@ -150,6 +150,9 @@ public class LE_653_Two_Sum_IV_Input_Is_A_BST {
      *
      * Same as Solution2, different implementation, not using iterator, just explicitly tracking
      * nodes with 2 stacks.
+     *
+     * Time  : O(n)
+     * Space : O(h)
      */
     class Solution3 {
         public boolean findTarget(TreeNode root, int k) {
@@ -186,6 +189,46 @@ public class LE_653_Two_Sum_IV_Input_Is_A_BST {
                 stackAdd(stack, node.right, isLeft);
             } else {
                 stackAdd(stack, node.left, isLeft);
+            }
+        }
+    }
+
+    /**
+     * Same as Solution3, but no using stackNext()
+     *
+     * zig-zag to find the next:
+     *
+     * For l_stack, pop n, n.right, then all the way left
+     * For r_stack, pop n, n.left,  then all the way right
+     */
+    class Solution4 {
+        public boolean findTarget(TreeNode root, int k) {
+            if(root == null) return false;
+            Stack<TreeNode> l_stack = new Stack<>();
+            Stack<TreeNode> r_stack = new Stack<>();
+
+            stackAdd(l_stack, root, true);
+            stackAdd(r_stack, root, false);
+
+            while(l_stack.peek().val < r_stack.peek().val){
+                int n = l_stack.peek().val + r_stack.peek().val;
+                if(n == k){
+                    return true;
+                }else if(n > k){
+                    TreeNode n1 = r_stack.pop();
+                    stackAdd(r_stack, n1.left, false);
+                }else{
+                    TreeNode n2 = l_stack.pop();
+                    stackAdd(l_stack, n2.right, true);
+                }
+            }
+            return false;
+        }
+
+        private void stackAdd(Stack<TreeNode> stack, TreeNode node, boolean isLeft){
+            while(node != null){
+                stack.push(node);
+                node = (isLeft) ? node.left : node.right;
             }
         }
     }

@@ -39,7 +39,7 @@ public class LE_827_Making_A_Large_Island {
      *
      * DFS + coloring
      *
-     * 1.DFS to find and color island, calculate area
+     * 1.DFS to find and color island, calculate area, save it in hashmap (id -> area)
      * 2.Iterate each 0 cell, calculate the area of the biggest land by set it to 1
      *
      * Time  : O(m * n)
@@ -91,7 +91,7 @@ public class LE_827_Making_A_Large_Island {
 
         /**
          * DFS
-         * Find a island starting from a "1" cell, color it and calculate/return area
+         * Find a island starting from a "1" cell, color it (mark it with id value) and calculate/return area
          */
         private int dfs(int[][] grid, int m, int n, int x, int y, int id) {
             if (x < 0 || x >= m || y < 0 || y >= n || grid[x][y] != 1) {

@@ -23,7 +23,7 @@ public class LE_120_Triangle {
      */
 
     /**
-        1.For ith level, jth element, in i+1 level, its adjacent elements are at poition j and j+1
+        1.For ith level, jth element, in i+1 level, its adjacent elements are at position j and j+1
         2.If total level is n, then the last level has n elements.
         3.DP from bottom to top
 
@@ -31,6 +31,13 @@ public class LE_120_Triangle {
                 [3,4],
                [6,5,7],
               [4,1,8,3]
+
+        Can be seen like :
+
+         [2],
+         [3,4],
+         [6,5,7],
+         [4,1,8,3]
 
         dp[]:
         init : [0,0,0,0,0]
@@ -41,7 +48,7 @@ public class LE_120_Triangle {
 
         Time : O(n ^ 2), Space : O(n)
 
-        Similar porblem : LE_931_Minimum_Falling_Path_Sum
+        Similar problem : LE_931_Minimum_Falling_Path_Sum
 
     */
     public static int minimumTotal(List<List<Integer>> triangle) {

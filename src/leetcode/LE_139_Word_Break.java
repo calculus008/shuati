@@ -18,6 +18,42 @@ public class LE_139_Word_Break {
         Return true because "leetcode" can be segmented as "leet code".
      */
 
+    /**
+     * Time  : O(n ^ 2)
+     * Space : O(n)
+     */
+    class Solution_Practice_2 {
+        public boolean wordBreak(String s, List<String> wordDict) {
+            if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
+                return false;
+            }
+
+            Set<String> set = new HashSet<>(wordDict);
+
+            return helper(s, set, new HashMap<>());
+        }
+
+        private boolean helper(String s, Set<String> set, Map<String, Boolean> mem) {
+            if (mem.containsKey(s)) return mem.get(s);
+
+            if (s.equals("")) return true;
+
+            for (int i = 0; i < s.length(); i++) {
+                String l = s.substring(0, i);
+                String r = s.substring(i);
+
+                if (set.contains(r)) {
+                    if (helper(l, set, mem)) {
+                        mem.put(s, true);
+                        return true;
+                    }
+                }
+            }
+
+            mem.put(s, false);
+            return false;
+        }
+    }
 
     /**
      * Solution 1 : DP
@@ -240,39 +276,6 @@ public class LE_139_Word_Break {
              */
             mem.put(s, false);
 
-            return false;
-        }
-    }
-
-    class Solution_Practice_2 {
-        public boolean wordBreak(String s, List<String> wordDict) {
-            if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
-                return false;
-            }
-
-            Set<String> set = new HashSet<>(wordDict);
-
-            return helper(s, set, new HashMap<>());
-        }
-
-        private boolean helper(String s, Set<String> set, Map<String, Boolean> mem) {
-            if (mem.containsKey(s)) return mem.get(s);
-
-            if (s.equals("")) return true;
-
-            for (int i = 0; i < s.length(); i++) {
-                String l = s.substring(0, i);
-                String r = s.substring(i);
-
-                if (set.contains(r)) {
-                    if (helper(l, set, mem)) {
-                        mem.put(s, true);
-                        return true;
-                    }
-                }
-            }
-
-            mem.put(s, false);
             return false;
         }
     }

@@ -15,27 +15,45 @@ LE_54_Spiral_Matrix      给你一个N*N的数组，返回顺时针和逆时针t
 LE_155_Min_Stack
 LE_146_LRU_Cache
 
+#BST
 LE_510_Inorder_Successor_In_BST_II
+LE_1038_Binary_Search_Tree_To_Greater_Sum_Tree
+LE_285_Inorder_Successor_In_BST
+LE_510_Inorder_Successor_In_BST_II
+LI_915_Inorder_Predecessor_In_BST
+LE_653_Two_Sum_IV_Input_Is_A_BST
+LE_1214_Two_Sum_BSTs
 
+
+#Trie
 LE_211_Add_And_Search_Word            (***)  要准备unicode, 在trie里用hashmap
 LE_1268_Search_Suggestions_System
 
-
 LE_387_First_Unique_Character_In_A_String       Require solution with 1 iteration (use LinkedHashMap and Set)
 LE_75_Set_Colors
+
+#Word
 LE_79_Word_Search
 LE_139_Word_Break
+LE_472_Concatenated_Words                  reverse版本的思器耳， 把input 和 return 倒一下
 LE_140_Word_Break_II
 LI_683_Word_Break_III     (***)
+LE_127_Word_Ladder
 
 LE_02_Add_Two_Numbers
 LE_445_Add_Two_Numbers_II
 
 LE_189_Rotate_Array + LE_01_Two_Sum ??
 
-LE_102_Binary_Tree_Level_Order_Traversal
+#Tree
+LE_102_Binary_Tree_Level_Order_Traversal         但不给用Queue，要求递归 (DFS)
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal  在之前的基础上用双向队列+判断level单复数即可解决
 LE_101_Symmetric_Tree
-LE_1120_Maximum_Average_Subtree
+LE_235_Lowest_Common_Ancestor_Of_BST
+LE_236_Lowest_Common_Ancestor_Of_BT
+LI_474_Lowest_Common_Ancestor_II
+LI_578_Lowest_Common_Ancestor_III
+LE_160_Intersection_Of_Tow_Linked_List
 
 LE_628_Maximum_Product_Of_Three_Numbers
 LE_152_Maximum_Product_Subarray
@@ -43,13 +61,18 @@ LE_152_Maximum_Product_Subarray
 LE_151_Reverse_Words_In_A_String
 LE_186_Reverse_Words_In_String_II
 
-https://leetcode.com/discuss/interview-question/488887/amazon-final-interview-questions-sde1
-
-LE_127_Word_Ladder
+LE_252_Meeting_Rooms
 LE_253_Meeting_Rooms_II
 
+https://leetcode.com/discuss/interview-question/488887/amazon-final-interview-questions-sde1
+
 LE_341_Flatten_Nested_List_Iterator
+LE_339_Nested_List_Weight_Sum
+LE_364_Nested_List_Weight_Sum_II
+
+LE_438_Find_All_Anagrams_In_A_String
 LI_647_Find_All_Anagrams_In_A_String
+LE_567_Permutation_In_String
 
 LE_121_Best_Time_To_Buy_And_Sell_Stock
 
@@ -76,42 +99,28 @@ LE_1074_Number_Of_Submatrices_That_Sum_To_Target
 
 LE_210_Course_Schedule_II      包装成 tasks 完成的顺序, follow up, 有 deadlock 的状况出现
 
-LE_235_Lowest_Common_Ancestor_Of_BST
-LE_236_Lowest_Common_Ancestor_Of_BT
-LI_474_Lowest_Common_Ancestor_II
-LI_578_Lowest_Common_Ancestor_III
-
 LE_21_Merge_Two_Sorted_Lists
 LE_23_Merge_k_Sorted_Lists
 
-LE_994_Rotting_Oranges         变体，更新文件，grid为0/1
+LE_120_Triangle                  min sum of falling path
+LE_931_Minimum_Falling_Path_Sum
 
-LE_120_Triangle
-
+#Island problems
 LE_200_Number_Of_Islands
-LE_305_Number_Of_Islands_II
+LE_305_Number_Of_Islands_II             Union Find
 LE_463_Island_Perimeter
 LE_695_Max_Area_Of_Island
 LE_827_Making_A_Large_Island
 LE_694_Number_Of_Distinct_Islands
 
-LE_102_Binary_Tree_Level_Order_Traversal         但不给用Queue，要求递归
-LE_103_Binary_Tree_Zigzag_Level_Order_Traversal  在之前的基础上用双向队列+判断level单复数即可解决
-
-LE_653_Two_Sum_IV_Input_Is_A_BST
+LE_994_Rotting_Oranges         变体，更新文件，grid为0/1
 
 LE_206_Reverse_LinkedList
 LE_92_Reverse_LinkedList_II
 
-LE_252_Meeting_Rooms
-LE_253_Meeting_Rooms_II
-
 LE_135_Candy
-
 LE_238_Product_Of_Array_Except_Self
-
 LE_611_Valid_Triangle_Number               找出一个数列里是否有仨数能组成一个直角三角形
-LE_472_Concatenated_Words                  reverse版本的思器耳， 把input 和 return 倒一下
 
 LE_428_Serialize_And_Deserialize_Nary_Tree
 LE_727_Minimum_Window_Subsequence          给你一个很长的文本，和一个query，找到文本中最短的，包含这个 query的 内容，
@@ -119,8 +128,38 @@ LE_727_Minimum_Window_Subsequence          给你一个很长的文本，和一�
                                            query 是：this river,  包含这个query的文本有 （this is a river,
                                            this river）， 最短的是 this river，类似利口727
 
-LE_307_Range_Sum_Query_Mutable
+LE_307_Range_Sum_Query_Mutable           Binary Index Tree
 LE_239_Sliding_Window_Maximum
-LE_510_Inorder_Successor_In_BST_II
 
 Make_Sorted_By_One_Swap
+
+=========================
+LE_48_Rotate_Image
+
+LE_60_Permutation_Sequence                 (***)
+
+LE_76_Minimum_Window_Substring
+LE_108_Convert_Sorted_Array_To_BST
+LE_109_Convert_Sorted_List_To_BST
+LE_116_Populating_Next_Right_Pointers_In_Each_Node
+
+LE_128_Longest_Consecutive_Sequence
+
+#HashMap
+LE_301_Remove_Invalid_Parentheses
+LE_819_Most_Common_Word
+LE_1152_Analyze_User_Website_Visit_Pattern
+
+LE_560_Subarray_Sum_Equals_K
+
+LE_706_Design_HashMap
+
+#DP
+LE_1062_Longest_Repeating_Substring
+
+#PriorityQueue
+LE_239_Sliding_Window_Maximum
+LE_703_Kth_Largest_Element_In_A_Stream
+LE_347_Top_K_Frequent_Elements
+LE_973_K_Closest_Points_To_Origin
+

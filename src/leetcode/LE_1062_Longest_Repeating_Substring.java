@@ -1,10 +1,10 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_1062_Longest_Repeating_Substring {
     /**
-     * Given a string S, find out the length of the longest repeating substring(s). Return 0 if no repeating substring exists.
+     * Given a string S, find out the length of the longest repeating substring(s).
+     * Return 0 if no repeating substring exists.
      *
-
      * Example 1:
      *
      * Input: "abcd"
@@ -40,6 +40,8 @@ public class LE_1062_Longest_Repeating_Substring {
 
     /**
      * DP
+     *
+     * dp[i][j] : length of the longest repeating substring ends at ith and jth char
      *
      * Time  : O(n ^ 2)
      * Space : O(n ^2)

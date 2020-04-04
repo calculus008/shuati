@@ -23,6 +23,41 @@ public class LI_683_Word_Break_III {
 
          Hard
      */
+    public class Solution {
+        public int wordBreak3(String s, Set<String> dict) {
+            Set<String> set = new HashSet<>();
+            for (String word : dict) {
+                set.add(word.toLowerCase());
+            }
+
+            return helper(s.toLowerCase(), set, new HashMap<>());
+        }
+
+        private int helper(String s, Set<String> dict, Map<String, Integer> mem) {
+            if (mem.containsKey(s)) return mem.get(s);
+
+            if (s.equals("")) {
+                if (!mem.containsKey(s)) {
+                    mem.put("", 1);
+                }
+
+                return mem.get("");
+            }
+
+            int res = 0;
+            for (int i = 0; i < s.length(); i++) {
+                String l = s.substring(0, i);
+                String r = s.substring(i);
+
+                if (dict.contains(r)) {
+                    res += helper(l, dict, mem);
+                }
+            }
+            mem.put(s, res);
+
+            return res;
+        }
+    }
 
     /**
      * Solution 1 : DP
@@ -152,7 +187,7 @@ public class LI_683_Word_Break_III {
 
     /**
      * Solution 3
-     * Copy solution from , just return size of the final list, but it is MLE on lintcode
+     * Copy solution from LE_140_Word_Break_II, just return size of the final list, but it is MLE on lintcode
      */
     public int wordBreak3_MLE(String s, Set<String> wordDict) {
         Set<String> lowerDict = new HashSet<>();

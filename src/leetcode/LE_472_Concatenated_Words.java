@@ -27,6 +27,50 @@ public class LE_472_Concatenated_Words {
      */
 
     /**
+     * 24ms 99.85# solution from leetocde
+     *
+     * A variation of word break logic with recursion
+     */
+    class Solution {
+        public List<String> findAllConcatenatedWordsInADict(String[] words) {
+            Set<String> set = new HashSet<>(10000);
+            List<String> ans = new ArrayList<>();
+            int min = Integer.MAX_VALUE;
+
+            for (String word : words) {
+                if (word.length() == 0) {
+                    continue;
+                }
+
+                set.add(word);
+                min = Math.min(min, word.length());
+            }
+
+            for (String word : words) {
+                if (check(set, word, 0, min)) {
+                    ans.add(word);
+                }
+            }
+
+            return ans;
+        }
+
+        private boolean check(Set<String> set, String word, int start, int min) {
+            for (int i = start + min; i <= word.length() - min; i++) {
+                /**
+                 * !!!
+                 */
+                if (set.contains(word.substring(start, i)) &&
+                        (set.contains(word.substring(i)) || check(set, word, i, min))) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /**
      * Trie + DFS
      *
      * Preferred Solution
@@ -143,6 +187,8 @@ public class LE_472_Concatenated_Words {
     /**
      * Recursion with mem
      *
+     * https://leetcode.com/problems/concatenated-words/discuss/348972/Java-Common-template-Word-Break-I-Word-Break-II-Concatenated-Words
+     *
      * Preferred Solution
      *
      * Exact the same algorithm as LE_139_Word_Break. "helper()" function is copied
@@ -199,6 +245,42 @@ public class LE_472_Concatenated_Words {
             mem.put(s, false);
 
             return false;
+        }
+    }
+
+    class Solution1_1 {
+        public List<String> findAllConcatenatedWordsInADict(String[] words) {
+
+            //sort the array in asc order of word length, since longer words are formed by shorter words.
+            Arrays.sort(words, (a, b) -> a.length() - b.length());
+            List<String> result = new ArrayList<>();
+
+            //list of shorter words
+            HashSet<String> preWords = new HashSet<>();
+
+            for (int i = 0; i < words.length; i++) {
+                //Word Break-I problem.
+                if (wordBreak(words[i], preWords)) result.add(words[i]);
+                preWords.add(words[i]);
+            }
+            return result;
+        }
+
+        private boolean wordBreak(String s, HashSet<String> preWords) {
+            if (preWords.isEmpty()) return false;
+
+            boolean[] dp = new boolean[s.length() + 1];
+            dp[0] = true;
+
+            for (int i = 1; i <= s.length(); i++) {
+                for (int j = 0; j < i; j++) {
+                    if (dp[j] && preWords.contains(s.substring(j, i))) {
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+            return dp[s.length()];
         }
     }
 

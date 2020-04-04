@@ -26,6 +26,14 @@ public class LE_364_Nested_List_Weight_Sum_II {
 
     /**
      * BFS with Iterator, preferred solution
+     *
+     * [1,[4,[6]]]
+     *
+     * queue: it for [1,[4,[6]]], pre = 1, res = 1
+     *
+     * queue: it for [4,[6]], pre = 5, res = 6
+     *
+     * queue: it for [6], pre = 5 + 6 = 11, res = 6 + 11 = 17
      */
     class Solution_BFS_Iterator {
         public int depthSumInverse(List<NestedInteger> nestedList) {

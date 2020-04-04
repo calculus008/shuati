@@ -335,8 +335,8 @@ public class LE_341_Flatten_Nested_List_Iterator {
      * with what a Stack should actually do, which is why the Deque interface is preferred (it does not allow such operations)
      * --its allowed operations are consistent with what a FIFO or LIFO data structure should allow.
      *
-     * Performance: The Vector class that Stack extends is basically the "thread-safe" version of an ArrayList. T
-     * he synchronizations can potentially cause a significant performance hit to your application. Also, extending other
+     * Performance: The Vector class that Stack extends is basically the "thread-safe" version of an ArrayList.
+     * The synchronizations can potentially cause a significant performance hit to your application. Also, extending other
      * classes with unneeded functionality (as mentioned in #2) bloat your objects, potentially costing a lot of extra memory
      * and performance overhead.
      *

@@ -21,6 +21,39 @@ public class LE_339_Nested_List_Weight_Sum {
      */
 
     /**
+     * Solution 4
+     * Same logic as Solution 3, we simply use stack.size() to get the current level,
+     * not need to maintain it with variable 'level'
+     */
+    public int depthSum4(List<NestedInteger> nestedList) {
+        if (nestedList == null) {
+            return 0;
+        }
+
+        //!!!"Stack<Iterator>"
+        Stack<Iterator> stack = new Stack<>();
+        stack.push(nestedList.iterator());
+
+        int res = 0;
+        while (!stack.isEmpty()) {
+            Iterator<NestedInteger> cur = stack.peek();
+            if (!cur.hasNext()) {
+                stack.pop();
+                continue;
+            }
+
+            NestedInteger n = cur.next();
+            if (n.isInteger()) {
+                res += stack.size() * n.getInteger();
+            } else {
+                stack.push(n.getList().iterator());//!!! "n.getList.iterator()"
+            }
+        }
+
+        return res;
+    }
+
+    /**
      * BFS with iterator, this should be the best solution
      */
     class Solution {
@@ -176,37 +209,6 @@ public class LE_339_Nested_List_Weight_Sum {
         return res;
     }
 
-    /**
-     * Solution 4
-     * Same logic as Solution 3, we simply use stack.size() to get the current level,
-     * not need to maintain it with variable 'level'
-     */
-    public int depthSum4(List<NestedInteger> nestedList) {
-        if (nestedList == null) {
-            return 0;
-        }
 
-        //!!!"Stack<Iterator>"
-        Stack<Iterator> stack = new Stack<>();
-        stack.push(nestedList.iterator());
-
-        int res = 0;
-        while (!stack.isEmpty()) {
-            Iterator<NestedInteger> cur = stack.peek();
-            if (!cur.hasNext()) {
-                stack.pop();
-                continue;
-            }
-
-            NestedInteger n = cur.next();
-            if (n.isInteger()) {
-                res += stack.size() * n.getInteger();
-            } else {
-                stack.push(n.getList().iterator());//!!! "n.getList.iterator()"
-            }
-        }
-
-        return res;
-    }
 
 }

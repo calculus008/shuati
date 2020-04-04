@@ -33,6 +33,35 @@ public class LE_109_Convert_Sorted_List_To_BST {
      */
 
     /**
+     * Time and Space : O(n)
+     */
+    class Solution2_Simplified {
+        public TreeNode sortedListToBST(ListNode head) {
+            List<Integer> list = new ArrayList<Integer>();
+
+            while (head != null) {
+                list.add(head.val);
+                head = head.next;
+            }
+
+            return buildTree(list, 0, list.size() - 1);
+        }
+
+        public TreeNode buildTree(List<Integer> arr, int start, int end) {
+            if (start > end) return null;
+
+            int mid = (start + end) / 2;
+            TreeNode node = new TreeNode(arr.get(mid));
+
+            node.left = buildTree(arr, start, mid - 1);
+            node.right = buildTree(arr, mid + 1, end);
+
+            return node;
+
+        }
+    }
+
+    /**
      * https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/
      *
      * Time  : O(nlogn)

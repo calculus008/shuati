@@ -11,7 +11,7 @@ public class LE_211_Add_And_Search_Word {
         bool search(word)
 
         search(word) can search a literal word or a regular expression string containing only
-        letters a-z or .. A . means it can represent any one letter.
+        letters a-z or .. A '.' means it can represent any one letter.
 
         For example:
 

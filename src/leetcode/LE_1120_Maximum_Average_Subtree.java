@@ -19,13 +19,12 @@ public class LE_1120_Maximum_Average_Subtree {
      */
 
     /**
-     * Definition for a binary tree node.
-     * public class TreeNode {
-     *     int val;
-     *     TreeNode left;
-     *     TreeNode right;
-     *     TreeNode(int x) { val = x; }
-     * }
+     * Post order
+     *
+     * dfs() returns Pair which is the sum and count of the current subtree.
+     * At the same time, main a max value in res.
+     *
+     * Time : O(n)
      */
     class Solution {
         class Pair {

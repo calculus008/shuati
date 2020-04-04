@@ -33,51 +33,59 @@ public class LE_102_Binary_Tree_Level_Order_Traversal {
     //Time and Space : O(n)
 
     //Solution 1 : use Queue and recursion
-    public static List<List<Integer>> levelOrderBottom1(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res;
+    class Solution_BFS {
+        public List<List<Integer>> levelOrderBottom1(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
 
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
 
-        while (!q.isEmpty()) {
-            int size = q.size();
-            List<Integer> list = new ArrayList<>();
+            while (!q.isEmpty()) {
+                int size = q.size();
+                List<Integer> list = new ArrayList<>();
 
-            for (int i = 0; i < size; i++) {
-                TreeNode cur = q.poll();
-                list.add(cur.val);
-                if (cur.left != null) q.offer(cur.left);
-                if (cur.right != null) q.offer(cur.right);
+                for (int i = 0; i < size; i++) {
+                    TreeNode cur = q.poll();
+                    list.add(cur.val);
+                    if (cur.left != null) q.offer(cur.left);
+                    if (cur.right != null) q.offer(cur.right);
+                }
+                res.add(list);
             }
-            res.add(list);
-        }
 
-        return res;
+            return res;
+        }
     }
 
 
     //Solution 2 : Use Pre-order traversal
-    public static List<List<Integer>> levelOrderBottom2(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res;
+    class Solution_DFS {
+        public List<List<Integer>> levelOrderBottom2(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) return res;
 
-        helper(res, root, 0);
-        return res;
-    }
+            helper(res, root, 0);
+            return res;
+        }
 
-    /**
-     * !!!
-     * pass "level" in params
-     */
-    public static void helper(List<List<Integer>> res, TreeNode root, int level) {
-        if (root == null) return;
+        /**
+         * !!!
+         * pass "level" in params
+         */
+        public void helper(List<List<Integer>> res, TreeNode root, int level) {
+            if (root == null) return;
 
-        //!!!Difference from 102
-        if (level == res.size()) res.add(new ArrayList<>());
-        res.get(level).add(root.val);
+            /**
+             * !!!
+             */
+            if (level == res.size()) {
+                res.add(new ArrayList<>());
+            }
+            res.get(level).add(root.val);
 
-        helper(res, root.left, level + 1);
-        helper(res, root.right, level + 1);
+            helper(res, root.left, level + 1);
+            helper(res, root.right, level + 1);
+        }
     }
 }
