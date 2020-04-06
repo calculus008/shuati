@@ -58,7 +58,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
           Remove()
           For list, we can remove by index or remove an object from list.
           For Set, it only supports removing object.
-          So when we use remove on map, using set avoids confusion and potential bug.
+          So when we use remove on dist, using set avoids confusion and potential bug.
 
           因为普通的HashSet iterate时间复杂度不是O(1)而是O(h/n) h是capacity
 
@@ -168,7 +168,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
     }
 
     public class RandomizedCollection2 {
-        // pair.number is the number, pair.index is the index in map value
+        // pair.number is the number, pair.index is the index in dist value
         private List<NumberAndIndex> nums;
         // key is the number, value if the indices list in nums;
         private Map<Integer, List<Integer>> map;

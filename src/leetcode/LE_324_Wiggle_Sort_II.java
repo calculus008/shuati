@@ -108,7 +108,7 @@ public class LE_324_Wiggle_Sort_II {
          这里用到了three-way partitioning算法。
 
          2.We can use a one-pass three-way partition to rearrange all elements.
-         The idea is to re-map the indices into its destined indices, odd indices first and even indices follow.
+         The idea is to re-dist the indices into its destined indices, odd indices first and even indices follow.
 
          Example:
 
@@ -168,7 +168,7 @@ public class LE_324_Wiggle_Sort_II {
 //        int len = nums.length;
 //        int median = findMedian(0, len-1, len/2, nums);
 //        int left = 0, right = len-1, i = 0;
-//        // map current index firstly
+//        // dist current index firstly
 //        while (i <= right) {
 //            int mappedCurIndex = newIndex(i, len);
 //            if (nums[mappedCurIndex] > median) {

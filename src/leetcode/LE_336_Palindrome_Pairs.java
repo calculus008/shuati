@@ -56,7 +56,7 @@ public class LE_336_Palindrome_Pairs {
                     if (isPalindrome(str1)) {
                         String target1 = (new StringBuilder(str2)).reverse().toString();
                         /**
-                         "map.get(target1) != i" : exclude the case that self concatenation, for example:
+                         "dist.get(target1) != i" : exclude the case that self concatenation, for example:
                          Given ["abcd","dcba","lls","s","sssll"], if we don't have this check, we will get {3, 3} in answer ("ss")
                          **/
                         if (map.containsKey(target1) && map.get(target1) != i) {

@@ -76,10 +76,10 @@ public class LE_392_Is_Subsequence {
     public class Solution_Follow_Up {
         /**
          * Optimize for online case :
-         * Pre-process t, create a map, mapping each char in t to the list
+         * Pre-process t, create a dist, mapping each char in t to the list
          * of indices that it appears in t. Since we scan it from start to end
-         * to build the map, the indices list is in sorted order. So for each
-         * char in s, binary search it in map.
+         * to build the dist, the indices list is in sorted order. So for each
+         * char in s, binary search it in dist.
          *
          * Pre-processing : O(length of t)
          * Each call to isSubsequences() : O(L * logk), L is length of s,

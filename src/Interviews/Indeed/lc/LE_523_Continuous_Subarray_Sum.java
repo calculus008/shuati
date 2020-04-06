@@ -68,9 +68,10 @@ public class LE_523_Continuous_Subarray_Sum {
              * Example:
              * [1, 2, 3, 4], k = 3
              * a[0] + a[1] = 3
-             * map : 1 -> 0
-             *       0 -> 1
-             *       0 -> -1
+             * map : 0 -> -1
+             *       1 -> 0
+             *       when come to idx 1, n[1] = 2, sum = 1 + 2 = 3, sum % 3 == 0, map.get(0) = -1, 1 - (-1) = 2
+             *       we get the answer as true.
              *
              * [0, 0], k = 0
              * map : 0 -> -1

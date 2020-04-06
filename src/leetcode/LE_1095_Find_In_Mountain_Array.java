@@ -1,4 +1,4 @@
-package src.leetcode;
+package leetcode;
 
 public class LE_1095_Find_In_Mountain_Array {
     /**

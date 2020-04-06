@@ -134,7 +134,7 @@ public class LE_212_Word_Search_II {
         int n = board[0].length;
 
         /**
-         * map : key - prefix or word, value : true if it is word, false if it is prefix
+         * dist : key - prefix or word, value : true if it is word, false if it is prefix
          */
         Map<String, Boolean> map = buildMap(words);
         Set<String> set = new HashSet<>();
@@ -164,7 +164,7 @@ public class LE_212_Word_Search_II {
         }
 
         /**
-         * if map.get(str) == true, then it is a word, we add it to set.
+         * if dist.get(str) == true, then it is a word, we add it to set.
          */
         if (map.get(str)) {
             set.add(str);

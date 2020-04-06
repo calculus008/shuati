@@ -50,16 +50,16 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
 
     /**
      * 1.save data in list and sort by time
-     * 2.save in user's sessions map
+     * 2.save in user's sessions dist
      * 3.build every one's 3-subsequences list(set)
-     * 4.count 3-subsequences by map get maxCount
+     * 4.count 3-subsequences by dist get maxCount
      */
 
     public List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
         int n = timestamp.length;
 
         /**
-         * 1. Sort sessions list by time, can not use map ,because web will be duplicated
+         * 1. Sort sessions list by time, can not use dist ,because web will be duplicated
          */
         List<List<String>> sessions =  new ArrayList<>();
         for (int i = 0; i < n; i++){
@@ -80,7 +80,7 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
         }
 
         /**
-         * 3. find each user list and build all 3-subsequences and count by map, and get maxCount;
+         * 3. find each user list and build all 3-subsequences and count by dist, and get maxCount;
          */
         Map<String, Integer> sequence = new HashMap<>();//(sequence, count)
         int maxCount = 0;

@@ -43,8 +43,8 @@ public class LE_819_Most_Common_Word {
     /**
      * 1.Put banned words into set
      * 2.split given paragrah into words
-     * 3.Iterate through words, count frequency in a map if the word is not banned.
-     * 4.Iterate through count map to get the max frequency
+     * 3.Iterate through words, count frequency in a dist if the word is not banned.
+     * 4.Iterate through count dist to get the max frequency
      */
     public String mostCommonWord(String paragraph, String[] banned) {
         Set<String> set = new HashSet<>(Arrays.asList(banned));

@@ -16,7 +16,7 @@ public class LE_890_Find_And_Replace_Pattern {
      *
      * (Recall that a permutation of letters is a bijection from
      * letters to letters: every letter maps to another letter,
-     * and no two letters map to the same letter.)
+     * and no two letters dist to the same letter.)
      *
      * Return a list of the words in words that match the given
      * pattern.
@@ -29,7 +29,7 @@ public class LE_890_Find_And_Replace_Pattern {
      * Output: ["mee","aqq"]
      * Explanation: "mee" matches the pattern because there is a permutation {a -> m, b -> e, ...}.
      * "ccc" does not match the pattern because {a -> c, b -> c, ...} is not a permutation,
-     * since a and b map to the same letter.
+     * since a and b dist to the same letter.
      *
      *
      * Note:
@@ -56,10 +56,10 @@ public class LE_890_Find_And_Replace_Pattern {
      * Space : O(N * K)
      *
      * If say, the first letter of the pattern is "a", and the first letter
-     * of the word is "x", then in the permutation, "a" must map to "x".
+     * of the word is "x", then in the permutation, "a" must dist to "x".
      *
-     * We can write this bijection using two maps: a forward map \text{m1}
-     * and a backwards map \text{m2}.
+     * We can write this bijection using two maps: a forward dist \text{m1}
+     * and a backwards dist \text{m2}.
      *
      * Then, if there is a contradiction later, we can catch it via one of
      * the two maps. For example, if the (word, pattern) is ("aa", "xy"),

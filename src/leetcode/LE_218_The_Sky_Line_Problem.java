@@ -184,7 +184,7 @@ public class LE_218_The_Sky_Line_Problem {
          *  In TreeMap here, key is height, value is frequency of the height.(!!!)
            "Collections.reverseOrder()",. "<Integer, Integer>"
             In TreeMap, sort it in reverse order (max to min) by frequency, so that
-            we can use map.firstKey() to get the biggest height.
+            we can use dist.firstKey() to get the biggest height.
          **/
         TreeMap<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
         map.put(0, 1);

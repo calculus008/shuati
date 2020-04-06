@@ -81,7 +81,7 @@ public class LE_833_Find_And_Replace_In_String {
             }
 
             /**
-             * Second pass to do replacement using map
+             * Second pass to do replacement using dist
              */
             StringBuilder sb = new StringBuilder();
             char[] chs = S.toCharArray();

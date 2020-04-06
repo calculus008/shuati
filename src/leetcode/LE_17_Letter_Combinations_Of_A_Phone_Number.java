@@ -13,7 +13,7 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
          combinations that the number could represent.
 
          A mapping of digit to letters (just like on the telephone buttons) is given below.
-         Note that 1 does not map to any letters.
+         Note that 1 does not dist to any letters.
 
          Example:
 

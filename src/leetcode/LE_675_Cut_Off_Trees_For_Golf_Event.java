@@ -5,7 +5,7 @@ import java.util.*;
 public class LE_675_Cut_Off_Trees_For_Golf_Event {
     /**
          You are asked to cut off trees in a forest for a golf event.
-         The forest is represented as a non-negative 2D map, in this map:
+         The forest is represented as a non-negative 2D dist, in this dist:
 
          0 represents the obstacle can't be reached.
          1 represents the ground can be walked through.

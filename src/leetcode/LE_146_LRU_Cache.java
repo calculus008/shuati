@@ -51,7 +51,7 @@ public class LE_146_LRU_Cache {
             /**
              Must have key in Node object,
              it is used to track key value when we want to delete
-             the entry from map in put() (when capacity is full)
+             the entry from dist in put() (when capacity is full)
              **/
             int key, val;
         };
@@ -122,7 +122,7 @@ public class LE_146_LRU_Cache {
             if (count >= capacity) {
                 Node m = tail.pre;
 
-                //!!! Remember to update the 2 data structures (map and DL) in each operation, here is DELETE
+                //!!! Remember to update the 2 data structures (dist and DL) in each operation, here is DELETE
                 map.remove(m.key);
                 removeNode(m);//always remove the tail.pre, this is the least recent used one
 
@@ -133,7 +133,7 @@ public class LE_146_LRU_Cache {
             node.val = value;
             node.key = key;//!!!
 
-            //!!! Remember to update the 2 data structures (map and DL) in each operation, here is ADD
+            //!!! Remember to update the 2 data structures (dist and DL) in each operation, here is ADD
             map.put(key, node);//!!!
             addNode(node);//!!!
 
@@ -158,15 +158,15 @@ public class LE_146_LRU_Cache {
      *   So moveToTail() = removeNode() + addNodeToTail()
      * 6.When capacity is full, remove LRU from head:
      *   removeNode(head.next)
-     * 7.ListNode class must have "key" field, it is used when removing entry from map when capacity is full:
-     *   "map.remove(head.next.key);"
-     * 8.Notice in set(), two places we need to update "map" and DLL at the same time:
+     * 7.ListNode class must have "key" field, it is used when removing entry from dist when capacity is full:
+     *   "dist.remove(head.next.key);"
+     * 8.Notice in set(), two places we need to update "dist" and DLL at the same time:
      *   a.Add new node if KV pair is not in current data structure:
-     *             "  map.put(key, node);
+     *             "  dist.put(key, node);
      *                addNodeToTail(node); "
      *
      *   b.Remove node when capacity is full:
-     *             "  map.remove(head.next.key);
+     *             "  dist.remove(head.next.key);
      *                removeHead();  "
      *
      *   !!! Always remember : There are TWO data structure we need to maintain for each action.
@@ -300,12 +300,12 @@ public class LE_146_LRU_Cache {
 
             /**
              * !!!
-             * Use "map.size()" to check current size.
+             * Use "dist.size()" to check current size.
              */
             if (map.size() == capacity) {
                 /**
                  * !!!
-                 * #8, never forget action of remove and add should be done on both map and DDL
+                 * #8, never forget action of remove and add should be done on both dist and DDL
                  */
                 map.remove(head.next.key);
 
@@ -316,7 +316,7 @@ public class LE_146_LRU_Cache {
 
             /**
              * !!!
-             * #8, never forget action of remove and add should be done on both map and DDL
+             * #8, never forget action of remove and add should be done on both dist and DDL
              */
             map.put(key, node);//!!!
 

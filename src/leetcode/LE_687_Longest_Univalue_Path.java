@@ -41,7 +41,7 @@ public class LE_687_Longest_Univalue_Path {
     /**
      * http://zxi.mytechroad.com/blog/tree/leetcode-687-longest-univalue-path/
      *
-     * DFS
+     * DFS (post order)
      * Time  : O(n)
      * Space : O(n)
      *

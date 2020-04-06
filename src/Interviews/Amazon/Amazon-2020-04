@@ -16,6 +16,7 @@ LE_155_Min_Stack
 LE_146_LRU_Cache
 
 #BST
+LE_98_Validate_BST
 LE_510_Inorder_Successor_In_BST_II
 LE_1038_Binary_Search_Tree_To_Greater_Sum_Tree
 LE_285_Inorder_Successor_In_BST
@@ -34,7 +35,8 @@ LE_75_Set_Colors
 
 #Word
 LE_79_Word_Search
-LE_139_Word_Break
+LE_212_Word_Search_II
+LE_139_Word_Break                          both DFS and BFS
 LE_472_Concatenated_Words                  reverse版本的思器耳， 把input 和 return 倒一下
 LE_140_Word_Break_II
 LI_683_Word_Break_III     (***)
@@ -54,7 +56,13 @@ LE_236_Lowest_Common_Ancestor_Of_BT
 LI_474_Lowest_Common_Ancestor_II
 LI_578_Lowest_Common_Ancestor_III
 LE_160_Intersection_Of_Tow_Linked_List
+LE_545_Boundary_Of_Binary_Tree                  (***)
+LE_617_Merge_Two_Binary_Trees
+  #result is not the return value of the recursion functionx
+LE_687_Longest_Univalue_Path
+LE_124_Binary_Tree_Max_Path_Sum
 
+#Max Product
 LE_628_Maximum_Product_Of_Three_Numbers
 LE_152_Maximum_Product_Subarray
 
@@ -63,6 +71,9 @@ LE_186_Reverse_Words_In_String_II
 
 LE_252_Meeting_Rooms
 LE_253_Meeting_Rooms_II
+LE_729_My_Calendar_I
+LE_731_My_Calendar_II
+LE_732_My_Calendar_III
 
 https://leetcode.com/discuss/interview-question/488887/amazon-final-interview-questions-sde1
 
@@ -106,7 +117,7 @@ LE_120_Triangle                  min sum of falling path
 LE_931_Minimum_Falling_Path_Sum
 
 #Island problems
-LE_200_Number_Of_Islands
+LE_200_Number_Of_Islands                Follow up with LE_694_Number_Of_Distinct_Islands
 LE_305_Number_Of_Islands_II             Union Find
 LE_463_Island_Perimeter
 LE_695_Max_Area_Of_Island
@@ -138,7 +149,9 @@ LE_48_Rotate_Image
 
 LE_60_Permutation_Sequence                 (***)
 
+LE_03_Longest_Substring_Without_Repeating_Characters
 LE_76_Minimum_Window_Substring
+
 LE_108_Convert_Sorted_Array_To_BST
 LE_109_Convert_Sorted_List_To_BST
 LE_116_Populating_Next_Right_Pointers_In_Each_Node
@@ -146,20 +159,253 @@ LE_116_Populating_Next_Right_Pointers_In_Each_Node
 LE_128_Longest_Consecutive_Sequence
 
 #HashMap
-LE_301_Remove_Invalid_Parentheses
+LE_296_Best_Meeting_Point
 LE_819_Most_Common_Word
-LE_1152_Analyze_User_Website_Visit_Pattern
+LE_1152_Analyze_User_Website_Visit_Pattern   (**)
+LE_49_Group_Anagrams
+LE_523_Continuous_Subarray_Sum
 
+#Prefix Sum + HashMap
 LE_560_Subarray_Sum_Equals_K
+LE_523_Continuous_Subarray_Sum
 
+#HashMap + Bucket sorting
+LE_451_Sort_Characters_By_Frequency
+
+#DFS
+LE_301_Remove_Invalid_Parentheses           Return all possible results
+
+
+
+#Design
+LE_155_Min_Stack
+LE_716_Max_Stack
 LE_706_Design_HashMap
+LE_707_Design_Linked_List
+LE_622_Design_Circular_Queue
 
 #DP
 LE_1062_Longest_Repeating_Substring
+LE_198_House_Robber
+LE_213_House_Robber_II
+LE_337_House_Robber_III
+LE_72_Edit_Distance
+LE_161_One_Edit_Distance
+LI_623_K_Edit_Distance
 
 #PriorityQueue
 LE_239_Sliding_Window_Maximum
 LE_703_Kth_Largest_Element_In_A_Stream
-LE_347_Top_K_Frequent_Elements
 LE_973_K_Closest_Points_To_Origin
+LE_295_Find_Median_From_Data_Stream
+LE_347_Top_K_Frequent_Elements         Variation, music web site, every user picks 10 songs, output top 100
+                                       most favorite songs
 
+#LinkedList
+LE_148_Sort_List                  linked list version of merge sort
+LE_138_Copy_List_With_Random_Pointer
+
+#Stack
+LE_84_Largest_Rectangle_In_Histogram
+LE_496_Next_Greater_Element_I
+LE_150_Evaluate_Reverse_Polish_Notation
+
+LE_29_Divide_Two_Integers
+LE_28_Implementing_Strstr
+
+#Binary Search
+LE_33_Search_In_Rotated_Sorted_Array
+LE_81_Search_In_Rotated_Sorted_Array_II
+LE_69_Sqrt
+
+#Backtrack + DFS
+LE_39_Combination_Sum               No duplicate
+LE_40_Combination_SUM_II            With duplicate
+LE_216_Combination_Sum_III          K number
+LE_377_Combination_Sum_IV           Different sequence count as different answer
+LE_63_Unique_Path_II
+LE_300_Longest_Increasing_Subsequence
+
+#Graph
+LE_133_Clone_Graph
+
+LE_490_The_Maze                    Check if we can hit destination
+LE_505_The_Maze_II                 Get shortest path to destination
+LE_499_The_Maze_III                Get shortest path string to a destination
+
+========================
+Phone Intervew
+
+LE_99_Recover_BST                  Both DFS, BFS
+LE_202_Happy_Number                直接hashset做了， follow up是O（1）时间复杂度，然后提示下做了双指针
+LE_138_Copy_List_With_Random_Pointer
+LE_134_Gas_Station
+LE_116_Populating_Next_Right_Pointers_In_Each_Node
+
+LE_460_LFU_Cache
+LE_42_Trapping_Rain_Water
+LE_499_The_Maze_III
+LE_852_Peak_Index_In_A_Mountain_Array
+LI_585_Maximum_Number_In_Mountain_Sequence
+LE_1095_Find_In_Mountain_Array
+LE_941_Valid_Mountain_Array
+LE_295_Find_Median_From_Data_Stream
+LE_101_Symmetric_Tree
+LE_253_Meeting_Rooms_II
+
+在简单图中找最长路径。
+本人用DFS解答了本题（O(n)=n^2），interviewer继续追问有没有时间复杂更优的解法，并提示只用两轮DFS
+答案在cracking the coding interview里有
+
+
+题目是 给一个array 求 最长递增substring 回传最长的长度 (面试官自己连subsequence和substring都搞不清..)
+就用双指针 解follow up.. 换成graph 而且有环的情况下怎解 lz 只写了伪代码
+Longest_Increasing_Subarray
+LE_300_Longest_Increasing_Subsequence
+
+Minimum_Steps_To_Minimize_N
+
+691. Stickers to Spell Word
+对比蠡口，首先是对方给了一个方法的interface, 要你用implements 一下
+然后内部多了一个delete 函数
+蠡口的解法里面应该最方便的是用treeMap 吧（我重来没用过，算了，随缘）
+如果不知道TreeMap, 应该是选用 HashMap + 二分查找的方法，把 node 按照 timestamp sort 之后二分查找。
+
+
+
+
+========================
+#
+Find name in a sorted string array: Given a sorted string array, find name such as "Fred"
+                                    Follow up: what if insert a name such as "Jane" (consider case "Jane" already exists)
+#
+1057. Campus Bikes
+
+#
+check if all chars in string have same frequeny by removing at most one char
+remove的是一个char, 不是一种char。
+如：
+aabbccc -> true
+aabbcccc -> false
+abbcc -> true
+ab -> true
+abbb -> true
+abbccc -> false
+
+
+#
+Phone interview题目是实现两个函数：
+newUserCome(uid): log新的用户
+returnFirstNonReturningUser()：返回第一个只来过一次的用户，即满足来过一次之后再也没来visit的第一个用户。
+楼主用的是map+双向linkedlist存储。两个方法都做到了O(1)复杂度。
+
+Map的key存uid, value存对应Node。
+
+第一个函数：每次新用户判断这个uid是否不在当前map里面，若不在，生成新的node节点记录用户信息，并将节点插入链表的末端。若在，在链表中删除对应node并将map中uid对应的value赋值为Null。
+第二个函数：返回链表的头节点。注意处理一个cornor case就是若当前链表头节点的next为空（即没有调用过第一个函数，直接调用了第二个函数），返回-1.
+
+#
+给一个binary tree, reverse所有偶数层的nodes(root算第一层，root下面一层算第二层， reverse第2， 4， 6， 8......层的nodes),
+然后返回这个tree
+
+#
+string 单词(s) -> list所有char (反向意思： 可用output 组成input 的所有单词)
+input: "Hello","World"
+output: H,e,l,l,o,W,r,d
+
+#
+1 图中两点是否相连, 输入是两个点
+2 如果，提供所有点，是否可以有更快的方法，确定两点是否相连
+
+#
+电面马鬃电商，美国男出了一道平面几何题，题目是一堆sensor，分布在隧道各个位置，每个感应器都有有效侦测距离，问一辆车能不能通过这个隧道。没做过跪了。电面出平面几何题感觉被黑了。
+
+这题坑挺多的，应该有些条件要和面试官确认，我面google时候就跪在这道题上了，当时也是用union find解的。我的思路是这个隧道有左墙和右墙
+，假设你这个小车的半径为r1，所有sensor的半径都为r2. 那么我做一个O(n2)的循环，对任意一对sensor，如果该对sensor圆心的距离小于r1 + 2r2，
+那么表示这对sensor之间的空隙无法让车通过，就把这对sensor给union起来，同时对于每个sensor，如果它离墙壁的距离大于r1+r2，那么车也无法从
+该sensor和墙壁之间通过，所以把该sensor和墙壁也union起来，最后判断左墙壁和右墙壁是否被union起来了，如果union起来了表示路被封死了过不去。
+面试官是个三姐，一直good，nice，最后把我挂了。我后来复盘，想到过不过的去跟车的初始位置有关系。就算左右墙壁被union起来了，但是如果车的初
+始位置在封锁线以外不就能通过了么？而且就算左右墙壁没被union起来，如果这个车被几个sensor给围起来了，那它也哪都去不了啊。在你的例子里你应
+该是假设车的半径无限趋近于0，可如果一开始车就被sensor给围起来了，哪怕sensor的范围没有覆盖[left,right],那么这辆车也无法到隧道的另一端的。
+
+
+对于每个接触到隧道上边缘的圆，dfs检测所有的neighbor圆，若有一个neighbor圆触碰到隧道下边缘，立刻返回false。所有neighbor圆都没触碰到下边缘，则返回true。
+
+这是前几年面经比较高频的union-find 题目，我之前准备quora的时候搜面经看到的题，貌似其他公司也出过。
+把每个sensor看成一个圆，对所有相交的圆 union 一下，这个senor能覆盖的范围就是 [left, right], left是相交的所有圆中 min(x-r) 的最小值，x是每个圆圆心的横坐标， r是半径， right就是 max(x + r)
+最后看[left, right]有没有覆盖掉这个隧道从左到右所有的范围.
+比如你这个隧道的横坐标范围是 [0, 1] ，但是相交的圆覆盖的范围是 [-1,2]， 那么你就永远不可能横着穿过隧道了。
+比如这个图的例子，隧道边界是 x = 0 和 x = 2，如果两个sensor的圆是这个样子，那么就不能穿过隧道
+
+可不可以建模成，输入是一个0-1 2d array/matrix，代表隧道，0 代表这个点在感测范围内，1代表不在，输出是要查找有没有一条只走0的路径，从(0,0)到(n-1,m-1)
+这样看就是BFS 可解的OA 问题吧
+可以把“画圆”这些操作看作处理input data，面试官如果还有follow up 应该也会在这讨论
+
+
+#
+给一个book list. [book1, book3, book2, book4, book4xxxxxxxx] 找top k books.
+本质就是top k. 先提出了max_heap的方法，分析时空复杂度。然后问能不能用min_heap, 又写了pseudo code，分析复杂度。
+又问能不能不用heap, 我又提出quick select,
+他说这个能work, 但是太复杂了, 有没有简单一点儿的, 带着我走了一遍bucket sort.
+然后对input format又讨论一下
+
+
+#
+代码是在codepad上写，很简单，场景大概就像泡泡堂或者超级炸弹人，给地图，炸弹和范围，问随机选一个位置不会被炸的概率。follow up是如果炸的不是十字而是方形区域。
+
+#
+ABC store top popular item sold. ( 基本上就是 most frequent cache, without cache capacity. )
+题目给的很松动，让我make assumption。
+写了2 个function。 sale（ Str prodName） 每次sale， 增加这个商品 count。
+lis<Str> get(int ｋ）return top k most popular product. ( popularity ranked by sale count )
+
+solved with hashmap + Linked list.
+
+Follow up:
+If this is production code how would you optimize it?
+就是说如果数据量大，商品很多 一台机器装不完，怎么办。
+
+#
+find nearest 100 points in a list (max heap)
+
+#
+先让介绍一下都做过啥 会有很细致的follow up
+Tech部分是给一个 String[][] performerMovie 的矩阵，让写一个void buildGraph( performerMovie)方法 ，来表示movie和performer的关系。
+比如说String[][] performerMovie={{“movieA”},{“actorA”},{“actorB”}}
+
+值得注意的是印度哥特别耐心，一点点引导，写好graph的数据结构，然后要考虑到不同的movie，performer会overlap， 那就得用一个hashmap 存一下 然后对应到 邻接矩阵中。 我最后是这样写的，用一个boolean[][] 存movie和performer的edges。 如果performer出现在这个movie里设为true。
+全程一个小时整 居然没有什么特别的对应14条的问题，枉我准备了这么多BQ
+
+#
+给了Stream of Product, Product has name, id, category, price, feature, num of clicks等信息
+完成下面的code：
+class Product {
+// write the class
+}
+class Solution {
+public void processStream(Stream<Product> products) {
+  // process the stream of products
+}
+public Map<String, Product> mostClickForEachCategory() {
+  // return Map<Category, Most click product>
+}
+}
+
+Follow up: mostClickForEachCategory(int k)
+
+#
+根据算法改编的情境应用题
+花了大概4-5分钟介绍了一下应用的情景
+问第一个问题，其实就是在一个list里面如何找最大值，但涉及到多个property综合比较，所以要先确定具体比较的方法，
+还有怎么handle collision，我为了体现customer obssession，又跟他说确实handle之前需要我们客人同意并且解释清楚
+（面试官小哥表示很赞同我们把这些细节都要和顾客解释清楚的态度），接下来讨论edge case，写代码，因为太简单所以只分析了
+一个valid case一个invalid case，分析空间时间，总共7-8分钟左右吧
+
+follow-up上一个问题，变成k-th最大值，需要怎么做，首先讨论了需要什么数据结构，说了一下这个数据结构的为什么适用于这一题的结构，
+讨论edge case，在上面的代码，跑test case，分析空间时间，总共也就5分钟
+
+#
+给一个fixed的unsorted array，找一个window里面的最小值，不能iterate但是可以preprocessing这个array。
+面试官当时给我hint之后我把这个array变成个tree，每个节点预先存好start，end和这个window的min 然后binary search start，
+start match之后binary search end直到两个都match返回存的min
+LE_307_Range_Sum_Query_Mutable

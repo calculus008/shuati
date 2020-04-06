@@ -52,7 +52,7 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
     /**
      *   TreeMap Solution  : O(logn) for addNum(), O(n) for getIntervals()
      *
-         TreeMap<Integer, Interval> map
+         TreeMap<Integer, Interval> dist
          add() : add new Interval to TreeMap.
          get_total(int start, int end) : merge all intervals between start and end, find total length;
 
@@ -60,7 +60,7 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
          toKey = TreeMap.higherKey(end)      //last Interval
 
          submap = TreeMap.subMap(fromKey, toKey)
-         "Returns a view of the portion of this map whose keys range from fromKey, inclusive, to toKey, exclusive"
+         "Returns a view of the portion of this dist whose keys range from fromKey, inclusive, to toKey, exclusive"
 
          Iterate through submap, do merge, same as in LE_56_Merge_Intervals
 
@@ -134,7 +134,7 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
         public List<Interval> getIntervals() {
             //If asked to return total length
 //            int res = 0;
-//            for (Interval interval : map.values()) {
+//            for (Interval interval : dist.values()) {
 //                res += interval.end - interval.start + 1;
 //            }
 //            return res;
@@ -173,7 +173,7 @@ public class LE_352_Data_Stream_As_Disjoint_Intervals {
              *  2.end == val
              *  3.end > val
              *
-             * 我们合并2和3的处理，"val - 1 <= map.get(lKey).end"，对于2，val应该和和这个interval合并。
+             * 我们合并2和3的处理，"val - 1 <= dist.get(lKey).end"，对于2，val应该和和这个interval合并。
              * 对于3，interval不用改变。
              *
              *

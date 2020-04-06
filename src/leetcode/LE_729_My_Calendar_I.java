@@ -106,7 +106,7 @@ public class LE_729_My_Calendar_I {
             Integer floor = map.floorKey(start);
             /**
              * !!!
-             * "map.get(floor) > start" : 以floor为start的time slot, its end is bigger than start,
+             * "dist.get(floor) > start" : 以floor为start的time slot, its end is bigger than start,
              * there's overlap.
              */
             if (floor != null && map.get(floor) > start) {

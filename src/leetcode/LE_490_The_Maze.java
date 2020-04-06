@@ -37,7 +37,10 @@ public class LE_490_The_Maze {
      */
 
     /**
-     * An variation of BFS
+     * An variation of BFS, we not just move one cell at a time, we move to one direction
+     * until we hit a wall, use a while loop to simulate this movement.
+     *
+     * Time and Space : O(mn)
      */
     class Solution {
         public boolean hasPath(int[][] maze, int[] start, int[] destination) {
@@ -60,15 +63,22 @@ public class LE_490_The_Maze {
                     /**
                      * !!!
                      * Use while loop to simulate the ball rolling in one direction
-                     * until hit a wall
+                     * until hit a wall. We check if we are still with boundary AND
+                     * the next cell is not a WALL:
                      *
                      * "maze[x][y] == 0"!!!
+                     *
+                     * Keep adding dir[0] and dir[1]: move to one direction.
                      */
                     while (x >= 0 && x < m && y >= 0 && y < n && maze[x][y] == 0) {
                         x += dir[0];
                         y += dir[1];
                     }
 
+                    /**
+                     * !!!
+                     * roll back one step since we hit the WALL in the last step of the while loop.
+                     */
                     x -= dir[0];
                     y -= dir[1];
 
@@ -76,6 +86,11 @@ public class LE_490_The_Maze {
                         return true;
                     }
 
+                    /**
+                     * !!!
+                     * We only count visited when we stop at a WALL, not for all cells on the way to the current
+                     * stop position.
+                     */
                     if (visited[x][y]) continue;
                     visited[x][y] = true;
 

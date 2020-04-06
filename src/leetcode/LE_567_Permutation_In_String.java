@@ -31,7 +31,7 @@ public class LE_567_Permutation_In_String {
 
     /**
      * Time : O(l1 + (l2 - l1) * 26), for every sliding window position, "Arrays.equals(map1, map2)" need to
-     * iterate through map, which has size 26, so it's constant.
+     * iterate through dist, which has size 26, so it's constant.
      */
     class Solution1 {
         public boolean checkInclusion(String s1, String s2) {

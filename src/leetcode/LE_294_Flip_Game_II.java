@@ -44,7 +44,7 @@ public class LE_294_Flip_Game_II {
                 String next = s.substring(0, i) + "--" + s.substring(i + 2, s.length());
                 /**
                  关键 ：当前player是否能赢，取决于下一个player能否用转换后的字符串(next)取得胜利。
-                 所以，只有当“helper(next, map)"返回FALSE时，当前player才能赢。
+                 所以，只有当“helper(next, dist)"返回FALSE时，当前player才能赢。
                  */
                 if (!helper(next, map)) {
                     map.put(s, true); //!!! put s, NOT next

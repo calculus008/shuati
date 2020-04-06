@@ -124,7 +124,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
 
         /**
          * This method is modified from finding depth of a binary tree,
-         * while it finds depth, it also saves leaves list of each level in a map
+         * while it finds depth, it also saves leaves list of each level in a dist
          */
         int dfs(TreeNode cur, Map<Integer, List<Integer>> depth) {
             if (cur == null) {
@@ -195,7 +195,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
      */
     List<List<Integer>> findLeavesInGraph(TreeNode graph) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        // Use a map to remember not only the height, but also track loop
+        // Use a dist to remember not only the height, but also track loop
         Map<TreeNode, Integer> map = new HashMap<TreeNode, Integer>();
         helper(res, map, graph);
         return res;

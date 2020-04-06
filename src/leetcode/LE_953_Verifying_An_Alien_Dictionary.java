@@ -48,7 +48,7 @@ public class LE_953_Verifying_An_Alien_Dictionary {
      * Find all alien words with letters in normal order.
      *
      * For example, if we have order = "xyz..."
-     * We can map the word "xyz" to "abc" or "123"
+     * We can dist the word "xyz" to "abc" or "123"
      *
      * Then we check if all words are in sorted order.
      *

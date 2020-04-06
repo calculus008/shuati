@@ -163,7 +163,7 @@ public class LE_315_Count_Of_Smaller_Numbers_After_Self {
 
         /**
          mapping between number and its rank
-         For example above, map will be :
+         For example above, dist will be :
 
          key   value
          1     1

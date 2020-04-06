@@ -42,7 +42,8 @@ public class LE_716_Max_Stack {
      * Solution #1 can't be linear in the worst case:
      * pushing N/2 numbers in descending order and then popMax N/2 times.
      * Since the solution enumerates the whole stack on every popMax,
-     * overall complexity is O(n^2)
+     *
+     * O(N) for popMax(), O(1) for other functions
      */
     class MaxStack1 {
         Stack<Integer> s1;
@@ -143,7 +144,7 @@ public class LE_716_Max_Stack {
         }
 
         /**
-         * O(1) (if do map.remove(), it will be O(logn)
+         * O(1) (if do dist.remove(), it will be O(logn)
          */
         public int pop() {
             int val = dll.pop();
@@ -237,7 +238,7 @@ public class LE_716_Max_Stack {
 
     /**
      * Java solution beat 99.37%,
-     * O(n) push O(1) for rest using double linked list
+     * O(n) push,  O(1) for rest using double linked list
      *
      * https://leetcode.com/problems/max-stack/discuss/125771/Java-solution-beat-99.37-O(n)-push-O(1)-for-rest-using-double-linked-list
      */

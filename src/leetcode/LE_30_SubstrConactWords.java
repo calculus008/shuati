@@ -41,7 +41,7 @@ public class LE_30_SubstrConactWords {
 
         //!!! "<= s.length() - n * m"
         for (int i = 0; i <= s.length() - n * m; i++) {
-            Map<String, Integer> copy = new HashMap<>(map);//make copy of map
+            Map<String, Integer> copy = new HashMap<>(map);//make copy of dist
             int j = i;
             int k = n;
             while (k > 0) {
@@ -63,7 +63,7 @@ public class LE_30_SubstrConactWords {
     }
 
     /**
-     * Solution 2 : Two map solution, Time : O(n ^ 2)
+     * Solution 2 : Two dist solution, Time : O(n ^ 2)
      * */
     public ArrayList<Integer> findSubstring2(String S, String[] L) {
         ArrayList<Integer> result = new ArrayList<Integer>();

@@ -85,7 +85,7 @@ public class LE_992_Subarrays_With_K_Different_Integers {
                      * since left most one is always unique, no need to check
                      * if we should remove it from hashmap
                      */
-//                    if (map.get(A[j]) == 0) {
+//                    if (dist.get(A[j]) == 0) {
                     map.remove(A[j]);
 //                    }
 

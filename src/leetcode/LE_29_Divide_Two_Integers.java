@@ -26,12 +26,55 @@ public class LE_29_Divide_Two_Integers {
          The divisor will never be 0.
          Assume we are dealing with an environment which could only store integers within
          the 32-bit signed integer range: [−231,  231 − 1].
+
+         !!!
          For the purpose of this problem, assume that your function returns 231 − 1 when
          the division result overflows.
+         (So it seems we can't use long here)
 
         Very Important
      */
 
+    /**
+     * Same logic and complexity as Solution1, without using long type
+     */
+    class Solution {
+        public int divide(int dividend, int divisor) {
+            /**
+             * overflow case
+             */
+            if(dividend ==  Integer.MIN_VALUE && divisor == -1){
+                return Integer.MAX_VALUE;
+            }
+
+            boolean isNeg = (dividend < 0) ^ (divisor < 0);
+
+            /**
+             * making divisor and dividend always negative instead of always positive is clever
+             * so you can avoid the overflow on converting sign when dividend is = Integer.MIN_VALUE
+             */
+            if(dividend > 0) dividend = -dividend;
+            if(divisor > 0) divisor = -divisor;
+
+            return isNeg? -div(dividend, divisor) : div(dividend, divisor);
+        }
+
+        public int div(int divid, int divis){
+            if(divid > divis) return 0;
+
+            /**
+             * "<<1" means "* 2"
+             */
+            int curSum = divis << 1, prevSum = divis, q = 1;
+
+            while(divid <= curSum && curSum < prevSum){
+                prevSum = curSum;
+                curSum <<= 1;
+                q <<= 1;
+            }
+            return q + div(divid - prevSum, divis);
+        }
+    }
 
     /**
      * Time and Space : O(logn) !!!
@@ -63,18 +106,23 @@ public class LE_29_Divide_Two_Integers {
         private long longDivd(long divd, long divs){
             // Recursion exit condition
             if (divd < divs) return 0;
+
             long sum = divs;
             long multi = 1;
 
-            //  Find the largest multiple so that (divisor * multiple <= dividend),
-            //  whereas we are moving with stride 1, 2, 4, 8, 16...2^n for performance reason.
-            //  Think this as a binary search.
+            /**
+             * Find the largest multiple so that (divisor * multiple <= dividend),
+             * whereas we are moving with stride 1, 2, 4, 8, 16...2^n for performance reason.
+             * Think this as a binary search.
+             **/
             while (sum + sum <= divd){
                 sum += sum;
                 multi += multi;
             }
 
-            //Look for additional value for the multiple from the reminder (dividend - sum) recursively.
+            /**
+             * Look for additional value for the multiple from the reminder (dividend - sum) recursively.
+             **/
             return multi + longDivd(divd - sum, divs);
         }
     }

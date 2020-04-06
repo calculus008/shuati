@@ -42,7 +42,7 @@ public class LE_290_Word_Pattern {
             /**
              !!!HashMap.put return value :
              The previous value associated with key, or null if there was no mapping for key.
-             (A null return can also indicate that the map previously associated null with key)
+             (A null return can also indicate that the dist previously associated null with key)
              */
 
             /**

@@ -19,14 +19,14 @@ public class LE_694_Number_Of_Distinct_Islands {
      * 00011
      * 00011
      *
-     * Given the above grid map, return 1.
+     * Given the above grid dist, return 1.
      *
      * Example 2:
      * 11011
      * 10000
      * 00001
      * 11011
-     * Given the above grid map, return 3.
+     * Given the above grid dist, return 3.
      *
      * Notice that:
      * 11

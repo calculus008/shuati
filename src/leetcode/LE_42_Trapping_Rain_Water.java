@@ -5,7 +5,7 @@ package leetcode;
  */
 public class LE_42_Trapping_Rain_Water {
     /**
-        Given n non-negative integers representing an elevation map where the width
+        Given n non-negative integers representing an elevation dist where the width
         of each bar is 1, compute how much water it is able to trap after raining.
 
         Compare with LE_11_Container_With_Most_Water

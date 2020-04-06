@@ -39,7 +39,7 @@ public class LE_48_Rotate_Image {
      *
      */
     class Solution1 {
-        public static void rotate(int[][] matrix) {
+        public void rotate(int[][] matrix) {
             int m = matrix.length;
             int n = matrix[0].length;
 

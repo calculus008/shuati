@@ -48,7 +48,7 @@ public class LE_911_Online_Election {
      */
     class TopVotedCandidate {
         /**
-         map time to the lead person id at that time
+         dist time to the lead person id at that time
          **/
         Map<Integer, Integer> map;
         int[] time;
@@ -63,7 +63,7 @@ public class LE_911_Online_Election {
             map = new HashMap<>();
 
             /**
-             map to count votes for each person
+             dist to count votes for each person
              **/
             Map<Integer, Integer> votes = new HashMap<>();
             int cur = -1;

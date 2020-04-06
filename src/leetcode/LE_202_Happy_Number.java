@@ -17,17 +17,21 @@ public class LE_202_Happy_Number {
 
         Example: 19 is a happy number
 
-        12 + 92 = 82
-        82 + 22 = 68
-        62 + 82 = 100
-        12 + 02 + 02 = 1
+        1^2 + 9^2 = 82
+        8^2 + 2^2 = 68
+        6^2 + 8^2 = 100
+        1^2 + 0^2 + 0^2 = 1
      */
 
+    /**
+     * Time and Space : O(log(n))
+     */
     public boolean isHappy(int n) {
         //"it loops endlessly in a cycle which does not include 1.", hence, use HashSet to detect the loop in cycles
         HashSet<Integer> set = new HashSet<>();
 
         int squareSum = 0;//!!! must delcare here for the next line
+
         while (set.add(squareSum)) {//!!!
             squareSum = 0;//!!!
             while (n > 0) {

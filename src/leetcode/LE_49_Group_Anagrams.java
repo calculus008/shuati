@@ -75,6 +75,8 @@ public class LE_49_Group_Anagrams {
                 map.get(key).add(str);
             }
 
+            //or return new ArrayList<>(dist.values());
+
             for (List<String> list : map.values()) {
                 res.add(list);
             }

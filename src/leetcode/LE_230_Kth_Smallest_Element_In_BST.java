@@ -89,7 +89,7 @@ public class LE_230_Kth_Smallest_Element_In_BST {
     }
 
     /**
-     * Time and Space : O(n) (building map for number of nodes under each node)
+     * Time and Space : O(n) (building dist for number of nodes under each node)
      */
     class Solution_Follow_UP_Practice {
         Map<TreeNode, Integer> map;

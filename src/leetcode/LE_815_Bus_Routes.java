@@ -51,7 +51,7 @@ public class LE_815_Bus_Routes {
      *  [3, 6, 7]
      * ]
      *
-     * map :
+     * dist :
      *
      * 1 : 0
      * 2 : 0
@@ -90,7 +90,7 @@ public class LE_815_Bus_Routes {
      *                        stop 3, stop 6 == T, return
      *
      * So the key to understand it is : for each BFS level, q saves stop number, after we pop out stop number,
-     * we use the map we built to map stop numbers to a list of bus numbers, then check if destination is in any
+     * we use the dist we built to dist stop numbers to a list of bus numbers, then check if destination is in any
      * of the bus routes.
      *
      * Notice, we need to get size of q first first then pop out #size of stop numbers from q, this is one level
@@ -186,7 +186,7 @@ public class LE_815_Bus_Routes {
                 }
             }
 
-            // for (Map.Entry<Integer,Set<Integer>> entry : map.entrySet()) {
+            // for (Map.Entry<Integer,Set<Integer>> entry : dist.entrySet()) {
             //     System.out.println(entry.getKey() + " -> " + Arrays.toString(entry.getValue().toArray()));
             // }
 

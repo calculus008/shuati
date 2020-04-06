@@ -37,7 +37,7 @@ public class LE_347_Top_K_Frequent_Elements {
             //!!! "ArrayList" can't follow with "<>"
             List<Integer>[] bucket = new ArrayList[nums.length + 1];//!!!"nums.length + 1", bucket, 1-based!!!
 
-            //create frequency map
+            //create frequency dist
             for (int num : nums) {
                 map.put(num, map.getOrDefault(num, 0) + 1);
             }
@@ -87,7 +87,7 @@ public class LE_347_Top_K_Frequent_Elements {
             List<Integer> res = new ArrayList<>();
             Map<Integer, Integer> map = new HashMap<>();
 
-            //create frequency map
+            //create frequency dist
             for (int num : nums) {
                 int cur = map.getOrDefault(num, 0) + 1;
                 map.put(num, cur);

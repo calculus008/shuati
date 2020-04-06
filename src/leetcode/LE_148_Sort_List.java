@@ -4,7 +4,7 @@ package leetcode;
  * Created by yuank on 3/18/18.
  */
 public class LE_148_Sort_List {
-    /*
+    /**
         Sort a linked list in O(n log n) time using constant space complexity.
      */
 

@@ -11,9 +11,9 @@ public class LE_527_Word_Abbreviation {
      * which followed by the last character.
      *
      * 2.If there are any conflict, that is more than one words share the same abbreviation,
-     * a longer prefix is used instead of only the first character until making the map
+     * a longer prefix is used instead of only the first character until making the dist
      * from word to abbreviation become unique. In other words, a final abbreviation
-     * cannot map to more than one original words.
+     * cannot dist to more than one original words.
      *
      * 3.If the abbreviation doesn't make the word shorter, then keep it as original.
      *
@@ -48,27 +48,27 @@ public class LE_527_Word_Abbreviation {
 
             /**
              * !!!
-             * keep going through the result set to check if each abbr is unique (count in map equals to one),
+             * keep going through the result set to check if each abbr is unique (count in dist equals to one),
              * if not, increase prefix value, recreate the key, then go to the next round.
              *
-             * For "dear", "door", in map:
+             * For "dear", "door", in dist:
              * d2r -> 2
              * res : {"d2r", "d2r"}
              *
-             * When we get to "dear", in map:
+             * When we get to "dear", in dist:
              * d2r  -> 2
              * de1r -> 1
              * res : {"de1r", "d2r"}
              *
              *
-             * When we get to "door", in map:
+             * When we get to "door", in dist:
              * d2r  -> 2
              * de1r -> 1
              * do1r -> 1
              * res : {de1r, do1r}
              *
              * So no need to update the count number of existing key. If it's bigger than 1, we need to update
-             * with new key. The old one will still be in the map, only that we no longer check it since we only
+             * with new key. The old one will still be in the dist, only that we no longer check it since we only
              * get the key from current res list. (!!!)
              */
             while (true) {

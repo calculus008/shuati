@@ -128,7 +128,7 @@ public class LE_817_Linked_List_Components {
              * No need to iterate through linked list here,
              * we only care for valid elements which are in G,
              * so just iterate G. For case : 0 -> 1 -> 2 - >3, [0, ,1, 3],
-             * 3 is the last element in linked list, so it's not in graph map.
+             * 3 is the last element in linked list, so it's not in graph dist.
              * But res still increases since it's a valid number in G.
              */
             for (int g : G) {

@@ -83,7 +83,7 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
 
     /**
      * Solution 3
-     * Same Sliding window algorithm, use int[] as map and iterate through char array "chars",
+     * Same Sliding window algorithm, use int[] as dist and iterate through char array "chars",
      * fasted running time on lintcode
      */
     public int lengthOfLongestSubstringKDistinct(String s, int k) {

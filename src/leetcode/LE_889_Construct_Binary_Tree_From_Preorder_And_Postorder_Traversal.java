@@ -59,7 +59,7 @@ public class LE_889_Construct_Binary_Tree_From_Preorder_And_Postorder_Traversal 
 
             /**
              * speed up looking up for left root in post[] by putting them
-             * in map, key is value in post[], value is its index.
+             * in dist, key is value in post[], value is its index.
              */
             Map<Integer, Integer> map = new HashMap<>();
             for (int i = 0; i < post.length; i++) {

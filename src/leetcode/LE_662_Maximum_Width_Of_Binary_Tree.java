@@ -104,7 +104,7 @@ public class LE_662_Maximum_Width_Of_Binary_Tree {
              *
              * By natrual of pre order DFS, left most node will
              * appear first for that level, so we only need to
-             * add it to map when we first reaches that level
+             * add it to dist when we first reaches that level
              */
             if (!map.containsKey(level)) {
                 map.put(level, pos);

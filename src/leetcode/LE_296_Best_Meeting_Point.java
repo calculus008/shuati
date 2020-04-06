@@ -38,6 +38,20 @@ public class LE_296_Best_Meeting_Point {
      Space : O(n)
      */
 
+    /**
+     * For example given in th question:
+     *
+     * a : {0, 0, 2} , row in sorted order
+     * b : {0, 2, 4} , col in sorted order
+     *
+     * min() on a:
+     * 2 - 0 = 2
+     *
+     * min() on b:
+     * 4 - 0 = 4
+     *
+     * res = 4 + 2 = 6
+     */
     public int minTotalDistance(int[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
 

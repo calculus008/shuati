@@ -150,7 +150,7 @@ public class LE_269_Alien_Dictionary {
 
             /**
              *  !!!
-             *  MUST initialize the map, to avoid null exception for those character
+             *  MUST initialize the dist, to avoid null exception for those character
              *  that will have zero inDegrees (i.e. starting characters)
              **/
             for (String word : words) {
@@ -160,7 +160,7 @@ public class LE_269_Alien_Dictionary {
             }
 
             /**
-             *  build graph, as well as fill out inDegree map for every character
+             *  build graph, as well as fill out inDegree dist for every character
              * */
             for (int i = 0; i < words.length - 1; i++) {
                 String curWord = words[i];
@@ -169,19 +169,19 @@ public class LE_269_Alien_Dictionary {
 
                 /**
                  * According to given dictionary with specified order, traverse every pair of words,
-                 * then put each pair into graph map to build the graph, and then update inDegree map
+                 * then put each pair into graph dist to build the graph, and then update inDegree dist
                  * for every "nextChar" (increase their inDegree by 1 every time)
                  * */
                 for (int j = 0; j < minLength; j++) {
                     char curChar = curWord.charAt(j);
                     char nextChar = nextWord.charAt(j);
                     if (curChar != nextChar) {
-                        /* update graph map */
+                        /* update graph dist */
                         graph.putIfAbsent(curChar, new HashSet<>());
                         Set<Character> set = graph.get(curChar);
 
                         /** WARNING: we must check if we already build curChar -> nextChar relationship in graph
-                         * if it contains, we cannot update inDegree map again. Otherwise, this nextChar
+                         * if it contains, we cannot update inDegree dist again. Otherwise, this nextChar
                          * will never be put in the queue when we do BFS traversal
                          * eg: for the input: {"za", "zb", "ca", "cb"}, we have two pairs of a -> b relationship
                          * if we increase inDegree value of 'b' again, the final result will not have 'b', since
@@ -194,7 +194,7 @@ public class LE_269_Alien_Dictionary {
                             graph.put(curChar, set);
 
                             /**
-                             * update inDegree map
+                             * update inDegree dist
                              **/
                             inDegreeMap.put(nextChar, inDegreeMap.getOrDefault(nextChar, 0) + 1);
                         }

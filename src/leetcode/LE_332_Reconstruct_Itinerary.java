@@ -100,7 +100,7 @@ public class LE_332_Reconstruct_Itinerary {
             while (map.containsKey(s) && !map.get(s).isEmpty()) {
                 /**
                  * "poll()", try all destinations that can be reached from s,
-                 * pq in map guaranteed lexicon order.
+                 * pq in dist guaranteed lexicon order.
                  */
                 helper(map.get(s).poll());
             }
@@ -148,7 +148,7 @@ public class LE_332_Reconstruct_Itinerary {
              *  The correct answer is ["JFK","MUC","LHR","SFO","SJC"]
              *
              */
-//            if (!map.containsKey(s)) return;
+//            if (!dist.containsKey(s)) return;
 
             while (map.containsKey(s) && !map.get(s).isEmpty()) {
                 String e = map.get(s).poll();

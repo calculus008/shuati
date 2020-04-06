@@ -52,7 +52,7 @@ public class LE_676_Implement_Magic_Dictionary {
      *       because, even the searched word is used to create current key, but it is NOT the only one, other word(s) is also
      *       used to create current key, so the searched word can be deemed as valid. See "hello" and "hallo" example in #2.
      *
-     *       if (map.containsKey(key) && (!map.get(key).contains(c) || map.get(key).size() > 1)) {
+     *       if (dist.containsKey(key) && (!dist.get(key).contains(c) || dist.get(key).size() > 1)) {
      *          return true;
      *       }
      *

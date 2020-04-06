@@ -12,7 +12,7 @@ public class LE_205_Isomorphic_Strings {
 
         Two strings are isomorphic if the characters in s can be replaced to get t.
 
-        All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.
+        All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may dist to the same character but a character may dist to itself.
 
         For example,
         Given "egg", "add", return true.
@@ -53,7 +53,7 @@ public class LE_205_Isomorphic_Strings {
             } else {
                 /**
                  * https://stackoverflow.com/questions/16757359/what-is-the-time-complexity-of-hashmap-containsvalue-in-java/16757380
-                 * map.containsValue() takes O(n)
+                 * dist.containsValue() takes O(n)
                  */
                 if (!map.containsValue(b)) {//!!! "containsValue"!!!
                     map.put(a, b);
@@ -142,7 +142,7 @@ public class LE_205_Isomorphic_Strings {
     }
 
     /**
-     * Can't just use one map to map char in s to char in t, for example :
+     * Can't just use one dist to dist char in s to char in t, for example :
      *
      * s: "ab"
      * t: "aa"
@@ -150,7 +150,7 @@ public class LE_205_Isomorphic_Strings {
      * for index 1, no key for 'b', it will just add and pass. But actually, 'a'
      * in t has been mapped to 'a' when index is 0.
      *
-     * Therefore we must map it to a 3rd party value.
+     * Therefore we must dist it to a 3rd party value.
      *
      */
     public boolean isIsomorphic4(String s, String t) {

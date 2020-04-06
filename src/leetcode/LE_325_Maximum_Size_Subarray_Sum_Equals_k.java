@@ -49,11 +49,11 @@ public class LE_325_Maximum_Size_Subarray_Sum_Equals_k {
             } else if(map.containsKey(sum - k)) {
                 /**
                  * sum - s = k => s = sum - k.
-                 * index of s = map.get(sum - k).
+                 * index of s = dist.get(sum - k).
                  *
                  * length of subarray:
                  *
-                 * i - (index + 1) + 1 = i - index = i - map.get(sum - k)
+                 * i - (index + 1) + 1 = i - index = i - dist.get(sum - k)
                  */
                 res = Math.max(res, i - map.get(sum - k));
             }

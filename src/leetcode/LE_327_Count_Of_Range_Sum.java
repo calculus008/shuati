@@ -51,7 +51,7 @@ public class LE_327_Count_Of_Range_Sum {
 
          Consider all possible indices we need for this problem: sum[i], lower + sum[i - 1] - 1, and upper + sum[i - 1].
          They can be either negative or very large and thus cannot be directly used for a Fenwick Tree.
-         One can solve this problem by doing the so-called discretization, i.e., map these 3n indices to positive numbers in [1, 3n]
+         One can solve this problem by doing the so-called discretization, i.e., dist these 3n indices to positive numbers in [1, 3n]
          while still preserving their relative order. Therefore, the size of the Fenwick Tree is bounded by 3n, and each operation takes only O(log n).
 
          For instance, assume the indices before discretization are [5, -3, 8, 300, 10]. After the mapping, they become [2, 1, 3, 5, 4].

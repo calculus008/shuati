@@ -52,7 +52,7 @@ public class LE_316_Remove_Duplicate_Letters {
      c b a c d c b c
      0 1 2 3 4 5 6 7
 
-     map:
+     dist:
      a  2
      b  6
      c  7

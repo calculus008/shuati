@@ -243,10 +243,10 @@ public class LE_425_Word_Squares {
                     //!!!
                     map.get(key).add(word);
                     //Stupid!!!
-                    //map.put(key, map.get(key).add(i));
+                    //dist.put(key, dist.get(key).add(i));
 
                     //or use one line
-                    //map.computeIfAbsent(key, k -> new HashSet()).add(word);
+                    //dist.computeIfAbsent(key, k -> new HashSet()).add(word);
                 }
             }
         }

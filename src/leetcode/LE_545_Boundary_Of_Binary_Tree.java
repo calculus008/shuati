@@ -76,12 +76,22 @@ public class LE_545_Boundary_Of_Binary_Tree {
             nodes.add(root.val);
 
             leftBoundary(root.left);
+            /**
+             * !!!
+             * Two parts for visiting leaves, since we go left to right
+             */
             leaves(root.left);
             leaves(root.right);
+
             rightBoundary(root.right);
 
             return nodes;
         }
+
+        /**
+         * pre order, because we go downward
+         *
+         */
         public void leftBoundary(TreeNode root) {
             if(root == null || (root.left == null && root.right == null)) {
                 return;
@@ -96,6 +106,9 @@ public class LE_545_Boundary_Of_Binary_Tree {
             }
         }
 
+        /**
+         * post order, because we go upward
+         */
         public void rightBoundary(TreeNode root) {
             if(root == null || (root.right == null && root.left == null)) {
                 return;

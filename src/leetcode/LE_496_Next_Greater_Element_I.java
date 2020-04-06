@@ -55,20 +55,20 @@ public class LE_496_Next_Greater_Element_I {
      *
      * 1
      * stack: 1
-     * map:
+     * dist:
      *
      * 2
      * stack: 2
-     * map: 1 -> 2
+     * dist: 1 -> 2
      *
      * 3
      * stack: 3
-     * map: 1 -> 2
+     * dist: 1 -> 2
      *      2 -> 3
      *
      * 4
      * stack: 4
-     * map: 1 -> 2
+     * dist: 1 -> 2
      *      2 -> 3
      *      3 -> 4
      *
@@ -149,22 +149,22 @@ public class LE_496_Next_Greater_Element_I {
      *
      * 4
      * stack: 4
-     * map: 4 -> -1
+     * dist: 4 -> -1
      *
      * 3
      * stack: 4 3
-     * map: 4 -> -1
+     * dist: 4 -> -1
      *      3 -> 4
      *
      * 2
      * stack: 4 3 2
-     * map: 4 -> -1
+     * dist: 4 -> -1
      *      3 -> 4
      *      2 -> 3
      *
      * 1
      * stack: 4 3 2 1
-     * map: 4 -> -1
+     * dist: 4 -> -1
      *      3 -> 2
      *      2 -> 3
      *      1 -> 2

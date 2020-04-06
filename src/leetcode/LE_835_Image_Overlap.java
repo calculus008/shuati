@@ -43,14 +43,14 @@ public class LE_835_Image_Overlap {
      * 1.First put coordinates of value 1 in A and B in l1 and l2
      * 2.Iterate elements in l1 and l2, calculate vector for each coordinate pair,
      *   use hashmap to calculate frequency of each vector.
-     * 3.Get max from map values
+     * 3.Get max from dist values
      *
      * Time  : O(N ^ 4)
      * Space : O(N ^ 2)
      *
      * For the time complexity,
      * saving the pixel coordinates takes: O(N ^ 2)
-     * The list can have a maximum of N ^ 2 entries, so filling in the map takes O(N ^ 2 * N ^ 2) i.e O(N ^ 4)
+     * The list can have a maximum of N ^ 2 entries, so filling in the dist takes O(N ^ 2 * N ^ 2) i.e O(N ^ 4)
      */
     class Solution {
         public int largestOverlap(int[][] A, int[][] B) {

@@ -68,7 +68,7 @@ public class MaxCharSequence {
                 char c = s.charAt(r);
                 //last konw location of the current char (repeated)
                 int k = map.get(c);
-                //move left boundary to the left of this location and remove this char from map
+                //move left boundary to the left of this location and remove this char from dist
                 l = k + 1;
                 map.remove(c);
             }

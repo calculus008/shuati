@@ -451,7 +451,7 @@ public class LE_749_Contain_Virus {
             }
 
             /**
-             * map 2D coordinate to 1D number, better use this mapping,, instead of creating a Pair class
+             * dist 2D coordinate to 1D number, better use this mapping,, instead of creating a Pair class
              * since we need to record which coordinates have been visited, use this mapping, we can use
              * 1 1D array visited[]. Use Pair class, we need to implement compare method etc, add more
              * complexity and error-prone in interview.

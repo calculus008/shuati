@@ -58,7 +58,7 @@ public class LE_523_Continuous_Subarray_Sum {
             int sums = 0;
 
             /**
-             * map : prefix sum -> index value when this prefix sum value appears
+             * dist : prefix sum -> index value when this prefix sum value appears
              */
             Map<Integer, Integer> map = new HashMap<>();
             /**
@@ -69,12 +69,12 @@ public class LE_523_Continuous_Subarray_Sum {
              * Example:
              * [1, 2, 3, 4], k = 3
              * a[0] + a[1] = 3
-             * map : 1 -> 0
+             * dist : 1 -> 0
              *       0 -> 1
              *       0 -> -1
              *
              * [0, 0], k = 0
-             * map : 0 -> -1
+             * dist : 0 -> -1
              *       0 -> 0, 0 - (-1) = 1, not the answer
              *       0 -> 1, 1 - (-1) = 2, it's the answer
              *

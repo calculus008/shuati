@@ -44,7 +44,7 @@ public class LE_1160_Find_Words_That_Can_Be_Formed_By_Characters {
 
             for (String word : words) {
                 /**
-                 * just clone map
+                 * just clone dist
                  */
                 int[] count = map.clone();
                 int i = 0;

@@ -124,7 +124,7 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
 
             /**
              * !!!
-             * "Collections.min(map.keySet())"
+             * "Collections.min(dist.keySet())"
              */
             for (int i = Collections.min(map.keySet()); i <= Collections.max(map.keySet()); i++) {
                 res.add(map.get(i));
@@ -427,7 +427,7 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
      * Adapt from LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree
      *
      * Changes :
-     * TreeMap<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
+     * TreeMap<Integer, TreeMap<Integer, List<Integer>>> dist = new TreeMap<>();
      *
      * Use list instead of TreeSet, the values in the trees are not unique.
      *

@@ -74,7 +74,7 @@ public class LE_560_Subarray_Sum_Equals_K {
 
         Map<Integer, Integer> map = new HashMap<>();
         /**
-         * deal with case the subarray starting from 0, with this entry in map,
+         * deal with case the subarray starting from 0, with this entry in dist,
          * no need to do "if (sum == k)"
          */
         map.put(0, 1);

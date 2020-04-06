@@ -57,7 +57,7 @@ public class LE_291_Word_Pattern_II {
                 return isMatch(str, i + s.length(), pattern, j + 1, map, set);
             }
 
-            // pattern character does not exist in the map
+            // pattern character does not exist in the dist
             for (int k = i; k < str.length(); k++) {//try in str, find which substring mapping with c can work out
                 String cur = str.substring(i, k + 1);
                 /**

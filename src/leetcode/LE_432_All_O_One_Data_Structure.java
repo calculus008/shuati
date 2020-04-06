@@ -47,7 +47,7 @@ public class LE_432_All_O_One_Data_Structure {
      *   这题和LE_460_LFU_Cache有类似的地方，都是用bucket来存放同样frequency的keys.
      *
      *   LE_460_LFU_Cache 我们只关心minFreq, 并且要处理"least recent", 所以用HashMap
-     *   to map frequency to LinkedHashSet.
+     *   to dist frequency to LinkedHashSet.
      *
      *   对这道题，关键要求是要能同时getMaxKey() and getMinKey() in O(1), 所以要用
      *   DLL, 要动态的维护其order, 保证最小和最大各在头和尾。

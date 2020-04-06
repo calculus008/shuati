@@ -65,8 +65,8 @@ public class LE_444_Sequence_Reconstruction {
 
           /**
            * This for loop creates :
-           * 1.map of indegree for each number appears in seqs
-           * 2.map of mapping each number appears in seqs to the numbers it points to.
+           * 1.dist of indegree for each number appears in seqs
+           * 2.dist of mapping each number appears in seqs to the numbers it points to.
            *   It serves the same purpose of "ArrayList<DirectedGraphNode> neighbors" in DirectedGraphNode class
            *
            * Has to process 2 adjacent elements at each iteration, therefore need to process the case that

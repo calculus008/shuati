@@ -60,8 +60,8 @@ public class LE_734_Sentence_Similarity {
             map.get(pair[1]).add(pair[0]);
 
             //It is wrong to use getOrDefault for object - https://stackoverflow.com/questions/43737014/how-does-java-util-maps-getordefault-works
-            // map.getOrDefault(pair[0], new HashSet<String>()).add(pair[1]);
-            // map.getOrDefault(pair[1], new HashSet<String>()).add(pair[0]);
+            // dist.getOrDefault(pair[0], new HashSet<String>()).add(pair[1]);
+            // dist.getOrDefault(pair[1], new HashSet<String>()).add(pair[0]);
         }
 
         for (int i = 0; i < words1.length; i++) {

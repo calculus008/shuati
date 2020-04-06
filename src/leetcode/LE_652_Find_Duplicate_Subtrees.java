@@ -68,8 +68,8 @@ public class LE_652_Find_Duplicate_Subtrees {
 
             /**
              * !!!
-             * Must count++ first, then put, if map.put(key, count++), the value
-             * put in map is not plus 1.
+             * Must count++ first, then put, if dist.put(key, count++), the value
+             * put in dist is not plus 1.
              */
             int count = map.getOrDefault(key, 0);
             count++;

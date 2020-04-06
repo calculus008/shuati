@@ -11,7 +11,7 @@ public class LE_64_Min_Path_Sum_2 {
      *         [[1,3,1],
      *          [1,5,1],
      *          [4,2,1]]
-     * Given the above grid map, return 7. Because the path 1→3→1→1→1 minimizes the sum.
+     * Given the above grid dist, return 7. Because the path 1→3→1→1→1 minimizes the sum.
      */
 
     /**

@@ -66,7 +66,7 @@ public class LE_460_LFU_Cache {
      * HashMap to save value and frequency (combine "valueMap" and "freMap"). You need to write more
      * code for it, so the 3 HashMap is simpler.
      *
-     * 4.Coordinate update on all 3 maps, used in both "get()" and "put()". Each call to "get()" and
+     * 4.Point update on all 3 maps, used in both "get()" and "put()". Each call to "get()" and
      *   "put()" means the frequency should be updated.
      *
      *   For a given key
@@ -215,7 +215,7 @@ public class LE_460_LFU_Cache {
              **/
             if (valueMap.size() == capacity) {
                 /**
-                 * what saved in bucket map:
+                 * what saved in bucket dist:
                  * key - frequency
                  * value - all keys (!!!) which have the same frequency as the key.
                  *
@@ -401,7 +401,7 @@ public class LE_460_LFU_Cache {
                 newList.add(node);
                 /**
                  * must have this line, since if get is null, getOrDefault()
-                 * return a new list that actually does not exist in map.
+                 * return a new list that actually does not exist in dist.
                  */
                 countMap.put(node.cnt, newList);
             }

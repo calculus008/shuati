@@ -91,7 +91,7 @@ public class LE_464_Can_I_Win {
 
         /**
          * Since maxChoosableInteger is smaller than 29, therefore,
-         * use integer (32 bit) to store state and used as key in map
+         * use integer (32 bit) to store state and used as key in dist
          **/
         private boolean helper2(int m, int t, int state, HashMap<Integer, Boolean> map) {
             // if (t < 0) {

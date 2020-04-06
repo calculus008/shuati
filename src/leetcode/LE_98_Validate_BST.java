@@ -31,61 +31,65 @@ public class LE_98_Validate_BST {
      * Divide and Conquer
      * Time and Space : O(n)
      */
-    public static boolean isValidBST(TreeNode root) {
-        if (root == null) return true;
-        return helper(root, null, null);
-    }
-
-    //!!! pass min and max as object Integer
-    public static boolean helper(TreeNode root, Integer min, Integer max) {
-        /**
-         * !!!
-         */
-        if (root == null) {
-            return true;
+    class Solution1 {
+        public boolean isValidBST(TreeNode root) {
+            if (root == null) return true;
+            return helper(root, null, null);
         }
 
-        /**
-         * !!!
-         * root.val <= min, "<="
-         */
-        if (min != null && root.val <= min) {
-            return false;
-        }
+        //!!! pass min and max as object Integer
+        public boolean helper(TreeNode root, Integer min, Integer max) {
+            /**
+             * !!!
+             */
+            if (root == null) {
+                return true;
+            }
 
-        /**
-         * !!!
-         * root.val >= max, ">="
-         */
-        if (max != null && root.val >= max) {
-            return false;
-        }
+            /**
+             * !!!
+             * root.val <= min, "<="
+             */
+            if (min != null && root.val <= min) {
+                return false;
+            }
 
-        return (helper(root.left, min, root.val) && helper(root.right, root.val, max));
+            /**
+             * !!!
+             * root.val >= max, ">="
+             */
+            if (max != null && root.val >= max) {
+                return false;
+            }
+
+            return (helper(root.left, min, root.val) && helper(root.right, root.val, max));
+        }
     }
 
     /**
      * Solution 2
      * Same as Solution 1, use long type to prevent overflow
      */
-    public boolean isValidBST2_JiuZhang(TreeNode root) {
-        /**
-         * !!!
-         * Long.MIN_VALUE, Long.MAX_VALUE
-         */
-        return divConq(root, Long.MIN_VALUE, Long.MAX_VALUE);
-    }
-
-    private boolean divConq(TreeNode root, long min, long max){
-        if (root == null){
-            return true;
+    class Solution2 {
+        public boolean isValidBST2_JiuZhang(TreeNode root) {
+            /**
+             * !!!
+             * Long.MIN_VALUE, Long.MAX_VALUE
+             */
+            return divConq(root, Long.MIN_VALUE, Long.MAX_VALUE);
         }
 
-        if (root.val <= min || root.val >= max){
-            return false;
-        }
+        private boolean divConq(TreeNode root, long min, long max) {
+            if (root == null) {
+                return true;
+            }
 
-        return divConq(root.left, min, root.val) && divConq(root.right, root.val, max);
+            if (root.val <= min || root.val >= max) {
+                return false;
+            }
+
+            return divConq(root.left, min, root.val) && divConq(root.right, root.val, max);
+        }
     }
 
     /**
@@ -96,39 +100,40 @@ public class LE_98_Validate_BST {
      *
      * This is the iterative version of inorder traversal.
      */
-    public boolean isValidBST3_JiuZhang(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
+    class Solution3 {
+        public boolean isValidBST3_JiuZhang(TreeNode root) {
+            Stack<TreeNode> stack = new Stack<>();
 
-        while (root != null) {
-            stack.push(root);
-            root = root.left;
-        }
-
-        TreeNode lastNode = null;
-        while (!stack.isEmpty()) {
-            // compare to last node
-            TreeNode node = stack.peek();
-            if (lastNode != null && lastNode.val >= node.val) {
-                return false;
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
             }
-            lastNode = node;
 
-            // move to next
-            if (node.right == null) {
-                node = stack.pop();
-                while (!stack.isEmpty() && stack.peek().right == node) {
+            TreeNode lastNode = null;
+            while (!stack.isEmpty()) {
+                // compare to last node
+                TreeNode node = stack.peek();
+                if (lastNode != null && lastNode.val >= node.val) {
+                    return false;
+                }
+                lastNode = node;
+
+                // move to next
+                if (node.right == null) {
                     node = stack.pop();
-                }
-            } else {
-                node = node.right;
-                while (node != null) {
-                    stack.push(node);
-                    node = node.left;
+                    while (!stack.isEmpty() && stack.peek().right == node) {
+                        node = stack.pop();
+                    }
+                } else {
+                    node = node.right;
+                    while (node != null) {
+                        stack.push(node);
+                        node = node.left;
+                    }
                 }
             }
+
+            return true;
         }
-
-        return true;
     }
-
 }

@@ -91,8 +91,8 @@ public class LE_126_Word_Ladder_II {
 
             List<String> path = new ArrayList<String>();
 
-            // bfs(map, distance, start, end, dict);
-            // dfs(ladders, path, end, start, distance, map);
+            // bfs(dist, distance, start, end, dict);
+            // dfs(ladders, path, end, start, distance, dist);
 
             /**
              * Improvement :
@@ -208,7 +208,7 @@ public class LE_126_Word_Ladder_II {
      *
      *  bfs starts from cog
      *
-     *  map:
+     *  dist:
      *  cog -
      *  dog - cog
      *  log - cog
@@ -272,7 +272,7 @@ public class LE_126_Word_Ladder_II {
                 List<String> path = new ArrayList<String>();
                 // path.add();
 
-                // dfs(ladders, path, end, start, distance, map);
+                // dfs(ladders, path, end, start, distance, dist);
                 dfs(ladders, path, start, end, distance, map);
             }
 
@@ -287,7 +287,7 @@ public class LE_126_Word_Ladder_II {
             q.offer(start);
             distance.put(start, 1);
 
-            //init map, put all valid strings from dict into map
+            //init dist, put all valid strings from dict into dist
             for (String s : dict) {
                 map.put(s, new ArrayList<String>());
             }

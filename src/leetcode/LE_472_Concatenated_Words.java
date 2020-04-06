@@ -29,9 +29,10 @@ public class LE_472_Concatenated_Words {
     /**
      * 24ms 99.85# solution from leetocde
      *
-     * A variation of word break logic with recursion
+     * Optimized from Solution_lc_2:
+     * Detect min length of the words, use it to minimize for loop times.
      */
-    class Solution {
+    class Solution_lc_1 {
         public List<String> findAllConcatenatedWordsInADict(String[] words) {
             Set<String> set = new HashSet<>(10000);
             List<String> ans = new ArrayList<>();
@@ -66,6 +67,40 @@ public class LE_472_Concatenated_Words {
                 }
             }
 
+            return false;
+        }
+    }
+
+    /***
+     * A simplified version of word break.
+     */
+    class Solution_lc_2 {
+        public List<String> findAllConcatenatedWordsInADict(String[] words) {
+            Set<String> set = new HashSet<>();
+            for (String word : words) {
+                set.add(word);
+            }
+
+            List<String> result = new ArrayList<>();
+            for (String word : words) {
+                if (dfs(word, set)) {
+                    result.add(word);
+                }
+            }
+
+            return result;
+        }
+
+        private boolean dfs(String word, Set<String> set) {
+            for (int i = 1; i < word.length(); i++) {
+                String firstHalf = word.substring(0, i);
+
+                if (set.contains(firstHalf)) {
+                    String secondHalf = word.substring(i);
+                    if (set.contains(secondHalf) || dfs(secondHalf, set))
+                        return true;
+                }
+            }
             return false;
         }
     }

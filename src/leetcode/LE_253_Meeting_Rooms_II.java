@@ -205,7 +205,7 @@ public class LE_253_Meeting_Rooms_II {
      * Move line, for a given moment, count how many meetings are running in parallel?
      * Maintain the MAX count value, then it is the answer.
      *
-     * In order to do it, need to map all start/end points on a single timeline,
+     * In order to do it, need to dist all start/end points on a single timeline,
      * hence we need Pair Class to represent time and type of events (start or end),
      * then sort.
      *
