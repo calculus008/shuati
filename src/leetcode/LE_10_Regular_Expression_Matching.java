@@ -100,6 +100,7 @@ public class LE_10_Regular_Expression_Matching {
     class Solution {
         /**
          *  Solution 1
+         *  DP
 
             https://leetcode.com/problems/regular-expression-matching/discuss/5651
             https://www.youtube.com/watch?v=c5vsle60Uw8&list=PLvyIyKZVcfAmSRMbPFWjWP6gBwPWiWwSU&index=10
@@ -117,8 +118,8 @@ public class LE_10_Regular_Expression_Matching {
                            Example of case 3.2 ,a* counts as multiple a:
                            s : aaa, p : a*
                            i = 0, j = 0 : a equals a
-                           i = 1, j = 1 : char at current j is '*', so we need to see if previous char in p matches current char in s ('*' is used as
-                                 the previous char)
+                           i = 1, j = 1 : char at current j is '*', so we need to see if previous char in p matches current char in s
+                                          ('*' is used as the previous char)
                            i = 2, j = 1 : check the matching state of previous char in s,'aaa' - 'a*', combine a in index 1 and 2 in s to match '*' in p
          **/
 
@@ -132,7 +133,7 @@ public class LE_10_Regular_Expression_Matching {
                 pre-process for case 3.1 when i is 0, init dp[0][j] (since i starts from 1 in the main for loop)
                 dp[0][j] : empty string matches with pattern string.
                 dp[0][j - 1] == true, then current '*' can take the meaning of matching 0 previous char('*' as empty), so dp[0][j] is true
-                dp[0][j-2] == true, then 'a*' as empty, so dp[0][j] = true
+                dp[0][j - 2] == true, then 'a*' as empty, so dp[0][j] = true
              **/
             for (int j = 1; j < dp[0].length; j++) {
                 if (p.charAt(j - 1) == '*') {

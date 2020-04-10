@@ -38,6 +38,8 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
         Solution 1 : Recursive
         Time and Space : O(n)
 
+        If we don't count recursion stack, it is space O(1)
+
         !!!
         Postorderd 的变形， instead of left->right->cur, it goes right->left->cur.
         It goes right side first, save right side nodes in system stack. Then it links from back to start (goes backwards)
@@ -127,4 +129,36 @@ public class LE_114_Flatten_Binary_Tree_To_LinkedList {
             cur.left = null;
         }
     }
+
+
+    /**
+     * Iterative space O(1) solution
+     *
+     * Time : O(n)
+     * Space : O!(1), no recursion space needed
+     *
+     * Solution3 in https://leetcode.com/problems/flatten-binary-tree-to-linked-list/solution/
+     *
+     * Optimal solution with Morris Traversal
+     */
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+
+        TreeNode node = root;
+
+        while (node != null) {
+            if (node.left != null) {
+                TreeNode rightmost = node.left;
+                while (rightmost.right != null) {
+                    rightmost = rightmost.right;
+                }
+
+                rightmost.right = node.right;
+                node.right = node.left;
+                node.left = null;
+            }
+            node = node.right;
+        }
+    }
+
 }

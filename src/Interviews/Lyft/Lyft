@@ -1,0 +1,89 @@
+LE_108_Convert_Sorted_Array_To_BST
+LE_109_Convert_Sorted_List_To_BST
+LE_114_Flatten_Binary_Tree_To_LinkedList
+
+(****)
+LE_157_Read_N_Char_Given_Read4
+LE_158_Read_N_Char_Given_Read4_II
+Buffered_Read
+
+LE_10_Regular_Expression_Matching      楼主上来就说要用DP. 结果面试官问了Recursive和DP两个思路. 重点问了为什么a和c.*a是match的.
+                                       问了两种思路的计算顺序, 时间复杂度. 然后写程序. 最后自己写test 测试.
+                                       楼主建议面试前先在codepad写一题,自己编译一下.  面试前自己先想好test case.
+
+
+LE_76_Minimum_Window_Substring
+LE_735_Asteroid_Collision          (*****) 变种， 每次撞过之后，小的会爆炸，大的的尺寸会变成大的减去小的，感觉比leetcode上的还好做一些...
+                                   space station 在右边 How many asteroids will hit station。 同时要求O(1) space solution
+                                   space station 在最右侧， 问题是最后有多少小行星会撞击space station. eg 如果是一直向左飞的话就不会撞击
+
+                                   原题是还剩多少asteroid
+                                   而这题是最后撞到右边的有多少； 原题中飞向左边的就算存活下来了 因为不是飞向右边所以也不能算
+
+
+
+LE_239_Sliding_Window_Maximum
+
+
+
+LE_78_Subsets                     但是是str 不是int
+LE_90_Subsets_II
+
+LE_238_Product_Of_Array_Except_Self   (***)   先说了除没法handle有0的情况，然而面试官说可以先写除的，写完之后写了乘的，
+                                              然后面试官说乘法cost也很大，要减少用乘的，最后优化成单独记录0的位置
+
+                                      尔伞霸 几种写法最好都写，从最简单的开始，要考虑edge case，要跑代码
+
+LE_279_Perfect_Squares
+LE_716_Max_Stack
+
+LE_981_Time_Based_Key_Value_Store      (*****) 上机题，变形。
+                                       第四题描述有一点不一样（把 timestamp 换成 version），code完全可以通用
+
+LE_1004_Max_Consecutive_Ones_III
+
+
+
+LE_155_Min_Stack                       先想了下解法，跟面试官交流了思路，确认后开始写。 准备写test case时候自己发现有bug 修了
+                                       简单写了几个test cases 确认无误后面试官说可以优化下代码，从之。
+                                       第一题比较顺利写完，最后还问了我要怎么简洁的解释这个解法。之后还有15分钟左右。
+LE_73_Set_Matrix_Zero
+
+LE_17_Letter_Combinations_Of_A_Phone_Number
+LE_140_Word_Break_II
+
+LE_281_Zigzag_Iterator
+没见过可能我面经看得少，但也还简单的，就是input multiple iterato：
+ex:
+iterator1 = [1,2,3]
+iterator2= [4,5]
+要求实现next和hasnext，顺序是14253
+
+
+#
+365. Water and Jug Problem  (*****)
+follow up： 如果target可以等于两个bucket水量之和呢
+follow up：如果你的这个function很多组都在用，每个组都有不同的要求，你觉得你能怎么扩展你的这个函数？
+感觉面试官想要知道如果bucket的个数不是固定的两个的话怎么扩展这个函数。改一改visited和queue里面存的状态的格式就好了，
+对于python选手来说直接把数组tuple()一下然后存成状态就行了。
+
+Note:基本题和followup面试官都要求写testcase和实际跑起来。
+1个小时的面试，面试官说题出完的时候还剩半个小时，应该就只有这一个题了。
+
+只不过要求给出一个最佳解决方案
+一开始以为就是力扣原题，开始分析gcd，小哥提示说不要算，只要求出一个解决方案就行
+于是开始用DFS，写了一会发现DFS不对，再改用BSF磕磕碰碰总算解出来并且run通过
+
+用bfs track路径？很浪费空间吧? 存个parent map就好。。相对dfs贵一点而已
+可能一个点对应多个parent，不过你只要一个可行解
+
+water 和 bucket 找达到target amount of water 的最短倒水路径。 用bfs 就可以了，但是我卡在如何maintain 每一个state 上。 大家加油！
+
+
+#
+1. Merge two array.
+2. Merge N array.
+
+
+
+

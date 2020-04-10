@@ -34,6 +34,8 @@ public class LE_109_Convert_Sorted_List_To_BST {
 
     /**
      * Time and Space : O(n)
+     *
+     * Use O(n) extra space (convert to arraylist)
      */
     class Solution2_Simplified {
         public TreeNode sortedListToBST(ListNode head) {
@@ -50,14 +52,78 @@ public class LE_109_Convert_Sorted_List_To_BST {
         public TreeNode buildTree(List<Integer> arr, int start, int end) {
             if (start > end) return null;
 
-            int mid = (start + end) / 2;
+            int mid = start + (end - start) / 2;
             TreeNode node = new TreeNode(arr.get(mid));
 
             node.left = buildTree(arr, start, mid - 1);
             node.right = buildTree(arr, mid + 1, end);
 
             return node;
+        }
+    }
 
+    /**
+     * Simulate inorder and construct BST
+     *
+     * Solution3 in https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/
+     *
+     * Could be the optimal solution, it achieves O(n) time like Solution2 but only uses O(logn) recursion
+     * space like Solution1.
+     *
+     * The invariance that we maintain in this algorithm is that whenever we are done building the left half
+     * of the BST, the head pointer in the linked list will point to the root node or the middle node
+     * (which becomes the root). So, we simply use the current value pointed to by head as the root node and
+     * progress the head node by once i.e. head = head.next
+     *
+     * 实际上就是按in order顺序移动head, 然后创建TreeNode (因为list是sorted).
+     *
+     * The only tricky part : how we can know when the recursion ends.
+     *
+     * That's why we first need to find out the length of the list, then pass start and end to recursion.
+     * Here we don't really use start and end to restrive the node, it only helps us to know when to
+     * end the recursion (start > end), in other words, start and end values only service as control
+     * mechanism.
+     *
+     * Time : O(n)
+     * Space : O(logn)
+     */
+    class Solution3 {
+        ListNode head;
+
+        public TreeNode sortedListToBST(ListNode head) {
+            if (head == null) return null;
+
+            this.head = head;
+            int len = getSize(head);
+
+            return helper(0, len - 1);
+        }
+
+        private int getSize(ListNode head) {
+            ListNode runner = head;
+            int count = 0;
+
+            while (runner != null) {
+                runner = runner.next;
+                count++;
+            }
+
+            return count;
+        }
+
+        private TreeNode helper(int start, int end) {
+            if (start > end) return null;
+
+            int mid = start + (end - start) / 2;
+            TreeNode left = helper(start, mid - 1);
+
+            TreeNode root = new TreeNode(this.head.val);
+            root.left = left;
+            this.head = head.next;//!!!
+
+            root.right = helper(mid + 1, end);
+
+            return root;
         }
     }
 
@@ -104,6 +170,10 @@ public class LE_109_Convert_Sorted_List_To_BST {
         }
 
         public TreeNode helper(ListNode head, ListNode tail) {
+            /**
+             * !!!
+             * head == tail
+             */
             if (head == tail) return null;
 
             ListNode slow = head;
@@ -131,6 +201,8 @@ public class LE_109_Convert_Sorted_List_To_BST {
     }
 
     /**
+     * Time and Space : O(n)
+     *
      * Convert linked list into a list (ArrayList) so that we can access the mid with
      * index directly.
      *

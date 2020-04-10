@@ -28,6 +28,13 @@ public class LE_108_Convert_Sorted_Array_To_BST {
          -10  5
      */
 
+    /**
+     * Pre order
+     *
+     * Time : O(n)
+     * Space : If we consider space for output, it is O(n).
+     *         If we don't consider space for output, it is O(logn)
+     */
     public static TreeNode sortedArrayToBST(int[] nums) {
         if (nums == null || nums.length == 0) return null;
         return helper(nums, 0, nums.length - 1);

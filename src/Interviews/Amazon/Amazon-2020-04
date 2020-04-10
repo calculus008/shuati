@@ -358,8 +358,9 @@ ABC store top popular item sold. ( 基本上就是 most frequent cache, without 
 题目给的很松动，让我make assumption。
 写了2 个function。 sale（ Str prodName） 每次sale， 增加这个商品 count。
 lis<Str> get(int ｋ）return top k most popular product. ( popularity ranked by sale count )
-
 solved with hashmap + Linked list.
+LE_347_Top_K_Frequent_Elements
+
 
 Follow up:
 If this is production code how would you optimize it?
