@@ -57,7 +57,10 @@ public class LE_10_Regular_Expression_Matching {
          Hard
      */
 
-    class Solution_Practice {
+    /**
+     * Time and Space : O(mn)
+     */
+    class Solution_Bottom_Up_Practice {
         public boolean isMatch(String s, String p) {
             if (s == null || p == null) return false;
 
@@ -74,20 +77,18 @@ public class LE_10_Regular_Expression_Matching {
 
             for (int i = 1; i <= m; i++) {
                 for (int j = 1; j <= n; j++) {
-                    char sc = s.charAt(i - 1);
-                    char pc = p.charAt(j - 1);
+                    char curS = s.charAt(i - 1);
+                    char curP = p.charAt(j - 1);
 
-                    if (sc == pc || pc == '.') {
+                    if (curS == curP || curP == '.') {
                         dp[i][j] = dp[i - 1][j - 1];
-                    } else if (pc == '*') {
-                        if (dp[i][j - 2]) {
-                            /**
-                             * if making 'a*' as empty string in p can match with s,
-                             * dp[i][j] is true.
-                             */
-                            dp[i][j] = true;
-                        } else if (sc == p.charAt(j - 2) || p.charAt(j - 2) == '.') {
-                            dp[i][j] = dp[i - 1][j];
+                    } else if (curP == '*') {
+                        char preP = p.charAt(j - 2);
+
+                        if (preP != curS && preP != '.') {
+                            dp[i][j] = dp[i][j - 2];
+                        } else {
+                            dp[i][j] = dp[i][j - 2] || dp[i - 1][j] || dp[i - 1][j - 2];
                         }
                     }
                 }
@@ -112,15 +113,20 @@ public class LE_10_Regular_Expression_Matching {
                         1   if p.charAt(j-1) != s.charAt(i) : dp[i][j] = dp[i][j-2]  //in this case, a* only counts as empty
                         2   if p.charAt(j-1) == s.charAt(i) or p.charAt(j-1) == '.':
                                        dp[i][j] = dp[i-1][j]    //in this case, a* counts as multiple a !!!
+                                                                //Here we actually "merge" the current char at i into "a*" group
+
                                     or dp[i][j] = dp[i][j-1]   // in this case, a* counts as single a
                                     or dp[i][j] = dp[i][j-2]   // in this case, a* counts as empty
 
                            Example of case 3.2 ,a* counts as multiple a:
                            s : aaa, p : a*
-                           i = 0, j = 0 : a equals a
+                           i = 0, j = 0 : a equals a, dp[1][1] = true
+
                            i = 1, j = 1 : char at current j is '*', so we need to see if previous char in p matches current char in s
                                           ('*' is used as the previous char)
-                           i = 2, j = 1 : check the matching state of previous char in s,'aaa' - 'a*', combine a in index 1 and 2 in s to match '*' in p
+
+                           i = 2, j = 1 : check the matching state of previous char in s,'aaa' - 'a*', combine 'a' in index 1 and 2
+                                          in s to match '*' in p
          **/
 
         public boolean isMatch(String s, String p) {
@@ -169,72 +175,74 @@ public class LE_10_Regular_Expression_Matching {
      * DFS
      * Use the same template as LE_44_Wildcards_Matching
      */
-    public boolean isMatch_JiuZhang(String s, String p) {
-        if (s == null || p == null) {
-            return false;
-        }
-
-        boolean[][] visited = new boolean[s.length()][p.length()];
-        boolean[][] mem = new boolean[s.length()][p.length()];
-
-        return helper(s, 0, p, 0, visited, mem);
-    }
-
-    private boolean helper(String s, int sIdx, String p, int pIdx, boolean[][] visited, boolean[][] mem) {
-        //"" == ""
-        if (pIdx == p.length()) {
-            return sIdx == s.length();
-        }
-
-        if (sIdx == s.length()) {
-            return isEmpty(p, pIdx);
-        }
-
-        if (visited[sIdx][pIdx]) {
-            return mem[sIdx][pIdx];
-        }
-
-        boolean match = false;
-        char sChar = s.charAt(sIdx);
-        char pChar = p.charAt(pIdx);
-
-        /**
-            consider 'a*' as a bundle
-            case 1 : See if 'a*' matches multiple chars in s - chars at sIdx and pIdx match (both are 'a'),
-                     move on to the next one in s, recurse.
-            case 2 : See 'a*' as empty, jump 2 positions and recurse
-         **/
-        if (pIdx + 1 < p.length() && p.charAt(pIdx + 1) == '*') {
-            match = (isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx, visited, mem)
-                    || helper(s, sIdx, p, pIdx + 2, visited, mem));
-        } else {
-            match = isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx + 1, visited, mem);
-        }
-
-        visited[sIdx][pIdx] = true;
-        mem[sIdx][pIdx] = match;
-
-        return match;
-    }
-
-    private boolean isMatch(char c1, char c2) {
-        return c1 == c2 || c2 == '.';
-    }
-
-    /**
-       For p to be matched as empty, it could be :
-       **********
-       a*b*c*d*
-
-       '*' should always be related with the char before it.
-       "i + 1 >= p.length()" -> XXXXa*b*c
-     */
-    private boolean isEmpty(String p, int pIdx) {
-        for (int i = pIdx; i < p.length(); i += 2) {
-            if (i + 1 >= p.length() || p.charAt(i + 1) != '*') {
+    class Solution_Top_Down {
+        public boolean isMatch_JiuZhang(String s, String p) {
+            if (s == null || p == null) {
                 return false;
             }
+
+            boolean[][] visited = new boolean[s.length()][p.length()];
+            boolean[][] mem = new boolean[s.length()][p.length()];
+
+            return helper(s, 0, p, 0, visited, mem);
         }
-        return true;
+
+        private boolean helper(String s, int sIdx, String p, int pIdx, boolean[][] visited, boolean[][] mem) {
+            //"" == ""
+            if (pIdx == p.length()) {
+                return sIdx == s.length();
+            }
+
+            if (sIdx == s.length()) {
+                return isEmpty(p, pIdx);
+            }
+
+            if (visited[sIdx][pIdx]) {
+                return mem[sIdx][pIdx];
+            }
+
+            boolean match = false;
+            char sChar = s.charAt(sIdx);
+            char pChar = p.charAt(pIdx);
+
+            /**
+             consider 'a*' as a bundle
+             case 1 : See if 'a*' matches multiple chars in s - chars at sIdx and pIdx match (both are 'a'),
+             move on to the next one in s, recurse.
+             case 2 : See 'a*' as empty, jump 2 positions and recurse
+             **/
+            if (pIdx + 1 < p.length() && p.charAt(pIdx + 1) == '*') {
+                match = (isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx, visited, mem)
+                        || helper(s, sIdx, p, pIdx + 2, visited, mem));
+            } else {
+                match = isMatch(sChar, pChar) && helper(s, sIdx + 1, p, pIdx + 1, visited, mem);
+            }
+
+            visited[sIdx][pIdx] = true;
+            mem[sIdx][pIdx] = match;
+
+            return match;
+        }
+
+        private boolean isMatch(char c1, char c2) {
+            return c1 == c2 || c2 == '.';
+        }
+
+        /**
+         * For p to be matched as empty, it could be :
+         * *********
+         * a*b*c*d*
+         * <p>
+         * '*' should always be related with the char before it.
+         * "i + 1 >= p.length()" -> XXXXa*b*c
+         */
+        private boolean isEmpty(String p, int pIdx) {
+            for (int i = pIdx; i < p.length(); i += 2) {
+                if (i + 1 >= p.length() || p.charAt(i + 1) != '*') {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
