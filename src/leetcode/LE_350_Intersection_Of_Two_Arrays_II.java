@@ -22,7 +22,8 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
          Follow up:
          What if the given array is already sorted? How would you optimize your algorithm?
          What if nums1's size is small compared to nums2's size? Which algorithm is better?
-         What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+         What if elements of nums2 are stored on disk, and the memory is limited such that
+         you cannot load all elements into the memory at once?
 
          Easy
      */
@@ -60,6 +61,9 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
          Solution 2 : Sorting and two pointers
          Time  : O(nlogn + mlogm)
          Space : O(min(m, n))
+
+         if given arrays are already sorted, it takes O(m + n) time.
+         if return type is list and not considering space in return data structure, it is O(1) in space.)oˆ;l, m
      */
     public int[] intersect2(int[] nums1, int[] nums2) {
         if (nums1 == null || nums1.length == 0 || nums2 == null || nums2.length == 0) {
@@ -77,7 +81,10 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
             } else if (nums1[i] > nums2[j]) {
                 j++;
             } else {
-                res.add(nums1[i]);//in LE_349是往set里加（因为不要重复的数字），此处是往list里加。
+                /**
+                 * in LE_349是往set里加（因为不要重复的数字），此处是往list里加。
+                 */
+                res.add(nums1[i]);
                 i++;
                 j++;
             }
@@ -95,18 +102,26 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
     /**
      !!!Follow up:
      1.What if the given array is already sorted? How would you optimize your algorithm?
-       Use solution 2 (without sorting), Time : O(m + n)
+       Use solution 2 (without sorting), Time : O(m + n).
+
+       Even though both Solution1 and Solution2 are both O(m + n), Solution2 has the following
+       advantages:
+         a.Avoid the hashmap related maintaining cost (both space and time)
+         b.For cases that one array is much smaller than the other, while loop can terminate
+           early so that we don't have to go through the full length of n + m.
 
      2.What if nums1's size is small compared to nums2's size? Which algorithm is better?
-       Use  solution 1, run through nums1 and put in HashMap, ?? (can save space since m < n)
+       Solution2, see #a and #b above.
 
-     3.What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+     3.What if elements of nums2 are stored on disk, and the memory is limited such that you
+       cannot load all elements into the memory at once?
          If only nums2 cannot fit in memory, put all elements of nums1 into a HashMap,
          read chunks of array that fit into the memory, and record the intersections.
 
-         If both nums1 and nums2 are so huge that neither fit into the memory, sort them individually (external sort),
-         then read 2 elements from each array at a time in memory, record intersections.
+         If both nums1 and nums2 are so huge that neither fit into the memory, sort them
+         individually (external sort), then read 2 elements from each array at a time in
+         memory, record intersections.
 
-        Or MapReduce
+         Or MapReduce
      */
 }

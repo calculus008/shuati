@@ -11,39 +11,42 @@ LE_10_Regular_Expression_Matching      楼主上来就说要用DP. 结果面试�
                                        问了两种思路的计算顺序, 时间复杂度. 然后写程序. 最后自己写test 测试.
                                        楼主建议面试前先在codepad写一题,自己编译一下.  面试前自己先想好test case.
 
+                                       a和c.*a 是不match的，是不是要说"a"和".*a"是match的？
 
+                                       对.
+                                       “a“和".*a"是match的.
+                                       a和c.*a 是不match的.
+
+#Sliding Window
 LE_76_Minimum_Window_Substring
+LE_239_Sliding_Window_Maximum
+LE_1004_Max_Consecutive_Ones_III
+
+Dependency_Resolver
+
 LE_735_Asteroid_Collision          (*****) 变种， 每次撞过之后，小的会爆炸，大的的尺寸会变成大的减去小的，感觉比leetcode上的还好做一些...
                                    space station 在右边 How many asteroids will hit station。 同时要求O(1) space solution
-                                   space station 在最右侧， 问题是最后有多少小行星会撞击space station. eg 如果是一直向左飞的话就不会撞击
+                                   space station 在最右侧， 问题是最后有多少小行星会撞击space station. eg 如果是一直向左飞的话就不
+                                   会撞击
 
                                    原题是还剩多少asteroid
                                    而这题是最后撞到右边的有多少； 原题中飞向左边的就算存活下来了 因为不是飞向右边所以也不能算
 
-
-
-LE_239_Sliding_Window_Maximum
-
-
-
-LE_78_Subsets                     但是是str 不是int
-LE_90_Subsets_II
+Asteroid_Collision_Variation
+Matrix_Transform
 
 LE_238_Product_Of_Array_Except_Self   (***)   先说了除没法handle有0的情况，然而面试官说可以先写除的，写完之后写了乘的，
                                               然后面试官说乘法cost也很大，要减少用乘的，最后优化成单独记录0的位置
 
                                       尔伞霸 几种写法最好都写，从最简单的开始，要考虑edge case，要跑代码
+Product_Of_Array_Except_Self
 
 LE_279_Perfect_Squares
-LE_716_Max_Stack
 
 LE_981_Time_Based_Key_Value_Store      (*****) 上机题，变形。
                                        第四题描述有一点不一样（把 timestamp 换成 version），code完全可以通用
 
-LE_1004_Max_Consecutive_Ones_III
-
-
-
+LE_716_Max_Stack
 LE_155_Min_Stack                       先想了下解法，跟面试官交流了思路，确认后开始写。 准备写test case时候自己发现有bug 修了
                                        简单写了几个test cases 确认无误后面试官说可以优化下代码，从之。
                                        第一题比较顺利写完，最后还问了我要怎么简洁的解释这个解法。之后还有15分钟左右。
@@ -53,12 +56,38 @@ LE_17_Letter_Combinations_Of_A_Phone_Number
 LE_140_Word_Break_II
 
 LE_281_Zigzag_Iterator
-没见过可能我面经看得少，但也还简单的，就是input multiple iterato：
+没见过可能我面经看得少，但也还简单的，就是input multiple iterator：
 ex:
 iterator1 = [1,2,3]
 iterator2= [4,5]
 要求实现next和hasnext，顺序是14253
 
+
+#
+LE_88_Merge_Sorted_Array
+LI_486_Merge_K_Sorted_Arrays
+
+LE_160_Intersection_Of_Tow_Linked_List
+
+LE_349_Intersection_Of_Two_Arrays
+LE_350_Intersection_Of_Two_Arrays_II
+Follow up 1: 给定 l1 和 l2 都是 iterator，要求实现一个 Iterator。这个 Iterator 有 next 和 has_next 两个方法，
+call next 会返回下一个common number。has_next 返回 true or false 表示是否有下一个 common number。我实现的时候
+把找下一个 common number 的逻辑都放在 has_next 里，然后用一个全局变量存 next common number。
+
+Follow up 2: 如果 l1 和 l2 里有 duplicates 而我们不想 返回 duplicates怎么办？ 比如 l1 = [1, 2, 2, 3, 3, 6, 8, 10],
+l2 = [2, 2, 3, 3, 5, 7, 10, 12] 返回 [2, 3] 而不是 [2, 2, 3, 3]。每次call next(l1) 的时候保证 next(l1) 不等于上一个 number。
+
+Follow up 3: 如果输入不止两个数组而是多个数组怎么办？这里只要求讲思路不用写码。可以用 min heap 存每个 iterator 的 next，
+然后用 counter 记录某个数字出现的次数，如果等于 iterator 数量就可以返回。
+Intersection_Union_Of_K_Sorted_Lists
+
+
+LE_986_Interval_List_Intersections
+LI_793_Intersection_Of_Arrays             use PriorityQueue, optimal in space
+
+LE_78_Subsets                     但是是str 不是int
+LE_90_Subsets_II
 
 #
 365. Water and Jug Problem  (*****)
@@ -78,12 +107,3 @@ Note:基本题和followup面试官都要求写testcase和实际跑起来。
 可能一个点对应多个parent，不过你只要一个可行解
 
 water 和 bucket 找达到target amount of water 的最短倒水路径。 用bfs 就可以了，但是我卡在如何maintain 每一个state 上。 大家加油！
-
-
-#
-1. Merge two array.
-2. Merge N array.
-
-
-
-

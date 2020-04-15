@@ -1,5 +1,6 @@
 package leetcode;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class LE_735_Asteroid_Collision {
@@ -61,29 +62,79 @@ public class LE_735_Asteroid_Collision {
      *   3.+ -
      *   4.- +
      *
-     * when collision happens: only 3 which is + -
+     * when collision happens: only 3 which is + - (All astroids move at the same speed!!!)
      *
      * use a stack to keep track of the previous and compare current value with previous ones
+     *
+     * Time and Space : O(n)
      */
-    public int[] asteroidCollision(int[] asteroids) {
-        Stack<Integer> stack = new Stack<>();
+    class Solution1 {
+        public int[] asteroidCollision(int[] asteroids) {
+            Stack<Integer> stack = new Stack<>();
 
-        for (int num : asteroids) {
-            if (num > 0) {
-                stack.add(num);
-            } else {
-                while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -num) {
-                    stack.pop();
-                }
+            for (int num : asteroids) {
+                if (num > 0) {
+                    stack.add(num);
+                } else {
+                    while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -num) {
+                        stack.pop();
+                    }
 
-                if (stack.isEmpty() || stack.peek() < 0) {
-                    stack.push(num);
-                } else if (stack.peek() == -num) {
-                    stack.pop();
+                    if (stack.isEmpty() || stack.peek() < 0) {
+                        stack.push(num);
+                    } else if (stack.peek() == -num) {
+                        stack.pop();
+                    }
                 }
             }
+
+            return stack.stream().mapToInt(i -> i).toArray();
+        }
+    }
+
+    /**
+     * !!!
+     * Time : O(n)
+     * Space : O(1)
+     *
+     * A variation of the problem that requires O(1) space - Asteroid_Collision_Variation
+     */
+    class Solution2 {
+        public int[] asteroidCollision(int[] asteroids) {
+            int len = helper(asteroids, 0, 1) + 1;
+            return Arrays.copyOfRange(asteroids, 0, len);
         }
 
-        return stack.stream().mapToInt(i -> i).toArray();
+        /**
+         * There are only four possible end states:
+         *
+         * [-,-,..,-]
+         * [+,+,..,+]
+         * [-,-,...-,+,+,...,+]
+         * []
+         *
+         * a is last positive, b is first negative after a.
+         * so in the end, we get final value for a, that is the end of the final result.
+         *
+         * Also the surviving asteroids will not change in its values. That's why we don't
+         * need to change any values during iteration. We just need to move index pointers.
+         */
+        private int helper(int[] as, int a, int b) {
+            if (as.length <= 1) return as.length;
+
+            while (b < as.length) {
+                if (a < 0 || as[a] < 0 || as[b] > 0) {
+                    as[++a] = as[b++];  // Win-Win (both are survived)
+                } else if (as[a] == -1 * as[b]) {
+                    a--;
+                    b++;           // Lost-Lost (both are destroyed)
+                } else if (as[a] < -1 * as[b]) {
+                    a--;                // Win (b replace a, a go back)
+                } else {
+                    b++;                // Lost (b goes on, a stay)
+                }
+            }
+            return a;
+        }
     }
 }

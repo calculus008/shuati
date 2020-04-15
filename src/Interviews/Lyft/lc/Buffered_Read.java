@@ -1,4 +1,4 @@
-package Interviews.Lyft;
+package Interviews.Lyft.lc;
 
 import java.util.ArrayList;
 import java.util.List;

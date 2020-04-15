@@ -3,6 +3,7 @@ package leetcode;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by yuank on 4/18/18.
@@ -82,6 +83,65 @@ public class LE_281_Zigzag_Iterator {
          */
         public boolean hasNext() {
             return !list.isEmpty();
+        }
+    }
+
+    public class ZigzagIterator1 {
+        Queue<Iterator> q;
+
+        public ZigzagIterator1(List<Integer> v1, List<Integer> v2) {
+            q = new LinkedList<>();
+            if (!v1.isEmpty()) q.add(v1.iterator());
+            if (!v2.isEmpty()) q.add(v2.iterator());
+        }
+
+        public int next() {
+            Iterator<Integer> i = q.poll();
+            int res = i.next();
+
+            if (i.hasNext()) {
+                q.add(i);
+            }
+            return res;
+        }
+
+        public boolean hasNext() {
+            return !q.isEmpty();
+        }
+    }
+
+    public class ZigzagIterator2 {
+        boolean isSecond;
+        Iterator<Integer> it1;
+        Iterator<Integer> it2;
+
+        public ZigzagIterator2(List<Integer> v1, List<Integer> v2) {
+            it1 = v1.iterator();
+            it2 = v2.iterator();
+            isSecond = false;
+        }
+
+        public int next() {
+            if (isSecond) {
+                isSecond = false;
+                int ret = it2.next();
+                return ret;
+            }
+            isSecond = true;
+            int ret = it1.next();
+            return ret;
+        }
+
+        public boolean hasNext() {
+            boolean ret1 = it1.hasNext();
+            boolean ret2 = it2.hasNext();
+            if (!ret1) {
+                isSecond = true;
+            }
+            if (!ret2) {
+                isSecond = false;
+            }
+            return ret1 || ret2;
         }
     }
 }

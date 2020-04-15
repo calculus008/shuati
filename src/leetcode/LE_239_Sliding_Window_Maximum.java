@@ -51,6 +51,23 @@ public class LE_239_Sliding_Window_Maximum {
                 }
                 dq.offer(i);
 
+                /**
+                 * !!!
+                 * for #2 and #3, notice that we only start to remove left side AFTER
+                 * we have a full window, for example :
+                 *
+                 * [1, 2, 3, 4, 5, 6]
+                 *     |_____|
+                 *
+                 * The first removal happens when we try to form window between index 1 and 3 (remove index 0)
+                 *
+                 * However, the process of filling the result array starts WHEN we have a full window.
+                 * For the above example, this happens when we have the window between index 0 and 2.
+                 *
+                 * Therefore we have two "if" conditions:
+                 *   "if (i >= k)"
+                 *   "if (i >= k - 1)"
+                 */
                 //2.remove when window starts to move
                 if (i >= k) {
                     if (dq.peekFirst() == i - k) {
@@ -76,7 +93,8 @@ public class LE_239_Sliding_Window_Maximum {
 
       Heap solution : Time : O((n - k + 1) * logk), space : O(k)
 
-      Best solution : Time and Space : O(n)
+      Best solution : Time : O(n), Space : O(k)
+
       Monotonic Queue Solution, using Deque to implement.
       Monotonic Queue - maintain elements in queue in sorted order (from large to small). Max number is at the head of the deque.
       Example :

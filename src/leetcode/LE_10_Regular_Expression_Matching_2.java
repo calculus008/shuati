@@ -3,18 +3,31 @@ package leetcode;
 public class LE_10_Regular_Expression_Matching_2 {
     /**
      * Brutal Force Recursion
+     *
+     * Time : O((m + n) * 2 ^ (m + n / 2))
+     * Space : O((m + n) * 2 ^ (m + n / 2))  -> O(m ^ 2 + n ^ 2)
      */
-    class Solution {
-        public boolean isMatch(String text, String pattern) {
-            if (pattern.isEmpty()) return text.isEmpty();
-            boolean first_match = (!text.isEmpty() &&
-                    (pattern.charAt(0) == text.charAt(0) || pattern.charAt(0) == '.'));
 
-            if (pattern.length() >= 2 && pattern.charAt(1) == '*'){
-                return (isMatch(text, pattern.substring(2)) ||
-                        (first_match && isMatch(text.substring(1), pattern)));
+    class Solution {
+        public boolean isMatch(String s, String p) {
+            if (p.isEmpty()) return s.isEmpty();
+
+            boolean firstMatch = !s.isEmpty() && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.');
+
+            if (p.length() >= 2 && p.charAt(1) == '*'){
+                /**
+                 * s : ab####
+                 * p : a*####
+                 *     or
+                 *     .*####
+                 *
+                 * "isMatch(s, p.substring(2))" : 'x*' counts as empty string.
+                 *
+                 * "firstMatch && isMatch(s.substring(1), p)" : for case that the first char in p is '.'
+                 */
+                return isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p));
             } else {
-                return first_match && isMatch(text.substring(1), pattern.substring(1));
+                return firstMatch && isMatch(s.substring(1), p.substring(1));
             }
         }
     }

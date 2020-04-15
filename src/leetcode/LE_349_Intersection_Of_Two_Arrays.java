@@ -19,12 +19,19 @@ public class LE_349_Intersection_Of_Two_Arrays {
          The result can be in any order.
 
          Easy
+
+         Follow up:
+         Then they ask you to solve it under these constraints:
+         O(n) time and O(1) space (the resulting array of intersections is not taken into consideration).
+         You are told the lists are sorted.
+
+         See Soluion2
      */
 
     /**
      * Solution 1  : Two sets
      *
-     * Time and Space : O(n)
+     * Time and Space : O(n + m)
      */
     public int[] intersection1(int[] nums1, int[] nums2) {
         Set<Integer> set = new HashSet<>();
@@ -57,8 +64,11 @@ public class LE_349_Intersection_Of_Two_Arrays {
 
     /**
          Solution 2 : sort and two pointers
+
          Time  : O(nlogn)
          Space : O(n)
+
+         If given arrays are already sorted, this solution will take O(n) time.
      **/
     public int[] intersection2(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
@@ -72,6 +82,14 @@ public class LE_349_Intersection_Of_Two_Arrays {
             } else if (nums1[i] < nums2[j]) {
                 i++;
             } else {
+                /**
+                 * Here, it requires "Each element in the result must be unique",
+                 * therefore we need to use Set to dedup.
+                 *
+                 * In, LE_350_Intersection_Of_Two_Arrays_II, it requires
+                 * " Each element in the result should appear as many times as it shows in both arrays",
+                 * we do add to a list.
+                 */
                 intersec.add(nums1[i]);
                 i++;
                 j++;

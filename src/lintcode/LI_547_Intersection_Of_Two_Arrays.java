@@ -9,7 +9,6 @@ public class LI_547_Intersection_Of_Two_Arrays {
 
          Each element in the result must be unique.
          The result can be in any order.
-         Have you met this question in a real interview?
 
          Example
          Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2].

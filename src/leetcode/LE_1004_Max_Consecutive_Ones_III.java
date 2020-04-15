@@ -33,6 +33,12 @@ public class LE_1004_Max_Consecutive_Ones_III {
     /**
      * sliding window
      *
+     * Find the longest subarray with at most K zeros.
+     *
+     * For each A[i], try to find the longest subarray.
+     * If A[j] ~ A[i] has zeros <= K, we continue to increment j.
+     * If A[j] ~ A[i] has zeros > K, we increment i.
+     *
      * Time  : O(n)
      * Space : O(1)
      */
