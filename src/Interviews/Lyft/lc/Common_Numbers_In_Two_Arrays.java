@@ -2,7 +2,7 @@ package Interviews.Lyft.lc;
 
 import java.util.*;
 
-public class Common_Numbers_In_Tow_Arrays {
+public class Common_Numbers_In_Two_Arrays {
     /**
      * LE_349_Intersection_Of_Two_Arrays
      * LE_350_Intersection_Of_Two_Arrays_II
@@ -81,6 +81,18 @@ public class Common_Numbers_In_Tow_Arrays {
     }
 
 
+    /**
+     * Follow up 1:
+     * 给定 l1 和 l2 都是 iterator，要求实现一个 Iterator。这个 Iterator 有 next 和 has_next 两个方法，
+     * call next 会返回下一个common number。has_next 返回 true or false 表示是否有下一个 common number。我实现的时候
+     * 把找下一个 common number 的逻辑都放在 has_next 里，然后用一个全局变量存 next common number。
+     *
+     * NOTE:
+     * Assumption for the following solutions are that the given List of numbers are already SORTED.
+     *
+     * Otherwise, need to do sorting first.
+     * Collections.sort(list)
+     */
     static class CommonNumberIterator {
         Iterator<Integer> it1;
         Iterator<Integer> it2;
