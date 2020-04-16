@@ -387,8 +387,8 @@ public class Common_Numbers_In_Tow_Arrays {
     }
 
         public static void main(String[] args) {
-//        int[] nums1 = {1, 2, 2, 3, 3, 6, 8, 10, 10, 10};
-//        int[] nums2 = {2, 2, 3, 3, 5, 7, 10, 10, 10, 12};
+        int[] nums1 = {1, 2, 2, 3, 3, 6, 8, 10, 10, 10};
+        int[] nums2 = {2, 2, 3, 3, 5, 7, 10, 10, 10, 12};
 
 //        int[] nums1 = {6, 8, 11};
 //        int[] nums2 = {5, 7, 10, 12};
@@ -408,8 +408,9 @@ public class Common_Numbers_In_Tow_Arrays {
 //        int[] nums1 = {2, 2, 2};
 //        int[] nums2 = {2, 2, 2};
 
-        int[] nums1 = {1, 2, 2, 7, 10, 11, 22, 22, 22, 22, 23, 50, 60, 70, 100};
-        int[] nums2 = {1, 1, 2, 2, 2, 10, 14, 22, 22, 22, 23};
+//        int[] nums1 = {1, 2, 2, 7, 10, 11, 22, 22, 22, 22, 23, 50, 60, 70, 100};
+//        int[] nums2 = {1, 1, 2, 2, 2, 10, 14, 22, 22, 22, 23};
+
         int[] nums3 = {1, 2, 5, 6, 10, 22, 22, 23, 55, 66};
 
         List<Integer> l1 = new ArrayList<>();
