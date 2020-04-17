@@ -331,12 +331,12 @@ public class Common_Numbers_In_Two_Arrays {
             size = pq.size();
             pre = null;
             next = null;
-//            System.out.println("init done, size = " + size);
+//            System.out.println("init done, READ_SIZE = " + READ_SIZE);
         }
 
         public boolean hasNext() {
             if (pq == null || pq.size() < size) {
-                System.out.println("#1.pq size is smaller than " + size + ", return false");
+                System.out.println("#1.pq READ_SIZE is smaller than " + size + ", return false");
                 if (pq != null) {
                     pq = null;
                 }
@@ -382,8 +382,8 @@ public class Common_Numbers_In_Two_Arrays {
                  * !!!
                  * can't return true here, it will miss the valid ones at the end
                  */
-//                if (pq.size() < size) {
-//                    System.out.println("#2.pq size is smaller than " + size + ", return false");
+//                if (pq.READ_SIZE() < READ_SIZE) {
+//                    System.out.println("#2.pq READ_SIZE is smaller than " + READ_SIZE + ", return false");
 //                    return false;
 //                }
             }

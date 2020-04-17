@@ -14,7 +14,7 @@ public class Matrix_Transform {
      *
      * I have got a square matrix consisting of elements either 1 or 0.
      * An ith row toggle toggles all the ith row elements (1 becomes 0 and vice versa) and jth column toggle
-     * toggles all the jth column elements. I have got another square matrix of similar size. I want to change
+     * toggles all the jth column elements. I have got another square matrix of similar READ_SIZE. I want to change
      * the initial matrix to the final matrix using the minimum number of toggles. For example
      *
      * |0 0 1|
@@ -47,7 +47,7 @@ public class Matrix_Transform {
      * The final step is a consequence of the fact that there are 2N possible toggles, and no toggle
      * will be part of both solutions. That should be immediately clear from the above for column toggles;
      * for row toggles, note that a row that is all 0's after one set of column toggles will be all 1's
-     * after the other set of column toggles. So, after computing one set of K toggles, the size of the other
+     * after the other set of column toggles. So, after computing one set of K toggles, the READ_SIZE of the other
      * set will be 2N - K toggles.
      */
 
