@@ -60,7 +60,7 @@ public class LE_443_String_Compression {
      * Easy
      */
 
-    class Solution {
+    class Solution1 {
         public int compress(char[] chars) {
             int i = 0;
             int n = chars.length;
@@ -79,13 +79,44 @@ public class LE_443_String_Compression {
                 chars[j++] = cur;
 
                 if (count != 1) {
-                    for (char c : Integer.toString(count).toCharArray()) {
+//                    for (char c : Integer.toString(count).toCharArray()) {
+
+                    String s = count + "";
+                    for (char c :s.toCharArray()) {
                         chars[j++] = c;
                     }
                 }
             }
 
             return j;
+        }
+    }
+
+    class Solution2 {
+        public int compress(char[] chars) {
+            int len = 0; // also a pointer to modify array in-place
+
+            for (int i = 0; i < chars.length; ) {
+                chars[len] = chars[i];
+                int j = i + 1;
+
+                while (j < chars.length && chars[j] == chars[i]) {
+                    j++;
+                }
+
+                if (j - i > 1) { // need compression
+                    String freq = j - i + "";
+
+                    for (char c : freq.toCharArray()) {
+                        chars[++len] = c;
+                    }
+                }
+
+                len++;
+                i = j;
+            }
+
+            return len;
         }
     }
 }

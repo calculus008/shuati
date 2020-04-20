@@ -56,7 +56,7 @@ public class Map_Digit_To_Letter {
 
                 if (isInteger(l)) {
                     numSet.add(l);
-                } else {
+                } else if (isWord(l)){
                     wordSet.add(l);
                 }
 
@@ -103,6 +103,13 @@ public class Map_Digit_To_Letter {
     private static boolean isInteger(String s) {
         for (char c : s.toCharArray()) {
             if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
+    private static boolean isWord(String s) {
+        for (char c : s.toCharArray()) {
+            if (!Character.isAlphabetic(c)) return false;
         }
         return true;
     }

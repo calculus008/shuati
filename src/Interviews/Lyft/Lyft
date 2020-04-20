@@ -102,6 +102,7 @@ LE_63_Unique_Path_II
 LE_68_Text_Justification
 
 LE_127_Word_Ladder
+
 LE_128_Longest_Consecutive_Sequence
 LE_173_Binary_Search_Tree_Iterator
 LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List
@@ -138,7 +139,7 @@ LE_69_Sqrt
 LE_88_Merge_Sorted_Array
 LE_121_Best_Time_To_Buy_And_Sell_Stock
 LE_162_Find_Peak_Element
-LE_443_String_Compression
+LE_443_String_Compression                   (***)  run-length, in-place
 
-LE_981_Time_Based_Key_Value_Store
-LE_1094_Car_Pooling                         (***)
+LE_981_Time_Based_Key_Value_Store            Map<String, TreeMap<Integer, String>> map
+LE_1094_Car_Pooling                         (***)  sweep line variation
