@@ -58,7 +58,8 @@ public class LE_155_Min_Stack {
     class MinStack4 {
         /**
          *!!!
-         * Both stack and min should use long
+         * Both stack and min should use long,
+         * since we need to do calculation and try to avoid integer overflow
          */
         private long min;
         private Stack<Long> stack;
@@ -218,47 +219,50 @@ public class LE_155_Min_Stack {
     }
 
     /**
-     * Using linkedlist
+     * Using linked list as stack, one stack, save value/min pair.
+     *
+     * If interviewer asks not using stack in java lib, we can use this solution.
      *
      * followup是： pop和push‍‌‍‍‍‍‌‌‌‍‌‌‍‌‍‌‌‌‌的时间复杂度优化
      */
     class MinStack3 {
-        class Node{
+        class Node {
             int value;
             int min;
             Node next;
 
-            Node(int x, int min){
-                this.value=x;
-                this.min=min;
+            Node(int x, int min) {
+                this.value = x;
+                this.min = min;
                 next = null;
             }
         }
 
         Node head;
+
         public void push(int x) {
-            if(null==head){
-                head = new Node(x,x);
-            }else{
-                Node n = new Node(x, Math.min(x,head.min));
-                n.next=head;
-                head=n;
+            if (null == head) {
+                head = new Node(x, x);
+            } else {
+                Node n = new Node(x, Math.min(x, head.min));
+                n.next = head;
+                head = n;
             }
         }
 
         public void pop() {
-            if(head!=null)
-                head =head.next;
+            if (head != null)
+                head = head.next;
         }
 
         public int top() {
-            if(head!=null)
+            if (head != null)
                 return head.value;
             return -1;
         }
 
         public int getMin() {
-            if(null!=head)
+            if (null != head)
                 return head.min;
             return -1;
         }

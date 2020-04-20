@@ -51,10 +51,76 @@ public class LE_127_Word_Ladder {
      *
      * BFS
      *
-     * Time  : O(n*26^l) -> O(n*26^l/2), l = length of solution, n=|wordList|
+     * Time  : O(n*26^l) -> O(n*26^l/2), l = length of solution, n is length of wordList.
      * Space : O(n)
+     *
+     * 另一种算法
+     * Time Complexity: O(M×N), where M is the length of words and N is the total number of words in
+     *                  the input word list. Finding out all the transformations takes M iterations
+     *                  for each of the N words. Also, breadth first search in the worst case might
+     *                  go to each of the N words.
+     *
+     *                  This should be the upper bound.
+     *
+     * Space Complexity: O(M×N), Queue for BFS in worst case would need space for all N words.
      */
 
+    /**
+     Solution 2 : BFS. improved version from Solution 1. 54 ms
+     Improvement :
+     1.Create a separate method "findNeighbors()" to get all valid neighbors for current String.
+     2.For String that is already visited, since we want to "find the length of SHORTEST transformation sequence",
+     whenever we see a String that has appears previously, we just ignore it. In Solution 1, we have a Set to
+     record the visited strings, here, we simply remove it from dictionary.
+
+     Also it seems that Leetcode requires that endWord must be in the given dictionary (or wordList),
+     */
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (wordList == null || wordList.size() == 0 || beginWord == null || endWord == null) {
+            return 0;
+        }
+
+        if (beginWord.equals(endWord)) {
+            return 1;
+        }
+
+        HashSet<String> dict = new HashSet<>();
+        for (String word : wordList) {
+            dict.add(word);
+        }
+
+        /**
+         * Need to clarify if endWord exists in the given dictionary, here it must exist.
+         */
+        if (!dict.contains(endWord)) {
+            return 0;
+        }
+
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
+
+        int res = 1;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            res++;
+
+            for (int i = 0; i < size; i++) {
+                String cur = queue.poll();
+                List<String> neighbors = findNeighbors(cur, dict);
+
+                for (String neighbor : neighbors) {
+                    if (endWord.equals(neighbor)) {
+                        return res;
+                    }
+
+                    queue.offer(neighbor);
+                }
+            }
+        }
+
+        return 0;
+    }
 
     /**
      * Solution 1 : BFS, 83ms
@@ -107,64 +173,6 @@ public class LE_127_Word_Ladder {
 
                     }
                     chars[j] = original;
-                }
-            }
-        }
-
-        return 0;
-    }
-
-
-    /**
-        Solution 2 : BFS. improved version from Solution 1. 54 ms
-        Improvement :
-        1.Create a separate method "findNeighbors()" to get all valid neighbors for current String.
-        2.For String that is already visited, since we want to "find the length of SHORTEST transformation sequence",
-          whenever we see a String that has appears previously, we just ignore it. In Solution 1, we have a Set to
-          record the visited strings, here, we simply remove it from dictionary.
-
-        Also it seems that Leetcode requires that endWord must be in the given dictionary (or wordList),
-     */
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (wordList == null || wordList.size() == 0 || beginWord == null || endWord == null) {
-            return 0;
-        }
-
-        if (beginWord.equals(endWord)) {
-            return 1;
-        }
-
-        HashSet<String> dict = new HashSet<>();
-        for (String word : wordList) {
-            dict.add(word);
-        }
-
-        /**
-         * Need to clarify if endWord exists in the given dictionary, here it must exist.
-         */
-        if (!dict.contains(endWord)) {
-            return 0;
-        }
-
-        Queue<String> queue = new LinkedList<>();
-        queue.offer(beginWord);
-
-        int res = 1;
-
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            res++;
-
-            for (int i = 0; i < size; i++) {
-                String cur = queue.poll();
-                List<String> neighbors = findNeighbors(cur, dict);
-
-                for (String neighbor : neighbors) {
-                    if (endWord.equals(neighbor)) {
-                        return res;
-                    }
-
-                    queue.offer(neighbor);
                 }
             }
         }
@@ -604,7 +612,7 @@ public class LE_127_Word_Ladder {
             /**
              * !!!
              * since end may not be in the dict and now we check if a newly generated word
-             * is in dict in fucntion getNext(), therefore, must make sure end is in dict.
+             * is in dict in function getNext(), therefore, must make sure end is in dict.
              */
             dict.add(end);
 

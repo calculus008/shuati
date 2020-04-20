@@ -316,7 +316,7 @@ public class LE_146_LRU_Cache {
 
             /**
              * !!!
-             * #8, never forget action of remove and add should be done on both dist and DDL
+             * #8, never forget action of remove and add should be done on both dist and DLL
              */
             map.put(key, node);//!!!
 

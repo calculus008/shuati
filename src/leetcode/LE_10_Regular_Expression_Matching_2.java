@@ -4,6 +4,14 @@ public class LE_10_Regular_Expression_Matching_2 {
     /**
      * Brutal Force Recursion
      *
+     * Time Complexity:
+     * Let m, n be the lengths of the text and the pattern respectively.
+     * In the worst case, a call to match(text[i:], pattern[2j:]) will be made c(i+j, i) times.
+     * (c=> combination, that break down into (i+j)!/(i)!.(j)!)
+     *
+     * Thus, the complexity has the order:  O((m + n) * 2 ^ (m + n / 2))
+     *
+     *
      * Time : O((m + n) * 2 ^ (m + n / 2))
      * Space : O((m + n) * 2 ^ (m + n / 2))  -> O(m ^ 2 + n ^ 2)
      */
@@ -21,9 +29,16 @@ public class LE_10_Regular_Expression_Matching_2 {
                  *     or
                  *     .*####
                  *
-                 * "isMatch(s, p.substring(2))" : 'x*' counts as empty string.
+                 * "isMatch(s, p.substring(2))" : 'x*' in pattern counts as empty string.
+                 *  s : ab
+                 *  p : d*ab
+                 *  After we ignore the first 2 chars in p, we will have a match
                  *
                  * "firstMatch && isMatch(s.substring(1), p)" : for case that the first char in p is '.'
+                 *  s: aaa
+                 *  p: a*
+                 *  After we remove the first 'a' from s and recurse several times, we have s as "" and
+                 *  p as "a*", we will have a match going through isMatch(s, p.substring(2)).
                  */
                 return isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p));
             } else {

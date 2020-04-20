@@ -116,6 +116,7 @@ public class Multi_Stream_1 {
 
                     if (k == 0) {
                         remove(this.cur.stream);
+                        continue;
                     }
                 }
 

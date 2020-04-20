@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by yuank on 5/14/18.
@@ -28,9 +26,75 @@ public class LE_341_Flatten_Nested_List_Iterator {
 
     /**
      * Important
+     */
+
+    /**
+     * Practice of Solution2
      *
+     * Let N be the total number of integers within the nested list,
+     * L be the total number of lists within the nested list,
+     * D be the maximum nesting depth (maximum number of lists inside each other).
+     *
+     * Time :
+     * Constructor : O(1)
+     * next() : O(1)
+     * hasNext() : O(L / N) or O(1)
+     *             If the top of the stack is an integer, then this function does nothing; taking O(1) time.
+     *
+     *             Otherwise, it needs to process the stack until an integer is on top. The best way of analyzing
+     *             the time complexity is to look at the total cost across all calls and then divide by the number
+     *             of calls made. Once the iterator is exhausted we must have seen every integer at least once,
+     *             costing O(N) time. Additionally, it has seen every list (except the first) on the stack at least
+     *             once also, so this costs O(L)time. Adding these together, we get O(N + L)time.
+     *
+     *             The amortized time  is the total cost, O(N + L), divided by the number of times it's called.
+     *             In order to get all integers, we need to have called it N times. This gives us an amortized
+     *             time complexity of O(N + L) / N = O(N / N + L / N) = O(L / N)
+     *
+     * Space : O(D)
      *
      */
+    public class NestedItrator_Iterator_Stack_Solution_Practice {
+        Deque<Iterator<NestedInteger>> stack;
+        Integer cur;
+
+        public NestedItrator_Iterator_Stack_Solution_Practice(List<NestedInteger> nestedList) {
+            stack = new ArrayDeque<>();
+            cur = null;
+            stack.push(nestedList.iterator());
+        }
+
+        public Integer next() {
+            if (cur != null) {
+                Integer res = cur;
+                cur = null;
+                return res;
+            }
+
+            return null;
+        }
+
+        public boolean hasNext() {
+            while (cur == null && !stack.isEmpty()) {
+                Iterator<NestedInteger> it = stack.peek();
+                if (!it.hasNext()) {
+                    stack.pop();
+                    continue;
+                }
+
+                NestedInteger n = it.next();
+                if (n.isInteger()) {
+                    cur = n.getInteger();
+                    return true;
+                } else {
+                    stack.push(n.getList().iterator());
+                }
+            }
+
+            return false;
+        }
+    }
+
 
     /**
          Stack

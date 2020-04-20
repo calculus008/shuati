@@ -63,6 +63,10 @@ public class LE_68_Text_Justification {
      * 调节字体使得这个常单词能在一行放下？是否能保证最长的字体在最小的字体下 <= maxWidth?
      */
 
+    /**
+     * Also refer to Text_Wrap
+     */
+
     class Solution {
 
         public List<String> fullJustify(String[] words, int maxWidth) {

@@ -20,6 +20,51 @@ public class  LE_173_Binary_Search_Tree_Iterator {
      **/
 
     /**
+     * https://leetcode.com/articles/binary-search-tree-iterator/
+     *
+     * For next(), time is O(1)
+     * the important thing to note here is that we only make call to goLeft() for nodes which have a right child.
+     * Otherwise, we simply return. Also, even if we end up calling the helper function, it won't always process
+     * N nodes. They will be much lesser. Only if we have a skewed tree would there be N.
+     *
+     * Thus, the amortized (average) time complexity for this function would still be O(1) which is what the
+     * question asks for. We don't need to have a solution which gives constant time operations for every call.
+     * We need that complexity on average and that is what we get.
+     */
+    class BSTIterator_Official_Solution {
+        TreeNode cur;
+        Stack<TreeNode> stack;
+
+        public BSTIterator_Official_Solution(TreeNode root) {
+            stack = new Stack<>();
+            cur = root;
+            goLeft(root);
+        }
+
+        private void goLeft(TreeNode root) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+        }
+
+        public int next() {
+            TreeNode cur = stack.pop();
+
+            if (cur.right != null) {
+                goLeft(cur.right);
+            }
+
+            return cur.val;
+        }
+
+        public boolean hasNext() {
+            return stack.size() > 0;
+        }
+    }
+
+
+    /**
      * !!!
      * This basically is a variation of iterative version of inorder traversal
      *
@@ -101,6 +146,8 @@ public class  LE_173_Binary_Search_Tree_Iterator {
      *
      * 大概就是用 LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List，
      * 把 BST convert to double linked list, 然后iterate.
+     *
+     * 如果要求 space O(1) 而且可以改变给定的BST, 可以用这个方法。
      */
 
 }

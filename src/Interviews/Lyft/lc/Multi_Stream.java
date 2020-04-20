@@ -148,7 +148,6 @@ public class Multi_Stream {
             if (map.size() == 0) return new int[]{};
 
             int count = 0;
-            boolean isEnd = false;
             List<Integer> res = new ArrayList<>();
 
             /**
@@ -157,7 +156,7 @@ public class Multi_Stream {
              * 如果没有stream了，返回。
              */
 
-            while (!isEnd && count < n) {
+            while (count < n) {
                 System.out.println("  count="+count + ", bufPtr="+this.bufPtr);
 
                 if (this.cur.stream == null) break;
@@ -173,6 +172,7 @@ public class Multi_Stream {
 
                     if (k == 0) {
                         remove(this.cur.stream);
+                        continue;
                     }
                 }
 
@@ -225,7 +225,7 @@ public class Multi_Stream {
 
             if (this.cur.equals(n)) {
                 this.cur = cur.next;
-                bufPtr = 0; //??
+                this.bufPtr = 0;
             }
 
             /**
@@ -260,13 +260,13 @@ public class Multi_Stream {
     public static void main(String[] args) {
         MultiStream ms = new MultiStream();
 
-//        List<Integer> l1 = Arrays.asList(1,2,3,4);
-//        List<Integer> l2 = Arrays.asList(5,6,7);
-//        List<Integer> l3 = Arrays.asList(8,9,10);
+        List<Integer> l1 = Arrays.asList(1,2,3,4);
+        List<Integer> l2 = Arrays.asList(5,6,7);
+        List<Integer> l3 = Arrays.asList(8,9,10);
 
-        List<Integer> l1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
-        List<Integer> l2 = Arrays.asList(9, 10, 11);
-        List<Integer> l3 = Arrays.asList(12, 13, 14, 15, 16);
+//        List<Integer> l1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
+//        List<Integer> l2 = Arrays.asList(9, 10, 11);
+//        List<Integer> l3 = Arrays.asList(12, 13, 14, 15, 16);
 
         Stream s1 = new Stream(l1);
         Stream s2 = new Stream(l2);
@@ -276,17 +276,18 @@ public class Multi_Stream {
         ms.add(s2);
         ms.add(s3);
 
-//        print(ms.read(2));
-//        print(ms.read(2));
-//        ms.remove(s2);
-//        print(ms.read(6));
-//        ms.remove(s2);
-//        print(ms.read(6));
-        print(ms.read(10));
+        print(ms.read(2));
+        print(ms.read(2));
         ms.remove(s2);
         print(ms.read(6));
         ms.remove(s2);
         print(ms.read(6));
+
+//        print(ms.read(10));
+//        ms.remove(s2);
+//        print(ms.read(6));
+//        ms.remove(s2);
+//        print(ms.read(6));
 
     }
 }

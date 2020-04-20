@@ -106,4 +106,36 @@ public class LE_42_Trapping_Rain_Water {
 
         return res;
     }
+
+    public int trap1(int[] height) {
+        if (height == null || height.length == 0) return 0;
+
+        int l = 0, r = height.length - 1;
+        int maxL = 0, maxR = 0;
+        int res = 0;
+
+        while (l < r) {
+            if (height[l] < height[r]) {
+                if (height[l] > maxL) {
+                    maxL = height[l];
+                }
+                res += maxL - height[l];
+                /**
+                 * !!!
+                 */
+                l++;
+            } else {
+                if (height[r] > maxR) {
+                    maxR = height[r];
+                }
+                res += maxR - height[r];
+                /**
+                 * !!!
+                 */
+                r--;
+            }
+        }
+
+        return res;
+    }
 }

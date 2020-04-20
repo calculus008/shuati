@@ -48,8 +48,12 @@ public class LE_671_Second_Minimum_Node_In_A_Binary_Tree {
      * 特性：
      * 1.给定的Root的值一定是最小的。
      * 2.Children nodes的值一定大于等于parent node 的值。
+     *
+     * pre-order
+     *
+     * Time and Space : O(n)
      */
-    class Solution1 {
+    class Solution_DFS_1 {
         public int findSecondMinimumValue(TreeNode root) {
             if (root == null) {
                 return -1;
@@ -65,6 +69,8 @@ public class LE_671_Second_Minimum_Node_In_A_Binary_Tree {
 
             /**
              * !!!
+             * s1 is the the value of the parent for current node.
+             *
              * Since children's values are no less than root's value,
              * so we already find 2nd min element, no need to go further
              * into its branches.
@@ -80,6 +86,28 @@ public class LE_671_Second_Minimum_Node_In_A_Binary_Tree {
             if (r == -1) return l;
 
             return Math.min(l, r);
+        }
+    }
+
+    class Solution_DFS_2 {
+        int min1;
+        long ans = Long.MAX_VALUE;
+
+        public int findSecondMinimumValue(TreeNode root) {
+            min1 = root.val;
+            dfs(root);
+            return ans < Long.MAX_VALUE ? (int) ans : -1;
+        }
+
+        public void dfs(TreeNode root) {
+            if (root == null) return;
+
+            if (min1 < root.val && root.val < ans) {
+                ans = root.val;
+            } else if (min1 == root.val) {
+                dfs(root.left);
+                dfs(root.right);
+            }
         }
     }
 
@@ -123,6 +151,8 @@ public class LE_671_Second_Minimum_Node_In_A_Binary_Tree {
      * Use a TreeMap<Integer, Integer>, key is node.val, value is number of times it appears in tree.
      *
      * Then go over the TreeMap to find kth min.
+     *
+     * Also see brutal force solution (use set)  in https://leetcode.com/articles/second-minimum-node-in-a-binary-tree/
      *
      */
 }

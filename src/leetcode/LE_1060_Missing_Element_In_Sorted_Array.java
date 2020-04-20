@@ -47,7 +47,7 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
      * 2.Two cases:
      *   missingNum is number of missing elements in the whole array.
      *   a. missingNum < k, then return nums[n - 1] + k - missingNum
-     *   b. missingNum <= k, binarySearch, find the min index "l", so that number of missing elements between
+     *   b. missingNum >= k, binarySearch, find the min index "l", so that number of missing elements between
      *      0 and l >= k. Therefore, the kth missing elements is between nums[l - 1] and nums[l], that kth missing
      *      number is :
      *
@@ -62,8 +62,14 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
             int l = 0;
             int h = n - 1;
 
+            /**
+             * get total missing number in the nums
+             */
             int missingNum = getMissingNum(nums, n - 1);
 
+            /**
+             * !!!
+             */
             if (missingNum < k) {
                 return nums[n - 1] + k - missingNum;
             }
@@ -81,6 +87,9 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
             return nums[l - 1] + k - getMissingNum(nums, l - 1);
         }
 
+        /**
+         * get the number of missing numbers between index 0 and idx
+         */
         private int getMissingNum(int[] nums, int idx) {
             return nums[idx] - nums[0] - idx;
         }
