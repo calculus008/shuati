@@ -53,7 +53,12 @@ public class LE_49_Group_Anagrams {
 
 
             for (String str : strs) {
+                /**
+                 * !!!
+                 * count must be init inside the loop
+                 */
                 int[] count = new int[26];
+
                 for (char c : str.toCharArray()) {
                     count[c - 'a']++;
                 }

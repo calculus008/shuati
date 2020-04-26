@@ -50,6 +50,9 @@ public class LE_210_Course_Schedule_II {
                 return new int[]{};
             }
 
+            /**
+             * #1.Build Graph (adjacent list) and init indegree[]
+             */
             int[] res = new int[numCourses];
 
             totalNumber = numCourses;
@@ -67,6 +70,9 @@ public class LE_210_Course_Schedule_II {
                 map.get(from).add(to);
             }
 
+            /**
+             * #2.BFS
+             */
             Queue<Integer> q = new LinkedList<>();
             for (int i = 0; i < indegree.length; i++) {
                 if (indegree[i] == 0) {

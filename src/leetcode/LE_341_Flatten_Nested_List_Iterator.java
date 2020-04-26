@@ -386,6 +386,37 @@ public class LE_341_Flatten_Nested_List_Iterator {
         }
     }
 
+    class Solution_Variation{
+        /**
+         * Variation, just flatten the nest list
+         */
+        public List<Integer> flatten(List<NestedInteger> nestedList) {
+            List<Integer> res = new ArrayList<>();
+            if (nestedList == null || nestedList.size() == 0) return res;
+
+            Stack<Iterator<NestedInteger>> stack = new Stack<>();
+            stack.push(nestedList.iterator());
+
+            while (!stack.isEmpty()) {
+                Iterator<NestedInteger> top = stack.peek();//!!! peek(), NOT pop()
+                if (!top.hasNext()) {//the list is empty
+                    stack.pop();//remove iterator of the empty list
+                    continue;
+                }
+
+                //After last if, we know top.hasNext() == true. Then we can use top.next() here.
+                NestedInteger n = top.next();
+                if (n.isInteger()) {
+                    res.add(n.getInteger());
+                } else {
+                    stack.push(n.getList().iterator());
+                }
+            }
+
+            return res;
+        }
+    }
+
     /**
      * Here are a few reasons why Deque is better than Stack:
      *

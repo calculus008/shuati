@@ -162,8 +162,8 @@ public class LE_943_Find_The_Shortest_Superstring {
      * is called the Travelling sells man’s problem which is NP-Complete.
      *
      * We can solve it with DP that uses exponential time.
-     * dp[s][i] := min distance to visit nodes (represented as a binary state s) once and only once
-     * and the path ends with node i.e.g. dp[7][1] is the min distance to visit nodes (0, 1, 2) and ends
+     * dp[s][i] := min dirs to visit nodes (represented as a binary state s) once and only once
+     * and the path ends with node i.e.g. dp[7][1] is the min dirs to visit nodes (0, 1, 2) and ends
      * with node 1, the possible paths could be (0, 2, 1), (2, 0, 1).
      *
      * Time complexity: O(n^2 * 2^n)

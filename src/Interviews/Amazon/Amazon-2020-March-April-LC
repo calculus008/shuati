@@ -1,0 +1,133 @@
+#Trie
+LE_211_Add_And_Search_Word
+                                          实现一个查找系统，大概就是输入单词，然后查找。。。我说用trie. 他让我回顾trie 的数据结构，
+                                          trie的children[26] 他说这都什么年代了， 还用26字母，怎么不用unicode 问我unicode有多少
+                                          个。。(143,924) 然后说要改进这个结构。。我说好吧，那就用hashmap吧。。然后他说。。。如果数据特别多
+                                          doule了会造成什么问题。。我说变慢啊，hashmap太大。。。他说为什么
+
+#BST
+LE_510_Inorder_Successor_In_BST_II        no access to root, but each node has parent pointer
+
+LE_64_Min_Path_Sum_2
+LE_64_Min_Path_Sum                        只是把 from top-left to bottom-right 改成了 from bottom-left to top-right。
+                                          直接给出DP算法，结果面试官问我 brute force 的解法是怎么样的，我说可以用DFS，
+                                          然后问我时间复杂度是多少，我说等于 unique path 的个数（因为不知道怎么用 m， n
+                                          来表示），面试官说，用 m，n 来表示呢(!!!)。瞎说了一个 (mxn)^2。刚去看了答案，
+                                          是 2^(m+n)。最后还是让我用 DP coding 出来
+
+
+LE_75_Set_Colors
+
+LE_79_Word_Search
+LE_212_Word_Search_II                     word search II升级版，八个方向，可以乱序,当时懵逼了，事后想想其实BFS就可以
+
+LE_323_Number_Of_Connected_Components_In_Undirected_Graph
+LE_547_Friend_Circles                     题目非常长，大概就是一堆输入，然后 n个学生, 求有多少人是不同信仰。 m个list,每个list 大概是[1, 2],  [2, 3] , [5, 8]
+                                          代表1和2 是相同信仰，2和3相同，5和8相同。求多少种不同信仰。 感觉是union find 但是忘了union find怎么写，磕磕巴巴。。
+                                          他最后跟我说要一开始就说自己想到union find， 好的面试官会引导你。
+
+LI_447_Search_In_A_Big_Sorted_Array       在无穷sorted数组中如何查找一个数, expand right side boundary until it includes
+                                          the target number, then binary search.
+
+LE_341_Flatten_Nested_List_Iterator
+LE_339_Nested_List_Weight_Sum
+
+LE_49_Group_Anagrams                      是给一堆字符串，一个target字符串 找所有和target anagram的字符串
+
+LE_210_Course_Schedule_II                 包装成 tasks 完成的顺序, follow up, 有 deadlock (cycle ??) 的状况出现
+
+LE_200_Number_Of_Islands_2
+LE_200_Number_Of_Islands                  与leecode不同，要求八个方向都算相连.
+                                          追问：是否可以不改变输入值（不能用copy）
+                                          提示：使用别的数据结构来优化算法
+                                          解答：将数据存储到BT里然后DFS
+                                          UnionFind?
+#LCA
+LE_236_Lowest_Common_Ancestor_Of_BT      p and q both exist. No parent pointer
+LI_474_Lowest_Common_Ancestor_II         p and q both exist.    Has parent pointer - Solution2
+                                         p and q may not exist. Has parent pointer - Solution1
+LI_578_Lowest_Common_Ancestor_III        p and q may not exist. No parent pointer
+                                         Solution1_A_B_May_Not_Exit in LE_236_Lowest_Common_Ancestor_Of_BT
+
+                                          tree node之间的指针是单向还是双向,interviewer回答：双向
+                                          (LI_474_Lowest_Common_Ancestor_II)
+
+                                          追问：如果是单向的，并且不使用额外空间
+                                          提示：分清有几种情况
+                                          解答：从上到下找到第一个节点，再用DFS看另一个节点是否这个节点的子节点，
+                                          如果是返回该节点，如果不是，搜索该节点父节点的其他branch，如果找不到
+                                          继续往上直到根节点
+
+                                          follow up: N-ary tree
+
+LI_79_Longest_Common_Substring            在一堆链表中找出最经常出现的pattern E.g. 在[A->B->C->D->E, E->B->C->D, B->C->D]中, B->C->D是最经常出现的pattern
+
+LE_1074_Number_Of_Submatrices_That_Sum_To_Target
+
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
+LE_281_Zigzag_Iterator
+LI_541_Zigzag_Iterator_II
+
+LE_253_Meeting_Rooms_II
+
+LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
+                                          她说好。
+                                          套了个实际问题，但是本身就是LRU
+
+LE_56_Merge_Intervals                     Space O(1)， 他给的是list不是array所以就可以直接在输入的list里进行操作
+                                          不用额外空间，是sort的那种方法
+                                          follow-up: 如果这些intervals是data stream怎么办
+
+LE_54_Spiral_Matrix                       给你一个N*N的数组，返回顺时针和逆时针traverse数组的顺序，注意考虑奇数和偶数不同的情况。
+
+LE_33_Search_In_Rotated_Sorted_Array
+LE_135_Candy                              (***)
+LE_528_Random_Pick_With_Weight
+LE_289_Game_Of_Life                       (*****)
+LE_295_Find_Median_From_Data_Stream
+
+LE_428_Serialize_And_Deserialize_Nary_Tree
+                                          prime video里面的每个视频的详细界面下面会有N 个推荐电影，用户会可能会不停地点
+                                          击推荐电影然后找到自己喜欢的电影，比如用户可以点击进入电影1后，再点进推荐 电影2，
+                                          电影2又推荐了， 电影3和电影4 以此往复，
+
+                                          提问就是，找到一种数据结构来表示用户的这个行为，并且设计一个serialize 和
+                                          unserialize的算法
+
+                                          我用的是树的结构来表示的，最后就是写树的serialize 和 unserialize 算法，
+                                          类似 利口 428
+
+LE_727_Minimum_Window_Subsequence         给你一个很长的文本，和一个query，找到文本中最短的，包含这个 query的 内容，
+                                          比如，文本是:
+                                          This is a river and this river has a drowning dog.
+                                          query 是：this river,
+                                          包含这个query的文本有 （this is a river,  this river），
+                                          最短的是 this river
+
+LE_224_Basic_Calculator                   +, -, (, )
+LE_227_Basic_Calculator_II                +, -, *, /
+LE_772_Basic_Calculator_III               +, -, *, /, (, )
+
+LI_127_Topological_Sorting                Build dependency resolution
+
+LE_692_Top_K_Frequent_Words
+
+LE_317_Shortest_Distance_From_All_Buildings
+                                          一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。
+                                          返回一个矩阵B with the same size，B[i][j]的值如下：
+                                          若A[i][j]为门，返回0；
+                                          若A[i][j]为障碍物，返回-1；
+                                          若A[i][j]为房间，返回这个房间离最近的门的距离。
+
+LE_572_Subtree_Of_Another_Tree
+
+
+
+
+
+
+
+
+
+
+

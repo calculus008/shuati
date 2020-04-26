@@ -5,9 +5,9 @@ import java.util.Queue;
 
 public class LE_542_01_Matrix {
     /**
-     * Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell.
+     * Given a matrix consists of 0 and 1, find the dirs of the nearest 0 for each cell.
      *
-     * The distance between two adjacent cells is 1.
+     * The dirs between two adjacent cells is 1.
      *
      *
      *

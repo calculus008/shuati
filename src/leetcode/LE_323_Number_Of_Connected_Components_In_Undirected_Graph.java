@@ -37,6 +37,9 @@ public class LE_323_Number_Of_Connected_Components_In_Undirected_Graph {
      * Space : O(n)
      */
     public int countComponents(int n, int[][] edges) {
+        /**
+         * if n == 1 and edges size is 0 or null, we still have one component.
+         */
         if (n < 1) return 0;
 
         UnionFindSet ufs = new UnionFindSet(n);

@@ -54,6 +54,7 @@ public class LE_997_Find_The_Town_Judge {
      *
      * Convert to DAG issue, the target should have N - 1 in-degree and 0 out-degree.
      *
+     * !!!
      * We can use two arrays to record in-degree and out-degree for each person, here
      * we simply use the property of town judge : in-degree - out-degree = N - 1, hence
      * we use only 1 array

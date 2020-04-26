@@ -5,7 +5,7 @@ public class LE_774_Minimize_Max_Distance_To_Gas_Station {
      * On a horizontal number line, we have gas stations at positions
      * stations[0], stations[1], ..., stations[N-1], where N = stations.length.
      *
-     * Now, we add K more gas stations so that D, the maximum distance
+     * Now, we add K more gas stations so that D, the maximum dirs
      * between adjacent gas stations, is minimized.
      *
      * Return the smallest possible value of D.

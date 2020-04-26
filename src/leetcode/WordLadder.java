@@ -158,7 +158,7 @@ public class WordLadder {
         //C.store the min ladder of EACH word, this is the one to be used in backtrack step
         map = new HashMap<String, List<String>>();
 
-        //D.save word and distance from start word to current word
+        //D.save word and dirs from start word to current word
         Map<String, Integer> ladder = new HashMap<String, Integer>();
 
         //put all words in dict to ladder
@@ -186,10 +186,10 @@ public class WordLadder {
                     if (ladder.containsKey(new_word)) {
                         System.out.println("new_word:" + new_word);
 
-                        //So the whole purpose of ladder here is to remember the distance to start word for each word.
-                        //Then when the word appears, we use the entry to verify if it is the min distance to start word for that word
+                        //So the whole purpose of ladder here is to remember the dirs to start word for each word.
+                        //Then when the word appears, we use the entry to verify if it is the min dirs to start word for that word
                         //If not, then just continue, bypass all the logic behind it. In this way, we make sure only the min
-                        //distance node will be recorded in the Graph (saved in dist)
+                        //dirs node will be recorded in the Graph (saved in dist)
                         if (step > ladder.get(new_word)) {//Check if it is the shortest path to one word.
                             continue; //continue with for loop on character iteration
                         } else if (step < ladder.get(new_word)) {

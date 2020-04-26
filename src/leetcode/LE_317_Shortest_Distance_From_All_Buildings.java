@@ -8,7 +8,7 @@ import java.util.Queue;
  */
 public class LE_317_Shortest_Distance_From_All_Buildings {
     /**
-     You want to build a house on an empty land which reaches all buildings in the shortest amount of distance.
+     You want to build a house on an empty land which reaches all buildings in the shortest amount of dirs.
      You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:
 
      Each 0 marks an empty land which you can pass by freely.
@@ -21,7 +21,7 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
      0 - 0 - 0 - 0 - 0
      |   |   |   |   |
      0 - 0 - 1 - 0 - 0
-     The point (1,2) is an ideal empty land to build a house, as the total travel distance of 3+3+1=7 is
+     The point (1,2) is an ideal empty land to build a house, as the total travel dirs of 3+3+1=7 is
      minimal. So return 7.
 
      Note:
@@ -41,7 +41,7 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
      * Space : O(m * n)
      *
      * Key : Starting from every building (1), update dist[][] and nums[][], then run another pass
-     *       to find the min distance
+     *       to find the min dirs
      *       单源点(empty land)多终点(houses)可以转化为多源点(houses)单终点(empty land)问题，终点就是所有源
      *       点都覆盖过的点，最后取距离和的最小值
      *
@@ -62,7 +62,7 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
 
             int m = grid.length;
             int n = grid[0].length;
-            int[][] dist = new int[m][n]; //For empty land, sum of distance to all buildings it can reach
+            int[][] dist = new int[m][n]; //For empty land, sum of dirs to all buildings it can reach
             int[][] nums = new int[m][n]; //For empty land, how many builds it can reach
             int buildingCount = 0;
 
@@ -105,15 +105,15 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
             queue.offer(new int[]{row, col});
             int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
             /**
-             * For BFS, each level means distance plus 1, so we have to start from a building, not empty land,
-             * since we can't add 1 to distance when starting from empty land, we simply don't know where
+             * For BFS, each level means dirs plus 1, so we have to start from a building, not empty land,
+             * since we can't add 1 to dirs when starting from empty land, we simply don't know where
              * is destination.
              */
             int distance = 0;
 
             while (!queue.isEmpty()) {
                 int size = queue.size();
-                distance++;//!!! increment distance here
+                distance++;//!!! increment dirs here
 
                 for (int i = 0; i < size; i++) {
                     int[] cur = queue.poll();

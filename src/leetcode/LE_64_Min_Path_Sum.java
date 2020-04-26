@@ -18,13 +18,17 @@ public class LE_64_Min_Path_Sum {
      */
 
     /**
+     * https://zxi.mytechroad.com/blog/dynamic-programming/leetcode-64-minimum-path-sum/
+     */
+
+    /**
      * Brutal Force
      * The Brute Force approach involves recursion. For each element, we consider two paths,
      * rightwards and downwards and find the minimum sum out of those two. It specifies whether
      * we need to take a right step or downward step to minimize the sum.
      *
-     * Time  : O(2^(m+n))
-     * Space : O(m+n)
+     * Time  : O(2^(m+n)), recursion depth m + n, for each step, we choose from 2 possible routes.
+     * Space : O(m+n), recursion depth
      */
     public class Solution_Brutal_Force {
         public int minPathSum(int[][] grid) {
@@ -32,7 +36,13 @@ public class LE_64_Min_Path_Sum {
         }
 
         public int calculate(int[][] grid, int i, int j) {
+            /**
+             * out of boundary
+             */
             if (i == grid.length || j == grid[0].length) return Integer.MAX_VALUE;
+            /**
+             * hit destination
+             */
             if (i == grid.length - 1 && j == grid[0].length - 1) return grid[i][j];
 
             return grid[i][j] + Math.min(calculate(grid, i + 1, j), calculate(grid, i, j + 1));
@@ -77,6 +87,8 @@ public class LE_64_Min_Path_Sum {
      * 1D DP Array
      * If it's not allowed to operate on input array, this solution only uses 1D extra array,
      * Space can be O(min(m, n))
+     *
+     * This is the advantage for bottom up DP over top down solution below.
      */
     class Solution_Practice_2 {
         public int minPathSum(int[][] grid) {
@@ -118,8 +130,8 @@ public class LE_64_Min_Path_Sum {
      * 2D DP array
      * Use extra 2D dp array, time and space O(mn)
      *
-     * dp[i][j] : represents the minimum sum of the path from the index (i, j)
-     *            to the bottom rightmost element
+     * dp[i][j] : min path sum to current cell (i, j)
+     *
      */
     class Solution_Practice_3 {
         public int minPathSum(int[][] grid) {
@@ -150,6 +162,37 @@ public class LE_64_Min_Path_Sum {
         }
     }
 
+    /**
+     * Top Down (recursion with memoization)
+     *
+     * Time : O(mn)
+     * Space : O(mn)
+     */
+    public class Solution_Top_Down_Recursion {
+        int m;
+        int n;
+        int[][] mem;
+
+        public int minPathSum(int[][] grid) {
+            if (grid == null || grid.length == 0) return 0;
+            m = grid.length;
+            n = grid[0].length;
+
+            mem = new int[m][n];
+            return helper(grid, m - 1, n - 1);
+        }
+
+        private int helper(int[][] grid, int x, int y) {
+            if (x == 0 && y == 0) return grid[x][y];
+            if (x < 0 || y < 0) return Integer.MAX_VALUE;
+            if (mem[x][y] != 0) return mem[x][y];
+
+            int res =  grid[x][y] + Math.min(helper(grid, x - 1, y), helper(grid, x, y - 1));
+            mem[x][y] = res;
+
+            return res;
+        }
+    }
 
     public static int minPathSum(int[][] grid) {
         if(null == grid || grid.length ==0) return 0;

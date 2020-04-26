@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by yuank on 3/27/18.
  */
@@ -30,72 +33,142 @@ public class LE_211_Add_And_Search_Word {
     /**
      * Time  : O(n), n is word length
      * Space : O(Number of Words * word length * 26)
+     *
+     * Assume words only contain lower case letter, use array for children in TrieNode
      */
+    class WordDictionary1 {
+        private TrieNode root;
 
-    private TrieNode root;
-
-    /** Initialize your data structure here. */
-    public LE_211_Add_And_Search_Word() {
-        //注意!!!, 不是 “TrieNode root = new TrieNode();"
-        root = new TrieNode();
-    }
-
-    /** Adds a word into the data structure. */
-    public void addWord(String word) {
-        if (word == null || word.length() == 0) return;
-
-        TrieNode cur = root;
-        for (int i = 0; i < word.length(); i++) {
-            int idx = word.charAt(i) - 'a';
-            if (cur.children[idx] == null) {
-                cur.children[idx] = new TrieNode();
-            }
-            cur = cur.children[idx];
+        /**
+         * Initialize your data structure here.
+         */
+        public WordDictionary1() {
+            //注意!!!, 不是 “TrieNode root = new TrieNode();"
+            root = new TrieNode();
         }
-        cur.isWord = true;
-        cur.word = word;
+
+        /**
+         * Adds a word into the data structure.
+         */
+        public void addWord(String word) {
+            if (word == null || word.length() == 0) return;
+
+            TrieNode cur = root;
+            for (int i = 0; i < word.length(); i++) {
+                int idx = word.charAt(i) - 'a';
+                if (cur.children[idx] == null) {
+                    cur.children[idx] = new TrieNode();
+                }
+                cur = cur.children[idx];
+            }
+            cur.isWord = true;
+            cur.word = word;
+        }
+
+        /**
+         * Returns if the word is in the data structure.
+         * A word could contain the dot character '.' to represent any one letter.
+         */
+        public boolean search(String word) {
+            if (word == null || word.length() == 0) return false;
+
+            return helper(word, 0, root);
+        }
+
+        //DFS helper
+        private boolean helper(String word, int start, TrieNode cur) {
+            if (start == word.length()) return cur.isWord; //or cur.word.equals(word)
+
+            /**
+             * !!!
+             * 因为'.'可以代表任何char,所以需要在下一层对所有字母遍历。
+             */
+            if (word.charAt(start) == '.') {//
+                for (TrieNode child : cur.children) {
+                    if (child != null && helper(word, start + 1, child)) {
+                        return true;
+                    }
+                }
+                /**
+                 * 要在这里返回false, for loop执行后仍然没有返回，必定为false.
+                 */
+                return false;
+            } else {
+                int idx = word.charAt(start) - 'a';
+                TrieNode temp = cur.children[idx];
+                return temp != null && helper(word, start + 1, temp);
+            }
+        }
     }
 
     /**
-     * Returns if the word is in the data structure.
-     * A word could contain the dot character '.' to represent any one letter.
+     * Word uses unicode, so use hashmap in TrieNode for children
      */
-    public boolean search(String word) {
-        if (word == null || word.length() == 0) return false;
+    class WordDictionary2 {
+        class TrieNode {
+            Map<Character, TrieNode> children;
+            boolean isWord;
 
-        return helper(word, 0, root);
-    }
+            public TrieNode() {
+                children = new HashMap<>();
+                isWord = false;
+            }
+        }
 
-    //DFS helper
-    private boolean helper(String word, int start, TrieNode cur) {
-        if (start == word.length()) return cur.isWord; //or cur.word.equals(word)
+        TrieNode root;
 
-        /**
-         * !!!
-         * 因为'.'可以代表任何char,所以需要在下一层对所有字母遍历。
-         */
-        if (word.charAt(start) == '.') {//
-            for (TrieNode child : cur.children) {
+        public WordDictionary2() {
+            root = new TrieNode();
+        }
+
+        public void addWord(String word) {
+            if (word == null || word.isEmpty()) return;
+
+            TrieNode cur = root;
+            for (char c : word.toCharArray()) {
+                if (!cur.children.containsKey(c)) {
+                    cur.children.put(c, new TrieNode());
+                }
+                cur = cur.children.get(c);
+            }
+            cur.isWord = true;
+        }
+
+        public boolean search(String word) {
+            if (word == null || word.isEmpty()) return false;
+
+            return helper(word, 0, root);
+        }
+
+        public boolean helper(String word, int start, TrieNode cur) {
+            if (start == word.length()) {
+                return cur.isWord;
+            }
+
+            char c = word.charAt(start);
+
+            if (c == '.') {
+                for (Character key : cur.children.keySet()) {
+                    TrieNode child = cur.children.get(key);
+                    if (child != null && helper(word, start + 1, child)) {
+                        return true;
+                    }
+                }
+            } else {
+                TrieNode child = cur.children.get(c);
                 if (child != null && helper(word, start + 1, child)) {
                     return true;
                 }
             }
-            /**
-             * 要在这里返回false, for loop执行后仍然没有返回，必定为false.
-             */
+
             return false;
-        } else {
-            int idx = word.charAt(start) - 'a';
-            TrieNode temp = cur.children[idx];
-            return temp != null && helper(word, start + 1, temp);
         }
     }
-
 
     /**
      * LintCode 473
      */
-    public class WordDictionary {
+    public class WordDictionary3 {
         class TrieNode {
             TrieNode[] children;
             boolean isWord;
@@ -108,7 +181,7 @@ public class LE_211_Add_And_Search_Word {
 
         TrieNode root;
 
-        public WordDictionary() {
+        public WordDictionary3() {
             root = new TrieNode();
         }
 
@@ -162,7 +235,6 @@ public class LE_211_Add_And_Search_Word {
 
             return false;
         }
-
     }
 
 }

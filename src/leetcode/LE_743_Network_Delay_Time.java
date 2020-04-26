@@ -152,7 +152,7 @@ public class LE_743_Network_Delay_Time {
             }
 
             /**
-             * Heap : store pair {distance, destination}, sorted by distance
+             * Heap : store pair {dirs, destination}, sorted by dirs
              */
             PriorityQueue<int[]> heap = new PriorityQueue<int[]>((a, b) -> a[0] - b[0]);
             heap.offer(new int[]{0, K});
@@ -170,7 +170,7 @@ public class LE_743_Network_Delay_Time {
                 dist.put(node, d);
 
                 /**
-                 * process the node with the shortest distance from source
+                 * process the node with the shortest dirs from source
                  */
                 if (graph.containsKey(node)) {
                     for (int[] edge : graph.get(node)) {

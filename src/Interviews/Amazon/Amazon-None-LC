@@ -1,0 +1,104 @@
+Min_In_Sliding_Window_For_Unsorted_Array      Use segment tree
+Game_Ranking                                  TreeMap
+Make_Sorted_By_One_Swap
+Minimum_Radius_Enclosing_K_Points             给三个点坐标，求包涵这三个点的最小的圆的半径等。问题给的很笼统，
+                                              需要自己clarify很多东西。不能用数学解。我用了Binary Search，
+                                              最后只把主程序写出来了。很多细节只是口头上沟通了一下。
+                                              好像之前地里见过这题？
+                                              我是先找到其中两个点的垂直平分线  确定圆心的一个坐标  然后二分来逼近圆心
+
+
+
+#
+给共同好友的图推荐好友，根据面试官的一点一点提要求，一点点改， 不怎么难，要跟着面试官的提示和思路走
+
+#
+meeting rooms变种，区别是有两类schedule, 一个是break, 一个是work。要求break 和 work不能overlapped
+
+#
+假设有一堆 log 纪录, 要实作 search, count, sort
+format 是 date_meg
+ex:
+2020/01/20/20:10:00_cat is good
+2020/01/20/12:20:01_cat and dog are good
+2020/01/20/01:01:02_cat is better than dogs
+
+search
+ex: search cat or ca 要出现上述三条 logs
+ex: search dogs 只出现最后一条 log
+
+count
+ex: input: cat, output: 3
+ex: input: dog, output: 2
+
+sort 没什么好说的, 就照时间 sort 而已
+
+lz 提了先 parse log 用 trie 的方式把 log 存起来, 这样可以加快搜寻和count 的速度, 但是没有让我实作 Trie,
+讲完概念最后实作没时间写
+
+#
+在简单图中找最长路径。
+本人用DFS解答了本题（O(n)=n^2），interviewer继续追问有没有时间复杂更优的解法，并提示只用两轮DFS
+答案在cracking the coding interview里有
+
+
+#??
+在一堆链表中找出最经常出现的pattern E.g. 在[A->B->C->D->E, E->B->C->D, B->C->D]中, B->C->D是最经常出现的pattern
+
+#!!!
+要求implement两个function， input是购买记录，包括一个product和它的string of accessories
+Void addPurchase(string product, string[] accessories)
+String getRecommended(string product)
+要求实现
+addPurchase("phone", {"case", "protector"});
+addPurchase("phone", {"case", "headset"});
+getRecommended("phone")
+会有50%几率return case, 25%几率return protector, 25% headset
+(Based on current purchase record to recommend accessories)
+
+LE_528_Random_Pick_With_Weight
+
+我用的hashmap
+follow up 如果millions of input怎么办，我说那就hashmap of hashmap 每个accessories也建个hashmap value是count 他说可以
+
+
+#
+输入： "aaabbbccccccddd"
+输出两个值：N=3, Compressed="abccd"
+输入： "aaabbbccccccd"
+输出两个值：N=1, Compressed="aaabbbccccccd"
+
+他会等你说出GCD这个词，然后告诉你，给你一个函数gcd(a, b)可以直接调用，让你写剩下的代码。
+注意点有两个：
+1）gcd(a,b,c) = gcd(gcd(a,b), c)
+2) 用for loop统计每个字母个数的时候不要忘了处理 i==input.length()
+
+我的方案是先拿到所有的<Char, Int>存到List里，然后算出全局gcd，再foreach这个List生成新字符串。
+
+follow up：如何做到常数空间？答案：先算前两个字母的gcd1，再算gcd1和第三个字母的gcd2……以此类推。需要的空间是两个Int。
+
+#
+设计一个类似于linux里面的查找文件的数据结构，查找所有给定前缀名的文件的名称和位置。
+比如给app，那么如果文件中有app，apple，appl，那么要返回所有这些文件，以及他的路径
+
+#
+判断2个日期是否相差了一个月，面试官给了一些定义，比如2/10,3/10是正好一个月，题目比较好懂，写的时候注意和面试官沟通，分类写
+
+#
+给一堆文件类型（string type的)和他们对应的时间点，然后查找某一天出现次数最多的文件类型。哈希表+优先队列
+
+#
+给三个点坐标，求包涵这三个点的最小的圆的半径等。问题给的很笼统，需要自己clarify很多东西。不能用数学解。
+我用了Binary Search，最后只把主程序写出来了。很多细节只是口头上沟通了一下。好像之前地里见过这题？
+
+#
+一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。返回一个矩阵B with the same size，B[i][j]的值如下：
+若A[i][j]为门，返回0；
+若A[i][j]为障碍物，返回-1；
+若A[i][j]为房间，返回这个房间离最近的门的距离。
+
+#
+人会说不同的语言，问两个人之间要多少个翻译，bfs就行，只是要自己定义数据类型。
+
+
+

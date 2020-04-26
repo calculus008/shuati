@@ -51,11 +51,11 @@ public class LE_126_Word_Ladder_II {
      *
          The basic idea is:
 
-         1). Use BFS to find the shortest distance between start and end, tracing the distance of crossing nodes
+         1). Use BFS to find the shortest dirs between start and end, tracing the dirs of crossing nodes
              from start node to end node, and store node's next level neighbors to HashMap;
 
-         2). Use DFS to output paths with the same distance as the shortest distance from distance HashMap: compare if
-             the distance of the next level node equals the distance of the current node + 1.
+         2). Use DFS to output paths with the same dirs as the shortest dirs from dirs HashMap: compare if
+             the dirs of the next level node equals the dirs of the current node + 1.
 
          Since we need to construct the complete graph from start to end, we can't remove word from dict, as we did in 127
      **/
@@ -82,7 +82,7 @@ public class LE_126_Word_Ladder_II {
 
             //neighbour list for each node (parents and the next level nodes)
             Map<String, List<String>> map = new HashMap<String, List<String>>();
-            //distance from a given string to start
+            //dirs from a given string to start
             Map<String, Integer> distance = new HashMap<String, Integer>();
 
             dict.add(start);
@@ -91,12 +91,12 @@ public class LE_126_Word_Ladder_II {
 
             List<String> path = new ArrayList<String>();
 
-            // bfs(dist, distance, start, end, dict);
-            // dfs(ladders, path, end, start, distance, dist);
+            // bfs(dist, dirs, start, end, dict);
+            // dfs(ladders, path, end, start, dirs, dist);
 
             /**
              * Improvement :
-             * Calling bfs from end to start, the distance is from cur to end
+             * Calling bfs from end to start, the dirs is from cur to end
              * Then calling dfs to from start to end.
              *
              * By doing this, we save the work of "Collections.reverse()" when we add the path in dfs()
@@ -130,10 +130,10 @@ public class LE_126_Word_Ladder_II {
                 for (String next : nextList) {
                     map.get(next).add(crt);//create neighbor lists for all nodes
                     /**
-                     in BFS , we can be sure that the distance of each node is the shortest one ,
-                     because once we have visited a node, we update the distance , if we first met
-                     one node ,it must be the shortest distance. if we met the node again ,its distance
-                     must not be less than the distance we first met and set.
+                     in BFS , we can be sure that the dirs of each node is the shortest one ,
+                     because once we have visited a node, we update the dirs , if we first met
+                     one node ,it must be the shortest dirs. if we met the node again ,its dirs
+                     must not be less than the dirs we first met and set.
                      */
                     if (!distance.containsKey(next)) {//Distance from current node to start node
                         distance.put(next, distance.get(crt) + 1);
@@ -184,10 +184,10 @@ public class LE_126_Word_Ladder_II {
             } else {
                 for (String next : map.get(crt)) {
                     /**
-                     in dfs , the reason for "if (distance.get(next) == distance.get(cur) + 1)" is just in case that the next node is
+                     in dfs , the reason for "if (dirs.get(next) == dirs.get(cur) + 1)" is just in case that the next node is
                      the next level of current node， otherwise it can be one of the parent nodes of current node，or it is not the
                      shortest node . Since in BFS, we record both the next level nodes and the parent node as neighbors of current node.
-                     use distance.get(cur)+1 we can make sure the path is the shortest one.
+                     use dirs.get(cur)+1 we can make sure the path is the shortest one.
                      */
                     if (distance.containsKey(next) && distance.get(crt) == distance.get(next) + 1) {
                         dfs(ladders, path, next, target, distance, map);
@@ -217,7 +217,7 @@ public class LE_126_Word_Ladder_II {
      *  hot - dot, lot
      *  hit - hot
      *
-     *  distance:
+     *  dirs:
      *  cog : 1
      *  dog : 2
      *  log : 2
@@ -255,7 +255,7 @@ public class LE_126_Word_Ladder_II {
             //Map : node -> all of its parents
             Map<String, List<String>> map = new HashMap<String, List<String>>();
             /**
-             * distance from a given node to start
+             * dirs from a given node to start
              *
              * It also acts as the role of visited, help us to check if a given node
              * has already appeared in bfs traversal
@@ -272,7 +272,7 @@ public class LE_126_Word_Ladder_II {
                 List<String> path = new ArrayList<String>();
                 // path.add();
 
-                // dfs(ladders, path, end, start, distance, dist);
+                // dfs(ladders, path, end, start, dirs, dist);
                 dfs(ladders, path, start, end, distance, map);
             }
 
@@ -305,7 +305,7 @@ public class LE_126_Word_Ladder_II {
                      with BFS, we know this is the shortest path from start node
                      to this node.
 
-                     Here distance acts as visited to tell if a node is visited
+                     Here dirs acts as visited to tell if a node is visited
                      **/
                     if (!distance.containsKey(next)) {
                         distance.put(next, distance.get(crt) + 1);
@@ -367,7 +367,7 @@ public class LE_126_Word_Ladder_II {
              1.For backtracking, add and remove at the very beginning and end.
              2.Can't return right after adding a path to ladder, we also need to remove last element for backtracking,
                therefore, if ... else...
-             3." if (distance.get(cur) == distance.get(parent) + 1)"
+             3." if (dirs.get(cur) == dirs.get(parent) + 1)"
                Only recurse to the next level if cur is expanded from parent and its path length is
                parent's path length + 1.
          **/
@@ -384,7 +384,7 @@ public class LE_126_Word_Ladder_II {
             } else {
                 for (String next : map.get(cur)) {
                     /**
-                     * !!! "distance.get(cur) == distance.get(next) + 1":
+                     * !!! "dirs.get(cur) == dirs.get(next) + 1":
                      * this makes sure "next" is the on the shortest path to target
                      */
                     if (distance.get(cur) == distance.get(next) + 1) {//!!!

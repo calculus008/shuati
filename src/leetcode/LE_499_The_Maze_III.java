@@ -11,7 +11,7 @@ public class LE_499_The_Maze_III {
      * is also a hole in this maze. The ball will drop into the hole if it rolls on to the hole.
      *
      * Given the ball position, the hole position and the maze, find out how the ball could
-     * drop into the hole by moving the shortest distance. The distance is defined by the
+     * drop into the hole by moving the shortest dirs. The dirs is defined by the
      * number of empty spaces traveled by the ball from the start position (excluded) to
      * the hole (included). Output the moving directions by using 'u', 'd', 'l' and 'r'.
      * Since there could be several different shortest ways, you should output the lexicographically
@@ -38,7 +38,7 @@ public class LE_499_The_Maze_III {
      * Explanation: There are two shortest ways for the ball to drop into the hole.
      * The first way is left -> up -> left, represented by "lul".
      * The second way is up -> left, represented by 'ul'.
-     * Both ways have shortest distance 6, but the first way is lexicographically smaller
+     * Both ways have shortest dirs 6, but the first way is lexicographically smaller
      * because 'l' < 'u'. So the output is "lul".
      *
      * Example 2:
@@ -162,8 +162,8 @@ public class LE_499_The_Maze_III {
      * 2ms 100% solution from Leetcode
      */
     class Solution_DFS {
-        int min; // min distance to hole
-        String minS; // min distance's path string
+        int min; // min dirs to hole
+        String minS; // min dirs's path string
         int[] hole;
         int[][] maze;
         int[][] dist; // shortest distant traveling from ball to this point

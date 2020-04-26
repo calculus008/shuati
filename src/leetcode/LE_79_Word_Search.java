@@ -1,5 +1,8 @@
 package leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by yuank on 3/5/18.
  */
@@ -222,6 +225,74 @@ public class LE_79_Word_Search {
             }
 
             return false;
+        }
+    }
+
+    /**
+     * Variation
+     * word search II升级版，八个方向，可以乱序,当时懵逼了，事后想想其实BFS就可以
+     */
+    class Solution_Variation {
+        public boolean exist(char[][] board, String word) {
+            if (null == board || board.length == 0 || null == word || word.length() == 0) {
+                return false;
+            }
+
+            int m = board.length;
+            int n = board[0].length;
+
+            Map<Character, Integer> count = new HashMap<>();
+
+            for (char c : word.toCharArray()) {
+                count.put(c, count.getOrDefault(c, 0) + 1);
+            }
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (helper(board, word.toCharArray(), count, m, n, i, j, 0)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private boolean isMatch(char c, Map<Character, Integer> count) {
+            if (!count.containsKey(c)) return false;
+            if (count.get(c) > 0) return true;
+
+            return false;
+        }
+
+        private boolean helper(char[][] board, char[] word,  Map<Character, Integer> count, int m , int n, int x, int y, int pos) {
+            if (pos == word.length) {
+                return true;
+            }
+
+            if (x < 0 || x >= m || y < 0 || y >= n) {
+                return false;
+            }
+
+            if (!isMatch(board[x][y], count)) return false;
+
+            char temp = board[x][y];
+            board[x][y] = '*';
+            count.put(temp, count.get(temp) - 1);
+
+            boolean res = helper(board, word, count, m, n, x + 1, y, pos + 1)
+                    || helper(board, word, count, m, n, x - 1, y, pos + 1)
+                    || helper(board, word, count, m, n, x, y + 1, pos + 1)
+                    || helper(board, word, count, m, n, x, y - 1, pos + 1)
+                    || helper(board, word, count, m, n, x - 1, y - 1, pos + 1)
+                    || helper(board, word, count, m, n, x + 1, y + 1, pos + 1)
+                    || helper(board, word, count, m, n, x + 1, y - 1, pos + 1)
+                    || helper(board, word, count, m, n, x - 1, y + 1, pos + 1);
+
+            board[x][y] = temp;
+            count.put(temp, count.get(temp) + 1);
+
+            return res;
         }
     }
 }

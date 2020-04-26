@@ -201,7 +201,7 @@ public class LE_10_Regular_Expression_Matching_2 {
             }
 
             /**
-             Induction rule is very similar to edit distance, where we also consider from the end.
+             Induction rule is very similar to edit dirs, where we also consider from the end.
              And it is based on what character in the pattern we meet.
 
              1. if p.charAt(j) == s.charAt(i), dp[i][j] = dp[i - 1][j - 1]

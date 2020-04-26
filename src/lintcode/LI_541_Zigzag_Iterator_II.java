@@ -33,7 +33,7 @@ public class LI_541_Zigzag_Iterator_II {
         public ZigzagIterator2(List<List<Integer>> vecs) {
             list = new LinkedList<>();
             for (List<Integer> vec : vecs) {//!!!"List<Integer>
-                if (!vec.isEmpty()) {
+                if (vec != null && !vec.isEmpty()) {
                     list.add(vec.iterator());
                 }
             }

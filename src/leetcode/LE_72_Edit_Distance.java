@@ -41,7 +41,7 @@ public class LE_72_Edit_Distance {
 
         DP:
         d(i, j) = minDistance(word1[0..i-1], word2[0..j-1]), or the first i chars in word1 vs the first j chars in word2.
-                  d(i, j) 表示把 str1 前 i 个字符编辑成 str2 前 j 个字符所需要的最小 edit distance
+                  d(i, j) 表示把 str1 前 i 个字符编辑成 str2 前 j 个字符所需要的最小 edit dirs
 
         Init:
         1.if j = 0, i

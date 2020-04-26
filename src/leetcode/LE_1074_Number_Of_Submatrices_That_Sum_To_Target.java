@@ -61,10 +61,16 @@ public class LE_1074_Number_Of_Submatrices_That_Sum_To_Target {
     /**
      * https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/discuss/303750/JavaC%2B%2BPython-Find-the-Subarray-with-Target-Sum
      *
-     * Time  : O(MN^2)
+     * Time  : O(M * N ^ 2)
      * Space : O(N)
      *
+     * For each row, calculate the prefix sum.
+     * For each pair of columns,
+     * calculate the accumulated sum of rows.
+     * Now this problem is same to, "Find the Subarray with Target Sum".
      *
+     * Brutal Force solution will try each submatrics, it costs O(M ^ 2 * N ^ 2).
+     * We use prefix-sum technique to lower the time complexity to O(M * N ^ 2)
      */
     class Solution {
         public int numSubmatrixSumTarget(int[][] matrix, int target) {
@@ -73,6 +79,9 @@ public class LE_1074_Number_Of_Submatrices_That_Sum_To_Target {
 
             int[][] A = matrix.clone();
 
+            /**
+             * calculate prefix-sum for each row
+             */
             for (int i = 0; i < m; i++) {
                 for (int j = 1; j < n; j++) {
                     A[i][j] += A[i][j - 1];
@@ -80,6 +89,11 @@ public class LE_1074_Number_Of_Submatrices_That_Sum_To_Target {
             }
 
             int res = 0;
+
+            /**
+             * Double "for" loops go through each pair of columns.
+             * Then inner loop go through each row.
+             */
             for (int i = 0; i < n; i++) {
                 for (int j = i; j < n; j++) {
                     Map<Integer, Integer> map = new HashMap<>();

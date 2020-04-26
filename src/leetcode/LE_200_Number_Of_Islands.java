@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 import common.Coordinate;
 import common.UnionFindWithCount1;
@@ -32,7 +31,9 @@ public class LE_200_Number_Of_Islands {
         Answer: 3
      */
     /**
-        Solution 1: DFS, Time and Space : O(m * n)
+        Solution 1: DFS,
+        Time and Space : O(m * n)
+
         Have potential of stack overflow, not recommended
      **/
     class Solution1 {
@@ -67,6 +68,10 @@ public class LE_200_Number_Of_Islands {
             helper(grid, x - 1, y);
             helper(grid, x, y + 1);
             helper(grid, x, y - 1);
+
+            /**
+             * Just mark connected component, no backtrack!!!
+             */
         }
     }
 
@@ -194,6 +199,7 @@ public class LE_200_Number_Of_Islands {
 
             while (!queue.isEmpty()) {
                 Coordinate coor = queue.poll();
+
                 for (int i = 0; i < 4; i++) {
                     Coordinate adj = new Coordinate(
                             coor.x + directionX[i],
@@ -360,9 +366,11 @@ public class LE_200_Number_Of_Islands {
          * Solution 4
          * Optimized version
          *
-         * 1.只遍历一次grid[][], 我们并不需要初始化count.一边遍历，一边统计total, 最后total加上getCount()即可(getCount()此时返回的是个负数）
+         * 1.只遍历一次grid[][], 我们并不需要初始化count.一边遍历，一边统计total,
+         *   最后total加上getCount()即可(getCount()此时返回的是个负数）
          *
-         * 2.但是对于每块陆地，只需要检测其右面和下面是否是陆地然后做connect，不需要对左和上再作判断，因为遍历顺序是从上到下，从左到右。
+         * 2.但是对于每块陆地，只需要检测其右面和下面是否是陆地然后做connect，
+         *   不需要对左和上再作判断，因为遍历顺序是从上到下，从左到右。
          *
          */
         public int numIslands2(boolean[][] grid) {
@@ -384,6 +392,7 @@ public class LE_200_Number_Of_Islands {
                         continue;
                     }
                     total++;
+
                     for (int k = 0; k < 2; k++){
                         int x = i + offsetX[k];
                         int y = j + offsetY[k];
@@ -393,8 +402,8 @@ public class LE_200_Number_Of_Islands {
                     }
                 }
             }
+
             return uf.getCount() + total;
         }
-
     }
 }

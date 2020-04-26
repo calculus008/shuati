@@ -34,6 +34,8 @@ public class LI_474_Lowest_Common_Ancestor_II {
      */
 
     /**
+     * For case that A and B may not exist
+     *
      * 注意： 这里的前提条件是两个给定的Node都是在树里存在的。
      *
      * Time and Space :  O(h), h is height of the tree
@@ -64,13 +66,14 @@ public class LI_474_Lowest_Common_Ancestor_II {
     /**
      * Solution 2
      *
+     * This works for the case both A and B exist.
+     *
      * Space O(1)
      * 借鉴 LE_160_Intersection_Of_Tow_Linked_List:
      * p1, p2分别从A，B出发， 向root方向遍历。 p1达到root之后， 从B开始重新向root遍历。p2达到root之后， 从A开始重新向root遍历。
      * p1和p2在第二次遍历时，一定会在第一个intersection（i.e LCA）相遇。 时间复杂度O(h)，h是数的最大高度。
      *
      */
-
     public ParentTreeNode lowestCommonAncestorII_2(ParentTreeNode root, ParentTreeNode A, ParentTreeNode B) {
         ParentTreeNode p1 = A, p2 = B;
         while (p1 != p2) {

@@ -1,0 +1,70 @@
+#1
+设计一个tracking system， 就是hr和candidate都可以用的，上面有job信息，candidate申请，传资料。hr可以review candidate信息，track当前这个人在申请的那一个阶段。
+没有说对与错，但我有说明自己做选择的理由，利弊什么的。
+
+#2
+要求设计social media feed list request interface signature
+追问：设计数据表及如何存储（hint: sql or nosql)
+之后问了ood的polymorphism (Overloading)
+
+#3
+设计AWS CodeCommit
+
+#4
+Design a pholo library platform. 可能像google相册那样
+
+#5
+design linux find OOD
+
+#6
+sys design：一个文件爬虫，根据条件，找出在某一路径下所有符合条件的文件
+
+#7
+OOD，设计一个算法和class 来实现 一个 find command，这个 find command 有各种filter，比如 小于特定size，
+比如名字要有什么样子的匹配，这个使用一个 filter pattern就可以了，同时要进行parallel的处理
+
+#8
+1）设计一个Queue，需要线程安全。答案是用锁（monitor pattern）。
+2）如果读操作很多怎么办？答案是读写锁（read-write lock -or- lock manager in database）。
+
+默认queue实现中的添加和删除都不是原子操作，线程1还没添加完的时候线程2想添加，怎么办？
+答案是需要用锁把添加删除强行序列化。如果你学习过数据库原理的话会更清楚：这里就相当于把数据库中的transaction强行serialization。
+
+是的。push pop peek都用同一个lock。
+改进办法是用读写锁，这样peek不会锁住push pop。
+
+#9
+design Amazon item price catalog system
+给了三个interface：
+getprice(Item item, Time time);
+updatePrice(Item item, Pirce price, Time time);
+addPrice(Item item, Pirce price, Time time);
+
+#10
+设计一个预订酒店系统
+
+#11
+open question, serial/deserial data stream. Define everything yourself.
+
+#12
+Design Twitter
+
+#13 (!!!)
+文件搜索，自己定义File，Folder等类别，一开始给了一个基本条件，说要找出所有JPEG类型且尺寸
+
+设计command line utility library的一个函数，输入为一个目录路径，以及搜索标准，返回这个目录下所有符合搜索标准的文件。
+搜索标准可以是基于last updated time, owner等文件的属性。可以有多个标准，之间可以AND以及OR。需求都是一步步讨论确定的，
+感觉算是个OOP design轮，具体算法感觉没啥可写的。个人感觉还是可以表现得更好些，但不知道到底在考察什么，有点东一下，西一下
+
+
+#
+每次购物完成支付后，系统要给用户发一个邮件。设计这个邮件系统。我答了这个邮件延迟几分钟没关系，可以用message queue做。
+面试官还补充说这类邮件是 至少一封，就是发多了没关系，但至少要保证用户收到一封。还跟我介绍了一些系统发的邮件是 至少一封，
+或者exactly一封，也算是普及了些知识吧。之后瞎扯了一些message queue，但由于本人没有过，被一眼识破，直接被问，你自己用过没？
+我老实回答，没有。尴尬到极点，于是又介绍message queue的运作原理。
+
+
+
+
+
+
