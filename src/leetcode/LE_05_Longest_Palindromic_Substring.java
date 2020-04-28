@@ -34,8 +34,8 @@ public class LE_05_Longest_Palindromic_Substring {
          if (s == null || s.length() == 0) return s;
 
          for (int i = 0; i < s.length(); i++) {
-             helper(s, i, i);
-             helper(s, i, i + 1);
+             helper(s, i, i);  //this is to check palindrom with odd chars
+             helper(s, i, i + 1);  // this is to check palindrom with even chars
           }
 
          return res;
@@ -64,7 +64,7 @@ public class LE_05_Longest_Palindromic_Substring {
 //         if (temp.length() > res.length()) {
 //             res = temp;
 //         }
-
+         //back to last equal char index
          left++;
          right--;
 
