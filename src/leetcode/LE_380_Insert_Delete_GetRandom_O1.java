@@ -61,7 +61,7 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
     public class RandomizedSet {
         /**
          * HashMap
-         * Key : element, Value : the location (index) of this element in the list
+         * Key -> element, Value : the location (index) of this element in the list (!!!)
          */
         private HashMap<Integer, Integer> locs;
         private List<Integer> nums;
@@ -97,7 +97,7 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
             if(!contain) return false;
 
             int idx = locs.get(val);
-            locs.remove(val);
+            locs.remove(val);//!!!
 
             if(idx < nums.size() - 1) {//!!!
                 int lastVal = nums.get(nums.size()-1);
@@ -105,7 +105,7 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
                 locs.put(lastVal, idx);
             }
 
-            nums.remove(nums.size() - 1);
+            nums.remove(nums.size() - 1);//!!!
 
             return true;
         }

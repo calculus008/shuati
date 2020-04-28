@@ -57,9 +57,19 @@ public class LE_472_Concatenated_Words {
         }
 
         private boolean check(Set<String> set, String word, int start, int min) {
+            /**
+             * !!!
+             * "int i = start + min; i <= word.length() - min; i++"
+             */
             for (int i = start + min; i <= word.length() - min; i++) {
                 /**
                  * !!!
+                 * 类似余word break, break the word into left and right.
+                 * if left is contained in set
+                 * AND
+                 * right is also contained in set OR calling check() on right returns true
+                 *
+                 * we have an answer
                  */
                 if (set.contains(word.substring(start, i)) &&
                         (set.contains(word.substring(i)) || check(set, word, i, min))) {
@@ -179,6 +189,10 @@ public class LE_472_Concatenated_Words {
         }
 
         private boolean helper(char[] chars, int index, int count) {
+            /**
+             * every time calling on helper is for a new word, so we
+             * start from root here.
+             */
             TrieNode cur = root;
             int n = chars.length;
 
@@ -194,7 +208,9 @@ public class LE_472_Concatenated_Words {
                     /**
                      * if we get to the end of current word, because of the requirement -
                      * "comprised entirely of at least two shorter words", we only return
-                     * TRUE if count is bigger than 1.
+                     * TRUE if count is bigger than 1. Here count value not increased for
+                     * the current newly found word, if we have a 2 words combination, here
+                     * count is 1, so it's ">= 1"
                      */
                     if (i == n - 1) {
                         return count >= 1;
@@ -229,14 +245,18 @@ public class LE_472_Concatenated_Words {
      * Exact the same algorithm as LE_139_Word_Break. "helper()" function is copied
      * from LE_139_Word_Break with no modification.
      *
+     * Two ways of dealing with word itself in set:
+     * 1.Pass word as original and make sure it is not compared with itself
+     * 2.Remove current word from set before calling helper, then add it back
+     *   to the set after helper() returns.
+     *
      * Time  : O(k * n ^ 2), k is number of words, n is average length of a single word.
      * Space : O(n ^ 2)
      *
      * 88 ms
      * 58 M
      */
-
-    class Solution1 {
+    class Solution_Recursion_With_Mem {
         public List<String> findAllConcatenatedWordsInADict(String[] words) {
             List<String> list = new ArrayList<String>();
             Set<String> set = new HashSet(Arrays.asList(words));
@@ -246,21 +266,22 @@ public class LE_472_Concatenated_Words {
                     continue;
                 }
 
-                set.remove(word);
+                // set.remove(word);
 
-                if (helper(word, set, new HashMap<>())) {
+                if (helper(word, set, new HashMap<>(), word)) {
                     list.add(word);
                 }
 
-                set.add(word);
+                // set.add(word);
             }
             return list;
         }
 
-        private boolean helper(String s, Set<String> dict, Map<String, Boolean> mem) {
+        private boolean helper(String s, Set<String> dict, Map<String, Boolean> mem, String original) {
             if (mem.containsKey(s)) return mem.get(s);
 
-            if (dict.contains(s)) {
+            if (!s.equals(original) && dict.contains(s)) {
+                // if (dict.contains(s)) {
                 mem.put(s, true);
                 return true;
             }
@@ -270,7 +291,7 @@ public class LE_472_Concatenated_Words {
                 String r = s.substring(i);
 
                 if (dict.contains(r)) {
-                    if (helper(l, dict, mem)) {
+                    if (helper(l, dict, mem, original)) {
                         mem.put(s, true);
                         return true;
                     }

@@ -1,11 +1,14 @@
 Min_In_Sliding_Window_For_Unsorted_Array      Use segment tree
 Game_Ranking                                  TreeMap
+K_Way_Merge_Iterator
 Make_Sorted_By_One_Swap
 Minimum_Radius_Enclosing_K_Points             给三个点坐标，求包涵这三个点的最小的圆的半径等。问题给的很笼统，
                                               需要自己clarify很多东西。不能用数学解。我用了Binary Search，
                                               最后只把主程序写出来了。很多细节只是口头上沟通了一下。
                                               好像之前地里见过这题？
                                               我是先找到其中两个点的垂直平分线  确定圆心的一个坐标  然后二分来逼近圆心
+
+Implement_BST_Insert_Find_GetRandom
 
 
 
@@ -100,5 +103,20 @@ follow up：如何做到常数空间？答案：先算前两个字母的gcd1，�
 #
 人会说不同的语言，问两个人之间要多少个翻译，bfs就行，只是要自己定义数据类型。
 
+#
+input: str, dict
+dict里面是key是字符串里的几个字母，value是可以替换成的数字
+求所有可能的组合
+
+#
+each iterator has two methods: next(), hasNext(). Given a list of iterators in which numbers are in
+ascending order, create a class that has two methods: next(), hasNext(). The next() method must return
+the smallest number each tim
+
+#
+LE_322_Coin_Change But with limited number of conins
+
+#
+implement BST with Insert/Find/GetRandom
 
 

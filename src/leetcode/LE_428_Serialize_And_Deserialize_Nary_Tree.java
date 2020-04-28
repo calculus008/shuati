@@ -21,7 +21,7 @@ public class LE_428_Serialize_And_Deserialize_Nary_Tree {
      * N is in the range of [1, 1000]
      * Do not use class member/global/static variables to store states.
      * Your serialize and deserialize algorithms should be stateless.
-     * <p>
+     *
      * Hard
      */
 

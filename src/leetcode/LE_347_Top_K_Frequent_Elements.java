@@ -31,6 +31,10 @@ public class LE_347_Top_K_Frequent_Elements {
                 map.put(num, map.getOrDefault(num, 0) + 1);
             }
 
+            /**
+             * !!!
+             * bucket size is "num.length + 1"
+             */
             List<Integer>[] bucket = new ArrayList[nums.length + 1];
             for (int i = 0; i < bucket.length; i++) {
                 bucket[i] = new ArrayList();
@@ -145,6 +149,36 @@ public class LE_347_Top_K_Frequent_Elements {
                 !!!
                 "res.size() < k" should be checked in both inner and outer loop.
              **/
+
+            return res;
+        }
+    }
+
+    class Solution1_New_Interface {
+        public int[] topKFrequent(int[] nums, int k) {
+            if (nums == null || nums.length == 0 || k <= 0) return new int[]{};
+
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int num : nums) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+            }
+
+            List<Integer>[] bucket = new ArrayList[nums.length + 1];//!!! "nums.length + 1"
+            for (int i = 0; i < bucket.length; i++) {
+                bucket[i] = new ArrayList<>();
+            }
+
+            for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+                bucket[e.getValue()].add(e.getKey());
+            }
+
+            int[] res = new int[k];
+            int idx = 0;
+            for (int i = bucket.length - 1; i > 0 && idx < res.length; i--) {//!!! "i--"
+                for (int j = 0; j < bucket[i].size() && idx < res.length; j++) {
+                    res[idx++] = bucket[i].get(j);
+                }
+            }
 
             return res;
         }

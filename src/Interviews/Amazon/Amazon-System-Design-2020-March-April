@@ -57,11 +57,71 @@ Design Twitter
 感觉算是个OOP design轮，具体算法感觉没啥可写的。个人感觉还是可以表现得更好些，但不知道到底在考察什么，有点东一下，西一下
 
 
-#
+#14
 每次购物完成支付后，系统要给用户发一个邮件。设计这个邮件系统。我答了这个邮件延迟几分钟没关系，可以用message queue做。
 面试官还补充说这类邮件是 至少一封，就是发多了没关系，但至少要保证用户收到一封。还跟我介绍了一些系统发的邮件是 至少一封，
 或者exactly一封，也算是普及了些知识吧。之后瞎扯了一些message queue，但由于本人没有过，被一眼识破，直接被问，你自己用过没？
 我老实回答，没有。尴尬到极点，于是又介绍message queue的运作原理。
+
+#15
+system design: Parking Lot System
+基本上就是確認
+User Cases
+Constraints
+API Schema
+MVC 架構
+
+#16
+design a warehouse system to support count of items, add the item, remove the item, and different kinds of item.
+
+#17
+要我写出一个efficient algo for real time toll system which tool price might change anytime
+面试官说要 有两个function
+getPrice(int timestamp) 就是有车过去时 的报价
+setInterval(int startTime, int endTime, int price)
+
+时间不太够所以要我做 high level
+用了个linked list 跟写了个 binary search 去找price
+
+#18
+design Map system
+
+#19
+系统设计 - 设计lyft/uber的共享车系统, 再具体问了design里哪些地方是bottleneck以及要怎么加强
+
+#20
+系统设计 - 设计一个internal logs aggregation的系统, 怎么处理已有的和新的log
+
+#21
+codeing + design - 亚麻的locker 配送系统, 如何能够找到合适大小的locker, 例如有个中号的包裹, 先找中号再找大号一直到找不到了.
+follow up是当用于取到包裹了改怎么办, 然后scale out这个系统, 如何存储数据, 如果当前地区的locker不够了怎么办 etc.
+https://leetcode.com/discuss/interview-question/233869/Design-Amazon-Locker-system
+
+#22
+top-k hash-tag
+
+#23
+城市交通票务一卡通系统设计
+
+#24
+Parking lot
+我简单回答了停车系统的实体之后，他们就抛给我几个问题让写代码了。
+一共四个问题，前面的三个都很简单，第二个不太记得清了。
+1. 写代码实现判断是否有停车空位；
+3. 如果车分大小车，车位分大小车位，两个连续的小的停车位可以停一辆大车，问如何修改代码实现变更；
+4. 如何更合理的利用车位的空间，例如，避免在四个小车位中间停一辆大车，而优先选择停在靠左或者靠右，从而剩余的空间选择更多。
+
+#25
+ood: design a warehouse 需要吐槽一下，recruiter跟我说会考system design害我准备了很久，结果考了ood，问了都傻眼了，答的不怎么样
+
+#26
+design a class that implement Linux find command. 主要也是考ood吧，要写代码
+我个人感觉是个开放式问题，没有正确答案。具体题目可以看这里
+https://leetcode.com/discuss/interview-question/369272/Amazon-or-Onsite-or-Linux-Find-Command
+
+#27
+系统设计：亚马逊customer review system
+
 
 
 

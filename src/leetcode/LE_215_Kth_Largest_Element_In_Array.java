@@ -17,8 +17,68 @@ public class LE_215_Kth_Largest_Element_In_Array {
      **/
 
     /**
+     * Quick Select:
+     *
+     * Time  : O(n), worst case O(n ^ 2)
+     * Space : O(1)
+     */
+    class Solution_Quick_Select {
+        public int findKthLargest(int[] nums, int k) {
+            /**
+             * !!!
+             * All param passed here is index, so to find kth largest number,
+             * the target index is k - 1
+             */
+            return quickSelect(nums, 0, nums.length - 1, k - 1);//!!! index
+        }
+
+        private int quickSelect(int[] nums, int start, int end, int k) {
+            if (start >= end) return nums[start];
+
+            int l = start;
+            int r = end;
+
+            int pivot = nums[start + (end - start) / 2];
+
+            while (l <= r) {
+                while (l <= r && nums[l] > pivot) {
+                    l++;
+                }
+
+                while (l <= r && nums[r] < pivot) {
+                    r--;
+                }
+
+                if (l <= r) {
+                    swap(nums, l, r);
+                    l++;
+                    r--;
+                }
+            }
+
+            if (k <= r) {
+                return quickSelect(nums, start, r, k);
+            }
+
+            if (k >= l) {
+                return quickSelect(nums, l, end, k );
+            }
+
+            return nums[k];
+        }
+
+        private void swap(int[] nums, int left, int right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+        }
+    }
+
+    /**
         Solution 1 : use min heap.
-        Time : O(nlogk), Space : O(k)
+
+        Time  : O(nlogk),
+        Space : O(k)
 
         !!!
         Under normal condition, Solution 2 (quick select) is better (O(n)).
@@ -40,10 +100,13 @@ public class LE_215_Kth_Largest_Element_In_Array {
     }
 
     /**
-     * For Quick Select solution, refer to LI_005_Kth_Largest_Number
+     * Quick Select:
+     *
+     * Time  : O(n), worst case O(n ^ 2)
+     * Space : O(1)
+     *
+     * For another implementation for  Quick Select solution, refer to LI_005_Kth_Largest_Number
      */
-    //Solution 2 : Quick Select
-    //Time : O(n)  Space : O(1)
     /**
         [3, 2, 1, 5, 6, 4]   k = 3
     col  0  1  2  3  4  5

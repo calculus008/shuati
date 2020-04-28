@@ -31,7 +31,28 @@ public class LE_286_Walls_And_Gates {
      */
 
     /**
+     * The performance of recursive DFS is very unstable. It is much slower than BFS if the rooms are
+     * interconnected. It is only faster than BFS when small groups of rooms are isolated. In the worst
+     * case the time complexity is also O(n^4).
+     *
+     * Thus, for this problem we should prefer BFS over DFS. And the best Solution is Multi End BFS.
+     */
+
+
+    /**
      * Simplified, without counting steps in BFS
+     *
+     * We don't need to count steps because the starting point (gate) has value 0,
+     * so we can simply add one for each step.
+     *
+     * Time : O(mn)
+     *        Let us start with the case with only one gate. The breadth-first search takes at most m * n steps
+     *        to reach all rooms, therefore the time complexity is O(mn). But what if you are doing breadth-first
+     *        search from kk gates? Once we set a room's distance, we are basically marking it as visited, which
+     *        means each room is visited
+     *
+     * Space : O(mn)
+     *         The space complexity depends on the queue's size. We insert at most m×n points into the queue.
      */
     class Solution3_1 {
         public void wallsAndGates(int[][] rooms) {
@@ -318,6 +339,31 @@ public class LE_286_Walls_And_Gates {
                     rooms[row][col + 1] = rooms[row][col] + 1;
                     queue.add(new int[]{row, col + 1});
                 }
+            }
+        }
+    }
+
+    class Solution_DFS {
+        public void wallsAndGates(int[][] rooms) {
+            for(int row = 0 ; row < rooms.length; ++row){
+                for(int col = 0; col < rooms[row].length; ++col){
+                    if(rooms[row][col] == 0){
+                        populateRooms(row, col, rooms, 0);
+                    }
+                }
+            }
+        }
+
+        public void populateRooms(int row, int col, int[][] rooms, int distance){
+
+            if(row < 0 || row >= rooms.length || col < 0 || col >= rooms[row].length || rooms[row][col] < distance){
+                return;
+            } else {
+                rooms[row][col] = distance;
+                populateRooms(row + 1, col, rooms, distance + 1);
+                populateRooms(row - 1, col, rooms, distance + 1);
+                populateRooms(row, col + 1, rooms, distance + 1);
+                populateRooms(row, col - 1, rooms, distance + 1);
             }
         }
     }

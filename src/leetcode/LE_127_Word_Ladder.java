@@ -62,7 +62,7 @@ public class LE_127_Word_Ladder {
      *
      *                  This should be the upper bound.
      *
-     * Space Complexity: O(M×N), Queue for BFS in worst case would need space for all N words.
+     * Space Complexity: O(M × N), Queue for BFS in worst case would need space for all N words.
      */
 
     /**

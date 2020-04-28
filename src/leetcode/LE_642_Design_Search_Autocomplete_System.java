@@ -48,7 +48,9 @@ public class LE_642_Design_Search_Autocomplete_System {
      * Operation: input('i')
      * Output: ["i love you", "island","i love leetcode"]
      * Explanation:
-     * There are four sentences that have prefix "i". Among them, "ironman" and "i love leetcode" have same hot degree. Since ' ' has ASCII code 32 and 'r' has ASCII code 114, "i love leetcode" should be in front of "ironman". Also we only need to output top 3 hot sentences, so "ironman" will be ignored.
+     * There are four sentences that have prefix "i". Among them, "ironman" and "i love leetcode" have same hot
+     * degree. Since ' ' has ASCII code 32 and 'r' has ASCII code 114, "i love leetcode" should be in front of
+     * "ironman". Also we only need to output top 3 hot sentences, so "ironman" will be ignored.
      *
      * Operation: input(' ')
      * Output: ["i love you","i love leetcode"]
@@ -63,7 +65,8 @@ public class LE_642_Design_Search_Autocomplete_System {
      * Operation: input('#')
      * Output: []
      * Explanation:
-     * The user finished the input, the sentence "i a" should be saved as a historical sentence in system. And the following input will be counted as a new search.
+     * The user finished the input, the sentence "i a" should be saved as a historical sentence in system.
+     * And the following input will be counted as a new search.
      *
      *
      * Note:
@@ -80,11 +83,19 @@ public class LE_642_Design_Search_Autocomplete_System {
      */
 
 
+    /**
+     * Use Trie + PriorityQueue, need to add logic to deal with "hotness" based on frequency of the
+     * existing sentences.
+     */
     public class AutocompleteSystem {
         class TrieNode {
             Map<Character, TrieNode> children;
+            /**
+             * remember the frequency of each word that goes through this TrieNode
+             */
             Map<String, Integer> counts;
             boolean isWord;
+
             public TrieNode() {
                 children = new HashMap<Character, TrieNode>();
                 counts = new HashMap<String, Integer>();
@@ -95,6 +106,7 @@ public class LE_642_Design_Search_Autocomplete_System {
         class Pair {
             String s;
             int c;
+
             public Pair(String s, int c) {
                 this.s = s; this.c = c;
             }
@@ -122,6 +134,10 @@ public class LE_642_Design_Search_Autocomplete_System {
                     curr.children.put(c, next);
                 }
                 curr = next;
+
+                /**
+                 * Update count
+                 */
                 curr.counts.put(s, curr.counts.getOrDefault(s, 0) + count);
             }
             curr.isWord = true;

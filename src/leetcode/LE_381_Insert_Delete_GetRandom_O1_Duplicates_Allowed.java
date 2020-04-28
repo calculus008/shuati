@@ -9,7 +9,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
     /**
      Design a data structure that supports all following operations in average O(1) time.
 
-     Note: Duplicate elements are allowed.
+     Note: Duplicate elements are allowed.(!!!)
 
      insert(val): Inserts an item val to the collection.
      remove(val): Removes an item val from the collection if present.
@@ -104,6 +104,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
 
             /**
              * 1.Get the first element in set, remove it from the set in HashMap.
+             *   Remove the first element from LinkedHashSet is O(1)
              **/
             int idx = map.get(val).iterator().next();//Use iterator to get the first element in set
             map.get(val).remove(idx);//remove the value from set
@@ -139,7 +140,9 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             return true;
         }
 
-        /** Get a random element from the collection. */
+        /**
+         * Get a random element from the collection.
+         */
         public int getRandom() {
             return list.get(rand.nextInt(list.size()));
         }

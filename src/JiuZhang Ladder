@@ -142,6 +142,7 @@ LE_773_Sliding_Puzzle                        (*)
 LI_794_Sliding_Puzzle_II                     (*)
 
 LE_317_Shortest_Distance_From_All_Buildings  (lint 573. Build Post Office II) (***)  revisit
+LE_286_Walls_And_Gates
 
 #Variation of BFS
 LE_847_Shortest_Path_Visiting_All_Nodes      (***)
@@ -152,6 +153,7 @@ LE_675_Cut_Off_Trees_For_Golf_Event
 LE_909_Snakes_And_Ladders
 
 LE_282_Expression_Add_Operators
+
 
 ====================================================
 
@@ -345,6 +347,8 @@ LE_643_Maximum_Average_Subarray_I
 LE_424_Longest_Repeating_Character_Replacement
 LE_1004_Max_Consecutive_Ones_III
 LE_1100_Find_K_Length_Substrings_With_No_Repeated_Characters
+
+LE_727_Minimum_Window_Subsequence
 
 ====================================================
 

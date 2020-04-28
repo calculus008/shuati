@@ -53,6 +53,37 @@ public class LE_772_Basic_Calculator_III {
             return helper(q);
         }
 
+        /**
+         * Compare with LE_224_Basic_Calculator, we need to deal with * and /.
+         *
+         * We do delayed add, every time 'cur' extraction is done, if op is + or -, we add 'pre' to sum.
+         * then save cur to pre. If op is * or /, calculate and update pre. In the end, return sum + pre.
+         *
+         * For example : 1 + 2 * 3
+         * With 'pre' init as 0, you can see it as :
+         *
+         * pre  cur
+         *  0 + 1 + 2 * 3 #
+         *      ^
+         *  sum + pre = sum + 0 = 0
+         *  pre = 1
+         *
+         *     pre cur
+         *  0 + 1 + 2 * 3 #
+         *          ^
+         *  sum + pre = sum + 1 = 1
+         *  pre = 2
+         *
+         *         pre  cur
+         *  0 + 1 + 2 * 3 #
+         *              ^
+         *  pre = pre * cur = 2 * 3 = 6
+         *
+         *
+         *  0 + 1 + 2 * 3 #
+         *              ^
+         *  return sum + pre = 1 + 6 = 7
+         */
         private int helper(Deque<Character> q) {
             int pre = 0, cur = 0, sum = 0;
             char preop = '+';

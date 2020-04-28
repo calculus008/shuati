@@ -63,12 +63,11 @@ LI_578_Lowest_Common_Ancestor_III        p and q may not exist. No parent pointe
 LI_79_Longest_Common_Substring            在一堆链表中找出最经常出现的pattern E.g. 在[A->B->C->D->E, E->B->C->D, B->C->D]中, B->C->D是最经常出现的pattern
 
 LE_1074_Number_Of_Submatrices_That_Sum_To_Target
+                                          (***)
 
 LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 LE_281_Zigzag_Iterator
 LI_541_Zigzag_Iterator_II
-
-LE_253_Meeting_Rooms_II
 
 LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
                                           她说好。
@@ -76,17 +75,18 @@ LE_146_LRU_Cache                          LRU写的双链表，follow up我也�
 
 LE_56_Merge_Intervals                     Space O(1)， 他给的是list不是array所以就可以直接在输入的list里进行操作
                                           不用额外空间，是sort的那种方法
-                                          follow-up: 如果这些intervals是data stream怎么办
+                                          follow-up: 如果这些intervals是data stream怎么办, use Iterator<Interval>
 
 LE_54_Spiral_Matrix                       给你一个N*N的数组，返回顺时针和逆时针traverse数组的顺序，注意考虑奇数和偶数不同的情况。
 
 LE_33_Search_In_Rotated_Sorted_Array
 LE_135_Candy                              (***)
-LE_528_Random_Pick_With_Weight
+LE_528_Random_Pick_With_Weight            (***)
 LE_289_Game_Of_Life                       (*****)
 LE_295_Find_Median_From_Data_Stream
 
 LE_428_Serialize_And_Deserialize_Nary_Tree
+                                          (*****)
                                           prime video里面的每个视频的详细界面下面会有N 个推荐电影，用户会可能会不停地点
                                           击推荐电影然后找到自己喜欢的电影，比如用户可以点击进入电影1后，再点进推荐 电影2，
                                           电影2又推荐了， 电影3和电影4 以此往复，
@@ -104,15 +104,19 @@ LE_727_Minimum_Window_Subsequence         给你一个很长的文本，和一�
                                           包含这个query的文本有 （this is a river,  this river），
                                           最短的是 this river
 
+#Calculator
 LE_224_Basic_Calculator                   +, -, (, )
 LE_227_Basic_Calculator_II                +, -, *, /
 LE_772_Basic_Calculator_III               +, -, *, /, (, )
 
 LI_127_Topological_Sorting                Build dependency resolution
+LE_210_Course_Schedule_II
 
+LE_347_Top_K_Frequent_Elements
 LE_692_Top_K_Frequent_Words
 
 LE_317_Shortest_Distance_From_All_Buildings
+LE_286_Walls_And_Gates                   （***）
                                           一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。
                                           返回一个矩阵B with the same size，B[i][j]的值如下：
                                           若A[i][j]为门，返回0；
@@ -120,6 +124,42 @@ LE_317_Shortest_Distance_From_All_Buildings
                                           若A[i][j]为房间，返回这个房间离最近的门的距离。
 
 LE_572_Subtree_Of_Another_Tree
+
+LE_215_Kth_Largest_Element_In_Array       Quick Select (**)
+LI_005_Kth_Largest_Number
+
+LE_303_Range_Sum_Query_Immutable
+
+LE_995_Minimum_Number_Of_K_Consecutive_Bit_Flips
+
+LE_472_Concatenated_Words                 Trie or Same Recursion with mem as in LE_139_Word_Break
+LE_139_Word_Break
+LE_140_Word_Break_II
+
+LE_322_Coin_Change                        如果有个自动售货机你需要算需要退的数额需要多少硬币. 给的input是有哪些硬币
+                                          (1分, 5分, 10分, 25分), 以及他们的数量, 求需要最少的硬币数量的话是什么样的组
+LE_518_Coin_Change_II                     Ask for number of combinations to sum to target number
+
+LE_127_Word_Ladder
+
+LE_642_Design_Search_Autocomplete_System
+LE_642_Design_Search_Autocomplete_System_Mine
+
+LE_380_Insert_Delete_GetRandom_O1
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed  (***)
+                                          可以用next successor的方法写，但是复杂度是O(K)，最差是O(N)。
+                                          可以在tree node里加一个subtree size，这样复杂度就是O(logN）了
+
+LE_815_Bus_Routes
+
+LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
+                                          meeting长度不变，问meeting average delay
+
+
+
+
+
+
 
 
 

@@ -36,4 +36,26 @@ tell me a time when you failed a project.
 
 BQ analysis and solve problems, a situation solve a complex problem
 
+每輪都有LP，但發現問題主要都是圍繞 Bias For Action 和 Deliver Result
+這個起碼要準備五個例子吧～其他LP感覺也都沒啥被問?!
+
+tell me the time you push the team to get higher standard. 这题我卡住了我听成 你不得不放弃high standard due to any reasons...
+
+tell me the time when you have to solve a complex system
+follow up what do you do when you have to pick design A vs design B
+
+纯BQ - 深入问了很多关于如果有反对意见的时候怎么处理的
+
+1. 怎么处理conflict，与经理或者同事
+2. 怎么处理deadline，有没有达不成的情况
+3. ownership，你做了什么职责之外的事
+这仨问题我感觉几乎问了3,4遍，所以大家一定要在这几个上面多准备几个例子。
+
+问了各种情景怎么debug。。。还有如果已知code有问题，但是你不熟悉这个package，应该如何deep dive。。。
+    第一次遇到这种问法，有点懵，平时常常做的这些事情一慌，全都想不起来了。。。
+就是要先判断代码什么时间开始出错的，然后根据commit和metrics来确定哪一部分的代码出bug了之类的。。。然后就要先revert之类的保证production正常运行，然后再修bug。。。
+就是工作时候平常每天干的事情。。但是问法太模糊，我以为只给package和bug的症状，没有其他的信息。。。所以答崩了。
+
+
+
 

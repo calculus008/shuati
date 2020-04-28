@@ -74,10 +74,10 @@ public class LE_995_Minimum_Number_Of_K_Consecutive_Bit_Flips {
                 }
 
                 /**
-                 * After the last if check, we have the correct fliCount value for current interval
+                 * After the last "if" check, we have the correct flipCount value for current interval
                  *
-                 * flipCount % 2 == 0, A[i] = 0, original value is 0, we need to flip it to 1
-                 * flipCount % 2 == 1, A[i] = 1, original value is 1, but we already flip it to 0, need to flip again to 1.
+                 * flipCount % 2 == 0, A[i] = 0 (original value is 0), we need to flip it to 1
+                 * flipCount % 2 == 1, A[i] = 1 (original value is 1), but we already flip it to 0, need to flip again to 1.
                  */
                 if (flipCount % 2 == A[i]) {
                     if (i + K - 1 >= n) {

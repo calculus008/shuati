@@ -1,12 +1,14 @@
 package leetcode;
 
+import java.util.Arrays;
+
 public class LE_727_Minimum_Window_Subsequence {
     /**
      * Given strings S and T, find the minimum (contiguous) substring W of S,
      * so that T is a subsequence of W.
      *
-     * If there is no such window in S that covers all characters in T, retur
-     * n the empty string "". If there are multiple such minimum-length windows,
+     * If there is no such window in S that covers all characters in T, return
+     * the empty string "". If there are multiple such minimum-length windows,
      * return the one with the left-most starting index.
      *
      * Example 1:
@@ -83,10 +85,69 @@ public class LE_727_Minimum_Window_Subsequence {
                     }
                 }
 
-                sIdx++;
+                sIdx++;//!!!
             }
 
             return start == -1 ? "" : S.substring(start, start + min);
+        }
+    }
+
+    class Solution1_Variation {
+        /**
+         * Instead of String, given strings that have words separated by space.
+         *
+         * 给你一个很长的文本，和一个query，找到文本中最短的，包含这个 query的 内容，
+         * 比如，文本是:
+         * This is a river and this river has a drowning dog.
+         * query 是：this river,
+         * 包含这个query的文本有 （this is a river,  this river），
+         * 最短的是 this river
+         */
+        public String minWindow(String text, String target) {
+            if (text == null || target == null || text.length() < target.length()) return "";
+
+            String[] s = text.split(" ");
+            String[] t = target.split(" ");
+
+            if (s == null || t == null || s.length < t.length) return "";
+
+            int sLen = s.length;
+            int tLen = t.length;
+
+            int min = Integer.MAX_VALUE;
+            int start = -1;
+
+            int sIdx = 0, tIdx = 0;
+
+            while (sIdx < sLen) {
+                if (s[sIdx].equals(t[tIdx])) {
+                    tIdx++;
+
+                    if (tIdx == tLen) {
+                        int end = sIdx;
+                        tIdx--;
+
+                        while (tIdx >= 0) {
+                            if (s[sIdx].equals(t[tIdx])) {
+                                tIdx--;
+                            }
+                            sIdx--;
+                        }
+
+                        sIdx++;
+                        tIdx++;
+
+                        if (end - sIdx + 1< min) {
+                            min = end - sIdx + 1;
+                            start = sIdx;
+                        }
+                    }
+                }
+
+                sIdx++;
+            }
+
+            return start == -1 ? "" : String.join(" ", Arrays.copyOfRange(s, start, start + min));
         }
     }
 
