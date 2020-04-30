@@ -1,12 +1,18 @@
 #Trie
+LE_208_Implement_Trie
+LI_231_Typeahead
+LE_472_Concatenated_Words                 Trie or Same Recursion with mem as in LE_139_Word_Break
 LE_211_Add_And_Search_Word
                                           实现一个查找系统，大概就是输入单词，然后查找。。。我说用trie. 他让我回顾trie 的数据结构，
                                           trie的children[26] 他说这都什么年代了， 还用26字母，怎么不用unicode 问我unicode有多少
                                           个。。(143,924) 然后说要改进这个结构。。我说好吧，那就用hashmap吧。。然后他说。。。如果数据特别多
                                           doule了会造成什么问题。。我说变慢啊，hashmap太大。。。他说为什么
+LE_23_Merge_k_Sorted_Lists                但给的input其实是list int array，用了priority queue解决。之后讨论了如果input list过大怎么办，
+                                          回答用map reduce
 
 #BST
 LE_510_Inorder_Successor_In_BST_II        no access to root, but each node has parent pointer
+LE_230_Kth_Smallest_Element_In_BST
 
 LE_64_Min_Path_Sum_2
 LE_64_Min_Path_Sum                        只是把 from top-left to bottom-right 改成了 from bottom-left to top-right。
@@ -34,6 +40,7 @@ LE_339_Nested_List_Weight_Sum
 
 LE_49_Group_Anagrams                      是给一堆字符串，一个target字符串 找所有和target anagram的字符串
 
+LE_207_Course_Schedule                    变形，拓扑排序就能做，用BFS做完之后，面试官让用DFS来做
 LE_210_Course_Schedule_II                 包装成 tasks 完成的顺序, follow up, 有 deadlock (cycle ??) 的状况出现
 
 LE_200_Number_Of_Islands_2
@@ -69,10 +76,6 @@ LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 LE_281_Zigzag_Iterator
 LI_541_Zigzag_Iterator_II
 
-LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
-                                          她说好。
-                                          套了个实际问题，但是本身就是LRU
-
 LE_56_Merge_Intervals                     Space O(1)， 他给的是list不是array所以就可以直接在输入的list里进行操作
                                           不用额外空间，是sort的那种方法
                                           follow-up: 如果这些intervals是data stream怎么办, use Iterator<Interval>
@@ -83,7 +86,8 @@ LE_33_Search_In_Rotated_Sorted_Array
 LE_135_Candy                              (***)
 LE_528_Random_Pick_With_Weight            (***)
 LE_289_Game_Of_Life                       (*****)
-LE_295_Find_Median_From_Data_Stream
+LE_295_Find_Median_From_Data_Stream       加了找最值和中位数，follow uo 问了下如何扩展到更多的功能，更多是如何设计code。
+
 
 LE_428_Serialize_And_Deserialize_Nary_Tree
                                           (*****)
@@ -112,9 +116,16 @@ LE_772_Basic_Calculator_III               +, -, *, /, (, )
 LI_127_Topological_Sorting                Build dependency resolution
 LE_210_Course_Schedule_II
 
-LE_347_Top_K_Frequent_Elements
-LE_692_Top_K_Frequent_Words
+LE_347_Top_K_Frequent_Elements            bucket
+LE_692_Top_K_Frequent_Words               heap
+                                          给你user 和 video pair, (c1, v1) (c1,v3) (c2, v1)....
+                                          找出长度为3(??) most frequent k video sequences.
+                                          K_Most_Frequent_Word ??
 
+
+#BFS
+LE_815_Bus_Routes                         (***)  design transportation query system
+                                          implement algorithm to find shortest path (minimum stop) from stop A to stop B
 LE_317_Shortest_Distance_From_All_Buildings
 LE_286_Walls_And_Gates                   （***）
                                           一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。
@@ -142,19 +153,81 @@ LE_518_Coin_Change_II                     Ask for number of combinations to sum 
 
 LE_127_Word_Ladder
 
+#Data structure design
 LE_642_Design_Search_Autocomplete_System
 LE_642_Design_Search_Autocomplete_System_Mine
-
 LE_380_Insert_Delete_GetRandom_O1
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed  (***)
-                                          可以用next successor的方法写，但是复杂度是O(K)，最差是O(N)。
-                                          可以在tree node里加一个subtree size，这样复杂度就是O(logN）了
+LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
+                                          她说好。
+                                          套了个实际问题，但是本身就是LRU
+                                          follow up with time to leave and if infinity memory how to optimize
 
-LE_815_Bus_Routes
 
 LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
-                                          meeting长度不变，问meeting average delay
+                                          meeting长度不变，问meeting average delay (??)
 
+#two sum的各种变形，duplicate，sorting，less than，各种followup，也很简单
+
+-----------------------------
+
+LE_1160_Find_Words_That_Can_Be_Formed_By_Characters
+                                          给一些字母
+                                          一个字典
+                                          输出这些字母能组成的字典里的词
+                                          字母不可以重复用，但是可以不用完，字母可能有重复，字典没有
+                                          面试官很想让写hashmap对比count的解法，就按她想的写了……
+
+                                          注意：HashMap需要deep copy.
+
+LE_787_Cheapest_Flights_Within_K_Stops    一个图的题，求从一个城市到另一个城市步数在k以内的最小cost，
+                                          给一个k和一个二维数组，分别表示出发和到达的城市，以及票价。
+
+LE_688_Knight_Probability_In_Chessboard   不同是的给一个老将的位置，问走几步老马吃老将
+LE_1152_Analyze_User_Website_Visit_Pattern
+                                          给一堆用户数据，有userid，activity name, TimeStamp,
+                                          然后让给出TOP k group of activity, 感觉像leetcode 1152.
+                                          但是我感觉这题稍微难些
+LE_785_Is_Graph_Bipartite
+LE_886_Possible_Bipartition
+
+LE_105_Construct_Binary_Tree_From_Preorder_Inorder
+LE_106_Construct_Binary_Tree_From_Postorder_Inorder
+
+LE_76_Minimum_Window_Substring
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_239_Sliding_Window_Maximum
+
+LE_1229_Meeting_Scheduler                (***)
+LE_675_Cut_Off_Trees_For_Golf_Event
+
+LE_296_Best_Meeting_Point
+LE_1120_Maximum_Average_Subtree          follow up 返回第K大的
+LE_328_Odd_Even_Linked_List
+LE_413_Arithmetic_Slices                 (***)
+
+LE_827_Making_A_Large_Island             (***）dfs populates each island, then try 0 -> 1 and see which one is the biggest
+
+LE_1258_Synonymous_Sentences             (***)
+
+#Dijskra
+LE_743_Network_Delay_Time                要会Dijskra
+LE_787_Cheapest_Flights_Within_K_Stops    一个图的题，求从一个城市到另一个城市步数在k以内的最小cost，
+                                          给一个k和一个二维数组，分别表示出发和到达的城市，以及票价。
+
+1242.  Web Crawler Multithreaded
+1236
+Web Crawler                               a网站可以连接到b，c
+                                          b又可以到d，e
+                                          c可以到b，f
+                                          给一个网址，返回所有能爬到的网址
+                                          图上的搜索，给了DFS，后来还让说了下BFS
+
+818. Race Car
+348. Design Tic-Tac-Toe                   写完之后问怎么拓展成五子棋一类的，没让写代码，就说了下思路
+1352. Product of the Last K Numbers
+765. Couples Holding Hands
+656. Coin Path
 
 
 

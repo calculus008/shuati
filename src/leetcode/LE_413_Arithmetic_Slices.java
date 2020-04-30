@@ -35,7 +35,7 @@ public class LE_413_Arithmetic_Slices {
      *
      * 1 2 3  ： 1
      *
-     * 1 2 3 4 ： 1 + 2 （ 1 2 3， 1 2 3 4）
+     * 1 2 3 4 ： 1 + 2 （ 2 3 4， 1 2 3 4）
      *
      * 1 2 3 4 5 ： 1 + 2 + 3  （3 4 5， 2 3 4 5， 1 2 3 4 5）
      *
@@ -45,7 +45,7 @@ public class LE_413_Arithmetic_Slices {
      *
      * 1 + 2 + 3 .... + n = n * (n + 1) / 2
      *
-     * Variation : ValidSubarray
+     * Variation : Valid Subarray
      */
 
     class Solution {

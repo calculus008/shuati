@@ -19,9 +19,9 @@ public class LE_382_Linked_List_Random_Node {
      * head.next.next = new ListNode(3);
      * Solution solution = new Solution(head);
      *
-     * // getRandom() should return either 1, 2, or 3 randomly.
+     * // getKthSmallest() should return either 1, 2, or 3 randomly.
      * Each element should have equal probability of returning.
-     * solution.getRandom();
+     * solution.getKthSmallest();
      */
 
     /**

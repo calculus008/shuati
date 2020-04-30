@@ -47,17 +47,17 @@ public class LE_815_Bus_Routes {
      * Example :
      *
      * [
-     *  [1, 2, 7],
-     *  [3, 6, 7]
+     *  [1, 2, 7], //bus #0
+     *  [3, 6, 7]  //bus #1
      * ]
      *
-     * dist :
-     *
-     * 1 : 0
-     * 2 : 0
-     * 3 : 1
-     * 6 : 1
-     * 7 : 0, 1
+     * map :
+     * stop number -> list of bus number
+     * 1 -> 0
+     * 2 -> 0
+     * 3 -> 1
+     * 6 -> 1
+     * 7 -> 0, 1
      *
      * S = 1, T =6
      *
@@ -89,17 +89,22 @@ public class LE_815_Bus_Routes {
      *                        {3, 6, 7}
      *                        stop 3, stop 6 == T, return
      *
-     * So the key to understand it is : for each BFS level, q saves stop number, after we pop out stop number,
-     * we use the dist we built to dist stop numbers to a list of bus numbers, then check if destination is in any
-     * of the bus routes.
+     * So the key to understand it : for each BFS level, q saves stop numbers, after we pop out a stop number,
+     * we use the map which maps stop number to all stops that can be reached from current stop, then check if
+     * destination is in any of the bus routes.
      *
-     * Notice, we need to get size of q first first then pop out #size of stop numbers from q, this is one level
+     * Notice, we need to get size of q first then pop out #size of stop numbers from q, this is one level
      * in BFS.
      *
      * For each BFS level, since we don't take bus that is already visited, we only check stops of the buses that
      * we haven't taken, in other words, all the stops that we put into q for the next level are stops belong to
      * new buses, this guarantees that we can increase bus count for each level, or for each level, we are taking
      * a new bus.
+     *
+     * 1.BFS level: all the bus stop numbers that can be reached from the given stop (by taking all buses that
+     *   have a stop at this given stop)
+     * 2.Visited : we only take a bus once, so the visited is marked on buses.
+     *
      */
     class Solution {
         public int numBusesToDestination(int[][] routes, int S, int T) {

@@ -9,7 +9,7 @@ public class LE_785_Is_Graph_Bipartite {
     /**
          Given an undirected graph, return true if and only if it is bipartite.
 
-         Recall that a graph is bipartite if we can split it's set of nodes into
+         Recall that a graph is bipartite if we can split its set of nodes into
          two independent subsets A and B such that every edge in the graph has
          one node in A and another node in B.
 
@@ -75,6 +75,12 @@ public class LE_785_Is_Graph_Bipartite {
      *
      * In 886, it is strictly [[x, y], [x1, y1],...], each row just have 2 elements and they dislike each other.
      * So we must build an adjacent matrix (build the graph)
+     *
+     * Time Complexity: O(N + E), where N is the number of nodes in the graph, and E is the number of edges.
+     *                  We explore each node once when we transform it from uncolored to colored, traversing
+     *                  all its edges in the process.
+     *
+     * Space Complexity: O(N), the space used to store the color
      */
     class SolutionDFS {
         public boolean isBipartite(int[][] graph) {
@@ -159,6 +165,7 @@ public class LE_785_Is_Graph_Bipartite {
 
                 while (!queue.isEmpty()) {
                     int cur = queue.poll();
+
                     for (int next : graph[cur]) {
                         if (colors[next] == 0) {          // If this node hasn't been colored;
                             colors[next] = -colors[cur];  // Color it with a different color;

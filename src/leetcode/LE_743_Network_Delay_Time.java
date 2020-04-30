@@ -135,13 +135,14 @@ public class LE_743_Network_Delay_Time {
      * Single source, all destinations
      *
      * Time  : O(NlogN + E)
-     * Space : O(N + E)
+     * Space : O(N + E), the size of the graph O(E) (number of edges between nodex),
+     *         plus the size of the other objects used (O(N).
      *
      */
     class Solution3 {
         public int networkDelayTime(int[][] times, int N, int K) {
             /**
-             * build Directed Weighed Graph
+             * build Directed Weighed Graph, O(E), E is number of edges (length of times)
              **/
             Map<Integer, List<int[]>> graph = new HashMap();
             for (int[] edge : times) {
@@ -152,11 +153,18 @@ public class LE_743_Network_Delay_Time {
             }
 
             /**
-             * Heap : store pair {dirs, destination}, sorted by dirs
+             * Heap : store pair {distance, destination}, sorted by distance
              */
             PriorityQueue<int[]> heap = new PriorityQueue<int[]>((a, b) -> a[0] - b[0]);
+            /**
+             * We start from node K, so distance from K to K is 0
+             */
             heap.offer(new int[]{0, K});
 
+            /**
+             * dist:
+             * Node -> distance
+             */
             Map<Integer, Integer> dist = new HashMap();
 
             while (!heap.isEmpty()) {
@@ -170,7 +178,7 @@ public class LE_743_Network_Delay_Time {
                 dist.put(node, d);
 
                 /**
-                 * process the node with the shortest dirs from source
+                 * process the node with the shortest distance from source
                  */
                 if (graph.containsKey(node)) {
                     for (int[] edge : graph.get(node)) {
@@ -196,6 +204,72 @@ public class LE_743_Network_Delay_Time {
             }
 
             return ans;
+        }
+    }
+
+    /**
+     * Use Pair class instead of array as entity saved in heap
+     */
+    class Solution_Dijskra_Practice {
+        class Pair {
+            int dest;
+            int cost;
+
+            public Pair(int dest, int cost) {
+                this.dest = dest;
+                this.cost = cost;
+            }
+        }
+
+        public int networkDelayTime(int[][] times, int N, int K) {
+            Map<Integer, List<Pair>> graph = new HashMap<>();
+            for (int[] t : times) {
+                if (!graph.containsKey(t[0])) {
+                    graph.put(t[0], new ArrayList<>());
+                }
+                graph.get(t[0]).add(new Pair(t[1], t[2]));
+            }
+
+            Map<Integer, Integer> dist = new HashMap<>();
+
+            /**
+             * !!!
+             * Must define comparator
+             */
+            PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
+            pq.offer(new Pair(K, 0));
+
+            while (!pq.isEmpty()) {
+                Pair cur = pq.poll();
+
+                /**
+                 * min heap garauntees the first distance seen popped from heap will be
+                 * the shortest one, so if we already have entry for dest, it's already
+                 * the shortest value.
+                 */
+                if (dist.containsKey(cur.dest)) continue;
+                dist.put(cur.dest, cur.cost);
+
+                /**
+                 * For case that we have a disconnected node in graph
+                 */
+                if (!graph.containsKey(cur.dest)) continue;
+
+                for (Pair p : graph.get(cur.dest)) {
+                    if (!dist.containsKey(p.dest)) {
+                        pq.offer(new Pair(p.dest, cur.cost + p.cost));
+                    }
+                }
+            }
+
+            if (dist.size() != N) return -1;
+
+            int res = 0;
+            for (int key : dist.keySet()) {
+                res = Math.max(res, dist.get(key));
+            }
+
+            return res;
         }
     }
 }

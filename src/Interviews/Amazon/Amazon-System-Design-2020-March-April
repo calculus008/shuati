@@ -97,6 +97,11 @@ codeing + design - 亚麻的locker 配送系统, 如何能够找到合适大小�
 follow up是当用于取到包裹了改怎么办, 然后scale out这个系统, 如何存储数据, 如果当前地区的locker不够了怎么办 etc.
 https://leetcode.com/discuss/interview-question/233869/Design-Amazon-Locker-system
 
+特别强调how to fit into in house order management system
+从下单, 找locker, 运送, 取件, how they work from you
+
+Amazon locker 实现给一个package返回一个locker里具体位置ID的方法 （我觉得跟paking lot非常类似）
+
 #22
 top-k hash-tag
 
@@ -119,8 +124,91 @@ design a class that implement Linux find command. 主要也是考ood吧，要写
 我个人感觉是个开放式问题，没有正确答案。具体题目可以看这里
 https://leetcode.com/discuss/interview-question/369272/Amazon-or-Onsite-or-Linux-Find-Command
 
+ood，设计一个类似linux的find命令，实现找文件大小大于5M以及找所有xml文件
+第四轮，一个trieTree的题，就是typeAhead，面试官似乎不喜欢在node上存储所有的单词的解法，大概想要的是建好
+trietree之后再做bfs或者dfs搜索所有的节点。
+
+设计一个查找文件的API，支持模糊搜索，返回所有符合条件的文件名
+自己觉得题就是DFS搜索，但是崩在了关于模糊搜索怎么处理regular expression matching，自己自动带入做题模式，12*对不对得上123，一个一个比较，比到*的时候分叉的思路
+面试官直接说难道你不知道regular expression matching怎么用吗，原来是想要让直接用java内置的函数处理，给我写了Pattern Class的match方法……后来又说我append文件路径的做法也不对，反正就感觉他想要的是一个比起做题更偏向实际在程序里能work的答案，两个人沟通不咋顺畅，对面不理解我，我也没完全听懂他，就崩掉了
+
+第二题三哥什么都说让自己想，我问了半天最后路径定的是string，就比如''\home\today\morning''，这就是一个路径
+
+不过亚麻这种文件查找的题目比较高频，可以是设计也可以是单独题目，所以还是需要各方面准备，现在面试是越来越难
+
+
 #27
+BQ+系统设计一个亚麻网站其中一个推荐不同category TOP20 的sale item，着重讲系统上，离线计算，数据同步，如何高可用和scale out
+
+#28
+设计亚麻网页下面的访问列表。烙印皮笑肉不笑问了一堆问题，用户多怎么办，记录多怎么办。
+
+#29
+设计一个视频网站里面的watch next list功能。
+
+#30
+设计parking lot. 我在live code写了interface 和 class, 写完check in， check out method
+
+#31
+design chatroom。要求用户在线时可以在多个聊天室发送和接受消息，再次登录时需要接收到所有unread message，拓展是用户之间可以发pm
+
+#32
+要求design一个全国停车场管理系统。
+聊到的知识点：optimistic lock vs pessimistic lock，transaction，load balancer作用，consistent hashing优缺点，
+partition，replication，sql vs nosql等等
+最后问如果想同时做大量的数据分析怎么办，我答可以用read replica，或者建一个data lake。还好没有细聊data lake相关的细节，
+不然我是真说不出来啥lol
+
+#33
 系统设计：亚马逊customer review system
+
+#34
+设计一个online 投票系统, 只开放24小时 能实时显示票数， 最后还问了 投票结束后 还有用户访问怎么处理
+
+#35
+设计twitter的Trending system，大概要求就是需要统计某个hashtag的使用量并且提供给用户一个list of trending items，
+按照点击量排序，需要讨论的点有load balancing，Database的选择与原因，数据的expiration，统计数据的办法和数据结构，
+以及如何确定这个trending list是满足当前time window的（比如这个trending list是今天的最火排名，昨天的数据怎么办balabala）
+
+这一题我觉得自己答得也并不太好，我当时选的是是Redis，我的选择的原因是performance更好，这个case不用太在意consistency，
+而且可以有data replication和data partitioning，所以scalability比较好，但面试官并没有给出很明确的反馈。
+
+#36
+设计一个log metric system，给一堆log string， for example:
+[2020.1.1.23:00:00][ERROR][ThreadNumber-xxx][content......].......
+设计一个function level的solution来存储这些log信息，希望能根据时间，log level等等进行分类并调用，这题并没有clarify太清楚，
+不过三哥觉得我答得还行。
+我主要就讲了下怎么多个filter来找到我们需要的log，然后讲了下把log分成很多time window来存，可以给user提供一个time period filter
+
+#37
+system design，设计一个购物的recommendation system，推荐的规则是比较同时出现的频率。比如用户1买了product A，然后有很多人
+同时买了product A和product B，就给这个用户1推荐product B。
+
+#38
+系统设计一个中间service。可以接受用户的request然后call 云端的一个black box service。 讨论了返回值 ，
+large volumn request, fail handling 等等
+
+#39
+设计一个user permission system， 实现给一个用户判断能否使用某种permission
+
+#40
+让设计一个在线文档多人同时编辑，感觉略崩，全程被面试官带着走。问了怎么做撤销、重复，怎么节约服务器端需要存储的数据等等。
+很多东西都是面试官主动提示，然后我给出我自己的解法。感觉不太像正常的系统设计，倒是问了很多具体的实现细节。
+
+#41
+Video Stream System， focus on how to distribute the content to users
+用CDN，解释了how to use multiple worker threads to handle transcoding，强烈建议看油管上两位印度小哥的视频，解释的很清晰
+
+#42
+设计一个数据结构可以存并且查数据。数据如下，(x, 10), (x, 11), (y, 8), (z, 11), (x, 0)，括号里第一个元素是key, 第二个是值。
+要求是给一个key，要求返回最后存入的值，如果没有就返回-1。比如输入key = x, 应该返回0。如果查询key = a, 则返回-1。follow up是
+如果存入的值是从小到大排列的，要找某个key下面有没有某个值，怎么办？ 我给的答案是二分法。
+
+
+
+
+
+
 
 
 

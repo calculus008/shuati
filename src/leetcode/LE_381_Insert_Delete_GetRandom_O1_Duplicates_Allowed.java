@@ -13,7 +13,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
 
      insert(val): Inserts an item val to the collection.
      remove(val): Removes an item val from the collection if present.
-     getRandom: Returns a random element from current collection of elements.
+     getKthSmallest: Returns a random element from current collection of elements.
                 The probability of each element being returned is linearly related to
                 the number of same value the collection contains.
      Example:
@@ -30,14 +30,14 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
      // Inserts 2 to the collection, returns true. Collection now contains [1,1,2].
      collection.insert(2);
 
-     // getRandom should return 1 with the probability 2/3, and returns 2 with the probability 1/3.
-     collection.getRandom();
+     // getKthSmallest should return 1 with the probability 2/3, and returns 2 with the probability 1/3.
+     collection.getKthSmallest();
 
      // Removes 1 from the collection, returns true. Collection now contains [1,2].
      collection.remove(1);
 
-     // getRandom should return 1 and 2 both equally likely.
-     collection.getRandom();
+     // getKthSmallest should return 1 and 2 both equally likely.
+     collection.getKthSmallest();
      */
 
     /**

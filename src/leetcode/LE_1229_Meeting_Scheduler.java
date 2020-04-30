@@ -6,7 +6,7 @@ public class LE_1229_Meeting_Scheduler {
     /**
      * Given the availability time slots arrays slots1 and slots2 of two people
      * and a meeting duration duration, return the earliest time slot that works
-     * for both of them and is of duration duration.
+     * for both of them and is of duration.
      *
      * If there is no common time slot that satisfies the requirements, return
      * an empty array.
@@ -37,6 +37,79 @@ public class LE_1229_Meeting_Scheduler {
      *
      * Medium
      */
+
+    /**
+     * PriorityQueue solution, fast and clean, 2ms, 100%
+     *
+     * Time : O(nlogn), n = l1 + l2
+     */
+    class Solution_PriorityQueue {
+        public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
+            /**
+             * pq, sort by starting time
+             */
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+
+            /**
+             * Important pruning, all valid interval should have at least duration in length.
+             */
+            for (int[] s : slots1) {
+                if (s[1] - s[0] >= duration) {
+                    pq.offer(s);
+                }
+            }
+
+            for (int[] s : slots2) {
+                if (s[1] - s[0] >= duration) {
+                    pq.offer(s);
+                }
+            }
+
+            while (pq.size() > 1) {
+                /**
+                 * if "pq.poll()[1] >= pq.peek()[0] + duration" is true,
+                 * then current interval and peeked interval must be from two persons, because:
+                 *
+                 * 1.As we put intervals in heap, those intervals must be longer duration.
+                 * 2.As the conditions given, there's no overlap between intervals from the same person.
+                 */
+                if (pq.poll()[1] >= pq.peek()[0] + duration) {
+                    return Arrays.asList(pq.peek()[0], pq.peek()[0] + duration);
+                }
+            }
+
+            return Arrays.asList();
+        }
+    }
+
+    class Solution_Two_Pointers {
+        public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
+            Arrays.sort(slots1, (a, b) -> a[0] - b[0]); // sort increasing by start time
+            Arrays.sort(slots2, (a, b) -> a[0] - b[0]); // sort increasing by start time
+
+            int i = 0, j = 0;
+            int n1 = slots1.length, n2 = slots2.length;
+
+
+            while (i < n1 && j < n2) {
+                /**
+                 * Find intersect between slots1[i] and slots2[j]
+                 **/
+                int intersectStart = Math.max(slots1[i][0], slots2[j][0]);
+                int intersectEnd = Math.min(slots1[i][1], slots2[j][1]);
+
+                if (intersectStart + duration <= intersectEnd) {// Found the result
+                    return Arrays.asList(intersectStart, intersectStart + duration);
+                } else if (slots1[i][1] < slots2[j][1]) {
+                    i++;
+                } else {
+                    j++;
+                }
+            }
+
+            return new ArrayList<>();
+        }
+    }
 
     /**
      * Swipe Line, similar to LE_253_Meeting_Rooms_II,
@@ -105,41 +178,6 @@ public class LE_1229_Meeting_Scheduler {
             }
 
             return res;
-        }
-    }
-
-    /**
-     * PriorityQueue solution
-     */
-    class Solution2 {
-        public List<Integer> minAvailableDuration(int[][] slots1, int[][] slots2, int duration) {
-            /**
-             * pq, sort by starting time
-             */
-            PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparing(a -> a[0]));
-            for (int[] s : slots1) {
-                if (s[1] - s[0] >= duration) {
-                    pq.offer(s);
-                }
-            }
-
-            for (int[] s : slots2) {
-                if (s[1] - s[0] >= duration) {
-                    pq.offer(s);
-                }
-            }
-
-            while (pq.size() > 1) {
-                /**
-                 * if "pq.poll()[1] >= pq.peek()[0] + duration" is true,
-                 * then current interval and peeked interval must be from two persons.
-                 */
-                if (pq.poll()[1] >= pq.peek()[0] + duration) {
-                    return Arrays.asList(pq.peek()[0], pq.peek()[0] + duration);
-                }
-            }
-
-            return Arrays.asList();
         }
     }
 }

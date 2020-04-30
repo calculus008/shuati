@@ -9,7 +9,7 @@ Minimum_Radius_Enclosing_K_Points             给三个点坐标，求包涵这�
                                               我是先找到其中两个点的垂直平分线  确定圆心的一个坐标  然后二分来逼近圆心
 
 Implement_BST_Insert_Find_GetRandom
-
+Rearrange_Linked_List
 
 
 #
@@ -103,7 +103,7 @@ follow up：如何做到常数空间？答案：先算前两个字母的gcd1，�
 #
 人会说不同的语言，问两个人之间要多少个翻译，bfs就行，只是要自己定义数据类型。
 
-#
+#(!!!)
 input: str, dict
 dict里面是key是字符串里的几个字母，value是可以替换成的数字
 求所有可能的组合
@@ -114,9 +114,88 @@ ascending order, create a class that has two methods: next(), hasNext(). The nex
 the smallest number each tim
 
 #
-LE_322_Coin_Change But with limited number of conins
+LE_322_Coin_Change                        But with limited number of conins
 
 #
-implement BST with Insert/Find/GetRandom
+LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
+                                          meeting长度不变，问meeting average delay (??)
+
+#(!!!)
+设计一个查找文件的API，支持模糊搜索，返回所有符合条件的文件名
+自己觉得题就是DFS搜索，但是崩在了关于模糊搜索怎么处理regular expression matching，自己自动带入做题模式，12*对不对得上123，一个一个比较，比到*的时候分叉的思路
+面试官直接说难道你不知道regular expression matching怎么用吗，原来是想要让直接用java内置的函数处理，给我写了Pattern Class的match方法……后来又说我append文件路径的做法也不对，反正就感觉他想要的是一个比起做题更偏向实际在程序里能work的答案，两个人沟通不咋顺畅，对面不理解我，我也没完全听懂他，就崩掉了
+
+第二题三哥什么都说让自己想，我问了半天最后路径定的是string，就比如''\home\today\morning''，这就是一个路径
+
+不过亚麻这种文件查找的题目比较高频，可以是设计也可以是单独题目，所以还是需要各方面准备，现在面试是越来越难
+
+#
+要求写一个special Random function 输入N 和 一个array, 要求随机返回一个值， 但值不能是array 里有的。
+n = 5, arr = [1, 2, 6, 7, 9], 是不是说random的范围是[0, 5], 但不能是arr里有的1， 2
+这个意思呢？
+是的 不能返回array里的数字
+那是不是先random 出来个n的数， 然后用set check在不在array里就行了？
+要考虑一些edge case. 比如说 array 里面包含了从0到N所有数， 就infinite loop了 怎么处理？
+follow-up: 如果只可以call 一次 rand(), 怎么做？
+
+#
+用二维数组表示lego (1: 有lego, 0：空) 随机destroy 一块 "1" （non attached will fall down）问剩下的lego。
+
+楼主lego那题 是跟刷题网一样 跟天花板连着的不会掉下来吗？
+不太一样 没有天花板连着 只考虑有底座就可以
+
+0000000
+0011000
+0001000
+0001000
+0011100
+
+如果destory center 的1， 剩下的是
+
+0000000
+0000000
+0000000
+0001000
+0011100
+
+#
+一个racing car game，大致是给一个int[][] array作为map, 小车起点在(0,0), 地图里存在障碍物用1表示，需要最终走到map的右下角，
+小车可以上下左右行驶，但不能到达障碍物，小车有一个初始速度为float变量=1，每次按同方向行驶小速度变为2*当前速度，转向或反方向行
+驶速度变为0.5*当前速度，问小车的最快到达右下角的时间。
+818. Race Car??
+
+#
+应该在刷题网上出现过，简单搜了下没找到。大概就是有一堆绳子，每根绳子有长度和价值value，它们可以拼接，然后给定一个长度N，
+找到绳子的combination使得它们加起来的价值最大。
+
+#
+给一个string array，找到不重复的最长subarray
+
+#
+问了一个关于送货的，从一个点出发到另一个地点需要多长时间，然后这个地点的用户约定好的送货时间是多少，然后计算总共有多少用
+户的送货时间会迟到。也是自己定义所有东西，花了些时间，我用了dfs来做
+
+#
+matrix由不同的数字组成，top-left往右或者往下走，走到bottom-right, 记录走过的path的list sorted之后的最小值
+
+#
+list的modification：1-2-3-4-5 转成1-5-2-4-3
+
+#
+给一道BFS的题，就是给一张图，图上有几个节点，节点到节点之间的距离不等。然后选定一个起点，要求写算法实现如何以最小的代价走完所有节点，
+如果走不完，则返回-1。楼主刷题太少，就100来个，没做过带边值的图的题目。虽然算法在提示下用priority queue写了，但是却卡在了怎么建n
+ode的问题上，因为是白板，node的class也要自己写
+
+Travling Sales Men?
+
+
+
+
+
+
+
+
+
+
 
 

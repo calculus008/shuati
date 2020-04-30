@@ -57,20 +57,20 @@ public class LE_106_Construct_Binary_Tree_From_Postorder_Inorder {
      * Only difference from helper1(), only pass "postend", no need to pass "poststart"
      * calculate length of the RIGHT subtree string, then recurse...
      **/
-    private TreeNode helper2(int[] postorder, int postend,  int[] inorder, int instart, int inend) {
-        if(instart > inend || postend < 0)
+    private TreeNode helper2(int[] postorder, int postend, int[] inorder, int instart, int inend) {
+        if (instart > inend || postend < 0)
             return null;
 
         TreeNode root = new TreeNode(postorder[postend]);
-        int i=0;
-        while(inorder[i] != root.val) {
+        int i = 0;
+        while (inorder[i] != root.val) {
             i++;
         }
 
         //inend - (i + 1) + 1
         int lenRT = inend - i;
-        root.left = helper2(postorder, postend - 1 - lenRT ,  inorder, instart, i-1);
-        root.right = helper2(postorder, postend - 1, inorder, i+1,     inend);
+        root.left = helper2(postorder, postend - 1 - lenRT, inorder, instart, i - 1);
+        root.right = helper2(postorder, postend - 1, inorder, i + 1, inend);
 
         return root;
     }

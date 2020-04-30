@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class LE_296_Best_Meeting_Point {
     /**
-         A group of two or more people wants to meet and minimize the total travel dirs.
+         A group of two or more people wants to meet and minimize the total travel distance.
          You are given a 2D grid of values 0 or 1, where each 1 marks the home of someone in the group.
-         The dirs is calculated using Manhattan Distance, where dirs(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
+         The distance is calculated using Manhattan Distance, where dirs(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
 
          For example, given three people living at (0,0), (0,4), and (2,2):
 
@@ -88,7 +88,7 @@ public class LE_296_Best_Meeting_Point {
     }
 
     /**
-     * two pointers to find min combined dirs
+     * two pointers to find min combined distance
      */
     public int min(List<Integer> list) {
         int res = 0;

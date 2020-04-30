@@ -11,7 +11,7 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
 
          insert(val): Inserts an item val to the set if not already present.
          remove(val): Removes an item val from the set if present.
-         getRandom: Returns a random element from current set of elements. Each element must have the same probability of being returned.
+         getKthSmallest: Returns a random element from current set of elements. Each element must have the same probability of being returned.
          Example:
 
          // Init an empty set.
@@ -26,8 +26,8 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
          // Inserts 2 to the set, returns true. Set now contains [1,2].
          randomSet.insert(2);
 
-         // getRandom should return either 1 or 2 randomly.
-         randomSet.getRandom();
+         // getKthSmallest should return either 1 or 2 randomly.
+         randomSet.getKthSmallest();
 
          // Removes 1 from the set, returns true. Set now contains [2].
          randomSet.remove(1);
@@ -35,8 +35,8 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
          // 2 was already in the set, so return false.
          randomSet.insert(2);
 
-         // Since 2 is the only number in the set, getRandom always return 2.
-         randomSet.getRandom();
+         // Since 2 is the only number in the set, getKthSmallest always return 2.
+         randomSet.getKthSmallest();
 
          Medium
      */
@@ -45,9 +45,9 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
      * For problem like this, one or multiple HashMap must be needed.
      * At least, you have a HashMap to find given element in O(1).
      *
-     * For this problem, O(1) insertion and getRandom imply using list,
+     * For this problem, O(1) insertion and getKthSmallest imply using list,
      * we can insert new value at the end of a list, which is O(1).
-     * getRandom - randomly get an index in a list and return its value.
+     * getKthSmallest - randomly get an index in a list and return its value.
      *
      * 这道题的关键是getRandom(), 这确定了我们需要用List.
      *

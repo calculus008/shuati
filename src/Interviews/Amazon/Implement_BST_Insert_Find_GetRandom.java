@@ -1,6 +1,9 @@
 package Interviews.Amazon;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Stack;
 
 public class Implement_BST_Insert_Find_GetRandom {
     /**
@@ -42,7 +45,7 @@ public class Implement_BST_Insert_Find_GetRandom {
 
     static class Node {
         int val;
-        int children;//number of children under current node
+        int children;//number of children under current node + node itself
 
         Node left, right;
 
@@ -71,6 +74,7 @@ public class Implement_BST_Insert_Find_GetRandom {
          **/
         if (root == null) {
             root = new Node(val);
+            root.children = 1;
             return root;
         }
 
@@ -97,33 +101,125 @@ public class Implement_BST_Insert_Find_GetRandom {
         inorder(root.right);
     }
 
-    public static int getRandom(Node root, int count) {
-        if (root == null) return 0;
+//    public static int getKthSmallest(Node root, int count) {
+//        if (root == null) return -1;
+//
+//        int l = root.left != null ? root.left.children + 1 : 0;
+//        if (l == count - 1) {
+//            return root.val;
+//        }
+//
+//        if (count <= l) return getKthSmallest(root.left, count);
+//
+//        /**
+//         * if root.left is not null, subtract root.left.children + 1 (root.left itself) + 1 (root).
+//         * otherwise, subtract 1 (root)
+//         */
+//        int num = root.left != null ? count -  (root.left.children + 2) : count - 1;
+//
+//        return getKthSmallest(root.right, num);
+//    }
 
-        int smaller = root.left != null ? root.left.children + 1 : 0;
-        if (smaller == count - 1) {
-            return root.val;
+    public static int getRandom_3(Node root, int count) {
+        if (root == null) return -1;
+
+        int l = (root.left == null ? 0 : root.left.children);
+
+        if (l >= count) {
+            return getRandom_3(root.left, count);
         }
 
-        if (count <= smaller) return getRandom(root.left, count);
+        if (l + 1 == count) return root.val;
 
-        /**
-         * if root.left is not null, subtract root.left.children + 1 (root.left itself) + 1 (root).
-         * otherwise, subtract 1 (root)
-         */
-        int num = root.left != null ? count -  (root.left.children + 2) : count - 1;
-
-        return getRandom(root.right, num);
+        return getRandom_3(root.right, count - l - 1);
     }
 
     /**
-     * Returns Random nod
+     * From LE_230_Kth_Smallest_Element_In_BST
+     *
+     * Iterative
+     * Time  : O(h + k)
+     * Space : O(h)
+     */
+    public static int getRandom_1(Node root, int count) {
+        Stack<Node> stack = new Stack<>();
+        Node cur = root;
+
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+
+            cur = stack.pop();
+
+            count--;
+            if (count == 0) return cur.val;
+
+            cur = cur.right;
+        }
+
+        return -1;
+    }
+
+    /**
+     * From LE_230_Kth_Smallest_Element_In_BST
+     *
+     * First count the number of nodes in each subtree, then do Quick Select in BST.
+     *
+     * Time and Space : O(n) (building map for number of nodes under each node)
+     */
+    static Map<Node, Integer> map;
+
+    public static int getRandom_2(Node root, int k) {
+        map = new HashMap<>();
+        getNodes(root);
+        return helper(root, k);
+    }
+
+    /**
+     * postorder, count number of nodes in each subtree starting from a given node.
+     * Time : O(n)
+     */
+    private static int getNodes(Node root) {
+        if (root == null) return 0;
+
+        int l = getNodes(root.left);
+        int r = getNodes(root.right);
+
+        int sum = l + r + 1;
+        map.put(root, sum);
+
+        return sum;
+    }
+
+    /**
+     * inorder, quick select, get the kth value
+     * Time : O(logn)
+     */
+    private static int helper(Node root, int k) {
+        if (root == null) return -1;
+
+        int l = (root.left == null ? 0 : map.get(root.left));
+
+        if (l >= k) {
+            return helper(root.left, k);
+        }
+
+        if (l + 1 == k) return root.val;
+
+        return helper(root.right, k - l - 1);
+    }
+
+
+    /**
+     * Returns Random node
      **/
     static int randomNode(Node root) {
         Random rand = new Random();
         int count = rand.nextInt(root.children + 1) + 1;
         System.out.println("count : " + count);
-        return getRandom(root, count);
+        return getRandom_2(root, count);
     }
 
     public static void main(String args[]) {
@@ -148,7 +244,10 @@ public class Implement_BST_Insert_Find_GetRandom {
         insertRec(root, 45);
 
         inorder(root);
-        System.out.println("A Random Node From Tree : " + randomNode(root));
+//        System.out.println("A Random Node From Tree : " + randomNode(root));
+        for (int i = 1; i < 10; i++) {
+            System.out.println("A Random Node From Tree : " + getRandom_3(root, i));
+        }
     }
 }
 
