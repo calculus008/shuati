@@ -45,10 +45,10 @@ public class LE_720_Longest_Word_In_Dictionary {
      * Each word, you need to get all prefixes of a word and check in HashMap or (set):
      * O(1) + O(2) + O(3) ... + O(l) -> O(w ^ 2), total : O(sum(w ^ 2))
      *
-     * For Trie, for each new prefix, you just need to move to the next level in Trie:
+     * For TrieNode, for each new prefix, you just need to move to the next level in TrieNode:
      * O(1) + O(1)...+ O(1) -> O(w), total : O(sum(w))
      *
-     * This is where Trie Solution is better in time complexity.
+     * This is where TrieNode Solution is better in time complexity.
      *
      * Time  : O(sum(w ^ 2))
      * Space : O(n * w)
@@ -89,7 +89,7 @@ public class LE_720_Longest_Word_In_Dictionary {
     }
 
     /**
-     * Trie + Pruning
+     * TrieNode + Pruning
      *
      * Time  : O(sum(W))
      * Space : O(26 * W * n)

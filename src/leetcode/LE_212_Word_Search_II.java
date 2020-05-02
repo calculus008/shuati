@@ -27,7 +27,7 @@ public class LE_212_Word_Search_II {
 
     /**
      * Solution 1
-     * Trie + DFS, Time : O(m * n * TrieNode), Space : O(TrieNode)
+     * TrieNode + DFS, Time : O(m * n * TrieNode), Space : O(TrieNode)
      *
      * https://zxi.mytechroad.com/blog/searching/leetcode-212-word-search-ii/
      *
@@ -263,9 +263,9 @@ public class LE_212_Word_Search_II {
     }
 
     /**
-     * Another form of Trie + DFS solution
+     * Another form of TrieNode + DFS solution
      * Difference from Solution 1 : use "insert()" from Tire class
-     * to populate Trie (instead of using "buildTrieTree()"
+     * to populate TrieNode (instead of using "buildTrieTree()"
      */
     public class Solution {
         class TrieNode {
@@ -322,7 +322,7 @@ public class LE_212_Word_Search_II {
             }
 
             /**
-             * check if it is visited and if target char exists in Trie
+             * check if it is visited and if target char exists in TrieNode
              */
             char c = board[i][j];
             int idx = c - 'a';

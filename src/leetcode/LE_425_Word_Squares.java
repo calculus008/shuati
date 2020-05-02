@@ -254,15 +254,15 @@ public class LE_425_Word_Squares {
 
     /**
      * Solution 2
-     * Use Trie, copied from leetcode, very clear explanation here:
+     * Use TrieNode, copied from leetcode, very clear explanation here:
      *
      * https://leetcode.com/problems/word-squares/discuss/91333/Explained.-My-Java-solution-using-Trie-126ms-1616
      *
-     * Main logic is the same as Solution1, the only difference is that it stores prefix in Trie.
-     * Call findByPrefix() in Trie class to get list of of words that share the given common prefix
+     * Main logic is the same as Solution1, the only difference is that it stores prefix in TrieNode.
+     * Call findByPrefix() in TrieNode class to get list of of words that share the given common prefix
      *
-     * Compare with HashMap, Trie saves space, Time complexity is the same.
-     * Implementing Trie takes time, so if not required, use HashMap saves time.
+     * Compare with HashMap, TrieNode saves space, Time complexity is the same.
+     * Implementing TrieNode takes time, so if not required, use HashMap saves time.
      *
      * Say there are n words, the words' length is l, and each trie node has c children on average. buildTrie() takes O(ln).
      * wordSquares() helper method takes O(c^l). So the for loop takes O(nc^l). The overall time complexity is O(ln + nc^l).

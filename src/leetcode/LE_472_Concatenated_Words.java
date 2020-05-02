@@ -116,7 +116,7 @@ public class LE_472_Concatenated_Words {
     }
 
     /**
-     * Trie + DFS
+     * TrieNode + DFS
      *
      * Preferred Solution
      *
@@ -125,7 +125,7 @@ public class LE_472_Concatenated_Words {
      *
      * It's O(n * k) for validation as we always needs to travel the Tire once
      *
-     * Trie vs HashMap
+     * TrieNode vs HashMap
      * https://stackoverflow.com/questions/245878/how-do-i-choose-between-a-hash-table-and-a-trie-prefix-tree
      *
      * 49 ms
@@ -165,7 +165,7 @@ public class LE_472_Concatenated_Words {
             List<String> res = new ArrayList<>();
             if (words == null || words.length == 0) return res;
 
-            //init Trie
+            //init TrieNode
             root = new TrieNode();
             for (String word : words) {
                 if (word == null || word.length() == 0) {

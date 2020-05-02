@@ -84,7 +84,7 @@ public class LE_642_Design_Search_Autocomplete_System {
 
 
     /**
-     * Use Trie + PriorityQueue, need to add logic to deal with "hotness" based on frequency of the
+     * Use TrieNode + PriorityQueue, need to add logic to deal with "hotness" based on frequency of the
      * existing sentences.
      */
     public class AutocompleteSystem {

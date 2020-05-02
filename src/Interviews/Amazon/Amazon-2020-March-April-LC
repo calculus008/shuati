@@ -7,8 +7,12 @@ LE_211_Add_And_Search_Word
                                           trie的children[26] 他说这都什么年代了， 还用26字母，怎么不用unicode 问我unicode有多少
                                           个。。(143,924) 然后说要改进这个结构。。我说好吧，那就用hashmap吧。。然后他说。。。如果数据特别多
                                           doule了会造成什么问题。。我说变慢啊，hashmap太大。。。他说为什么
+LE_1268_Search_Suggestions_System         (***)
+Auto_Complete
+
 LE_23_Merge_k_Sorted_Lists                但给的input其实是list int array，用了priority queue解决。之后讨论了如果input list过大怎么办，
                                           回答用map reduce
+
 
 #BST
 LE_510_Inorder_Successor_In_BST_II        no access to root, but each node has parent pointer
@@ -153,7 +157,7 @@ LE_518_Coin_Change_II                     Ask for number of combinations to sum 
 
 LE_127_Word_Ladder
 
-#Data structure design
+#Design
 LE_642_Design_Search_Autocomplete_System
 LE_642_Design_Search_Autocomplete_System_Mine
 LE_380_Insert_Delete_GetRandom_O1
@@ -162,6 +166,10 @@ LE_146_LRU_Cache                          LRU写的双链表，follow up我也�
                                           她说好。
                                           套了个实际问题，但是本身就是LRU
                                           follow up with time to leave and if infinity memory how to optimize
+LE_348_Design_Tic_Tac_Toe                 写完之后问怎么拓展成五子棋一类的，没让写代码，就说了下思路
+LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
+LE_1236_Web_Crawler
+LE_1242_Web_Crawler_Multithreaded
 
 
 LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
@@ -211,26 +219,18 @@ LE_827_Making_A_Large_Island             (***）dfs populates each island, then 
 LE_1258_Synonymous_Sentences             (***)
 
 #Dijskra
-LE_743_Network_Delay_Time                要会Dijskra
+LE_743_Network_Delay_Time                要会Dijskra, use PriorityQueue
 LE_787_Cheapest_Flights_Within_K_Stops    一个图的题，求从一个城市到另一个城市步数在k以内的最小cost，
                                           给一个k和一个二维数组，分别表示出发和到达的城市，以及票价。
 
-1242.  Web Crawler Multithreaded
-1236
-Web Crawler                               a网站可以连接到b，c
-                                          b又可以到d，e
-                                          c可以到b，f
-                                          给一个网址，返回所有能爬到的网址
-                                          图上的搜索，给了DFS，后来还让说了下BFS
+LE_1352_Product_Of_The_Last_KNumbers     (***)
 
-818. Race Car
-348. Design Tic-Tac-Toe                   写完之后问怎么拓展成五子棋一类的，没让写代码，就说了下思路
-1352. Product of the Last K Numbers
-765. Couples Holding Hands
+
+
+====================
+LE_765_Couples_Holding_Hands
 656. Coin Path
-
-
-
+818. Race Car
 
 
 

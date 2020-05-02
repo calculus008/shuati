@@ -71,9 +71,11 @@ public class LE_1268_Search_Suggestions_System {
      * Init : O(nlogn)
      * Query : O(len(searchWord)logn)
      *
-     * Query is more expensive then Trie solution. Since we only need to search one searchWord, so
-     * this solution avoids the high cost of init for Trie (we just need to do a sort here), so
+     * Query is more expensive then TrieNode solution. Since we only need to search one searchWord, so
+     * this solution avoids the high cost of init for TrieNode (we just need to do a sort here), so
      * even query is more expensive, it works faster overall.
+     *
+     * 10ms, 95%
      */
 
     /**
@@ -190,23 +192,28 @@ public class LE_1268_Search_Suggestions_System {
     }
 
     /**
-     * Trie
+     * TrieNode : save matches words at each TrieNode, takes more space.
      *
      * Init : O(sum(len(products[i]))
      * Query : O(len(searchWord))
      *
      * Since we only have one searchWord, so it seems that init stage is a little expensive.
-     * If we have more than 1 searchWord, Trie solution is better since we only do one init operation.
+     * If we have more than 1 searchWord, TrieNode solution is better since we only do one init operation.
+     *
+     * Also, since we save list of matched words in each TrieNode, we spend more on memory to gain time
+     * on search.
+     *
+     * 13ms 85%
      */
-    class Solution3 {
+    class Solution_Trie_1{
         //trie node
-        class Trie {
-            Trie[] next;
+        class TrieNode {
+            TrieNode[] next;
             List<String> words;
 
-            public Trie() {
+            public TrieNode() {
                 words = new ArrayList();
-                next = new Trie[26];
+                next = new TrieNode[26];
             }
         }
 
@@ -215,16 +222,16 @@ public class LE_1268_Search_Suggestions_System {
             Arrays.sort(products);
 
             /**
-             * init Trie
+             * init TrieNode
              */
-            Trie root = new Trie();
+            TrieNode root = new TrieNode();
 
             for (String prod : products) {
-                Trie cur = root;
+                TrieNode cur = root;
                 for (char ch : prod.toCharArray()) {
                     int i = ch - 'a';
                     if (cur.next[i] == null) {
-                        cur.next[i] = new Trie();
+                        cur.next[i] = new TrieNode();
                     }
                     cur = cur.next[i];
 
@@ -238,7 +245,7 @@ public class LE_1268_Search_Suggestions_System {
              * Query
              */
             List<List<String>> res = new ArrayList();
-            Trie cur = root;
+            TrieNode cur = root;
 
             for (char c : searchWord.toCharArray()) {
                 cur = cur.next[c - 'a'];
@@ -251,6 +258,107 @@ public class LE_1268_Search_Suggestions_System {
             }
 
             return res;
+        }
+    }
+
+    /**
+     * Difference from Solution_Trie_1 :
+     * We don't save list matched words in each TrieNode, so we need to do DFS
+     * for search. Use less memory, but query performance is poor.
+     *
+     * If required by interviewer to use DFS, should be able to come up with this solution.
+     *
+     * findByDFS() and helper() are copied from Auto_Complete
+     *
+     */
+    class Solution_Trie_2 {
+        class TrieNode {
+            TrieNode[] next;
+            boolean isWord;
+
+            public TrieNode() {
+                next = new TrieNode[26];
+                isWord = false;
+            }
+        }
+
+        TrieNode root;
+
+        public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+            Arrays.sort(products);
+
+            root = new TrieNode();
+
+            for (String prod : products) {
+                TrieNode cur = root;
+                for (char ch : prod.toCharArray()) {
+                    int i = ch - 'a';
+                    if (cur.next[i] == null) {
+                        cur.next[i] = new TrieNode();
+                    }
+                    cur = cur.next[i];
+                }
+                cur.isWord = true;
+            }
+
+            List<List<String>> res = new ArrayList();
+            TrieNode cur = root;
+
+            String prefix ="";
+            for (char c : searchWord.toCharArray()) {
+                prefix += c;
+                if (cur == null) break;
+                List<String> list = findByDFS(prefix);
+                if (list.size() > 0) {
+                    res.add(list);
+                }
+            }
+
+            while (res.size() < searchWord.length()) {
+                res.add(new ArrayList<>());
+            }
+
+            return res;
+        }
+
+        /**
+         * !!!
+         * Given prefix, DFS search matching words.
+         * 1.First, go level by level to the last char of the prefix String.
+         * 2.Then recursively go deeper into Trie to find all words (isWord is TRUE)
+         */
+        public List<String> findByDFS(String prefix){
+            List<String> res = new ArrayList<>();
+            if (prefix == null || prefix.isEmpty()) return res;
+
+            TrieNode cur = root;
+            for (char c : prefix.toCharArray()) {
+                int idx = c - 'a';
+                if (cur.next[idx] == null) {
+                    return res;
+                }
+
+                cur = cur.next[idx];
+            }
+
+            helper(res, cur, prefix);
+            return res;
+        }
+
+        public void helper(List<String> res, TrieNode pRoot, String curS){
+            if (pRoot == null){
+                return;
+            }
+
+            if (pRoot.isWord && res.size() < 3) {//"res.size() < 3"!!!
+                res.add(curS);//!!!
+            }
+
+            String tempS = curS;
+            for (int i = 0; i < 26; i++){
+                char c = (char)('a' + i); //!!!
+                helper(res, pRoot.next[i], tempS + c);
+            }
         }
     }
 

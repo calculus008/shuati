@@ -33,7 +33,7 @@ public class LE_745_Prefix_And_Suffix_Search {
     /**
      * http://zxi.mytechroad.com/blog/tree/leetcode-745-prefix-and-suffix-search/
      *
-     * HashMap Trie Design
+     * HashMap TrieNode Design
      */
 
     /**
@@ -105,20 +105,20 @@ public class LE_745_Prefix_And_Suffix_Search {
     }
 
     /**
-     * Trie
+     * TrieNode
      *
      * Time  : O(n * l ^ 2)
      * Space : O(n * l ^ 2)
      *
-     * The key step to reduce time complexity is the key inserted into Trie is suffix + "{" _ word.
-     * Because of the natrue of Trie, we save the work of generating prefix, when search down Trie,
+     * The key step to reduce time complexity is the key inserted into TrieNode is suffix + "{" _ word.
+     * Because of the natrue of TrieNode, we save the work of generating prefix, when search down TrieNode,
      * it will go by each char of the word hence the prefix.
      *
      * 389 ms
      */
     class WordFilter3 {
         /**
-         * Trie class adapted for this problem
+         * TrieNode class adapted for this problem
          *
          * 1."index" : save the index value which is returned by search(), also pass it to insert()
          * 2.Has 27 children instead of 26. The extra one is for separator between suffix and the word.

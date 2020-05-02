@@ -50,7 +50,7 @@ public class LE_14_Longest_Common_Prefix {
     }
 
     /**
-     * Trie solution
+     * TrieNode solution
      * Time : O(S) , where S is the sum of all characters in all strings.
      */
     public class Solution {
