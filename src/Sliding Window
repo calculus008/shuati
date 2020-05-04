@@ -1,0 +1,37 @@
+#Sliding Window
+
+#Min or Max length of sliding window
+LE_03_Longest_Substring_Without_Repeating_Characters      (**)
+LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
+LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
+LE_76_Min_Window_Substring
+LE_727_Minimum_Window_Subsequence
+
+#Number of subarrays
+LE_992_Subarrays_With_K_Different_Integers
+LE_1248_Count_Number_Of_Nice_Subarrays
+
+LE_30_SubstrConactWords                                   (***)
+
+LE_209_Minimum_Size_Subarray_Sum
+LE_239_Sliding_Window_Maximum
+LE_480_Sliding_Window_Median                              (lint 360)   (***) Revisit
+LE_346_Moving_Average_From_Data_Stream
+LE_438_Find_All_Anagrams_In_A_String
+LI_647_Find_All_Anagrams_In_A_String
+LE_567_Permutation_In_String
+LE_643_Maximum_Average_Subarray_I
+LE_424_Longest_Repeating_Character_Replacement
+LE_1004_Max_Consecutive_Ones_III
+LE_1100_Find_K_Length_Substrings_With_No_Repeated_Characters
+
+
+
+
+209
+862
+904
+930
+1234
+1358
+
