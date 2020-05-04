@@ -22,16 +22,12 @@ LI_647_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
 LE_643_Maximum_Average_Subarray_I
 LE_424_Longest_Repeating_Character_Replacement
+LE_862_Shortest_Subarray_With_Sum_At_Least_K
+LE_930_Binary_Subarrays_With_Sum
 LE_1004_Max_Consecutive_Ones_III
 LE_1100_Find_K_Length_Substrings_With_No_Repeated_Characters
 
-
-
-
-209
-862
 904
-930
 1234
 1358
 

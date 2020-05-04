@@ -300,6 +300,9 @@ LE_946_Validate_Stack_Sequences
 #mono stack
 LE_239_Sliding_Window_Maximum
 LE_739_Daily_Temperatures
+LE_901_Online_Stock_Span
+907
+862
 
 #Iterators
 LE_251_Flatten_2D_Vector                                  (lint 601)
@@ -691,9 +694,11 @@ Reservoir Sampling
 LE_382_Linked_List_Random_Node
 
 #Mono Stack
-LE_1019_Next_Greater_Node_In_Linked_List
 LE_901_Online_Stock_Span
 LE_739_Daily_Temperatures
+LE_862_Shortest_Subarray_With_Sum_At_Least_K
+LE_1019_Next_Greater_Node_In_Linked_List
+
 
 #Array and String
 LE_55_Jump_Game
