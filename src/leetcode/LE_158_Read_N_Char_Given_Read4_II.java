@@ -74,7 +74,7 @@ public class LE_158_Read_N_Char_Given_Read4_II {
          buffPtr point to next unread char in buff and buffcount indicate length of buff. So when we call read(),
          we read from buff starting with buffPtr. Once buffPtr == buffCount we finish reading buff and we have to call
          read4() to refill internal buff and read from buff again.
-         It is important to note that read4() is a system call and every call increament file position by 4 (like C *File)
+         It is important to note that read4() is a system call and every call increament file position by 4 (like C *FileNode)
     */
 
     class Solution {

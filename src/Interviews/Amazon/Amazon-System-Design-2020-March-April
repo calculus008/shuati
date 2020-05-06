@@ -15,6 +15,8 @@ Design a pholo library platform. 可能像google相册那样
 
 #5
 design linux find OOD
+ood - linux command find。有多种filter查找结果的feature，比如文件大小，文件类型等；之后又问如果要加上别的logistic operation怎么办，
+比如OR，AND。这题相当高频了，地里有个大神写过一个很详细的solution
 
 #6
 sys design：一个文件爬虫，根据条件，找出在某一路径下所有符合条件的文件
@@ -204,9 +206,34 @@ Video Stream System， focus on how to distribute the content to users
 要求是给一个key，要求返回最后存入的值，如果没有就返回-1。比如输入key = x, 应该返回0。如果查询key = a, 则返回-1。follow up是
 如果存入的值是从小到大排列的，要找某个key下面有没有某个值，怎么办？ 我给的答案是二分法。
 
+#43
+BH后问的是OOD， 问设计一个分析计算式的类，可以parse处理数字，字母等各种类型的数据，进行各种operation。直接抽象借口写了，
+然后问，如果是不同类型的数据,怎么设计接口不用switch，我就点点点了，最后他跟我说可以弄个map把各种类型和operation映射起来成新的类型，
+我就更点点点了，这也行？
 
+#44
+system design - 设计一个分数管理系统。api要求给一个list的视频，根据视频被观看的次数给视频打分，返回分数，怎么设计api，数据库，
+系统结构？怎么scale？如果把用户观看视频的记录存在一个log server里面，怎么定期更新数据库？怎么monitor整个系统？
 
+#45
+ood - locker。有三种size的locker，实现存取package
 
+#46
+设计一个分数管理系统。api要求给一个list的视频，根据视频被观看的次数给视频打分，返回分数，怎么设计api，数据库，系统结构？怎么scale？
+如果把用户观看视频的记录存在一个log server里面，怎么定期更新数据库？怎么monitor整个系统？
+
+#47
+系统设计 minitoring system 很多小的device 有数据要经常上传到服务器，api主要是服务器端 1. 计算某个guid的总和 2. 当前时刻所有
+device的平均值
+follow up：1. scale server 2. 连续内存大小不够怎么存array （数据结构）
+
+#48
+一个服务，能跨终端记录和恢复电子书的阅读状态
+和我经历过的其他系统设计面试不同的地方是，面试官对每一步的data schema问的很细，client, web server, 每一个service, 以及db
+，每一层具体有哪些column，传递哪些，serialization用json，xml还是binary等等。最后写满了一屏幕的data structure。中间一度感
+觉和面试官在非常不同的频道上，还以为这轮挂了
+这题其实没啥特别的，主要是数据库设计，稍微讨论下得出每一行的key是userId，简单版只需要记录最后一本书的bookId和pageId，高级版需要另开
+一张表记录多本书的，然后加入timestamp，讨论resolve conflict，stale data cleanup等等，都是一般数据系统里的常见问题
 
 
 

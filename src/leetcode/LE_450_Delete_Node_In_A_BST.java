@@ -45,6 +45,49 @@ public class LE_450_Delete_Node_In_A_BST {
          Medium
      */
 
+    class Solution {
+        /**
+         * One step right and then always left
+         */
+        public int successor(TreeNode root) {
+            root = root.right;
+            while (root.left != null) root = root.left;
+            return root.val;
+        }
+
+        /**
+         * One step left and then always right
+         */
+        public int predecessor(TreeNode root) {
+            root = root.left;
+            while (root.right != null) root = root.right;
+            return root.val;
+        }
+
+        public TreeNode deleteNode(TreeNode root, int key) {
+            if (root == null) return null;
+
+            if (key > root.val) {// delete from the right subtree
+                root.right = deleteNode(root.right, key);
+            } else if (key < root.val) {// delete from the left subtree
+                root.left = deleteNode(root.left, key);
+            } else { // delete the current node
+                if (root.left == null && root.right == null) {// the node is a leaf
+                    root = null;
+                } else if (root.right != null) {// the node is not a leaf and has a right child
+                    root.val = successor(root);
+                    root.right = deleteNode(root.right, root.val);
+                } else { // the node is not a leaf, has no right child, and has a left child
+                    root.val = predecessor(root);
+                    root.left = deleteNode(root.left, root.val);
+                }
+            }
+
+            return root;
+        }
+    }
+
+
     /**
      * http://zxi.mytechroad.com/blog/tree/leetcode-450-delete-node-in-a-bst/
      *
@@ -57,10 +100,7 @@ public class LE_450_Delete_Node_In_A_BST {
      * Space : O(h)
      */
 
-    /**
-     *
-     */
-    class Solution1 {
+    class Solution_Recursive_Copy_Delete {
         public TreeNode deleteNode(TreeNode root, int key) {
             if (root == null) return root;
 
@@ -103,10 +143,11 @@ public class LE_450_Delete_Node_In_A_BST {
         }
     }
 
+
     /**
-     *
+     * Postorder
      */
-    class Solution2 {
+    class Solution_Recursive_Move_And_Delete {
         public TreeNode deleteNode(TreeNode root, int key) {
             if (root == null) return root;
 
@@ -116,7 +157,7 @@ public class LE_450_Delete_Node_In_A_BST {
                 root.left = deleteNode(root.left, key);
             } else {//==
                 /**
-                 * Only part deffers from Solution1
+                 * Only part differs from Solution1
                  * Actually delete root and move the newNode
                  * to the place of root.
                  */
@@ -127,10 +168,10 @@ public class LE_450_Delete_Node_In_A_BST {
                      * parent starts from root
                      */
                     TreeNode parent = root;
-                    TreeNode newNode = root.right;
-                    while (newNode.left != null) {
-                        parent = newNode;
-                        newNode = newNode.left;
+                    TreeNode newRoot = root.right;
+                    while (newRoot.left != null) {
+                        parent = newRoot;
+                        newRoot = newRoot.left;
                     }
 
                     /**
@@ -149,25 +190,50 @@ public class LE_450_Delete_Node_In_A_BST {
                      *         newNode = node 4
                      *
                      *         parent == root, we only need to set node 4 left child to point to 2.
+                     *                   5
+                     *                  / \
+                     *                 4   6
+                     *                /    \
+                     *               2     7
                      *
                      *         If we don' have the if condition here :
                      *         parent.left = newNode.right; //node 3 left point to null,
                      *         newNode.right = root.right;  //node4 right point to itself
                      *
                      *         It will cause memory leak.
+                     *
+                     *                 5
+                     *               /  \
+                     *              3    10
+                     *             / \  / \
+                     *            2  4 8   12
+                     *                 \
+                     *                 9
+                     *  Delete 5, find successor -> 8, parent = 10, newRoot = 8
+                     *  "parent.left = newRoot.right" : 10 points to 9 on left
+                     *  "newRoot.right = root.right"  :  8 points to 10 on right
+                     *  "newRoot.left = root.left"    :  8 points to 3 on left
+                     *
+                     *                 8
+                     *               /  \
+                     *              3    10
+                     *             / \  / \
+                     *            2  4 9  12
+                     *
+                     *
                      */
                     if (parent != root) {
-                        parent.left = newNode.right;
-                        newNode.right = root.right;
+                        parent.left = newRoot.right;
+                        newRoot.right = root.right;
                     }
 
-                    newNode.left = root.left;
-                    root = newNode;
+                    newRoot.left = root.left;
+                    root = newRoot;
                 } else if (root.left != null) {
                     root = root.left;
                 } else if (root.right != null) {
                     root = root.right;
-                } else {
+                } else {//If the node is a leaf, the delete process is straightforward : root = null
                     root = null;
                 }
             }

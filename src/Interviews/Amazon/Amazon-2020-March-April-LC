@@ -9,14 +9,27 @@ LE_211_Add_And_Search_Word
                                           doule了会造成什么问题。。我说变慢啊，hashmap太大。。。他说为什么
 LE_1268_Search_Suggestions_System         (***)
 Auto_Complete
+LE_588_Design_In_Memory_File_System       (***)  Trie problem in disguise
+
 
 LE_23_Merge_k_Sorted_Lists                但给的input其实是list int array，用了priority queue解决。之后讨论了如果input list过大怎么办，
                                           回答用map reduce
 
-
 #BST
 LE_510_Inorder_Successor_In_BST_II        no access to root, but each node has parent pointer
-LE_230_Kth_Smallest_Element_In_BST
+LE_230_Kth_Smallest_Element_In_BST        重点在follow up，不让写原题代码，提示说可以用别的数据结构，其实是想你改节点定义，
+                                          要能实现insert和findkth
+                                          你可以看刷题网下面有个Follow Up。原题是已经给了一个root node了让你findKth，而面试官
+                                          的要求是现在node的attribute你可以改，怎么优化findKth？改了node的attribute的话，
+                                          insert node的时候当然也得作相应修改，所以insert也要求实现。
+                                          设计实现2个function，第一个是readStream() 从一个int stream中读取1个数；
+                                          第二个是countLessThan(k) 计算到目前为止小雨k的个数。 写了一个计算bst rank的解法。
+
+#BST Insert Delete Validate Balance       (***)
+LE_701_Insert_Into_A_Binary_Search_Tree
+LE_450_Delete_Node_In_A_BST
+LE_98_Validate_BST
+1382. Balance a Binary Search Tree
 
 LE_64_Min_Path_Sum_2
 LE_64_Min_Path_Sum                        只是把 from top-left to bottom-right 改成了 from bottom-left to top-right。
@@ -44,8 +57,6 @@ LE_339_Nested_List_Weight_Sum
 
 LE_49_Group_Anagrams                      是给一堆字符串，一个target字符串 找所有和target anagram的字符串
 
-LE_207_Course_Schedule                    变形，拓扑排序就能做，用BFS做完之后，面试官让用DFS来做
-LE_210_Course_Schedule_II                 包装成 tasks 完成的顺序, follow up, 有 deadlock (cycle ??) 的状况出现
 
 LE_200_Number_Of_Islands_2
 LE_200_Number_Of_Islands                  与leecode不同，要求八个方向都算相连.
@@ -117,8 +128,13 @@ LE_224_Basic_Calculator                   +, -, (, )
 LE_227_Basic_Calculator_II                +, -, *, /
 LE_772_Basic_Calculator_III               +, -, *, /, (, )
 
+#Topological Sort
 LI_127_Topological_Sorting                Build dependency resolution
-LE_210_Course_Schedule_II
+LE_207_Course_Schedule                    变形，拓扑排序就能做，用BFS做完之后，面试官让用DFS来做
+LE_210_Course_Schedule_II                 包装成 tasks 完成的顺序, follow up, 有 deadlock (cycle ??) 的状况出现
+                                          bfs解 + 過一次test case, 問了很多細節 why bfs?...
+LE_269_Alien_Dictionary
+LE_953_Verifying_An_Alien_Dictionary
 
 LE_347_Top_K_Frequent_Elements            bucket
 LE_692_Top_K_Frequent_Words               heap
@@ -151,8 +167,10 @@ LE_472_Concatenated_Words                 Trie or Same Recursion with mem as in 
 LE_139_Word_Break
 LE_140_Word_Break_II
 
+(**)
 LE_322_Coin_Change                        如果有个自动售货机你需要算需要退的数额需要多少硬币. 给的input是有哪些硬币
                                           (1分, 5分, 10分, 25分), 以及他们的数量, 求需要最少的硬币数量的话是什么样的组
+                                          dp解+dfs解+過一次test case
 LE_518_Coin_Change_II                     Ask for number of combinations to sum to target number
 
 LE_127_Word_Ladder
@@ -160,7 +178,9 @@ LE_127_Word_Ladder
 #Design
 LE_642_Design_Search_Autocomplete_System
 LE_642_Design_Search_Autocomplete_System_Mine
-LE_380_Insert_Delete_GetRandom_O1
+LE_380_Insert_Delete_GetRandom_O1         设计和实现随机播放功能。
+                                          我用双重循环生成随机序列O(n^2)，面试官问用单循环从ArrayList里随机往外拿是否能快，
+                                          我指出拿的过程本身也是O(n)，但是我们可以优化，然后默写了一个蠡口三八零，获得了面试官的肯定
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed  (***)
 LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
                                           她说好。
@@ -227,8 +247,13 @@ LE_1352_Product_Of_The_Last_KNumbers     (***)
 
 LE_1360_Number_Of_Days_Between_Two_Dates
 
+LE_42_Trapping_Rain_Water
+LE_50_POW
+LE_394_Decode_String
 
-==================
+
+
+================
 LE_765_Couples_Holding_Hands
 656. Coin Path
 818. Race Car
