@@ -21,7 +21,8 @@ LE_23_Merge_k_Sorted_Lists                但给的input其实是list int array�
 #BST
 LE_285_Inorder_Successor_In_BST           root is given
 LE_510_Inorder_Successor_In_BST_II        no access to root, but each node has parent pointer
-LE_230_Kth_Smallest_Element_In_BST        重点在follow up，不让写原题代码，提示说可以用别的数据结构，其实是想你改节点定义，
+LE_230_Kth_Smallest_Element_In_BST        Implement_BST_Insert_Find_GetRandom
+                                          重点在follow up，不让写原题代码，提示说可以用别的数据结构，其实是想你改节点定义，
                                           要能实现insert和findkth
                                           你可以看刷题网下面有个Follow Up。原题是已经给了一个root node了让你findKth，而面试官
                                           的要求是现在node的attribute你可以改，怎么优化findKth？改了node的attribute的话，
@@ -72,8 +73,8 @@ LE_200_Number_Of_Islands                  与leecode不同，要求八个方向�
                                           UnionFind?
 #LCA
 LE_236_Lowest_Common_Ancestor_Of_BT      p and q both exist. No parent pointer
-LI_474_Lowest_Common_Ancestor_II         p and q both exist.    Has parent pointer - Solution2
-                                         p and q may not exist. Has parent pointer - Solution1
+LI_474_Lowest_Common_Ancestor_II         p and q both exist.    Has parent pointer - Solution2  linkedlist
+                                         p and q may not exist. Has parent pointer - Solution1  set
 LI_578_Lowest_Common_Ancestor_III        p and q may not exist. No parent pointer
                                          Solution1_A_B_May_Not_Exit in LE_236_Lowest_Common_Ancestor_Of_BT
 
