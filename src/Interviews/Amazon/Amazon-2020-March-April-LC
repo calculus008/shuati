@@ -2,20 +2,24 @@
 LE_208_Implement_Trie
 LI_231_Typeahead
 LE_472_Concatenated_Words                 Trie or Same Recursion with mem as in LE_139_Word_Break
+LE_472_Concatenated_Words_1
 LE_211_Add_And_Search_Word
                                           实现一个查找系统，大概就是输入单词，然后查找。。。我说用trie. 他让我回顾trie 的数据结构，
                                           trie的children[26] 他说这都什么年代了， 还用26字母，怎么不用unicode 问我unicode有多少
                                           个。。(143,924) 然后说要改进这个结构。。我说好吧，那就用hashmap吧。。然后他说。。。如果数据特别多
                                           doule了会造成什么问题。。我说变慢啊，hashmap太大。。。他说为什么
 LE_1268_Search_Suggestions_System         (***)
-Auto_Complete
 LE_588_Design_In_Memory_File_System       (***)  Trie problem in disguise
+LE_642_Design_Search_Autocomplete_System
+LE_642_Design_Search_Autocomplete_System_Mine
+Auto_Complete
 
 
 LE_23_Merge_k_Sorted_Lists                但给的input其实是list int array，用了priority queue解决。之后讨论了如果input list过大怎么办，
                                           回答用map reduce
 
 #BST
+LE_285_Inorder_Successor_In_BST           root is given
 LE_510_Inorder_Successor_In_BST_II        no access to root, but each node has parent pointer
 LE_230_Kth_Smallest_Element_In_BST        重点在follow up，不让写原题代码，提示说可以用别的数据结构，其实是想你改节点定义，
                                           要能实现insert和findkth
@@ -24,12 +28,14 @@ LE_230_Kth_Smallest_Element_In_BST        重点在follow up，不让写原题�
                                           insert node的时候当然也得作相应修改，所以insert也要求实现。
                                           设计实现2个function，第一个是readStream() 从一个int stream中读取1个数；
                                           第二个是countLessThan(k) 计算到目前为止小雨k的个数。 写了一个计算bst rank的解法。
+                                          (*******)
 
 #BST Insert Delete Validate Balance       (***)
 LE_701_Insert_Into_A_Binary_Search_Tree
-LE_450_Delete_Node_In_A_BST
+LE_450_Delete_Node_In_A_BST               (***)
 LE_98_Validate_BST
-1382. Balance a Binary Search Tree
+LE_1382_Balance_Binary_Search_Tree
+
 
 LE_64_Min_Path_Sum_2
 LE_64_Min_Path_Sum                        只是把 from top-left to bottom-right 改成了 from bottom-left to top-right。
@@ -99,7 +105,8 @@ LE_54_Spiral_Matrix                       给你一个N*N的数组，返回顺�
 
 LE_33_Search_In_Rotated_Sorted_Array
 LE_135_Candy                              (***)
-LE_528_Random_Pick_With_Weight            (***)
+LE_528_Random_Pick_With_Weight            (***) 根据概率随机return 一个string，
+                                                input 的是每个string的概率
 LE_289_Game_Of_Life                       (*****)
 LE_295_Find_Median_From_Data_Stream       加了找最值和中位数，follow uo 问了下如何扩展到更多的功能，更多是如何设计code。
 
@@ -130,7 +137,8 @@ LE_772_Basic_Calculator_III               +, -, *, /, (, )
 
 #Topological Sort
 LI_127_Topological_Sorting                Build dependency resolution
-LE_207_Course_Schedule                    变形，拓扑排序就能做，用BFS做完之后，面试官让用DFS来做
+LE_207_Course_Schedule                    (***)
+                                          变形，拓扑排序就能做，用BFS做完之后，面试官让用DFS来做 !!!!!
 LE_210_Course_Schedule_II                 包装成 tasks 完成的顺序, follow up, 有 deadlock (cycle ??) 的状况出现
                                           bfs解 + 過一次test case, 問了很多細節 why bfs?...
 LE_269_Alien_Dictionary
@@ -142,9 +150,10 @@ LE_692_Top_K_Frequent_Words               heap
                                           找出长度为3(??) most frequent k video sequences.
                                           K_Most_Frequent_Word ??
 
-
+------------------------
 #BFS
-LE_815_Bus_Routes                         (***)  design transportation query system
+LE_994_Rotting_Oranges
+LE_815_Bus_Routes                         (***) 包装： design transportation query system
                                           implement algorithm to find shortest path (minimum stop) from stop A to stop B
 LE_317_Shortest_Distance_From_All_Buildings
 LE_286_Walls_And_Gates                   （***）
@@ -153,8 +162,10 @@ LE_286_Walls_And_Gates                   （***）
                                           若A[i][j]为门，返回0；
                                           若A[i][j]为障碍物，返回-1；
                                           若A[i][j]为房间，返回这个房间离最近的门的距离。
+LE_909_Snakes_And_Ladders                 条件有变，梯子可以无限次使用，这哥们自己也糊涂题意，一开始问走了x步之后，可否用梯子，
+                                          他说可以，之后就说梯子和走x步只能选一
 
-LE_572_Subtree_Of_Another_Tree
+------------------------
 
 LE_215_Kth_Largest_Element_In_Array       Quick Select (**)
 LI_005_Kth_Largest_Number
@@ -175,6 +186,7 @@ LE_518_Coin_Change_II                     Ask for number of combinations to sum 
 
 LE_127_Word_Ladder
 
+--------------
 #Design
 LE_642_Design_Search_Autocomplete_System
 LE_642_Design_Search_Autocomplete_System_Mine
@@ -188,14 +200,17 @@ LE_146_LRU_Cache                          LRU写的双链表，follow up我也�
                                           follow up with time to leave and if infinity memory how to optimize
 LE_348_Design_Tic_Tac_Toe                 写完之后问怎么拓展成五子棋一类的，没让写代码，就说了下思路
 LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
-LE_1236_Web_Crawler
+LE_1236_Web_Crawler                       后来延展了一下 system design要怎么弄，哪里会是bottle neck
+                                          https://code.dennyzhang.com/web-crawler
 LE_1242_Web_Crawler_Multithreaded
+LE_642_Design_Search_Autocomplete_System
+LE_642_Design_Search_Autocomplete_System_Mine
+-------------
+
 
 
 LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
                                           meeting长度不变，问meeting average delay (??)
-
-#two sum的各种变形，duplicate，sorting，less than，各种followup，也很简单
 
 -----------------------------
 
@@ -227,7 +242,10 @@ LE_03_Longest_Substring_Without_Repeating_Characters
 LE_239_Sliding_Window_Maximum
 
 LE_1229_Meeting_Scheduler                (***)
-LE_675_Cut_Off_Trees_For_Golf_Event
+LE_675_Cut_Off_Trees_For_Golf_Event      2d array，有货物（positive integer），障碍物（-1），empty spot（0）。
+                                         告诉你机器人起始位置currPos，和某用户的购物清单array。找一条能够拿到所有货物的路线。
+                                         我是写了一个给定起点和终点找路径的BFS，然后for循环把要买的东西都跑一遍。
+                                         if 购物清单array gives orders buying goods, it will be the same as 675
 
 LE_296_Best_Meeting_Point
 LE_1120_Maximum_Average_Subtree          follow up 返回第K大的
@@ -239,19 +257,77 @@ LE_827_Making_A_Large_Island             (***）dfs populates each island, then 
 LE_1258_Synonymous_Sentences             (***)
 
 #Dijskra
-LE_743_Network_Delay_Time                要会Dijskra, use PriorityQueue
+LE_743_Network_Delay_Time                 要会Dijskra, use PriorityQueue
 LE_787_Cheapest_Flights_Within_K_Stops    一个图的题，求从一个城市到另一个城市步数在k以内的最小cost，
                                           给一个k和一个二维数组，分别表示出发和到达的城市，以及票价。
+
+                                          就是给一张图，图上有几个节点，节点到节点之间的距离不等。然后选定一个起点，
+                                          要求写算法实现如何以最小的代价走完所有节点，
+                                          如果走不完，则返回-1。
 
 LE_1352_Product_Of_The_Last_KNumbers     (***)
 
 LE_1360_Number_Of_Days_Between_Two_Dates
 
 LE_42_Trapping_Rain_Water
-LE_50_POW
+LE_50_POW                                (***)
 LE_394_Decode_String
 
+LE_126_Word_Ladder_II
 
+
+LE_23_Merge_k_Sorted_Lists
+LE_88_Merge_Sorted_Array
+
+#Parenthese
+LE_20_Valid_Parentheses                  stack, check if matching
+LE_22_Generate_Parentheses               DFS, permutation
+LE_32_Longest_Valid_Parentheses          (***) 1.Stack. 2.two passes, left->right, right->left
+LE_241_Different_Ways_To_Add_Parentheses
+LE_678_Valid_Parenthesis_String          Greedy. min, max, min == 0 in the end
+LE_301_Remove_Invalid_Parentheses        DFS, only has "(" and ")"
+LE_1249_Minimum_Remove_To_Make_Valid_Parentheses
+
+##Tree
+LE_199_Binary_Tree_Right_Side_View       改版 多加了条横线 最后结果要根据离线的位置由近到远排 也不难 直接秒 (!!!)
+LE_572_Subtree_Of_Another_Tree
+LE_1080_Insufficient_Nodes_In_Root_To_Leaf_Paths
+
+LE_353_Design_Snake_Game
+
+LE_55_Jump_Game
+LE_45_Jump_Game_II
+
+
+LE_238_Product_Of_Array_Except_Self
+
+
+LE_04_Median_Of_Two_Sorted_Arrays
+
+#two sum的各种变形，duplicate，sorting，less than，各种followup，也很简单
+LE_01_Two_Sum
+LE_1099_Two_Sum_Less_Than_K
+LE_167_Two_Sum_II_Array_Is_Sorted
+LI_609_Two_Sum_Less_Than_Or_Equal_To_Target
+LE_170_Two_Sum_III_Data_Structure_Design
+LI_610_Two_Sum_Difference_Equals_To_Target
+LE_653_Two_Sum_IV_Input_Is_A_BST                 In one BST
+LE_1214_Two_Sum_BSTs                             Two BST, one node from each.
+
+LE_94_Binary_Tree_Inorder_Traversal
+LE_124_Binary_Tree_Max_Path_Sum
+
+
+++++++++++++++++
+
+LE_958_Check_Completeness_Of_A_Binary_Tree
+LE_332_Reconstruct_Itinerary
+LE_939_Minimum_Area_Rectangle                    一个机器人，每次走一段就左转，给出这个机器人每次走的距离，
+                                                 求最小能cover这个机器人路线的rectangle。
+
+
+LE_946_Validate_Stack_Sequences                  (***)
+LE_337_House_Robber_III
 
 ================
 LE_765_Couples_Holding_Hands

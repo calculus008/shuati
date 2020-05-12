@@ -33,7 +33,7 @@ public class LE_611_Valid_Triangle_Number {
     /**
      * 4ms solution from leetcode
      *
-     * Same as Soluion1 below
+     * Same as Solution1 below
      */
     class Solution_Preferred {
         public int triangleNumber(int[] nums) {

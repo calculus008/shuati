@@ -32,14 +32,17 @@ public class LE_939_Minimum_Area_Rectangle {
      */
 
     /**
-     * Basically, in your approach, we are first of all finding two points which are possible diagonals of a rectangle.
+     * Basically, in your approach, we first go through all two points which are possible diagonals of a rectangle.
      * Then, we check if we are able to find the other two diagonal points. If they exist, we found a rectangle.
      *
      * Time : O(n ^ 2)
-     *
      */
     class Solution1 {
         public int minAreaRect1(int[][] points) {
+            /**
+             * map saves the set of points that have the same x coordinate.
+             * x coordinate -> set of y coordinates
+             */
             Map<Integer, Set<Integer>> map = new HashMap<>();
 
             for (int[] p : points) {
@@ -51,12 +54,26 @@ public class LE_939_Minimum_Area_Rectangle {
 
             int min = Integer.MAX_VALUE;
 
+            /**
+             * Or
+             *
+             *             for (int i = 0; i < points.length; i++)
+             *                 for (int j = i + 1; j < points.length; j++)
+             * More efficient
+             */
             for (int[] p1 : points) {
                 for (int[] p2 : points) {
                     if (p1[0] == p2[0] || p1[1] == p2[1]) { // if have the same x or y
                         continue;
                     }
 
+                    /**
+                     * We take p1 and p2 as a diagonal, check if there are other two points at the
+                     * expected coordinates that can form a rectangle.
+                     *
+                     * map.get(p1[0]).contains(p2[1] : if we have a point at (p1[0], p2[1])
+                     * map.get(p2[0]).contains(p1[1] : if we have a point at (p2[0], p1[2])
+                     */
                     if (map.get(p1[0]).contains(p2[1]) && map.get(p2[0]).contains(p1[1])) { // find other two points
                         min = Math.min(min, Math.abs(p1[0] - p2[0]) * Math.abs(p1[1] - p2[1]));
                     }

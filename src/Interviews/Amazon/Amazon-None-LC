@@ -12,6 +12,30 @@ Implement_BST_Insert_Find_GetRandom
 Rearrange_Linked_List
 
 Linux_Command_Find_1
+Find_Height_BT_By_Parent_Array               给一个arr，每次arr的值是当前index的parent node。 求这个树的高度
+
+#
+一个机器人，每次走一段就左转，给出这个机器人每次走的距离，求最小能cover这个机器人路线的rectangle。
+walk[]
+for (int i = 0; i < n; i + 2) x += walk[i];
+for (int i = 2; i < n; i + 2) x -= walk[i];
+
+keep track min and max for x
+
+for (int i = 1; i < n; i + 2) y += walk[i];
+for (int i = 3; i < n; i + 2) y -= walk[i];
+
+keep track min and max for y
+
+area : x : min >= 0 ? 0 : min, u = max - min
+       y : min >= 0 ? 0 : min, v = max - min
+       u * v
+O(n)
+
+#
+sort 100 million 个10 bit integer
+10 bit 换算之后是1024，相当于限定了范围是从0-1024，也就是100 million的数里只有1024个unique的，可以用dictionary存储数字出现的次数，
+相当于说只sort key就可以了，然后再counting sort
 
 =============================================
 #
@@ -41,6 +65,13 @@ sort 没什么好说的, 就照时间 sort 而已
 lz 提了先 parse log 用 trie 的方式把 log 存起来, 这样可以加快搜寻和count 的速度, 但是没有让我实作 Trie,
 讲完概念最后实作没时间写
 
+Create Inverted Index, timestamp is DocId, for example:
+cat -> {2020/01/20/20:10:00, 2020/01/20/12:20:01, 2020/01/20/01:01:02}
+dog -> {2020/01/20/12:20:01, 2020/01/20/01:01:02}
+
+count = InveredIndex.get("cat").size()
+search : count = InveredIndex.get("cat"), iterate docId, retrieve from another TreeMap
+
 #
 在简单图中找最长路径。
 本人用DFS解答了本题（O(n)=n^2），interviewer继续追问有没有时间复杂更优的解法，并提示只用两轮DFS
@@ -68,7 +99,7 @@ follow up 如果millions of input怎么办，我说那就hashmap of hashmap 每�
 
 
 #
-输入： "aaabbbccccccddd"
+输入： "aaabbbccccccddd" (sorted)
 输出两个值：N=3, Compressed="abccd"
 输入： "aaabbbccccccd"
 输出两个值：N=1, Compressed="aaabbbccccccd"
@@ -95,12 +126,6 @@ follow up：如何做到常数空间？答案：先算前两个字母的gcd1，�
 #
 给三个点坐标，求包涵这三个点的最小的圆的半径等。问题给的很笼统，需要自己clarify很多东西。不能用数学解。
 我用了Binary Search，最后只把主程序写出来了。很多细节只是口头上沟通了一下。好像之前地里见过这题？
-
-#
-一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。返回一个矩阵B with the same size，B[i][j]的值如下：
-若A[i][j]为门，返回0；
-若A[i][j]为障碍物，返回-1；
-若A[i][j]为房间，返回这个房间离最近的门的距离。
 
 #
 人会说不同的语言，问两个人之间要多少个翻译，bfs就行，只是要自己定义数据类型。
@@ -182,8 +207,6 @@ follow-up: 如果只可以call 一次 rand(), 怎么做？
 如果走不完，则返回-1。楼主刷题太少，就100来个，没做过带边值的图的题目。虽然算法在提示下用priority queue写了，但是却卡在了怎么建n
 ode的问题上，因为是白板，node的class也要自己写
 
-Travling Sales Men?
-
 #
 log ingestion 给出一个log file文件，格式类似：
 2020-04-11 13:03:11 duration=5m0s
@@ -200,6 +223,91 @@ log ingestion 给出一个log file文件，格式类似：
 设计一个拍卖行，实现两个功能，LogPurchasePrice和ShowTopKItems。每个商品可以被多次卖出（如果价格更高的话），估计模拟的是竞价过程吧。
 showtopkitems要求是不一样的items。
 
+#
+纯coding: 虽然说是纯coding，但是问题很抽象而且想要什么 input什么样也得慢慢聊出来。问题是有一些movie的entry，rating和导演平分都
+存在s3，问你怎么实现给用户的推荐，估计要么rating要么导演平分，然后说这个file size很大，不能直接load进memory 然后global sort。
+后来聊起来他有说可以假设有个按行读部分这个file的api可以用，然后假设可以有k个host去平摊工作。那我就说可以分别load完然后sort自己的，
+然后merge k sorted list。最后问怎么做 要么divide conquor 要么priority queue我选的后者。 问完followup又问如果又加了新的movie
+在里面然后读进了某一个host的list，怎么update整个结果（assume read会被call 很多次，所以要优化read）。我说就重新算一遍
+merge k sorted list，但是慢了点确实，然后他说怎么办，我后面没打出来貌似。
+
+电影推荐那题的followup可以先sort有新电影的那个list然后跟推荐结果比较在对应位置插入新电影。
+
+#
+一个简单coding 解决实际问题: 给一个收费公路的不同时间不同收费的data， 如果input是一个具体的时间，让计算当时的price。有挺多东西要问
+清楚然后clarify。比如时间是什么format，收费数据图是具体的小时，还是分钟之类的。然后他说每天的price都会update，所以要考虑怎么优化这
+个update data的过程。结论就是做一个interval lookup method （通过给的时间转化成属于哪个interval），然后第二个map就是通过具体的哪
+个interval来找到对应的price。第一步开始用binary searchd对于list做的，后面优化成了binary search tree。感觉可能也没有到最优解
+
+收费公路那题用一个TreeMap存开始时间和收费，floorKey()就可以定位出input区间，然后返回收费。
+
+# !!!
+给一系列的intervals 找出所有两两conflicts的pair(注意是每两个 不是光相邻的) 例如输入是：[1, 4], [2, 5], [3, 5], [4，6]
+那么输出就是：[2,4],[3,4],[4,4],[3,5],[4,5],[4,5]
+就是先sort intervals 然后用二分法
+能否说下第一题 conflict interval的思路？每个pair之间的overlap 感觉最少也要O(n^2).
+除非用这个https://www.geeksforgeeks.org/interval-tree/
+
+# !!!
+然后给你一个数组表示的数 数组的index表示一个节点 index里面的值表示这个index节点的parent， 对于根结点 他的parent就是-1
+求这个树的高度
+比如这样的一棵树 4，1，3，2，0， 那么用数组就表示成：
+index : 0，1，2，3，4
+val     : 1，4，1，4，-1
+用DFS加一个dp数组优化就行了
+
+Find_Height_BT_By_Parent_Array
+
+#
+给一个grid, 一堆locker, 一个固定的customer坐标,找出离customer距离最近的locker。 followup 是customer很多怎么办
+第三轮的followup multiple customer是不是把locker enqueue然后BFS更新每一个customer位置最先到的locker
+没错，我的解法也是这样
+意思是从锁当起点做多源点的BFS？
+是的。。。
+
+一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。返回一个矩阵B with the same size，B[i][j]的值如下：
+若A[i][j]为门，返回0；
+若A[i][j]为障碍物，返回-1；
+若A[i][j]为房间，返回这个房间离最近的门的距离。
+
+LE_286_Walls_And_Gates
+
+#
+OOD+Alg 在一堆电脑配件中，根据用户的要求，选择合适配件， 类似linux find file。 这个答的不太好，本来准备了解法，
+但是被带节奏到一个很难解的地步。
+那题我本来的想法是，所有的item都存在list里面，然后用predicate去test是不是符合规则，
+但是面试官觉得，每个item都扫一遍不好，
+提出了用map<partType, List of Parts>, 这种解法，但是这种的话，只对partType 的query有好处，
+对其他的query比如说，size, 就还是要全部扫一遍，
+然后我又提出，存的时候排序存，但是还是否决，因为还有别的criteria，所以还是不是最优，
+所以我也还是没有特别好的建议，你要是有什么想法的话，也可以提出来哈，我还是挺好奇的，
+优化该怎样弄
+
+#
+还有一个根据概率随机return 一个string，
+input 的是每个string的概率
+
+#
+Given (customer id, session id, page url, timestamp), and 定义 exit page= last page of each session,
+求top 5 exit page count
+
+#
+輸入兩個日期 ＡＢ 問Ｂ是在Ａ前後30天範圍內, 外, 還是正好30天
+就是要寫一個compareTo function
+需要跟面試官問清楚日期等等的定義
+
+#
+然后问我怎么实现一个family tree，就两个人在一起可以有很多children，同时一个人又可以在不同时间段有好多妻子或者丈夫。
+最后让我实现一个map， key是generation， value是这个generation所有的人。
+
+#
+后有一个数n，找到x,y  让 x*y 大于等于n， 但是小于等于n+2, x和y要相差的越小越好。比如4 就返回（2， 2）， 18就返回（4， 5），
+17就返回（3， 6）。第二题就是sliding window中unique number的个数。
+
+
+#
+Coding: Binary combinations of event, 给event number, event name和 event detail, return all possible combination
+solutions, 很straightforward, 直接2^n，不难
 
 
 

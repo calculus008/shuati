@@ -374,7 +374,8 @@ find nearest 100 points in a list (max heap)
 Tech部分是给一个 String[][] performerMovie 的矩阵，让写一个void buildGraph( performerMovie)方法 ，来表示movie和performer的关系。
 比如说String[][] performerMovie={{“movieA”},{“actorA”},{“actorB”}}
 
-值得注意的是印度哥特别耐心，一点点引导，写好graph的数据结构，然后要考虑到不同的movie，performer会overlap， 那就得用一个hashmap 存一下 然后对应到 邻接矩阵中。 我最后是这样写的，用一个boolean[][] 存movie和performer的edges。 如果performer出现在这个movie里设为true。
+值得注意的是印度哥特别耐心，一点点引导，写好graph的数据结构，然后要考虑到不同的movie，performer会overlap， 那就得用一个hashmap
+存一下 然后对应到 邻接矩阵中。 我最后是这样写的，用一个boolean[][] 存movie和performer的edges。 如果performer出现在这个movie里设为true。
 全程一个小时整 居然没有什么特别的对应14条的问题，枉我准备了这么多BQ
 
 #

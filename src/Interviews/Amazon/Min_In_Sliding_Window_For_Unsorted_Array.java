@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class Min_In_Sliding_Window_For_Unsorted_Array {
     /**
+     * Minimum range query(!!!), 给一串array，start 和end index, 找range中的最小值，lz想用hashtable来存precalculated
+     * 的range的minimum，这样空间就是O(n^2),但面试官说要用 空间小于O(n^2) 的解法。。
+     *
      * 给一个fixed的unsorted array，找一个window里面的最小值，(!!!)不能iterate但是可以preprocessing这个array
      *
      * 面试官当时给我hint之后我把这个array变成个tree，每个节点预先存好start，end和这个window的min
@@ -15,9 +18,17 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
      *
      * https://algs4.cs.princeton.edu/99misc/SegmentTree.java.html
      *
-     * Segment tree can be used to do preprocessing and query in moderate time. With segment tree,
-     * pre-processing time is O(n) and time to for range minimum query is O(Logn). The extra space
-     * required is O(n) to store the segment tree.
+     * Segment tree can be used to do pre-processing and query in moderate time. With segment tree,
+     * pre-processing time is O(n) and time to query for range minimum query is O(Logn). The extra space
+     * required is O(n) (2*n - 1) to store the segment tree.
+     *
+     * Representation of Segment trees
+     * 1. Leaf Nodes are the elements of the input array.
+     * 2. Each internal node represents minimum of all leaves under it.
+     *
+     * An array representation of tree is used to represent Segment Trees.
+     * For each node at index i, the left child is at index 2*i+1, right
+     * child at 2*i+2 and the parent is at (i - 1) / 2
      */
 
 
@@ -41,17 +52,21 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
         range of array indexes. The following are parameters for
         this function.
 
-        st    --> Pointer to segment tree
+        segmentTree    --> Pointer to segment tree
         index --> Index of current node in the segment tree. Initially
                    0 is passed as root is always at index 0
         ss & se  --> Starting and ending indexes of the segment
-                     represented by current node, i.e., st[index]
+                     represented by current node, i.e., segmentTree[index]
         qs & qe  --> Starting and ending indexes of query range
      **/
-    int RMQUtil(int start, int end, int qs, int qe, int index) {
+    int helper(int start, int end, int qs, int qe, int index) {
         /**
-         * If segment of this node is a part of given range,
-         *  then return the min of the segment
+         * If segment of this node is a part of given range (query range),
+         *  then return the min of the segment.
+         *  qs                  qe
+         *  |___________________|
+         *    start         end
+         *     |_____________|
          ***/
         if (qs <= start && qe >= end) {
             return st[index];
@@ -59,7 +74,18 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
 
         /**
          * If segment of this node is outside the given range
+         * qs                  qe
+         * |___________________|
+         *                      start         end
+         *                       |_____________|
+         *
+         *   or
+         *                    qs                  qe
+         *                    |___________________|
+         * start         end
+         *  |_____________|
          **/
+
         if (end < qs || start > qe) {
             return Integer.MAX_VALUE;
         }
@@ -69,27 +95,27 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
          **/
        int mid = getMid(start, end);
 
-       return minVal(RMQUtil(start, mid, qs, qe, 2 * index + 1),
-                RMQUtil(mid + 1, end, qs, qe, 2 * index + 2));
+       return minVal(helper(start, mid, qs, qe, 2 * index + 1),
+                     helper(mid + 1, end, qs, qe, 2 * index + 2));
     }
 
     /**
      * Return minimum of elements in range from index qs (query start)
-     *  to qe (query end).  It mainly uses RMQUtil()
+     *  to qe (query end).  It mainly uses helper()
      *  **/
-    int RMQ(int n, int qs, int qe) {
+    int getMinInWindow(int n, int qs, int qe) {
         // Check for erroneous input values
         if (qs < 0 || qe > n - 1 || qs > qe) {
             System.out.println("Invalid Input");
             return -1;
         }
 
-        return RMQUtil(0, n - 1, qs, qe, 0);
+        return helper(0, n - 1, qs, qe, 0);
     }
 
     /**
      * A recursive function that constructs Segment Tree for array[ss..se].
-     * si is index of current node in segment tree st
+     * si is index of current node in segment tree segmentTree
      **/
     int constructSTUtil(int arr[], int start, int end, int idx) {
         /**
@@ -113,7 +139,7 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
 
     /**
      * Function to construct segment tree from given array. This function allocates memory for
-     * segment tree and calls constructSTUtil() to fill the allocated memory
+     * segment tree and calls buildSegmentTree() to fill the allocated memory
      *
      * Construction of Segment Tree from given array
      * We start with a segment arr[0 . . . n-1]. and every time we divide the current segment into
@@ -127,7 +153,7 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
      *
      * Height of the segment tree will be log(n). Since the tree is represented using array and
      * relation between parent and child indexes must be maintained, size of memory allocated for
-     * segment ree will be 2 * 2 ^ h - 1.
+     * segment tree will be 2 * 2 ^ h - 1.
      **/
     void constructST(int arr[], int n) {
         /**
@@ -139,7 +165,7 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
         int max_size = 2 * (int) Math.pow(2, x) - 1;
         st = new int[max_size];
 
-        /** Fill the allocated memory st **/
+        /** Fill the allocated memory segmentTree **/
         constructSTUtil(arr, 0, n - 1, 0);
     }
 
@@ -149,7 +175,7 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
         int n = arr.length;
         Min_In_Sliding_Window_For_Unsorted_Array tree = new Min_In_Sliding_Window_For_Unsorted_Array();
 
-        // Build segment tree from given array
+        /** Build segment tree from given array **/
         tree.constructST(arr, n);
 
         /**
@@ -160,7 +186,7 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
 
         // Print minimum value in arr[qs..qe]
         System.out.println("Minimum of values in range [" + qs + ", "
-                + qe + "] is = " + tree.RMQ(n, qs, qe));
+                + qe + "] is = " + tree.getMinInWindow(n, qs, qe));
 
         /**
          * Test sliding window min
@@ -169,7 +195,7 @@ public class Min_In_Sliding_Window_For_Unsorted_Array {
         int[] res = new int[arr.length - windowSize + 1];
         for (int i = 0; i < arr.length - windowSize + 1; i++) {
             int end = i + windowSize - 1;
-            res[i] = tree.RMQ(arr.length, i, end);
+            res[i] = tree.getMinInWindow(arr.length, i, end);
             System.out.println("Range : " + i + ", " + end + ", res : " + res[i]);
         }
 

@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Random;
+
 public class LE_398_Random_Pick_Index {
     /**
      * Given an array of integers with possible duplicates, randomly output
@@ -24,4 +26,31 @@ public class LE_398_Random_Pick_Index {
      *
      * Medium
      */
+
+    /**
+     * Reservoir Sampling
+     */
+    public class Solution {
+        int[] nums;
+        Random rnd;
+
+        public Solution(int[] nums) {
+            this.nums = nums;
+            this.rnd = new Random();
+        }
+
+        public int pick(int target) {
+            int result = -1;
+            int count = 0;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] != target) continue;
+
+                if (rnd.nextInt(++count) == 0) {
+                    result = i;
+                }
+            }
+
+            return result;
+        }
+    }
 }

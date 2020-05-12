@@ -15,7 +15,7 @@ public class LE_286_Walls_And_Gates {
          INF - Infinity means an empty room. We use the value 2^31 - 1 = 2147483647 to
          represent INF as you may assume that the dirs to a gate is less than 2147483647.
 
-         Fill each empty room with the dirs to its nearest gate. If it is impossible to
+         Fill each empty room with the distance to its nearest gate. If it is impossible to
          reach a gate, it should be filled with INF.
 
          For example, given the 2D grid:
@@ -38,6 +38,88 @@ public class LE_286_Walls_And_Gates {
      * Thus, for this problem we should prefer BFS over DFS. And the best Solution is Multi End BFS.
      */
 
+    class Solution_1 {
+        class Solution {
+            public void wallsAndGates(int[][] rooms) {
+                if (rooms == null || rooms.length == 0) return;
+
+                Queue<int[]> q = new LinkedList<>();
+                int m = rooms.length;
+                int n = rooms[0].length;
+
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (rooms[i][j] == 0) {
+                            q.offer(new int[]{i, j});
+                        }
+                    }
+                }
+
+                int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+                int steps = 0;
+
+                while (!q.isEmpty()) {
+                    int[] cur = q.poll();
+                    int x = cur[0];
+                    int y = cur[1];
+
+                    for (int[] dir : dirs) {
+                        int nx = x + dir[0];
+                        int ny = y + dir[1];
+
+                        if (nx >= 0 && nx < m && ny >= 0 && ny < n && rooms[nx][ny] == Integer.MAX_VALUE) {
+                            rooms[nx][ny] = rooms[x][y] + 1;
+                            q.offer(new int[]{nx, ny});
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    class Solution3 {
+        public void wallsAndGates(int[][] rooms) {
+            if (rooms == null || rooms.length == 0) return;
+
+            Queue<int[]> q = new LinkedList<>();
+            int m = rooms.length;
+            int n = rooms[0].length;
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (rooms[i][j] == 0) {
+                        q.offer(new int[]{i, j});
+                    }
+                }
+            }
+
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+            int steps = 0;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+                steps++;
+
+                for (int i = 0; i < size; i++) {
+                    int[] cur = q.poll();
+
+                    for (int[] dir : dirs) {
+                        int nx = cur[0] + dir[0];
+                        int ny = cur[1] + dir[1];
+
+                        if (nx >= 0 && nx < m && ny >= 0 && ny < n
+                                && rooms[nx][ny] == Integer.MAX_VALUE) {
+                            rooms[nx][ny] = steps;
+                            q.offer(new int[]{nx, ny});
+                        }
+                    }
+                }
+            }
+
+        }
+    }
 
     /**
      * Simplified, without counting steps in BFS
@@ -87,49 +169,6 @@ public class LE_286_Walls_And_Gates {
                     }
                 }
             }
-        }
-    }
-
-    class Solution3 {
-        public void wallsAndGates(int[][] rooms) {
-            if (rooms == null || rooms.length == 0) return;
-
-            Queue<int[]> q = new LinkedList<>();
-            int m = rooms.length;
-            int n = rooms[0].length;
-
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (rooms[i][j] == 0) {
-                        q.offer(new int[]{i, j});
-                    }
-                }
-            }
-
-            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
-            int steps = 0;
-
-            while (!q.isEmpty()) {
-                int size = q.size();
-                steps++;
-
-                for (int i = 0; i < size; i++) {
-                    int[] cur = q.poll();
-
-                    for (int[] dir : dirs) {
-                        int nx = cur[0] + dir[0];
-                        int ny = cur[1] + dir[1];
-
-                        if (nx >= 0 && nx < m && ny >= 0 && ny < n
-                                && rooms[nx][ny] == Integer.MAX_VALUE) {
-                            rooms[nx][ny] = steps;
-                            q.offer(new int[]{nx, ny});
-                        }
-                    }
-                }
-            }
-
         }
     }
 

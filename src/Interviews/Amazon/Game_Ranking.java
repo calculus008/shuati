@@ -19,6 +19,9 @@ import java.util.*;
 
 public class Game_Ranking {
     public static int getRanking(List<Integer> scores, int score) {
+        /**
+         * larger element in front
+         */
         TreeMap<Integer, Integer> map = new TreeMap<>((a, b) -> b - a);
 
         for (int num : scores) {
@@ -39,6 +42,6 @@ public class Game_Ranking {
 
     public static void main(String[] args) {
         List<Integer> scores = Arrays.asList(10, 22, 10, 22, 1, 2, 5, 5, 2);
-        System.out.println(getRanking(scores, 5));
+        System.out.println(getRanking(scores, 10));
     }
 }

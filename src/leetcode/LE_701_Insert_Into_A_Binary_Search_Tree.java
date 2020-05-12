@@ -81,6 +81,7 @@ public class LE_701_Insert_Into_A_Binary_Search_Tree {
             } else {
                 root.left = insertIntoBST(root.left, val);
             }
+
             return root;
         }
     }

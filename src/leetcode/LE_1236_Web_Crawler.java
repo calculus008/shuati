@@ -114,7 +114,7 @@ public class LE_1236_Web_Crawler {
     }
 
 
-    class Solution {
+    class Solution_DFS {
         public List<String> crawl(String startUrl, HtmlParser htmlParser) {
             String[] sArr = startUrl.split("/" , -1);
             String hostName = sArr[2];

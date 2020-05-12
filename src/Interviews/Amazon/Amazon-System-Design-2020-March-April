@@ -1,5 +1,6 @@
 #1
-设计一个tracking system， 就是hr和candidate都可以用的，上面有job信息，candidate申请，传资料。hr可以review candidate信息，track当前这个人在申请的那一个阶段。
+设计一个tracking system， 就是hr和candidate都可以用的，上面有job信息，candidate申请，传资料。hr可以review candidate信息，
+track当前这个人在申请的那一个阶段。
 没有说对与错，但我有说明自己做选择的理由，利弊什么的。
 
 #2
@@ -131,8 +132,11 @@ ood，设计一个类似linux的find命令，实现找文件大小大于5M以及
 trietree之后再做bfs或者dfs搜索所有的节点。
 
 设计一个查找文件的API，支持模糊搜索，返回所有符合条件的文件名
-自己觉得题就是DFS搜索，但是崩在了关于模糊搜索怎么处理regular expression matching，自己自动带入做题模式，12*对不对得上123，一个一个比较，比到*的时候分叉的思路
-面试官直接说难道你不知道regular expression matching怎么用吗，原来是想要让直接用java内置的函数处理，给我写了Pattern Class的match方法……后来又说我append文件路径的做法也不对，反正就感觉他想要的是一个比起做题更偏向实际在程序里能work的答案，两个人沟通不咋顺畅，对面不理解我，我也没完全听懂他，就崩掉了
+自己觉得题就是DFS搜索，但是崩在了关于模糊搜索怎么处理regular expression matching，自己自动带入做题模式，12*对不对得上123，
+一个一个比较，比到*的时候分叉的思路
+面试官直接说难道你不知道regular expression matching怎么用吗，原来是想要让直接用java内置的函数处理，给我写了Pattern Class的
+match方法……后来又说我append文件路径的做法也不对，反正就感觉他想要的是一个比起做题更偏向实际在程序里能work的答案，两个人沟通不咋顺畅，
+对面不理解我，我也没完全听懂他，就崩掉了
 
 第二题三哥什么都说让自己想，我问了半天最后路径定的是string，就比如''\home\today\morning''，这就是一个路径
 
@@ -235,11 +239,44 @@ follow up：1. scale server 2. 连续内存大小不够怎么存array （数据�
 这题其实没啥特别的，主要是数据库设计，稍微讨论下得出每一行的key是userId，简单版只需要记录最后一本书的bookId和pageId，高级版需要另开
 一张表记录多本书的，然后加入timestamp，讨论resolve conflict，stale data cleanup等等，都是一般数据系统里的常见问题
 
+#49
+system design dropbox/google drive 类似的system
+
+#50
+coding OOD： 设计一个Amazon locker系统，这个真的还挺高频的 只不过网上貌似没有太好的总结 所以我也没准备，不过答得貌似他还挺满意。
+多用abstraction和factory pattern
+
+#51
+system design：设计一个shopping warehouse，怎么add item 和search by specific item，schema的设计，api，整个架构，db读写的优化，
+redundancy和sharding，cache，然后最后还延伸到了利用data warehouse来优化db的读写load，这快我确实没get到怎么能帮助到。。
+有懂的同学可以讲讲。他看我不太懂就问我知不知道data warehouse，我还真懂点，因为在准备一家data warehouse的面试，我就说了一下里面的几
+个layer，顶多就是virtual warehouse layer的一些cache，他貌似满意。不过我还是觉得和db没有本质的区别，他可能就是想听这个名词把。。
+
+olap对于join filter 这种search确实会快很多比oltp，oltp上需要靠manually建很多index吧才能提高搜索的速度
 
 
+#
+设计一个job sceduler 把job分配给不同的VM运行 如何追踪每个job的status 如何处理fail的job
+
+#
+design image sharing
+
+#
+SD 下象棋 数据库怎样好，服务器坏了怎么办之类的
+
+#
+聊天软件
+
+#
+设计一个oncall notification system
+
+#
+system design, 設計餐廳預約系統
+先畫了簡單架構
+接著根據需求Scale
+把我知道的LB, database ,cache, API, CDN,所有的方法優缺都講了
 
 
-
-
-
+#
+https://aws.amazon.com/blogs/database/building-a-real-time-gaming-leaderboard-with-amazon-elasticache-for-redis/
 
