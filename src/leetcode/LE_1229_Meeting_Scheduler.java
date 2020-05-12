@@ -70,7 +70,7 @@ public class LE_1229_Meeting_Scheduler {
                  * if "pq.poll()[1] >= pq.peek()[0] + duration" is true,
                  * then current interval and peeked interval must be from two persons, because:
                  *
-                 * 1.As we put intervals in heap, those intervals must be longer duration.
+                 * 1.As we put intervals in heap, polled interval is not shorter than the peeked one.
                  * 2.As the conditions given, there's no overlap between intervals from the same person.
                  */
                 if (pq.poll()[1] >= pq.peek()[0] + duration) {
@@ -112,7 +112,7 @@ public class LE_1229_Meeting_Scheduler {
     }
 
     /**
-     * Swipe Line, similar to LE_253_Meeting_Rooms_II,
+     * Sweep Line, similar to LE_253_Meeting_Rooms_II,
      * Time : O(nlogn), n = l1 + l2
      */
     class Solution1 {

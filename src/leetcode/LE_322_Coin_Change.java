@@ -87,7 +87,7 @@ public class LE_322_Coin_Change {
                 }
             }
 
-            return dp[n][amount];
+            return dp[n][amount] == Integer.MAX_VALUE ? -1 : dp[n][amount];
         }
 
     }

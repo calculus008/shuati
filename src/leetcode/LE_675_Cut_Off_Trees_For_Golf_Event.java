@@ -315,7 +315,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
 
             for (Tuple t : trees) {
                 /**
-                 * each time, destitnation or end is current t.
+                 * each time, destination or end is current t.
                  */
                 int steps = getSteps(f, start, t);
                 if (steps == -1) {
@@ -359,7 +359,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
                     /**
                      * 坑3
                      * !!!
-                     * 是在从队列里去除元素是判断是否到达重点
+                     * 是在从队列里去除元素是判断是否到达终点
                      * 判断坐标相等，不是值相等
                      */
                     if (cur.x == end.x && cur.y == end.y) {

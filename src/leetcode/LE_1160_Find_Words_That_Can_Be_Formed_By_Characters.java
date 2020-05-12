@@ -45,7 +45,7 @@ public class LE_1160_Find_Words_That_Can_Be_Formed_By_Characters {
      * Input: words = ["cat","bt","hat","tree"], chars = "atach",
      * The strings that can be formed are "cat" and "hat".
      *
-     * NOTICE that there one 't' in chars, it is used in both 'cat' and 'hat'.
+     * NOTICE that there's one 't' in chars, it is used in both 'cat' and 'hat'.
      */
     class Solution2 {
         public int countCharacters(String[] words, String chars) {
@@ -86,7 +86,7 @@ public class LE_1160_Find_Words_That_Can_Be_Formed_By_Characters {
     }
 
     /**
-     * If the chars are unicode or interviewer explicityly asks to use HashMap instead of array.
+     * If the chars are unicode or interviewer explicitly asks to use HashMap instead of array.
      * there's a trap here.
      *
      * You can't use map.clone(), becasue it does a shallow copy, it will not make a object for the key

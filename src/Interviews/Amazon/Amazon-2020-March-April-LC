@@ -164,6 +164,8 @@ LE_286_Walls_And_Gates                   （***）
                                           若A[i][j]为房间，返回这个房间离最近的门的距离。
 LE_909_Snakes_And_Ladders                 条件有变，梯子可以无限次使用，这哥们自己也糊涂题意，一开始问走了x步之后，可否用梯子，
                                           他说可以，之后就说梯子和走x步只能选一
+LE_688_Knight_Probability_In_Chessboard   不同是的给一个老将的位置，问走几步老马吃老将
+knightMove
 
 ------------------------
 
@@ -203,11 +205,9 @@ LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
 LE_1236_Web_Crawler                       后来延展了一下 system design要怎么弄，哪里会是bottle neck
                                           https://code.dennyzhang.com/web-crawler
 LE_1242_Web_Crawler_Multithreaded
-LE_642_Design_Search_Autocomplete_System
-LE_642_Design_Search_Autocomplete_System_Mine
+LE_353_Design_Snake_Game
+
 -------------
-
-
 
 LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
                                           meeting长度不变，问meeting average delay (??)
@@ -223,16 +223,10 @@ LE_1160_Find_Words_That_Can_Be_Formed_By_Characters
 
                                           注意：HashMap需要deep copy.
 
-LE_787_Cheapest_Flights_Within_K_Stops    一个图的题，求从一个城市到另一个城市步数在k以内的最小cost，
-                                          给一个k和一个二维数组，分别表示出发和到达的城市，以及票价。
-
-LE_688_Knight_Probability_In_Chessboard   不同是的给一个老将的位置，问走几步老马吃老将
 LE_1152_Analyze_User_Website_Visit_Pattern
                                           给一堆用户数据，有userid，activity name, TimeStamp,
                                           然后让给出TOP k group of activity, 感觉像leetcode 1152.
                                           但是我感觉这题稍微难些
-LE_785_Is_Graph_Bipartite
-LE_886_Possible_Bipartition
 
 LE_105_Construct_Binary_Tree_From_Preorder_Inorder
 LE_106_Construct_Binary_Tree_From_Postorder_Inorder
@@ -242,19 +236,22 @@ LE_03_Longest_Substring_Without_Repeating_Characters
 LE_239_Sliding_Window_Maximum
 
 LE_1229_Meeting_Scheduler                (***)
+
+LE_296_Best_Meeting_Point
+LE_328_Odd_Even_Linked_List
+LE_413_Arithmetic_Slices                 (***)
+
+#DFS
+LE_337_House_Robber_III
+LE_785_Is_Graph_Bipartite
+LE_886_Possible_Bipartition
+LE_827_Making_A_Large_Island             (***）dfs populates each island, then try 0 -> 1 and see which one is the biggest
+LE_1258_Synonymous_Sentences             (***)
 LE_675_Cut_Off_Trees_For_Golf_Event      2d array，有货物（positive integer），障碍物（-1），empty spot（0）。
                                          告诉你机器人起始位置currPos，和某用户的购物清单array。找一条能够拿到所有货物的路线。
                                          我是写了一个给定起点和终点找路径的BFS，然后for循环把要买的东西都跑一遍。
                                          if 购物清单array gives orders buying goods, it will be the same as 675
 
-LE_296_Best_Meeting_Point
-LE_1120_Maximum_Average_Subtree          follow up 返回第K大的
-LE_328_Odd_Even_Linked_List
-LE_413_Arithmetic_Slices                 (***)
-
-LE_827_Making_A_Large_Island             (***）dfs populates each island, then try 0 -> 1 and see which one is the biggest
-
-LE_1258_Synonymous_Sentences             (***)
 
 #Dijskra
 LE_743_Network_Delay_Time                 要会Dijskra, use PriorityQueue
@@ -270,9 +267,9 @@ LE_1352_Product_Of_The_Last_KNumbers     (***)
 LE_1360_Number_Of_Days_Between_Two_Dates
 
 LE_42_Trapping_Rain_Water
-LE_50_POW                                (***)
+LE_50_POW
+                            (***)
 LE_394_Decode_String
-
 LE_126_Word_Ladder_II
 
 
@@ -292,15 +289,17 @@ LE_1249_Minimum_Remove_To_Make_Valid_Parentheses
 LE_199_Binary_Tree_Right_Side_View       改版 多加了条横线 最后结果要根据离线的位置由近到远排 也不难 直接秒 (!!!)
 LE_572_Subtree_Of_Another_Tree
 LE_1080_Insufficient_Nodes_In_Root_To_Leaf_Paths
+LE_958_Check_Completeness_Of_A_Binary_Tree
+LE_94_Binary_Tree_Inorder_Traversal
+LE_124_Binary_Tree_Max_Path_Sum
+LE_1120_Maximum_Average_Subtree          follow up 返回第K大的
 
-LE_353_Design_Snake_Game
+
 
 LE_55_Jump_Game
 LE_45_Jump_Game_II
 
-
 LE_238_Product_Of_Array_Except_Self
-
 
 LE_04_Median_Of_Two_Sorted_Arrays
 
@@ -314,20 +313,13 @@ LI_610_Two_Sum_Difference_Equals_To_Target
 LE_653_Two_Sum_IV_Input_Is_A_BST                 In one BST
 LE_1214_Two_Sum_BSTs                             Two BST, one node from each.
 
-LE_94_Binary_Tree_Inorder_Traversal
-LE_124_Binary_Tree_Max_Path_Sum
-
-
 ++++++++++++++++
 
-LE_958_Check_Completeness_Of_A_Binary_Tree
 LE_332_Reconstruct_Itinerary
 LE_939_Minimum_Area_Rectangle                    一个机器人，每次走一段就左转，给出这个机器人每次走的距离，
                                                  求最小能cover这个机器人路线的rectangle。
 
-
 LE_946_Validate_Stack_Sequences                  (***)
-LE_337_House_Robber_III
 
 ================
 LE_765_Couples_Holding_Hands

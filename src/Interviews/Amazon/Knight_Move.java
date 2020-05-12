@@ -23,13 +23,12 @@ public class Knight_Move {
 
         while (!q.isEmpty()) {
             int size = q.size();
+            steps++;
 
             for (int i = 0; i < size; i++) {
                 int[] cur = q.poll();
                 int x = cur[0];
                 int y = cur[1];
-
-                if (x == x2 && y == y2) return steps;
 
                 for (int[] d : dirs) {
                     int nx = x + d[0];
@@ -37,11 +36,13 @@ public class Knight_Move {
 
                     if (nx < 0 || nx >= N || ny < 0 || ny >= N || visited[nx][ny]) continue;
 
+                    if (x == x2 && y == y2) return steps;
+
+                    visited[nx][ny] = true;
                     q.offer(new int[]{nx, ny});
                 }
             }
 
-            steps++;
         }
 
         return -1;

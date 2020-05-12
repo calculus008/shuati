@@ -25,7 +25,7 @@ public class LE_1080_Insufficient_Nodes_In_Root_To_Leaf_Paths {
      * https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths/discuss/308326/JavaC%2B%2BPython-Easy-and-Concise-Recursion
      *
      * Key points:
-     * 1.Don't get tangled with idea with compute path sum and compare sum on the way. The node
+     * 1.Don't get tangled with idea of computing path sum and comparing sum on the way. The node
      *   value can be negative, so no point comparing sum results along the way.
      * 2.Convert sum compare to compare remaining value with the last node (leaf node) on a path.
      * 3.Start thinking about the base case - what happened if we only have a leaf node?
