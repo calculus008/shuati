@@ -66,9 +66,6 @@ public class LI_578_Lowest_Common_Ancestor_III {
                 return root;
             }
 
-            /**
-             * 如果 root 是要找的，更新全局变量
-             **/
             TreeNode left = helper(root.left, A, B);
             TreeNode right = helper(root.right, A, B);
 

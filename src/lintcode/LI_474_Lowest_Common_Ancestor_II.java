@@ -36,8 +36,6 @@ public class LI_474_Lowest_Common_Ancestor_II {
     /**
      * For case that A and B may not exist
      *
-     * 注意： 这里的前提条件是两个给定的Node都是在树里存在的。
-     *
      * Time and Space :  O(h), h is height of the tree
      *
      * Solution 1

@@ -96,6 +96,14 @@ public class LE_1074_Number_Of_Submatrices_That_Sum_To_Target {
              */
             for (int i = 0; i < n; i++) {
                 for (int j = i; j < n; j++) {
+                    /**
+                     * Convert to two-sum procedure, we can think
+                     * "A[k][j] - (i > 0 ? A[k][i - 1] : 0)" as getting a value in
+                     * a 1D array.
+                     * Here we want to get number of submatrics with target sum,
+                     * not sum itself, use map to count the frequency of submatrics
+                     * that meet requirements.
+                     */
                     Map<Integer, Integer> map = new HashMap<>();
                     map.put(0, 1);
                     int cur = 0;

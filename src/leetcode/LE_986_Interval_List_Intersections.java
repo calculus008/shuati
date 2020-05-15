@@ -50,6 +50,10 @@ public class LE_986_Interval_List_Intersections {
                     res.add(new int[]{startMax, endMin});
                 }
 
+                /**
+                 * !!!
+                 * move the one with the less end time
+                 */
                 if (A[p1][1] == endMin) {
                     p1++;
                 } else {

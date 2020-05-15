@@ -1,0 +1,56 @@
+#
+数据结构设计。给一个固定大小的数组(程序开始提前分配好数组大小)，实现一个ring queue(https://en.wikipedia.org/wiki/Circular_buffer) ，
+    支持enqueue/dequeue 功能, enqueue 将给定的数字加到数组中，dequeue 将数组中的数移除，并且满足FIFO顺序。
+ 解法: 双指针。一个指针指向enqueue的坐标，另一个指向dequeue的坐标。实现的时候记得用一个counter去记录当前数组中元素个数，这样实现起来方便一些。
+
+
+#OA
+    Given a list of integers, count the number of 'good tuples' that can be created. A 'good tuple' is defined as
+    connectutive triplets having exactly 2 duplicate elements.
+
+    Given two strings, s and t (consisting of alphanumeric characters), how many ways can you remove 1 digit from
+    either s or t so that s is lexographically less than t?
+
+    Given a rectangular matrix, m, and an int, k, return the sum of the distinct numbers contained in each k by
+    k submatrix that sums to the maximum value.
+
+    Given two arrays of ints, a and b, try to create an arithmetic sequence by adding ints from b into a. Return
+    the maximum length of a or -1 if there does not exist an artimetic sequence.
+
+    第一题我是list里面好几个数字，然后问你偶数位数的有几个，第二题目是给个string，然后加和，eg: "10"+"9"="110"这个样子的。
+
+
+#
+和Quora一样用codesignal, 75分钟4道题
+1. Given two arrays of ints, a and b, try to create an arithmetic sequence by adding ints from b into a. Return the maximum length of a o‍‌‌‍‌‍‌‍‌‍‌‍‍‍‍‌‍‍‍r -1 if there does not exist an artimetic sequence.
+
+2. broken keyboard
+input: a = "Hello, my dear friend!", b = ['h', 'e', 'l', 'o', 'm']
+output: 1
+题目是键盘坏了，只剩下b中的字母按键和所有的数字和符号案件能用，同时shift键是好的，所以可以切换大小写。问a中的单词有几个可以用当前坏掉的键盘打出来。
+
+3.reverseDigitsInPairs
+就是把一个integer reverse 成另一个integer, 不用考虑末尾‍‍‌‌‌‍‍‍‍‌‍‍‌‍‌‌‌‍‍是0和溢出
+
+4. 新题
+类似于498. Diagonal Traverse
+给一个matrix， 按照数字出现的频率，按照类似于Diagonal Traverse重新排列整个matrix
+
+这个是quora的整理，但我又遇到一道新题
+https://docs.google.com/document ... urTp2Lmvo-4aR4/edit
+
+#
+TPS
+给一个TicTacToe棋盘，输出赢了的玩家
+
+Onsite 1
+Coding：把Json文件里的snake_case变成camelCase
+
+Onsite 2
+设计NextDoor时间线
+
+Onsite 3
+Coding：LRU Cache
+
+Onsite 4
+设计一套数据分析系统，从API到数据库
