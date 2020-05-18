@@ -1,0 +1,28 @@
+LE_208_Implement_Trie
+LI_231_Typeahead
+LE_472_Concatenated_Words                 Trie or Same Recursion with mem as in LE_139_Word_Break
+LE_472_Concatenated_Words_1
+LE_211_Add_And_Search_Word
+                                          实现一个查找系统，大概就是输入单词，然后查找。。。我说用trie. 他让我回顾trie 的数据结构，
+                                          trie的children[26] 他说这都什么年代了， 还用26字母，怎么不用unicode 问我unicode有多少
+                                          个。。(143,924) 然后说要改进这个结构。。我说好吧，那就用hashmap吧。。然后他说。。。如果数据特别多
+                                          doule了会造成什么问题。。我说变慢啊，hashmap太大。。。他说为什么
+
+LE_1268_Search_Suggestions_System         (***)
+LE_588_Design_In_Memory_File_System       (***)  Trie problem in disguise
+LE_642_Design_Search_Autocomplete_System
+LE_642_Design_Search_Autocomplete_System_Mine
+
+LE_14_Longest_Common_Prefix
+LE_79_Word_Search                                         (lint 123)
+LE_212_Word_Search_II                                     (lint 132)
+LI_635_Boggle_Game
+LE_425_Word_Squares                                       (lint 634) **
+LE_677_Map_Sum_Pairs
+LE_745_Prefix_And_Suffix_Search
+LE_720_Longest_Word_In_Dictionary
+LI_559_Trie_Service
+LE_1268_Search_Suggestions_System
+
+Auto_Complete
+

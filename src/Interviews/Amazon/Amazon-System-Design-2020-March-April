@@ -280,3 +280,21 @@ system design, 設計餐廳預約系統
 #
 https://aws.amazon.com/blogs/database/building-a-real-time-gaming-leaderboard-with-amazon-elasticache-for-redis/
 
+#
+设计一个五子棋游戏，从ood到实现。
+
+#
+设计Google Map
+
+#
+1. Design uber app
+
+2. Design a system to find duplicate files in massive urls
+
+3. Design ads delivery system
+
+4. Design a language translation application
+
+#
+就是有很多file你要去验证这些log file符合条件不， 标准可能有日期，名字，大小各种。感觉有点像系统设计。。
+我做了超级多的假设  中间一度自己很混乱 觉得答得不是特别好

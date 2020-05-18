@@ -2,27 +2,34 @@
 数据结构设计。给一个固定大小的数组(程序开始提前分配好数组大小)，实现一个ring queue(https://en.wikipedia.org/wiki/Circular_buffer) ，
     支持enqueue/dequeue 功能, enqueue 将给定的数字加到数组中，dequeue 将数组中的数移除，并且满足FIFO顺序。
  解法: 双指针。一个指针指向enqueue的坐标，另一个指向dequeue的坐标。实现的时候记得用一个counter去记录当前数组中元素个数，这样实现起来方便一些。
-
+LE_622_Design_Circular_Queue
 
 #OA
     Given a list of integers, count the number of 'good tuples' that can be created. A 'good tuple' is defined as
-    connectutive triplets having exactly 2 duplicate elements.
+    consecutive triplets having exactly 2 duplicate elements.
 
     Given two strings, s and t (consisting of alphanumeric characters), how many ways can you remove 1 digit from
     either s or t so that s is lexographically less than t?
 
     Given a rectangular matrix, m, and an int, k, return the sum of the distinct numbers contained in each k by
     k submatrix that sums to the maximum value.
+    Matrix_Submatrix_Sum_Size_K
 
     Given two arrays of ints, a and b, try to create an arithmetic sequence by adding ints from b into a. Return
     the maximum length of a or -1 if there does not exist an artimetic sequence.
 
-    第一题我是list里面好几个数字，然后问你偶数位数的有几个，第二题目是给个string，然后加和，eg: "10"+"9"="110"这个样子的。
+
+第一题我是list里面好几个数字，然后问你偶数位数的有几个，第二题目是给个string，然后加和，eg: "10"+"9"="110"这个样子的。
 
 
 #
 和Quora一样用codesignal, 75分钟4道题
-1. Given two arrays of ints, a and b, try to create an arithmetic sequence by adding ints from b into a. Return the maximum length of a o‍‌‌‍‌‍‌‍‌‍‌‍‍‍‍‌‍‍‍r -1 if there does not exist an artimetic sequence.
+1. Given two arrays of ints, a and b, try to create an arithmetic sequence by adding ints from b into a.
+Return the maximum length of a o‍‌‌‍‌‍‌‍‌‍‌‍‍‍‍‌‍‍‍r -1 if there does not exist an artimetic sequence.
+Form_Arithmetic_Sequence
+Clarify :
+1.Make the whole a as? Or only part of?
+2.a Sorted?
 
 2. broken keyboard
 input: a = "Hello, my dear friend!", b = ['h', 'e', 'l', 'o', 'm']
@@ -35,6 +42,8 @@ output: 1
 4. 新题
 类似于498. Diagonal Traverse
 给一个matrix， 按照数字出现的频率，按照类似于Diagonal Traverse重新排列整个matrix
+LE_498_Diagonal_Traverse
+
 
 这个是quora的整理，但我又遇到一道新题
 https://docs.google.com/document ... urTp2Lmvo-4aR4/edit
@@ -43,8 +52,50 @@ https://docs.google.com/document ... urTp2Lmvo-4aR4/edit
 TPS
 给一个TicTacToe棋盘，输出赢了的玩家
 
+
+
+LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
+
+
 Onsite 1
 Coding：把Json文件里的snake_case变成camelCase
+
+import org.codehaus.jackson.map.MapperConfig;
+import org.codehaus.jackson.map.PropertyNamingStrategy;
+import org.codehaus.jackson.map.introspect.AnnotatedField;
+import org.codehaus.jackson.map.introspect.AnnotatedMethod;
+
+public class CustomNameStrategy extends PropertyNamingStrategy {
+    @Override
+    public String nameForField(MapperConfig config, AnnotatedField field, String defaultName) {
+        return convert(defaultName);
+    }
+
+    @Override
+    public String nameForGetterMethod(MapperConfig config, AnnotatedMethod method, String defaultName) {
+        return convert(defaultName);
+    }
+
+    @Override
+    public String nameForSetterMethod(MapperConfig config, AnnotatedMethod method, String defaultName) {
+        return convert(defaultName);
+    }
+
+    public String convert(String defaultName) {
+        char[] arr = defaultName.toCharArray();
+        StringBuilder nameToReturn = new StringBuilder();
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == '_') {
+                nameToReturn.append(Character.toUpperCase(arr[i + 1]));
+                i++;
+            } else {
+                nameToReturn.append(arr[i]);
+            }
+        }
+        return nameToReturn.toString();
+    }
+}
 
 Onsite 2
 设计NextDoor时间线

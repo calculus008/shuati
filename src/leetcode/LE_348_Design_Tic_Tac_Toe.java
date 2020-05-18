@@ -162,7 +162,7 @@ public class LE_348_Design_Tic_Tac_Toe {
     }
 
     /**
-     * Follow up : extended to board size of m (m >= n)
+     * Follow up : extended to board size of m (m >= 3)
      *
      * Inspired by LE_52_N_Queens_II.
      *
