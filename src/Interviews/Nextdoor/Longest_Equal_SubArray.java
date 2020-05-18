@@ -68,6 +68,7 @@ public class Longest_Equal_SubArray {
 //            } else {// Else put this sum in hash table
 //                map.put(sum + n, i);
 //            }
+
             if (map.containsKey(sum)) {
                 if (max_len < i - map.get(sum)) {
                     max_len = i - map.get(sum);
