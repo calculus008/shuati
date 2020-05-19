@@ -75,6 +75,8 @@ public class LE_934_Shortest_Bridge {
              *
              * !!! Can't just use "break" after dfs(), it will only break from
              * the inner for loop, but not the outer for loop.
+             *
+             * Instead, use "found" to signal that we already mark one island.
              */
             boolean found = false;
             for (int i = 0; i < m && !found; i++) {
@@ -143,6 +145,9 @@ public class LE_934_Shortest_Bridge {
                             return steps;
                         }
 
+                        /**
+                         * mark it as 2, it acts as visited set.
+                         */
                         A[nx][ny] = 2;
                         q.offer(new Pair(nx, ny));
                     }

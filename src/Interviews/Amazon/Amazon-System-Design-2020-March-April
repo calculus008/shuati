@@ -12,7 +12,7 @@ track当前这个人在申请的那一个阶段。
 设计AWS CodeCommit
 
 #4
-Design a pholo library platform. 可能像google相册那样
+Design a photo library platform. 可能像google相册那样
 
 #5
 design linux find OOD
@@ -298,3 +298,6 @@ https://aws.amazon.com/blogs/database/building-a-real-time-gaming-leaderboard-wi
 #
 就是有很多file你要去验证这些log file符合条件不， 标准可能有日期，名字，大小各种。感觉有点像系统设计。。
 我做了超级多的假设  中间一度自己很混乱 觉得答得不是特别好
+
+#
+push config/notif system, 能支持100m+的用户（说好的rate limiter呢=。=

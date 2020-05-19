@@ -166,6 +166,8 @@ LE_286_Walls_And_Gates                   （***）
 LE_909_Snakes_And_Ladders                 条件有变，梯子可以无限次使用，这哥们自己也糊涂题意，一开始问走了x步之后，可否用梯子，
                                           他说可以，之后就说梯子和走x步只能选一
 LE_688_Knight_Probability_In_Chessboard   不同是的给一个老将的位置，问走几步老马吃老将
+LE_847_Shortest_Path_Visiting_All_Nodes
+LE_934_Shortest_Bridge
 knightMove
 
 ------------------------
@@ -197,6 +199,7 @@ LE_380_Insert_Delete_GetRandom_O1         设计和实现随机播放功能。
                                           我用双重循环生成随机序列O(n^2)，面试官问用单循环从ArrayList里随机往外拿是否能快，
                                           我指出拿的过程本身也是O(n)，但是我们可以优化，然后默写了一个蠡口三八零，获得了面试官的肯定
 LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed  (***)
+LE_460_LFU_Cache
 LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
                                           她说好。
                                           套了个实际问题，但是本身就是LRU
@@ -333,13 +336,16 @@ LE_91_Decode_Ways
 LE_138_Copy_List_With_Random_Pointer
 LE_218_The_Sky_Line_Problem
 
+LE_847_Shortest_Path_Visiting_All_Nodes
+LE_934_Shortest_Bridge
+LE_322_Coin_Change
+LE_973_K_Closest_Points_To_Origin
+LE_212_Word_Search_II
+LE_42_Trapping_Rain_Water                      比如525225，不是返回总的雨量=9，而是返回最大雨量的[left boundary, right boundary]，所以就是[2,5]，
+LE_133_Clone_Graph
 
 
-
-
-
-
-
+LE_727_Minimum_Window_Subsequence
 
 
 

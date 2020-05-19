@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 public class LE_847_Shortest_Path_Visiting_All_Nodes {
     /**
@@ -33,6 +30,76 @@ public class LE_847_Shortest_Path_Visiting_All_Nodes {
 
      Hard
      **/
+
+    class Solution_BFS_Count_Steps {
+        class Tuple {
+            int cur;
+            int state;
+
+            public Tuple(int cur, int state) {
+                this.cur = cur;
+                this.state = state;
+            }
+
+            public boolean equals(Object o) {
+                Tuple p = (Tuple)o;
+
+                return p.cur == this.cur && p.state == this.state;
+            }
+
+            public int hashCode() {
+                /**
+                 * !!!
+                 * Objects.hash()
+                 */
+                return Objects.hash(this.cur, this.state);
+            }
+        }
+
+        public int shortestPathLength(int[][] graph) {
+            int N = graph.length;
+            int target = (1 << N) - 1;
+
+            Queue<Tuple> q = new LinkedList<>();
+            Set<Tuple> visited = new HashSet<>();
+
+            for (int i = 0; i < N; i++) {
+                int tmp = (1 << i);
+                q.offer(new Tuple(i, tmp));
+                visited.add(new Tuple(i, tmp));
+            }
+
+            int steps = 0;
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    Tuple cur = q.poll();
+
+                    if (cur.state == target) {
+                        return steps;
+                    }
+
+                    int node = cur.cur;
+                    for (int v : graph[node]) {
+                        int state = cur.state;
+
+                        state |= (1 << v);
+                        Tuple t = new Tuple(v, state);
+
+                        if (visited.contains(t)) continue;
+
+                        visited.add(t);
+                        q.offer(t);
+                    }
+                }
+
+                steps++;
+            }
+
+            return -1;
+        }
+    }
 
     /**
      * Huahua's version

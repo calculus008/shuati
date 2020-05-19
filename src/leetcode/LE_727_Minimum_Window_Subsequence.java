@@ -137,7 +137,7 @@ public class LE_727_Minimum_Window_Subsequence {
                         sIdx++;
                         tIdx++;
 
-                        if (end - sIdx + 1< min) {
+                        if (end - sIdx + 1 < min) {
                             min = end - sIdx + 1;
                             start = sIdx;
                         }

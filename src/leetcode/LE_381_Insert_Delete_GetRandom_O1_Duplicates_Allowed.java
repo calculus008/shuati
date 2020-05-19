@@ -58,13 +58,14 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
           Remove()
           For list, we can remove by index or remove an object from list.
           For Set, it only supports removing object.
-          So when we use remove on dist, using set avoids confusion and potential bug.
+          So when we do "remove" on map, using set avoids confusion and potential bug.
 
           因为普通的HashSet iterate时间复杂度不是O(1)而是O(h/n) h是capacity
 
           This solution is based on assumption :
           LinkedHashSet.remove() is O(1)
 
+          !!!
           "Using LinkedHashSet can be considered as O(1) if we only get the FIRST element to remove."(!!!)
 
      **/
@@ -103,7 +104,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             }
 
             /**
-             * 1.Get the first element in set, remove it from the set in HashMap.
+             * 1.Get the first element in LinkedHashSet, remove it from the set in HashMap.
              *   Remove the first element from LinkedHashSet is O(1)
              **/
             int idx = map.get(val).iterator().next();//Use iterator to get the first element in set

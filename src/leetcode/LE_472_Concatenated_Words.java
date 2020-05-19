@@ -121,7 +121,7 @@ public class LE_472_Concatenated_Words {
      * Preferred Solution
      *
      * Since we have an array of words, we can pre-process words to create a trie, which will help us
-     * to save processing time later one.
+     * to save processing time later on.
      *
      * It's O(n * k) for validation as we always needs to travel the Tire once
      *
