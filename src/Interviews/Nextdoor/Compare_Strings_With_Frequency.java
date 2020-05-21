@@ -16,7 +16,7 @@ public class Compare_Strings_With_Frequency {
      * Input: S1 = "babzccc", S2 = "abbzczz" Output: True
      *
      * compare两个string，只有小写字母。 每个stirng内部可以任意换位置，所以位置不重要。每个 string内部两个letter
-     * 出现的频率也可以互换，所以这题只需要两个string每个frequency出现的 次数要一样。比如“babzccc” 和 “bbazzcz”
+     * 出现的频率也可以互换，所以这题只需要两个string每个frequency出现的 次数要一样。(!!!)比如“babzccc” 和 “bbazzcz”
      * 就返回“true”，因为z和c可以互换频率。 但是 “babzcccm” 和 “bbazzczl” 就不一样，因为m在第一个里出现过，第二个
      * 里没有出现过。
      *
@@ -74,7 +74,7 @@ public class Compare_Strings_With_Frequency {
         }
 
         for (int freq : countS1.keySet()) {
-            if (countS2.containsKey(freq) ||countS1.get(freq) != countS2.get(freq)) {
+            if (countS2.containsKey(freq) || countS1.get(freq) != countS2.get(freq)) {
                 return false;
             }
         }

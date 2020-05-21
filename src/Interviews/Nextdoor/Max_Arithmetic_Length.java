@@ -50,12 +50,12 @@ public class Max_Arithmetic_Length {
 
     public static int try_insert(int[] a, int i, HashSet<Integer> set) {
         int result = 0;
-        int front = a[0];
+        int head = a[0];
         int tail = a[a.length - 1];
 
         while (true) {
-            front -= i;
-            if (set.contains(front)) {
+            head -= i;
+            if (set.contains(head)) {
                 result++;
             } else {
                 break;

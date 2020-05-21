@@ -25,6 +25,11 @@ public class Find_Min_In_Matrix {
     public static List<Integer> find_min_in_matrix(int m, int n, int[][] query) {
         int[][] matrix = new int[m][n];
 
+        /**
+         * Use TreeMap with 2 purposes:
+         * 1.Sort value in matrix so that we can find min value in O(1)
+         * 2.Values in treemap is frequency of the key, so we can disable values as input suggests
+         */
         TreeMap<Integer, Integer> map = new TreeMap();
         HashSet<Integer> removed_row = new HashSet();
         HashSet<Integer> removed_col = new HashSet();
@@ -46,9 +51,9 @@ public class Find_Min_In_Matrix {
                 // case: remove row if element
                 int r = q[1];
                 for (int i = 0; i < n; i++) {
-                    if (removed_col.contains(i)) {
-                        continue;
-                    }
+//                    if (removed_col.contains(i)) {//??
+//                        continue;
+//                    }
                     int val = matrix[r][i];
                     if (map.get(val) == 1) {
                         map.remove(val);
@@ -59,10 +64,10 @@ public class Find_Min_In_Matrix {
             } else {
                 // case: remove col
                 int c = q[1];
-                for (int i = 0; i < n; i++) {
-                    if (removed_row.contains(i)) {
-                        continue;
-                    }
+                for (int i = 0; i < m; i++) {
+//                    if (removed_row.contains(i)) {
+//                        continue;
+//                    }
                     int val = matrix[i][c];
                     if (map.get(val) == 1) {
                         map.remove(val);

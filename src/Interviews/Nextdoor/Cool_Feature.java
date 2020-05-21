@@ -55,7 +55,8 @@ public class Cool_Feature {
                 int temp = findSum(map, b, query[1]);
                 ans.add(temp);
             } else if (query.length == 3) {
-                changeArray(a, b, query[1], query[2]);
+//                changeArray(a, b, query[1], query[2]);
+                b[query[1]] = query[2];
             }
         }
 

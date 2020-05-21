@@ -62,8 +62,8 @@ public class Query {
                     }
                 }
 
-                left_pos = (left_pos < 0 ? -(left_pos + 1) : left_pos);
-                right_pos = (right_pos < 0 ? -(right_pos + 1) : right_pos);
+//                left_pos = (left_pos < 0 ? -(left_pos + 1) : left_pos);
+//                right_pos = (right_pos < 0 ? -(right_pos + 1) : right_pos);
             }
         }
         return result;
