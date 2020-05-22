@@ -32,7 +32,7 @@ public class LE_1197_Minimum_Knight_Moves {
     /**
      * BFS
      *
-     * Tricky part of board is INFINIT
+     * Tricky part of board is INFINITY
      */
     class Solution1 {
         public int minKnightMoves(int x, int y) {

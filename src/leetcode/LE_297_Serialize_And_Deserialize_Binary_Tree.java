@@ -2,9 +2,7 @@ package leetcode;
 
 import common.TreeNode;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by yuank on 4/21/18.
@@ -46,124 +44,175 @@ public class LE_297_Serialize_And_Deserialize_Binary_Tree {
     /**
      * Solution 1 : Iterative, BFS
      */
-    // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
-        if (root == null) return "";//!!!
+    class Solution_BFS {
+        // Encodes a tree to a single string.
+        public String serialize(TreeNode root) {
+            if (root == null) return "";//!!!
 
-        StringBuilder sb = new StringBuilder();
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
+            StringBuilder sb = new StringBuilder();
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
 
-        while (!queue.isEmpty()) {
-            TreeNode cur = queue.poll();
+            while (!queue.isEmpty()) {
+                TreeNode cur = queue.poll();
 
-            /**
-             * !!!
-             * Must write this way, if cur == null, append, then continue
-             * otherwise, "cur.left" will run into null pointer exception.
-             **/
-            if (cur == null) {
-                sb.append("null ");
-                continue;
-            }
+                /**
+                 * !!!
+                 * Must write this way, if cur == null, append, then continue
+                 * otherwise, "cur.left" will run into null pointer exception.
+                 **/
+                if (cur == null) {
+                    sb.append("null ");
+                    continue;
+                }
 
-            sb.append(cur.val + " ");
-            queue.offer(cur.left);
-            queue.offer(cur.right);
-        }
-
-        return sb.toString();
-    }
-
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        if (data.equals("")) return null;//!!!
-
-        String[] str = data.split(" ");
-        TreeNode root = new TreeNode(Integer.parseInt(str[0])); /** Integer.parseInt(str[0]) !!! **/
-
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-
-        /**
-         * str array gets the token, queue ensures tree structure
-         */
-        for (int i = 1; i < str.length; i++) {
-            TreeNode cur = queue.poll();//!!!
-            if (!str[i].equals("null")) {
-                cur.left = new TreeNode(Integer.parseInt(str[i]));
+                sb.append(cur.val + " ");
                 queue.offer(cur.left);
-            }
-
-            i++;//!!!
-
-            if (!str[i].equals("null")) {
-                cur.right = new TreeNode(Integer.parseInt(str[i]));
                 queue.offer(cur.right);
             }
+
+            return sb.toString();
         }
 
-        return root;
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            if (data.equals("")) return null;//!!!
+
+            String[] str = data.split(" ");
+            TreeNode root = new TreeNode(Integer.parseInt(str[0])); /** Integer.parseInt(str[0]) !!! **/
+
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+
+            /**
+             * str array gets the token, queue ensures tree structure
+             */
+            for (int i = 1; i < str.length; i++) {
+                TreeNode cur = queue.poll();//!!!
+                if (!str[i].equals("null")) {
+                    cur.left = new TreeNode(Integer.parseInt(str[i]));
+                    queue.offer(cur.left);
+                }
+
+                i++;//!!!
+
+                if (!str[i].equals("null")) {
+                    cur.right = new TreeNode(Integer.parseInt(str[i]));
+                    queue.offer(cur.right);
+                }
+            }
+
+            return root;
+        }
     }
 
     /**
      * Solution 2, recursion DFS, pre-order
      */
-
-    public String serialize1(TreeNode root) {
-        StringBuilder sb = new StringBuilder();
-        encode(root, sb);
-        return sb.toString();
-    }
-
-    private void encode(TreeNode root, StringBuilder sb) {
-        if(root == null) {
-            sb.append("#").append(" ");
-            /**
-             * !!!
-             * must return here!!!
-             */
-            return;
+    class Solution_DFS_StirngBuilder {
+        public String serialize1(TreeNode root) {
+            StringBuilder sb = new StringBuilder();
+            encode(root, sb);
+            return sb.toString();
         }
 
-        sb.append(root.val).append(" ");
-        encode(root.left, sb);
-        encode(root.right, sb);
-    }
+        private void encode(TreeNode root, StringBuilder sb) {
+            if (root == null) {
+                sb.append("#").append(" ");
+                /**
+                 * !!!
+                 * must return here!!!
+                 */
+                return;
+            }
 
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize1(String data) {
-        /**
+            sb.append(root.val).append(" ");
+            encode(root.left, sb);
+            encode(root.right, sb);
+        }
+
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize1(String data) {
+            /**
              1.No need to use Deque, declare it as LinkedList is ok, Queue interface does not have "addAll" method.
              2.Notice, the type of queue is "String" (compared with BFS solution using "TreeNode") since decode
-               method already made the string follow BT structure.
+             method already made the string follow BT structure.
 
              (unique : here DFS, not BFS, uses Queue)
-         **/
-        Queue<String> q = new LinkedList<>();
-        /**
-         * !!!"Arrays.asList"
-         */
-        q.addAll(Arrays.asList(data.split(" ")));
+             **/
+            Queue<String> q = new LinkedList<>();
+            /**
+             * !!!"Arrays.asList"
+             */
+            q.addAll(Arrays.asList(data.split(" ")));
 
-        return decode(q);
-    }
-
-    private TreeNode decode(Queue<String> q) {
-        if(q.isEmpty()) return null;
-
-        String s = q.remove();//!!!"q.remove()"
-        if(s.equals("#")) {
-            return null;
+            return decode(q);
         }
 
-        TreeNode node = new TreeNode(Integer.parseInt(s));
-        node.left = decode(q);
-        node.right = decode(q);
+        private TreeNode decode(Queue<String> q) {
+            if (q.isEmpty()) return null;
 
-        return node;
+            String s = q.remove();//!!!"q.remove()"
+            if (s.equals("#")) {
+                return null;
+            }
+
+            TreeNode node = new TreeNode(Integer.parseInt(s));
+            node.left = decode(q);
+            node.right = decode(q);
+
+            return node;
+        }
     }
 
+    /**
+     * Use list instead of StringBuilder in encode, join at the end.
+     * Not as efficient as StringBUilder, but concise and no need to
+     * append delimiter every time. Same logic as in LE_428_Serialize_And_Deserialize_Nary_Tree
+     *
+     * For binary tree, we need to have special string represents NULL child.
+     */
+    public class Solution_DFS_List {
+        public String serialize(TreeNode root) {
+            // if (root == null) return "";
+            StringBuilder sb = new StringBuilder();
+            List<String> list = new ArrayList<>();
+            encode(root, list);
+            return String.join(" ", list);
+        }
+
+        private void encode(TreeNode root, List<String> list) {
+            if (root == null) {
+                list.add("#");
+                return;
+            }
+
+            list.add(String.valueOf(root.val));
+            encode(root.left, list);
+            encode(root.right, list);
+        }
+
+        public TreeNode deserialize(String data) {
+            if (data == null) return null;
+
+            Queue<String> q = new LinkedList<>();
+            q.addAll(Arrays.asList(data.split(" ")));
+            return decode(q);
+        }
+
+        private TreeNode decode(Queue<String> q) {
+            if (q.isEmpty()) return null;
+
+            String cur = q.poll();
+            if (cur.equals("#")) return null;
+
+            TreeNode node = new TreeNode(Integer.valueOf(cur));
+            node.left = decode(q);
+            node.right = decode(q);
+
+            return node;
+        }
+    }
 
     /**
      * Another try with BFS, find out that using "null" is not a random decision,

@@ -38,6 +38,10 @@ public class LE_1146_Snapshot_Array {
      */
 
     /**
+     * Array of TreeMaps
+     * key : snapId
+     * value : value set by "set()"
+     *
      * https://leetcode.com/problems/snapshot-array/discuss/350562/JavaPython-Binary-Search
      *
      * Intuition
