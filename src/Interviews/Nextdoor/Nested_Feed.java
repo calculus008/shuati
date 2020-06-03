@@ -132,6 +132,8 @@ class Nested_Feed {
                 NestedFeed nf = new NestedFeed();
                 nf.rollup = rollup;
                 nf.isFeed = false;
+
+                res.add(nf);
             }
         }
 
@@ -141,9 +143,9 @@ class Nested_Feed {
     public static void main(String[] args) {
         FeedObject fo1 = new FeedObject(1, "This is a subject", "This is a body1", ObjectType.PHOTO, 100);
         FeedObject fo2 = new FeedObject(2, "This is a subject", "This is a body2", ObjectType.PHOTO, 99);
-        FeedObject fo3 = new FeedObject(1, "This is a subject", "This is a body3", ObjectType.NORMAL, 85);
-        FeedObject fo4 = new FeedObject(1, "This is a subject", "This is a body4", ObjectType.VIDEO, 95);
-        FeedObject fo5 = new FeedObject(1, "This is a subject", "This is a body5", ObjectType.PHOTO, 94);
+        FeedObject fo3 = new FeedObject(3, "This is a subject", "This is a body3", ObjectType.NORMAL, 85);
+        FeedObject fo4 = new FeedObject(4, "This is a subject", "This is a body4", ObjectType.VIDEO, 95);
+        FeedObject fo5 = new FeedObject(5, "This is a subject", "This is a body5", ObjectType.PHOTO, 94);
 
         List<FeedObject> input = new ArrayList<>();
         input.add(fo1);
@@ -160,6 +162,7 @@ class Nested_Feed {
             if (cur.isFeed) {
                 System.out.println(cur.feed.id);
             } else {
+                System.out.println("rollup");
                 for (NestedFeed nf : cur.rollup) {
                     System.out.println(nf.feed.id);
                 }
