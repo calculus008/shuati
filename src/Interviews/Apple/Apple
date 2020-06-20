@@ -45,7 +45,8 @@ LE_449_Serialize_And_Deserialize_BST
 LE_331_Verify_Preorder_Serialization_Of_A_Binary_Tree
 
 
-https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=630730&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3086%5D%5Bvalue%5D%3D10%26searchoption%5B3086%5D%5Btype%5D%3Dradio%26searchoption%5B3087%5D%5Bvalue%5D%3D2%26searchoption%5B3087%5D%5Btype%5D%3Dradio%26searchoption%5B3088%5D%5Bvalue%5D%3D1%26searchoption%5B3088%5D%5Btype%5D%3Dradio%26searchoption%5B3090%5D%5Bvalue%5D%3D1%26searchoption%5B3090%5D%5Btype%5D%3Dradio%26searchoption%5B3046%5D%5Bvalue%5D%3D4%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311%26orderby%3Ddateline
+https://www.1point3acres.com/bbs/forum.p
+hp?mod=viewthread&tid=630730&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3086%5D%5Bvalue%5D%3D10%26searchoption%5B3086%5D%5Btype%5D%3Dradio%26searchoption%5B3087%5D%5Bvalue%5D%3D2%26searchoption%5B3087%5D%5Btype%5D%3Dradio%26searchoption%5B3088%5D%5Bvalue%5D%3D1%26searchoption%5B3088%5D%5Btype%5D%3Dradio%26searchoption%5B3090%5D%5Bvalue%5D%3D1%26searchoption%5B3090%5D%5Btype%5D%3Dradio%26searchoption%5B3046%5D%5Bvalue%5D%3D4%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311%26orderby%3Ddateline
 
 LE_200_Number_Of_Islands
 
@@ -70,7 +71,8 @@ LE_151_Reverse_Words_In_A_String
 
 #
 AMP组店面 实现car registry的put, get方法void put(@nonnull String manufacturing, @nonnull String color, @nonnull String model, @nonnull String vehicleId);
-String[] get(@nullable String manufacturing, @nullable String color, @nullable String model) -> return 符合条件的vehicleId array
+String[] get(@nullable String manufact
+\][poi  vbnm,ASD    uring, @nullable String color, @nullable String model) -> return 符合条件的vehicleId array
 只要求 get O(1), put不做要求， space complexity不做要求
 又问了java的hashmap实现细节，以及如果给你一个class，你只override了Hashcode()没有override equals() / 只override equals()没override Hashcode()各会出现什么问题
 
