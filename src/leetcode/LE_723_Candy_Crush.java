@@ -56,6 +56,10 @@ public class LE_723_Candy_Crush {
      *   a value that should be crushed depending on if it is negative, then when we want to get its original
      *   value, we just get its ABS value.
      *
+     *   A similar trick is used in LE_289_Game_Of_Life. The purpose of those tricks is to use a special value
+     *   to mark the target cells for later processing. It has to meet the requirements of both marking and
+     *   preserving the original value.
+     *
      * 2.For drop, we only need to do it vertically. This is similar to LE_88_Merge_Sorted_Array. We don't need
      *   to actually set value to 0, we just start from the last element of the column, put none-negative values
      *   in each cell with a running row index, then set the rest of the cells in the column (if there's any left) to 0.
