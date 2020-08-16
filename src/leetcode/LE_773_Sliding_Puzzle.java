@@ -18,7 +18,7 @@ public class LE_773_Sliding_Puzzle {
          Input: board = [[1,2,3],[4,0,5]]
          Output: 1
          Explanation: Swap the 0 and the 5 in one move.
-         Input: board = [[1,2,3],[5,4,0]]
+         Input: board = [[1 ,2,3],[5,4,0]]
          Output: -1
          Explanation: No number of moves will make the board solved.
          Input: board = [[4,1,2],[5,0,3]]
