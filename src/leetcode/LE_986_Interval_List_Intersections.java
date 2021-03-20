@@ -46,6 +46,10 @@ public class LE_986_Interval_List_Intersections {
                 int startMax = Math.max(A[p1][0], B[p2][0]);
                 int endMin = Math.min(A[p1][1], B[p2][1]);
 
+                /**
+                 * !!!
+                 * startMax <= endMin : there's intersection
+                 */
                 if (startMax <= endMin) {
                     res.add(new int[]{startMax, endMin});
                 }
