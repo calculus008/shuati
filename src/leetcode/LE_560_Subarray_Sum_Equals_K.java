@@ -27,7 +27,7 @@ public class LE_560_Subarray_Sum_Equals_K {
      *
      * Prefix Sum + HashMap
      *
-     * HashMap :
+     * HashMap : To answer how many subarrays have sum of a given value.
      * key - num
      * number - Frequency of num
      *
@@ -75,7 +75,7 @@ public class LE_560_Subarray_Sum_Equals_K {
         Map<Integer, Integer> map = new HashMap<>();
         /**
          * deal with case the subarray starting from 0, with this entry in dist,
-         * no need to do "if (sum == k)"
+         * no need to do "if (sum == k)", that is, if sum - k == 0,  res = res + 1
          */
         map.put(0, 1);
 
@@ -95,6 +95,7 @@ public class LE_560_Subarray_Sum_Equals_K {
 
     /**
      * Can be in followup question, how to make it work with constant space.
+     * (so can't use extra mem for hashmap), then it turns into brutal force.
      *
      * Time  : O(n ^ 2)
      * Space : O(1)
