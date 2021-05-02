@@ -65,6 +65,10 @@ public class LE_68_Text_Justification {
 
     /**
      * Also refer to Text_Wrap
+     *
+     * Similar Question:
+     * Text_Wrap
+     * Text_Wrap_Number_Of_Lines
      */
     class Solution {
 
