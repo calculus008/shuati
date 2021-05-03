@@ -50,8 +50,8 @@ public class LE_1244_Design_A_Leaderboard {
      */
 
     /**
-     * Keeping id -> score => HashMap
-     * Top K calculation -> need a way to save scores in sorted order, we also need to save how many players have a score,
+     * Keeping id and score mapping => HashMap
+     * Top K calculation => need a way to save scores in sorted order, we also need to save how many players have a given score,
      * therefore => TreeMap, key is score, value is count of the players that have the same score. Here we don't care about
      * the ids of the players, only the count of number of the players.
      */
@@ -86,7 +86,9 @@ public class LE_1244_Design_A_Leaderboard {
             for (Map.Entry<Integer, Integer> e : scores.entrySet()) {
                 int score = e.getKey();
                 int cnt = e.getValue();
-
+                /**
+                 * nice trick to use Math.min()
+                 */
                 int n = Math.min(cnt, K);
 
                 ans += n * score;
