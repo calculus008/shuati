@@ -60,9 +60,9 @@ public class LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination {
      * For each step, to tell if we have visited the current state, we just need to know its
      * coordinates (x and y). With obstacles, the current state has a 3rd dimension - the number
      * of obstacles we have eliminated at a coordinate (x and y). Therefore visited should be a 3D
-     * boolean array and the state info should be saved in an array with length of 3 (x, y, obstacles).
+     * boolean array and the state info should be saved in an array with length of 3 - (x, y, obstacles).
      *
-     * We eliminate a obstacles whenever we run into one and we haven't reached k. Therefore, it is
+     * We eliminate a obstacles whenever we run into one if we haven't reached k. Therefore, it is
      * greedy.
      *
      * Similar Problems:
