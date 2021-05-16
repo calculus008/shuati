@@ -18,6 +18,88 @@ public class LE_45_Jump_Game_II {
         (Jump 1 step from index 0 to 1, then 3 steps to the last index.)
      */
 
+    /**
+     * https://leetcode.com/problems/jump-game-ii/discuss/18014/Concise-O(n)-one-loop-JAVA-solution-based-on-Greedy
+     *
+     * The main idea is based on greedy. Let's say the range of the current jump is [curBegin, curEnd], curFarthest is
+     * the farthest point that all points in [curBegin, curEnd] can reach. Once the current point reaches curEnd, then
+     * trigger another jump, and set the new curEnd with curFarthest, then keep the above steps.
+     *
+     * This is an implicit bfs solution. i == curEnd means you visited all the items on the current level. Incrementing
+     * jumps++ is like incrementing the level you are on. And curEnd = curFarthest is like getting the queue size
+     * (level size) for the next level you are traversing.
+     *
+     * Same type of problems:
+     * LE_1024_Video_Stitching
+     * LE_1326_Minimum_Number_Of_Taps_To_Open_To_Water_A_Garden
+     */
+    class Solution_leedcode {
+        /**
+         * Assume we can always reach the end
+         * [2,3,1,1,4]
+         *  0 1 2 3 4
+         *       0
+         *      /\
+         *     1  2
+         *    / \  \
+         *   2 ..4  3
+         */
+        public int jump1(int[] A) {
+            int jumps = 0, curEnd = 0, curFarthest = 0;
+
+            for (int i = 0; i < A.length - 1; i++) {
+                curFarthest = Math.max(curFarthest, i + A[i]);
+
+                if (curFarthest >= A.length - 1) {
+                    jumps++;
+                    break;
+                }
+
+                if (i == curEnd) {
+                    jumps++;
+                    curEnd = curFarthest;
+                }
+            }
+            return jumps;
+        }
+
+        public int jump1_1(int[] A) {
+            int jumps = 0, curEnd = 0, curFarthest = 0;
+
+            for (int i = 0; curEnd < A.length - 1; curEnd = curFarthest) {
+                jumps++;
+
+                while (i < A.length && i <= curEnd) {
+                    curFarthest = Math.max(curFarthest, i + A[i]);
+                    i++;
+                }
+
+                if(curEnd == curFarthest) return -1;
+            }
+            return jumps;
+        }
+
+        /**
+         * if the problem definition is changed where you can't always reach the last index and If you can't reach the
+         * last index, return -1
+         */
+        public int jump2(int[] A) {
+            int jumps = 0, curEnd = 0, curFarthest = 0;
+
+            for (int i = 0; i < A.length; i++) {
+                if (i > curFarthest) return -1;
+
+                curFarthest = Math.max(curFarthest, i + A[i]);
+                if (i < A.length - 1 && i == curEnd) {
+                    jumps++;
+                    curEnd = curFarthest;
+                }
+            }
+            return jumps;
+        }
+    }
+
+
     /**nextMax=0, curMax=0
      * Solution 1 : Greedy, Time : O(n), Space : O(1)
      *
