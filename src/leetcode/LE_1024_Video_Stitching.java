@@ -54,98 +54,137 @@ public class LE_1024_Video_Stitching {
      */
 
     /**
+     * https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/discuss/506853/Java-A-general-greedy-solution-to-process-similar-problems
+     *
+     * Same solution as:
+     * LE_45_Jump_Game_II
+     * LE_1326_Minimum_Number_Of_Taps_To_Open_To_Water_A_Garden
+     *
+     * Since it requires a sorting first, time is O(nlogn)
+     */
+    class Solution1 {
+        public int videoStitching(int[][] clips, int time) {
+            int n = clips.length;
+            Arrays.sort(clips, (a, b) -> a[0] - b[0]);
+            if (clips[n - 1][1] < time) return -1;
+
+            int res = 0, curEnd = 0, curfarthest = 0;
+            /**
+             * "curEnd < time"
+             */
+            for (int i = 0; curEnd < time; curEnd = curfarthest) {
+                res++;
+
+                while (i < n && clips[i][0] <= curEnd) {
+                    /**
+                     * "Math.max(curfarthest, clips[i][1])"
+                     */
+                    curfarthest = Math.max(curfarthest, clips[i][1]);
+                    i++;
+                }
+
+                if (curEnd == curfarthest) return -1;
+            }
+
+            return res;
+        }
+    }
+
+    /**
      * https://zxi.mytechroad.com/blog/leetcode/leetcode-weekly-contest-131-1021-1022-1023-1024/
      *
      * Time  : O(n * T ^ 2)
      * Space : O(T ^ 2)
      */
-    public int videoStitching(int[][] clips, int T) {
-        if (clips == null || clips.length == 0) return -1;
-
-        /**
-         * dp[i][j] := min clips to cover range [i, j]
-         **/
-        int[][] dp = new int[T + 1][T + 1];
-        int n = clips.length;
-        int max = n + 1;
-
-        for (int i = 0; i < dp.length; i++) {
-            /**
-             * !!!
-             * Can't set init value to Integer.MAX_VALUE,
-             * because in the following logic, if plus 1,
-             * the value will overflow to be Integer.MIN_VALUE
-             */
-            Arrays.fill(dp[i], max);
-        }
-
-        for (int[] clip : clips) {
-            int start = clip[0];
-            int end = clip[1];
+    class Solution2 {
+        public int videoStitching(int[][] clips, int T) {
+            if (clips == null || clips.length == 0) return -1;
 
             /**
-             * !!!
-             * clip is the current one we are working on,
-             * interval between [i, j] is the final movie we are supposed to get after editing.
-             */
-            for (int l = 1; l <= T; l++) {
-                for (int i = 0; i + l <= T; i++) {
-                    int j = i + l;
+             * dp[i][j] := min clips to cover range [i, j]
+             **/
+            int[][] dp = new int[T + 1][T + 1];
+            int n = clips.length;
+            int max = n + 1;
 
-                    if (end < i || j < start) {
-                        /**
-                         * current clip has no overlap with the final movie
-                         *  i       j
-                         *  |_______|
-                         *             start      end
-                         *              |__________|
-                         * or
-                         *             start      end
-                         *              |__________|
-                         *                             i           j
-                         *                             |___________|
-                         */
-                        continue;
-                    } else if (start <= i && j <= end) {
-                        /**
-                         *    start        end
-                         *     |____________|
-                         *       i       j
-                         *       |_______|
-                         *
-                         */
-                        dp[i][j] = 1;
-                    } else if (end >= j) {
-                        /**
-                         *    start        end
-                         *     |____________|
-                         * i            j
-                         * |____________|
-                         *
-                         */
-                        dp[i][j] = Math.min(dp[i][j], dp[i][start] + 1);
-                    } else if (start <= i) {
-                        /**
-                         *    start        end
-                         *     |____________|
-                         *           i            j
-                         *           |____________|
-                         */
-                        dp[i][j] = Math.min(dp[i][j], 1 + dp[end][j]);
-                    } else {
-                        /**
-                         *    start        end
-                         *     |____________|
-                         * i                       j
-                         * |_______________________|
-                         *
-                         */
-                        dp[i][j] = Math.min(dp[i][j], dp[i][start] + 1 + dp[end][j]);
+            for (int i = 0; i < dp.length; i++) {
+                /**
+                 * !!!
+                 * Can't set init value to Integer.MAX_VALUE,
+                 * because in the following logic, if plus 1,
+                 * the value will overflow to be Integer.MIN_VALUE
+                 */
+                Arrays.fill(dp[i], max);
+            }
+
+            for (int[] clip : clips) {
+                int start = clip[0];
+                int end = clip[1];
+
+                /**
+                 * !!!
+                 * clip is the current one we are working on,
+                 * interval between [i, j] is the final movie we are supposed to get after editing.
+                 */
+                for (int l = 1; l <= T; l++) {
+                    for (int i = 0; i + l <= T; i++) {
+                        int j = i + l;
+
+                        if (end < i || j < start) {
+                            /**
+                             * current clip has no overlap with the final movie
+                             *  i       j
+                             *  |_______|
+                             *             start      end
+                             *              |__________|
+                             * or
+                             *             start      end
+                             *              |__________|
+                             *                             i           j
+                             *                             |___________|
+                             */
+                            continue;
+                        } else if (start <= i && j <= end) {
+                            /**
+                             *    start        end
+                             *     |____________|
+                             *       i       j
+                             *       |_______|
+                             *
+                             */
+                            dp[i][j] = 1;
+                        } else if (end >= j) {
+                            /**
+                             *    start        end
+                             *     |____________|
+                             * i            j
+                             * |____________|
+                             *
+                             */
+                            dp[i][j] = Math.min(dp[i][j], dp[i][start] + 1);
+                        } else if (start <= i) {
+                            /**
+                             *    start        end
+                             *     |____________|
+                             *           i            j
+                             *           |____________|
+                             */
+                            dp[i][j] = Math.min(dp[i][j], 1 + dp[end][j]);
+                        } else {
+                            /**
+                             *    start        end
+                             *     |____________|
+                             * i                       j
+                             * |_______________________|
+                             *
+                             */
+                            dp[i][j] = Math.min(dp[i][j], dp[i][start] + 1 + dp[end][j]);
+                        }
                     }
                 }
             }
-        }
 
-        return dp[0][T] == max ? -1 : dp[0][T];
+            return dp[0][T] == max ? -1 : dp[0][T];
+        }
     }
 }
