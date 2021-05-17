@@ -11,7 +11,7 @@ public class LE_140_Word_Break_II {
         add spaces in s to construct a sentence where each word is a valid dictionary word.
         You may assume the dictionary does not contain duplicate words.
 
-        Return all such possible sentences.
+        Return ALL such possible sentences.
 
         For example, given
         s = "catsanddog",
@@ -25,9 +25,9 @@ public class LE_140_Word_Break_II {
         https://www.youtube.com/watch?v=JqOIRBC0_9c&t=539s
         https://zxi.mytechroad.com/blog/leetcode/leetcode-140-word-break-ii/
 
-        Time complexity: O(2^n)
+        Time complexity: O(2 ^ n)
 
-        Space complexity: O(2^n)
+        Space complexity: O(2 ^ n)
 
         Example:
         c a t s a n d d o g
@@ -46,9 +46,9 @@ public class LE_140_Word_Break_II {
     */
 
     /**
-     * Time complexity : O(n^3) Size of recursion tree can go up to n ^ 2. The creation of list takes O(n) time.
+     * Time complexity : O(n ^ 3) Size of recursion tree can go up to n ^ 2. The creation of list takes O(n) time.
      *
-     * Space complexity : O(n^3)  The depth of the recursion tree can go up to n and each activation record
+     * Space complexity : O(n ^ 3)  The depth of the recursion tree can go up to n ^ 2 and each activation record
      *                            can contains a string list of size n
      */
     public List<String> wordBreak(String s, List<String> wordDict) {

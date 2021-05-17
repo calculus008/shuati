@@ -29,14 +29,14 @@ public class LE_677_Map_Sum_Pairs {
     /**
      * http://zxi.mytechroad.com/blog/tree/leetcode-677-map-sum-pairs/
      *
-     * HashMap + Trie
+     * HashMap + TrieNode
      * 98 ms
      *
      * Key Insights :
-     * 1.We still need a HashMap to work with Trie, because we need to update the latest value for a given key.
-     *   Then when we insert new pair into Trie, we actually insert the delta between new value and the old value.
+     * 1.We still need a HashMap to work with TrieNode, because we need to update the latest value for a given key.
+     *   Then when we insert new pair into TrieNode, we actually insert the delta between new value and the old value.
      * 2.We add delta with current value in each TrieNode when doing insert. Then when we query with given prefix,
-     *   we just need to search the prefix in Trie and return the sum value saved in the last node on the path,
+     *   we just need to search the prefix in TrieNode and return the sum value saved in the last node on the path,
      *   no calculation is needed.
      *
      *

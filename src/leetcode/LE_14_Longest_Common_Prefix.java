@@ -50,13 +50,32 @@ public class LE_14_Longest_Common_Prefix {
     }
 
     /**
-     * Trie solution
+     * TrieNode solution
      * Time : O(S) , where S is the sum of all characters in all strings.
+     *
+     * Key points :
+     * 1.Build Trie
+     * 2.Start from root of Trie Tree, for the common prefix, the current node will have only one child.
+     * 3.We keep going down in Trie Tree if :
+     *   a.There's only one child
+     *   AND
+     *   b.No complete word appears.
+     *
+     * For example :
+     *
+     * ["aa", "aab", "aabc"]
+     *
+     * Without the condition "b", "aab" will be the output, which is wrong, the correct output should be "aa".
+     *
      */
-    public class Solution {
-        public class TrieNode {
+    class Solution_Trie {
+        class TrieNode {
             char ch;
             TrieNode[] next = new TrieNode[256];
+            /**
+             * !!!
+             */
+            boolean isWord = false;
 
             public TrieNode() {
             }
@@ -66,56 +85,67 @@ public class LE_14_Longest_Common_Prefix {
             }
         }
 
-        public TrieNode triebuilder(String[] strs) {
+        public TrieNode buildTrie(String[] strs) {
             TrieNode root = new TrieNode();
             for (String str : strs) {
-                if (str.length() == 0) {
-                    return null;
-                }
+                if (str == null || str.length() == 0) return null;
 
                 TrieNode cur = root;
                 for (char c : str.toCharArray()) {
-                    if (cur.next[c - 'A'] == null) {
-                        cur.next[c - 'A'] = new TrieNode(c);
+                    if (cur.next[c] == null) {
+                        cur.next[c] = new TrieNode(c);
                     }
-                    cur = cur.next[c - 'A'];
+
+                    cur = cur.next[c];
                 }
+                cur.isWord = true;
             }
+
             return root;
         }
 
-        public String longestCommonPrefix(String[] strs) {
-            String result = "";
-            if (strs == null || strs.length == 0) {
-                return result;
-            }
+        public String getLongestPrefix(String[] strs) {
+            String res = "";
+            if (strs == null || strs.length == 0) return res;
 
-            TrieNode root = triebuilder(strs);
+            TrieNode root = buildTrie(strs);
 
-            if (root == null) {
-                return "";
-            }
+            if (root == null) return "";
 
-            while (count(root.next) == 1) {
+            /**
+             * Must stop when we reach the end of a word.
+             */
+            boolean stop = false;
+            while (count(root.next) == 1 && !stop) {
                 for (TrieNode node : root.next) {
                     if (node != null) {
-                        result += node.ch;
+                        res += node.ch;
+                        System.out.println(res);
+                        stop = node.isWord;
                         root = node;
                         break;
                     }
                 }
             }
-            return result;
+
+            return res;
         }
 
         private int count(TrieNode[] next) {
-            int result = 0;
+            int res = 0;
             for (TrieNode node : next) {
                 if (node != null) {
-                    result++;
+                    res++;
                 }
             }
-            return result;
+
+            return res;
         }
+
+//        public static void main(String[] args) {
+//            String[] strs = {"abc", "abc", "abc", "abc"};
+//            // String[] strs = {"aa", "aabcd", "aab", "aabbbb"};
+//            System.out.println(getLongestPrefix(strs));
+//        }
     }
 }

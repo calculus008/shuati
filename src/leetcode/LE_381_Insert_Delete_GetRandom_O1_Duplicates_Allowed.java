@@ -9,11 +9,11 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
     /**
      Design a data structure that supports all following operations in average O(1) time.
 
-     Note: Duplicate elements are allowed.
+     Note: Duplicate elements are allowed.(!!!)
 
      insert(val): Inserts an item val to the collection.
      remove(val): Removes an item val from the collection if present.
-     getRandom: Returns a random element from current collection of elements.
+     getKthSmallest: Returns a random element from current collection of elements.
                 The probability of each element being returned is linearly related to
                 the number of same value the collection contains.
      Example:
@@ -30,14 +30,14 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
      // Inserts 2 to the collection, returns true. Collection now contains [1,1,2].
      collection.insert(2);
 
-     // getRandom should return 1 with the probability 2/3, and returns 2 with the probability 1/3.
-     collection.getRandom();
+     // getKthSmallest should return 1 with the probability 2/3, and returns 2 with the probability 1/3.
+     collection.getKthSmallest();
 
      // Removes 1 from the collection, returns true. Collection now contains [1,2].
      collection.remove(1);
 
-     // getRandom should return 1 and 2 both equally likely.
-     collection.getRandom();
+     // getKthSmallest should return 1 and 2 both equally likely.
+     collection.getKthSmallest();
      */
 
     /**
@@ -58,13 +58,14 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
           Remove()
           For list, we can remove by index or remove an object from list.
           For Set, it only supports removing object.
-          So when we use remove on dist, using set avoids confusion and potential bug.
+          So when we do "remove" on map, using set avoids confusion and potential bug.
 
           因为普通的HashSet iterate时间复杂度不是O(1)而是O(h/n) h是capacity
 
           This solution is based on assumption :
           LinkedHashSet.remove() is O(1)
 
+          !!!
           "Using LinkedHashSet can be considered as O(1) if we only get the FIRST element to remove."(!!!)
 
      **/
@@ -103,7 +104,8 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             }
 
             /**
-             * 1.Get the first element in set, remove it from the set in HashMap.
+             * 1.Get the first element in LinkedHashSet, remove it from the set in HashMap.
+             *   Remove the first element from LinkedHashSet is O(1)
              **/
             int idx = map.get(val).iterator().next();//Use iterator to get the first element in set
             map.get(val).remove(idx);//remove the value from set
@@ -139,7 +141,9 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
             return true;
         }
 
-        /** Get a random element from the collection. */
+        /**
+         * Get a random element from the collection.
+         */
         public int getRandom() {
             return list.get(rand.nextInt(list.size()));
         }

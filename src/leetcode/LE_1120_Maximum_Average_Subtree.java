@@ -2,6 +2,8 @@ package leetcode;
 
 import common.TreeNode;
 
+import java.util.PriorityQueue;
+
 public class LE_1120_Maximum_Average_Subtree {
     /**
      * Given the root of a binary tree, find the maximum average value of any subtree of that tree.
@@ -59,6 +61,53 @@ public class LE_1120_Maximum_Average_Subtree {
             int count = 1 + p1.count + p2.count;
 
             res = Math.max(res, (double)sum / (double)count);
+
+            return new Pair(sum, count);
+        }
+    }
+
+    class Solution_Get_Kth {
+        /**
+         * Follow up: get average for
+         */
+        PriorityQueue<Double> pq = new PriorityQueue<>();
+        int k;
+
+        class Pair {
+            int sum;
+            int count;
+
+            public Pair(int sum, int count) {
+                this.sum = sum;
+                this.count = count;
+            }
+        }
+
+        public double KthAverageSubtree(TreeNode root, int k) {
+            if (root == null) return 0.0;
+            this.k = k;
+
+            dfs(root);
+
+            return pq.peek();
+        }
+
+        private Pair dfs(TreeNode root) {
+            if (root == null)  {
+                return new Pair(0, 0);
+            }
+
+            Pair p1 = dfs(root.left);
+            Pair p2 = dfs(root.right);
+
+            int sum = root.val + p1.sum + p2.sum;
+            int count = 1 + p1.count + p2.count;
+
+            double average = (double)sum / (double)count;
+            pq.offer(average);
+            if (pq.size() > k) {
+                pq.poll();
+            }
 
             return new Pair(sum, count);
         }

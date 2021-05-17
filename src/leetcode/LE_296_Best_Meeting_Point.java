@@ -10,7 +10,7 @@ public class LE_296_Best_Meeting_Point {
     /**
          A group of two or more people wants to meet and minimize the total travel distance.
          You are given a 2D grid of values 0 or 1, where each 1 marks the home of someone in the group.
-         The distance is calculated using Manhattan Distance, where distance(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
+         The distance is calculated using Manhattan Distance, where dirs(p1, p2) = |p2.x - p1.x| + |p2.y - p1.y|.
 
          For example, given three people living at (0,0), (0,4), and (2,2):
 
@@ -19,7 +19,7 @@ public class LE_296_Best_Meeting_Point {
          0 - 0 - 0 - 0 - 0
          |   |   |   |   |
          0 - 0 - 1 - 0 - 0
-         The point (0,2) is an ideal meeting point, as the total travel distance of 2+2+2=6 is minimal. So return 6.
+         The point (0,2) is an ideal meeting point, as the total travel dirs of 2+2+2=6 is minimal. So return 6.
 
         Hard
      */
@@ -27,10 +27,10 @@ public class LE_296_Best_Meeting_Point {
     /**
      Key : it is NOT steps between 2 points, so no need to use BFS
      1.Distance on x and y can be calculated separately. 降维。
-     2.One a one dimension line, given 2 points A, B, the point that has the min combined distance to A and B
+     2.One a one dimension line, given 2 points A, B, the point that has the min combined dirs to A and B
        must between A and B.
-     3.The min combined distance is B - A. With same logic, add two more points C and D, the min combined distance to all 4
-       points must be between C and D. And the min combined distance is (B-A)+(D-C).
+     3.The min combined dirs is B - A. With same logic, add two more points C and D, the min combined dirs to all 4
+       points must be between C and D. And the min combined dirs is (B-A)+(D-C).
 
      A---C---------D--------B
 

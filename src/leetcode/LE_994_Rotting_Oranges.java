@@ -37,6 +37,10 @@ public class LE_994_Rotting_Oranges {
      *
      * Easy
      */
+
+    /**
+     * BFS
+     */
     class Solution {
         public int orangesRotting(int[][] grid) {
             if (grid == null || grid.length == 0) return -1;
@@ -50,9 +54,9 @@ public class LE_994_Rotting_Oranges {
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
                     if (grid[i][j] == 1) {
-                        count++;
+                        count++;//get total number of good oranges to be used later to tell if no good oranges left
                     } else if (grid[i][j] == 2) {
-                        q.offer(new int[]{i, j});
+                        q.offer(new int[]{i, j});//init BFS queue
                     }
                 }
             }

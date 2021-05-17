@@ -1,0 +1,323 @@
+Min_In_Sliding_Window_For_Unsorted_Array      Use segment tree
+Game_Ranking                                  TreeMap
+K_Way_Merge_Iterator
+Make_Sorted_By_One_Swap
+Minimum_Radius_Enclosing_K_Points             给三个点坐标，求包涵这三个点的最小的圆的半径等。问题给的很笼统，
+                                              需要自己clarify很多东西。不能用数学解。我用了Binary Search，
+                                              最后只把主程序写出来了。很多细节只是口头上沟通了一下。
+                                              好像之前地里见过这题？
+                                              我是先找到其中两个点的垂直平分线  确定圆心的一个坐标  然后二分来逼近圆心
+
+Implement_BST_Insert_Find_GetRandom
+Rearrange_Linked_List
+
+Linux_Command_Find_1
+Find_Height_BT_By_Parent_Array               给一个arr，每次arr的值是当前index的parent node。 求这个树的高度
+
+#
+一个机器人，每次走一段就左转，给出这个机器人每次走的距离，求最小能cover这个机器人路线的rectangle。
+walk[]
+for (int i = 0; i < n; i + 2) x += walk[i];
+for (int i = 2; i < n; i + 2) x -= walk[i];
+
+keep track min and max for x
+
+for (int i = 1; i < n; i + 2) y += walk[i];
+for (int i = 3; i < n; i + 2) y -= walk[i];
+
+keep track min and max for y
+
+area : x : min >= 0 ? 0 : min, u = max - min
+       y : min >= 0 ? 0 : min, v = max - min
+       u * v
+O(n)
+
+#
+sort 100 million 个10 bit integer
+10 bit 换算之后是1024，相当于限定了范围是从0-1024，也就是100 million的数里只有1024个unique的，可以用dictionary存储数字出现的次数，
+相当于说只sort key就可以了，然后再counting sort
+
+=============================================
+#
+给共同好友的图推荐好友，根据面试官的一点一点提要求，一点点改， 不怎么难，要跟着面试官的提示和思路走
+
+#
+meeting rooms变种，区别是有两类schedule, 一个是break, 一个是work。要求break 和 work不能overlapped
+
+#
+假设有一堆 log 纪录, 要实作 search, count, sort
+format 是 date_meg
+ex:
+2020/01/20/20:10:00_cat is good
+2020/01/20/12:20:01_cat and dog are good
+2020/01/20/01:01:02_cat is better than dogs
+
+search
+ex: search cat or ca 要出现上述三条 logs
+ex: search dogs 只出现最后一条 log
+
+count
+ex: input: cat, output: 3
+ex: input: dog, output: 2
+
+sort 没什么好说的, 就照时间 sort 而已
+
+lz 提了先 parse log 用 trie 的方式把 log 存起来, 这样可以加快搜寻和count 的速度, 但是没有让我实作 Trie,
+讲完概念最后实作没时间写
+
+Create Inverted Index, timestamp is DocId, for example:
+cat -> {2020/01/20/20:10:00, 2020/01/20/12:20:01, 2020/01/20/01:01:02}
+dog -> {2020/01/20/12:20:01, 2020/01/20/01:01:02}
+
+count = InveredIndex.get("cat").size()
+search : count = InveredIndex.get("cat"), iterate docId, retrieve from another TreeMap
+
+#
+在简单图中找最长路径。
+本人用DFS解答了本题（O(n)=n^2），interviewer继续追问有没有时间复杂更优的解法，并提示只用两轮DFS
+答案在cracking the coding interview里有
+
+
+#??
+在一堆链表中找出最经常出现的pattern E.g. 在[A->B->C->D->E, E->B->C->D, B->C->D]中, B->C->D是最经常出现的pattern
+
+#!!!
+要求implement两个function， input是购买记录，包括一个product和它的string of accessories
+Void addPurchase(string product, string[] accessories)
+String getRecommended(string product)
+要求实现
+addPurchase("phone", {"case", "protector"});
+addPurchase("phone", {"case", "headset"});
+getRecommended("phone")
+会有50%几率return case, 25%几率return protector, 25% headset
+(Based on current purchase record to recommend accessories)
+
+LE_528_Random_Pick_With_Weight
+
+我用的hashmap
+follow up 如果millions of input怎么办，我说那就hashmap of hashmap 每个accessories也建个hashmap value是count 他说可以
+
+
+#
+输入： "aaabbbccccccddd" (sorted)
+输出两个值：N=3, Compressed="abccd"
+输入： "aaabbbccccccd"
+输出两个值：N=1, Compressed="aaabbbccccccd"
+
+他会等你说出GCD这个词，然后告诉你，给你一个函数gcd(a, b)可以直接调用，让你写剩下的代码。
+注意点有两个：
+1）gcd(a,b,c) = gcd(gcd(a,b), c)
+2) 用for loop统计每个字母个数的时候不要忘了处理 i==input.length()
+
+我的方案是先拿到所有的<Char, Int>存到List里，然后算出全局gcd，再foreach这个List生成新字符串。
+
+follow up：如何做到常数空间？答案：先算前两个字母的gcd1，再算gcd1和第三个字母的gcd2……以此类推。需要的空间是两个Int。
+
+#
+设计一个类似于linux里面的查找文件的数据结构，查找所有给定前缀名的文件的名称和位置。
+比如给app，那么如果文件中有app，apple，appl，那么要返回所有这些文件，以及他的路径
+
+#
+判断2个日期是否相差了一个月，面试官给了一些定义，比如2/10,3/10是正好一个月，题目比较好懂，写的时候注意和面试官沟通，分类写
+
+#
+给一堆文件类型（string type的)和他们对应的时间点，然后查找某一天出现次数最多的文件类型。哈希表+优先队列
+
+#
+给三个点坐标，求包涵这三个点的最小的圆的半径等。问题给的很笼统，需要自己clarify很多东西。不能用数学解。
+我用了Binary Search，最后只把主程序写出来了。很多细节只是口头上沟通了一下。好像之前地里见过这题？
+
+#
+人会说不同的语言，问两个人之间要多少个翻译，bfs就行，只是要自己定义数据类型。
+
+#(!!!)
+input: str, dict
+dict里面是key是字符串里的几个字母，value是可以替换成的数字
+求所有可能的组合
+
+#
+each iterator has two methods: next(), hasNext(). Given a list of iterators in which numbers are in
+ascending order, create a class that has two methods: next(), hasNext(). The next() method must return
+the smallest number each tim
+
+#
+LE_322_Coin_Change                        But with limited number of conins
+
+#
+LE_253_Meeting_Rooms_II                   follow up是给定meeting room，如果meeting room满，之后的meeting向后顺延，
+                                          meeting长度不变，问meeting average delay (??)
+
+#(!!!)
+设计一个查找文件的API，支持模糊搜索，返回所有符合条件的文件名
+自己觉得题就是DFS搜索，但是崩在了关于模糊搜索怎么处理regular expression matching，自己自动带入做题模式，12*对不对得上123，一个一个比较，比到*的时候分叉的思路
+面试官直接说难道你不知道regular expression matching怎么用吗，原来是想要让直接用java内置的函数处理，给我写了Pattern Class的match方法……后来又说我append文件路径的做法也不对，反正就感觉他想要的是一个比起做题更偏向实际在程序里能work的答案，两个人沟通不咋顺畅，对面不理解我，我也没完全听懂他，就崩掉了
+
+第二题三哥什么都说让自己想，我问了半天最后路径定的是string，就比如''\home\today\morning''，这就是一个路径
+
+不过亚麻这种文件查找的题目比较高频，可以是设计也可以是单独题目，所以还是需要各方面准备，现在面试是越来越难
+
+#
+要求写一个special Random function 输入N 和 一个array, 要求随机返回一个值， 但值不能是array 里有的。
+n = 5, arr = [1, 2, 6, 7, 9], 是不是说random的范围是[0, 5], 但不能是arr里有的1， 2
+这个意思呢？
+是的 不能返回array里的数字
+那是不是先random 出来个n的数， 然后用set check在不在array里就行了？
+要考虑一些edge case. 比如说 array 里面包含了从0到N所有数， 就infinite loop了 怎么处理？
+follow-up: 如果只可以call 一次 rand(), 怎么做？
+
+#
+用二维数组表示lego (1: 有lego, 0：空) 随机destroy 一块 "1" （non attached will fall down）问剩下的lego。
+
+楼主lego那题 是跟刷题网一样 跟天花板连着的不会掉下来吗？
+不太一样 没有天花板连着 只考虑有底座就可以
+
+0000000
+0011000
+0001000
+0001000
+0011100
+
+如果destory center 的1， 剩下的是
+
+0000000
+0000000
+0000000
+0001000
+0011100
+
+#
+一个racing car game，大致是给一个int[][] array作为map, 小车起点在(0,0), 地图里存在障碍物用1表示，需要最终走到map的右下角，
+小车可以上下左右行驶，但不能到达障碍物，小车有一个初始速度为float变量=1，每次按同方向行驶小速度变为2*当前速度，转向或反方向行
+驶速度变为0.5*当前速度，问小车的最快到达右下角的时间。
+818. Race Car??
+
+#
+应该在刷题网上出现过，简单搜了下没找到。大概就是有一堆绳子，每根绳子有长度和价值value，它们可以拼接，然后给定一个长度N，
+找到绳子的combination使得它们加起来的价值最大。
+
+#
+给一个string array，找到不重复的最长subarray
+
+#
+问了一个关于送货的，从一个点出发到另一个地点需要多长时间，然后这个地点的用户约定好的送货时间是多少，然后计算总共有多少用
+户的送货时间会迟到。也是自己定义所有东西，花了些时间，我用了dfs来做
+
+#
+给一道BFS的题，就是给一张图，图上有几个节点，节点到节点之间的距离不等。然后选定一个起点，要求写算法实现如何以最小的代价走完所有节点，
+如果走不完，则返回-1。楼主刷题太少，就100来个，没做过带边值的图的题目。虽然算法在提示下用priority queue写了，但是却卡在了怎么建n
+ode的问题上，因为是白板，node的class也要自己写
+
+#
+log ingestion 给出一个log file文件，格式类似：
+2020-04-11 13:03:11 duration=5m0s
+2020-04-11 13:27:15 duration=5m3s
+
+写一段代码分析log，计算每半小时bucket内 累计的duration长度 类似如下output
+2020-04-11 13:00 total=5m+2m45s=7m45s
+2020-04-11 13:30 total=2m18s
+
+#
+生成mirror tree。 binary tree ser/de
+
+#
+设计一个拍卖行，实现两个功能，LogPurchasePrice和ShowTopKItems。每个商品可以被多次卖出（如果价格更高的话），估计模拟的是竞价过程吧。
+showtopkitems要求是不一样的items。
+
+#
+纯coding: 虽然说是纯coding，但是问题很抽象而且想要什么 input什么样也得慢慢聊出来。问题是有一些movie的entry，rating和导演平分都
+存在s3，问你怎么实现给用户的推荐，估计要么rating要么导演平分，然后说这个file size很大，不能直接load进memory 然后global sort。
+后来聊起来他有说可以假设有个按行读部分这个file的api可以用，然后假设可以有k个host去平摊工作。那我就说可以分别load完然后sort自己的，
+然后merge k sorted list。最后问怎么做 要么divide conquor 要么priority queue我选的后者。 问完followup又问如果又加了新的movie
+在里面然后读进了某一个host的list，怎么update整个结果（assume read会被call 很多次，所以要优化read）。我说就重新算一遍
+merge k sorted list，但是慢了点确实，然后他说怎么办，我后面没打出来貌似。
+
+电影推荐那题的followup可以先sort有新电影的那个list然后跟推荐结果比较在对应位置插入新电影。
+
+#
+一个简单coding 解决实际问题: 给一个收费公路的不同时间不同收费的data， 如果input是一个具体的时间，让计算当时的price。有挺多东西要问
+清楚然后clarify。比如时间是什么format，收费数据图是具体的小时，还是分钟之类的。然后他说每天的price都会update，所以要考虑怎么优化这
+个update data的过程。结论就是做一个interval lookup method （通过给的时间转化成属于哪个interval），然后第二个map就是通过具体的哪
+个interval来找到对应的price。第一步开始用binary searchd对于list做的，后面优化成了binary search tree。感觉可能也没有到最优解
+
+收费公路那题用一个TreeMap存开始时间和收费，floorKey()就可以定位出input区间，然后返回收费。
+
+# !!!
+给一系列的intervals 找出所有两两conflicts的pair(注意是每两个 不是光相邻的) 例如输入是：[1, 4], [2, 5], [3, 5], [4，6]
+那么输出就是：[2,4],[3,4],[4,4],[3,5],[4,5],[4,5]
+就是先sort intervals 然后用二分法
+能否说下第一题 conflict interval的思路？每个pair之间的overlap 感觉最少也要O(n^2).
+除非用这个https://www.geeksforgeeks.org/interval-tree/
+
+# !!!
+然后给你一个数组表示的数 数组的index表示一个节点 index里面的值表示这个index节点的parent， 对于根结点 他的parent就是-1
+求这个树的高度
+比如这样的一棵树 4，1，3，2，0， 那么用数组就表示成：
+index : 0，1，2，3，4
+val     : 1，4，1，4，-1
+用DFS加一个dp数组优化就行了
+
+Find_Height_BT_By_Parent_Array
+
+#
+给一个grid, 一堆locker, 一个固定的customer坐标,找出离customer距离最近的locker。 followup 是customer很多怎么办
+第三轮的followup multiple customer是不是把locker enqueue然后BFS更新每一个customer位置最先到的locker
+没错，我的解法也是这样
+意思是从锁当起点做多源点的BFS？
+是的。。。
+
+一个矩阵A，矩阵元素可以是一个房间，一扇门，或者一个障碍物。返回一个矩阵B with the same size，B[i][j]的值如下：
+若A[i][j]为门，返回0；
+若A[i][j]为障碍物，返回-1；
+若A[i][j]为房间，返回这个房间离最近的门的距离。
+
+LE_286_Walls_And_Gates
+
+#
+OOD+Alg 在一堆电脑配件中，根据用户的要求，选择合适配件， 类似linux find file。 这个答的不太好，本来准备了解法，
+但是被带节奏到一个很难解的地步。
+那题我本来的想法是，所有的item都存在list里面，然后用predicate去test是不是符合规则，
+但是面试官觉得，每个item都扫一遍不好，
+提出了用map<partType, List of Parts>, 这种解法，但是这种的话，只对partType 的query有好处，
+对其他的query比如说，size, 就还是要全部扫一遍，
+然后我又提出，存的时候排序存，但是还是否决，因为还有别的criteria，所以还是不是最优，
+所以我也还是没有特别好的建议，你要是有什么想法的话，也可以提出来哈，我还是挺好奇的，
+优化该怎样弄
+
+#
+还有一个根据概率随机return 一个string，
+input 的是每个string的概率
+
+#
+Given (customer id, session id, page url, timestamp), and 定义 exit page= last page of each session,
+求top 5 exit page count
+
+#
+輸入兩個日期 ＡＢ 問Ｂ是在Ａ前後30天範圍內, 外, 還是正好30天
+就是要寫一個compareTo function
+需要跟面試官問清楚日期等等的定義
+
+#
+然后问我怎么实现一个family tree，就两个人在一起可以有很多children，同时一个人又可以在不同时间段有好多妻子或者丈夫。
+最后让我实现一个map， key是generation， value是这个generation所有的人。
+
+#
+后有一个数n，找到x,y  让 x*y 大于等于n， 但是小于等于n+2, x和y要相差的越小越好。比如4 就返回（2， 2）， 18就返回（4， 5），
+17就返回（3， 6）。第二题就是sliding window中unique number的个数。
+
+
+#
+Coding: Binary combinations of event, 给event number, event name和 event detail, return all possible combination
+solutions, 很straightforward, 直接2^n，不难
+
+
+
+
+
+
+
+
+
+
+
+
+

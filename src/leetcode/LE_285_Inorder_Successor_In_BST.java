@@ -55,6 +55,7 @@ public class LE_285_Inorder_Successor_In_BST {
     //Solution 1 : Iterative
     public TreeNode inorderSuccessor1(TreeNode root, TreeNode p) {
         TreeNode res = null;
+
         while (root != null) {
             //!!! "<=", for "If the given node has no in-order successor in the tree, return null"
             if (root.val <= p.val) {//This "if" logic uses the property of BST
@@ -64,6 +65,7 @@ public class LE_285_Inorder_Successor_In_BST {
                 root = root.left;
             }
         }
+
         return res;
     }
 

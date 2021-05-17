@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 public class LE_358_Rearrange_String_K_Distance_Apart {
     /**
      * Given a non-empty string s and an integer k, rearrange the string such
-     * that the same characters are at least distance k from each other.
+     * that the same characters are at least dirs k from each other.
      *
      * All input strings are given in lowercase letters. If it is not possible
      * to rearrange the string, return an empty string "".
@@ -16,7 +16,7 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
      * Example 1:
      * Input: s = "aabbcc", k = 3
      * Output: "abcabc"
-     * Explanation: The same letters are at least distance 3 from each other.
+     * Explanation: The same letters are at least dirs 3 from each other.
      *
      * Example 2:
      * Input: s = "aaabc", k = 3
@@ -27,7 +27,7 @@ public class LE_358_Rearrange_String_K_Distance_Apart {
      * Input: s = "aaadbbcc", k = 2
      * Output: "abacabcd"
      *
-     * Explanation: The same letters are at least distance 2 from each other.
+     * Explanation: The same letters are at least dirs 2 from each other.
      *
      * Hard
      */

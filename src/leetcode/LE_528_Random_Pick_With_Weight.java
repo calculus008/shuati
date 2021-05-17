@@ -73,7 +73,7 @@ public class LE_528_Random_Pick_With_Weight {
         public int pickIndex() {
             /**
              * nextInt(int bound)
-             * Returns a pseudorandom, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive)
+             * Returns a pseudo random, uniformly distributed int value between 0 (inclusive) and the specified value (exclusive)
              */
             int target = rand.nextInt(sums[sums.length - 1]) + 1;
             int l = 0;

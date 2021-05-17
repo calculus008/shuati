@@ -55,7 +55,9 @@ public class LE_981_Time_Based_Key_Value_Store {
     /**
      * https://zxi.mytechroad.com/blog/hashtable/leetcode-981-time-based-key-value-store/
      *
-     * HashMap + TreeMap
+     * HashMap of TreeMaps
+     * key : input key
+     * val : TreeMap, key : timestamp -> val : input value at the timestamp
      */
     class TimeMap {
         Map<String, TreeMap<Integer, String>> map;
@@ -83,6 +85,17 @@ public class LE_981_Time_Based_Key_Value_Store {
              * "Map.Entry<Integer, String>"
              * "floorEntry"
              * "with timestamp_prev <= timestamp."
+             *
+             * From JAVA Doc:
+             * "floorKey(K key)
+             * Returns the greatest key less than or equal to the given key, or null if there is no such key."
+             *
+             * 就是说，floorKey() 可以等于给定的 key。
+             * 
+             * In contrast:
+             * "lowerEntry(K key)
+             * Returns a key-value mapping associated with the greatest key strictly less than the given key,
+             * or null if there is no such key."
              */
             Map.Entry<Integer, String> entry = map.get(key).floorEntry(timestamp);
             if (entry != null) {

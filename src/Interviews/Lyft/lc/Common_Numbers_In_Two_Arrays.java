@@ -2,7 +2,7 @@ package Interviews.Lyft.lc;
 
 import java.util.*;
 
-public class Common_Numbers_In_Tow_Arrays {
+public class Common_Numbers_In_Two_Arrays {
     /**
      * LE_349_Intersection_Of_Two_Arrays
      * LE_350_Intersection_Of_Two_Arrays_II
@@ -81,6 +81,18 @@ public class Common_Numbers_In_Tow_Arrays {
     }
 
 
+    /**
+     * Follow up 1:
+     * 给定 l1 和 l2 都是 iterator，要求实现一个 Iterator。这个 Iterator 有 next 和 has_next 两个方法，
+     * call next 会返回下一个common number。has_next 返回 true or false 表示是否有下一个 common number。我实现的时候
+     * 把找下一个 common number 的逻辑都放在 has_next 里，然后用一个全局变量存 next common number。
+     *
+     * NOTE:
+     * Assumption for the following solutions are that the given List of numbers are already SORTED.
+     *
+     * Otherwise, need to do sorting first.
+     * Collections.sort(list)
+     */
     static class CommonNumberIterator {
         Iterator<Integer> it1;
         Iterator<Integer> it2;
@@ -319,12 +331,12 @@ public class Common_Numbers_In_Tow_Arrays {
             size = pq.size();
             pre = null;
             next = null;
-//            System.out.println("init done, size = " + size);
+//            System.out.println("init done, READ_SIZE = " + READ_SIZE);
         }
 
         public boolean hasNext() {
             if (pq == null || pq.size() < size) {
-                System.out.println("#1.pq size is smaller than " + size + ", return false");
+                System.out.println("#1.pq READ_SIZE is smaller than " + size + ", return false");
                 if (pq != null) {
                     pq = null;
                 }
@@ -370,8 +382,8 @@ public class Common_Numbers_In_Tow_Arrays {
                  * !!!
                  * can't return true here, it will miss the valid ones at the end
                  */
-//                if (pq.size() < size) {
-//                    System.out.println("#2.pq size is smaller than " + size + ", return false");
+//                if (pq.READ_SIZE() < READ_SIZE) {
+//                    System.out.println("#2.pq READ_SIZE is smaller than " + READ_SIZE + ", return false");
 //                    return false;
 //                }
             }
@@ -387,8 +399,8 @@ public class Common_Numbers_In_Tow_Arrays {
     }
 
         public static void main(String[] args) {
-//        int[] nums1 = {1, 2, 2, 3, 3, 6, 8, 10, 10, 10};
-//        int[] nums2 = {2, 2, 3, 3, 5, 7, 10, 10, 10, 12};
+        int[] nums1 = {1, 2, 2, 3, 3, 6, 8, 10, 10, 10};
+        int[] nums2 = {2, 2, 3, 3, 5, 7, 10, 10, 10, 12};
 
 //        int[] nums1 = {6, 8, 11};
 //        int[] nums2 = {5, 7, 10, 12};
@@ -408,8 +420,9 @@ public class Common_Numbers_In_Tow_Arrays {
 //        int[] nums1 = {2, 2, 2};
 //        int[] nums2 = {2, 2, 2};
 
-        int[] nums1 = {1, 2, 2, 7, 10, 11, 22, 22, 22, 22, 23, 50, 60, 70, 100};
-        int[] nums2 = {1, 1, 2, 2, 2, 10, 14, 22, 22, 22, 23};
+//        int[] nums1 = {1, 2, 2, 7, 10, 11, 22, 22, 22, 22, 23, 50, 60, 70, 100};
+//        int[] nums2 = {1, 1, 2, 2, 2, 10, 14, 22, 22, 22, 23};
+
         int[] nums3 = {1, 2, 5, 6, 10, 22, 22, 23, 55, 66};
 
         List<Integer> l1 = new ArrayList<>();

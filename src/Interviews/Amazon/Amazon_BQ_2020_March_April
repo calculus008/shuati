@@ -1,0 +1,280 @@
+bq1: project that you most interested in，详细了解了一下项目内容
+bq2: quick decision, result (same as calculated risks?)
+
+bq1: challenging project, most challenging part, how the problem was solved
+bq2: extra work for your team, result
+
+BQ1: 你在工作过程中发现了哪些问题，并且说服你的同事同意你的意见。
+BQ2: 你工作中对工作优先级的更改策略。
+
+BQ1: 你在工作中和上级的意见不同，最终说服了上级。
+     short term vs long term goals?
+     template framework
+##Convert to ES from druid for AI
+
+BQ2: 在你之前工作中遇到的最大的挑战
+
+##Query Engine framework
+
+BQ1: 你在解决了哪些问题
+BQ2: 你在工作中遇到的最大的挑战
+
+BQ1: 你在工作中通过什么衡量指标改变了你的开发策略
+
+1. 至少要准备10个故事，而且要熟记细节，口语表达最好事先准备好，每一句话不仅仅要解释清楚意思，也要对应LP。
+2. 切勿眼高手低，在脑子里搞懂了不一定就能流利地表达并给对方也讲明白
+
+BQ:
+(1) when you finish task outside of the scope (go above and beyond)
+   (GCP deployment testing tools)
+
+(2) when you find out your approach isn't the best
+
+BQ deal with limited resource or time
+
+你做过的比较creative 的project？你之前有在公司做过什么贡献么？遇到过什么challenge？每个BQ都会有一些follow up对细节的追问
+
+BQ, tell me a time when you have conflict with your manager
+
+##Helm chart, template engine
+
+
+BQ most prouded project + followup
+tell me a time when you failed a project.
+
+和同事冲突的例子
+
+##Display one, new channel, not willing to share data etc)
+
+没有meet deadline的例子
+
+##Template Engine)
+
+你的提议没有被manager接受的例子
+
+BQ analysis and solve problems, a situation solve a complex problem
+
+每輪都有LP，但發現問題主要都是圍繞 Bias For Action 和 Deliver Result
+這個起碼要準備五個例子吧～其他LP感覺也都沒啥被問?!
+
+tell me the time you push the team to get higher standard. 这题我卡住了我听成 你不得不放弃high standard due to any reasons...
+
+tell me the time when you have to solve a complex system
+follow up what do you do when you have to pick design A vs design B
+
+纯BQ - 深入问了很多关于如果有反对意见的时候怎么处理的
+
+1. 怎么处理conflict，与经理或者同事
+
+
+2. 怎么处理deadline，有没有达不成的情况
+3. ownership，你做了什么职责之外的事
+这仨问题我感觉几乎问了3,4遍，所以大家一定要在这几个上面多准备几个例子。
+
+问了各种情景怎么debug。。。还有如果已知code有问题，但是你不熟悉这个package，应该如何deep dive。。。
+    第一次遇到这种问法，有点懵，平时常常做的这些事情一慌，全都想不起来了。。。
+就是要先判断代码什么时间开始出错的，然后根据commit和metrics来确定哪一部分的代码出bug了之类的。。。然后就要先revert之类的保证production正常运行，然后再修bug。。。
+就是工作时候平常每天干的事情。。但是问法太模糊，我以为只给package和bug的症状，没有其他的信息。。。所以答崩了。
+
+
+complex problem solved with simple solution
+
+give me a time have conflict, give me a time your proud project, give me a time receive constructive feedback
+
+1，介绍下你做过的最有挑战的项目。要求是业界的，不是学校的。会根据回答追问。比如我就被问到这个问题是你自己发现的，还是别人指出来的。
+2，有什么项目是自己主动要求做的？
+3，项目做的差不多了，要改变方案怎么办？
+4，牺牲短期利益成全长期利益的经历
+5，自我介绍
+6，跟别人意见不合，怎么说服他们？追问了细节，就是要摆证据说明你的方案可行。
+   Durid -> ES
+
+7，描述你怎么应对项目时间很紧的经历
+
+BQ 1: went above and beyond
+童鞋们注意，这题考点是vision (think big/are right a lot) 而不是attitude (dive deep/insist on highest standards)，
+做超出原有scope的事必须是因为你看到了更重要的目标、更大的机会，通过充分的考虑和权衡，能更好的服务客户。而不是因为“妈妈，我喜欢工作”，
+更不是缺乏边界意识，把一个核心工作给连着不重要的周边一起做了。
+##??
+Testing suits for GCP deployment
+
+BQ 2: simple solution to complex problem
+这个题考验的是problem solving的能力和bias for action/deliver results的态度。例子不用特别高大上，只要能说明你以终为始，有时间意识，
+不是做事慢吞吞的技术完美主义者就行了。例子最好是技术方面的，之前和被问过这题的小伙伴交流，回答管理或做事上的例子的效果并不理想。
+##Async CMS using dimhub table
+
+
+BQ 1: discovered a big problem in the project
+这题考点我没摸清，也可能并没有预设考点。我回答了一个和项目管理有关的例子，似乎效果不错。这种题尽量不要找technical problem，
+因为锅总要有人背，被追问的时候，无论自己扛还是甩给别人都有可能暴露弱点或无法自圆其说。最不容易讲出毛病的problem包括resource change
+（自己组或dependency组成员生病/离职/有其他priority），project management（需求变动，工期和质量的取舍），等等。
+是要自己discover，需求变化可以是“量变引起质变，但是其他人没注意到”之类的
+##SRE/Dev/QA team disconnected in tight schedule and pressure. they think we did it and we think they did it.
+For example : load test
+
+
+BQ 2: invented something new
+考点同第一轮的simple solution。回答要紧扣中心，技术是为产品服务的，最终都是为了用户，千万不能表现出技术浪漫主义。
+##QBR
+
+BQ 1: took calculated risk
+这题考点是bias for action，考点本身不难满足。有risk字眼的题肯定要做impact/cost/risk analysis，而这题翻车点就在这：
+impact小了不应该take risk，而impact很大的话又轮不到你来决定。解决办法就是往customer obsession上靠，比如一个棘手的UI bug，
+不在关键位置所以不需要惊动老板，但还是影响一部分客户体验，所以要take risk去修等等。Justify了为什么要take risk，后面的都比较容易。
+
+##Webex Outlook plugin bug, impact end user, cost : 1 week to release and inherit the code from other team,not
+farmiliar, risk : tricky to fix, not in my domain expertise, may impact my current task. Take the risk to fix it.
+
+BQ 2: work with incomplete info
+这是一个送分题，主考点是are right a lot，但是很容易在一个故事里一次性覆盖半数以上的军规。最常用模板是处理影响客户的紧急任务，
+剩余的自由发挥。
+
+##Softphone, debugging an issue for BMW, voice quality issue. It could be anything from network, switch, CallManager,
+decoder etc. Work on establish tools, collect info, log, debug and fix it.
+
+纯LP https://www.youtube.com/watch?v=bDKuX3BnBTk 这大哥的channel挺管用，我有些例子怎么也想不出来，他channel一些视频能给点例子
+
+
+BQ: do things differently
+
+BQ: make a decision with limited info
+
+BQ: take action fast
+
+问了一些反面实例， 例如提出意见没被接纳、失败的例子。
+
+1) made a bad decision where I was not right
+       specifically the bad decision - the moment?
+       What is code review process- What is code review process
+2）Challenging problem that I solved with in depth analysis
+       What about the customers
+       What was the challenging part of this
+
+Standard vs Delivery basically good vs good enough
+Tell me about a time of unsatisfied result
+Goal that I had and I could have done better
+hard problem solved with a simple solution
+
+Customer feedback to improve the situation
+Difficult decision under pressure, defend and justify that it was the right decision to make.
+Peers don't agree with you, who was resistant and describe the situation.
+
+Took on something significant - not a job role why it was important
+Significant unanticipated obstacles that is really significant to achieve the goal
+
+Time was critical and get something out really quick
+Situation where you were stuck and don't know what to do next
+Where do you learn new things
+
+
+-----------------------------------------
+
+1.Work with incomplete info
+考点是are right a lot
+Softphone, debugging an issue for BMW, voice quality issue. It could be anything from network, switch, CallManager,
+decoder etc. Quicky go into action, call on related teams, understand the key stacks. Have a joint-plan for debugging:
+1.Deploy debugging tools, collect traffic dump, CallManager log,
+2.collect info, log, debug and fix it.
+Find a bug in codec mismatch. Fix in both CallManager and Softphone.
+
+2.Take calculated risks:
+Webex Outlook plugin bug, reschedule (by drag/drop) an instance ends with wrong time slot.
+Impact : For end user, it will leave low quality impression on our product.
+risk/cost : 1 week to release and inherit the code from other team,not farmiliar, tricky to fix, not in my domain expertise,
+       may impact my current task. Take the risk to fix it.
+Decide to take the risk : Dive deep into code, understand the logic.
+
+3.Discovered a big problem in the project
+For GCP migration, structure for tasks:
+SRE is responsible for network(tero form) and infrastructure, dev is responsible for app containers (helm charts)
+Each team has its own daily meeting, does not have enough communication. (First team in company to do this kind of
+migartion, no previous plan or model to follow).
+SRE/Dev/QA team disconnected in tight schedule and pressure. they think we did it and we think they did it.
+For example : load test, find the issue, bring it up to upper management, propose a joint planning and testing scheme.
+
+4.Invent something new
+QBR story
+
+5.simple solution to complex problem
+Async report based on CMS, find CMS is not reliable. Use simple sync through dimhub table. Simple, easy to implement
+, work reliably for our use cases (daily job number is small, 50 - 100), code/test and deploy in a week.
+
+6.went above and beyond
+Testing suits for GCP deployment: Situation - after each deployment, takes long time to do sanity test -
+network connection, if DB is working, if Kafka and rabbitmq runs, if all micro services are running correctly.
+SRE team's responsibility, not mine, but I see it has huge negative impact on our productivity, go ahead implemnet
+the test suit using golang.
+
+7.怎么处理conflict，与经理或者同事
+Use "Earn Trust of Others"
+AOL display one, not enthusastic about integration, has negative feeling. genuinely listen, open minded.
+Original plan is to move all componenets and pipeline into our product, through discussion, understand it makes sense
+that disply one team keep some part of the pipeline since they have the resource and experience.
+
+8.你在工作中和上级的意见不同，最终说服了上级。
+short term vs long term goals?
+AI, convert from Druid to ES, testing, performance data.
+
+9.描述你怎么应对项目时间很紧的经历
+Use "Insist on the Highest Standards"
+a.Insist on finishing helm chart template engine
+b.??
+
+10.analysis and solve problems, a situation solve a complex problem
+Transition from AIY to Query Engine Framework
+
+AI Durid:
+Audience Insights - Fact data - 361 GB, 94 dimensions, 1 metric
+    367 segments
+    Hashed partition
+    Audience Insights Meta - Meta data - 330 MB, 10 dimensions, 1 metric
+    Audience Insights Taxonomy - 358 KB, 7 dimensions, 1 metric
+    Prod Environment
+    40 nodes
+    256 GB RAM, 24x2 cores each
+    Single tier
+    Replications
+    10 for fact data
+    2 snapshots, throwaway data, all in memory
+
+    Druid is a time series aggregation and ingestion engine.
+    Focuses on OLAP workflows.
+    Indexes only structured event data.
+    Measures must be defined in a Druid schema such that summarization/roll-up can be done.
+    Basic search support for structured event data, but does not support full text search
+
+    Basic/Metadata retrieval
+
+New requirement
+Horizontal Scale
+Flexible data model
+Schemaless
+Rapid Query execution
+
+ES
+    Apache Lucene distributed and fault tolerant.
+    Store arbitrary unstructured documents as-is.
+    Full text search for schema-free documents and provides access to raw event level data.
+    No data summarization/roll-up at ingestion time.
+
+    Full Text Search and Regex
+    Auto suggestion (prefix)
+    Ranking
+
+    Retain attribute relations.
+
+    What we answer today ?
+        Purchase insights on people travelling from SFO.
+        Purchase insights on people travelling to LAX.
+        Purchase insights on people travelling via JetBlue airways.
+
+    New questions being asked.
+        Ability to provide purchase insights on people travelling from SFO to LAX via JetBlue airways.
+
+Query time comparison                      query time reduction
+1 concurrent users 4000 queries            -86%
+5 concurrent users 1000 queries each       55%
+10 concurrent users 500 queries each       70%
+50 concurrent users 100 queries each       67%
+
+

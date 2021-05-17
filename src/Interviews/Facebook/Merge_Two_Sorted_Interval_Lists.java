@@ -1,4 +1,4 @@
-package src.Interviews.Facebook;
+package Interviews.Facebook;
 
 import java.util.*;
 

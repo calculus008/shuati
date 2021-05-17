@@ -61,6 +61,155 @@ public class LE_909_Snakes_And_Ladders {
      * Medium
      */
 
+    class Solution_BFS_1 {
+        public int snakesAndLadders(int[][] board) {
+            int n = board.length;
+            int end = n * n;
+            boolean[] visited = new boolean[n * n + 1];
+            visited[1] = true;
+
+            Queue<Integer> q = new LinkedList<>();
+            q.offer(1);
+            int steps = 0;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    int cur = q.poll();
+                    /**
+                     * Mark visited as the cell popped out of q.
+                     * Think it as only here we start from this cell to move on,
+                     * it is the start point for next move. So here if we take ladder,
+                     * we only count it as one move, so only the destination of the ladder
+                     * will be marked as visited.
+                     */
+                    if (visited[cur]) continue;
+
+                    visited[cur] = true;
+                    if (cur == n * n) {
+                        return steps;
+                    }
+
+                    /**
+                     * "j <= 6 && cur + j <= end"
+                     */
+                    for (int j = 1; j <= 6 && cur + j <= end ; j++) {
+                        int next = cur + j;
+
+                        /**
+                         * With the constrain of using ladder,
+                         * the branching factor in BFS is still 6.
+                         */
+                        int val = getBoardValue(board, next);
+                        if (val > 0) {
+                            next = val;
+                        }
+
+                        if (!visited[next]) {
+                            q.offer(next);
+                        }
+                    }
+                }
+                steps++;
+            }
+
+            return -1;
+        }
+
+        private int getBoardValue(int[][] board, int num) {
+            int n = board.length;
+            int r = (num - 1) / n;
+
+            /**
+             * upside-down conversion
+             */
+            int x = n - 1 - r;
+
+
+            /**
+             * zig-zag adjustment
+             * At row 0: left -> right, (y + 1) + n * r = num => y = num - 1 - r * n
+             * At row 1: right -> left, (n - 1) - (y - 1) + n * r = num
+             *                              n - y + n * r = num
+             *                              => y = n + r * n - num
+             * .....
+             *
+             * x is transformed as upside-down index, r is not, we still use r to calculate column
+             * zig-zag conversion
+             */
+            int y = r % 2 == 0 ? num - 1 - r * n : n + r * n - num;
+            return board[x][y];
+        }
+    }
+
+    /**
+     * Variation: 梯子可以无限次使用, 梯子和走x步只能选一.
+     */
+    class Solution_BFS_1_Variation {
+        public int snakesAndLadders(int[][] board) {
+            int n = board.length;
+            int end = n * n;
+            boolean[] visited = new boolean[n * n + 1];
+            visited[1] = true;
+
+            Queue<Integer> q = new LinkedList<>();
+            q.offer(1);
+            int steps = 0;
+
+            while (!q.isEmpty()) {
+                int size = q.size();
+
+                for (int i = 0; i < size; i++) {
+                    int cur = q.poll();
+                    if (visited[cur]) continue;
+
+                    visited[cur] = true;
+                    if (cur == n * n) {
+                        return steps;
+                    }
+
+                    for (int j = 1; j <= 6 && cur + j <= end ; j++) {
+                        int next = cur + j;
+                        int val = getBoardValue(board, next);
+
+                        /**
+                         * !!!
+                         * 假如题意是：
+                         * next 到达梯子处，可以选择用或不用梯子，可以连续使用梯子：
+                         * next 和 每一个梯子的终点都属于BFS的当前的这一层，应该放入q.
+                         */
+                        while (val > 0) {
+                            int s = val;
+                            if (!visited[s]) {
+                                q.offer(s);
+                            }
+                            val = getBoardValue(board, s);
+                        }
+
+                        if (!visited[next]) {
+                            q.offer(next);
+                        }
+                    }
+                }
+                steps++;
+            }
+
+            return -1;
+        }
+
+        private int getBoardValue(int[][] board, int num) {
+            int n = board.length;
+            int r = (num - 1) / n;
+
+            int x = n - 1 - r;//upside-down adjustment
+            int y = r % 2 == 0 ? num - 1 - r * n : n + r * n - num;
+
+            return board[x][y];
+        }
+    }
+
+
     /**
      * Convert to 1D + BFS
      *
@@ -69,14 +218,14 @@ public class LE_909_Snakes_And_Ladders {
      * Time  : O(N ^ 2)
      * Space : O(N ^ 2)
      */
-    class Solution {
+    class Solution_BFS_2 {
         public int snakesAndLadders(int[][] board) {
             int N = board.length;
 
             /**
              * Map
              * key   : an integer representing an location on chessboard
-             * value : number of steps taken to get to this location
+             * value : number of steps taken to get to this location (from start point 1)
              */
             Map<Integer, Integer> dist = new HashMap();
             dist.put(1, 0);
@@ -85,27 +234,27 @@ public class LE_909_Snakes_And_Ladders {
             queue.add(1);
 
             while (!queue.isEmpty()) {
-                int s = queue.remove();
+                int cur = queue.remove();
 
                 /**
                  * !!!
                  * we get to the destination
                  */
-                if (s == N * N) {
-                    return dist.get(s);
+                if (cur == N * N) {
+                    return dist.get(cur);
                 }
 
                 /**
                  * For every step, move range is s + 6 and it is bounded by N*N
                  */
-                for (int s2 = s + 1; s2 <= Math.min(s + 6, N * N); ++s2) {
+                for (int s2 = cur + 1; s2 <= Math.min(cur + 6, N * N); s2++) {
                     int rc = get(s2, N);
                     int r = rc / N, c = rc % N;
 
                     int s2Final = board[r][c] == -1 ? s2 : board[r][c];
 
                     if (!dist.containsKey(s2Final)) {
-                        dist.put(s2Final, dist.get(s) + 1);
+                        dist.put(s2Final, dist.get(cur) + 1);
                         queue.add(s2Final);
                     }
                 }
@@ -115,6 +264,8 @@ public class LE_909_Snakes_And_Ladders {
         }
 
         /**
+         * Map from grid number to 2D array coordination.
+         *
          * s = row * N + col + 1
          *
          * Note:
@@ -122,8 +273,8 @@ public class LE_909_Snakes_And_Ladders {
          */
         public int get(int s, int N) {
             // Given a square num s, return board coordinates (r, c) as r*N + c
-            int quot = (s - 1) / N;//current row
-            int rem = (s - 1) % N; //current col
+            int x = (s - 1) / N;//current row
+            int y = (s - 1) % N; //current col
 
             /**
              * adjust for zig-zag (col) and upside-down (row)
@@ -131,8 +282,8 @@ public class LE_909_Snakes_And_Ladders {
              * col :
              * left to right, then right to left
              */
-            int row = N - 1 - quot;
-            int col = row % 2 != N % 2 ? rem : N - 1 - rem;
+            int row = N - 1 - x;
+            int col = row % 2 != N % 2 ? y : N - 1 - y;
             return row * N + col;
         }
     }

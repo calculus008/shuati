@@ -117,8 +117,8 @@ public class Product_Of_Array_Except_Self {
             if (nums == null || nums.length == 0) return nums;
 
             int[] res = new int[nums.length];
-            res[0] = 1;
 
+            res[0] = 1;
             for (int i = 1; i < nums.length; i++) {
                 res[i] = res[i - 1] * nums[i - 1];
             }
@@ -203,6 +203,50 @@ public class Product_Of_Array_Except_Self {
                 }
 
                 return res;
+            }
+
+            int right = 1;
+            for (int i = n - 1; i >= 0; i--) {
+                res[i] *= right;
+                right *= nums[i];
+            }
+
+            return res;
+        }
+    }
+
+    class Solution5 {
+        public int[] productExceptSelf(int[] nums) {
+            List<Integer> list = new ArrayList<>();
+
+            int n = nums.length;
+            int[] res = new int[n];
+
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] == 0) {
+                    list.add(i);
+                }
+            }
+
+            if (list.size() > 1) {
+                Arrays.fill(res, 0);
+                return res;
+            } else if (list.size() == 1) {
+                Arrays.fill(res, 0);
+                int idx = list.get(0);
+                res[idx] = 1;
+
+                for (int i = 0; i < n; i++) {
+                    if (i == idx) continue;
+                    res[idx] *= nums[i];
+                }
+
+                return res;
+            }
+
+            res[0] = 1;
+            for (int i = 1; i < nums.length; i++) {
+                res[i] = res[i - 1] * nums[i - 1];
             }
 
             int right = 1;

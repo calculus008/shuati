@@ -176,10 +176,19 @@ public class LE_227_Basic_Calculator_II {
         }
     }
 
+    /**
+     * Since there's no parentheses, we don't need recursion.
+     * So we don't have to use Deque. The purpose of Deque is
+     * to simply the logic of retrieving the next char during
+     * recursion.
+     */
     class Solution_Recursion {
         public int calculate(String s) {
             if (s == null || s.length() == 0) return 0;
 
+            /**
+             * s = s.replaceAll()
+             */
             s = s.replaceAll(" ", "");
             s += "#";
 

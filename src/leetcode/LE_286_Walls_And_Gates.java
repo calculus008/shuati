@@ -13,7 +13,7 @@ public class LE_286_Walls_And_Gates {
          -1 - A wall or an obstacle.
          0 - A gate.
          INF - Infinity means an empty room. We use the value 2^31 - 1 = 2147483647 to
-         represent INF as you may assume that the distance to a gate is less than 2147483647.
+         represent INF as you may assume that the dirs to a gate is less than 2147483647.
 
          Fill each empty room with the distance to its nearest gate. If it is impossible to
          reach a gate, it should be filled with INF.
@@ -31,38 +31,47 @@ public class LE_286_Walls_And_Gates {
      */
 
     /**
-     * Simplified, without counting steps in BFS
+     * The performance of recursive DFS is very unstable. It is much slower than BFS if the rooms are
+     * interconnected. It is only faster than BFS when small groups of rooms are isolated. In the worst
+     * case the time complexity is also O(n^4).
+     *
+     * Thus, for this problem we should prefer BFS over DFS. And the best Solution is Multi End BFS.
      */
-    class Solution3_1 {
-        public void wallsAndGates(int[][] rooms) {
-            if (rooms == null || rooms.length == 0) return;
 
-            Queue<int[]> q = new LinkedList<>();
-            int m = rooms.length;
-            int n = rooms[0].length;
+    class Solution_1 {
+        class Solution {
+            public void wallsAndGates(int[][] rooms) {
+                if (rooms == null || rooms.length == 0) return;
 
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (rooms[i][j] == 0) {
-                        q.offer(new int[]{i, j});
+                Queue<int[]> q = new LinkedList<>();
+                int m = rooms.length;
+                int n = rooms[0].length;
+
+                for (int i = 0; i < m; i++) {
+                    for (int j = 0; j < n; j++) {
+                        if (rooms[i][j] == 0) {
+                            q.offer(new int[]{i, j});
+                        }
                     }
                 }
-            }
 
-            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+                int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-            while (!q.isEmpty()) {
-                int[] cur = q.poll();
-                int x = cur[0];
-                int y = cur[1];
+                int steps = 0;
 
-                for (int[] dir : dirs) {
-                    int nx = x + dir[0];
-                    int ny = y + dir[1];
+                while (!q.isEmpty()) {
+                    int[] cur = q.poll();
+                    int x = cur[0];
+                    int y = cur[1];
 
-                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && rooms[nx][ny] > rooms[x][y] + 1) {
-                        rooms[nx][ny] = rooms[x][y] + 1;
-                        q.offer(new int[]{nx, ny});
+                    for (int[] dir : dirs) {
+                        int nx = x + dir[0];
+                        int ny = y + dir[1];
+
+                        if (nx >= 0 && nx < m && ny >= 0 && ny < n && rooms[nx][ny] == Integer.MAX_VALUE) {
+                            rooms[nx][ny] = rooms[x][y] + 1;
+                            q.offer(new int[]{nx, ny});
+                        }
                     }
                 }
             }
@@ -109,6 +118,57 @@ public class LE_286_Walls_And_Gates {
                 }
             }
 
+        }
+    }
+
+    /**
+     * Simplified, without counting steps in BFS
+     *
+     * We don't need to count steps because the starting point (gate) has value 0,
+     * so we can simply add one for each step.
+     *
+     * Time : O(mn)
+     *        Let us start with the case with only one gate. The breadth-first search takes at most m * n steps
+     *        to reach all rooms, therefore the time complexity is O(mn). But what if you are doing breadth-first
+     *        search from kk gates? Once we set a room's distance, we are basically marking it as visited, which
+     *        means each room is visited
+     *
+     * Space : O(mn)
+     *         The space complexity depends on the queue's size. We insert at most m×n points into the queue.
+     */
+    class Solution3_1 {
+        public void wallsAndGates(int[][] rooms) {
+            if (rooms == null || rooms.length == 0) return;
+
+            Queue<int[]> q = new LinkedList<>();
+            int m = rooms.length;
+            int n = rooms[0].length;
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (rooms[i][j] == 0) {
+                        q.offer(new int[]{i, j});
+                    }
+                }
+            }
+
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+            while (!q.isEmpty()) {
+                int[] cur = q.poll();
+                int x = cur[0];
+                int y = cur[1];
+
+                for (int[] dir : dirs) {
+                    int nx = x + dir[0];
+                    int ny = y + dir[1];
+
+                    if (nx >= 0 && nx < m && ny >= 0 && ny < n && rooms[nx][ny] > rooms[x][y] + 1) {
+                        rooms[nx][ny] = rooms[x][y] + 1;
+                        q.offer(new int[]{nx, ny});
+                    }
+                }
+            }
         }
     }
 
@@ -318,6 +378,31 @@ public class LE_286_Walls_And_Gates {
                     rooms[row][col + 1] = rooms[row][col] + 1;
                     queue.add(new int[]{row, col + 1});
                 }
+            }
+        }
+    }
+
+    class Solution_DFS {
+        public void wallsAndGates(int[][] rooms) {
+            for(int row = 0 ; row < rooms.length; ++row){
+                for(int col = 0; col < rooms[row].length; ++col){
+                    if(rooms[row][col] == 0){
+                        populateRooms(row, col, rooms, 0);
+                    }
+                }
+            }
+        }
+
+        public void populateRooms(int row, int col, int[][] rooms, int distance){
+
+            if(row < 0 || row >= rooms.length || col < 0 || col >= rooms[row].length || rooms[row][col] < distance){
+                return;
+            } else {
+                rooms[row][col] = distance;
+                populateRooms(row + 1, col, rooms, distance + 1);
+                populateRooms(row - 1, col, rooms, distance + 1);
+                populateRooms(row, col + 1, rooms, distance + 1);
+                populateRooms(row, col - 1, rooms, distance + 1);
             }
         }
     }

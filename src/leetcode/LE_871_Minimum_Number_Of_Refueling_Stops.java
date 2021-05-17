@@ -112,7 +112,7 @@ public class LE_871_Minimum_Number_Of_Refueling_Stops {
             int n = stations.length;
             long[] dp = new long[n + 1];//!!! n + 1
             /**
-             dp[i] : max distance to go with i refules
+             dp[i] : max dirs to go with i refules
              **/
             dp[0] = startFuel;
 

@@ -31,6 +31,8 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
 
         Note:
         All of the nodes' values will be unique. (!!!)
+
+        !!!
         p and q are different and both values will exist (!!!) in the binary tree.
 
         Follow up : LI_578_Lowest_Common_Ancestor_III
@@ -66,6 +68,73 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
             return left == null ? right : left;
         }
     }
+
+    /**
+     * Solution for LI_578_Lowest_Common_Ancestor_III
+     */
+    class Solution1_A_B_May_Not_Exit {
+        boolean foundP = false;
+        boolean foundQ = false;
+
+        public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+            TreeNode res = helper(root, p, q);
+            if (foundP && foundQ) return res;
+
+            return null;
+        }
+
+        private TreeNode helper(TreeNode root, TreeNode p, TreeNode q) {
+            if (root == null) return root;
+
+            TreeNode l = helper(root.left, p, q);
+            TreeNode r = helper(root.right, p, q);
+
+            if (root == p || root == q)  {
+                foundP = foundP || (root == p);
+                foundQ = foundQ || (root == q);
+                return root;
+            }
+
+            if (l != null && r != null) {
+                return root;
+            } else if (l != null) {
+                return l;
+            } else if (r != null) {
+                return r;
+            }
+
+            return null;
+        }
+    }
+
+    /**
+     * If it's N-arry Tree
+     *         private TreeNode helper(TreeNode root, TreeNode p, TreeNode q) {
+     *             if (root == null) return root;
+     *
+     *             List<TreeNode> res = new ArrayList<>();
+     *             for (TreeNode child : root.children) {}
+     *                TreeNode t = helper(child, p, q);
+     *                if (t != null) {
+     *                  res.add(t);
+     *                }
+     *             }
+     *
+     *             if (root == p || root == q)  {
+     *                 foundP = foundP || (root == p);
+     *                 foundQ = foundQ || (root == q);
+     *                 return root;
+     *             }
+     *
+     *             if (t.size() == 2) {
+     *                 return root;
+     *             } else if (t.size() == 1) {
+     *                 return res.get(0);54
+     *             }
+     *
+     *             return null;
+     *         }
+     */
 
     /**
      * Iterative
@@ -321,7 +390,6 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
         }
 
         public class BT_NoParentPtr_Solution1 {
-
             Node root;
             private List<Integer> path1 = new ArrayList<>();
             private List<Integer> path2 = new ArrayList<>();

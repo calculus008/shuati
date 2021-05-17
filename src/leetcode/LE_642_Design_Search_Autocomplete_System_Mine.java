@@ -120,7 +120,7 @@ public class LE_642_Design_Search_Autocomplete_System_Mine {
              * !!!
              * "new PriorityQueue<>(...)", Don't forget "<>"!!!
              *
-             * Compareator:
+             * Comparator:
              * "If several sentences have the same degree of hot, you need to use ASCII-code order (smaller one appears first)."
              */
             PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.count == b.count ? a.s.compareTo(b.s) : b.count - a.count);

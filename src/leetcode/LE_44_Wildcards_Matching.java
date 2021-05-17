@@ -26,10 +26,17 @@ public class LE_44_Wildcards_Matching {
      */
 
     /**
-     * Time : O(m * n).
+     * Time : O(m * n), best case O(min(m, n))
+     * Space : O(1)
+     *
      * Worst Case : After we get to 'b' (last char in p),
      * we need to move all the way back to the first 'a' in p
      * s = "aaaaaaaaaaaaaaaaaaaa" p = "*aaaaaaaaaaaaaaaaaab"
+     *
+     * https://leetcode.com/problems/wildcard-matching/solution/
+     * Solution3
+     * "Backtrack in no match situation: come back to the previous
+     *  star and assume that it matches one more char"
      **/
 
     public boolean isMatch_practice(String str, String pattern) {
@@ -102,7 +109,7 @@ public class LE_44_Wildcards_Matching {
             }
 
             /**
-             * last pattern pointer was *, advancing string pointer
+             * the last pattern pointer was *, advancing string pointer
              *
              * !!!
              * If pattern character != string character

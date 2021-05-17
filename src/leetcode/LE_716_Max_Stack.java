@@ -34,6 +34,7 @@ public class LE_716_Max_Stack {
      * Easy
      */
 
+
     /**
      * Two Stacks
      *
@@ -109,6 +110,8 @@ public class LE_716_Max_Stack {
      * !!!
      * Solution 2
      *
+     * Double Linked List + TreeMap
+     *
      * Using structures like Array or Stack will never let us popMax quickly.
      * We turn our attention to tree and linked-list structures that have a
      * lower time complexity for removal, with the aim of making popMax faster
@@ -144,7 +147,7 @@ public class LE_716_Max_Stack {
         }
 
         /**
-         * O(1) (if do dist.remove(), it will be O(logn)
+         * O(1) (if do map.remove(), it will be O(logn)
          */
         public int pop() {
             int val = dll.pop();
@@ -235,6 +238,7 @@ public class LE_716_Max_Stack {
         Node prev, next;
         public Node(int v) {val = v;}
     }
+
 
     /**
      * Java solution beat 99.37%,

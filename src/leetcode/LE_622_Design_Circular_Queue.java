@@ -1,5 +1,6 @@
 package leetcode;
 
+import java.util.NoSuchElementException;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class LE_622_Design_Circular_Queue {
@@ -54,6 +55,11 @@ public class LE_622_Design_Circular_Queue {
             a = new int[k];
         }
 
+        /**
+         * enqueue puts new element at the end of the array, which rear pointer points to.
+         *
+         * rear pointer is where add() and offer() (Java Queue Interface) happen.
+         */
         public boolean enQueue(int val) {
             if (!isFull()) {
                 rear = (rear + 1) % a.length;
@@ -65,7 +71,12 @@ public class LE_622_Design_Circular_Queue {
             }
         }
 
-        /** Delete an element from the circular queue. Return true if the operation is successful. */
+        /**
+         * Delete an element from the circular queue. Return true if the operation is successful.
+         *
+         * With FIFO, deQueue() needs to delete element at the idx that front pointer points to.
+         * front pointers is the where peek() and poll() (Java Queue Interface) happen.
+         * */
         public boolean deQueue() {
             if (!isEmpty()) {
                 front = (front + 1) % a.length;
@@ -76,12 +87,28 @@ public class LE_622_Design_Circular_Queue {
             }
         }
 
+        /**
+         * Front here is the head of the queue
+         */
         public int Front() {
-            return isEmpty() ? -1 : a[front];
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            } else {
+                return a[front];
+            }
+//            return isEmpty() ? -1 : a[front];
         }
 
+        /**
+         * Rear here is the tail of the queue
+         */
         public int Rear() {
-            return isEmpty() ? -1 : a[rear];
+            if (isEmpty()) {
+                throw new NoSuchElementException();
+            } else {
+                return a[rear];
+            }
+//            return isEmpty() ? -1 : a[rear];
         }
 
         public boolean isEmpty() {
@@ -104,7 +131,6 @@ public class LE_622_Design_Circular_Queue {
     }
 
     class MyCircularQueue_LinkedList {
-
         private Node head, tail;
         private int count;
         private int capacity;
@@ -142,7 +168,8 @@ public class LE_622_Design_Circular_Queue {
         /** Get the front item from the queue. */
         public int Front() {
             if (this.count == 0) {
-                return -1;
+//                return -1;
+                throw new NoSuchElementException();
             } else {
                 return this.head.value;
             }
@@ -151,7 +178,8 @@ public class LE_622_Design_Circular_Queue {
         /** Get the last item from the queue. */
         public int Rear() {
             if (this.count == 0) {
-                return -1;
+//                return -1;
+                throw new NoSuchElementException();
             } else {
                 return this.tail.value;
             }
@@ -213,6 +241,7 @@ public class LE_622_Design_Circular_Queue {
             } finally {
                 queueLock.unlock();
             }
+
             return true;
         }
     }

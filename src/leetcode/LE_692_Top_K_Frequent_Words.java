@@ -124,6 +124,38 @@ public class LE_692_Top_K_Frequent_Words {
             /**
              * !!!
              * Comparator defined for sorting logic in pq
+             * min heap for frequency, if frequency is the same, reverse alphabetic order.
+             *
+             * For example:
+             * 5 -> c, b, a
+             * 4 -> d, e, f
+             * 3 -> g, h
+             *
+             * k = 4
+             *
+             * heap :
+             * In order that is popped from pq
+             * (3, h)
+             * (3, g)
+             * (4, f)
+             * (4, e)
+             * -------
+             * pq state before while loop:
+             * (4, d) top
+             * (5, c)
+             * (5, b)
+             * (5, a)
+             *
+             * Poll from pq, insert at index 0 !!!
+             *
+             * ((4, d))
+             *    ^
+             * ((5, c), (4, d))
+             *    ^
+             * ((5, b), (5, c), (4, d))
+             *    ^
+             * ((5, a), (5, b), (5, c), (4, d))
+             *    ^
              */
             PriorityQueue<Map.Entry<String, Integer>> pq =
                     new PriorityQueue<>((a, b) -> a.getValue() != b.getValue() ? a.getValue() - b.getValue() : b.getKey().compareTo(a.getKey()));
@@ -143,7 +175,8 @@ public class LE_692_Top_K_Frequent_Words {
                  * pq by default is min heap, requirement here is to put max freq first,
                  * therefore, add at index 0.
                  *
-                 * "pq.poll().getKey()"
+                 * 1."res.add(0,"
+                 * 2."pq.poll().getKey()"
                  */
                 res.add(0, pq.poll().getKey());
             }

@@ -55,6 +55,9 @@ public class LE_10_Regular_Expression_Matching {
          Output: false
 
          Hard
+
+         It's different from LE_44_Wildcards_Matching in that "'*' Matches zero or more of the preceding element",
+         '*' must be used with its proceeding char.
      */
 
     /**

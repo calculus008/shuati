@@ -5,7 +5,7 @@ import java.util.*;
 public class LE_675_Cut_Off_Trees_For_Golf_Event {
     /**
          You are asked to cut off trees in a forest for a golf event.
-         The forest is represented as a non-negative 2D dist, in this dist:
+         The forest is represented as a non-negative 2D array, in this array:
 
          0 represents the obstacle can't be reached.
          1 represents the ground can be walked through.
@@ -126,7 +126,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
 
         //find a path from start to end
         private int bfs(int x, int y, int x1, int y1) {
-            if(x == x1 && y == y1) return 0;
+            if (x == x1 && y == y1) return 0;
             int res = 0;
 
             Queue<int[]> queue = new LinkedList<>();
@@ -134,20 +134,20 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
             int[][] visited = new int[n][m];
             visited[x][y] = 1;
 
-            while(!queue.isEmpty()) {
+            while (!queue.isEmpty()) {
                 int size = queue.size();
                 res++;
 
-                for(int i=0; i<size; i++) {
+                for (int i = 0; i < size; i++) {
                     int[] cur = queue.poll();
-                    int cur_x = cur[0], cur_y=cur[1];
+                    int cur_x = cur[0], cur_y = cur[1];
 
-                    for(int j=0; j<4; j++) {
-                        int new_x = cur_x+dir[j][0];
-                        int new_y = cur_y+dir[j][1];
-                        if(new_x>=0 && new_x<n && new_y>=0 && new_y<m
-                                && f.get(new_x).get(new_y)>0 && visited[new_x][new_y]==0) {
-                            if(new_x==x1 && new_y==y1) return res;
+                    for (int j = 0; j < 4; j++) {
+                        int new_x = cur_x + dir[j][0];
+                        int new_y = cur_y + dir[j][1];
+                        if (new_x >= 0 && new_x < n && new_y >= 0 && new_y < m
+                                && f.get(new_x).get(new_y) > 0 && visited[new_x][new_y] == 0) {
+                            if (new_x == x1 && new_y == y1) return res;
                             visited[new_x][new_y] = 1;
                             queue.add(new int[]{new_x, new_y});
                         }
@@ -315,7 +315,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
 
             for (Tuple t : trees) {
                 /**
-                 * each time, destitnation or end is current t.
+                 * each time, destination or end is current t.
                  */
                 int steps = getSteps(f, start, t);
                 if (steps == -1) {
@@ -359,7 +359,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
                     /**
                      * 坑3
                      * !!!
-                     * 是在从队列里去除元素是判断是否到达重点
+                     * 是在从队列里去除元素是判断是否到达终点
                      * 判断坐标相等，不是值相等
                      */
                     if (cur.x == end.x && cur.y == end.y) {

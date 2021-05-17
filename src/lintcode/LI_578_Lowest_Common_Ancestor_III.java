@@ -36,61 +36,62 @@ public class LI_578_Lowest_Common_Ancestor_III {
      *   Solution 1
          Divide & Conquer + Global Variable（不需要 ResultType）
 
-         这题和 LCA 原题(LE_236_Lowest_Common_Ancestor_Of_BT) 的区别主要是要找的 A 和 B 可能并不存在树里。所以我们要做出这两个改变
+         这题和 LCA 原题(LE_236_Lowest_Common_Ancestor_Of_BT) 的区别主要是:
+         要找的 A 和 B 可能并不存在树里。所以我们要做出这两个改变
 
          用全局变量把 A 和 B 是否找到保存起来。最后在 main function 里面要查看是否都找到
-         当 root 等于 A 或者 B 时不能直接返回root了。原题可以直接返回是因为两个 node 是保证存在的所以这情况下 LCA 一定是 root。
+         当 root 等于 A 或者 B 时不能直接返回root了。原题可以直接返回是因为两个 node 是
+         保证存在的所以这情况下 LCA 一定是 root。
+
          现在 root 等于 A 或者 B 我们还是要继续往下找是否存在另外的一个
-         不用 ResultType 的一个好处是：如果面试的时候出了一个原题，然后问这题做 follow up。如果从头开始写 result type 代码改动会比较大
-         。一是比较容易写错，二是时间可能会不够。
+         不用 ResultType 的一个好处是：如果面试的时候出了一个原题，然后问这题做 follow up。
+         如果从头开始写 result type 代码改动会比较大。一是比较容易写错，二是时间可能会不够。
 
          这个方法只需要增加两个全局变量并且改动 LCA 原题的代码两行即可。
      */
+    class Solution1 {
+        boolean foundA = false;
+        boolean foundB = false;
 
-    boolean foundA = false;
-    boolean foundB = false;
-
-    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode A, TreeNode B) {
-        TreeNode res = helper(root, A, B);
-        if (foundA && foundB) {
-            return res;
-        }
-        return null;
-    }
-
-    public TreeNode helper(TreeNode root, TreeNode A, TreeNode B) {
-        if (root == null) {
-            return root;
-        }
-
-        /**
-         * 如果 root 是要找的，更新全局变量
-         **/
-        TreeNode left = helper(root.left, A, B);
-        TreeNode right = helper(root.right, A, B);
-
-        /**
-         * 如果 root 是要找的，更新全局变量
-         **/
-        if (root == A || root == B) {
-            foundA = foundA || (root == A);
-            foundB = foundB || (root == B);
-            return root;
-        }
-
-        /**
-         注意这种情况返回的时候是不保证两个都有找到的。
-         可以是只找到一个或者两个都找到
-         所以在最后上面要查看是不是两个都找到了
-         **/
-        if (left != null && right != null) {
-            return root;
-        } else if (left != null) {
-            return left;
-        } else if (right != null) {
-            return right;
-        } else {
+        public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode A, TreeNode B) {
+            TreeNode res = helper(root, A, B);
+            if (foundA && foundB) {
+                return res;
+            }
             return null;
+        }
+
+        public TreeNode helper(TreeNode root, TreeNode A, TreeNode B) {
+            if (root == null) {
+                return root;
+            }
+
+            TreeNode left = helper(root.left, A, B);
+            TreeNode right = helper(root.right, A, B);
+
+            /**
+             * 如果 root 是要找的，更新全局变量
+             **/
+            if (root == A || root == B) {
+                foundA = foundA || (root == A);
+                foundB = foundB || (root == B);
+                return root;
+            }
+
+            /**
+             注意这种情况返回的时候是不保证两个都有找到的。
+             可以是只找到一个或者两个都找到
+             所以在最后上面要查看是不是两个都找到了
+             **/
+            if (left != null && right != null) {
+                return root;
+            } else if (left != null) {
+                return left;
+            } else if (right != null) {
+                return right;
+            } else {
+                return null;
+            }
         }
     }
 
@@ -104,89 +105,93 @@ public class LI_578_Lowest_Common_Ancestor_III {
      * If we have found both, we can return without executing extra logic.
      *
      */
-    private TreeNode result;
+    class Solution2 {
+        private TreeNode result;
 
-    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode A, TreeNode B) {
-        helper(root, A, B);
-        return result;
-    }
-
-    private boolean helper2(TreeNode root, TreeNode A, TreeNode B) {
-        if (result != null) {
-            return false;
-        }
-        if (root == null) {
-            return false;
+        public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode A, TreeNode B) {
+            helper2(root, A, B);
+            return result;
         }
 
-        boolean left = helper2(root.left, A, B);
-        boolean right = helper2(root.right, A, B);
+        private boolean helper2(TreeNode root, TreeNode A, TreeNode B) {
+            if (result != null) {
+                return false;
+            }
+            if (root == null) {
+                return false;
+            }
 
-        if (left && right) {
-            result = root;
-            return false;
-        }
+            boolean left = helper2(root.left, A, B);
+            boolean right = helper2(root.right, A, B);
 
-        if (left || right) {
-            if (root == A || root == B) {
+            if (left && right) {
                 result = root;
                 return false;
             }
-            return true;
-        }
-        if (root == A && root == B) {
-            result = root;
+
+            if (left || right) {
+                if (root == A || root == B) {
+                    result = root;
+                    return false;
+                }
+                return true;
+            }
+            if (root == A && root == B) {
+                result = root;
+                return false;
+            }
+            if (root == A || root == B) {
+                return true;
+            }
             return false;
         }
-        if (root == A || root == B) {
-            return true;
-        }
-        return false;
     }
 
     /**
      * Solution 3
      * With ResultType
      */
+    class Solution3 {
+        class ResultType {
+            public boolean a_exist, b_exist;
+            public TreeNode node;
 
-    class ResultType {
-        public boolean a_exist, b_exist;
-        public TreeNode node;
-        ResultType(boolean a, boolean b, TreeNode n) {
-            a_exist = a;
-            b_exist = b;
-            node = n;
+            ResultType(boolean a, boolean b, TreeNode n) {
+                a_exist = a;
+                b_exist = b;
+                node = n;
+            }
         }
-    }
 
-    public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode A, TreeNode B) {
-        ResultType rt = helper3(root, A, B);
-        if (rt.a_exist && rt.b_exist)
-            return rt.node;
-        else
-            return null;
-    }
+        public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode A, TreeNode B) {
+            ResultType rt = helper3(root, A, B);
+            if (rt.a_exist && rt.b_exist)
+                return rt.node;
+            else
+                return null;
+        }
 
-    public ResultType helper3(TreeNode root, TreeNode A, TreeNode B) {
-        if (root == null)
-            return new ResultType(false, false, null);
+        public ResultType helper3(TreeNode root, TreeNode A, TreeNode B) {
+            if (root == null)
+                return new ResultType(false, false, null);
 
-        ResultType left_rt = helper3(root.left, A, B);
-        ResultType right_rt = helper3(root.right, A, B);
+            ResultType left_rt = helper3(root.left, A, B);
+            ResultType right_rt = helper3(root.right, A, B);
 
-        boolean a_exist = left_rt.a_exist || right_rt.a_exist || root == A;
-        boolean b_exist = left_rt.b_exist || right_rt.b_exist || root == B;
+            boolean a_exist = left_rt.a_exist || right_rt.a_exist || root == A;
+            boolean b_exist = left_rt.b_exist || right_rt.b_exist || root == B;
 
-        if (root == A || root == B)
-            return new ResultType(a_exist, b_exist, root);
+            if (root == A || root == B)
+                return new ResultType(a_exist, b_exist, root);
 
-        if (left_rt.node != null && right_rt.node != null)
-            return new ResultType(a_exist, b_exist, root);
-        if (left_rt.node != null)
-            return new ResultType(a_exist, b_exist, left_rt.node);
-        if (right_rt.node != null)
-            return new ResultType(a_exist, b_exist, right_rt.node);
+            if (left_rt.node != null && right_rt.node != null)
+                return new ResultType(a_exist, b_exist, root);
+            if (left_rt.node != null)
+                return new ResultType(a_exist, b_exist, left_rt.node);
+            if (right_rt.node != null)
+                return new ResultType(a_exist, b_exist, right_rt.node);
 
-        return new ResultType(a_exist, b_exist, null);
+            return new ResultType(a_exist, b_exist, null);
+        }
     }
 }

@@ -47,8 +47,15 @@ public class LE_281_Zigzag_Iterator {
 
         public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
             list = new LinkedList<>();
-            if (!v1.isEmpty()) list.add(v1.iterator()); //!!!"v1.iterator()"
-            if (!v2.isEmpty()) list.add(v2.iterator());
+            /**
+             * !!!
+             * Check both v1 != null and !v2.isEmpty().
+             * This garauntees the list has at least one element,
+             * therefore in next(), calling cur.next() for the first time
+             * will not run into exception.
+             */
+            if (v1 != null && !v1.isEmpty()) list.add(v1.iterator());
+            if (v2 != null && !v2.isEmpty()) list.add(v2.iterator());
         }
 
         /**

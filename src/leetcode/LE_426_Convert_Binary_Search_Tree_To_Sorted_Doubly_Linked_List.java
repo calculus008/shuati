@@ -17,6 +17,43 @@ public class LE_426_Convert_Binary_Search_Tree_To_Sorted_Doubly_Linked_List {
      *
      * https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/
      */
+
+    class Solution1_Practice {
+        TreeNode head;
+        TreeNode tail;
+
+        public TreeNode treeToDoublyList(TreeNode root) {
+            if (root == null) {
+                return null;
+            }
+
+            helper(root);
+
+            head.left = tail;
+            tail.right = head;
+
+            return head;
+        }
+
+        private void helper(TreeNode node) {
+            if (node == null) return;
+
+            helper(node.left);
+
+            if (tail != null) {
+                tail.right = node;
+                node.left = tail;
+            } else {
+                head = node;
+            }
+
+            tail = node;//!!!
+
+            helper(node.right);
+        }
+
+    }
+
     /**
      * Recursion
      * https://leetcode.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/solution/

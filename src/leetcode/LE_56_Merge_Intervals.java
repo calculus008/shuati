@@ -1,11 +1,8 @@
 package leetcode;
 
-import sun.jvm.hotspot.utilities.Interval;
+import common.Interval;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yuank on 3/3/18.
@@ -176,6 +173,42 @@ public class LE_56_Merge_Intervals {
             res.add(new Interval(start, end));
 
             return res;
+        }
+    }
+
+    class Solution_Variation {
+        /**
+         * Variation
+         * Given list of intervals, require to operate on the input list so we use no extra space.
+         *
+         * What it tries to test is if you know how to use Iterator. We can't use for loop with index
+         * because once we delete an item from list, the size of the list will be changed and the index
+         * for the next item will not be the same as the one before the delete action.
+         *
+         * So we must use iterator.remove(), which removes from the underlying collection the last element
+         * returned by this iterator, then we can still go to the next item correctly.
+         */
+        public List<common.Interval> merge1(List<common.Interval> intervals) {
+            if (intervals == null || intervals.size() == 0) {
+                return new ArrayList<>();
+            }
+
+            Collections.sort(intervals, (a, b) -> a.start - b.start);
+
+            common.Interval last = null;
+            Iterator<common.Interval> it = intervals.iterator();
+
+            while (it.hasNext()) {
+                common.Interval cur = it.next();
+                if (last == null || last.end < cur.start) {
+                    last = cur;
+                } else {
+                    last.end = Math.max(last.end, cur.end);
+                    it.remove();
+                }
+            }
+
+            return intervals;
         }
     }
 

@@ -35,42 +35,46 @@ public class LE_94_Binary_Tree_Inorder_Traversal {
 
     //Recursive version
     //Time and Space : O(n)
-    public static List<Integer> inorderTraversal1(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        if (root == null) return res;
-        helper(root, res);
-        return res;
-    }
+    class Solution_DFS {
+        public List<Integer> inorderTraversal1(TreeNode root) {
+            List<Integer> res = new ArrayList<>();
+            if (root == null) return res;
+            helper(root, res);
+            return res;
+        }
 
-    public static void helper(TreeNode root, List<Integer> res) {
-        if (root == null) return;
-        helper(root.left, res);
-        res.add(root.val);
-        helper(root.right, res);
+        public void helper(TreeNode root, List<Integer> res) {
+            if (root == null) return;
+            helper(root.left, res);
+            res.add(root.val);
+            helper(root.right, res);
+        }
     }
 
     //Iterative Version
     //Time and Space : O(n)
-    public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        if (root == null) return res;
+    class Solution_BFS {
+        public List<Integer> inorderTraversal(TreeNode root) {
+            List<Integer> res = new ArrayList<>();
+            if (root == null) return res;
 
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode cur = root;
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode cur = root;
 
-        //while 之前，不push
-        //"||", NOT "&&"
-        while (cur != null || !stack.isEmpty()) {
-            while (cur != null) {
-                //push cur, not cur.left
-                stack.push(cur);
-                cur = cur.left;
+            //while 之前，不push
+            //"||", NOT "&&"
+            while (cur != null || !stack.isEmpty()) {
+                while (cur != null) {
+                    //push cur, not cur.left
+                    stack.push(cur);
+                    cur = cur.left;
+                }
+                cur = stack.pop();
+                res.add(cur.val);
+                cur = cur.right;
             }
-            cur = stack.pop();
-            res.add(cur.val);
-            cur = cur.right;
-        }
 
-        return res;
+            return res;
+        }
     }
 }

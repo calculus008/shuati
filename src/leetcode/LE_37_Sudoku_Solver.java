@@ -14,6 +14,47 @@ public class LE_37_Sudoku_Solver {
      *     Hard
      */
 
+    class Solution1_Practice {
+        public void solveSudoku(char[][] board) {
+            if (board == null || board.length == 0) return;
+            helper(board);
+        }
+
+        private boolean helper(char[][] board) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (board[i][j] == '.') {
+                        for (char c = '1'; c <= '9'; c++) {
+                            if (isValid(board, i, j, c)) {
+                                board[i][j] = c;
+                                if (helper(board)) {
+                                    return true;
+                                } else {
+                                    board[i][j] = '.';
+                                }
+                            }
+                        }
+                        return false;//!!! FALSE !!! #1
+                    }
+                }
+            }
+            return true;//!!! TRUE !!! #2
+        }
+
+        private boolean isValid(char[][] board, int row, int col, char c) {
+            for (int i = 0; i < 9; i++) {
+                if (board[row][i] != '.' && board[row][i] == c) return false;//!!! "board[row][i] != '.'" #3
+                if (board[i][col] != '.' && board[i][col] == c) return false;
+
+                int x = 3 * (row / 3) + i / 3;//!!! i / 3 #4
+                int y = 3 * (col / 3) + i % 3;//!!! i % 3 #5
+                if (board[x][y] != '.' && board[x][y] == c) return false;
+            }
+
+            return true;
+        }
+    }
+
     class Solution1 {
         public void solveSudoku(char[][] board) {
             if (board == null || board.length == 0) return;
@@ -24,7 +65,7 @@ public class LE_37_Sudoku_Solver {
             for (int i = 0; i < board.length; i++) {
                 for (int j = 0; j < board[0].length; j++) {
                     /**
-                     * if current cel is already filled
+                     * if current cel is not yet filled with a number
                      */
                     if (board[i][j] == '.') {
                         for (char c = '1'; c <= '9'; c++) {
@@ -34,7 +75,7 @@ public class LE_37_Sudoku_Solver {
                                 board[i][j] = c;
                                 if (helper(board)) {
                                     return true;
-                                } else {
+                                } else {//backtrack
                                     board[i][j] = '.';
                                 }
                             }
@@ -51,7 +92,7 @@ public class LE_37_Sudoku_Solver {
 
             /**
              * reaching here, meaning there's no empty cell in board. All cells are filled with
-             * valid number, therefore return true here.
+             * valid number, therefore return true here. This is actually the base case here.
              */
             return true;
         }

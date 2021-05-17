@@ -67,6 +67,13 @@ public class LE_1002_Find_Common_Characters {
                 List<Pair> l = map.get(key);
 
                 if (l.size() == n) {
+                    /**
+                     * !!!
+                     * If one character appears multiple times in each word,
+                     * then we only add the number of the min among all counts.
+                     * This satisfies the requirement we only add char that shows
+                     * in all words.
+                     */
                     int min = Integer.MAX_VALUE;
                     for (Pair p : l) {
                         min = Math.min(min, p.count);

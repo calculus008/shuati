@@ -7,7 +7,7 @@ public class LE_245_Shortest_Word_Distance_III {
     /**
         This is a follow up of Shortest Word Distance(LE_243). The only difference is now word1 could be the same as word2.
 
-        Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+        Given a list of words and two words word1 and word2, return the shortest dirs between these two words in the list.
 
         word1 and word2 may be the same and they represent two individual words in the list.
 
@@ -52,7 +52,7 @@ public class LE_245_Shortest_Word_Distance_III {
             if (words[i].equals(word2)) {
                 /**
                  * For case that word1 and word2 are the same :
-                 * 1.Can only calculate distance if we see the word at least two times
+                 * 1.Can only calculate dirs if we see the word at least two times
                  * 2.Always do calculation for 2 adjacent indexes. Therefore, "a" need to
                  *   take the value of "b" here.
                  */

@@ -53,9 +53,17 @@ public class LE_348_Design_Tic_Tac_Toe {
          |X|X|X|
 
          Follow up:
-         Could you do better than O(n2) per move() operation?
+         Could you do better than O(n ^ 2) per move() operation?
 
          Medium
+     */
+
+
+    /**
+     * Related:
+     * LE_348_Design_Tic_Tac_Toe
+     * LE_794_Valid_Tic_Tac_Toe_State
+     * LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
      */
 
     /**
@@ -68,17 +76,32 @@ public class LE_348_Design_Tic_Tac_Toe {
          To keep track of which player, I add one for Player1 and -1 for Player2.
          There are two additional variables to keep track of the count of the diagonals.
          Each time a player places a piece we just need to check the count of that row, column, diagonal and anti-diagonal.
+
+         This algo has a limitation for this problem, it cannot tell whether it is a valid move or not because it
+         does not save the points history. potentially the player can keep move on the same spot. But the question
+         itself kinda guarantees that assumption, even though it is not a 'good' assumption to follow.
      */
+
+
+    /**
+     * Related:
+     * LE_348_Design_Tic_Tac_Toe                      Design data structure, give one move, check if there's a winner
+     * LE_794_Valid_Tic_Tac_Toe_State                 Given a board, check if the board is in a correct state.
+     * LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game      Given sequence of moves in array, check if there's a winner
+     */
+
     class TicTacToe {
         int[] rows;
         int[] cols;
         int diagnal;
         int antiDiagnal;
+        int n;
 
         /** Initialize your data structure here. */
         public TicTacToe(int n) {
             rows = new int[n];
             cols = new int[n];
+            this.n = n;
         }
 
         /** Player {player} makes a move at ({row}, {col}).
@@ -99,7 +122,7 @@ public class LE_348_Design_Tic_Tac_Toe {
                 diagnal += toAdd;
             }
 
-            if ((cols.length - row - 1) == col) {
+            if ((row + col) == (cols.length - 1)) {
                 antiDiagnal += toAdd;
             }
 
@@ -110,6 +133,78 @@ public class LE_348_Design_Tic_Tac_Toe {
             }
 
             return 0;
+        }
+
+        /**
+         * The version without using Math.abs()
+         */
+        public int move1(int row, int col, int player) {
+            int val = (player == 1) ? 1 : -1;
+            int target = (player == 1) ? n : -n;
+
+            if(row == col) { // diagonal
+                diagnal += val;
+                if(diagnal == target) return player;
+            }
+
+            if(row + col == n - 1) { // diagonal
+                antiDiagnal += val;
+                if(antiDiagnal == target) return player;
+            }
+
+            rows[row] += val;
+            cols[col] += val;
+
+            if(rows[row] == target || cols[col] == target) return player;
+
+            return 0;
+        }
+    }
+
+    /**
+     * Follow up : extended to board size of m (m >= 3)
+     *
+     * Inspired by LE_52_N_Queens_II.
+     *
+     * Use four arrays to maintain the current status of the board,
+     * whenever the count of one player equals to N, then he wins.
+     * And I also use the index to map to different users.
+     * (0 - nobody, 1 - palyer1, 2 -player2)
+     */
+    class TicTacToe_FollowUp {
+        private int[][] rows;
+        private int[][] cols;
+        private int[][] diags;
+        private int[][] adiags;
+        private int n; //target
+        private int m; //board size
+
+        public TicTacToe_FollowUp(int n, int m) {
+            rows = new int[m][3];
+            cols = new int[m][3];
+            diags = new int[2 * m][3];
+            adiags = new int[2 * m][3];
+            this.n = n;
+            this.m = m;
+        }
+
+        public int move(int row, int col, int player) {
+            rows[row][player] += 1;
+            cols[col][player] += 1;
+
+            /**
+             * Track diagnal and anti diagnal index:
+             * "row + col"
+             * "row - col + m"
+             */
+            diags[row + col][player] += 1;
+            adiags[row - col + m][player] += 1;
+
+            if (rows[row][player] == n || cols[col][player] == n || diags[row + col][player] == n || adiags[row - col + n][player] == n) {
+                return player;
+            } else {
+                return 0;
+            }
         }
     }
 }

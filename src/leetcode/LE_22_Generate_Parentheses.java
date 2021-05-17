@@ -29,6 +29,14 @@ public class LE_22_Generate_Parentheses {
      * Time  : O(n!)
      * Space : O(n)
      *
+     * Another theory:
+     * This analysis is outside the scope of this article, but it turns out this is the n-th Catalan number.
+     * which is bounded asymptotically by : 4 ^ n / n * sqrt(n)
+     *
+     * Time  : O(4 ^ n / sqrt(n))  Each valid sequence has at most n steps during the backtracking procedure.
+     * Space : O(4 ^ n / sqrt(n))
+     *
+     *
      * StringBuilder solution
      **/
     class Solution1 {

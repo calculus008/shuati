@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by yuank on 4/10/18.
@@ -20,7 +17,9 @@ public class LE_251_Flatten_2D_Vector {
           [3],
           [4,5,6]
         ]
-        By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,2,3,4,5,6].
+     
+        By calling next repeatedly until hasNext returns false, the order of elements returned
+        by next should be: [1,2,3,4,5,6].
 
         Follow up:
         As an added challenge, try to code it using only iterators in C++ or iterators in Java.
@@ -40,6 +39,90 @@ public class LE_251_Flatten_2D_Vector {
      * Integers
      *
      */
+
+    class Vector2D_Two_Pointers {
+        int idxRow;
+        int idxCol;
+        int[][] nums;
+
+        public Vector2D_Two_Pointers(int[][] v) {
+            nums = v;
+            idxRow = 0;
+            idxCol = 0;
+        }
+
+        public int next() {
+            /**
+             * A better way for handling no element case, throw exception instead of returning any value.
+             */
+            if (!hasNext()) throw new NoSuchElementException();;
+
+            return nums[idxRow][idxCol++];
+        }
+
+        public boolean hasNext() {
+            /**
+             * "idxRow < nums.length" must be in the first place, because the 2nd check uses idxRow value.
+             *
+             * "idxCol == nums[idxRow].length" : deals with case that we get to the end of current array, this
+             *                                   includes the case of empty array.
+             */
+            while (idxRow < nums.length && idxCol == nums[idxRow].length ) {
+                idxRow++;
+                idxCol = 0;
+            }
+
+            return idxRow < nums.length;
+        }
+    }
+
+
+    public class Vector2D_Iterator implements Iterator<Integer> {
+        private Iterator<List<Integer>> row_itr;
+        private Iterator<Integer> col_itr;
+
+        public Vector2D_Iterator(List<List<Integer>> vec2d) {
+            row_itr = vec2d.iterator();
+
+            /**
+             * if row_itr doesn't have next, it means vec2d is empty,
+             * in this case, col_itr won't get initialized
+             * **/
+            if(row_itr.hasNext()) {
+                col_itr = row_itr.next().iterator();
+            }
+        }
+
+        public Integer next() {
+            /**
+             * !!!
+             * we won't call next() unless we are sure that hasNext() is true, meaning col_itr.hasNext() is true
+             **/
+            return col_itr.next();
+        }
+
+        public boolean hasNext() {
+            /**
+             * !!!
+             * check whether vec2d is empty, if it is empty, col_itr won't be initialized (see logic in constructor)
+             **/
+            if (col_itr == null) return false;
+
+            /**
+             * important!!! we do update here in hasNext(),
+             * update col_itr and row_itr until col_itr.hasNext() or row_itr.hasNext() is false
+             * **/
+            while (!col_itr.hasNext() && row_itr.hasNext()) {
+                col_itr = row_itr.next().iterator();
+            }
+
+            return col_itr.hasNext();
+        }
+    }
+
+
+
+
     //Solution 1 : Use Iterator
     public class Vector2D1 implements Iterator<Integer> {
         Queue<Iterator> queue;

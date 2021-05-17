@@ -61,18 +61,26 @@ public class LE_1074_Number_Of_Submatrices_That_Sum_To_Target {
     /**
      * https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/discuss/303750/JavaC%2B%2BPython-Find-the-Subarray-with-Target-Sum
      *
-     * Time  : O(MN^2)
+     * Time  : O(M * N ^ 2)
      * Space : O(N)
      *
+     * For each row, calculate the prefix sum.
+     * For each pair of columns, calculate the accumulated sum of rows.
+     * Now this problem is same to, "Find the Subarray with Target Sum".
      *
+     * Brutal Force solution will try each submatrics, it costs O(M ^ 2 * N ^ 2).
+     * We use prefix-sum technique to lower the time complexity to O(M * N ^ 2)
      */
     class Solution {
         public int numSubmatrixSumTarget(int[][] matrix, int target) {
             int m = matrix.length;
             int n = matrix[0].length;
 
-            int[][] A = matrix.clone();
+            int[][] A = matrix.clone();//!!!
 
+            /**
+             * calculate prefix-sum for each row
+             */
             for (int i = 0; i < m; i++) {
                 for (int j = 1; j < n; j++) {
                     A[i][j] += A[i][j - 1];
@@ -80,12 +88,27 @@ public class LE_1074_Number_Of_Submatrices_That_Sum_To_Target {
             }
 
             int res = 0;
+
+            /**
+             * Double "for" loops go through each pair of columns (start column and end column of a possible submatrics)
+             */
             for (int i = 0; i < n; i++) {
                 for (int j = i; j < n; j++) {
+                    /**
+                     * Convert to two-sum procedure, we can think
+                     * "A[k][j] - (i > 0 ? A[k][i - 1] : 0)" as getting a value in a 1D array in vertical.
+                     *
+                     * Here we want to get number of submatrics with target sum,
+                     * not sum itself, use map to count the frequency of submatrics
+                     * that meet requirements.
+                     */
                     Map<Integer, Integer> map = new HashMap<>();
                     map.put(0, 1);
                     int cur = 0;
 
+                    /**
+                     * Given column range, inner loop goes through each row.
+                     */
                     for (int k = 0; k < m; k++) {
                         cur += A[k][j] - (i > 0 ? A[k][i - 1] : 0);
                         res += map.getOrDefault(cur - target, 0);

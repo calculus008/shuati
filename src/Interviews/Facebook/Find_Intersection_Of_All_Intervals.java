@@ -1,4 +1,4 @@
-package src.Interviews.Facebook;
+package Interviews.Facebook;
 
 public class Find_Intersection_Of_All_Intervals {
     /**

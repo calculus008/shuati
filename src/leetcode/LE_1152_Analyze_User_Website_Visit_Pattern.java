@@ -59,7 +59,9 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
         int n = timestamp.length;
 
         /**
-         * 1. Sort sessions list by time, can not use dist ,because web will be duplicated
+         * 1. Sort sessions list by time, can not use map, because website may be duplicated.
+         *    so-called "3-subsequences" is a sequence by time. We need to sort combine all
+         *    info together to form session and sort session by timestamp.
          */
         List<List<String>> sessions =  new ArrayList<>();
         for (int i = 0; i < n; i++){
@@ -68,10 +70,16 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
             sessions.get(i).add(""+timestamp[i]);
             sessions.get(i).add(website[i]);
         }
-        sessions.sort((a, b)-> Integer.parseInt(a.get(1)) - Integer.parseInt(b.get(1)));
+        sessions.sort((a, b)-> Integer.parseInt(a.get(1)) - Integer.parseInt(b.get(1)));//sort by time
 
         /**
          * 2. add each person visited list;
+         * visited:
+         * username -> website visited
+         *
+         * "3-subsequences" frequency is per user based. We need to get the website visted history list
+         * for each user.
+         *
          */
         Map<String, List<String>> visited = new HashMap<>();//(name, list<web>)
         for (int i = 0; i < n; i++){
@@ -80,9 +88,9 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
         }
 
         /**
-         * 3. find each user list and build all 3-subsequences and count by dist, and get maxCount;
+         * 3. find each user's visited website list, build all "3-subsequences", count frequency and get maxCount;
          */
-        Map<String, Integer> sequence = new HashMap<>();//(sequence, count)
+        Map<String, Integer> sequence = new HashMap<>();//(sequence, count), map used to count frequency of each "3-subsequences"
         int maxCount = 0;
         String maxseq = "";
 
@@ -91,7 +99,7 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
             if(list.size() < 3) continue;
 
             /**
-             * build users' all 3-sequences, use set in case duplicated 3-sequences
+             * build users' all 3-sequences, use set to dedup 3-sequences
              **/
             Set<String> subseqences = subseqence(list);
             for (String seq : subseqences){
@@ -100,7 +108,10 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
                 if(sequence.get(seq) > maxCount){
                     maxCount = sequence.get(seq);
                     maxseq = seq;
-                } else if (sequence.get(seq) == maxCount && seq.compareTo(maxseq) < 0) {//alphabetic order
+                } else if (sequence.get(seq) == maxCount && seq.compareTo(maxseq) < 0) {
+                    /**
+                     * if count is the same, make sure the alphabetic smaller one is in the front.
+                     */
                     maxseq = seq;
                 }
             }
@@ -108,18 +119,20 @@ public class LE_1152_Analyze_User_Website_Visit_Pattern {
 
         String[] strs = maxseq.split(",");
         List<String> res = new ArrayList<>();
-        for (String s : strs) res.add(s);
+        for (String s : strs) {
+            res.add(s);
+        }
         return res;
     }
 
-    public Set<String> subseqence(List<String> list){
+    public Set<String> subseqence(List<String> list) {
         int n = list.size();
         Set<String> res = new HashSet<>();
 
-        for (int i = 0; i < n-2; i++){
-            for (int j = i+1; j < n-1; j++){
-                for (int k = j+1; k < n; k++){
-                    res.add(list.get(i)+","+list.get(j)+","+list.get(k));
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = i + 1; j < n - 1; j++) {
+                for (int k = j + 1; k < n; k++) {
+                    res.add(list.get(i) + "," + list.get(j) + "," + list.get(k));
                 }
             }
         }

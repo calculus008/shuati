@@ -15,6 +15,43 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
      */
 
     /**
+     * Solution 3
+     * Same Sliding window algorithm, use int[] as map and iterate through char array "chars",
+     * fasted running time on lintcode
+     */
+    public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        if (s == null || s.length() == 0) return 0;
+
+        int res = Integer.MIN_VALUE;
+        int[] map = new int[256];
+        int count = 0;
+        char[] chars = s.toCharArray();
+
+        for (int i = 0, j = 0; i < chars.length; i++) {
+            if (map[chars[i]] == 0) {
+                count++;
+            }
+            map[chars[i]]++;
+
+            while (count > k) {
+                map[chars[j]]--;
+                if (map[chars[j]] == 0) {
+                    count--;
+                }
+                /**
+                 * !!!
+                 * 最后才对j加一。因为上面的logic要reference当前的j值。
+                 */
+                j++;
+            }
+
+            res = Math.max(res, i - j + 1);
+        }
+
+        return res;
+    }
+
+    /**
      * Sliding Window, Same as LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
      **/
     public int lengthOfLongestSubstringKDistinct1(String s, int k) {
@@ -73,43 +110,6 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
                 } else {
                     map.put(c1, val);
                 }
-            }
-
-            res = Math.max(res, i - j + 1);
-        }
-
-        return res;
-    }
-
-    /**
-     * Solution 3
-     * Same Sliding window algorithm, use int[] as dist and iterate through char array "chars",
-     * fasted running time on lintcode
-     */
-    public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        if (s == null || s.length() == 0) return 0;
-
-        int res = Integer.MIN_VALUE;
-        int[] map = new int[256];
-        int count = 0;
-        char[] chars = s.toCharArray();
-
-        for (int i = 0, j = 0; i < chars.length; i++) {
-            if (map[chars[i]] == 0) {
-                count++;
-            }
-            map[chars[i]]++;
-
-            while (count > k) {
-                map[chars[j]]--;
-                if (map[chars[j]] == 0) {
-                    count--;
-                }
-                /**
-                 * !!!
-                 * 最后才对j加一。因为上面的logic要reference当前的j值。
-                 */
-                j++;
             }
 
             res = Math.max(res, i - j + 1);

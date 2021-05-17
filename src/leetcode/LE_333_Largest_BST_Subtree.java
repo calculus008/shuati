@@ -44,11 +44,14 @@ public class LE_333_Largest_BST_Subtree {
         int size;
         /**
          * upper and lower bound are used to tell if it is BST
+         *
+         * !!!
+         * Use long to deal with case that node value is Integer.MAX_VALUE or Integer.MIN_VALUE
          */
-        int lower;
-        int upper;
+        long lower;
+        long upper;
 
-        public SearchNode(int size, int lower, int upper) {
+        public SearchNode(int size, long lower, long upper) {
             this.size = size;
             this.lower = lower;
             this.upper = upper;
@@ -73,7 +76,7 @@ public class LE_333_Largest_BST_Subtree {
              * Postorder
              * Bottom up, so this is the starting point (0, max, min)
              */
-            return new SearchNode(0, Integer.MAX_VALUE, Integer.MIN_VALUE);
+            return new SearchNode(0, Long.MAX_VALUE, Long.MIN_VALUE);
         }
 
         SearchNode left = helper(root.left);
@@ -91,6 +94,7 @@ public class LE_333_Largest_BST_Subtree {
                 Math.min(root.val, left.lower),
                 Math.max(root.val, right.upper)
         );
+
         res = Math.max(res, cur.size);
 
         return cur;

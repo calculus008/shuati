@@ -51,13 +51,27 @@ public class LE_886_Possible_Bipartition {
      */
     class SolutionDFS_With_AdjacentList {
         ArrayList<Integer>[] graph;
+
+        /**
+         * person Id -> color Id
+         */
         Map<Integer, Integer> color;
 
         public boolean possibleBipartition(int N, int[][] dislikes) {
             graph = new ArrayList[N + 1];
-            for (int i = 1; i <= N; ++i)
+            for (int i = 1; i <= N; ++i) {//person id is 1-based
                 graph[i] = new ArrayList();
+            }
 
+            /**
+             * A person's "neighbours" are those people that he dislikes,
+             * so we want to see if this person and his "neighbours" can
+             * be divided with Bipartition process.
+             *
+             * !!!
+             * This is an undirected graph, so we need to add two edges for
+             * each dislike relationship.
+             */
             for (int[] edge : dislikes) {
                 graph[edge[0]].add(edge[1]);
                 graph[edge[1]].add(edge[0]);
@@ -65,7 +79,7 @@ public class LE_886_Possible_Bipartition {
 
             color = new HashMap();
             for (int node = 1; node <= N; ++node) {
-                if (!color.containsKey(node) && !dfs(node, 0)) {
+                if (!color.containsKey(node) && !dfs(node, 1)) {
                     return false;
                 }
             }
@@ -77,10 +91,10 @@ public class LE_886_Possible_Bipartition {
                 return color.get(node) == c;
             }
 
-            color.put(node, c ^ 1);
+            color.put(node, c);
 
             for (int nei : graph[node]) {
-                if (!dfs(nei, c )) {
+                if (!dfs(nei, -c)) {
                     return false;
                 }
             }

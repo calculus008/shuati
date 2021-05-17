@@ -15,7 +15,7 @@ public class LE_133_Clone_Graph {
     /**
      * Solution 1: DFS
      *
-     * dist (!!!)
+     * Map (!!!)
      * key : current node
      * value : new copied node
      *
@@ -60,7 +60,7 @@ public class LE_133_Clone_Graph {
     }
 
     /**
-     * Solution 4, same as Solution 3, only difference is to use label as key in dist (since the question guaranteed
+     * Solution 4, same as Solution 3, only difference is to use label as key in map (since the question guaranteed
      * label is unique)
      *   BFS + HashMap
      Time : O(nm)，Space : O(n)

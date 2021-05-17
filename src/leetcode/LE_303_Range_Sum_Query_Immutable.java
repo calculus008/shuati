@@ -20,12 +20,35 @@ public class LE_303_Range_Sum_Query_Immutable {
          Easy
      */
 
-    //Time and Space : O(n);
+    /**
+     *Time : O(1) time per query, O(n)time pre-computation.
+     *       Since the cumulative sum is cached, each sumRange query can be calculated in O(1)time.
+     *Space : O(n)
+     **/
     class NumArray {
         int[] sums;
 
-        //O(n)
         public NumArray(int[] nums) {
+            sums = new int[nums.length + 1];
+            for (int i = 0; i < nums.length; i++) {
+                sums[i + 1] = sums[i] + nums[i];
+            }
+        }
+
+        public int sumRange(int i, int j) {
+            int min = Math.min(i, j);
+            int max = Math.max(i, j);
+
+            return sums[max + 1] - sums[min];
+        }
+    }
+
+
+    class NumArray1 {
+        int[] sums;
+
+        //O(n)
+        public NumArray1(int[] nums) {
             sums = new int[nums.length];
             int sum = 0;
             for (int i = 0; i < nums.length; i++) {
@@ -42,20 +65,22 @@ public class LE_303_Range_Sum_Query_Immutable {
         }
     }
 
-    class NumArray1 {
-        private int[] sums;
+    /**
+     * we inserted a dummy 0 as the first element in the sum array.
+     * This trick saves us from an extra conditional check in sumRange function.
+     */
+    class NumArray2 {
+        private int[] sum;
 
-        public NumArray1(int[] nums) {
-            for(int i=1; i<nums.length; i++) {
-                nums[i] = nums[i-1] + nums[i];
+        public NumArray2(int[] nums) {
+            sum = new int[nums.length + 1];
+            for (int i = 0; i < nums.length; i++) {
+                sum[i + 1] = sum[i] + nums[i];
             }
-
-            sums = nums;
         }
 
         public int sumRange(int i, int j) {
-            if(i==0) return sums[j];
-            return sums[j] - sums[i-1];
+            return sum[j + 1] - sum[i];
         }
     }
 }

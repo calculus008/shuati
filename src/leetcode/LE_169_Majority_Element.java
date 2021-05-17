@@ -6,10 +6,15 @@ import java.util.Arrays;
  * Created by yuank on 3/20/18.
  */
 public class LE_169_Majority_Element {
-    /*
-        Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+    /**
+        Given an array of size n, find the majority element. The majority element is the element
+        that appears more than ⌊ n/2 ⌋ times.
 
         You may assume that the array is non-empty and the majority element always exist in the array.
+
+        Possible follow up:
+        If we don't know if there's majority element in array?
+        See Majority_Element
      */
 
     //Time : O(n), Space : O(1)

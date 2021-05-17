@@ -189,15 +189,34 @@ public class LE_224_Basic_Calculator {
 
             Deque<Character> q = new ArrayDeque<>();
             for (char c : s.toCharArray()) {
+                /**
+                 * !!! filter out spaces
+                 */
                 if (c != ' ') {
                     q.offer(c);
                 }
             }
 
+            /**
+             * !!!
+             * signal the end of calculation, for example: 1 + 2 + 3,
+             * without the last '#', the logic will miss adding the last number.
+             */
             q.offer('#');
             return helper(q);
         }
 
+        /**
+         * !!!
+         * Since we only have '+','-','(',')', we don't need 'pre' here.
+         * 'pre' is for case we have '*' and '/', which we need to back track to previous operand.
+         *
+         * Here, instead of considering calculating two operands with one operator, we have a fixed
+         * operand - 'sum'. We just add a positive or negative number to sum.
+         *
+         * If current char is not number or '(' (marking the start of a recursion), it signals that
+         * current number extraction is done, then we just need to add it to sum.
+         */
         private int helper(Deque<Character> q) {
             int sum = 0, pre = 0, cur = 0;
             char preOp = '+';
@@ -211,11 +230,13 @@ public class LE_224_Basic_Calculator {
                     cur = helper(q);
                 } else {
                     if (preOp == '+') {
-                        sum += pre;
-                        pre = cur;
+//                        sum += pre;
+//                        pre = cur;
+                        sum += cur;
                     } else if (preOp == '-') {
-                        sum += pre;
-                        pre = -cur;
+//                        sum += pre;
+//                        pre = -cur;
+                        sum -= cur;
                     }
 
                     if (c == ')') break;
@@ -225,7 +246,8 @@ public class LE_224_Basic_Calculator {
                 }
             }
 
-            return sum + pre;
+//            return sum + pre;
+            return sum;
         }
     }
 }

@@ -26,9 +26,9 @@ public class LE_593_Valid_Square {
 
     /**
      * For any 4 points, there are 6 distances, calculate all it,
-     * use HashMap to get frequency of the distance values.
+     * use HashMap to get frequency of the dirs values.
      *
-     * For square, there are only two values in HashMap and diagonal distance (max)
+     * For square, there are only two values in HashMap and diagonal dirs (max)
      * has frequency of 2.
      */
     class Solution {

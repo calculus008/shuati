@@ -30,7 +30,7 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
         int res = 0;
 
         /**
-         * dist stores char and the index that the char appeared last time
+         * map stores char and the index that the char appeared last time
          */
         Map<Character, Integer> map = new HashMap<>();
 
@@ -46,7 +46,7 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
 
             /**
              *
-             * 1."(dist.size() > 2" :
+             * 1."(map.size() > 2" :
              *    condition to tell if current window is still valid
              *
              * current sliding window moves out of its max position
@@ -55,13 +55,13 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
              * removing the char which last appearance is the left most among
              * all chars in the dist.
              *
-             * 2.since "dist.size() <= 2" is the condition to do dist.put(),
-             *  dist.size() > 2 will happen.
+             * 2.since "map.size() <= 2" is the condition to do dist.put(),
+             *  map.size() > 2 will happen.
              *
              **/
             if (map.size() > 2) {
                 int leftmost = len;
-                for (int num : map.values()) {//!!! dist.values()
+                for (int num : map.values()) {//!!! map.values()
                     leftmost = Math.min(leftmost, num);
                 }
                 map.remove(s.charAt(leftmost));//!!!

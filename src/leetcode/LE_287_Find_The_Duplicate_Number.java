@@ -17,38 +17,10 @@ public class LE_287_Find_The_Duplicate_Number {
          Your runtime complexity should be less than O(n2).
          There is only one duplicate number in the array, but it could be repeated more than once.
 
-        Medium
+         Medium
      */
 
     /**
-     * Important
-     * 关键是要求both space O(1)
-     */
-
-
-    /**
-     * This one works, but it needs Space O(n).So it does not meet the requirement for space O(n)
-     **/
-    public int findDuplicate1(int[] nums) {
-        if (nums == null || nums.length == 0) return 0;
-
-        int[] dup = new int[nums.length];
-        int res = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (++dup[nums[i]] > 1) {
-                res = nums[i];
-                break;
-            }
-        }
-
-        return res;
-    }
-
-    /**
-     *
-     * @param nums
-     * @return
-     *
      * Time : O(n), Space : O(1)
      *
      * 如果把数据看做一个 LinkedList，第 i 个位置上的值代表第 i 个点的下一个点是什么的话，
@@ -70,7 +42,7 @@ public class LE_287_Find_The_Duplicate_Number {
      *  0 - 2 - 3 - 1 - 1 - 1
      *  There's a loop
      *
-     *  Check LE_142_Linked_List_Cycle_II
+     *  Use same algorithm as in LE_142_Linked_List_Cycle_II
      *
      *  https://segmentfault.com/a/1190000003817671
      *
@@ -92,6 +64,29 @@ public class LE_287_Find_The_Duplicate_Number {
         }
 
         return slow;
+    }
+
+    /**
+     * Important
+     * 关键是要求both space O(1), so we can't use hashmap to count frequency
+     */
+
+    /**
+     * This one works, but it needs Space O(n).So it does not meet the requirement for space O(n)
+     **/
+    public int findDuplicate1(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int[] dup = new int[nums.length];
+        int res = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (++dup[nums[i]] > 1) {
+                res = nums[i];
+                break;
+            }
+        }
+
+        return res;
     }
 
     /**
@@ -193,6 +188,8 @@ public class LE_287_Find_The_Duplicate_Number {
             int n = nums.length;
             int l = 0;
             int r = n - 1;
+
+            Arrays.sort(nums);
 
             while (l < r) {
                 int m = l + (r - l) / 2;

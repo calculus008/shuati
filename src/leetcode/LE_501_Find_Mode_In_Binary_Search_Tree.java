@@ -38,58 +38,22 @@ public class LE_501_Find_Mode_In_Binary_Search_Tree {
      */
 
     /**
-     * One inorder traversal pass
-     */
-    public class Solution1 {
-        Integer prev = null;
-        int count = 1;
-        int max = 0;
-
-        public int[] findMode(TreeNode root) {
-            if (root == null) return new int[0];
-
-            List<Integer> list = new ArrayList<>();
-            traverse(root, list);
-
-            int[] res = new int[list.size()];
-
-            for (int i = 0; i < list.size(); ++i) {
-                res[i] = list.get(i);
-            }
-
-            return res;
-        }
-
-        private void traverse(TreeNode root, List<Integer> list) {
-            if (root == null) return;
-
-            traverse(root.left, list);
-
-            if (prev != null) {
-                if (root.val == prev) {
-                    count++;
-                } else {
-                    count = 1;
-                }
-            }
-
-            if (count > max) {
-                max = count;
-                list.clear();
-                list.add(root.val);
-            } else if (count == max) {
-                list.add(root.val);
-            }
-
-            prev = root.val;
-
-            traverse(root.right, list);
-        }
-    }
-
-    /**
      * Time  : O(n)
      * Space : O(1)
+     *
+     * I've seen several solutions claimed to be O(1) space, but I disagree.
+     * They traverse the tree in in-order and keep track of the current set of
+     * modes (among other things). But that's not O(1) space, not even when
+     * disregarding recursion stack space (as explicitly allowed) and result
+     * space (not mentioned but reasonable). The set's contents aren't on stack
+     * space, so it can't be disregarded that way. And if the values are for
+     * example 1,2,3,4,...,n-2,n-1,n-1 (unique values followed by one double value),
+     * the set grows to Ω(n) and it can't be disregarded because the result only
+     * has size 1.
+     *
+     * I think the way to do it properly is to do two passes. One to find the highest
+     * number of occurrences of any value, and then a second pass to collect all values
+     * occurring that often.
      *
      * Here's a (two-pass) solution that I think can rightfully be called O(1) space.
      * Both passes keep track of the current value etc, and the second pass additionally
@@ -136,6 +100,111 @@ public class LE_501_Find_Mode_In_Binary_Search_Tree {
             inorder(root.left);
             handleValue(root.val);
             inorder(root.right);
+        }
+    }
+
+    class Solution_Mine {
+        int count = 0;
+        int maxCount = 0;
+        int numberOfMax = 1;
+        Integer pre = null;
+        int[] res;
+        int idx;
+
+        public int[] findMode(TreeNode root) {
+            if (root == null) return new int[]{};
+
+            inorder(root);
+            res = new int[numberOfMax];
+
+            pre = null;
+            count = 0;
+            idx = 0;
+
+            inorder(root);
+            return res;
+        }
+
+        private void inorder(TreeNode root) {
+            if (root == null) return;
+
+            inorder(root.left);
+
+            if (pre == null || root.val != pre) {
+                count = 1;
+            } else {
+                count++;
+            }
+
+            if (res == null) {//first run for getting number of modes
+                if (count == maxCount) {
+                    numberOfMax++;
+                } else if (count > maxCount) {
+                    numberOfMax = 1;
+                    maxCount = count;
+                }
+            } else {//second run to populate res[]
+                if (count == maxCount) {
+                    res[idx++] = root.val;
+                }
+            }
+
+
+            pre = root.val;
+
+            inorder(root.right);
+        }
+    }
+
+    /**
+     * One inorder traversal pass
+     *
+     * But it uses a list to keep track current modes number, this is not space O(1)
+     */
+    public class Solution1 {
+        Integer prev = null;
+        int count = 1;
+        int max = 0;
+
+        public int[] findMode(TreeNode root) {
+            if (root == null) return new int[0];
+
+            List<Integer> list = new ArrayList<>();
+            traverse(root, list);
+
+            int[] res = new int[list.size()];
+
+            for (int i = 0; i < list.size(); ++i) {
+                res[i] = list.get(i);
+            }
+
+            return res;
+        }
+
+        private void traverse(TreeNode root, List<Integer> list) {
+            if (root == null) return;
+
+            traverse(root.left, list);
+
+            if (prev != null) {
+                if (root.val == prev) {
+                    count++;
+                } else {
+                    count = 1;
+                }
+            }
+
+            if (count > max) {
+                max = count;
+                list.clear();
+                list.add(root.val);
+            } else if (count == max) {
+                list.add(root.val);
+            }
+
+            prev = root.val;
+
+            traverse(root.right, list);
         }
     }
 }

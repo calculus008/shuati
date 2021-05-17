@@ -80,12 +80,12 @@ public class LE_109_Convert_Sorted_List_To_BST {
      * The only tricky part : how we can know when the recursion ends.
      *
      * That's why we first need to find out the length of the list, then pass start and end to recursion.
-     * Here we don't really use start and end to restrive the node, it only helps us to know when to
+     * Here we don't really use start and end to retrieve the node, it only helps us to know when to
      * end the recursion (start > end), in other words, start and end values only service as control
      * mechanism.
      *
      * Time : O(n)
-     * Space : O(logn)
+     * Space : O(logn), recursion space, it's the height of BST
      */
     class Solution3 {
         ListNode head;

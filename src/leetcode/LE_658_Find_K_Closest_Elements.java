@@ -109,7 +109,7 @@ public class LE_658_Find_K_Closest_Elements {
      * Assume we are taking A[i] ~ A[i + k -1] for final answer.
      * We can binary research i, in other words, Binary Search for the start index, based on the location of x.
      *
-     * We compare the distance between x - A[mid] and A[mid + k] - x
+     * We compare the dirs between x - A[mid] and A[mid + k] - x
      *
      * If x - A[mid] > A[mid + k] - x,
      * it means A[mid + 1] ~ A[mid + k] is better than A[mid] ~ A[mid + k - 1],

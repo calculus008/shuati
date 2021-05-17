@@ -1,0 +1,303 @@
+#1
+设计一个tracking system， 就是hr和candidate都可以用的，上面有job信息，candidate申请，传资料。hr可以review candidate信息，
+track当前这个人在申请的那一个阶段。
+没有说对与错，但我有说明自己做选择的理由，利弊什么的。
+
+#2
+要求设计social media feed list request interface signature
+追问：设计数据表及如何存储（hint: sql or nosql)
+之后问了ood的polymorphism (Overloading)
+
+#3
+设计AWS CodeCommit
+
+#4
+Design a photo library platform. 可能像google相册那样
+
+#5
+design linux find OOD
+ood - linux command find。有多种filter查找结果的feature，比如文件大小，文件类型等；之后又问如果要加上别的logistic operation怎么办，
+比如OR，AND。这题相当高频了，地里有个大神写过一个很详细的solution
+
+#6
+sys design：一个文件爬虫，根据条件，找出在某一路径下所有符合条件的文件
+
+#7
+OOD，设计一个算法和class 来实现 一个 find command，这个 find command 有各种filter，比如 小于特定size，
+比如名字要有什么样子的匹配，这个使用一个 filter pattern就可以了，同时要进行parallel的处理
+
+#8
+1）设计一个Queue，需要线程安全。答案是用锁（monitor pattern）。
+2）如果读操作很多怎么办？答案是读写锁（read-write lock -or- lock manager in database）。
+
+默认queue实现中的添加和删除都不是原子操作，线程1还没添加完的时候线程2想添加，怎么办？
+答案是需要用锁把添加删除强行序列化。如果你学习过数据库原理的话会更清楚：这里就相当于把数据库中的transaction强行serialization。
+
+是的。push pop peek都用同一个lock。
+改进办法是用读写锁，这样peek不会锁住push pop。
+
+#9
+design Amazon item price catalog system
+给了三个interface：
+getprice(Item item, Time time);
+updatePrice(Item item, Pirce price, Time time);
+addPrice(Item item, Pirce price, Time time);
+
+#10
+设计一个预订酒店系统
+
+#11
+open question, serial/deserial data stream. Define everything yourself.
+
+#12
+Design Twitter
+
+#13 (!!!)
+文件搜索，自己定义File，Folder等类别，一开始给了一个基本条件，说要找出所有JPEG类型且尺寸
+
+设计command line utility library的一个函数，输入为一个目录路径，以及搜索标准，返回这个目录下所有符合搜索标准的文件。
+搜索标准可以是基于last updated time, owner等文件的属性。可以有多个标准，之间可以AND以及OR。需求都是一步步讨论确定的，
+感觉算是个OOP design轮，具体算法感觉没啥可写的。个人感觉还是可以表现得更好些，但不知道到底在考察什么，有点东一下，西一下
+
+
+#14
+每次购物完成支付后，系统要给用户发一个邮件。设计这个邮件系统。我答了这个邮件延迟几分钟没关系，可以用message queue做。
+面试官还补充说这类邮件是 至少一封，就是发多了没关系，但至少要保证用户收到一封。还跟我介绍了一些系统发的邮件是 至少一封，
+或者exactly一封，也算是普及了些知识吧。之后瞎扯了一些message queue，但由于本人没有过，被一眼识破，直接被问，你自己用过没？
+我老实回答，没有。尴尬到极点，于是又介绍message queue的运作原理。
+
+#15
+system design: Parking Lot System
+基本上就是確認
+User Cases
+Constraints
+API Schema
+MVC 架構
+
+#16
+design a warehouse system to support count of items, add the item, remove the item, and different kinds of item.
+
+#17
+要我写出一个efficient algo for real time toll system which tool price might change anytime
+面试官说要 有两个function
+getPrice(int timestamp) 就是有车过去时 的报价
+setInterval(int startTime, int endTime, int price)
+
+时间不太够所以要我做 high level
+用了个linked list 跟写了个 binary search 去找price
+
+#18
+design Map system
+
+#19
+系统设计 - 设计lyft/uber的共享车系统, 再具体问了design里哪些地方是bottleneck以及要怎么加强
+
+#20
+系统设计 - 设计一个internal logs aggregation的系统, 怎么处理已有的和新的log
+
+#21
+codeing + design - 亚麻的locker 配送系统, 如何能够找到合适大小的locker, 例如有个中号的包裹, 先找中号再找大号一直到找不到了.
+follow up是当用于取到包裹了改怎么办, 然后scale out这个系统, 如何存储数据, 如果当前地区的locker不够了怎么办 etc.
+https://leetcode.com/discuss/interview-question/233869/Design-Amazon-Locker-system
+
+特别强调how to fit into in house order management system
+从下单, 找locker, 运送, 取件, how they work from you
+
+Amazon locker 实现给一个package返回一个locker里具体位置ID的方法 （我觉得跟paking lot非常类似）
+
+#22
+top-k hash-tag
+
+#23
+城市交通票务一卡通系统设计
+
+#24
+Parking lot
+我简单回答了停车系统的实体之后，他们就抛给我几个问题让写代码了。
+一共四个问题，前面的三个都很简单，第二个不太记得清了。
+1. 写代码实现判断是否有停车空位；
+3. 如果车分大小车，车位分大小车位，两个连续的小的停车位可以停一辆大车，问如何修改代码实现变更；
+4. 如何更合理的利用车位的空间，例如，避免在四个小车位中间停一辆大车，而优先选择停在靠左或者靠右，从而剩余的空间选择更多。
+
+#25
+ood: design a warehouse 需要吐槽一下，recruiter跟我说会考system design害我准备了很久，结果考了ood，问了都傻眼了，答的不怎么样
+
+#26
+design a class that implement Linux find command. 主要也是考ood吧，要写代码
+我个人感觉是个开放式问题，没有正确答案。具体题目可以看这里
+https://leetcode.com/discuss/interview-question/369272/Amazon-or-Onsite-or-Linux-Find-Command
+
+ood，设计一个类似linux的find命令，实现找文件大小大于5M以及找所有xml文件
+第四轮，一个trieTree的题，就是typeAhead，面试官似乎不喜欢在node上存储所有的单词的解法，大概想要的是建好
+trietree之后再做bfs或者dfs搜索所有的节点。
+
+设计一个查找文件的API，支持模糊搜索，返回所有符合条件的文件名
+自己觉得题就是DFS搜索，但是崩在了关于模糊搜索怎么处理regular expression matching，自己自动带入做题模式，12*对不对得上123，
+一个一个比较，比到*的时候分叉的思路
+面试官直接说难道你不知道regular expression matching怎么用吗，原来是想要让直接用java内置的函数处理，给我写了Pattern Class的
+match方法……后来又说我append文件路径的做法也不对，反正就感觉他想要的是一个比起做题更偏向实际在程序里能work的答案，两个人沟通不咋顺畅，
+对面不理解我，我也没完全听懂他，就崩掉了
+
+第二题三哥什么都说让自己想，我问了半天最后路径定的是string，就比如''\home\today\morning''，这就是一个路径
+
+不过亚麻这种文件查找的题目比较高频，可以是设计也可以是单独题目，所以还是需要各方面准备，现在面试是越来越难
+
+
+#27
+BQ+系统设计一个亚麻网站其中一个推荐不同category TOP20 的sale item，着重讲系统上，离线计算，数据同步，如何高可用和scale out
+
+#28
+设计亚麻网页下面的访问列表。烙印皮笑肉不笑问了一堆问题，用户多怎么办，记录多怎么办。
+
+#29
+设计一个视频网站里面的watch next list功能。
+
+#30
+设计parking lot. 我在live code写了interface 和 class, 写完check in， check out method
+
+#31
+design chatroom。要求用户在线时可以在多个聊天室发送和接受消息，再次登录时需要接收到所有unread message，拓展是用户之间可以发pm
+
+#32
+要求design一个全国停车场管理系统。
+聊到的知识点：optimistic lock vs pessimistic lock，transaction，load balancer作用，consistent hashing优缺点，
+partition，replication，sql vs nosql等等
+最后问如果想同时做大量的数据分析怎么办，我答可以用read replica，或者建一个data lake。还好没有细聊data lake相关的细节，
+不然我是真说不出来啥lol
+
+#33
+系统设计：亚马逊customer review system
+
+#34
+设计一个online 投票系统, 只开放24小时 能实时显示票数， 最后还问了 投票结束后 还有用户访问怎么处理
+
+#35
+设计twitter的Trending system，大概要求就是需要统计某个hashtag的使用量并且提供给用户一个list of trending items，
+按照点击量排序，需要讨论的点有load balancing，Database的选择与原因，数据的expiration，统计数据的办法和数据结构，
+以及如何确定这个trending list是满足当前time window的（比如这个trending list是今天的最火排名，昨天的数据怎么办balabala）
+
+这一题我觉得自己答得也并不太好，我当时选的是是Redis，我的选择的原因是performance更好，这个case不用太在意consistency，
+而且可以有data replication和data partitioning，所以scalability比较好，但面试官并没有给出很明确的反馈。
+
+#36
+设计一个log metric system，给一堆log string， for example:
+[2020.1.1.23:00:00][ERROR][ThreadNumber-xxx][content......].......
+设计一个function level的solution来存储这些log信息，希望能根据时间，log level等等进行分类并调用，这题并没有clarify太清楚，
+不过三哥觉得我答得还行。
+我主要就讲了下怎么多个filter来找到我们需要的log，然后讲了下把log分成很多time window来存，可以给user提供一个time period filter
+
+#37
+system design，设计一个购物的recommendation system，推荐的规则是比较同时出现的频率。比如用户1买了product A，然后有很多人
+同时买了product A和product B，就给这个用户1推荐product B。
+
+#38
+系统设计一个中间service。可以接受用户的request然后call 云端的一个black box service。 讨论了返回值 ，
+large volumn request, fail handling 等等
+
+#39
+设计一个user permission system， 实现给一个用户判断能否使用某种permission
+
+#40
+让设计一个在线文档多人同时编辑，感觉略崩，全程被面试官带着走。问了怎么做撤销、重复，怎么节约服务器端需要存储的数据等等。
+很多东西都是面试官主动提示，然后我给出我自己的解法。感觉不太像正常的系统设计，倒是问了很多具体的实现细节。
+
+#41
+Video Stream System， focus on how to distribute the content to users
+用CDN，解释了how to use multiple worker threads to handle transcoding，强烈建议看油管上两位印度小哥的视频，解释的很清晰
+
+#42
+设计一个数据结构可以存并且查数据。数据如下，(x, 10), (x, 11), (y, 8), (z, 11), (x, 0)，括号里第一个元素是key, 第二个是值。
+要求是给一个key，要求返回最后存入的值，如果没有就返回-1。比如输入key = x, 应该返回0。如果查询key = a, 则返回-1。follow up是
+如果存入的值是从小到大排列的，要找某个key下面有没有某个值，怎么办？ 我给的答案是二分法。
+
+#43
+BH后问的是OOD， 问设计一个分析计算式的类，可以parse处理数字，字母等各种类型的数据，进行各种operation。直接抽象借口写了，
+然后问，如果是不同类型的数据,怎么设计接口不用switch，我就点点点了，最后他跟我说可以弄个map把各种类型和operation映射起来成新的类型，
+我就更点点点了，这也行？
+
+#44
+system design - 设计一个分数管理系统。api要求给一个list的视频，根据视频被观看的次数给视频打分，返回分数，怎么设计api，数据库，
+系统结构？怎么scale？如果把用户观看视频的记录存在一个log server里面，怎么定期更新数据库？怎么monitor整个系统？
+
+#45
+ood - locker。有三种size的locker，实现存取package
+
+#46
+设计一个分数管理系统。api要求给一个list的视频，根据视频被观看的次数给视频打分，返回分数，怎么设计api，数据库，系统结构？怎么scale？
+如果把用户观看视频的记录存在一个log server里面，怎么定期更新数据库？怎么monitor整个系统？
+
+#47
+系统设计 minitoring system 很多小的device 有数据要经常上传到服务器，api主要是服务器端 1. 计算某个guid的总和 2. 当前时刻所有
+device的平均值
+follow up：1. scale server 2. 连续内存大小不够怎么存array （数据结构）
+
+#48
+一个服务，能跨终端记录和恢复电子书的阅读状态
+和我经历过的其他系统设计面试不同的地方是，面试官对每一步的data schema问的很细，client, web server, 每一个service, 以及db
+，每一层具体有哪些column，传递哪些，serialization用json，xml还是binary等等。最后写满了一屏幕的data structure。中间一度感
+觉和面试官在非常不同的频道上，还以为这轮挂了
+这题其实没啥特别的，主要是数据库设计，稍微讨论下得出每一行的key是userId，简单版只需要记录最后一本书的bookId和pageId，高级版需要另开
+一张表记录多本书的，然后加入timestamp，讨论resolve conflict，stale data cleanup等等，都是一般数据系统里的常见问题
+
+#49
+system design dropbox/google drive 类似的system
+
+#50
+coding OOD： 设计一个Amazon locker系统，这个真的还挺高频的 只不过网上貌似没有太好的总结 所以我也没准备，不过答得貌似他还挺满意。
+多用abstraction和factory pattern
+
+#51
+system design：设计一个shopping warehouse，怎么add item 和search by specific item，schema的设计，api，整个架构，db读写的优化，
+redundancy和sharding，cache，然后最后还延伸到了利用data warehouse来优化db的读写load，这快我确实没get到怎么能帮助到。。
+有懂的同学可以讲讲。他看我不太懂就问我知不知道data warehouse，我还真懂点，因为在准备一家data warehouse的面试，我就说了一下里面的几
+个layer，顶多就是virtual warehouse layer的一些cache，他貌似满意。不过我还是觉得和db没有本质的区别，他可能就是想听这个名词把。。
+
+olap对于join filter 这种search确实会快很多比oltp，oltp上需要靠manually建很多index吧才能提高搜索的速度
+
+
+#
+设计一个job sceduler 把job分配给不同的VM运行 如何追踪每个job的status 如何处理fail的job
+
+#
+design image sharing
+
+#
+SD 下象棋 数据库怎样好，服务器坏了怎么办之类的
+
+#
+聊天软件
+
+#
+设计一个oncall notification system
+
+#
+system design, 設計餐廳預約系統
+先畫了簡單架構
+接著根據需求Scale
+把我知道的LB, database ,cache, API, CDN,所有的方法優缺都講了
+
+
+#
+https://aws.amazon.com/blogs/database/building-a-real-time-gaming-leaderboard-with-amazon-elasticache-for-redis/
+
+#
+设计一个五子棋游戏，从ood到实现。
+
+#
+设计Google Map
+
+#
+1. Design uber app
+
+2. Design a system to find duplicate files in massive urls
+
+3. Design ads delivery system
+
+4. Design a language translation application
+
+#
+就是有很多file你要去验证这些log file符合条件不， 标准可能有日期，名字，大小各种。感觉有点像系统设计。。
+我做了超级多的假设  中间一度自己很混乱 觉得答得不是特别好
+
+#
+push config/notif system, 能支持100m+的用户（说好的rate limiter呢=。=

@@ -43,8 +43,8 @@ public class LE_1048_Longest_String_Chain {
      * Finally return the longest word chain.
      *
      * Time Complexity
-     * Assume there are Nwords, and on average each word's length is L, we should conside
-     * r about the time when calling function substring as well. Therefore, the total time
+     * Assume there are N words, and on average each word's length is L, we should consider
+     * about the time when calling function substring as well. Therefore, the total time
      * complexity of your resolution should be O(NlogN + NL^2)
      *
      * Space : O(NL)
@@ -63,16 +63,34 @@ public class LE_1048_Longest_String_Chain {
             Arrays.sort(words, (a, b) -> a.length() - b.length());
             int res = 0;
 
+            /**
+             * After sorting, word is in order from smallest length to the largest length
+             */
             for (String word : words) {
-                // System.out.println("word="+word);
                 int best = 0;
                 for (int i = 0; i < word.length(); i++) {
+                    /**
+                     * Iterate all possible strings by removing one char from the word.
+                     * Those strings are candidate of the previous word.
+                     */
                     String pre = word.substring(0, i) + word.substring(i + 1);
-                    // System.out.println("pre=" + s);
+
+                    /**
+                     * if we find previous word in map, then length of chain for this previous word
+                     * should be increase by 1.
+                     * Find the max value of the length of the chain for the current word.
+                     */
                     best = Math.max(best, map.getOrDefault(pre, 0) + 1);
                 }
 
+                /**
+                 * now we have the max possible length of chain that ends with current word, put it in map
+                 */
                 map.put(word, best);
+
+                /**
+                 * keep the max chain length in final solution
+                 */
                 res = Math.max(res, best);
             }
 

@@ -14,7 +14,7 @@ public class LE_853_Car_Fleet {
      * A car can never pass another car ahead of it, but it can catch up
      * to it, and drive bumper to bumper at the same speed.
      *
-     * The distance between these two cars is ignored - they are assumed
+     * The dirs between these two cars is ignored - they are assumed
      * to have the same position.
      *
      * A car fleet is some non-empty set of cars driving at the same
@@ -50,10 +50,10 @@ public class LE_853_Car_Fleet {
 
     /**
      * TreeMap
-     * key - distance from start position to destination
+     * key - dirs from start position to destination
      * val - time to get to the destination
      *
-     * For a car to be caught up, it needs to be in front, hence sort by distance.
+     * For a car to be caught up, it needs to be in front, hence sort by dirs.
      *
      * Keep track of currently slowest one(which might block the car behind),
      * if a car can catch up current slowest one, it will not form a new group.

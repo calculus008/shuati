@@ -1,0 +1,29 @@
+/*
+Let’s say you have two tables: authors and books.
+
+
+- authors:
+
+author_name  book_title
+————————————————
+author_1                book_1
+author_1                book_2
+author_2              book_3
+..
+
+- books
+
+book_title  sold_copies
+————————————-
+book_1          1000
+book_2         1500
+book_3         34000
+
+Q: TOP 3 authors who sold the most books in total!
+     The output has two columns, autho_name sold_copies.
+*/
+
+select author_name  sum(sold_copies) as copies from
+(select author_name, book_tile, sold_copies from authors a join books b on a.book_tile = b.book.tile)
+group by author_name
+order by copies desc limit 3;

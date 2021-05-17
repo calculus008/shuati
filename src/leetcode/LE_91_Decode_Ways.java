@@ -44,9 +44,112 @@ public class LE_91_Decode_Ways {
                                  "31" is invalid
 
         Here, i in for loop is the index for dp[], its relationship to index of s : index_s = i - 1
+
+        !!!
+        这里，要注意的是，dp[i] = dp[i - 1] + dp[i - 2]的实际意思是：
+           dp[i - 1] : 把当前的字符（ith char) 作为单独的一个字符解码，隐含的意思是，我们遵从的是前 i - 1 个字符解码的方式，
+                       他们有多少中方式，我现在就有多少种方式。
+           dp[i - 2] : 把当前的字符（ith char) 和前一个字符 ( (i - 1) th char ) 合并作为的一个字符解码，隐含的意思是，
+                       我们遵从的是前 i - 2 个字符解码的方式，他们有多少中方式，我现在就有多少种方式。
+        当然，这两种方式都是有条件的， 也就是在什么条件下，才能做这种解码 （ith char is not '0', value of ith and (i - 1) th
+        char combined, its int value should be >= 10 and <= 26)
+
+        Refer to the explanation in official solution:
+        https://leetcode.com/articles/decode-ways/
   */
 
-    class Solution {
+    class Solution_Practice {
+        /**
+         * Bottom up, time and space O(n)
+         *
+         * Use substring, slower but looks cleaner
+         */
+        public int numDecodings(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            int n = s.length();
+            int[] dp = new int[n + 1];
+
+            dp[0] = 1;
+            dp[1] = s.charAt(0) == '0' ? 0 : 1;
+
+            for (int i = 2; i <= n; i++) {
+                int one = Integer.parseInt(s.substring(i - 1, i));
+                int two = Integer.parseInt(s.substring(i - 2, i));
+
+                if (one != 0) {
+                    dp[i] += dp[i - 1];
+                }
+                if (two >= 10 && two <= 26) {
+                    dp[i] += dp[i - 2];
+                }
+            }
+
+            return dp[n];
+        }
+
+        /**
+         * bottom up, Time and Space O(n)
+         */
+        public int numDecodings1(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            int n = s.length();
+            int[] dp = new int[n + 1];
+            dp[0] = 1;
+            dp[1] = s.charAt(0) == '0' ? 0 : 1;
+
+            for (int i = 2; i <= n; i++) {
+                char c1 = s.charAt(i - 1);
+                char c2 = s.charAt(i - 2);
+
+                boolean v1 = (c1 == '0' ? false : true);
+                int num = (c2 - '0') * 10 + c1 - '0';
+                boolean v2 = (num >= 10 && num <= 26);
+
+                if (!v1 && !v2) return 0;
+
+                if (v1) dp[i] += dp[i - 1];
+                if (v2) dp[i] += dp[i - 2];
+            }
+
+            return dp[n];
+        }
+        /**
+         * bottom up, time O(n), space O(1)
+         */
+        public int numDecodings2(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            int n = s.length();
+
+            int dp1 = 1;
+            int dp2 = s.charAt(0) == '0' ? 0 : 1;
+
+            for (int i = 2; i <= n; i++) {
+                char c1 = s.charAt(i - 1);
+                char c2 = s.charAt(i - 2);
+
+                boolean v1 = (c1 == '0' ? false : true);
+                int num = (c2 - '0') * 10 + c1 - '0';
+                boolean v2 = (num >= 10 && num <= 26);
+
+                if (!v1 && !v2) return 0;
+
+                int dp = 0;
+                if (v1) dp += dp2;
+                if (v2) dp += dp1;
+
+                dp1 = dp2;
+                dp2 = dp;
+            }
+
+            return dp2;
+        }
+    }
+
+
+    class Solution_DP_Bottom_Up {
         /**
          * DP
          * dp[i] : number of decoding ways of the first i chars

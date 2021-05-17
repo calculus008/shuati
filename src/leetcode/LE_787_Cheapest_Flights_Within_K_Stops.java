@@ -33,6 +33,121 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
          Medium
      */
 
+
+    /**
+     * Dijskra
+     * Modified from Dijskra solution from LE_743_Network_Delay_Time
+     *
+     * Time  : O(E + NlogN), where E is the total number of flights (edges).
+     * Space : O(N), the size of the heap.
+     */
+    class Solution_Dijskra_1 {
+        class Pair {
+            int dest;
+            int cost;
+            /**
+             * We have stops constrain, we need to have a property to save it.
+             */
+            int stops;
+
+            public Pair(int dest, int cost, int stops) {
+                this.dest = dest;
+                this.cost = cost;
+                this.stops = stops;
+            }
+        }
+
+        public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+            Map<Integer, List<Pair>> graph = new HashMap<>();
+            for (int[] t : flights) {
+                if (!graph.containsKey(t[0])) {
+                    graph.put(t[0], new ArrayList<>());
+                }
+                /**
+                 * we don't care stops in graph, so just set as 0.
+                 * This is not quite space efficient.
+                 */
+                graph.get(t[0]).add(new Pair(t[1], t[2], 0));
+            }
+
+            PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
+            /**
+             * We start from src, the cost to src is 0, steps is 0
+             */
+            pq.offer(new Pair(src, 0, 0));
+
+            while (!pq.isEmpty()) {
+                Pair cur = pq.poll();
+
+                if (cur.dest == dst) return cur.cost;
+
+                /**
+                 * Must have this validation
+                 */
+                if (!graph.containsKey(cur.dest)) continue;
+
+                if (cur.stops <= K) {
+                    for (Pair p : graph.get(cur.dest)) {
+                        pq.offer(new Pair(p.dest, cur.cost + p.cost, cur.stops + 1));
+                    }
+                }
+            }
+
+            return -1;
+        }
+    }
+
+    /**
+     * No using Pair class.
+     *
+     * We save different data in graph and heap.
+     *
+     * Graph : Map of Maps
+     * (src -> (dst -> cost))
+     *
+     * heap: triplet in form of array[]
+     * {dst, cost, stops}
+     *
+     * here:
+     * dst   - current stop we get to (from src)
+     * cost  - total cost along the way from src to dst
+     * stops - total number stops from src to dst
+     */
+    class Solution_Dijskra_2 {
+        public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+            Map<Integer, Map<Integer, Integer>> graph = new HashMap<>();
+            for (int[] t : flights) {
+                if (!graph.containsKey(t[0])) {
+                    graph.put(t[0], new HashMap<>());
+                }
+                graph.get(t[0]).put(t[1], t[2]);
+            }
+
+            PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+            pq.offer(new int[]{src, 0, 0});
+
+            while (!pq.isEmpty()) {
+                int[] cur = pq.poll();
+                int dest = cur[0];
+                int cost = cur[1];
+                int stops = cur[2];
+
+                if (dest == dst) return cost;
+
+                if (!graph.containsKey(dest)) continue;
+
+                if (stops <= K) {
+                    Map<Integer, Integer> map = graph.get(dest);
+                    for (int key : map.keySet()) {
+                        pq.offer(new int[]{key, map.get(key) + cost, stops + 1});
+                    }
+                }
+            }
+
+            return -1;
+        }
+    }
+
     /**
      * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-787-cheapest-flights-within-k-stops/
      *
@@ -198,10 +313,10 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
      *
      * dp[k][i]: min cost from src to i taken up to k flights (k + 1 stops)
      * init: dp[0:k+2][src] = 0
-     * transition: dp[k][i] = min(dp[k-1][j] + price[j][i])
+     * transition: dp[k][i] = min(dp[k-1][j] + price[j][i], dp[k][i])
      * ans: dp[K+1][dst]
      *
-     * Time  : O(k * |flights|) / O(k*n^2)
+     * Time  : O(k * E) -> O(k * n^2), E is number edges -> number of total flights, max value is n ^ 2.
      * Space : O(k*n) -> O(n)
      * w/o space compression O(k*n)
      */
@@ -210,7 +325,12 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
             //"with nodes labeled from 0 to n - 1"
             int[][] dp = new int[K + 2][n];
 
-            //!!!
+            /**
+             * Can't use Integer.MAX_VALUE here becasue we need to do calculation
+             *  "dp[i - 1][f[0]] + f[2])"
+             * It will overflow. Therefore, we just specify a very large number here.
+             * In the end, any value that is ">=" this number means no answer.
+             */
             int InfCost = 1000000009;
             for (int[] a : dp) {
                 Arrays.fill(a, InfCost);
@@ -233,7 +353,10 @@ public class LE_787_Cheapest_Flights_Within_K_Stops {
                      *
                      * With i flights
                      * 直达 ：dp[i][f[1]]
-                     * 中转 ：dp[i - 1][f[0]] + f[2]， 假设在i个flights里，最后的一个flight(ith)是当前的f (f[0]到f[1], costs f[2])
+                     * 中转 ：dp[i - 1][f[0]] + f[2]， 假设在i个flights里，最后的一个flight(ith)是当前的f (f[0]到f[1],
+                     *       costs f[2]).
+                     *       dp[i - 1][f[0]] : min cost after the last flight (destination is the start point for
+                     *                         current flight f)
                      */
                     dp[i][f[1]] = Math.min(dp[i][f[1]], dp[i - 1][f[0]] + f[2]);
                 }

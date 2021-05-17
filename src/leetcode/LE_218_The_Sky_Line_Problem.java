@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class LE_218_The_Sky_Line_Problem {
     /**
-        A city's skyline is the outer contour of the silhouette formed by all the buildings in that city when viewed from a distance.
+        A city's skyline is the outer contour of the silhouette formed by all the buildings in that city when viewed from a dirs.
         Now suppose you are given the locations and height of all the buildings as shown on a cityscape photo (Figure A),
         write a program to output the skyline formed by these buildings collectively (Figure B).
 
@@ -64,86 +64,9 @@ public class LE_218_The_Sky_Line_Problem {
      */
 
     /**
-     * Solution 1 : Heap, Time : O(n ^ 2), Space : O(n)
-     *
-     * PriorityQueue.remove() takes O(n), if we want to optimize it, need to use HashHeap,
-     * which uses HashMap to track each element in heap, then do swap and sift up/down
-     * it takes o(logn). Just need to understand its mechanism. A reference implementation
-     * from JiuZhang:
-     * https://github.com/awangdev/LintCode/blob/master/Java/HashHeap.java
-     *
-     **/
-    public List<int[]> getSkyline1(int[][] buildings) {
-        List<int[]> res = new ArrayList<>();
-        List<int[]> heights = new ArrayList<>();
-
-        //Based on the question conditions, b[0] - start, b[1] - end, b[2] - H
-        for (int[] b : buildings) {
-            //!!! NOT "new int[2]{b[0], -b[2]}"
-            heights.add(new int[]{b[0], -b[2]});
-            heights.add(new int[]{b[1],  b[2]});
-        }
-
-        /**
-            Sort height by x, if x is equal, by height. Since we make the entry height negative,
-            if the exit line of rectangle A and the start line of rectangle B are at the same x,
-            enter line of B will be in front of the exit line of A. So the event of the entering
-            line will be processed first.
-
-            This is the trick that helps to deal with special cases that entry/exit lines of
-            different rectangles overlap.
-        */
-        Collections.sort(heights, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
-
-        PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> b -a);
-        //!!!
-        heap.add(0);
-
-        /**
-         * For input [1, 2, 1], [2, 3, 2], after sorting heights:
-         * [1, -1], [2, -2], [2, 1], [3, 2]
-         *
-         * heap : 0
-         * pre : 0
-         * [1, -1] , enter line
-         * heap : 1, 0
-         * cur = 1, pre = 0 -> res : [[1, 1]], pre = 1
-         *
-         * [2, -1], enter line
-         * heap : 2, 1, 0
-         * cur = 2, pre = 1 -> res : [[1, 1], [2, 2]], pre = 2
-         *
-         * [2, 1], exit line
-         * heap : 2, 0
-         * cur = 2, pre = 2, do nothing
-         * !!!
-         *
-         * [3, 2], exit line
-         * heap : 0
-         * cur = 0, pre = 2 -> res : [[1, 1], [2, 2], [3, 0]]
-         *
-         */
-        int pre = 0; //height of the last added key point
-        for(int[] h : heights) {
-            if (h[1] < 0) {//Entry line
-                heap.add(-h[1]);
-            } else {//Exit line
-                //Take time O(n)
-                heap.remove(h[1]);
-            }
-
-            int cur = heap.peek(); //!!! peek(), NOT peak()
-            if (pre != cur) {
-                res.add(new int[]{h[0], cur});
-                pre = cur;
-            }
-        }
-
-        return res;
-    }
-
-    /**
      * Solution 2 : Use TreeMap (B-Tree), Time : O(nlogn), Space : O(n)
+     *
+     * Optimal Solution
      **/
     public List<int[]> getSkyline2(int[][] buildings) {
         List<int[]> res = new ArrayList<>();
@@ -182,9 +105,9 @@ public class LE_218_The_Sky_Line_Problem {
 
         /**!!!
          *  In TreeMap here, key is height, value is frequency of the height.(!!!)
-           "Collections.reverseOrder()",. "<Integer, Integer>"
-            In TreeMap, sort it in reverse order (max to min) by frequency, so that
-            we can use dist.firstKey() to get the biggest height.
+         "Collections.reverseOrder()",. "<Integer, Integer>"
+         In TreeMap, sort it in reverse order (max to min) by frequency, so that
+         we can use dist.firstKey() to get the biggest height.
          **/
         TreeMap<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
         map.put(0, 1);
@@ -221,6 +144,86 @@ public class LE_218_The_Sky_Line_Problem {
              * cur : current biggest height, after current event is processed.
              */
             int cur = map.firstKey();
+            if (pre != cur) {
+                res.add(new int[]{h[0], cur});
+                pre = cur;
+            }
+        }
+
+        return res;
+    }
+
+
+    /**
+     * Solution 1 : Heap, Time : O(n ^ 2), Space : O(n)
+     *
+     * PriorityQueue.remove() takes O(n), if we want to optimize it, need to use HashHeap,
+     * which uses HashMap to track each element in heap, then do swap and sift up/down
+     * it takes o(logn). Just need to understand its mechanism. A reference implementation
+     * from JiuZhang:
+     * https://github.com/awangdev/LintCode/blob/master/Java/HashHeap.java
+     *
+     **/
+    public List<int[]> getSkyline1(int[][] buildings) {
+        List<int[]> res = new ArrayList<>();
+        List<int[]> heights = new ArrayList<>();
+
+        //Based on the question conditions, b[0] - start, b[1] - end, b[2] - H
+        for (int[] b : buildings) {
+            //!!! NOT "new int[2]{b[0], -b[2]}"
+            heights.add(new int[]{b[0], -b[2]});
+            heights.add(new int[]{b[1],  b[2]});
+        }
+
+        /**
+            Sort height by x, if x is equal, by height. Since we make the entry height negative,
+            if the exit line of rectangle A and the start line of rectangle B are at the same x,
+            enter line of B will be in front of the exit line of A. So the event of the entering
+            line will be processed first.
+
+            This is the trick that helps to deal with special cases that entry/exit lines of
+            different rectangles overlap.
+        */
+        Collections.sort(heights, (a, b) -> a[0] != b[0] ? a[0] - b[0] : a[1] - b[1]);
+
+        PriorityQueue<Integer> heap = new PriorityQueue<>((a, b) -> b - a);
+        //!!!
+        heap.add(0);
+
+        /**
+         * For input [1, 2, 1], [2, 3, 2], after sorting heights:
+         * [1, -1], [2, -2], [2, 1], [3, 2]
+         *
+         * heap : 0
+         * pre : 0
+         * [1, -1] , enter line
+         * heap : 1, 0
+         * cur = 1, pre = 0 -> res : [[1, 1]], pre = 1
+         *
+         * [2, -1], enter line
+         * heap : 2, 1, 0
+         * cur = 2, pre = 1 -> res : [[1, 1], [2, 2]], pre = 2
+         *
+         * [2, 1], exit line
+         * heap : 2, 0
+         * cur = 2, pre = 2, do nothing
+         * !!!
+         *
+         * [3, 2], exit line
+         * heap : 0
+         * cur = 0, pre = 2 -> res : [[1, 1], [2, 2], [3, 0]]
+         *
+         */
+        int pre = 0; //height of the last added key point
+        for(int[] h : heights) {
+            if (h[1] < 0) {//Entry line
+                heap.add(-h[1]);
+            } else {//Exit line
+                //Take time O(n)
+                heap.remove(h[1]);
+            }
+
+            int cur = heap.peek(); //!!! peek(), NOT peak()
             if (pre != cur) {
                 res.add(new int[]{h[0], cur});
                 pre = cur;

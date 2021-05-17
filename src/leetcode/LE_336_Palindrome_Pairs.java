@@ -177,9 +177,9 @@ public class LE_336_Palindrome_Pairs {
     }
 
     /**
-     * Trie solution
+     * TrieNode solution
      *
-     * https://leetcode.com/problems/palindrome-pairs/discuss/79195/O(n-*-k2)-java-solution-with-Trie-structure
+     * https://leetcode.com/problems/palindrome-pairs/discuss/79195/O(n-*-k2)-java-solution-with-TrieNode-structure
      */
     class Solution2 {
         private class TrieNode {

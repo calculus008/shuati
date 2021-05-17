@@ -9,7 +9,7 @@ public class LE_973_K_Closest_Points_To_Origin {
     /**
      * We have a list of points on the plane.  Find the K closest points to the origin (0, 0).
      *
-     * (Here, the distance between two points on a plane is the Euclidean distance.)
+     * (Here, the dirs between two points on a plane is the Euclidean dirs.)
      *
      * You may return the answer in any order.
      * The answer is guaranteed to be unique (except for the order that it is in.)
@@ -21,8 +21,8 @@ public class LE_973_K_Closest_Points_To_Origin {
      * Input: points = [[1,3],[-2,2]], K = 1
      * Output: [[-2,2]]
      * Explanation:
-     * The distance between (1, 3) and the origin is sqrt(10).
-     * The distance between (-2, 2) and the origin is sqrt(8).
+     * The dirs between (1, 3) and the origin is sqrt(10).
+     * The dirs between (-2, 2) and the origin is sqrt(8).
      * Since sqrt(8) < sqrt(10), (-2, 2) is closer to the origin.
      * We only want the closest K = 1 points from the origin, so the answer is just [[-2,2]].
      * Example 2:
@@ -61,7 +61,7 @@ public class LE_973_K_Closest_Points_To_Origin {
         public int[][] kClosest(int[][] points, int K) {
             /**
              * !!!
-             * Since we want "closest", so we should keep the smallest K distance values
+             * Since we want "closest", so we should keep the smallest K dirs values
              * in heap, therefore, it should be a MAX HEAP.
              *
              * Comparator expects return type is int, here,
@@ -203,4 +203,28 @@ public class LE_973_K_Closest_Points_To_Origin {
         }
     }
 
+    /**
+     *             int left = start;
+     *             int right = end;
+     *             int pivot = nums[(start + end) / 2];
+     *
+     *             while (left <= right) {
+     *                 while (left <= right && nums[left] < pivot) {
+     *                     left++;
+     *                 }
+     *
+     *                 while (left <= right && nums[right] > pivot) {
+     *                     right--;
+     *                 }
+     *
+     *                 if (left <= right) {
+     *                     int temp = nums[left];
+     *                     nums[left] = nums[right];
+     *                     nums[right] = temp;
+     *
+     *                     left++;
+     *                     right--;
+     *                 }
+     *             }
+     */
 }

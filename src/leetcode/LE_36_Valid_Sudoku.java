@@ -7,8 +7,23 @@ import java.util.HashSet;
  */
 public class LE_36_Valid_Sudoku {
     /**
-    Determine if a Sudoku is valid.
-    The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+     Determine if a Sudoku is valid.
+     The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+
+     Only the filled cells need to be validated according to the following rules:
+
+     Each row must contain the digits 1-9 without repetition.
+     Each column must contain the digits 1-9 without repetition.
+     Each of the 9 3x3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+
+     Note:
+
+     A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+     Only the filled cells need to be validated according to the mentioned rules.
+     The given board contain only digits 1-9 and the character '.'.
+     The given board size is always 9x9.
+
+     Medium
      */
 
     /**
@@ -69,13 +84,23 @@ public class LE_36_Valid_Sudoku {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board[i][j] != '.' && !row.add(board[i][j]))
+                /**
+                 * Row
+                 */
+                if (board[i][j] != '.' && !row.add(board[i][j]))//!!! "add", Not "contains"
                     return false;
+
+                /**
+                 * Column
+                 */
                 if (board[j][i] != '.' && !column.add(board[j][i]))
                     return false;
 
-                int r = 3 * (i / 3) + j / 3;
-                int c = 3 * (i % 3) + j % 3;
+                /**
+                 * Sub-square
+                 */
+                int r = 3 * (i / 3) + j / 3;//!!! i, j
+                int c = 3 * (i % 3) + j % 3;//!!! i, j
                 if (board[r][c] != '.' && !subsquare.add(board[r][c]))
                     return false;
 

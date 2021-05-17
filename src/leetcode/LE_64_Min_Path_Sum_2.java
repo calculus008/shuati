@@ -20,68 +20,65 @@ public class LE_64_Min_Path_Sum_2 {
      * Time  : O(mn)
      * Space : O(mn)
      */
-    public class Solution1 {
+    class Solution_DP_1 {
         public int minPathSum(int[][] grid) {
-            if (grid == null || grid.length == 0) return 0;
-
             int m = grid.length;
             int n = grid[0].length;
-            int[][] dp = new int[m][n];
 
-            for (int i = m - 1; i >= 0; i--) {
-                for (int j = n - 1; j >= 0; j--) {
-                    if (i == m - 1 && j == n - 1) {
-                        dp[i][j] = grid[m - 1][n - 1];
-                    } else if (i == m - 1) {
-                        dp[i][j] = grid[i][j] + dp[i][j + 1];
-                    } else if (j == n - 1) {
-                        dp[i][j] = grid[i][j] + dp[i + 1][j];
+            int[][] dp = new int[m][n];
+//            dp[0][0] = grid[0][0];
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (i == 0 && j == 0) {
+                        dp[i][j] = grid[0][0];
+                    } else if (i == 0) {
+                        dp[i][j] = grid[i][j] + dp[i][j - 1];
+                    } else if (j == 0) {
+                        dp[i][j] = grid[i][j] + dp[i - 1][j];
                     } else {
-                        dp[i][j] = grid[i][j] + Math.min(dp[i][j + 1], dp[i + 1][j]);
+                        dp[i][j] = grid[i][j] + Math.min(dp[i - 1][j], dp[i][j - 1]);
                     }
                 }
             }
 
-            return dp[0][0];
+            return dp[m - 1][n - 1];
         }
     }
-
     /**
      * 1D DP Array
      *
      * Time : O(mn)
      * Space : O(n)
      */
-    public class Solution2 {
+    class Solution_DP_2 {
         public int minPathSum(int[][] grid) {
-            if (grid == null || grid.length == 0) return 0;
-
             int m = grid.length;
             int n = grid[0].length;
-            int[] dp = new int[n];
 
-            for (int i = m - 1; i >= 0; i--) {
-                for (int j = n - 1; j >= 0; j--) {
-                    if (i == m - 1 && j == n - 1) {
-                        dp[j] = grid[m - 1][n - 1];
-                    } else if (i == m - 1) {
-                        dp[j] = grid[i][j] + dp[j + 1];
-                    } else if (j == n - 1) {
-                        dp[j] = grid[i][j] + dp[j];
-                    } else {
-                        dp[j] = grid[i][j] + Math.min(dp[j + 1], dp[j]);
-                    }
+            int[] dp = new int[n];
+            dp[0] = grid[0][0];
+
+            for (int i = 1; i < n; i++) {
+                dp[i] = grid[0][i] + dp[i - 1];
+            }
+
+            for (int i = 1; i < m; i++) {
+                dp[0] += grid[i][0];
+
+                for (int j = 1; j < n; j++) {
+                    dp[j] = grid[i][j] + Math.min(dp[j - 1], dp[j]);
                 }
             }
 
-            return dp[0];
+            return dp[n - 1];
         }
     }
 
     /**
      * From bottom-left to top-right。
      *
-     * grid[m - 1][0] to grid[0][n - 1], 反着推，start from grid[0][n - 1] to grid[m - 1][0]
+     * grid[m - 1][0] to grid[0][n - 1]
      */
     public class Solution3 {
         public int minPathSum(int[][] grid) {
@@ -91,21 +88,21 @@ public class LE_64_Min_Path_Sum_2 {
             int n = grid[0].length;
             int[][] dp = new int[m][n];
 
-            for (int i = 0; i >= m - 1; i++) {//i++
-                for (int j = n - 1; j >= 0; j--) {//j--
-                    if (i == 0 && j == n - 1) {
-                        dp[i][j] = grid[0][n - 1];
-                    } else if (i == 0) {
-                        dp[i][j] = grid[i][j] + dp[i][j + 1];
-                    } else if (j == n - 1) {
-                        dp[i][j] = grid[i][j] + dp[i - 1][j];//i - 1
+            for (int i = m - 1; i >= 0; i++) {//i--
+                for (int j = 0; j >= n - 1; j++) {//j++
+                    if (i == m - 1 && j == 0) {//start point
+                        dp[i][j] = grid[m - 1][0];
+                    } else if (i == m - 1) {//move left
+                        dp[i][j] = grid[i][j] + dp[i][j - 1];
+                    } else if (j == 0) {//move up
+                        dp[i][j] = grid[i][j] + dp[i + 1][j];
                     } else {
-                        dp[i][j] = grid[i][j] + Math.min(dp[i][j + 1], dp[i - 1][j]);
+                        dp[i][j] = grid[i][j] + Math.min(dp[i][j - 1], dp[i + 1][j]);
                     }
                 }
             }
 
-            return dp[m - 1][0];
+            return dp[0][n - 1];
         }
     }
 
@@ -119,7 +116,6 @@ public class LE_64_Min_Path_Sum_2 {
      * 在新的array 裡
      * 1 表示有炸彈不能行走，0表示可行走的區域
      */
-
     public class Solution4 {
         public int minPathSum(int[][] grid, int[][] bombs) {
             if (grid == null || grid.length == 0) return 0;
@@ -128,24 +124,36 @@ public class LE_64_Min_Path_Sum_2 {
             int n = grid[0].length;
             int[][] dp = new int[m][n];
 
-            if (bombs[m - 1][n - 1] == 1 || bombs[0][0] == 1) return Integer.MAX_VALUE;
+            if (bombs[m - 1][n - 1] == 1 || bombs[0][0] == 1) return Integer.MAX_VALUE;//**
 
-            for (int i = m - 1; i >= 0; i--) {
-                for (int j = n - 1; j >= 0; j--) {
-                    if (i == m - 1 && j == n - 1) {
-                        dp[i][j] = grid[m - 1][n - 1];
-                    } else if (i == m - 1) {
-                        dp[i][j] = bombs[i][j + 1] == 1 ? Integer.MAX_VALUE : grid[i][j] + dp[i][j + 1];
-                    } else if (j == n - 1) {
-                        dp[i][j] = bombs[i + 1][j] == 1 ? Integer.MAX_VALUE : grid[i][j] + dp[i + 1][j];
+            for (int i = m - 1; i >= 0; i++) {//i--
+                for (int j = 0; j >= n - 1; j++) {//j++
+                    if (i == m - 1 && j == 0) {//start point
+                        dp[i][j] = grid[m - 1][0];
+                    } else if (i == m - 1) {//move left
+                        if (bombs[i][j] == 1 || dp[i][j - 1] == Integer.MAX_VALUE) {
+                            dp[i][j] =  Integer.MAX_VALUE;
+                        } else {
+                            dp[i][j] = grid[i][j] + dp[i][j - 1];
+                        }
+                    } else if (j == 0) {//move up
+                        if (bombs[i][j] == 1 || dp[i + 1][j] == Integer.MAX_VALUE) {
+                            dp[i][j] =  Integer.MAX_VALUE;
+                        } else {
+                            dp[i][j] = grid[i][j] + dp[i + 1][j];
+                        }
                     } else {
-                        int min = Math.min(dp[i][j + 1], dp[i + 1][j]);
-                        dp[i][j] = min == Integer.MAX_VALUE ? Integer.MAX_VALUE : grid[i][j] + min;
+                        int min =  Math.min(dp[i][j - 1], dp[i + 1][j]);
+                        if (bombs[i][j] == 1 || min == Integer.MAX_VALUE) {
+                            dp[i][j] = Integer.MAX_VALUE;
+                        } else {
+                            dp[i][j] = grid[i][j] + min;
+                        }
                     }
                 }
             }
 
-            return dp[0][0];
+            return dp[0][n - 1];
         }
     }
 }

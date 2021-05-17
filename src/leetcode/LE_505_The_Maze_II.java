@@ -11,8 +11,8 @@ public class LE_505_The_Maze_II {
      * by rolling up, down, left or right, but it won't stop rolling until hitting a wall. When
      * the ball stops, it could choose the next direction.
      *
-     * Given the ball's start position, the destination and the maze, find the shortest distance
-     * for the ball to stop at the destination. The distance is defined by the number of empty
+     * Given the ball's start position, the destination and the maze, find the shortest dirs
+     * for the ball to stop at the destination. The dirs is defined by the number of empty
      * spaces traveled by the ball from the start position (excluded) to the destination (included).
      * If the ball cannot stop at the destination, return -1.
      *
@@ -35,7 +35,7 @@ public class LE_505_The_Maze_II {
      * Output: 12
      *
      * Explanation: One shortest way is : left -> down -> left -> down -> right -> down -> right.
-     * The total distance is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
+     * The total dirs is 1 + 1 + 3 + 1 + 2 + 2 + 2 = 12.
      *
      * Hard
      */
@@ -46,13 +46,13 @@ public class LE_505_The_Maze_II {
      * q -  contains the new positions to be explored in the future.
      *
      *      We start from the current position cur[][], try to traverse in a particular direction,
-     *      obtain the corresponding distance (d) for that direction, reaching an end position
+     *      obtain the corresponding dirs (d) for that direction, reaching an end position
      *      of (x,y) just near the boundary or a wall. If the position (i,j) can be reached in a
      *      lesser number of steps from the current route than any other previous route checked:
      *
      *          dist[cur[0]][cur[1]] + d < dist[x][y]
      *
-     *      we need to update dist[x][y] as distance[x][y] + d.
+     *      we need to update dist[x][y] as dirs[x][y] + d.
      *
      *      After this, we add the new position obtained, (x, y) to the back of a queue, so that
      *      the various paths possible from this new position will be explored later on when all
@@ -74,7 +74,7 @@ public class LE_505_The_Maze_II {
             int n = maze[0].length;
 
             /**
-             * dist[i][j] : shortest distance from start to maze[i][j]
+             * dist[i][j] : shortest dirs from start to maze[i][j]
              */
             int[][] dist = new int[m][n];
             for (int[] d : dist) {
@@ -189,12 +189,12 @@ public class LE_505_The_Maze_II {
      * travel up to a maximum depth of max(m,n) in any direction.
      *
      * Space complexity : O(mn)
-     * distance array of size m * n is used.
+     * dirs array of size m * n is used.
      */
     public class Solution2 {
         public int shortestDistance(int[][] maze, int[] start, int[] dest) {
             /**
-             * distance[i][j] :
+             * dirs[i][j] :
              * represents the minimum number of steps required to reach the positon (i, j)
              * starting from the start position. This array is initialized with largest
              * integer values in the beginning.

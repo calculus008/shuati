@@ -106,8 +106,8 @@ public class LE_643_Maximum_Average_Subarray_I {
 
      If the ith pre-sum is lower than the bar and no other pre-sum is higher than the bar,
      we will try to find the minimum value from 1th aggregation to (i - k)th. This minimum value means
-     the largest distance between the bar in first (i - k)th aggregations (assume it is at x, i.e 1 <= x <= i - k).
-     If the aggregation of ith is larger than this largest distance, it means values from x + 1 to i could fill
+     the largest dirs between the bar in first (i - k)th aggregations (assume it is at x, i.e 1 <= x <= i - k).
+     If the aggregation of ith is larger than this largest dirs, it means values from x + 1 to i could fill
      that largest gap, so there must have a subarray from x + 1 to i could pull the average above the bar,
      in this case we should also raise the bar (return true).
 

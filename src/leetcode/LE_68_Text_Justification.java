@@ -10,20 +10,20 @@ public class LE_68_Text_Justification {
     /**
      * Given an array of words and a length L, format the text such that each line has exactly L
      * characters and is fully (left and right) justified.
-     * <p>
+     *
      * You should pack your words in a greedy approach; that is, pack as many words as you can in each line.
      * Pad extra spaces ' ' when necessary so that each line has exactly L characters.
-     * <p>
+     *
      * Extra spaces between words should be distributed as evenly as possible. If the number of spaces on
      * a line do not divide evenly between words, the empty slots on the left will be assigned more spaces
      * than the slots on the right.
-     * <p>
+     *
      * For the last line of text, it should be left justified and no extra space is inserted between words.
-     * <p>
+     *
      * For example,
      * words: ["This", "is", "an", "example", "of", "text", "justification."]
      * L: 16.
-     * <p>
+     *
      * Return the formatted lines as:
      * [
      * "This    is    an",
@@ -31,7 +31,7 @@ public class LE_68_Text_Justification {
      * "justification.  "
      * ]
      * Note: Each word is guaranteed not to exceed L in length.
-     * <p>
+     *
      *
      * Example 2:
      *
@@ -63,6 +63,13 @@ public class LE_68_Text_Justification {
      * 调节字体使得这个常单词能在一行放下？是否能保证最长的字体在最小的字体下 <= maxWidth?
      */
 
+    /**
+     * Also refer to Text_Wrap
+     *
+     * Similar Question:
+     * Text_Wrap
+     * Text_Wrap_Number_Of_Lines
+     */
     class Solution {
 
         public List<String> fullJustify(String[] words, int maxWidth) {
@@ -98,7 +105,7 @@ public class LE_68_Text_Justification {
                  *
                  * The number of padding spaces : maxWidth - len
                  *
-                 * How many padding spaces each gap gets by evenly distribution : (maxWidth - len) / The number of gaps + 1
+                 * How many padding spaces each gap gets by evenly distribution : ((maxWidth - len) / The number of gaps) + 1
                  * "+ 1" - this is the default one space each word (except the last word) gets.
                  *
                  * How many extra padding spaces left after evenly distribution : (maxWidth - len) % The number of gaps
@@ -125,7 +132,7 @@ public class LE_68_Text_Justification {
                  * 2."w != i + 1" :
                  *   if w == i + 1
                  *   w is the index of the first word of the next line,
-                 *   i is the index of the start word
+                 *   i is the index of the start word of current line
                  *   so it means words[i] is the only word in current line.
                  *
                  * For those 2 cases, no need to do evenly distribution and fully-justified.

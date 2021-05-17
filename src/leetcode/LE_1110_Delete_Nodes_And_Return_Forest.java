@@ -27,7 +27,7 @@ public class LE_1110_Delete_Nodes_And_Return_Forest {
 
     /**
      * The key point is that we need to do two things here:
-     * 1.Add deleted node into result list
+     * 1.Add un-deleted node into result list
      * 2.Doing the actual delete - set child pointer to the delete node as null
      */
     class Solution {
@@ -67,6 +67,27 @@ public class LE_1110_Delete_Nodes_And_Return_Forest {
             node.right = dfs(node.right, deleted);
 
             return deleted ? null : node;
+        }
+
+        /**
+         * This version removes the links for deleted node to its children
+         */
+        private TreeNode dfs1(TreeNode root, boolean isRoot) {
+            if (root == null) return null;
+
+            boolean deleted = set.contains(root.val) ? true : false;
+
+            if (isRoot && !deleted) {
+                res.add(root);
+            }
+
+            TreeNode l = dfs(root.left, deleted);
+            TreeNode r = dfs(root.right, deleted);
+
+            root.left = deleted ? null : l;
+            root.right = deleted ? null : r;
+
+            return deleted ? null : root;
         }
     }
 }

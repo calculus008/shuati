@@ -292,7 +292,7 @@ public class LE_269_Alien_Dictionary {
                         Set<Character> set = graph.get(c1);
 
                         /**
-                         * #4.Only process when set does not contain c2
+                         * #4.Only process when set does not contain c2, c1 -> c2, so indegree for c2 plus one
                          */
                         if (!set.contains(c2)) {
                             set.add(c2);

@@ -2,6 +2,7 @@ package leetcode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Stack;
 
 public class LE_946_Validate_Stack_Sequences {
     /**
@@ -35,7 +36,16 @@ public class LE_946_Validate_Stack_Sequences {
      * pushed and popped have distinct values.
      */
 
-    class Solution {
+    /**
+     * Greedy
+     *
+     * For each value, push it to the stack.
+     * Then, greedily pop values from the stack if they are the next values to pop.
+     * At the end, we check if we have popped all the values successfully.
+     *
+     * Time and Space : O(n)
+     */
+    class Solution1 {
         public boolean validateStackSequences(int[] pushed, int[] popped) {
             if (null == pushed || null == popped) {
                 return false;
@@ -52,6 +62,29 @@ public class LE_946_Validate_Stack_Sequences {
             }
 
             return stack.isEmpty();
+        }
+    }
+
+    /**
+     * Using pushed as the stack.
+     * This solution will take O(1) extra space,
+     * though it also changed the input.
+     *
+     * Time O(N)
+     * Space O(1)
+     */
+    class Solution2 {
+        public boolean validateStackSequences(int[] pushed, int[] popped) {
+            int i = 0, j = 0;
+            for (int x : pushed) {
+                pushed[i++] = x;
+                while (i > 0 && pushed[i - 1] == popped[j]) {
+                    i--;
+                    j++;
+                }
+            }
+
+            return i == 0;
         }
     }
 }

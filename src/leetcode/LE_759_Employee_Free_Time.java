@@ -47,8 +47,8 @@ public class LE_759_Employee_Free_Time {
      * Improve from Solution2, we don't need to merge and run another loop to find answer,
      * we can just find answer during k-way merge
      *
-     * In theory, this is the optimize for both time and space.
-     * The same as Soluion2 in official solutions
+     * In theory, this is the optimal solution for both time and space.
+     * The same is as Soluion2 in official solutions
      * https://leetcode.com/problems/employee-free-time/solution/
      *
      * Time  : O(mnlogm)
@@ -91,7 +91,7 @@ public class LE_759_Employee_Free_Time {
                     pre.end = Math.max(pre.end, cur.end);
                 }
 
-                if (p.col + 1< schedule.get(p.row).size()) {
+                if (p.col + 1 < schedule.get(p.row).size()) {
                     p.col++;
                     pq.offer(p);
                 }

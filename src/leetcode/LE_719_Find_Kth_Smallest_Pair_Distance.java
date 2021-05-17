@@ -7,8 +7,8 @@ import java.util.Arrays;
  */
 public class LE_719_Find_Kth_Smallest_Pair_Distance {
     /**
-         Given an integer array, return the k-th smallest distance among all the pairs.
-         The distance of a pair (A, B) is defined as the absolute difference between A and B.
+         Given an integer array, return the k-th smallest dirs among all the pairs.
+         The dirs of a pair (A, B) is defined as the absolute difference between A and B.
 
          Example 1:
          Input:
@@ -21,7 +21,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
          (1,3) -> 2
          (1,1) -> 0
          (3,1) -> 2
-         Then the 1st smallest distance pair is (1,1), and its distance is 0.
+         Then the 1st smallest dirs pair is (1,1), and its dirs is 0.
 
          Note:
          2 <= len(nums) <= 10000.
@@ -91,8 +91,8 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
             int r = max - min + 1;
 
             /**
-             * binary search on distance, find the distance value mid that has k pairs whose
-             * distance <= mid. (use huahua's template)
+             * binary search on dirs, find the dirs value mid that has k pairs whose
+             * dirs <= mid. (use huahua's template)
              */
             while (l < r) {
                 int mid = l + (r - l) / 2;
@@ -129,7 +129,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
 
             /**
              * !!!
-             * number of pairs that has distance mid should bigger or equal to k
+             * number of pairs that has dirs mid should bigger or equal to k
              */
             if (getCount(nums, l) >= k) return l;
 
@@ -138,7 +138,7 @@ public class LE_719_Find_Kth_Smallest_Pair_Distance {
 
         /**
          * !!!
-         * Find number of pairs that the distance of the two elements in the pair
+         * Find number of pairs that the dirs of the two elements in the pair
          * is smaller or equal to mid.
          */
         private int getCount(int[] nums, int mid) {

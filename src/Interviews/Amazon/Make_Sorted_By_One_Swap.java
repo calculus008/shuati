@@ -6,7 +6,14 @@ public class Make_Sorted_By_One_Swap {
     /**
      * https://www.geeksforgeeks.org/check-if-array-can-be-sorted-with-one-swap/
      *
-     * Given an array containing N elements. Find if it is possible to sort it in non-decreasing order using at most one swap.
+     * Given an array containing N elements. Find if it is possible to sort it in
+     * non-decreasing order using at most one swap.
+     *
+     * "借鉴这个思路 https://www.geeksforgeeks.org/ch ... rted-with-one-swap/
+     * 假设需要升序的数组，用一个数组indices存index i where nums > nums[i+1]
+     * 然后检查这个数组，如果只有1个元素，那么swap(nums, nums[i+1])，看是否有序
+     * 如果有2个元素i, j， 那么swap[nums, nums[i+1]], 看是否有序
+     * 如果有多于2个元素，若indices中的元素均为consecutive，那么翻转nums[indices[0], indices.back() + 2]，看是否有序"
      *
      * Examples:
      *

@@ -65,6 +65,13 @@ public class LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game {
      */
 
     /**
+     * Related:
+     * LE_348_Design_Tic_Tac_Toe                      Design data structure, give one move, check if there's a winner
+     * LE_794_Valid_Tic_Tac_Toe_State                 Given a board, check if the board is in a correct state.
+     * LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game      Given sequence of moves in array, check if there's a winner
+     */
+
+    /**
      * Counting
      *
      * For each player, there are 8 possible winning pattern, we cound them on each step.
