@@ -49,23 +49,34 @@ public class LE_1345_Jump_Game_IV {
      * 很tricky的BFS的变形题，要转好几个弯。
      *
      * 1.From a given index i, the valid next stop is the indices that have the same value as arr[i], AND i + 1, i - 1
-     *   if i + 1 and i -1 are with index range. So those valid indices is the NEXT LEVEL, therefore it is converted to
-     *   a shorted distance problem => BFS
+     *   if i + 1 and i -1 are within index range. So those valid indices is the NEXT LEVEL, therefore it is converted to
+     *   a shorted path problem => BFS
      * 2.However, if we jump back to an index that is previously visited, it forms a loop, we can't reach the end and will
      *   stuck in the loop, therefore, we need to remember which indices that have been visited.
-     * 3."next.clear()" is a magic! I used the same BFS and always got TLE without removing looked up indices.
-     *   This method mainly solves the problem when there are duplicate values in arr, for example [7,7,7,7,1]:
+     * 3."next.clear()"
+     *   Theoretically, without this line, the solution should solve the problem, but on leetcode, I always got TLE
+     *   without removing looked up indices by including this line. This lines mainly solves the case that there are
+     *   duplicate values in arr.
+     *
+     *   For example : [7,7,7,7,1]:
      *   map:
      *   7 => 0- > 1 -> 2 -> 3
      *   1 => 4
      *   visited : {0}
      *
      *   After poll 0 from q, visited : {0, 1, 2, 3}, next level {1, 2, 3}. When we go to next level, value is "7" again.
-     *   We are still iterating to check again and again that's why. next.clear() saves us from that repeated iterating on same values when n is large
+     *   We are still iterating to check again and again....: since we already set indices with value "7" in visited[] when
+     *   we first run into "7". So next time we get value "7", we will just repeatedly check visited[] and will not add
+     *   anything to q (since those indices are already set "True"). Imagine we have, say,  50000000000 repeated "7" instead
+     *   of just 4, then those checking are totally wasted time.
      *
-     *   In the case where each index has the same value, I only go to the neighbor (the same value) once then I break all the edge by using: next.clear();.
-     *   So the algorithm will traverse up to N edges for j and 2N edges for (i+1, i-1).
-     *   That's why time complexity is O(N)
+     *   That's why. next.clear() saves us from that repeated iterating on same values when n is large
+     *
+     *   The result is that we only go to the neighbor (the same value) once then we break
+     *   all the edge by using "next.clear()". So the algorithm will traverse up to N edges for j and 2N edges for (i+1, i-1).
+     *   That's why time complexity is O(N) (!!!)
+     *
+     *   If we don't have "next.clear()", time complexity won't be O(n)
      */
     class Solution {
         public int minJumps(int[] arr) {
