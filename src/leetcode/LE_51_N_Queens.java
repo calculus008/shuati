@@ -89,4 +89,68 @@ public class LE_51_N_Queens {
 
         res.add(list);
     }
+
+
+}
+
+/*
+HuahuaJiang solution
+Diaganal number = n*2-1  and n*2-1
+idx = x+y  and x-y+(n-1)
+ */
+class Solution {
+    private boolean[] cols;
+    private boolean[] diag1;
+    private boolean[] diag2;
+    private char[][] board;
+
+    public List<List<String>> solveNQueens(int n) {
+        board = new char[n][n];
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                board[i][j] = '.';
+            }
+        }
+
+        List<List<String>> res = new ArrayList<List<String>>();
+        cols = new boolean[n];
+        diag1 = new boolean[2*n-1];
+        diag2 = new boolean[2*n-1];
+        helper(res, n, 0);
+        return res;
+    }
+
+    private void helper(List<List<String>> res, int n, int row) {
+        if (row == n) {
+            buildRes(res);
+            return;
+        }
+
+        for(int y = 0; y < n; y++) {
+            if (!available(row, y, n)) continue;
+            updateBoard(row, y, n, true);
+            helper(res, n, row+1);
+            updateBoard(row, y, n, false);
+        }
+    }
+
+    private boolean available(int x, int y, int n) {
+        return !cols[y] && !diag1[x+y] && !diag2[x-y+n-1];
+    }
+
+    private void updateBoard(int x, int y, int n, boolean isPut) {
+        cols[y] = isPut;
+        diag1[x+y] = isPut;
+        diag2[x-y+n-1] = isPut;
+        board[x][y] = isPut? 'Q':'.';
+    }
+
+    private void buildRes(List<List<String>> res) {
+        List<String> sol = new ArrayList<>();
+        for (int i = 0; i < board.length; i++) {
+            String row = String.valueOf(board[i]);
+            sol.add(row);
+        }
+        res.add(sol);
+    }
 }
