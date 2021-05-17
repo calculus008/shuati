@@ -1,4 +1,6 @@
 #Mono Stack
+https://leetcode.com/problems/sum-of-subarray-minimums/discuss/178876/stack-solution-with-very-detailed-explanation-step-by-step
+
 LE_496_Next_Greater_Element_I
 LE_503_Next_Greater_Element_II
 LE_739_Daily_Temperatures
@@ -13,5 +15,10 @@ LE_84_Largest_Rectangle_In_Histogram
 LE_85_Max_Rectangle
 
 856 Score of Parentheses
-901 Online Stock Span
-907 Sum of Subarray Minimums
+LE_901_Online_Stock_Span
+LE_907_Sum_Of_Subarray_Minimums
+
+LE_316_Remove_Duplicate_Letters
+LE_321_Create_Maximum_Number
+LE_402_Remove_K_Digits
+LE_769_Max_Chunks_To_Make_Sorted

@@ -6,7 +6,7 @@ import java.util.Stack;
 /**
  * Created by yuank on 3/7/18.
  */
-public class LE_85_Max_Rectangle {
+public class LE_85_Maximal_Rectangle {
     /**
         Given a 2D binary matrix filled with 0's and 1's,
         find the largest rectangle containing only 1's and return its area.

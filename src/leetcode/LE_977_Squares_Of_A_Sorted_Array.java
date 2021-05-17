@@ -38,6 +38,9 @@ public class LE_977_Squares_Of_A_Sorted_Array {
                 return res;
             }
 
+            /**
+             * If the first element is smaller than 0, then turn into a 2 pointers problem.
+             */
             int l = 0;
             int r = n - 1;
             int i = n - 1;
