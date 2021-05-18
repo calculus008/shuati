@@ -1,130 +1,131 @@
 #1.Interview style of Google/FB:
-LE_937_Reorder_Log_Files
-LE_408_Valid_Word_Abbreviation       Same kind of problem : LE_809_Expressive_Words, LE_925_Long_Pressed_Name
-LE_56_Merge_Intervals
-LE_91_Decode_Ways
+LE_937_Reorder_Log_Files   --- done
+LE_408_Valid_Word_Abbreviation       Same kind of problem : LE_809_Expressive_Words, LE_925_Long_Pressed_Name    -- done
+LE_56_Merge_Intervals   -- done
+LE_91_Decode_Ways    --- done
 LE_05_Longest_Palindromic_Substring
-LE_409_Longest_Palindrome
+LE_409_Longest_Palindrome  -- done
 
 LI_596_Minimum_Subtree
-LI_628_Maximum_Subtree
+LI_628_Maximum_Subtree    -- similar to LE 1120
 
-LI_626_Rectangle_Overlap
+LI_626_Rectangle_Overlap  (LE 836)-- done
 LI_604_Window_Sum
 LE_207_Course_Schedule
-LE_210_Course_Schedule_II
-LI_613_High_Five
+LE_210_Course_Schedule_II   - done, dup
+LI_613_High_Five (LE 1086)  - done
 
 LI_612_K_Closest_Points
-LE_973_K_Closest_Points_To_Origin
+LE_973_K_Closest_Points_To_Origin   -- done, dup
 K_Closest_Points_To_A_Given_Point
 
-LE_138_Copy_List_With_Random_Pointer
+LE_138_Copy_List_With_Random_Pointer   -- done
 LI_629_Minimum_Spanning_Tree           (UnionFind)
 
 ##related
 LI_1784_Decrease_To_Be_Palindrome
 LI_837_Palindromic_Substrings
 LI_1075_Subarray_Product_Less_Than_K
-LE_305_Number_Of_Islands_II            (UnionFind)
-LE_209_Minimum_Size_Subarray_Sum
-LE_179_Largest_Number
+LE_305_Number_Of_Islands_II            (UnionFind)  -- revisit
+LE_209_Minimum_Size_Subarray_Sum   -- dup
+LE_179_Largest_Number       -- done
 LE_57_Insert_Interval
 
-LI_1574_Music_Playlist                 (**) (leetcode 920)
-LE_1024_Video_Stitching
+LI_1574_Music_Playlist                 (**) (leetcode 920)  -- DP
+LE_1024_Video_Stitching                 -- done (can use DP. But I used PQ)
 
-LE_44_Wildcards_Matching               (backtrack)
+LE_44_Wildcards_Matching               (backtrack)  -- dup
 
 #2.Basic algorithm and data structure I
-LE_65_Valid_Number
+LE_65_Valid_Number              -- done
 LE_311_Sparse_Matrix_Multiplication
-LE_277_Find_The_Celebrity
-LE_163_Missing_Range
+LE_277_Find_The_Celebrity    -- done
+LE_163_Missing_Range  -- done
 LE_50_POW
-LE_12_Integer_To_Roman                 LI_654_Sparse_Matrix_Multiplication
+LE_12_Integer_To_Roman             -- done
+LI_654_Sparse_Matrix_Multiplication   - dup
 
-LE_09_Palindrome_Number
-LE_258_Add_Digits
-LE_202_Happy_Number
+LE_09_Palindrome_Number   -- done
+LE_258_Add_Digits       -- done (rememeber the (num-1)%9+1 )
+LE_202_Happy_Number     -- done
 LE_69_Sqrt
-LE_13_Roman_To_Integer
-LI_180_Binary_Representation
-LE_08_String_To_Integer
+LE_13_Roman_To_Integer  -- done
+LI_180_Binary_Representation   -- ** how to ?
+LE_08_String_To_Integer   --- done
 
-LE_246_Strobogrammatic_Number
-LE_20_Valid_Parentheses
-LE_161_One_Edit_Distance
-LE_150_Evaluate_Reverse_Polish_Notation     Evaluate_Reverse_Polish_Notation
+LE_246_Strobogrammatic_Number  -- done
+LE_20_Valid_Parentheses   -- done
+LE_161_One_Edit_Distance  -- done
+LE_150_Evaluate_Reverse_Polish_Notation     -- dup
 LI_206_Interval_Sum
 LE_155_Min_Stack
 
 #3.Basic algorithm and data structure II
-LE_438_Find_All_Anagrams_In_A_String
-LE_242_Valid_Anagram
-LE_288_Unique_Word_Abbreviation
+LE_438_Find_All_Anagrams_In_A_String   -- done
+LE_242_Valid_Anagram   -- done
+LE_288_Unique_Word_Abbreviation   -- done
 LI_526_Load_Balancer
-LE_128_Longest_Consecutive_Sequence
-LE_527_Word_Abbreviation
+LE_128_Longest_Consecutive_Sequence   -- dup
+LE_527_Word_Abbreviation   - revisit
 
 LI_646_First_Position_Unique_Character
-LE_36_Valid_Sudoku
-LE_187_Repeated_DNA_Sequences
-LE_03_Longest_Substring_Without_Repeating_Characters
-LE_49_Group_Anagrams
+LE_36_Valid_Sudoku   -- done
+LE_187_Repeated_DNA_Sequences   -- done
+LE_03_Longest_Substring_Without_Repeating_Characters   - dup
+LE_49_Group_Anagrams    - dup
 
-LE_300_Longest_Increasing_Subsequence
-LE_336_Palindrome_Pairs                      (***)
+LE_300_Longest_Increasing_Subsequence   - revisit
+LE_336_Palindrome_Pairs                      (***)  -- done
 
 #4.Search BFS
-LE_286_Walls_And_Gates
+LE_286_Walls_And_Gates   -- dup
 LI_598_Zombie_In_Matrix
-LE_130_Surrounded_Regions
-LE_752_Open_The_Lock
+LE_130_Surrounded_Regions  -- done
+LE_752_Open_The_Lock   - dup
 LI_794_Sliding_Puzzle_II
 
-LE_200_Number_Of_Islands
+LE_200_Number_Of_Islands    -- dup
 LI_611_Knight_Shortest_Path
-LE_261_Graph_Valid_Tree                   (Union Find)
-LE_305_Number_Of_Islands_II               (Union Find)
-LE_317_Shortest_Distance_From_All_Buildings  (LI 573)
-LE_127_Word_Ladder
+LE_261_Graph_Valid_Tree                   (Union Find)  -- dup
+LE_305_Number_Of_Islands_II               (Union Find)  -- revisit
+LE_317_Shortest_Distance_From_All_Buildings  (LI 573) -- done
+LE_127_Word_Ladder   -- dup
 
-LE_417_Pacific_Atlantic_Water_Flow
+LE_417_Pacific_Atlantic_Water_Flow   -- done
 LE_314_Binary_Tree_Vertical_Order_Traversal   (***)
 LE_133_Clone_Graph
 LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 
 #5.Tree & Divide and Conquer
-LI_661_Convert_BST_To_Greater_Tree
-LE_366_Find_Leaves_Of_Binary_Tree
-LE_156_Binary_Tree_Upside_Down
-LE_285_Inorder_Successor_In_BST
-LE_140_Word_Break_II
+LI_661_Convert_BST_To_Greater_Tree (LE 538)  -- done
+LE_366_Find_Leaves_Of_Binary_Tree  -- done
+LE_156_Binary_Tree_Upside_Down   -- done
+LE_285_Inorder_Successor_In_BST   -- dup
+LE_140_Word_Break_II   -- dup
 
-LE_559_Maximum_Depth_Of_Nary_Tree
-LE_139_Word_Break
-LE_98_Validate_BST
+LE_559_Maximum_Depth_Of_Nary_Tree   -- done
+LE_139_Word_Break   -- dup
+LE_98_Validate_BST  -- dup
 LI_11_Search_Range_In_BST
-LE_87_Scramble_String                         (***)
+LE_87_Scramble_String                         (***)  -- TLE revisit
 
 LE_278_First_Bad_Version
 LE_34_Search_For_A_Range
 LE_74_Search_In_2D_Matrix
 
 #6.Search DFS
-LE_254_Factor_Combinations
-LE_282_Expression_Add_Operators
-LE_425_Word_Squares                           (***)
+LE_254_Factor_Combinations   -- done
+LE_282_Expression_Add_Operators   -- done
+LE_425_Word_Squares                           (***)  -- done
 LE_126_Word_Ladder_II                         (***)
 LE_127_Word_Ladder
 
-LE_17_Letter_Combinations_Of_A_Phone_Number
+LE_17_Letter_Combinations_Of_A_Phone_Number   -- dup
 LE_51_N_Queens
 LE_52_N_Queens_II
-LE_37_Sudoku_Solver
+LE_37_Sudoku_Solver    -- done
 
-LE_320_Generalized_Abbreviation
+LE_320_Generalized_Abbreviation   -- done
 
 
 #Abbreviation

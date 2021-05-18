@@ -4,6 +4,11 @@ package leetcode;
  * Created by yuank on 4/13/18.
  */
 public class LE_264_Ugly_Number_II {
+    /*
+        BL: better use the priorityQueue + Set. Becareful to use Long for potential overflow.
+     */
+
+
     /**
          Write a program to find the n-th ugly number.
 

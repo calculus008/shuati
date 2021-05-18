@@ -108,5 +108,50 @@ public class LE_140_Word_Break_II {
      *
      * return : [[superhighway,], [super, high, way], [superhigh, way]]
      */
+
+    //BL : use memoization
+    public List<String> wordBreak_JiuZhang(String s, List<String> wordDict) {
+        //List<String> res = new ArrayList<>();
+        /* Set<Character> charset = new HashSet<>();
+        for(String str: wordDict) {
+            for (char c: str.toCharArray()) {
+                charset.add(c);
+            }
+        }
+        for (char c: s.toCharArray()) {
+            if (!charset.contains(c)) return new ArrayList<String>();
+        }
+        */
+        Map<String, List<String>> mem = new HashMap<>();
+        return helper(s, wordDict, mem);
+    }
+
+    private List<String> helper(String s, List<String> wordDict, Map<String, List<String>> mem) {
+        if (mem.containsKey(s)) {
+            return mem.get(s);
+        }
+
+        List<String> res = new ArrayList<>();
+        if (s.length() ==0) {
+            return res;
+        }
+
+        if (wordDict.contains(s)) {
+            res.add(s);
+        }
+
+        for (int i = 0; i< s.length()-1; i++) {
+            String w = s.substring(0, i+1);
+            if (wordDict.contains(w)) {
+                List<String> splits = helper(s.substring(i+1), wordDict, mem);
+                for (String sp : splits) {
+                    res.add(w + " " + sp);
+                }
+            }
+        }
+
+        mem.put(s, res);
+        return res;
+    }
 }
 
