@@ -70,11 +70,14 @@ public class LE_1345_Jump_Game_IV {
      *   anything to q (since those indices are already set "True"). Imagine we have, say,  50000000000 repeated "7" instead
      *   of just 4, then those checking are totally wasted time.
      *
-     *   That's why. next.clear() saves us from that repeated iterating on same values when n is large
+     *   If we have arr of length n with the same value for each index, the for loop go through the "next" list actually
+     *   costs O(n ^ n) (for each of the n elements, need to go through the list of length n), and it is totally unnecessary
+     *   since when we do that with the first element of arr, we already set visited info for all the next of elements
+     *   when we we go through the "next" list.
      *
-     *   The result is that we only go to the neighbor (the same value) once then we break
-     *   all the edge by using "next.clear()". So the algorithm will traverse up to N edges for j and 2N edges for (i+1, i-1).
-     *   That's why time complexity is O(N) (!!!)
+     *   That's why. next.clear() saves us from that repeated iterating on same values. The result is that we only go to
+     *   the neighbor (the same value) once then we break all the edge by using "next.clear()". So the algorithm will
+     *   traverse up to N edges for j and 2N edges for (i+1, i-1).That's why time complexity is O(N) (!!!)
      *
      *   If we don't have "next.clear()", time complexity won't be O(n)
      */
