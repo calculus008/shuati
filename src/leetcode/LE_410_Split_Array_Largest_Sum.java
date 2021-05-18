@@ -173,6 +173,7 @@ public class LE_410_Split_Array_Largest_Sum {
 
             long left = 0;
             long right = 0;
+            //The range of the sum is between the biggest nums and total sum.
             for (int num : nums) {
                 left = Math.max(num, left);
                 right += num;
@@ -194,13 +195,15 @@ public class LE_410_Split_Array_Largest_Sum {
             return (int)left;
         }
 
+        //The target here is the possible sum of each subarray. If we could forme m+ subarrays with sum > target,
+        // means the actual min sum is greater than this target. Therefore, the left point should adjust.
         private boolean isBigger(int[] nums, long target, int m) {
             long sum = 0;//!!!
             int count = 1;
             for (int num : nums) {
                 if (sum + num > target) {
                     count++;
-                    sum = num; //!!!
+                    sum = num; //!!! This makes sure the next subarray starts from the current num.
 
                     if (count > m) {
                         return true;

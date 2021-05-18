@@ -66,7 +66,7 @@ public class LE_269_Alien_Dictionary {
      Other topological sort problems : LE_207, LE_210
      */
     class Solution1 {
-        public String alienOrder(String[] words) {
+        public String alienOrder(String[] words) {  // has bug -- ["abc","ab"]
             if (words == null || words.length == 0) return "";
 
             StringBuilder res = new StringBuilder();
@@ -104,6 +104,8 @@ public class LE_269_Alien_Dictionary {
                         }
                         break;//!!!
                     }
+
+                    if (j == next.length-1 && j < cur.length-1) return "";  ///this is for the case of ["abc","ab"]
                 }
             }
 

@@ -39,6 +39,12 @@ public class LE_44_Wildcards_Matching {
      *  star and assume that it matches one more char"
      **/
 
+    /** BL
+     *  if there is multiple *, only backtrack to the current last one. as previous ones are all matched.
+     * @param str
+     * @param pattern
+     * @return
+     */
     public boolean isMatch_practice(String str, String pattern) {
         if (str == null || pattern == null) return false;
 

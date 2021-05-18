@@ -61,7 +61,7 @@ public class LE_78_Subsets {
         res.add(new ArrayList<Integer>(temp));
 
         for (int i = index; i < nums.length; i++) {
-            temp.add(i);
+            temp.add(nums[i]);
             helper(res, nums, temp, i + 1);
             temp.remove(temp.size() - 1);
         }

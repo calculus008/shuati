@@ -78,4 +78,37 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
 
         return res;
     }
+
+    // Bitao's solution faster than 100%
+    public int lengthOfLongestSubstringTwoDistinct2(String s) {
+        if (s == null || s.length() == 0) return 0;
+
+        int[] charl = new int[256];
+        int charcount = 0;
+        int start = 0;
+        int end =0;
+        int res = 0;
+
+        while(end < s.length()) {
+            char c = s.charAt(end);
+
+            if (charl[c] == 0) {
+                charcount++;
+            }
+            charl[c]++;
+            if (charcount <=2) {
+                int l = end -start+1;
+                res = Math.max(res, l);
+            }
+
+            while (charcount > 2) {
+                char t = s.charAt(start);
+                start++;
+                charl[t]--;
+                if (charl[t] == 0) charcount--;
+            }
+            end++;
+        }
+        return res;
+    }
 }
