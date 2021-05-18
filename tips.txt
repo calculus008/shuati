@@ -1,0 +1,264 @@
+String manipulation
+1. Use an array of char[256], each element represent a ASCII char.
+2. Sort an array to get easier search
+3. Choose a data structure considering the feature of a collection
+a. Array maintains the sequence of a list
+b. Set keeps the uniqueness
+c. Map has relationship with key value pair
+4. Don't just think of 1 string. Sometimes adding string or double the string can simplify things. Such as the rotation quesion.
+
+------------------------------
+Tree
+1. Difference between trees
+2. Binary search tree - 
+a. how to build one 
+b. how to traverse - BFS, DFS
+
+Linkedlist
+1. Double LinkedList to have O(1) on removal. 
+
+------------------------------
+Recursion
+1. Find the basic logic that can be recursed
+2. Find the way to break out the recursion
+3. Check the boundries
+
+------------------------------
+Graph
+1. 3 ways of representing map
+Edge lists
+Adjacency metrics
+Adjacency lists
+2. Travers/sort graph
+Topological sort -- sort by indegree 
+BFS - during BFS, if there is more than 1 state or properties need to pass to next level, create a object to store them.
+
+------------------------------
+Timeline questions:
+-- A series of event happen on a timeline
+-- Find the relationship between the events
+1. Sorting the events along the timeline
+2. Maintain queues of the events
+
+------------------------------
+Sorting
+1. Merge sort
+2. Quick sort
+3. Radix sort
+
+------------------------------
+Math
+1. Be careful with double, float numbers. Better use BigDecimal to do the calculation so that the presition is preserved. 
+2. When declare a new BigDecimal, use the constructor that takes String instead of the one takes double.
+3. Slope = Delta(x)/Delta(y) but it is better to use string to represent. To do that, need use the Max dividend of the two. To find the GCD:
+        public int generateGcd(int x, int y) {
+            if (y == 0) return x;
+            return generateGcd(y, x % y);
+        }
+
+------------------------------
+Bit manipulation: 
+	1. BigInteger has built in bit operation. It also is the biggest number in java can represent (64bits). 
+	2. Shift left is *2(power of number of position shifted), shift right is /2(power of number of position shifted).
+	3. Check whether a bit is set - AND(&) a number with that bit. This is also getting that particular bit
+	4. Set a bit - OR(|) a number with that bit set.
+	5. Unset a bit - AND(&) a number with only that bit unset. 
+	6. Flip/toggle a bit - XOR(^) a number with that bit set 
+	7. Bit right of the decimal point is - 1/2power(n) with n=1 the first bit after '.': 0.101 = 1*(1/2) + 0*(1/4) + 1*(1/8)
+	8. Every 8 bits is a Byte. So int is 32 bits and 4 bytes. Binery form is 64 bits, Hex form is 8 bytes.
+	9. 0 ^ num = num; num ^ num = 0
+	10. n & (n-1) remove the lowest 1.
+
+------------------------------
+Singleton DP
+1. Implementation:
+	public class Singleton {
+        // Private constructor. Prevents instantiation from other classes.
+        private Singleton() { }
+ 
+        /**
+         * Initializes singleton.
+         *
+         * SingletonHolder is loaded on the first execution of Singleton.getInstance()
+         * or the first access to SingletonHolder.INSTANCE, not before.
+         */
+        private static class SingletonHolder {
+                private static final Singleton INSTANCE = new Singleton();
+        }
+ 
+        public static Singleton getInstance() {
+                return SingletonHolder.INSTANCE;
+        }
+	}
+
+2. Why singlegton?
+For logging. Cfg read, DB access for performance issue.
+And for anything don't want to repeat doing - like loading a set of data at beginning of a class. 
+Global access of set of data - but can use static class in this case.
+Stateless class - a singleton class can be mocked for testing purpose. A static method can't.
+
+------------------------------
+Factory DP:
+GoF patterns: Factory Method and Abstract Factory.
+creates objects without exposing the instantiation logic to the client.
+refers to the newly created object through a common interface
+1. Implementation
+a. Factory class that mask the constructor of concrete products. 
+b. Register the products class so that adding new product does not require modify the factory class.
+c. Registering product can go with reflection way or use abstract method in product abstract class so each concrete product class register itself.
+ 
+2. When to use:
+If you have many objects of the same base type and you manipulate them mostly casted to abstract types, then you need a factory
+
+------------------------------
+Stacks and Queues
+both usually implement using linkedlist. 
+Stacks - new item add at head, and pop at head
+Queue - new item add at tail, and pop at head
+  
+------------------------------  
+Unicode vs ASCII
+Unicode is 16 bits - 2 bytes. Java is unicode
+ASCII is 8 bits - 1 byte. The first 127 char in Java is same as ASCII.  
+
+------------------------------
+Deadlock
+Coffman conditions for a deadlock to happen
+1. Mutually exclusive
+2. Hold and Wait
+3. No preemption
+4. Circular wait
+
+------------------------------
+Storage size
+2pow(32) ~ 4 billion ---- this is number of unique integer 
+2pow(31) ~ 2 billion ---- this is number of non-neg integer
+1GB = 1000MB= 1024*1024KB=1024*1024*1024Byte ~ 1 billion
+1 GB ~ 8 billion of bits
+2pow(10) = 1024.
+1GB = 2pow(10) * 2pow(10) * 2pow(10) * 8 bits = 2pow(30) * 2pow(3) = 2pow(33)
+
+------------------------------
+SQL
+1. Use '' in the queries.
+
+2. Basic commands
+create table "tablename" ("column1" "data type" [constraint], "column2" "data type" [constraint], "column3" "data type" [constraint]);
+
+insert into "tablename" (first_column,...last_column) values (first_value,...last_value);
+
+update "tablename" set "columnname" = "newvalue" [,"nextcolumn" = "newvalue2"...] where "columnname" OPERATOR "value" [and|or "column" OPERATOR "value"];
+
+delete from "tablename" where "columnname" OPERATOR "value" [and|or "column" OPERATOR "value"];
+
+SELECT [ALL | DISTINCT] column1[,column2] FROM table1[,table2] [WHERE "conditions"] [GROUP BY "column-list"] [HAVING "conditions] [ORDER BY "column-list" [ASC | DESC] ];
+
+3. Aggregate Funcs
+MIN	returns the smallest value in a given column
+MAX	returns the largest value in a given column
+SUM	returns the sum of the numeric values in a given column
+AVG	returns the average value of a given column
+COUNT	returns the total number of values in a given column
+COUNT(*)	returns the number of rows in a table
+
+Aggregate funcs are required by GROUP BY clause.
+If a column want to be selected correctly it has to be in GROUP BY as well.
+HAVING requires GROUP BY
+
+4. Other OPERATORs in Where clause
+SELECT col1, SUM(col2) FROM "list-of-tables" WHERE col3 IN (list-of-values);
+SELECT col1, SUM(col2) FROM "list-of-tables" WHERE col3 BETWEEN value1 AND value2;
+
+5. Math Funcs
++	addition
+-	subtraction
+*	multiplication
+/	division
+%	modulo
+ABS(x)	returns the absolute value of x
+SIGN(x)	returns the sign of input x as -1, 0, or 1 (negative, zero, or positive respectively)
+MOD(x,y)	modulo - returns the integer remainder of x divided by y (same as x%y)
+FLOOR(x)	returns the largest integer value that is less than or equal to x
+CEILING(x) or CEIL(x)	returns the smallest integer value that is greater than or equal to x
+POWER(x,y)	returns the value of x raised to the power of y
+ROUND(x)	returns the value of x rounded to the nearest whole integer
+ROUND(x,d)	returns the value of x rounded to the number of decimal places specified by the value d
+SQRT(x)	returns the square-root value of x
+
+6. Joins
+SELECT "list-of-columns" FROM table1,table2 WHERE "search-condition(s)";
+Select "list-of-columns" FROM table1 INNER JOIN table2 ON "search-condition";
+
+------------------------------
+Testing
+1. Ask questions about
+Who will use it, why
+What are the use cases
+Boundary of use
+Stess and failure conditions
+How to perform test
+
+2. For software
+manual or automated
+black or white box
+
+3. Proceed with test
+Give a plan - prioritize, separate into functions/area, type of testing
+Testing types:
+	Functional
+	Regression
+	Load and performance - response time, throughput, resource utilization, max load
+	Integration with other
+	E2E/UAT
+
+
+
+==============================
+
+Practice Area
+	Data structure - Tries
+	bit vector?
+	SQL
+	
+Book:
+1. Chapter need to study -
+2. Chapters need to practice                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+Probability
+Threads/Locks
+Databases
+
+
+Linkedin Prep
+1. Schedule
+Code debug
+Coding
+Lunch
+Manager - behavioral and past experience
+Design
+Coding
+
+2. Prep for
+a. Past exp and projects
+b. White board coding
+c. Questions
+d. Testing approaches
+e. Design patterns and approaches
+
+System testing
+1. Search engines
+2. Email system
+3. Cloud
+
+
+Big O
+1. Binery search -> O(logn)
+2. For loop -> O(n)
+3. Double for loop -> O(npow2)
+4. Sort O(nlogn)
+
+
+
+Strategies
+1. Use a different value to identify. LE289
+2. Front and back run on array
+3. 
