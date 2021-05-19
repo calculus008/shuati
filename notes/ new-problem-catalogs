@@ -1,0 +1,34 @@
+# BFS
+LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
+LE_1345_Jump_Game_IV
+LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
+
+
+# Greedy
+## Jump Game
+LE_45_Jump_Game_II
+LE_1024_Video_Stitching
+LE_1326_Minimum_Number_Of_Taps_To_Open_To_Water_A_Garden
+
+
+#Design
+LE_1157_Online_Majority_Element_In_Subarray
+LE_1236_Web_Crawler
+LE_1242_Web_Crawler_Multithreaded
+LE_1244_Design_A_Leaderboard
+LE_1352_Product_Of_The_Last_KNumbers
+
+
+#Binary Search (TreeSet, TreeMap)
+LE_1157_Online_Majority_Element_In_Subarray
+LE_1268_Search_Suggestions_System
+LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
+
+
+#Heap(PriorityQueue)
+LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
+
+#Tree
+LE_1110_Delete_Nodes_And_Return_Forest
+LE_1315_Sum_Of_Nodes_With_Even_Valued_Grandparent
+LE_1382_Balance_Binary_Search_Tree
