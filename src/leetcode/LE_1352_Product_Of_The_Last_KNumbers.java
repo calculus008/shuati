@@ -51,7 +51,16 @@ public class LE_1352_Product_Of_The_Last_KNumbers {
     /**
      * https://leetcode.com/problems/product-of-the-last-k-numbers/discuss/510260/JavaC%2B%2BPython-Prefix-Product
      *
-     * Prefix product, similar idea as prefix sum. Example:
+     * Prefix product, similar idea as prefix sum.
+     * "0 <= num <= 100" : the key is how to deal with 0. k is like the width of a sliding window. When
+     * a 0 is added, product of last k numbers becomes 0, until this 0 moves out of the sliding window.
+     * So, when adding a 0, we re-init a list, add value "1" to the list. Why? the basic idea using prefix
+     * product is that the result is list[last index] / list[last index - k - 1], can't have a zero here, have
+     * "1" will make the division work. Also, whenever the list is initialized, 1 is added. If we have a list
+     * that is inserted with x positive numbers, the length of the list is actually x + 1. This also makes
+     * division work.
+     *
+     * Example:
      *         list
      * Add 0 : [1]
      * Add 3 : [1, 3]
