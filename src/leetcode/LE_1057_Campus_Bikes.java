@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class LE_1057_Campus_Bikes {
     /**
@@ -41,6 +39,7 @@ public class LE_1057_Campus_Bikes {
      */
 
     /**
+     * Solution1
      * Bucket Sort
      *
      * Very important implicit conditions:
@@ -53,11 +52,14 @@ public class LE_1057_Campus_Bikes {
      *
      * Therefore, it's O(M * N) time and O(M * N) space.
      *
+     * Solution2
+     * PriorityQueue
+     *
      * A straight forward solution is to use a PriorityQueue of bike and worker pairs. (The heap order should be Distance ASC,
      * WorkerIndex ASC, Bike ASC). But each insertion and poll on pq will require log(size of pq), therefore time wise, it
      * is more expensive than the bucket sort solution : O(MN log(MN))
      */
-    class Solution {
+    class Solution1 {
         public int[] assignBikes(int[][] workers, int[][] bikes) {
             /**
              * Buckets, defined as array of list whose element is int array
@@ -112,6 +114,48 @@ public class LE_1057_Campus_Bikes {
 
         private int getDistance(int[] p1, int[] p2) {
             return Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);
+        }
+    }
+
+    class Solution2 {
+        public int[] assignBikes(int[][] workers, int[][] bikes) {
+            int l1 = workers.length, l2 = bikes.length;
+            int[] wo = new int[l1], bi = new int[l2];
+            Arrays.fill(wo, -1);
+            Arrays.fill(bi, -1);
+
+            PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> {
+                int comp = Integer.compare(a[0], b[0]);
+                if (comp == 0) {
+                    if (a[1] == b[1]) {
+                        return Integer.compare(a[2], b[2]);
+                    }
+
+                    return Integer.compare(a[1], b[1]);
+                }
+
+                return comp;
+            });
+
+            for (int i = 0; i < l1; i++) {
+                for (int j = 0; j < l2; j++) {
+                    int[] worker = workers[i];
+                    int[] bike = bikes[j];
+                    int dist = Math.abs(worker[0] - bike[0]) + Math.abs(worker[1] - bike[1]);
+                    pq.offer(new int[]{dist, i, j});
+                }
+            }
+
+            int assigned = 0;
+            while (!pq.isEmpty() && assigned < l1) {
+                int[] s = pq.poll();
+                if (wo[s[1]] == -1 && bi[s[2]] == -1) {
+                    wo[s[1]] = s[2];
+                    bi[s[2]] = s[1];
+                    assigned++;
+                }
+            }
+            return wo;
         }
     }
 }
