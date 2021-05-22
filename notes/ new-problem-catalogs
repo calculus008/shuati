@@ -3,6 +3,9 @@ LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
 LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
 
+# DFS
+LE_1376_Time_Needed_To_Inform_All_Employees
+
 
 # Greedy
 ## Jump Game
@@ -28,10 +31,26 @@ LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 #Heap(PriorityQueue)
 LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 
+
 #Tree
 LE_1110_Delete_Nodes_And_Return_Forest
 LE_1315_Sum_Of_Nodes_With_Even_Valued_Grandparent
 LE_1382_Balance_Binary_Search_Tree
 
+
 #Bucket Sort
 LE_1057_Campus_Bikes
+
+
+#Monotone (increase/decrease) Stack
+LE_42_Trapping_Rain_Water
+LE_84_Largest_Rectangle_In_Histogram
+LE_85_Maximal_Rectangle
+LE_239_Sliding_Window_Maximum
+LE_316_Remove_Duplicate_Letters
+LE_321_Create_Maximum_Number
+LE_402_Remove_K_Digits
+LE_456_132_Pattern
+LE_503_Next_Greater_Element_II
+LE_769_Max_Chunks_To_Make_Sorted
+LE_907_Sum_Of_Subarray_Minimums
