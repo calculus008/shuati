@@ -2,6 +2,8 @@
 LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
 LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
+LE_1377_Frog_Position_After_T_Seconds
+
 
 # DFS
 LE_1376_Time_Needed_To_Inform_All_Employees
@@ -54,3 +56,7 @@ LE_456_132_Pattern
 LE_503_Next_Greater_Element_II
 LE_769_Max_Chunks_To_Make_Sorted
 LE_907_Sum_Of_Subarray_Minimums
+
+
+#String & HashMap
+LE_1417_Reformat_The_String
