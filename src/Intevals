@@ -8,6 +8,9 @@ LI_577_Merge_K_Sorted_Interval_Lists                      (***) Revisit  A varia
 LE_986_Interval_List_Intersections                        Same as LI_821_Time_Intersection
                                                           LE_986 is O(n)
                                                           LI_821 using line sweep is O(nlogn)
+#Merge overlap - must share common sub-overlap
+LE_435_Non_Overlapping_Intervals
+LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
 
 #line sweep
 LE_252_Meeting_Rooms                                      (lint 920)
@@ -23,7 +26,8 @@ LI_131_The_Skyline_Problem
 
 #Combination of Insert,merge and remove
 LE_352_Data_Stream_As_Disjoint_Intervals                  (******)
-Merge_Intervals                                           (*******)
+
+#Merge_Intervals                                           (*******)
 LE_855_Exam_Room
 
 

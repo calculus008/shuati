@@ -8,7 +8,7 @@ public class LE_855_Exam_Room {
      * In an exam room, there are N seats in a single row, numbered 0, 1, 2, ..., N-1.
      *
      * When a student enters the room, they must sit in the seat that maximizes the
-     * dirs to the closest person.  If there are multiple such seats, they sit
+     * distance to the closest person.  If there are multiple such seats, they sit
      * in the seat with the lowest number.  (Also, if no one is in the room, then
      * the student sits at seat number 0.)
      *
@@ -45,11 +45,11 @@ public class LE_855_Exam_Room {
     /**
      * It's an interval problem
      *
-     * Need to measure the dirs between seated students: O(n) is trivial, but not as fast.
+     * Need to measure the distance between seated students: O(n) is trivial, but not as fast.
      * Use PriorityQueue to store the potential candidate as interval, and also calculate the
-     * candidate's mid-dirs to both side.
+     * candidate's mid-distance to both side.
      *
-     * seat(): pq.poll() to find interval of largest dirs. Split and add new intervals back to queue.
+     * seat(): pq.poll() to find interval of largest distance. Split and add new intervals back to queue.
      *
      * leave(x): one seat will be in 2 intervals: remove both from pq, and merge to a new interval.
      *

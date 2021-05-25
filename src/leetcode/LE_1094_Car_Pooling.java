@@ -45,7 +45,7 @@ public class LE_1094_Car_Pooling {
      * An Interval Sweep Line problem in disguise
      *
      * Sweep line by TreeMap, two loops:
-     * #1.Put all start/end time and count in dist (sorted by TreeMap)
+     * #1.Put all start/end time and count in a map (sorted by TreeMap)
      * #2.Go over the TreeMap, check if number of total passengers exceeds the capacity at any time.
      *
      * Same as :
