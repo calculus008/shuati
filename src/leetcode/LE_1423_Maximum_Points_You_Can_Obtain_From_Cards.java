@@ -46,6 +46,38 @@ public class LE_1423_Maximum_Points_You_Can_Obtain_From_Cards {
      */
 
     /**
+     * Sliding Window
+     * https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/discuss/597763/Python3-Easy-Sliding-Window-O(n)%3A-Find-minimum-subarray
+     */
+    class Solution1 {
+        public int maxScore(int[] cardPoints, int k) {
+            int n = cardPoints.length;
+            int sum = 0;
+            for (int i = 0; i < k ; i++) {
+                sum += cardPoints[i];
+            }
+
+            int res = sum;
+            for (int end = k - 1; end >= 0; end--) {
+                sum -= cardPoints[end];
+
+                /**
+                 * number of items shifted :
+                 * "end" is the index that is moved out of current sliding window, so (end + 1)th item is out.
+                 * x = k - end  = k - end
+                 * find the index at the end: (n - 1) - (x - 1)
+                 *
+                 * n - 1 - ((k - end) - 1) = n - 1 - k + end + 1 = n - k + end
+                 * **/
+                sum += cardPoints[n - k + end];
+                res = Math.max(sum, res);
+            }
+
+            return res;
+        }
+    }
+
+    /**
      * Prefix Sum
      * https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/discuss/597825/Simple-Clean-Intuitive-Explanation-with-Visualization
      *
@@ -69,7 +101,7 @@ public class LE_1423_Maximum_Points_You_Can_Obtain_From_Cards {
      * 4.Repeat Step 3 for all i ranging from 0 to K.
      * 5.Return the maximum value of points reached.
      */
-    class Solution {
+    class Solution2 {
         public int maxScore(int[] cardPoints, int k) {
             int n = cardPoints.length;
             int[] presum1 = new int[n];
