@@ -43,6 +43,12 @@ public class LE_379_Design_Phone_Directory {
      */
 
     /**
+     * At first look, it seems that you can just use HashMap as internal data structure. It works well for release() and
+     * check(), but get() does not work, how do you keep tracking what is the next available unit? So it requires some
+     * different data structure.
+     */
+
+    /**
      * Strict O(1) solution
      * Use a pointer "next" to mark the next new number (never released), and a HashSet to collect all recycled numbers.
      * The get() method will look up first in the recycling set rather than assign a brand new number in bank. No need

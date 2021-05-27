@@ -20,6 +20,7 @@ LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
 
 
 #Design
+LE_379_Design_Phone_Directory
 LE_1157_Online_Majority_Element_In_Subarray
 LE_1236_Web_Crawler
 LE_1242_Web_Crawler_Multithreaded
@@ -30,7 +31,7 @@ LE_1352_Product_Of_The_Last_KNumbers
 #Binary Search (TreeSet, TreeMap)
 LE_1157_Online_Majority_Element_In_Subarray
 LE_1268_Search_Suggestions_System
-LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
+LE_166_Find_Servers_That_Handled_Most_Number_Of_Requests
 
 
 #Heap(PriorityQueue)
@@ -67,3 +68,8 @@ LE_1417_Reformat_The_String
 
 #Interval
 LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
+
+
+# Array
+## Sliding Window
+LE_1423_Maximum_Points_You_Can_Obtain_From_Cards
