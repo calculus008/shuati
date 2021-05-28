@@ -122,6 +122,27 @@ public class LE_379_Design_Phone_Directory {
      * We have allocated pool of numbers of given size. Each free number in array points to next free number (emulating linked list inside array).
      *
      * Initialization takes O(n), if you are asked to implement using an array, this should be the solution.
+     * It seems that this problem is designed for using Free List.
+     *
+     * Here the index value (0 ~ maxNumbers - 1) can be deemed as "address", next[i] is the value that is stored at mem block with address "i",
+     * we make it point to the next available free mem block. For example : next[2] = 3, mem block at address "2" contains the address of next
+     * available free mem bock - 3. Once a mem block is allocated, we set its value to -1. "pos" is the pointer that points to the head of the
+     * "linked list" of free mem blocks.
+     *
+     * get():
+     * 1.Check if there's still free mem block. That is : if next[pos] == -1. If no free mem, return -1.
+     * 2.We still have free mem block, its address is pos.
+     *   Remember the address, save it in "ret" so we will return later :        "int ret = pos;"
+     *   Move pos so it points to the next free mem block in the "linked list":  "pos = next[pos];"
+     *   Flag the allocated mem block as taken :                                 "next[ret] = -1;"
+     *
+     * release(int number):
+     * 1.Check if number in valid range and if it is already taken.
+     * 2.Release:
+     *   Think it as putting the released mem block to the front of the "linked list" by let it point to the head:
+     *      next[number] = pos;
+     *   Set the head of the "linked list" to this mem block (make it the head)
+     *      pos = number;
      */
     class PhoneDirectory2 {
         int[] next;
@@ -134,6 +155,10 @@ public class LE_379_Design_Phone_Directory {
             for (int i = 0; i < max; i++) {
                 /**
                  * "0 <= number < maxNumbers"
+                 * so when i = maxNumbers - 1, next[maxNumbers - 1] can't point to index maxNumbers, since it is
+                 * out of the index range. Instead, using mod, we let it point to index 0. If we keep doing get()
+                 * until the last one (maxNumbers - 1), it points to index 0, by this time, numbers[0] = -1, meaning it
+                 * is already allocated, so get() returns -1.
                  */
                 next[i] = (i + 1) % max;
             }
@@ -143,12 +168,10 @@ public class LE_379_Design_Phone_Directory {
         public int get() {
             if (next[pos] == -1) return -1;
 
-            //"pos" points to the current available unit, return it.
             int ret = pos;
-            //move the "pos" to the next available unit
             pos = next[pos];
-            //current unit is taken, mark it as -1
             next[ret] = -1;
+
             return ret;
         }
 
@@ -159,10 +182,7 @@ public class LE_379_Design_Phone_Directory {
         public void release(int number) {
             if (!isValid(number) || next[number] != -1) return;
 
-            //think it as putting the release unit to the front of the available linked list.
-            //pointing the release unit to the head of the available units list
             next[number] = pos;
-            //set available units list head to the released unit
             pos = number;
         }
 
