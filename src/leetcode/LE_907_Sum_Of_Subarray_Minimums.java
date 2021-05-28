@@ -126,7 +126,7 @@ public class LE_907_Sum_Of_Subarray_Minimums {
      * Good summary of mono stack problems.
      *
      *
-     * 1.
+     * 1.find the previous less element of each element in a vector with O(n) time
      * 2.find the next less element of each element in a vector with O(n) time
      *
      * Key:
@@ -241,7 +241,7 @@ public class LE_907_Sum_Of_Subarray_Minimums {
             for (int i = 0; i < len; i++) {
                 /**
                  * !!!
-                 * Must cast multiplication resutl to long before addition,
+                 * Must cast multiplication result to long before addition,
                  * otherwise, value will be wrong for really large number.
                  */
                 sum = (sum + (long) A[i] * B[i] * arr[i]) % mod;
