@@ -64,7 +64,7 @@ public class LE_588_Design_In_Memory_File_System {
      * Renaming files/directories is also very simple, since all we need to do is to create a temporary
      * copy of the directory structure/file with a new name and delete the last entry.
      *
-     * Relocating a hierarchichal subdirectory structure from one directory to the other is also very easy,
+     * Relocating a hierarchical subdirectory structure from one directory to the other is also very easy,
      * since, all we need to do is obtain the address for the corresponding subdirectory class, and assign
      * the same at the new position in the new directory structure.
      *
@@ -83,10 +83,10 @@ public class LE_588_Design_In_Memory_File_System {
      *        "m" refers to the length of the input string. We need to scan the input string
      *        once to split it and determine the various levels.
      *        "n" refers to the depth of the last directory level in the given input for ls.
-     *        This factor is taken becaus we need to enter n levels of the tree structure
+     *        This factor is taken because we need to enter n levels of the tree structure
      *        to reach the last level.
-     *        "k" refers to the number of entries(files+subdirectories) in the last level
-     *        directory(in the current input). We need to sort these names giving a factor
+     *        "k" refers to the number of entries (files + subdirectories) in the last level
+     *        directory (in the current input). We need to sort these names giving a factor
      *        of klog(k).
      *
      * mkdir() : O(m + n)
@@ -99,11 +99,11 @@ public class LE_588_Design_In_Memory_File_System {
         class File {
             boolean isFile = false;
             /**
-             * Or we can use TreeMap here so that we sort the files/subdirs
+             * Or we can use TreeMap here so that we sort the files/sub-dirs
              * list in mkdir() (O(l + l * nlogn)), and ls() will only take O(l)
              *
-             * l : is the length of the file path(number of subdirs).
-             * n : average number of subdirs/files in FileNode Node.
+             * l : is the length of the file path(number of sub-dirs).
+             * n : average number of sub-dirs/files in FileNode Node.
              */
             Map<String, File> children = new HashMap<>();
             String content = "";
@@ -121,6 +121,10 @@ public class LE_588_Design_In_Memory_File_System {
             List<String> result = new ArrayList<>();
             String name = "";
 
+            /**
+             * Go in directory level by level, if we can't find the dir or file name at
+             * a level, return an empty list.
+             */
             for (String dir : dirs) {
                 /**
                  * !!!
@@ -176,6 +180,9 @@ public class LE_588_Design_In_Memory_File_System {
             return cur.content;
         }
 
+        /**
+         * Common functions used by mkdir() and addContentToFile()
+         */
         private File traverse(String filePath){
             String[] dirs = filePath.split("/");
             File cur = root;
@@ -248,17 +255,30 @@ public class LE_588_Design_In_Memory_File_System {
     /**
      * A fast solution from leetcode
      *
+     * Use TreeMap to keep children sorted when doing insertion.
+     *
      * 35ms
+     */
+    /**
+     * In given constraints:
+     * "You can assume that all operations will be passed valid parameters, and users will not attempt to retrieve
+     * file content or list a directory or file that does not exist."
+     *
+     * So the solution takes the shortcut of always creating dir if it does not exist in getFile(). It assumes that
+     * only mkdir() will supply dir that does not exist and ls(), addContent() and readContent won't.
+     *
+     * If we don't have this given constraint, we can add param to getFile() -> getFile(String path, boolean create),
+     * See Solution_2 for details.
      */
     class FileSystem_1 {
         class FileNode {
-            String path;
+            String name;
             boolean isFile;
             String content = "";
             TreeMap<String, FileNode> children;
 
             public FileNode(String path) {
-                this.path = path;
+                this.name = path;
                 children = new TreeMap<>();
             }
         }
@@ -291,7 +311,7 @@ public class LE_588_Design_In_Memory_File_System {
             FileNode p = getFile(path);
 
             if (p.isFile) {
-                res.add(p.path);
+                res.add(p.name);
                 return res;
             }
 
@@ -321,6 +341,83 @@ public class LE_588_Design_In_Memory_File_System {
         }
     }
 
+    class FileSystem_2 {
+        class FileNode {
+            String path;
+            boolean isFile;
+            String content = "";
+            TreeMap<String, FileNode> children;
+
+            public FileNode(String path) {
+                this.path = path;
+                children = new TreeMap<>();
+            }
+        }
+
+        FileNode root;
+
+        public FileSystem_2() {
+            root = new FileNode("/");
+        }
+
+        private FileNode getFile(String path, boolean isCreate) {
+            FileNode cur = root;
+            String[] dirs = path.split("/");
+
+            for (String dir : dirs) {
+                if (dir.length() == 0) continue;
+
+                if (!cur.children.containsKey(dir)) {
+                    if (isCreate) {
+                        cur.children.put(dir, new FileNode(dir));
+                    } else {
+                        return null;
+                    }
+                }
+
+                cur = cur.children.get(dir);
+            }
+
+            return cur;
+        }
+
+        public List<String> ls(String path) {
+            List<String> res = new ArrayList<>();
+            FileNode p = getFile(path, false);
+
+            if (p == null) return res;
+
+            if (p.isFile) {
+                res.add(p.path);
+                return res;
+            }
+
+            if (p.children != null) {
+                for (String name : p.children.keySet()) {
+                    res.add(name);
+                }
+            }
+
+            return res;
+        }
+
+        //test when directory name conflict with file name
+        public void mkdir(String path) {
+            FileNode p = getFile(path, true);
+        }
+
+        public void addContentToFile(String filePath, String content) {
+            FileNode p = getFile(filePath, true);
+            p.isFile = true;
+            p.content += content;
+        }
+
+        public String readContentFromFile(String filePath) {
+            FileNode p = getFile(filePath, true);
+            return p.content;
+        }
+    }
+
     /**
      * This solution is more OOP.
      *
@@ -330,7 +427,7 @@ public class LE_588_Design_In_Memory_File_System {
      *
      * Single Responsibility principle in SOLID
      */
-    public class FileSystem_2 {
+    public class FileSystem_3 {
         // Private class
         private class FileNode{
             private TreeMap<String, FileNode> children;
@@ -381,7 +478,7 @@ public class LE_588_Design_In_Memory_File_System {
 
         private FileNode root;
 
-        public FileSystem_2() {
+        public FileSystem_3() {
             root = new FileNode("");
         }
 
