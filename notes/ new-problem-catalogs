@@ -19,8 +19,10 @@ LE_1326_Minimum_Number_Of_Taps_To_Open_To_Water_A_Garden
 LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
 
 
-#Design
+# Design
 LE_379_Design_Phone_Directory
+LE_588_Design_In_Memory_File_System
+LE_631_Design_Excel_Sum_Formula
 LE_1157_Online_Majority_Element_In_Subarray
 LE_1236_Web_Crawler
 LE_1242_Web_Crawler_Multithreaded
@@ -28,23 +30,24 @@ LE_1244_Design_A_Leaderboard
 LE_1352_Product_Of_The_Last_KNumbers
 
 
-#Binary Search (TreeSet, TreeMap)
+# Binary Search (TreeSet, TreeMap)
 LE_1157_Online_Majority_Element_In_Subarray
 LE_1268_Search_Suggestions_System
 LE_166_Find_Servers_That_Handled_Most_Number_Of_Requests
 
 
-#Heap(PriorityQueue)
+# Heap(PriorityQueue)
 LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 
 
-#Tree
+# Tree
+LE_919_Complete_Binary_Tree_Inserter
 LE_1110_Delete_Nodes_And_Return_Forest
 LE_1315_Sum_Of_Nodes_With_Even_Valued_Grandparent
 LE_1382_Balance_Binary_Search_Tree
 
 
-#Bucket Sort
+# Bucket Sort
 LE_1057_Campus_Bikes
 
 
@@ -62,14 +65,19 @@ LE_769_Max_Chunks_To_Make_Sorted
 LE_907_Sum_Of_Subarray_Minimums
 
 
-#String & HashMap
+# String & HashMap
 LE_1417_Reformat_The_String
 
 
-#Interval
+# Interval
 LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
 
 
 # Array
 ## Sliding Window
 LE_1423_Maximum_Points_You_Can_Obtain_From_Cards
+
+
+# Math
+LE_396_Rotate_Function
+LE_504_Base_7
