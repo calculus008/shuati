@@ -6,8 +6,8 @@ LE_1377_Frog_Position_After_T_Seconds
 
 
 # DFS
+LE_834_Sum_Of_Distances_In_Tree
 LE_1376_Time_Needed_To_Inform_All_Employees
-
 
 # Greedy
 ## Jump Game
@@ -41,6 +41,7 @@ LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 
 
 # Tree
+LE_834_Sum_Of_Distances_In_Tree
 LE_919_Complete_Binary_Tree_Inserter
 LE_1110_Delete_Nodes_And_Return_Forest
 LE_1315_Sum_Of_Nodes_With_Even_Valued_Grandparent

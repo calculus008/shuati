@@ -209,8 +209,11 @@ public class LE_631_Design_Excel_Sum_Formula {
      *
      * Good for get()/sum() heavy system
      *
-     * Tricky part is how to update cells since there are dependence between cells. So we use HashSet dependentCells in
-     * Cell class to remember all cell dependence and it's convenient to update (remove or add)
+     * Tricky part is how to update cells since there are dependence between cells.
+     * So we use "HashSet<Cell> dependentCells" in Cell class to remember all other cells that depend on "me".
+     * "HashMap<Cell, Integer> formula" remembers what cells "I" depend on.
+     *
+     * This is like a directed graph, those 2 data structures in a cell (a node) act as in/out relationship with other nodes.
      */
     public class Excel2 {
         Cell[][] table;
