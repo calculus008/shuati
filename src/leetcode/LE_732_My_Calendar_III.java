@@ -57,7 +57,7 @@ public class LE_732_My_Calendar_III {
      *          
      * Same solution as LE_731_My_Calendar_II solution2.
      *
-     * Even though it is Hard, it is actually simplier thatn LE_731_My_Calendar_II
+     * Even though it is Hard, it is actually similar to LE_731_My_Calendar_II
      * with this solution
      *
      * Time  : O(nlogn)
