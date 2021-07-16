@@ -70,7 +70,14 @@ public class LE_884_Uncommon_Words_From_Two_Sentences {
     }
 
     /**
-     * One HashMap, cantatenate two sentences together so we treat it as one sentence, then the word with count 1 is the answer.
+     * One HashMap, contatenate two sentences together so we treat it as one sentence, then the word with count 1 is the answer.
+     *
+     * Intuition:
+     * No matter how many sentences,
+     * uncommon word = words that appears only once !!!
+     *
+     * Similar Problem
+     * LE_819_Most_Common_Word
      */
     class Solution2 {
         public String[] uncommonFromSentences(String A, String B) {
