@@ -11,8 +11,6 @@ public class LE_819_Most_Common_Word {
      * Words in the list of banned words are given in lowercase, and free of punctuation.
      * Words in the paragraph are not case sensitive.  The answer is in lowercase.
      *
-     *
-     *
      * Example:
      *
      * Input:
@@ -43,8 +41,11 @@ public class LE_819_Most_Common_Word {
     /**
      * 1.Put banned words into set
      * 2.split given paragrah into words
-     * 3.Iterate through words, count frequency in a dist if the word is not banned.
+     * 3.Iterate through words, count frequency in a HashMap if the word is not banned.
      * 4.Iterate through count dist to get the max frequency
+     *
+     * Similar Problem
+     * LE_884_Uncommon_Words_From_Two_Sentences
      */
     public String mostCommonWord(String paragraph, String[] banned) {
         Set<String> set = new HashSet<>(Arrays.asList(banned));
