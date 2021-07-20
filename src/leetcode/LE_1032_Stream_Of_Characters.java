@@ -53,6 +53,10 @@ public class LE_1032_Stream_Of_Characters {
         }
 
         TrieNode root;
+        /**
+         * "there is a limit on the number of queries which is 40000. So, sb can at max be of length 40,000 which
+         * I don't think will cause out of memory with modern machines."
+         */
         StringBuilder sb;
 
         private void createTrie(String[] words) {

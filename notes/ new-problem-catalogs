@@ -64,7 +64,7 @@ LE_456_132_Pattern
 LE_503_Next_Greater_Element_II
 LE_769_Max_Chunks_To_Make_Sorted
 LE_907_Sum_Of_Subarray_Minimums
-
+LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
 
 # String & HashMap
 LE_1417_Reformat_The_String
@@ -77,6 +77,7 @@ LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
 # Array
 ## Sliding Window
 LE_1423_Maximum_Points_You_Can_Obtain_From_Cards
+LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
 
 ## HashMap
 LE_819_Most_Common_WordO
