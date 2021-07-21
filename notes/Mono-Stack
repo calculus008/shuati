@@ -1,0 +1,116 @@
+https://leetcode.com/problems/sum-of-subarray-minimums/discuss/178876/stack-solution-with-very-detailed-explanation-step-by-step
+
+1.Find PLE and NLE
+   class Demo {
+        /**
+         * Mono Increase Stack is used for:
+         * Find the Previous Less Element (PLE) of each element in a list (or array) with O(n) time.
+         * For example:
+         * [3, 7, 8, 4]
+         * The previous less element of 7 is 3.
+         * The previous less element of 8 is 7.
+         * The previous less element of 4 is 3.
+         *
+         * -1 in res : no PLE
+         *
+         * Push index, not element itself, into stack.
+         * "num" represents the number pushed into the stack at current stack (after add PLE to res):
+         * stack           res
+         * "0"             -1
+         *  0 "1"          A[0] = 3
+         *  0  1 "2"       A[1] = 7
+         *  0 "3"          A[0] = 3
+         */
+        public List<Integer> findPreviousLessElements(int[] A) {
+            List<Integer> res = new ArrayList<>();
+            Stack<Integer> stack = new Stack<>();
+            for (int i = 0; i < A.length; i++) {
+                while (!stack.isEmpty() && A[stack.peek()] > A[i]) {
+                    stack.pop();
+                }
+                int PLE = stack.isEmpty() ? -1 : A[stack.peek()];
+                res.add(PLE);
+
+                stack.push(i);
+            }
+            return res;
+        }
+
+        /**
+         * Mono Decrease Stack is used for:
+         * Find the Next Less Element (NLE) of each element in a list (or array) with O(n) time:
+         * What is the next less element of an element?
+         * For example:
+         * [3, 7, 8, 4]
+         * The next less element of 8 is 4.
+         * The next less element of 7 is 4.
+         * There is no next less element for 3 and 4.
+         *
+         * stack            res
+         * "0"              -
+         *  0 "1"           -
+         *  0  1  "2"       -
+         *  0 "3"           res[2] = A[3] = 4
+         *                  res[1] = A[3] = 4
+         *
+         *                  [-1, 4, 4, -1]
+         */
+        public int[] findNextLessElements(int[] A) {
+            int[] res = new int[A.length];
+            Arrays.fill(res, -1);
+
+            Stack<Integer> stack = new Stack<>();
+            for (int i = 0; i < A.length; i++) {
+                while (!stack.isEmpty() && A[stack.peek()] > A[i]) {
+                    int top = stack.pop();
+                    res[top] = A[i];
+                }
+                stack.push(i);
+            }
+            return res;
+        }
+    }
+
+2.Maintain the max and min element in a sliding window
+LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
+
+                //mono decrease stack to save the max value
+
+                while (!maxDeque.isEmpty() && maxDeque.peekLast() < nums[right]) {//!!!while
+                    maxDeque.removeLast();
+                }
+                maxDeque.addLast(nums[right]);
+
+                //mono increase stack to save the min value
+                while (!minDeque.isEmpty() && minDeque.peekLast() > nums[right]) {//!!!while
+                    minDeque.removeLast();
+                }
+                minDeque.addLast(nums[right]);
+
+                while (maxDeque.peekFirst() - minDeque.peekFirst() > limit) {//!!!while
+                    if (maxDeque.peekFirst() == nums[left]) {//!!!nums[left]
+                        maxDeque.removeFirst();
+                    }
+                    if (minDeque.peekFirst() == nums[left]) {//!!!nums[left]
+                        minDeque.removeFirst();
+                    }
+                    left++;//!!!
+                }
+
+
+#Mono Stack
+LE_42_Trapping_Rain_Water
+LE_84_Largest_Rectangle_In_Histogram
+LE_85_Maximal_Rectangle
+LE_239_Sliding_Window_Maximum
+LE_316_Remove_Duplicate_Letters
+LE_321_Create_Maximum_Number
+LE_402_Remove_K_Digits
+LE_456_132_Pattern
+LE_496_Next_Greater_Element_I
+LE_503_Next_Greater_Element_II
+LE_769_Max_Chunks_To_Make_Sorted
+LE_862_Shortest_Subarray_With_Sum_At_Least_K
+LE_907_Sum_Of_Subarray_Minimums
+LE_1019_Next_Greater_Node_In_Linked_List
+LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit

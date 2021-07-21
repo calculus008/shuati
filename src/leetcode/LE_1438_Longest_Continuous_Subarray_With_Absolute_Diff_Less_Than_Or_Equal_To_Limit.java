@@ -44,10 +44,11 @@ public class LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or
      * Sliding Window + Deque (Mono Stack)
      *
      * 找符合条件的subarray的最大长度，很容易想到是要用Sliding Window. 问题在于，每次移动左右边界，判断新的window是否符合条件，如果
-     * 用Brutal Force, 那就需要计算美个元素和其他元素的差，O(n ^ 2), 这肯定不对。
+     * 用Brutal Force, 那就需要计算每个元素和其他元素的差，O(n ^ 2), 这肯定不对。
      *
      * !!! 关键：
-     * "Absolute difference between any two elements is less than or equal to limit" is basically => "Absolute difference between min and max elements of subarray"
+     * "Absolute difference between any two elements is less than or equal to limit" is basically => "Absolute difference
+     * between min and max elements of subarray".
      * 所以，需要保存当前subarray的最大和最小值 -> Use mono queue (Deque)
      *
      * Now the question becomes => find the longest subarray in which the absolute difference between min and max is less
@@ -67,11 +68,13 @@ public class LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or
 
             int res = 0;
             for (int right = 0, left = 0; right < nums.length; right++) {
+                //mono decrease stack
                 while (!maxDeque.isEmpty() && maxDeque.peekLast() < nums[right]) {//!!!while
                     maxDeque.removeLast();
                 }
                 maxDeque.addLast(nums[right]);
 
+                //mono increase stack
                 while (!minDeque.isEmpty() && minDeque.peekLast() > nums[right]) {//!!!while
                     minDeque.removeLast();
                 }
@@ -95,17 +98,19 @@ public class LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or
     }
 
     /**
-     * Sliding Winow + TreeMap
+     * Sliding Window + TreeMap
      * Use TreeMap to get min/max.
      * More costly than Solution1, because TreeMap takes O(nlogn)
      */
     class Solution2 {
         public int longestSubarray(int[] A, int limit) {
-            int left = 0, right;
+            /**
+             * TreeMap is a freq count, key is element value, val is number of appearances
+             */
             TreeMap<Integer, Integer> m = new TreeMap<>();
             int res = 0;
 
-            for (right = 0; right < A.length; right++) {
+            for (int left = 0, right = 0; right < A.length; right++) {
                 m.put(A[right], 1 + m.getOrDefault(A[right], 0));
 
                 while (m.lastEntry().getKey() - m.firstEntry().getKey() > limit) {
@@ -121,4 +126,31 @@ public class LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or
             return res;
         }
     }
+
+    /**
+     * Pattern of Sliding Window Algorithm
+     *            int res = 0;
+     *            //declare data structure (May use all kinds of data structures)
+     *
+     *            for (int left = 0, right = 0; right < A.length; right++) {
+     *                 //#1.Add element at A[right] to window, using the logic specified by problem (adding to sum etc)
+     *                 //   Adjust related data structure and variables.
+     *
+     *                 //#2.Based on problem requirement, do WHILE for condtion that the window property is FALSE.
+     *                 //   So essentially, as long as the window property is no hold, we will keep moving the left side
+     *                 //   until the window property is true again.
+     *                 //   Implicitly, it also means that we will continue the "for" loop as long as the window property
+     *                 //   holds TRUE, meaning keep moving the right side of the window.
+     *                 while (condition is FALSE) {
+     *                    //remove element at A[left]
+     *                    //adjust related data structure and variables
+     *                    left++;
+     *                 }
+
+     *                 //#3.After step #2, we are sure that window property is TRUE here, then this is the place to update
+     *                 //   the min/max length of the window.
+     *                 res = Math.max(res, right - left + 1);
+     *             }
+     *
+     */
 }
