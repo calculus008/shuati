@@ -1,0 +1,22 @@
+Bellman Ford algorithm:
+https://algs4.cs.princeton.edu/44sp/
+https://algs4.cs.princeton.edu/44sp/BellmanFordSP.java.html
+https://web.stanford.edu/class/archive/cs/cs161/cs161.1168/lecture14.pdf
+https://en.wikipedia.org/wiki/Bellman–Ford_algorithm
+https://www.geeks for geeks.org/bellman-ford-algorithm-dp-23/(remove the 2 spaces among the links to make it valid)
+
+Dijkstra's algorithm:
+https://algs4.cs.princeton.edu/44sp/
+https://algs4.cs.princeton.edu/44sp/DijkstraSP.java.html
+https://en.wikipedia.org/wiki/Dijkstra's_algorithm
+https://www.geeks for geeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/ (remove the 2 spaces among the links to make it valid)
+
+Similar problems:
+
+LE_407_Trapping_Rain_Water_II
+LE_499_The_Maze_III
+LE_505_The_Maze_II
+LE_743_Network_Delay_Time
+LE_787_Cheapest_Flights_Within_K_Stops
+LE_1514_Path_With_Maximum_Probability
+1631. Path With Minimum Effort

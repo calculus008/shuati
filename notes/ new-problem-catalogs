@@ -4,11 +4,17 @@ LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
 LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
 LE_1377_Frog_Position_After_T_Seconds
+LE_1514_Path_With_Maximum_Probability
 
 
 # DFS
 LE_834_Sum_Of_Distances_In_Tree
 LE_1376_Time_Needed_To_Inform_All_Employees
+
+
+# Dijkstra
+LE_1514_Path_With_Maximum_Probability
+
 
 # Greedy
 ## Jump Game
