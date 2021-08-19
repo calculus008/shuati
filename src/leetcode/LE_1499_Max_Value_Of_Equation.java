@@ -74,6 +74,8 @@ public class LE_1499_Max_Value_Of_Equation {
     /**
      * Mono Stack solution
      *
+     * When using a heap to maintain an ordered subsequence/subarray, consider using a monotonic stack
+     *
      * Keep the point with max (p[1] - p[0]) at the head of dq (mono decrease stack)
      */
     class Solution2 {
