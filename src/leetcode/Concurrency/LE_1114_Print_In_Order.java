@@ -2,6 +2,7 @@ package leetcode.Concurrency;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.*;
 
 public class LE_1114_Print_In_Order {
     /**
@@ -39,6 +40,46 @@ public class LE_1114_Print_In_Order {
      *
      * Easy
      */
+
+    /**
+     * https://leetcode.com/problems/print-in-order/solution/
+     * To summarize, in order to prevent the race condition in concurrency, we need a mechanism that possess two capabilities:
+     * 1). access control on critical section.
+     * 2). notification to the blocking threads.
+     */
+
+    /**
+     * Pair Synchronization with AtomicInteger in Java
+     * In order to enforce the execution sequence of the jobs, we could create some dependencies between pairs of jobs,
+     * i.e. the second job should depend on the completion of the first job and the third job should depend on the
+     * completion of the second job.
+     */
+    class Foo {
+        private AtomicInteger firstDone = new AtomicInteger(0);
+        private AtomicInteger secondDone = new AtomicInteger(0);
+
+        public Foo() {
+
+        }
+
+        public void first(Runnable printFirst) throws InterruptedException {
+            printFirst.run();
+            firstDone.incrementAndGet();
+        }
+
+        public void second(Runnable printSecond) throws InterruptedException {
+            while (firstDone.get() != 1) {}
+            printSecond.run();
+            secondDone.incrementAndGet();
+        }
+
+        public void third(Runnable printThird) throws InterruptedException {
+            while (secondDone.get() != 1) {}
+            printThird.run();
+        }
+    }
+
+
 
     /**
      * Semaphore

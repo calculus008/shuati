@@ -61,12 +61,31 @@ public class LE_909_Snakes_And_Ladders {
      * Medium
      */
 
+    /**
+     * "Return the least number of moves required to reach square N*N" -> shortest path -> BFS
+     *
+     * Each cell by default has "-1", if it's not, it "has a snake ladder", the value is the destination cell.
+     * You can just take one snake ladder in each move.
+     *
+     * For each move, you have 6 possible destinations, should be be cur + 1 to cur +_ 6 without snake ladder.
+     * With snake ladder, there are other destinations.
+     *
+     * Key points:
+     * 1.如果有snake ladder, 必须take且只能take一次。So the branching factor in BFS is still 6.
+     * 2.需要有value to cell coordinates 的 mapping, 注意，grid是上下颠倒，而且zig zag.
+     * 3.BFS -> mark visited
+     */
     class Solution_BFS_1 {
         public int snakesAndLadders(int[][] board) {
             int n = board.length;
             int end = n * n;
             boolean[] visited = new boolean[n * n + 1];
-            visited[1] = true;
+            /**
+             * !!!
+             * visited[1] process is in the BFS loop, not here.
+             * if set visited[1] to true here, it will fails.
+             */
+            visited[0] = true;
 
             Queue<Integer> q = new LinkedList<>();
             q.offer(1);
@@ -78,8 +97,8 @@ public class LE_909_Snakes_And_Ladders {
                 for (int i = 0; i < size; i++) {
                     int cur = q.poll();
                     /**
-                     * Mark visited as the cell popped out of q.
-                     * Think it as only here we start from this cell to move on,
+                     * Mark visited when the cell popped out of q.
+                     * Think it this way: at this point, we start from this cell to move on,
                      * it is the start point for next move. So here if we take ladder,
                      * we only count it as one move, so only the destination of the ladder
                      * will be marked as visited.
@@ -151,7 +170,7 @@ public class LE_909_Snakes_And_Ladders {
             int n = board.length;
             int end = n * n;
             boolean[] visited = new boolean[n * n + 1];
-            visited[1] = true;
+            visited[0] = true;
 
             Queue<Integer> q = new LinkedList<>();
             q.offer(1);
