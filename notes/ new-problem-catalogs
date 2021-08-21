@@ -96,9 +96,13 @@ LE_396_Rotate_Function
 LE_504_Base_7
 
 
-#Intervals - Line Sweep
+# Intervals - Line Sweep
 LE_850_Rectangle_Area_II
 
 
-#Trie
+# Trie
 LE_1032_Stream_Of_Characters
+
+
+# Binary Search
+LE_1539_Kth_Missing_Positive_Number

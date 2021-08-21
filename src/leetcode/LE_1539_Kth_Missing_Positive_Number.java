@@ -157,9 +157,8 @@ public class LE_1539_Kth_Missing_Positive_Number {
      * Example:
      * [2,3,4,7,11], k = 5
      *  0 1 2 3 4
-     * Between index 0 and index 4, there are 5 missing numbers, so the number is 4 + 5 = 9.
-     * In other words, Between index 0 and index 4, there are 4 numbers are not missing, so plus 5, the 5th missing number
-     * is 9.
+     * Between index 0 and index 4, there are 5 missing numbers and 4 not-missing numbers (numbers at index 0, 1, 2, 3),
+     * so the 5th missing number is 4 + 5 = 9.
      *
      * In the range of [1, l+k], there are l numbers not missing, and k numbers are missing.
      */
