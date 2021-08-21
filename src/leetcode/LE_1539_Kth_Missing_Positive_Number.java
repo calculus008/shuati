@@ -151,8 +151,12 @@ public class LE_1539_Kth_Missing_Positive_Number {
      * If A[m] - 1 - m >= k, m is big enough, we update right = m.
      *
      * Note that, we exit the while loop, l = r,
-     * which equals to the number of missing number used (!!! Between index 0 and index l, there are k missing numbers)
-     * So the Kth positive number will be l + k. (l is index, not number itself !!!)
+     * which equals to the number of missing number used, meaning, A[l] - 1 - l = k
+     * (!!! Between index 0 and index l, there are k missing numbers)
+     * Between index  0 and index l, there are total k missing numbers and l unmissing numbers (index is 0 based,
+     * so from index 0 to index l, total l + 1 elements. so A[0] to A[l - 1] are l unmissing numbers), therefore,
+     * the kth positive missing number is l + k.
+     * (l is index, not number itself !!!)
      *
      * Example:
      * [2,3,4,7,11], k = 5
