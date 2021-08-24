@@ -76,6 +76,22 @@ public class LE_875_Koko_Eating_Bananas {
             }
 
             return l;
+
+            // This binary search logic also works
+//            int res = 0;
+//            while (l <= r) {
+//                int m = l + (r - l) / 2;
+//
+//                if (canEatAll(piles, H, m)) {
+//                    res = m;
+//                    r = m - 1;
+//                } else {
+//                    l = m + 1;
+//                }
+//            }
+//
+//            return res;
+
         }
 
         /**

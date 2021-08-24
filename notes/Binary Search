@@ -1,0 +1,16 @@
+LE_774_Minimize_Max_Distance_To_Gas_Station
+LE_875_Koko_Eating_Bananas
+LE_1482_Minimum_Number_Of_Days_To_Make_M_Bouquets (count adjacent)
+
+# Search on distance based distribution
+LE_1552_Magnetic_Force_Between_Two_Balls
+
+# search on group sum, need to consider how to process sum overshoot
+LE_410_Split_Array_Largest_Sum (divide array into groups, find min of max group sum, count to next when overshoot)
+LE_1231_Divide_Chocolate       (divide array into groups, find max of min group sum, count to current when overshoot)
+
+LE_1539_Kth_Missing_Positive_Number
+
+1011. Capacity To Ship Packages Within D Days
+1283. Find the Smallest Divisor Given a Threshold
+

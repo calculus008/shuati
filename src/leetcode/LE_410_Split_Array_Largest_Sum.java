@@ -195,7 +195,7 @@ public class LE_410_Split_Array_Largest_Sum {
             return (int)left;
         }
 
-        //The target here is the possible sum of each subarray. If we could forme m+ subarrays with sum > target,
+        //The target here is the possible sum of each subarray. If we could form m+ subarrays with sum > target,
         // means the actual min sum is greater than this target. Therefore, the left point should adjust.
         private boolean isBigger(int[] nums, long target, int m) {
             long sum = 0;//!!!
@@ -210,6 +210,69 @@ public class LE_410_Split_Array_Largest_Sum {
                     }
                 } else {
                     sum += num;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    /**
+     * Binary Search
+     * Same format as in LE_1231_Divide_Chocolate
+     */
+    class Solution4 {
+        public int splitArray(int[] nums, int m) {
+            int l = Integer.MIN_VALUE;
+            int r = 0;
+
+            for (int num : nums) {
+                l = Math.max(l, num);
+                r += num;
+            }
+
+            int res = 0;
+            while (l <= r) {
+                int mid = l + (r - l) / 2;
+                if (isValid(nums, m, mid)) {
+                    /**
+                     * !!! min(), used for find group sum
+                     */
+                    res = Math.min(res, mid);
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            return res;
+
+            //This binary search form also works
+//            while (l < r) {
+//                int mid = l + (r - l) / 2;
+//                if (isValid(nums, m, mid)) {
+//                    l = mid + 1;
+//                } else {
+//                    r = mid;
+//                }
+//            }
+//            return l;
+        }
+
+        private boolean isValid(int[] nums, int m, int mid) {
+            int count = 0;
+            int sum = 0;
+
+            for (int num : nums) {
+                /**
+                 * count current number to the next group when overshoot
+                 */
+                if (sum + num <= mid) {
+                    sum += num;
+                } else {
+                    count++;
+                    sum = num;
+
+                    if (count >= m) return true;
                 }
             }
 

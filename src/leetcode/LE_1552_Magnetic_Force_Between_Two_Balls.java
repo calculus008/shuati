@@ -74,6 +74,19 @@ public interface LE_1552_Magnetic_Force_Between_Two_Balls {
                 }
             }
             return optimal;
+
+            /**
+             *             //This binary search logic also works
+             *             while (l < r) {
+             *                 int mid = l + (r - l) / 2;
+             *                 if (canPut(position, m, mid)) {
+             *                     l = mid + 1;
+             *                 } else {
+             *                     r = mid;
+             *                 }
+             *             }
+             *             return l - 1;
+             */
         }
 
         /**
