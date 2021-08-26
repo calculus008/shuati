@@ -132,7 +132,7 @@ public class LE_1592_Rearrange_Spaces_Between_Words {
 
             /**
              * !!!
-             * With String.repeat() is in Java 11:
+             * In Java 11, use String.repeat():
              *   return String.join(" ".repeat(gap), words) + " ".repeat(trailingSpaces);
              */
 
