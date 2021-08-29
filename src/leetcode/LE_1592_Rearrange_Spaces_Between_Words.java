@@ -98,7 +98,8 @@ public class LE_1592_Rearrange_Spaces_Between_Words {
     }
 
     /**
-     * Concise but not efficient (8ms, 6.38%), since it goes over the input two times.
+     * Concise but not efficient (8ms, 6.38%), since it goes over the input two times, one for split, one for count
+     * number of spaces.
      */
     class Solution2 {
         public String reorderSpaces(String text) {
