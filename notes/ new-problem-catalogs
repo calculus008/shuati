@@ -5,12 +5,12 @@ LE_1345_Jump_Game_IV
 LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
 LE_1377_Frog_Position_After_T_Seconds
 LE_1514_Path_With_Maximum_Probability
-
+LE_1631_Path_With_Minimum_Effort
 
 # DFS
 LE_834_Sum_Of_Distances_In_Tree
 LE_1376_Time_Needed_To_Inform_All_Employees
-
+LE_1631_Path_With_Minimum_Effort
 
 # Dijkstra
 LE_1514_Path_With_Maximum_Probability
@@ -113,5 +113,10 @@ LE_1539_Kth_Missing_Positive_Number
 # String
 LE_1592_Rearrange_Spaces_Between_Words
 
+
 # Sliding Window
 LE_1610_Maximum_Number_Of_Visible_Points
+
+
+# Bit Operation
+LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
