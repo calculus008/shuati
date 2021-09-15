@@ -6,6 +6,8 @@ LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
 LE_1377_Frog_Position_After_T_Seconds
 LE_1514_Path_With_Maximum_Probability
 LE_1631_Path_With_Minimum_Effort
+LE_1765_Map_Of_Highest_Peak
+
 
 # DFS
 LE_834_Sum_Of_Distances_In_Tree
@@ -72,6 +74,8 @@ LE_503_Next_Greater_Element_II
 LE_769_Max_Chunks_To_Make_Sorted
 LE_907_Sum_Of_Subarray_Minimums
 LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
+LE_1776_Car_Fleet_II
+
 
 # String & HashMap
 LE_1417_Reformat_The_String
