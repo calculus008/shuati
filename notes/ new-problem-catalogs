@@ -37,12 +37,14 @@ LE_1236_Web_Crawler
 LE_1242_Web_Crawler_Multithreaded
 LE_1244_Design_A_Leaderboard
 LE_1352_Product_Of_The_Last_KNumbers
+LE_1825_Finding_MK_Average
 
 
 # Binary Search (TreeSet, TreeMap)
 LE_1157_Online_Majority_Element_In_Subarray
 LE_1268_Search_Suggestions_System
 LE_166_Find_Servers_That_Handled_Most_Number_Of_Requests
+LE_1825_Finding_MK_Average
 
 
 # Heap(PriorityQueue)
@@ -124,3 +126,7 @@ LE_1610_Maximum_Number_Of_Visible_Points
 
 # Bit Operation
 LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
+
+
+#Two Pointers
+LE_1793_Maximum_Score_Of_A_Good_Subarray
