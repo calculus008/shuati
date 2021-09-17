@@ -45,10 +45,11 @@ LE_1157_Online_Majority_Element_In_Subarray
 LE_1268_Search_Suggestions_System
 LE_166_Find_Servers_That_Handled_Most_Number_Of_Requests
 LE_1825_Finding_MK_Average
-
+LE_1870_Minimum_Speed_To_Arrive_On_Time
 
 # Heap(PriorityQueue)
 LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
+LE_1834_Single_Threaded_CPU
 
 
 # Tree
@@ -118,6 +119,7 @@ LE_1539_Kth_Missing_Positive_Number
 
 # String
 LE_1592_Rearrange_Spaces_Between_Words
+LE_1859_Sorting_The_Sentence
 
 
 # Sliding Window
