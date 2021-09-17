@@ -55,10 +55,21 @@ public class LE_1870_Minimum_Speed_To_Arrive_On_Time {
      * Binary Search
      * Time : O(nlogn) n = 10000000
      * Space: O(1)
+     *
+     * https://leetcode.com/problems/minimum-speed-to-arrive-on-time/discuss/1226468/Binary-Answer-Cheat-sheet
+     *
+     * Similar problem:
+     * https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/
      */
     class Solution {
         public int minSpeedOnTime(int[] dist, double hour) {
             int n = dist.length;
+
+            /**
+             * Since time is round to the next integer, so each train will take at least 1 hour.
+             * Therefore if hour is smaller than or equal to n - 1, there's no time left for the
+             * last train.
+             */
             if (hour <= n - 1) return -1;
 
             int l = 1;
