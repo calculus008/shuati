@@ -47,9 +47,11 @@ LE_166_Find_Servers_That_Handled_Most_Number_Of_Requests
 LE_1825_Finding_MK_Average
 LE_1870_Minimum_Speed_To_Arrive_On_Time
 
+
 # Heap(PriorityQueue)
 LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 LE_1834_Single_Threaded_CPU
+LE_1882_Process_Tasks_Using_Servers
 
 
 # Tree
@@ -132,3 +134,4 @@ LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
 
 #Two Pointers
 LE_1793_Maximum_Score_Of_A_Good_Subarray
+LE_1877_Minimize_Maximum_Pair_Sum_In_Array

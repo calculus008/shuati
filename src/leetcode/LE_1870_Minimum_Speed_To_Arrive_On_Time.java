@@ -53,7 +53,7 @@ public class LE_1870_Minimum_Speed_To_Arrive_On_Time {
 
     /**
      * Binary Search
-     * Time : O(nlogn) n = 10000000
+     * Time O(NlogM), where M = max(A)
      * Space: O(1)
      *
      * https://leetcode.com/problems/minimum-speed-to-arrive-on-time/discuss/1226468/Binary-Answer-Cheat-sheet
@@ -61,7 +61,7 @@ public class LE_1870_Minimum_Speed_To_Arrive_On_Time {
      * Similar problem:
      * https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/
      */
-    class Solution {
+    class Solution1 {
         public int minSpeedOnTime(int[] dist, double hour) {
             int n = dist.length;
 
@@ -99,6 +99,48 @@ public class LE_1870_Minimum_Speed_To_Arrive_On_Time {
                 /**
                  * Math.ceil()
                  */
+                time += Math.ceil((double) dist[i] / speed);
+            }
+
+            time += (double) dist[n - 1] / speed;
+
+            return time <= hour? true : false;
+        }
+    }
+
+    /**
+     * Binary Search with different template
+     */
+    class Solution2 {
+        public int minSpeedOnTime(int[] dist, double hour) {
+            int n = dist.length;
+
+            int l = 1;
+            int h = 10000000;
+
+            int res = -1;
+
+            while (l <= h) {
+                int mid = l + (h - l) / 2;
+                if (isValid(dist, hour, mid)) {
+                    /**
+                     * remember the last valid mid value.
+                     */
+                    res = mid;
+                    h = mid - 1;
+                } else {
+                    l = mid + 1;
+                }
+            }
+
+            return res;
+        }
+
+        private boolean isValid(int[] dist, double hour, int speed) {
+            double time = 0.0;
+            int n = dist.length;
+
+            for (int i = 0; i < n - 1; i++) {
                 time += Math.ceil((double) dist[i] / speed);
             }
 
