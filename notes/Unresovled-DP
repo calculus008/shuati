@@ -1,4 +1,5 @@
 403. Frog Jump
+471. Encode String with Shortest Length
 818. Race Car
 837. New 21 Game
 940. Distinct Subsequences II
@@ -6,7 +7,11 @@
 1027. Longest Arithmetic Subsequence
 1055. Shortest Way to Form String
 1187. Make Array Strictly Increasing
+1218. Longest Arithmetic Subsequence of Given Difference
+1235. Maximum Profit in Job Scheduling
+1255. Maximum Score Words Formed by Letters
 1277. Count Square Submatrices with All Ones
+1335. Minimum Difficulty of a Job Schedule
 1406. Stone Game III
 1411. Number of Ways to Paint N × 3 Grid
 1444. Number of Ways of Cutting a Pizza
@@ -19,7 +24,10 @@
 1548. The Most Similar Path in a Graph
 1553. Minimum Number of Days to Eat N Oranges
 1641. Count Sorted Vowel Strings
+1691. Maximum Height by Stacking Cuboids
+1770. Maximum Score from Performing Multiplication Operations
 1866. Number of Ways to Rearrange Sticks With K Sticks Visible
+1884. Egg Drop With 2 Eggs and N Floors
 1928. Minimum Cost to Reach Destination in Time
 1987. Number of Unique Good Subsequences
 

@@ -14,6 +14,7 @@ LE_834_Sum_Of_Distances_In_Tree
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
 
+
 # Dijkstra
 LE_1514_Path_With_Maximum_Probability
 
@@ -49,6 +50,7 @@ LE_1870_Minimum_Speed_To_Arrive_On_Time
 
 
 # Heap(PriorityQueue)
+LE_857_Minimum_Cost_To_Hire_K_Workers
 LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 LE_1834_Single_Threaded_CPU
 LE_1882_Process_Tasks_Using_Servers
@@ -98,9 +100,11 @@ LE_1477_Find_Two_Non_Overlapping_Sub_Arrays_Each_With_Target_Sum
 
 
 ## HashMap
-LE_819_Most_Common_WordO
+LE_819_Most_Common_Word
 LE_884_Uncommon_Words_From_Two_Sentences
-
+### 配对, use HashMap to simulate pick elements from a set
+LE_954_Array_Of_Doubled_Pairs
+LE_2007_Find_Original_Array_From_Doubled_Array
 
 # Math
 LE_396_Rotate_Function
