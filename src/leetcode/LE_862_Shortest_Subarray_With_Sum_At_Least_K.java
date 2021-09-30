@@ -34,6 +34,8 @@ public class LE_862_Shortest_Subarray_With_Sum_At_Least_K {
      * Mono Stack Solution
      * https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/143726/C%2B%2BJavaPython-O(N)-Using-Deque
      *
+     * https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/189039/Detailed-intuition-behind-Deque-solution
+     *
      * What makes this problem hard is that we have negative values. Because of negative number,
      * we can use the solution in LE_209_Minimum_Size_Subarray_Sum.
      *
