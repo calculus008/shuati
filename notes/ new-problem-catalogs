@@ -10,7 +10,10 @@ LE_1765_Map_Of_Highest_Peak
 
 
 # DFS
+LE_403_Frog_Jump
+LE_797_All_Paths_From_Source_To_Target
 LE_834_Sum_Of_Distances_In_Tree
+LE_990_Satisfiability_Of_Equality_Equations
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
 
@@ -139,3 +142,11 @@ LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
 #Two Pointers
 LE_1793_Maximum_Score_Of_A_Good_Subarray
 LE_1877_Minimize_Maximum_Pair_Sum_In_Array
+
+
+#Array
+LE_775_Global_And_Local_Inversions
+
+
+#Union Find
+LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
