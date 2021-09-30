@@ -45,11 +45,11 @@ public class LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends {
      */
 
     /**
-     * Union Find
+     * Sort + Union Find
      *
-     * sort logs array by timestamp
-     * union: when two people know each other
-     * when there is only one parent (one single connected component), return the timestamp as the final result.
+     * Sort logs array by timestamp
+     * Union: when two people know each other
+     *        when there is only one parent (one single connected component), return the timestamp as the final result.
      *
      * Time  : O(MlogM), where M is the number of logs
      * Space : O(N), where N is the number of people
