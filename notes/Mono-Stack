@@ -119,7 +119,8 @@ LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Lim
 LE_1499_Max_Value_Of_Equation
 LE_1776_Car_Fleet_II
 
+## Find max/min length of a subarray with certain conditions
 683. K Empty Slots
 LE_862_Shortest_Subarray_With_Sum_At_Least_K
-962. Maximum Width Ramp
+LE_962_Maximum_Width_Ramp
 LE_1124_Longest_Well_Performing_Interval

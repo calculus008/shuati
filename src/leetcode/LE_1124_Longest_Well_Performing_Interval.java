@@ -84,11 +84,16 @@ public class LE_1124_Longest_Well_Performing_Interval {
                     res = i + 1;
                 } else if (map.containsKey(sum - 1)){
                     /**
-                     * get the index j where sum of hours[0:j] is sum - 1, so that sum of hours[j+1:i] is 1
+                     * Get the index j where sum of hours[0:j] is sum - 1, so that sum of hours[j+1 : i] is 1
                      *
                      * Must use "sum - 1" as key, can't use "-1". For example: [6, 6, 6], use "sum - 1" will
-                     * by pass this else if branch and end result is 0. Using "-1" will go into else if branch
+                     * by pass this "else if" branch and end result is 0. Using "-1" will go into "else if" branch
                      * and the result will be wrong.
+                     *
+                     * "i - map.get(sum - 1)" : 长度是 i - j + 1, 这里"map.get(sum - 1)"得到的x，其实是 j - 1, 所以：
+                     * x = j - 1 ==> j = x + 1
+                     * hence:
+                     * i - j + 1 = i - (x + 1) + 1 = i - x.
                      */
                     res = Math.max(res, i - map.get(sum - 1));
                 }
@@ -127,14 +132,15 @@ public class LE_1124_Longest_Well_Performing_Interval {
      */
     class Solution2 {
         public int longestWPI(int[] hours) {
-            int len = hours.length;
-            int[] preSum = new int[len + 1];   // prefix Sum
-            for (int i = 1; i <= len; i++) {
+            int n = hours.length;
+
+            int[] preSum = new int[n + 1];   // prefix Sum array with padding
+            for (int i = 1; i <= n; i++) { //"i <= n"!!!
                 preSum[i] = preSum[i - 1] + (hours[i - 1] > 8 ? 1 : -1);
             }
 
             Deque<Integer> stack = new LinkedList<>();   // Deque (8ms) is much faster than Stack (18ms)
-            for (int i = 0; i <= len; i++) {
+            for (int i = 0; i <= n; i++) {
                 /**
                  * Mono decreasing stack, save index.
                  */
@@ -144,8 +150,13 @@ public class LE_1124_Longest_Well_Performing_Interval {
             }
 
             int res = 0;
-            for (int i = len; i >= 0; i--) {  // start from end
+            for (int i = n; i >= 0; i--) {  // start from end
                 while (!stack.isEmpty() && preSum[i] - preSum[stack.peek()] > 0) {
+                    /**
+                     * len = i - j + 1, stack.pop() = x = j - 1 ==> j = x + 1
+                     *
+                     * i - (x + 1) + 1 = i - x
+                     */
                     res = Math.max(res, i - stack.pop());
                 }
             }
