@@ -108,10 +108,12 @@ public class LE_1124_Longest_Well_Performing_Interval {
      *
      * https://leetcode.com/problems/longest-well-performing-interval/discuss/335163/O(N)-Without-Hashmap.-Generalized-ProblemandSolution%3A-Find-Longest-Subarray-With-Sum-greater-K.
      *
+     * Once we convert hours array to preSum array, it is the exact same problem as LE_862_Shortest_Subarray_With_Sum_At_Least_K
+     *
      * Here I propose a more generalized problem and a solution to it.
      *
      * Problem:
-     * input: arrary arr in which elements are arbitrary integers.
+     * input: array arr in which elements are arbitrary integers.
      * output: length of a longest subarray arr[i, j) with sum(arr[i], ... , arr[j-1]) >= K.
      *
      *
@@ -121,7 +123,7 @@ public class LE_1124_Longest_Well_Performing_Interval {
      * 2.Iterate through prefixSum from begin to end and build a strictly monotone decreasing stack smdStack.
      *   (smdStack.top() is the smallest)
      * 3.Iterate through prefixSum from END to BEGIN. For each prefixSum[i], while smdStack.top() is less than
-     *   prefixSum[i] by at least K, pop smdStackand and try to update result by subarray [index of top,i).
+     *   prefixSum[i] by at least K, pop smdStack and try to update result by subarray [index of top,i).
      *   Until top element is not less than it by K.
      * 4.Return result.
      *
