@@ -48,26 +48,33 @@ public class LE_862_Shortest_Subarray_With_Sum_At_Least_K {
      * Every index will be pushed exactly once.
      * Every index will be popped at most once.
      *
+     * Why keep the deque increase?
+     * If preSum[dq.getLast()] > preSum[i] and moreover we already know that i > dq.getLast(), it means that compared with dq.getLast(),
+     * B[i] can help us make the subarray length SHORTER and sum BIGGER. So no need to keep d.back() in our deque.
+     *
      * Time O(N)
      * Space O(N)
+     *
+     * Use Mono Stack to get max length:
+     * LE_962_Maximum_Width_Ramp
      */
     class Solution {
         public int shortestSubarray(int[] A, int K) {
             Deque<Integer> dq = new ArrayDeque<>();
-            int[] presum = new int[A.length + 1];
+            int[] preSum = new int[A.length + 1];
 
             for (int i = 0; i < A.length; i++) {
-                presum[i + 1] = presum[i] + A[i];
+                preSum[i + 1] = preSum[i] + A[i];
             }
 
             int res = Integer.MAX_VALUE;
 
-            for (int i = 0; i < presum.length; i++) {
-                while (!dq.isEmpty() && presum[i] - presum[dq.getFirst()] >= K) {
+            for (int i = 0; i < preSum.length; i++) {
+                while (!dq.isEmpty() && preSum[i] - preSum[dq.getFirst()] >= K) {
                     res = Math.min(res, i - dq.pollFirst());
                 }
 
-                while (!dq.isEmpty() && presum[dq.getLast()] > presum[i]) {
+                while (!dq.isEmpty() && preSum[dq.getLast()] > preSum[i]) {
                     dq.pollLast();
                 }
 

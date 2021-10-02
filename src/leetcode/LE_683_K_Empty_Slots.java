@@ -138,7 +138,7 @@ public class LE_683_K_Empty_Slots {
      * minimum blooming day cannot be these removed positions). Each position will be pushed into and popped out from the
      * deque once, so the overall time complexity will be O(n).
      *
-     * ??
+     * ?? don't quite understand it yet.
      */
     class Solution {
         public int kEmptySlots(int[] bulbs, int k) {

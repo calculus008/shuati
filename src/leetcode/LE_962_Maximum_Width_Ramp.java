@@ -40,6 +40,9 @@ public class LE_962_Maximum_Width_Ramp {
      * The mono stack is used to store all candidate start points.And by comparing elements (starting from the end of
      * the array) with those candidates, we can eliminate points that are not bigger than the candidate.
      *
+     * Use Mono Stack to get min length:
+     * LE_862_Shortest_Subarray_With_Sum_At_Least_K
+     *
      * Same type problem:
      * LE_1124_Longest_Well_Performing_Interval
      *

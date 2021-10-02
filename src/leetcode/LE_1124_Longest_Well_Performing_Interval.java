@@ -129,8 +129,10 @@ public class LE_1124_Longest_Well_Performing_Interval {
      *
      * Same type problem:
      * LE_862_Shortest_Subarray_With_Sum_At_Least_K
-     * 683. K Empty Slots
-     * 962. Maximum Width Ramp
+     * LE_962_Maximum_Width_Ramp
+     *
+     * For this solution, once we create preSum array, we can apply the same solution on preSum array as in problem
+     * LE_962_Maximum_Width_Ramp
      */
     class Solution2 {
         public int longestWPI(int[] hours) {

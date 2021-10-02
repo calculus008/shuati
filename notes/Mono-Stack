@@ -120,8 +120,8 @@ LE_1499_Max_Value_Of_Equation
 LE_1776_Car_Fleet_II
 
 ## Find max/min length of a subarray with certain conditions
-LE_862_Shortest_Subarray_With_Sum_At_Least_K
-LE_962_Maximum_Width_Ramp
+LE_862_Shortest_Subarray_With_Sum_At_Least_K   (find min length)
+LE_962_Maximum_Width_Ramp                      (find max length)
 LE_1124_Longest_Well_Performing_Interval
 
 ## Array, time and space mapping and separation
