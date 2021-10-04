@@ -30,17 +30,17 @@ public class LE_962_Maximum_Width_Ramp {
     /**
      * Mono Stack
      *
-     * A max-width ramp should have its smaller element appear as "early" in A and as small as possible. All elements
-     * larger than A[0] are not possible to be the smaller element in the max-width ramp, hence they shouldn't be
+     * A max-width ramp should have its smaller element appear as "EARLY" in A and as SMALL as possible. All elements
+     * larger than A[0] are not possible to be the smaller element in the max-width ramp(!!!), hence they shouldn't be
      * considered as the candidate smaller element. The same applies to arbitrary A'[0], where A' is a sublist A[i:]
      * in which A[i] < A[0]; constructing a stack of candidate smaller elements in max-width ramp, which includes A[0]
-     * and all later and smaller elements, becomes natural. Otherwise, we must consider those uninteresting elements
+     * and all LATER and SMALLER elements, becomes natural. Otherwise, we must consider those uninteresting elements
      * as candidate smaller element in max-width ramp and compare them, wasting a great deal of time.
      *
      * The mono stack is used to store all candidate start points.And by comparing elements (starting from the end of
      * the array) with those candidates, we can eliminate points that are not bigger than the candidate.
      *
-     * Use Mono Stack to get min length:
+     * Use Mono Deque to get min length:
      * LE_862_Shortest_Subarray_With_Sum_At_Least_K
      *
      * Same type problem:
@@ -64,6 +64,10 @@ public class LE_962_Maximum_Width_Ramp {
             int res = 0;
             for (int i = n - 1; i >= 0; i--) {
                 while (!stack.isEmpty() && nums[i] >= nums[stack.peek()]) {
+                    /**
+                     * "i - stack.pop()"
+                     * By definition - "The width of such a ramp is j - i"
+                     */
                     res = Math.max(res, i - stack.pop());
                 }
             }

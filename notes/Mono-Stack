@@ -119,12 +119,22 @@ LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Lim
 LE_1499_Max_Value_Of_Equation
 LE_1776_Car_Fleet_II
 
-## Find max/min length of a subarray with certain conditions
+## Find max/min length of a subarray with certain conditions, in essense, it's a variation from sliding window.
 LE_862_Shortest_Subarray_With_Sum_At_Least_K   (find min length)
 LE_962_Maximum_Width_Ramp                      (find max length)
 LE_1124_Longest_Well_Performing_Interval
+LE_683_K_Empty_Slots (Solution2)
+
+Use mono queue/stack is basically a way to filter out candidates elements based values - one must be bigger than the previous,
+hence, increasing in values, or smaller than than the previous, hence, decreasing in values. So we need to analyse the question
+and find property of this nature, then we can think of using monon queue/stack.
+
+Different ways of using mono stack/queue
+* Two passes : Iterate array and build the mono stack/queue first, then do another pass to get result. LE_962_Maximum_Width_Ramp
+* One pass: Iterate array, pop, push, compute result in this one pass. LE_862_Shortest_Subarray_With_Sum_At_Least_K
+
 
 ## Array, time and space mapping and separation
 354. Russian Doll Envelopes
 630. Course Schedule III
-LE_683_K_Empty_Slots   (there's a deque based solution, don't quite understand it)
+LE_683_K_Empty_Slots

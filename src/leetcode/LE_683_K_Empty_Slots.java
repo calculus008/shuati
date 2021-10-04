@@ -110,10 +110,10 @@ public class LE_683_K_Empty_Slots {
                 days[position] = i + 1;
             }
 
+            int res = Integer.MAX_VALUE;
+
             int left = 0;
             int right = k + 1;
-
-            int res = Integer.MAX_VALUE;
 
             for (int i = 1; right < n; i++) {
                 if (days[i] > days[left] && days[i] > days[right]) continue;
@@ -138,9 +138,13 @@ public class LE_683_K_Empty_Slots {
      * minimum blooming day cannot be these removed positions). Each position will be pushed into and popped out from the
      * deque once, so the overall time complexity will be O(n).
      *
+     * What are saved in dq are the boundary candidates to be the left boundary of the window. When we move from left
+     * to right, we take current day as right boundary. Then if the last value in dq is bigger, it is not qualified as
+     * a valid left boundary candidate, so remove.
+     *
      * ?? don't quite understand it yet.
      */
-    class Solution {
+    class Solution2 {
         public int kEmptySlots(int[] bulbs, int k) {
             int n = bulbs.length;
             int[] days = new int[n];
@@ -151,6 +155,7 @@ public class LE_683_K_Empty_Slots {
 
                 /**
                  * deal with k = 0 case separately
+                 * Since want to min day, i is day and iterate from 0 to n, so the first day meets the conditions is the min day.
                  */
                 if (k == 0 && (position - 1 >= 0 && days[position - 1] != 0	|| position + 1 < days.length && days[position + 1] != 0))
                     return i + 1;
@@ -160,6 +165,18 @@ public class LE_683_K_Empty_Slots {
             int res = Integer.MAX_VALUE;
 
             for (int i = 0; i < days.length; i++) {
+                /**
+                 * mono decreasing deque
+                 *
+                 * For k > 0, positions:
+                 * left, left + 1, left + 2, ...., left + k - 1, left + k, right
+                 *
+                 * So in this while loop, i is right, we treat the elements in dq as possible candidates of left.
+                 * For values in window at days[left,...., left + k], they should be bigger than days[right]. k > 0意味着
+                 * 在左右边界之间至少有一个元素，如果是我们要找的区间，那么这些元素的值必定大于days[right]. 所以在while循环
+                 * 的第一步，就是移除这样的一个值，然后马上看这时在last的值，如果符合条件，就可以找left和right中大的一个，和res
+                 * 取min. 注意，这两个动作是在while的同一步中完成的。
+                 */
                 while (!dq.isEmpty() && days[dq.peekLast()] > days[i]) {
                     dq.pollLast();
 
