@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 public class LE_981_Time_Based_Key_Value_Store {
     /**
-     * Create a timebased key-value store class TimeMap, that supports two operations.
+     * Create a time based key-value store class TimeMap, that supports two operations.
      *
      * 1. set(string key, string value, int timestamp)
      * Stores the key and value, along with the given timestamp.

@@ -27,6 +27,7 @@ LE_1514_Path_With_Maximum_Probability
 LE_45_Jump_Game_II
 LE_1024_Video_Stitching
 LE_1326_Minimum_Number_Of_Taps_To_Open_To_Water_A_Garden
+LE_1135_Connecting_Cities_With_Minimum_Cost    (Solution1 with PriorityQueue)
 
 ## Interval
 LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
@@ -57,6 +58,7 @@ LE_857_Minimum_Cost_To_Hire_K_Workers
 LE_1606_Find_Servers_That_Handled_Most_Number_Of_Requests
 LE_1834_Single_Threaded_CPU
 LE_1882_Process_Tasks_Using_Servers
+LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution1)
 
 
 # Tree
@@ -116,9 +118,10 @@ LE_1248_Count_Number_Of_Nice_Subarrays
 ## HashMap
 LE_819_Most_Common_Word
 LE_884_Uncommon_Words_From_Two_Sentences
-### 配对, use HashMap to simulate pick elements from a set
+### 配对, use HashMap or TreeMap to simulate pick elements from a set
 LE_954_Array_Of_Doubled_Pairs
 LE_2007_Find_Original_Array_From_Doubled_Array
+LE_1296_Divide_Array_In_Sets_Of_K_Consecutive_Numbers
 
 # Math
 LE_396_Rotate_Function
@@ -161,3 +164,4 @@ LE_775_Global_And_Local_Inversions
 
 #Union Find
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
+LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution2)
