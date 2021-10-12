@@ -74,6 +74,15 @@ public class LE_1314_Matrix_Block_Sum {
      * sums[10, 1] from it because then you would skip counting the square (10, 1). So instead you want to subtract
      * sums[10, 0] and that's why sums[r2, c1 - 1].
      *
+     * In other words, as we show above:
+     *
+     * r1* = i - k - 1
+     * c1* = j - k - 1
+     *
+     * Since we use padding in rangeSum DP array, its index becomes :
+     * r1 = r1* + 1 = i - k - 1 + 1 = i - k
+     * c1 = c1* + 1 = j - k - 1 + 1 = j - k
+     *
      * Time and Space : O(m * n)
      */
     class Solution {
