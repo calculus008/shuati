@@ -78,7 +78,7 @@ public class LE_498_Diagonal_Traverse {
     }
 
     /**
-     * This solution is more efficient in both time and space but a little to tricky to understand.
+     * This solution is more efficient in both time and space but a little tricky to understand.
      *
      * 2 ms
      *
