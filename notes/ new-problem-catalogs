@@ -114,6 +114,8 @@ LE_1004_Max_Consecutive_Ones_III
 1234. Replace the Substring for Balanced String
 LE_1248_Count_Number_Of_Nice_Subarrays
 
+## 2D Array using rangeSum
+LE_1314_Matrix_Block_Sum
 
 ## HashMap
 LE_819_Most_Common_Word
