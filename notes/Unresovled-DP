@@ -20,7 +20,6 @@ LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence
 1411. Number of Ways to Paint N × 3 Grid
 1444. Number of Ways of Cutting a Pizza
 1478. Allocate Mailboxes
-1483. Kth Ancestor of a Tree Node
 1504. Count Submatrices With All Ones
 1524. Number of Sub-arrays With Odd Sum
 1525. Number of Good Ways to Split a String
@@ -35,5 +34,5 @@ LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence
 1928. Minimum Cost to Reach Destination in Time
 1987. Number of Unique Good Subsequences
 
-
+LE_1483_Kth_Ancestor_Of_A_Tree_Node
 LE_1937_Maximum_Number_Of_Points_with_Cost

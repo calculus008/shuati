@@ -17,10 +17,22 @@ public class Sort_Strings_By_Customized_Alphabetical_Order {
      * strArr[] = {“rainbow”, “consists”, “of”, “colours”}
      * Output: consists colours of rainbow
      *
-     * https://www.geeksforgeeks.org/sort-the-array-of-strings-according-to-alphabetical-order-defined-by-another-string/
+     *
      */
 
-    public class Solution {
+    /**
+     * Counting Sort Variation
+     * https://medium.com/analytics-vidhya/sorting-strings-using-counting-sort-modified-1a6ca02b9a9f
+     *
+     * https://playcode.io/475393/
+     */
+
+
+    /**
+     * O(nlogn)
+     * https://www.geeksforgeeks.org/sort-the-array-of-strings-according-to-alphabetical-order-defined-by-another-string/
+     */
+    public class Solution2 {
         private static void sort(String[] strArr, String str) {
             Comparator<String> myComp = new Comparator<String>() {
                 @Override
