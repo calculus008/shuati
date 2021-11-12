@@ -39,15 +39,30 @@ public class LE_1576_Replace_All_Question_Marks_To_Avoid_Consecutive_Repeating_C
      *
      * https://leetcode.com/problems/replace-all-s-to-avoid-consecutive-repeating-characters/
      */
+
     class Solution1 {
         public String modifyString(String s) {
             char[] arr = s.toCharArray();
             for (int i = 0; i < arr.length; i++) {
                 if (arr[i] == '?') {
+
+                    /**
+                     * 这是关键 ： 实际上我们最多只需要保证不和前一个和后一个字母相同，
+                     * 也就是顶多两个字母，所以从a循环到c就足够了，根本不用循环26个字母。
+                     */
                     for (int j = 0; j < 3; j++) {
+                        /**
+                         * 看前一个，如果相同，跳过。
+                         */
                         if (i > 0 && arr[i - 1] - 'a' == j) continue;
+
+                        /**
+                         * 看后一个，如果相同，跳过。
+                         */
                         if (i + 1 < arr.length && arr[i + 1] - 'a' == j) continue;
+
                         arr[i] = (char) ('a' + j);
+
                         break;
                     }
                 }
