@@ -74,6 +74,10 @@ public class LE_1642_Furthest_Building_You_Can_Reach {
     class Solution1 {
         public int furthestBuilding(int[] heights, int bricks, int ladders) {
             int n = heights.length;
+            /**
+             * Min Heap
+             * Save climb heights by ladders
+             */
             PriorityQueue<Integer> pq = new PriorityQueue<>();
 
             for (int i = 0; i < n - 1; i++) {
@@ -139,21 +143,32 @@ public class LE_1642_Furthest_Building_You_Can_Reach {
     class Solution2 {
         public int furthestBuilding(int[] heights, int bricks, int ladders) {
             int n = heights.length;
-            PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);//!!! max heap
+            /**
+             * Max Heap
+             * Save bricks used for climbs
+             */
+            PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a);
 
             for (int i = 0; i < n - 1; i++) {
                 int climb = heights[i + 1] - heights[i];
 
                 if (climb <= 0) continue;
 
-                //Use bricks as priority and track it in pq
+                /**
+                 * Use bricks as priority and track it in pq
+                 */
                 pq.offer(climb);
                 bricks -= climb;
-                if (bricks >= 0) continue;
+                if (bricks >= 0) continue; //as long as we still have bricks, go on
 
-                //no ladder and no brick, can't go further
+                /**
+                 * no ladder and no brick, can't go further
+                 */
                 if (ladders == 0) return i;
 
+                /**
+                 * No bricks by now, but we still have ladders, swap ladder for the max bricks used
+                 */
                 Integer cur = pq.poll();// get the max bricks climb height
                 bricks += cur; // return the bricks (add to unused bricks)
                 ladders--; //use a ladder instead
