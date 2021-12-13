@@ -8,7 +8,7 @@ LE_1377_Frog_Position_After_T_Seconds
 LE_1514_Path_With_Maximum_Probability
 LE_1631_Path_With_Minimum_Effort
 LE_1765_Map_Of_Highest_Peak
-
+LE_1778_Shortest_Path_In_A_Hidden_Grid
 
 # DFS
 LE_403_Frog_Jump
@@ -17,7 +17,7 @@ LE_834_Sum_Of_Distances_In_Tree
 LE_990_Satisfiability_Of_Equality_Equations
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
-
+LE_1778_Shortest_Path_In_A_Hidden_Grid
 
 # Dijkstra
 LE_1514_Path_With_Maximum_Probability
