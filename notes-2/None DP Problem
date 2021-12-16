@@ -12,15 +12,13 @@ LE_1424_Diagonal_Traverse_II
 LE_1436_Destination_City
 LE_1472_Design_Browser_History
 LE_1576_Replace_All_Question_Marks_To_Avoid_Consecutive_Repeating_Characters
+LE_1588_Sum_Of_All_Odd_Length_Subarrays
+LE_1616_Split_Two_Strings_To_Make_Palindrome
+LE_1618_Maximum_Font_To_Fit_A_Sentence_In_A_Screen
+LE_1642_Furthest_Building_You_Can_Reach
+LE_1697_Checking_Existence_Of_Edge_Length_Limited_Paths
+LE_1732_Find_The_Highest_Altitude
+LE_1778_Shortest_Path_In_A_Hidden_Grid
 
-1588. Sum of All Odd Length Subarrays
-1616. Split Two Strings to Make Palindrome
-1618. Maximum Font to Fit a Sentence in a Screen
-1641. Count Sorted Vowel Strings
-1642. Furthest Building You Can Reach
-1697. Checking Existence of Edge Length Limited Paths
-1732. Find the Highest Altitude
-1778. Shortest Path in a Hidden Grid
 1782. Count Pairs Of Nodes
-1807. Evaluate the Bracket Pairs of a String
-
+LE_1807_Evaluate_The_Bracket_Pairs_Of_A_String
