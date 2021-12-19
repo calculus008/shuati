@@ -1,5 +1,6 @@
 # BFS
 LE_433_Minimum_Genetic_Mutation
+LE_582_Kill_Process
 LE_909_Snakes_And_Ladders
 LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
@@ -12,6 +13,7 @@ LE_1778_Shortest_Path_In_A_Hidden_Grid
 
 # DFS
 LE_403_Frog_Jump
+LE_582_Kill_Process
 LE_797_All_Paths_From_Source_To_Target
 LE_834_Sum_Of_Distances_In_Tree
 LE_990_Satisfiability_Of_Equality_Equations
@@ -95,6 +97,7 @@ LE_1776_Car_Fleet_II
 
 
 # String & HashMap
+LE_710_Random_Pick_With_Blacklist
 LE_1417_Reformat_The_String
 LE_1576_Replace_All_Question_Marks_To_Avoid_Consecutive_Repeating_Characters
 LE_1807_Evaluate_The_Bracket_Pairs_Of_A_String
@@ -131,6 +134,7 @@ LE_1424_Diagonal_Traverse_II
 LE_1314_Matrix_Block_Sum
 
 ## HashMap
+LE_582_Kill_Process
 LE_819_Most_Common_Word
 LE_884_Uncommon_Words_From_Two_Sentences
 ### 配对, use HashMap or TreeMap to simulate pick elements from a set
@@ -141,6 +145,7 @@ LE_1296_Divide_Array_In_Sets_Of_K_Consecutive_Numbers
 # Math
 LE_396_Rotate_Function
 LE_504_Base_7
+LE_780_Reaching_Points
 
 
 # Intervals - Line Sweep
@@ -181,3 +186,7 @@ LE_775_Global_And_Local_Inversions
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
 LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution2)
 LE_1697_Checking_Existence_Of_Edge_Length_Limited_Paths
+
+
+#Random
+LE_710_Random_Pick_With_Blacklist
