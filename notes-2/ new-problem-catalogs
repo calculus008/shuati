@@ -26,6 +26,8 @@ LE_1514_Path_With_Maximum_Probability
 
 
 # Greedy
+LE_1042_Flower_Planting_With_No_Adjacent
+
 ## Jump Game
 LE_45_Jump_Game_II
 LE_1024_Video_Stitching
@@ -157,6 +159,7 @@ LE_1032_Stream_Of_Characters
 
 
 # Binary Search
+LE_1044_Longest_Duplicate_Substring
 LE_1539_Kth_Missing_Positive_Number
 
 
