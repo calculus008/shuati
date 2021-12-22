@@ -31,6 +31,10 @@ public class LE_1044_Longest_Duplicate_Substring {
      */
 
     /**
+     * Related problem
+     * LE_1062_Longest_Repeating_Substring
+     * https://leetcode.com/problems/longest-repeating-substring/
+     *
      * https://leetcode.com/problems/longest-duplicate-substring/discuss/695419/JAVA-%3A-O(n-log-n)-Rabin-Karp-%2B-Binary-Search
      */
     class Solution3 {
