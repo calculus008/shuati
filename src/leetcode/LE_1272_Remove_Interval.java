@@ -36,6 +36,12 @@ public class LE_1272_Remove_Interval {
      * https://leetcode.com/problems/remove-interval/
      */
 
+    /**
+     * Sweep Line - check overlap
+     *
+     * Time : O(n)
+     * Space : if not considering the space for output, it is O(1)
+     */
     class Solution {
         public List<List<Integer>> removeInterval(int[][] intervals, int[] toBeRemoved) {
             List<List<Integer>> ans = new ArrayList<>();
@@ -56,6 +62,9 @@ public class LE_1272_Remove_Interval {
         }
     }
 
+    /**
+     * Same as the one above, it can be simplified to be the first one.
+     */
     class Solution_Mine {
         public List<List<Integer>> removeInterval(int[][] intervals, int[] toBeRemoved) {
             List<List<Integer>> res = new ArrayList<>();
