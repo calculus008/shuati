@@ -2,6 +2,7 @@
 LE_433_Minimum_Genetic_Mutation
 LE_582_Kill_Process
 LE_909_Snakes_And_Ladders
+LE_1284_Minimum_Number_Of_Flips_To_Convert_Binary_Matrix_To_Zero_Matrix
 LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
 LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
@@ -74,7 +75,9 @@ LE_834_Sum_Of_Distances_In_Tree
 LE_919_Complete_Binary_Tree_Inserter
 LE_1110_Delete_Nodes_And_Return_Forest
 LE_1315_Sum_Of_Nodes_With_Even_Valued_Grandparent
+LE_1325_Delete_Leaves_With_A_Given_Value
 LE_1382_Balance_Binary_Search_Tree
+LE_1490_Clone_Nary_Tree
 
 
 # Bucket Sort
@@ -166,6 +169,7 @@ LE_1539_Kth_Missing_Positive_Number
 
 
 # String
+LE_1446_Consecutive_Characters
 LE_1592_Rearrange_Spaces_Between_Words
 LE_1859_Sorting_The_Sentence
 
@@ -186,6 +190,7 @@ LE_1877_Minimize_Maximum_Pair_Sum_In_Array
 #Array
 LE_683_K_Empty_Slots
 LE_775_Global_And_Local_Inversions
+
 
 #Union Find
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
