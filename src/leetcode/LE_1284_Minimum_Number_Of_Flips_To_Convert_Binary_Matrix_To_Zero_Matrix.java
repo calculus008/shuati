@@ -42,6 +42,25 @@ public class LE_1284_Minimum_Number_Of_Flips_To_Convert_Binary_Matrix_To_Zero_Ma
     /**
      * BFS
      *
+     * BFS Template:
+     *
+     * q = [start]
+     * seen = (start)
+     * step = 0
+     *
+     * while q:
+     *   size = q.size()
+     *   for i in range(size)
+     *     s = q.poll()
+     *     if s == end : return steps
+     *     for t in expand(s):
+     *       if t not in seen:
+     *         q.add(t)
+     *         seen.add(t)
+     *   step++
+     *
+     * return -1
+     *
      * 容易犯糊涂的地方：
      * 1.BFS是对状态做BFS, 所以q和visited里面也相应存储的是representation of a state, 对该题，状态就是每次flip操作之后mat的样子。
      * 2.直接的做法可以是存储二维数组作为状态，但是这样，需要iterate整个数组(O(m * n))去验证：
