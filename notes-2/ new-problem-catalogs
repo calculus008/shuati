@@ -50,6 +50,7 @@ LE_1242_Web_Crawler_Multithreaded
 LE_1244_Design_A_Leaderboard
 LE_1352_Product_Of_The_Last_KNumbers
 LE_1472_Design_Browser_History
+LE_1570_Dot_Product_Of_Two_Sparse_Vectors
 LE_1825_Finding_MK_Average
 
 
@@ -130,6 +131,7 @@ LE_1004_Max_Consecutive_Ones_III
 LE_1248_Count_Number_Of_Nice_Subarrays
 
 ## Two Pointers
+LE_1570_Dot_Product_Of_Two_Sparse_Vectors
 LE_1616_Split_Two_Strings_To_Make_Palindrome
 
 ## 2D Array Traverse
