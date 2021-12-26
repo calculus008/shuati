@@ -145,6 +145,8 @@ LE_1314_Matrix_Block_Sum
 LE_582_Kill_Process
 LE_819_Most_Common_Word
 LE_884_Uncommon_Words_From_Two_Sentences
+LE_1636_Sort_Array_By_Increasing_Frequency
+
 ### 配对, use HashMap or TreeMap to simulate pick elements from a set
 LE_954_Array_Of_Doubled_Pairs
 LE_2007_Find_Original_Array_From_Doubled_Array
@@ -174,6 +176,7 @@ LE_1539_Kth_Missing_Positive_Number
 LE_1446_Consecutive_Characters
 LE_1592_Rearrange_Spaces_Between_Words
 LE_1859_Sorting_The_Sentence
+LE_1864_Minimum_Number_Of_Swaps_To_Make_The_Binary_String_Alternating
 
 
 # Sliding Window
@@ -186,6 +189,7 @@ LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
 
 #Two Pointers
 LE_1793_Maximum_Score_Of_A_Good_Subarray
+LE_1855_Maximum_Distance_Between_A_Pair_Of_Values
 LE_1877_Minimize_Maximum_Pair_Sum_In_Array
 
 
