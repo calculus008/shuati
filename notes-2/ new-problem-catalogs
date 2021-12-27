@@ -21,6 +21,8 @@ LE_990_Satisfiability_Of_Equality_Equations
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
 LE_1778_Shortest_Path_In_A_Hidden_Grid
+LE_1971_Find_If_Path_Exists_in_Graph
+
 
 # Dijkstra
 LE_1514_Path_With_Maximum_Probability
@@ -84,6 +86,8 @@ LE_1490_Clone_Nary_Tree
 # Bucket Sort
 LE_1057_Campus_Bikes
 
+#Stack
+LE_1910_Remove_All_Occurrences_Of_A_Substring
 
 #Monotone (increase/decrease) Stack
 LE_42_Trapping_Rain_Water
@@ -177,10 +181,17 @@ LE_1446_Consecutive_Characters
 LE_1592_Rearrange_Spaces_Between_Words
 LE_1859_Sorting_The_Sentence
 LE_1864_Minimum_Number_Of_Swaps_To_Make_The_Binary_String_Alternating
+LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
+LE_1910_Remove_All_Occurrences_Of_A_Substring
+
+##Rabin-Karp
+LE_1044_Longest_Duplicate_Substring
+LE_1554_Strings_Differ_By_One_Character
 
 
 # Sliding Window
 LE_1610_Maximum_Number_Of_Visible_Points
+LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
 
 
 # Bit Operation
