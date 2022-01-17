@@ -20,6 +20,13 @@ public class LE_739_Daily_Temperatures {
     /**
      * A twisted version of RunningTemperature
      *
+     * Basically, what we need to find:
+     * 1.For "next bigger element" - for a given element in an array, find the element that is bigger than it in the elements come after.
+     * 2.Then get the distance between current element and the next bigger element.
+     *
+     * Action of calculating distance happens when we popping out element when we run into a bigger element.
+     * Therefore, we use mono-decreasing stack and it saves index of the element, not element itself (for calculating distance).
+     *
      * O(n)
      */
     class Solution1 {
@@ -30,6 +37,9 @@ public class LE_739_Daily_Temperatures {
             int[] res = new int[n];
             Stack<Integer> stack = new Stack<>();
 
+            /**
+             * going from end to start
+             */
             for (int i = n - 1; i >= 0; i--) {
                 while (!stack.isEmpty() && T[i] >= T[stack.peek()]) {
                     stack.pop();

@@ -14,7 +14,12 @@ public class RunningTemperature {
      * Here it is not a window, so logic is easier.
      *
      * Key point :
-     * 1.Use stack
+     *
+     * 1.For "previous bigger element" - for a given element, find the element that is bigger than it in elements come before.
+     * 2.Calculate distance.
+     *
+     * Algorithm:
+     * 1.Use mono-decreasing stack
      * 2.Stack saves index, not element itself, because if we save elements (values), after we pop it, we lose it
      *   and the result won't be correct.
      * 3.Stack里存的是上一个比当前元素大的元素的坐标，所以当前答案是 i - stack.peek()

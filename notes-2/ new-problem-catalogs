@@ -87,9 +87,12 @@ LE_1490_Clone_Nary_Tree
 
 # Bucket Sort
 LE_1057_Campus_Bikes
+LE_1996_The_Number_Of_Weak_Characters_In_the_Game
+
 
 #Stack
 LE_1910_Remove_All_Occurrences_Of_A_Substring
+
 
 #Monotone (increase/decrease) Stack
 LE_42_Trapping_Rain_Water
@@ -106,6 +109,7 @@ LE_907_Sum_Of_Subarray_Minimums
 LE_1124_Longest_Well_Performing_Interval
 LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
 LE_1776_Car_Fleet_II
+LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 
 # String & HashMap
