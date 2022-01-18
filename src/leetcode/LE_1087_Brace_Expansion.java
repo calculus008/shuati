@@ -1,8 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class LE_1087_Brace_Expansion {
     /**
@@ -35,6 +33,55 @@ public class LE_1087_Brace_Expansion {
      *
      * https://leetcode.com/problems/brace-expansion/
      */
+
+    /**
+     * Stack
+     *
+     * Exact the same solution for LE_1096_Brace_Expansion_II
+     */
+    class Solution1 {
+        Set<String> set = new HashSet<String>();
+
+        StringBuilder sb = new StringBuilder();
+        List<String> res;
+        Stack<String> stack = new Stack<String>();
+
+        public String[] expand(String s) {
+            stack.push(s);
+            helper();
+            res = new ArrayList<>(set);
+            Collections.sort(res);
+            return res.toArray(new String[0]);
+        }
+
+        private void helper(){
+            while(!stack.isEmpty()) {
+                String str = stack.pop();
+                if (str.indexOf('{') == -1) {
+                    set.add(str);
+                    continue;
+                }
+
+                int i = 0, l = 0, r = 0;
+                while (str.charAt(i) != '}') {
+                    if (str.charAt(i) == '{') {
+                        l = i;
+                    }
+                    i++;
+                }
+                r = i;
+
+                String before = str.substring(0, l);
+                String after = str.substring(r + 1, str.length());
+                String[] args = str.substring(l + 1, r).split(",");
+
+                for (String s : args) {
+                    sb.setLength(0);
+                    stack.push(sb.append(before).append(s).append(after).toString());
+                }
+            }
+        }
+    }
 
     /**
      * DFS backtracking
@@ -78,7 +125,7 @@ public class LE_1087_Brace_Expansion {
      *         acdf acef  bcdf bcef
      */
 
-    class Solution {
+    class Solution2 {
         List<String> list = new ArrayList<>();
         public String[] expand(String s) {
             helper(s, "");
@@ -109,4 +156,5 @@ public class LE_1087_Brace_Expansion {
             }
         }
     }
+
 }
