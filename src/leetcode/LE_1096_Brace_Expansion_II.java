@@ -49,14 +49,26 @@ public class LE_1096_Brace_Expansion_II {
 
     /**
      * Compare with LE_1087_Brace_Expansion, now, we have nested brackets and Cartesian product rules.
+     * We can use the exact same stack solution to solve it. The general idea of the stack solution is :
      *
+     * 1.For each pair of brackets, expand and generate a collection of new Strings, which are put into stack for procssing.
+     * 2.Scan from left to right, always find the inner most brackets among the nested brackets to expand.
+     * 3.When string popped from stack has no bracket, we get one final from of expanded string, add it to a Set (dedup).
+     * 4.Create a list from set, then sort.
+     *
+     * Examples:
+     * #1
      * input : "{a,b}{c,{d,e}}"
      *
+     * #First, expand "{a, b}"
      * a{c,{d,e}},
+     *    |  #Then expand "{d, e}"
      *    |_ a{c, d}
+     *    |    | #expand "{c, d}"
      *    |    |___________ac, ad
      *    |
      *    |_ a{c, e}
+     *         | #expand "{c, e}"
      *         |___________ac, ae
      *
      *
@@ -67,6 +79,7 @@ public class LE_1096_Brace_Expansion_II {
      *    |_ b{c, e}
      *         |___________bc, be
      *
+     * #2
      * input : ""{a,b}{c,d}"
      *
      * {a,b}{c,d}
@@ -77,6 +90,9 @@ public class LE_1096_Brace_Expansion_II {
      *     |___b{c,d}
      *           |_____bc, bd
      *
+     * Time Complexity:
+     * I think its at least exponential runtime (2 ^ n).
+     * Inputs like {a,b}{c,d}{e,f}{g,h}... return 2 ^ (n/5) strings of length n/5
      */
     class Solution {
         Set<String> set = new HashSet<String>();
@@ -102,7 +118,7 @@ public class LE_1096_Brace_Expansion_II {
             while(!stack.isEmpty()) {
                 String str = stack.pop();
                 /**
-                 * No more brackets in current string, meaning no need to do further expansion, we find one result.
+                 * No more bracket in current string, meaning no need to do further expansion, we find one result.
                  */
                 if (str.indexOf('{') == -1) {
                     set.add(str);
