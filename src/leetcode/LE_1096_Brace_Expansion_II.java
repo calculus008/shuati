@@ -49,8 +49,35 @@ public class LE_1096_Brace_Expansion_II {
 
     /**
      * Compare with LE_1087_Brace_Expansion, now, we have nested brackets and Cartesian product rules.
+     *
+     * input : "{a,b}{c,{d,e}}"
+     *
+     * a{c,{d,e}},
+     *    |_ a{c, d}
+     *    |    |___________ac, ad
+     *    |
+     *    |_ a{c, e}
+     *         |___________ac, ae
+     *
+     *
+     * b{c,{d,e}}
+     *    |_ b{c, d}
+     *    |    |___________bc, bd
+     *    |
+     *    |_ b{c, e}
+     *         |___________bc, be
+     *
+     * input : ""{a,b}{c,d}"
+     *
+     * {a,b}{c,d}
+     *     |___a{c,d}
+     *     |     |_____ac, ad
+     *     |
+     *     |
+     *     |___b{c,d}
+     *           |_____bc, bd
+     *
      */
-
     class Solution {
         Set<String> set = new HashSet<String>();
         /**
@@ -88,8 +115,10 @@ public class LE_1096_Brace_Expansion_II {
                  */
                 int i = 0, l = 0, r = 0;
                 while (str.charAt(i) != '}') {
-                    if (str.charAt(i++) == '{') //??
-                        l = i - 1;
+                    if (str.charAt(i) == '{') {
+                        l = i;
+                    }
+                    i++;
                 }
                 r = i;
 
