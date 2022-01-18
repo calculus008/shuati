@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LE_1044_Longest_Duplicate_Substring {
     /**
@@ -29,10 +26,101 @@ public class LE_1044_Longest_Duplicate_Substring {
      * S consists of lowercase English letters.
      *
      * Hard
+     *
+     * https://leetcode.com/problems/longest-duplicate-substring/
      */
 
     /**
-     * Binary Search
+     * Related problem
+     * LE_1062_Longest_Repeating_Substring
+     * https://leetcode.com/problems/longest-repeating-substring/
+     *
+     * https://leetcode.com/problems/longest-duplicate-substring/discuss/695419/JAVA-%3A-O(n-log-n)-Rabin-Karp-%2B-Binary-Search
+     */
+    class Solution3 {
+        public String longestDupSubstring(String s) {
+            int l = 1;
+            int r = s.length() - 1;
+
+            String res = "";
+
+            while (l <= r) {
+                int m = l + (r - l) / 2;
+
+                String dup = getDup(m, s);
+
+                if (dup != null) {
+                    res = dup;
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
+            }
+
+            return res;
+        }
+
+        private String getDup(int size, String s) {
+            /**
+             * Get first hash -> the substring starting from idx 0 and length is 'size'
+             */
+            long hash = getHash(s.substring(0, size));
+
+            Set<Long> set = new HashSet<>();
+            set.add(hash);
+
+            long pow = 1;
+            for (int i = 1; i < size; i++) {
+                pow = (pow * 31);
+            }
+
+            int n = s.length();
+            /**
+             * iterate by the end index of the substring, by now we already have the hash of the first substring (0, size - 1).
+             * Therefore we start from the 2nd substring (1, size)
+             */
+            for (int i = size; i < n; i++) {
+                /**
+                 * since the hash is rolling, we must use "hash", not a new variable, hash is the param for rollingHash()
+                 * and also the result of rollingHash()
+                 */
+                hash = rollingHash(pow, hash, s.charAt(i - size), s.charAt(i));
+                if (!set.add(hash)) {
+                    return s.substring(i - size + 1, i + 1);
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * rolling hash, for a given string x with length size:
+         * (x.charAt(0) - 'a' + 1) * (31 ^ (size - 1)) + (x.charAt(1) - 'a'  + 1) * (31 ^ (size - 2)) + .....
+         *  + (x.charAt(size - 1) - 'a' + 1) * (31 ^ 0)
+         */
+        private long getHash(String s) {
+            int n = s.length();
+            long base = 1;
+            long h = 0;
+
+            /**
+             * starting from the end
+             */
+            for (int i = n - 1; i >= 0; i--) {
+                h += (s.charAt(i) - 'a' + 1) * base;
+                base *= 31;
+            }
+
+            return h;
+        }
+
+        private long rollingHash(long pow, long hash, char left, char right) {
+            return (hash - (left - 'a' + 1) * pow) * 31 + (right - 'a' + 1);
+        }
+    }
+
+    /**
+     * Binary Search + Rabin-Karp
      * https://leetcode.com/problems/longest-duplicate-substring/discuss/290871/Python-Binary-Search
      *
      * Binary Search in range 1 and N, so it's O(logN)

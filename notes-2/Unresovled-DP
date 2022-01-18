@@ -1,6 +1,3 @@
-LE_403_Frog_Jump
-LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence)
-
 471. Encode String with Shortest Length
 638. Shopping Offers
 818. Race Car
@@ -10,9 +7,15 @@ LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence
 996. Number of Squareful Arrays
 1027. Longest Arithmetic Subsequence
 1055. Shortest Way to Form String
+1066. Campus Bikes II
+1092. Shortest Common Supersequence
+1162. As Far from Land as Possible
 1187. Make Array Strictly Increasing
 1218. Longest Arithmetic Subsequence of Given Difference
+1227. Airplane Seat Assignment Probability
+1230. Toss Strange Coins
 1235. Maximum Profit in Job Scheduling
+1240. Tiling a Rectangle with the Fewest Squares
 1255. Maximum Score Words Formed by Letters
 1277. Count Square Submatrices with All Ones
 1335. Minimum Difficulty of a Job Schedule
@@ -20,9 +23,12 @@ LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence
 1411. Number of Ways to Paint N × 3 Grid
 1444. Number of Ways of Cutting a Pizza
 1478. Allocate Mailboxes
+1494. Parallel Courses II
 1524. Number of Sub-arrays With Odd Sum
 1525. Number of Good Ways to Split a String
 1526. Minimum Number of Increments on Subarrays to Form a Target Array
+1531. String Compression II
+1547. Minimum Cost to Cut a Stick
 1548. The Most Similar Path in a Graph
 1553. Minimum Number of Days to Eat N Oranges
 1641. Count Sorted Vowel Strings
@@ -33,6 +39,8 @@ LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence
 1928. Minimum Cost to Reach Destination in Time
 1987. Number of Unique Good Subsequences
 
+LE_403_Frog_Jump
+LE_446_Arithmetic_Slices_II_Subsequence  (LE_1027_Longest_Arithmetic_Subsequence)
 LE_1483_Kth_Ancestor_Of_A_Tree_Node
 LE_1504_Count_Submatrices_With_All_Ones
 LE_1937_Maximum_Number_Of_Points_with_Cost

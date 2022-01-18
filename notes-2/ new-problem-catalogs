@@ -1,6 +1,8 @@
 # BFS
 LE_433_Minimum_Genetic_Mutation
+LE_582_Kill_Process
 LE_909_Snakes_And_Ladders
+LE_1284_Minimum_Number_Of_Flips_To_Convert_Binary_Matrix_To_Zero_Matrix
 LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
 LE_1368_Minimum_Cost_To_Make_At_Least_One_Valid_Path_In_A_Grid
@@ -12,18 +14,23 @@ LE_1778_Shortest_Path_In_A_Hidden_Grid
 
 # DFS
 LE_403_Frog_Jump
+LE_582_Kill_Process
 LE_797_All_Paths_From_Source_To_Target
 LE_834_Sum_Of_Distances_In_Tree
 LE_990_Satisfiability_Of_Equality_Equations
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
 LE_1778_Shortest_Path_In_A_Hidden_Grid
+LE_1971_Find_If_Path_Exists_in_Graph
+
 
 # Dijkstra
 LE_1514_Path_With_Maximum_Probability
 
 
 # Greedy
+LE_1042_Flower_Planting_With_No_Adjacent
+
 ## Jump Game
 LE_45_Jump_Game_II
 LE_1024_Video_Stitching
@@ -45,6 +52,7 @@ LE_1242_Web_Crawler_Multithreaded
 LE_1244_Design_A_Leaderboard
 LE_1352_Product_Of_The_Last_KNumbers
 LE_1472_Design_Browser_History
+LE_1570_Dot_Product_Of_Two_Sparse_Vectors
 LE_1825_Finding_MK_Average
 
 
@@ -54,6 +62,7 @@ LE_1268_Search_Suggestions_System
 LE_166_Find_Servers_That_Handled_Most_Number_Of_Requests
 LE_1825_Finding_MK_Average
 LE_1870_Minimum_Speed_To_Arrive_On_Time
+LE_2034_Stock_Price_Fluctuation
 
 
 # Heap(PriorityQueue)
@@ -63,6 +72,7 @@ LE_1834_Single_Threaded_CPU
 LE_1882_Process_Tasks_Using_Servers
 LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution1)
 LE_1642_Furthest_Building_You_Can_Reach
+LE_2034_Stock_Price_Fluctuation
 
 
 # Tree
@@ -70,11 +80,18 @@ LE_834_Sum_Of_Distances_In_Tree
 LE_919_Complete_Binary_Tree_Inserter
 LE_1110_Delete_Nodes_And_Return_Forest
 LE_1315_Sum_Of_Nodes_With_Even_Valued_Grandparent
+LE_1325_Delete_Leaves_With_A_Given_Value
 LE_1382_Balance_Binary_Search_Tree
+LE_1490_Clone_Nary_Tree
 
 
 # Bucket Sort
 LE_1057_Campus_Bikes
+LE_1996_The_Number_Of_Weak_Characters_In_the_Game
+
+
+#Stack
+LE_1910_Remove_All_Occurrences_Of_A_Substring
 
 
 #Monotone (increase/decrease) Stack
@@ -92,15 +109,20 @@ LE_907_Sum_Of_Subarray_Minimums
 LE_1124_Longest_Well_Performing_Interval
 LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
 LE_1776_Car_Fleet_II
+LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 
 # String & HashMap
+LE_710_Random_Pick_With_Blacklist
 LE_1417_Reformat_The_String
 LE_1576_Replace_All_Question_Marks_To_Avoid_Consecutive_Repeating_Characters
 LE_1807_Evaluate_The_Bracket_Pairs_Of_A_String
+LE_2013_Detect_Squares
+
 
 # Interval
 LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
+LE_1272_Remove_Interval
 
 
 # Array
@@ -119,8 +141,10 @@ LE_930_Binary_Subarrays_With_Sum
 LE_1004_Max_Consecutive_Ones_III
 1234. Replace the Substring for Balanced String
 LE_1248_Count_Number_Of_Nice_Subarrays
+LE_2089_Find_Target_Indices_After_Sorting_Array
 
 ## Two Pointers
+LE_1570_Dot_Product_Of_Two_Sparse_Vectors
 LE_1616_Split_Two_Strings_To_Make_Palindrome
 
 ## 2D Array Traverse
@@ -131,8 +155,11 @@ LE_1424_Diagonal_Traverse_II
 LE_1314_Matrix_Block_Sum
 
 ## HashMap
+LE_582_Kill_Process
 LE_819_Most_Common_Word
 LE_884_Uncommon_Words_From_Two_Sentences
+LE_1636_Sort_Array_By_Increasing_Frequency
+
 ### 配对, use HashMap or TreeMap to simulate pick elements from a set
 LE_954_Array_Of_Doubled_Pairs
 LE_2007_Find_Original_Array_From_Doubled_Array
@@ -141,6 +168,7 @@ LE_1296_Divide_Array_In_Sets_Of_K_Consecutive_Numbers
 # Math
 LE_396_Rotate_Function
 LE_504_Base_7
+LE_780_Reaching_Points
 
 
 # Intervals - Line Sweep
@@ -149,19 +177,30 @@ LE_850_Rectangle_Area_II
 
 # Trie
 LE_1032_Stream_Of_Characters
+LE_1166_Design_File_System
 
 
 # Binary Search
+LE_1044_Longest_Duplicate_Substring
 LE_1539_Kth_Missing_Positive_Number
 
 
 # String
+LE_1446_Consecutive_Characters
 LE_1592_Rearrange_Spaces_Between_Words
 LE_1859_Sorting_The_Sentence
+LE_1864_Minimum_Number_Of_Swaps_To_Make_The_Binary_String_Alternating
+LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
+LE_1910_Remove_All_Occurrences_Of_A_Substring
+
+##Rabin-Karp
+LE_1044_Longest_Duplicate_Substring
+LE_1554_Strings_Differ_By_One_Character
 
 
 # Sliding Window
 LE_1610_Maximum_Number_Of_Visible_Points
+LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
 
 
 # Bit Operation
@@ -170,14 +209,30 @@ LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
 
 #Two Pointers
 LE_1793_Maximum_Score_Of_A_Good_Subarray
+LE_1855_Maximum_Distance_Between_A_Pair_Of_Values
 LE_1877_Minimize_Maximum_Pair_Sum_In_Array
 
 
 #Array
 LE_683_K_Empty_Slots
 LE_775_Global_And_Local_Inversions
+LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
+
 
 #Union Find
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
 LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution2)
 LE_1697_Checking_Existence_Of_Edge_Length_Limited_Paths
+
+
+#Random
+LE_710_Random_Pick_With_Blacklist
+
+
+#Geometry
+LE_939_Minimum_Area_Rectangle
+LE_2013_Detect_Squares
+
+
+#Emueration
+LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword

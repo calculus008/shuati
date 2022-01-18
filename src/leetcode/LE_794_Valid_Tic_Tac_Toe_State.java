@@ -62,6 +62,12 @@ public class LE_794_Valid_Tic_Tac_Toe_State {
             int diag = 0;
             int antidiag = 0;
 
+            /**
+             * Iterate given board state, populate all flags.
+             * note: we need also to keep tracking "turn" state,
+             * "1" - X
+             * "o" - O
+             */
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     if (board[i].charAt(j) == 'X') {
@@ -100,6 +106,7 @@ public class LE_794_Valid_Tic_Tac_Toe_State {
             /**
              * !!!
              * Finally, when we return, turns must be either 0 or 1, and X and O cannot win at the same time.
+             * "Can't win at the same time" can also be "!(xwin && owin)"
              */
             return (turns == 0 || turns == 1) && (!xwin || !owin);
         }

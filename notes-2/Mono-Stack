@@ -101,6 +101,10 @@ LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Lim
 
 
 #Mono Stack
+## 典型题
+RunningTemperature
+LE_739_Daily_Temperatures
+
 LE_42_Trapping_Rain_Water
 LE_84_Largest_Rectangle_In_Histogram
 LE_85_Maximal_Rectangle
@@ -118,6 +122,7 @@ LE_1124_Longest_Well_Performing_Interval
 LE_1438_Longest_Continuous_Subarray_With_Absolute_Diff_Less_Than_Or_Equal_To_Limit
 LE_1499_Max_Value_Of_Equation
 LE_1776_Car_Fleet_II
+LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 ## Find max/min length of a subarray with certain conditions, in essense, it's a variation from sliding window.
 LE_862_Shortest_Subarray_With_Sum_At_Least_K   (find min length)
