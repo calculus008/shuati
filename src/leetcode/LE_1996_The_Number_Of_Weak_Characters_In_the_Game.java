@@ -131,7 +131,9 @@ public class LE_1996_The_Number_Of_Weak_Characters_In_the_Game {
      * Unlike LE_739_Daily_Temperatures, we don't need to find element positions for calculating distance, we only find
      * if there exists a bigger element, therefore, it is a simple issue of keeping a current max value.
      *
-     * Without using stack, only iterate from end to start, keep a max mark, compare and update. Faster than Solution1
+     * Without using stack, only iterate from end to start, keep a max mark, compare and update. Faster than Solution1.
+     *
+     * Again, the key is the sorting logic, when first values are equal, larger second value should go in front.
      *
      * Time  : O(nlogn)
      * Space : O(n)
