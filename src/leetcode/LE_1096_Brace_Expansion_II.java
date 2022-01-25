@@ -156,4 +156,66 @@ public class LE_1096_Brace_Expansion_II {
             }
         }
     }
+
+    class Solution_mine {
+        class Solution {
+            public List<String> braceExpansionII(String expression) {
+                Stack<String> stack = new Stack<>();
+                Set<String> set = new HashSet<>();
+
+                stack.push(expression);
+
+                while (!stack.isEmpty()) {
+                    String cur = stack.pop();
+                    /**
+                     * #1.如果没有'{'，也就是说当前的string不再需要expand了，可以加入set
+                     */
+                    if (cur.indexOf("{") < 0) {
+                        set.add(cur);
+                        continue;
+                    }
+
+                    /**
+                     * #2.找到从左边起，第一个'{}'pair as candidate to be expanded, example:
+                     * {{{{a,b},a},{a,b,c}},{c,d}}
+                     *    ^   ^
+                     * {a,b,c,{d,e},{{{a....}
+                     *        ^   ^
+                     */
+                    int start = 0, end = -1;
+                    int i = 0;
+                    while (i < cur.length() && end < 0) {
+                        if (cur.charAt(i) == '{') {
+                            start = i;
+                        } else if (cur.charAt(i) == '}') {
+                            end = i;
+                        }
+                        i++;
+                    }
+
+                    /**
+                     * #3.Expand
+                     * 这是关键， ","就意味着一组并列的合法的字符串，相当于从当前节点多了一条branch.
+                     */
+                    String s = cur.substring(start + 1, end);
+                    String[] tokens = s.split(",");
+
+                    /**
+                     * !!!
+                     * 当入栈时，正确的组合是要"连头带尾" -> 一定要用到prefix and postfix
+                     */
+                    String prefix = cur.substring(0, start);
+                    String postfix = cur.substring(end + 1);
+                    for (String t : tokens) {
+                        stack.push(prefix + t + postfix);
+                    }
+                }
+
+                List<String> res = new ArrayList<>(set);
+                Collections.sort(res);
+
+                return res;
+            }
+        }
+    }
 }
