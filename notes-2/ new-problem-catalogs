@@ -89,6 +89,7 @@ LE_1490_Clone_Nary_Tree
 
 # Bucket Sort
 LE_1057_Campus_Bikes
+LE_1512_Number_Of_Good_Pairs
 LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 
@@ -164,6 +165,7 @@ LE_1314_Matrix_Block_Sum
 LE_582_Kill_Process
 LE_819_Most_Common_Word
 LE_884_Uncommon_Words_From_Two_Sentences
+LE_1624_Largest_Substring_Between_Two_Equal_Characters
 LE_1636_Sort_Array_By_Increasing_Frequency
 
 ### 配对, use HashMap or TreeMap to simulate pick elements from a set
@@ -223,6 +225,7 @@ LE_1877_Minimize_Maximum_Pair_Sum_In_Array
 LE_683_K_Empty_Slots
 LE_775_Global_And_Local_Inversions
 LE_1512_Number_Of_Good_Pairs
+LE_1624_Largest_Substring_Between_Two_Equal_Characters
 LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
 
 
