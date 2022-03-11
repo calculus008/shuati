@@ -85,7 +85,7 @@ public class LE_1100_Find_K_Length_Substrings_With_No_Repeated_Characters {
      *
      * The lazy delete/sliding policy is very cool!
      * The counting policy here counts substrings even longer than length K so long they have unique characters.
-     * But this is okay because even if we deleted and slid every time we crossed length K (eagerly), we would
+     * But this is okay because even if we delete and slide every time we crossed length K (eagerly), we would
      * still get substrings with unique characters only (as that invariant is still asserted every time). Now,
      * if/when a duplicate character does arrive, we start shrinking the window from left till the previous
      * occurrence of this character is excluded - a lazy delete/slide policy. While doing this, we also came

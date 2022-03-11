@@ -19,6 +19,7 @@ LE_403_Frog_Jump
 LE_582_Kill_Process
 LE_797_All_Paths_From_Source_To_Target
 LE_834_Sum_Of_Distances_In_Tree
+LE_839_Similar_String_Groups
 LE_990_Satisfiability_Of_Equality_Equations
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
@@ -152,10 +153,12 @@ LE_1248_Count_Number_Of_Nice_Subarrays
 LE_2089_Find_Target_Indices_After_Sorting_Array
 
 ## Two Pointers
+LE_832_Flipping_An_Image
 LE_1570_Dot_Product_Of_Two_Sparse_Vectors
 LE_1616_Split_Two_Strings_To_Make_Palindrome
 
 ## 2D Array Traverse
+LE_832_Flipping_An_Image
 LE_498_Diagonal_Traverse
 LE_1424_Diagonal_Traverse_II
 
