@@ -26,6 +26,7 @@ LE_98_Validate_BST (***)
 LE_124_Binary_Tree_Max_Path_Sum                          (***)
 LE_543_Diameter_Of_Binary_Tree
 LE_687_Longest_Univalue_Path
+LE_979_Distribute_Coins_In_Binary_Tree                   (***)
 
 LE_654_Maximum_Binary_Tree
 

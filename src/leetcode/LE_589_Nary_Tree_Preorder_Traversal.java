@@ -24,6 +24,7 @@ public class LE_589_Nary_Tree_Preorder_Traversal {
     }
 
     /**
+     * !!!
      * Iterative
      */
     public List<Integer> preorder_iterative(Node root) {
@@ -37,6 +38,11 @@ public class LE_589_Nary_Tree_Preorder_Traversal {
             root = stack.pop();
             list.add(root.val);
 
+            /**
+             * For an iterative solution, we need to manage the stack in a way so that left most node can be popped
+             * earlier for a pre-order sequence. Due to FILO nature of stack, we have to push the node starting from
+             * RIGHT, instead of LEFT, to the stack.
+             */
             for (int i = root.children.size() - 1; i >= 0; i--) {
                 stack.add(root.children.get(i));
             }
