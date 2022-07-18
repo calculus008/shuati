@@ -155,6 +155,8 @@ LE_1004_Max_Consecutive_Ones_III
 LE_1248_Count_Number_Of_Nice_Subarrays
 LE_2089_Find_Target_Indices_After_Sorting_Array
 
+LE_845_Longest_Mountain_In_Array
+
 ## Two Pointers
 LE_832_Flipping_An_Image
 LE_1570_Dot_Product_Of_Two_Sparse_Vectors
