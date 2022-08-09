@@ -126,6 +126,7 @@ LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 # String & HashMap
 LE_710_Random_Pick_With_Blacklist
+LE_916_Word_Subsets
 LE_1417_Reformat_The_String
 LE_1576_Replace_All_Question_Marks_To_Avoid_Consecutive_Repeating_Characters
 LE_1807_Evaluate_The_Bracket_Pairs_Of_A_String
@@ -205,6 +206,7 @@ LE_1539_Kth_Missing_Positive_Number
 
 
 # String
+LE_916_Word_Subsets
 LE_1446_Consecutive_Characters
 LE_1592_Rearrange_Spaces_Between_Words
 LE_1859_Sorting_The_Sentence
@@ -226,35 +228,36 @@ LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
 LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
 
 
-#Two Pointers
+# Two Pointers
 LE_1793_Maximum_Score_Of_A_Good_Subarray
 LE_1855_Maximum_Distance_Between_A_Pair_Of_Values
 LE_1877_Minimize_Maximum_Pair_Sum_In_Array
 
 
-#Array
+# Array
 LE_683_K_Empty_Slots
 LE_775_Global_And_Local_Inversions
+LE_916_Word_Subsets
 LE_1331_Rank_Transform_Of_An_Array
 LE_1512_Number_Of_Good_Pairs
 LE_1624_Largest_Substring_Between_Two_Equal_Characters
 LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
 
 
-#Union Find
+# Union Find
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
 LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution2)
 LE_1697_Checking_Existence_Of_Edge_Length_Limited_Paths
 
 
-#Random
+# Random
 LE_710_Random_Pick_With_Blacklist
 
 
-#Geometry
+# Geometry
 LE_939_Minimum_Area_Rectangle
 LE_2013_Detect_Squares
 
 
-#Emueration
+# Emueration
 LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
