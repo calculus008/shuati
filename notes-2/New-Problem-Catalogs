@@ -21,6 +21,7 @@ LE_582_Kill_Process
 LE_797_All_Paths_From_Source_To_Target
 LE_834_Sum_Of_Distances_In_Tree
 LE_839_Similar_String_Groups
+LE_924_Minimize_Malware_Spread
 LE_979_Distribute_Coins_In_Binary_Tree
 LE_990_Satisfiability_Of_Equality_Equations
 LE_1026_Maximum_Difference_Between_Node_And_Ancestor
@@ -245,6 +246,7 @@ LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
 
 
 # Union Find
+LE_924_Minimize_Malware_Spread
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
 LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution2)
 LE_1697_Checking_Existence_Of_Edge_Length_Limited_Paths
