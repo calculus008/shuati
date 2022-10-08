@@ -2,6 +2,7 @@
 LE_433_Minimum_Genetic_Mutation
 LE_582_Kill_Process
 LE_909_Snakes_And_Ladders
+LE_1162_As_Far_From_Land_As_Possible   (multi points set as starting point)
 LE_1129_Shortest_Path_With_Alternating_Colors
 LE_1284_Minimum_Number_Of_Flips_To_Convert_Binary_Matrix_To_Zero_Matrix
 LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
@@ -102,6 +103,7 @@ LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 
 #Stack
+LE_921_Minimum_Add_To_Make_Parentheses_Valid
 LE_1087_Brace_Expansion
 LE_1096_Brace_Expansion_II
 LE_1910_Remove_All_Occurrences_Of_A_Substring
