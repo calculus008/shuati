@@ -66,6 +66,14 @@ public class LE_1055_Shortest_Way_To_Form_String {
             while (j < tar.length) {
                 if (!set.contains(tar[j])) return -1;
 
+                /**
+                 * The beauty of the solution is the way how pointers are moved in src and tar.
+                 * The difference with my solution using an inner while loop is that the for loop
+                 * here will guarantee to make a full iteration of src. Therefore, after the
+                 * for loop, we are sure we have found one more subsequence (without checking if the
+                 * index hits the end of src) in tar and increase res by one. Also we don't have to
+                 * init res to 1 or checking if res should be increased by one after the outter while loop.
+                 */
                 for (int i = 0; i < src.length; i++) {
                     if (j < tar.length && src[i] == tar[j]) {
                         j++;
