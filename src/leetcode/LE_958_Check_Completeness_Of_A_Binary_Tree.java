@@ -18,14 +18,16 @@ public class LE_958_Check_Completeness_Of_A_Binary_Tree {
      */
 
     /**
+     * BFS
+     *
      * Use BFS to do a level order traversal,
-     * add childrens to the bfs queue,
+     * add children to the bfs queue,
      * until we met the first empty node.
      *
      * For a complete binary tree,
      * there should not be any node after we met an empty one.
      */
-    class Solution_BFS {
+    class Solution_BFS_1 {
         public boolean isCompleteTree(TreeNode root) {
             if (root == null) return false;
 
@@ -47,6 +49,36 @@ public class LE_958_Check_Completeness_Of_A_Binary_Tree {
     }
 
     /**
+     * This BFS solution ends the loop as early as possible
+     */
+    class Solution_BFS_2 {
+        public boolean isCompleteTree(TreeNode root) {
+            if (root == null) {
+                return true;
+            }
+
+            boolean nullNodeFound = false;
+            Queue<TreeNode> q = new LinkedList<>();
+            q.offer(root);
+
+            while (!q.isEmpty()) {
+                TreeNode node = q.poll();
+
+                if (node == null) {
+                    nullNodeFound = true;
+                } else {
+                    if (nullNodeFound) {
+                        return false;
+                    }
+                    q.offer(node.left);
+                    q.offer(node.right);
+                }
+            }
+            return true;
+        }
+    }
+
+    /**
      *              0
      *            /  \
      *           1    2
@@ -59,6 +91,8 @@ public class LE_958_Check_Completeness_Of_A_Binary_Tree {
      *
      *  For the given example above, when we come to node 4, go to its right child:
      *  node is not null, i is 2 * 4 + 2 = 10, 10 > 9, so it returns false;
+     *
+     *  The drawback is that it needs to traverse the tree twice (1st one to get total number of nodes)
      */
     class Solution_DFS_1 {
         public boolean isCompleteTree(TreeNode root) {
@@ -83,6 +117,8 @@ public class LE_958_Check_Completeness_Of_A_Binary_Tree {
     }
 
     /**
+     * DFS
+     *
      * We traverse the tree and track the current height h. The very
      * first leaf is the leftmost node, so its height sets target_height.
      *
@@ -105,7 +141,7 @@ public class LE_958_Check_Completeness_Of_A_Binary_Tree {
             if (root == null) {
                 /**
                  * target_height == 0 means this null is the left pointer of the left
-                 * most leave.
+                 * most leaf.
                  */
                 if (target_height == 0) {
                     target_height = h;
