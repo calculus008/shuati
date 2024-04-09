@@ -35,6 +35,7 @@ package leetcode;
  * word1 and word2 consist of lowercase English letters.
  *
  * Easy
+ *
  */
 
 public class LE_1768_Merge_Strings_Alternately {
