@@ -5,7 +5,7 @@ import common.TreeNode;
 /**
  * Created by yuank on 3/11/18.
  */
-public class E_110_Balanced_Binary_Tree {
+public class LE_110_Balanced_Binary_Tree {
     /**
         Given a binary tree, determine if it is height-balanced.
 
