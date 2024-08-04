@@ -2,6 +2,8 @@
 LE_433_Minimum_Genetic_Mutation
 LE_582_Kill_Process
 LE_909_Snakes_And_Ladders
+LE_1162_As_Far_From_Land_As_Possible   (multi points set as starting point)
+LE_1129_Shortest_Path_With_Alternating_Colors
 LE_1284_Minimum_Number_Of_Flips_To_Convert_Binary_Matrix_To_Zero_Matrix
 LE_1293_Shortest_Path_In_A_Grid_With_Obstacles_Elimination
 LE_1345_Jump_Game_IV
@@ -20,8 +22,11 @@ LE_582_Kill_Process
 LE_797_All_Paths_From_Source_To_Target
 LE_834_Sum_Of_Distances_In_Tree
 LE_839_Similar_String_Groups
+LE_924_Minimize_Malware_Spread
 LE_979_Distribute_Coins_In_Binary_Tree
 LE_990_Satisfiability_Of_Equality_Equations
+LE_1026_Maximum_Difference_Between_Node_And_Ancestor
+LE_1302_Deepest_Leaves_Sum
 LE_1376_Time_Needed_To_Inform_All_Employees
 LE_1631_Path_With_Minimum_Effort
 LE_1778_Shortest_Path_In_A_Hidden_Grid
@@ -98,6 +103,7 @@ LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 
 #Stack
+LE_921_Minimum_Add_To_Make_Parentheses_Valid
 LE_1087_Brace_Expansion
 LE_1096_Brace_Expansion_II
 LE_1910_Remove_All_Occurrences_Of_A_Substring
@@ -123,6 +129,7 @@ LE_1996_The_Number_Of_Weak_Characters_In_the_Game
 
 # String & HashMap
 LE_710_Random_Pick_With_Blacklist
+LE_916_Word_Subsets
 LE_1417_Reformat_The_String
 LE_1576_Replace_All_Question_Marks_To_Avoid_Consecutive_Repeating_Characters
 LE_1807_Evaluate_The_Bracket_Pairs_Of_A_String
@@ -153,6 +160,8 @@ LE_1004_Max_Consecutive_Ones_III
 1234. Replace the Substring for Balanced String
 LE_1248_Count_Number_Of_Nice_Subarrays
 LE_2089_Find_Target_Indices_After_Sorting_Array
+
+LE_845_Longest_Mountain_In_Array
 
 ## Two Pointers
 LE_832_Flipping_An_Image
@@ -200,6 +209,7 @@ LE_1539_Kth_Missing_Positive_Number
 
 
 # String
+LE_916_Word_Subsets
 LE_1446_Consecutive_Characters
 LE_1592_Rearrange_Spaces_Between_Words
 LE_1859_Sorting_The_Sentence
@@ -213,6 +223,7 @@ LE_1554_Strings_Differ_By_One_Character
 
 
 # Sliding Window
+LE_1052_Grumpy_Bookstore_Owner
 LE_1610_Maximum_Number_Of_Visible_Points
 LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
 
@@ -221,34 +232,42 @@ LE_1888_Minimum_Number_Of_Flips_To_Make_The_Binary_String_Alternating
 LE_1680_Concatenation_Of_Consecutive_Binary_Numbers
 
 
-#Two Pointers
+# Two Pointers
 LE_1793_Maximum_Score_Of_A_Good_Subarray
 LE_1855_Maximum_Distance_Between_A_Pair_Of_Values
 LE_1877_Minimize_Maximum_Pair_Sum_In_Array
 
 
-#Array
+# Array
 LE_683_K_Empty_Slots
 LE_775_Global_And_Local_Inversions
+LE_896_Monotonic_Array
+LE_916_Word_Subsets
+LE_1331_Rank_Transform_Of_An_Array
 LE_1512_Number_Of_Good_Pairs
 LE_1624_Largest_Substring_Between_Two_Equal_Characters
 LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
 
 
-#Union Find
+# Union Find
+LE_924_Minimize_Malware_Spread
 LE_1101_The_Earliest_Moment_When_Everyone_Become_Friends
 LE_1135_Connecting_Cities_With_Minimum_Cost  (Solution2)
 LE_1697_Checking_Existence_Of_Edge_Length_Limited_Paths
 
 
-#Random
+# Random
 LE_710_Random_Pick_With_Blacklist
 
 
-#Geometry
+# Geometry
 LE_939_Minimum_Area_Rectangle
 LE_2013_Detect_Squares
 
 
-#Emueration
+# Emueration
 LE_2018_Check_If_Word_Can_Be_Placed_In_Crossword
+
+
+# Linked List
+LE_1171_Remove_Zero_Sum_Consecutive_Nodes_From_Linked_List
