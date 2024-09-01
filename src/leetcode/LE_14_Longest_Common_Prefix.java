@@ -34,9 +34,13 @@ public class LE_14_Longest_Common_Prefix {
         String pre = strs[0]; //Take the first String as pre
         for (int i = 1; i < strs.length; i++) {
             /**
-             * "indexOf"
-             * This means pre is not the prefix in current string,
-             * hence, shorten it by one and continue
+             * "indexOf": returns the first index of the occurrence of the given string
+             *            if not found, returns -1
+             * Here, when indexOf returns none zero value, it means pre is not the prefix in current string,
+             * hence, shorten it by one and continue.
+             *
+             * The nice touch is that it does not check return value as '-1' since it already covered by the while
+             * loop, it will return "" in the end. So it save several lines of code.
              */
             while (strs[i].indexOf(pre) != 0) {
                 pre = pre.substring(0, pre.length() - 1);
@@ -88,9 +92,13 @@ public class LE_14_Longest_Common_Prefix {
         public TrieNode buildTrie(String[] strs) {
             TrieNode root = new TrieNode();
             for (String str : strs) {
+                /**
+                 * This step is an optimization for this particular question, not the common step in creating Trie.
+                 * If there is a null or empty string in strs, then common prefix can only be "".
+                 */
                 if (str == null || str.length() == 0) return null;
 
-                TrieNode cur = root;
+                TrieNode cur = root; // start from root each time for a new str
                 for (char c : str.toCharArray()) {
                     if (cur.next[c] == null) {
                         cur.next[c] = new TrieNode(c);
@@ -120,7 +128,6 @@ public class LE_14_Longest_Common_Prefix {
                 for (TrieNode node : root.next) {
                     if (node != null) {
                         res += node.ch;
-                        System.out.println(res);
                         stop = node.isWord;
                         root = node;
                         break;

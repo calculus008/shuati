@@ -17,7 +17,52 @@ public class LE_34_Search_For_A_Range {
         return [3, 4].
      **/
 
-    //https://www.youtube.com/watch?v=pZ7ypg3mU64&list=PLvyIyKZVcfAlKHPFECFxlkG7jOvD64r9V&index=9
+
+
+    class Solution {
+        //https://www.youtube.com/watch?v=bPdnC5X5xDw
+        public int[] searchRange(int[] nums, int target) {
+            if (nums == null || nums.length == 0) return new int[]{-1, -1};
+
+            int first = findFirst(nums, target);
+            if (first == -1) return new int[]{-1, -1};
+
+            int last = findLast(nums, target);
+
+            return new int[]{first, last};
+        }
+
+        public int findFirst(int[] nums, int target) {
+            int l = 0, r = nums.length - 1;
+            while (l < r) {//!!! Must be "<", not "<=="
+                int mid = (r - l) / 2 + l;
+                if (nums[mid] >= target) {
+                    r = mid;
+                } else {
+                    l = mid + 1;
+                }
+            }
+
+            return nums[l] == target ? l : -1;
+        }
+
+        public int findLast(int[] nums, int target) {
+            int l = 0, r = nums.length - 1;
+            while (l < r) {
+                int mid = (r - l + 1) / 2 + l; //!!!
+                if (nums[mid] <= target) {
+                    l = mid;
+                } else {
+                    r = mid - 1;
+                }
+            }
+
+            return nums[l] == target ? l : -1;
+        }
+    }
+
+
+
 
     /**
      * Similar

@@ -23,6 +23,8 @@ public class LE_28_Implementing_Strstr {
 
          For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
 
+         https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/?envType=company&envId=apple&favoriteSlug=apple-six-months
+
          Easy
      */
 
@@ -35,7 +37,7 @@ public class LE_28_Implementing_Strstr {
 
 
         for (int i = 0; i < haystack.length(); i++) {
-            // no enough places for needle after i
+            // not enough places for needle after i
             if (i + needle.length() > haystack.length()) break;
 
             for (int j = 0; j < needle.length(); j++) {
@@ -61,6 +63,13 @@ public class LE_28_Implementing_Strstr {
             }
         }
 
+        return -1;
+    }
+
+    public int strStr3(String haystack, String needle) {
+        if(haystack.contains(needle)){
+            return haystack.indexOf(needle);
+        }
         return -1;
     }
 }

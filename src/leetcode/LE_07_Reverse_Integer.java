@@ -30,6 +30,9 @@ public class LE_07_Reverse_Integer {
      */
 
     public int reverse(int x) {
+        /**
+         * !!! Use long
+         */
         long sum = 0;
         while (x != 0) {
             sum = sum * 10 + x % 10;

@@ -81,7 +81,7 @@ public class LE_42_Trapping_Rain_Water {
      */
     public int trap(int[] height) {
         /**
-         * First pair of 2 pointers, start from begining and end of the array, move toward each other.
+         * First pair of pointers, start from beginning and end of the array, move toward each other.
          */
         int left = 0;
         int right = height.length - 1;
