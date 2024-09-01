@@ -25,6 +25,87 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
          The median is (2 + 3)/2 = 2.5
      */
 
+    class Solution_partition_clean {
+        /**
+         * https://www.youtube.com/watch?v=LPFhl65R7ww
+         * https://github.com/mission-peace/interview/blob/master/src/com/interview/binarysearch/MedianOfTwoSortedArrayOfDifferentLength.java
+         */
+        public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+            int l1 = nums1.length;
+            int l2 = nums2.length;
+            if (l1 > l2) {
+                return findMedianSortedArrays(nums2, nums1);
+            }
+
+            int l = 0;
+            int r = l1;
+
+            while (l <= r) {
+                int mid1 = l + (r - l) / 2;
+                int mid2 = (l1 + l2 + 1) / 2 - mid1;
+
+                int maxLeft1 = mid1 == 0 ? Integer.MIN_VALUE : nums1[mid1 - 1];
+                int minRight1 = mid1 == l1 ? Integer.MAX_VALUE : nums1[mid1];
+
+                int maxLeft2 = mid2 == 0 ? Integer.MIN_VALUE : nums2[mid2 - 1];
+                int minRight2 = mid2 == l2 ? Integer.MAX_VALUE : nums2[mid2];
+
+                if (maxLeft1 <= minRight2 && maxLeft2 <= minRight1) {
+                    if ((l1 + l2) % 2 == 0) {
+                        return (double)((Math.max(maxLeft1, maxLeft2) + Math.min(minRight1, minRight2)) / 2.0);
+                    } else {
+                        return (double) Math.max(maxLeft1, maxLeft2);
+                    }
+                } else if (maxLeft1 > minRight2) {
+                    r = mid1 - 1;
+                } else {
+                    l = mid1 + 1;
+                }
+            }
+
+            throw new IllegalArgumentException();
+        }
+    }
+    class Solution_clean__huahua {
+        public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+            if (nums1 == null && nums2 == null) return 0.0;
+
+            int l1 = nums1.length;
+            int l2 = nums2.length;
+
+            if (l1 > l2) {
+                return findMedianSortedArrays(nums2, nums1);
+            }
+
+            int k = (l1 + l2 + 1) / 2;
+
+            int l = 0;
+            int r = l1;
+            while (l < r) {
+                int m = l + (r - l) / 2;
+                if (nums1[m] < nums2[(k - m) - 1]) {
+                    l = m + 1;
+                } else {
+                    r = m;
+                }
+            }
+
+            int m1 = l;
+            int m2 = k - m1;
+
+            int c1 = Math.max (m1 <= 0 ? Integer.MIN_VALUE : nums1[m1 - 1],
+                    m2 <= 0 ? Integer.MIN_VALUE : nums2[m2 - 1]);
+
+            if (((l1 + l2) % 2) == 1) {
+                return c1;
+            }
+
+            int c2 = Math.min(m1 >= l1 ? Integer.MAX_VALUE : nums1[m1],
+                    m2 >= l2 ? Integer.MAX_VALUE : nums2[m2]);
+
+            return (c1 + c2) / 2.0;
+        }
+    }
 
     /**
      * Solution 4
@@ -59,7 +140,7 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
              * !!!
              * 此处，二分搜素的对象是nums1[] 的index，所以，[l, r) 左闭右开，所以r不能是l1 - 1, 是l1.
              * 循坏条件是 l < r，但最后 l 可能等于 r， 表示第一个数组所有的元素都要使用。
-             * 如果循环条件是(l <= r)，最后 l 可能大于 r，那就越界了。﻿
+             * 如果循环条件是(l <= r)，最后 l 可能大于 r，那就越界了。
              */
             int l = 0;
             int r = l1;
