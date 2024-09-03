@@ -17,8 +17,6 @@ public class LE_34_Search_For_A_Range {
         return [3, 4].
      **/
 
-
-
     class Solution {
         //https://www.youtube.com/watch?v=bPdnC5X5xDw
         public int[] searchRange(int[] nums, int target) {

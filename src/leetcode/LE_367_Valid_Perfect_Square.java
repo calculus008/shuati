@@ -26,6 +26,30 @@ public class LE_367_Valid_Perfect_Square {
      */
 
     /**
+     * Exact same solution for LE_69_Sqrt
+     */
+    public boolean isPerfectSquare_best(int num) {
+        int l = 1;
+        int r = num;
+
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            if (m > num / m) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+
+        return r * r == num;
+    }
+
+    /**
+     * #########################3
+     */
+
+    /**
      * !!!
      * Notice the difference from the solution for LE_69_Sqrt.
      * Here we must use long for mid and sqr, since we must calculate mid * mid.

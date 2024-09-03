@@ -16,6 +16,30 @@ public class LE_56_Merge_Intervals {
         return [1,6],[8,10],[15,18].
      */
 
+    class Solution_clean {
+        public int[][] merge(int[][] intervals) {
+            if (intervals == null || intervals.length <= 1) return intervals;
+
+            Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
+
+            List<int[]> res = new ArrayList<>();
+            int[] last = null;
+
+            for (int[] cur : intervals) {
+                if (last == null || last[1] < cur[0]) {
+                    res.add(cur);
+                    last = cur;
+                } else {
+                    last[1] = Math.max(last[1], cur[1]);
+                }
+            }
+
+            return res.toArray(new int[res.size()][2]);
+        }
+    }
+
+
+
     class Solution1_New_Input_Type_1 {
         public int[][] merge(int[][] intervals) {
             if (intervals.length <= 1) return intervals;

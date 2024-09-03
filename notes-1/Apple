@@ -2,7 +2,7 @@
 LE_01_Two_Sum                     (HashMap)
 LE_02_Add_Two_Numbers             (Linked List)
 LE_03_Longest_Substring_Without_Repeating_Characters (Sliding Window)
-LE_04_Median_Of_Two_Sorted_Arrays  Hard                                     ***
+LE_04_Median_Of_Two_Sorted_Arrays (Binary Search)                            ***
 LE_07_Reverse_Integer
 LE_11_Container_With_Most_Water   (Two Pointers)
 LE_14_Longest_Common_Prefix       (Trie)
@@ -20,3 +20,11 @@ LE_42_Trapping_Rain_Water         (Two Pointers)                             ***
 LE_48_Rotate_Image
 LE_49_Group_Anagrams              (HashMap + sorting)
 LE_53_Maximum_Subarray            (DP)
+LE_54_Spiral_Matrix               (Matrix)
+LE_55_Jump_Game                   (Greedy)
+LE_56_Merge_Intervals             (Intervals)
+LE_57_Insert_Interval             (Intervals)
+LE_67_Add_Binary                  (Two Pointers)
+LE_69_Sqrt                        (Binary Search)
+LE_71_Simplify_Path               (Stack)
+LE_73_Set_Matrix_Zero             (Matrix)

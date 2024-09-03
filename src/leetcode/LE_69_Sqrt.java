@@ -14,6 +14,25 @@ public class LE_69_Sqrt {
         Same as LE_367_Valid_Perfect_Square
      */
 
+    public int mySqrt_best(int x) {
+        int l = 1;
+        int r = x;
+
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            if (m > x / m) {
+                r = m - 1;
+            } else {
+                l = m + 1;
+            }
+        }
+        return r;
+    }
+
+
+
+
     public int mySqrt(int x) {
         if (x == 0) return 0;
 

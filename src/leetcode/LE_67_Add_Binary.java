@@ -18,11 +18,11 @@ public class LE_67_Add_Binary {
 
         int i = a.length() - 1;
         int j = b.length() - 1;
-        int remainder = 0;
+        int carry = 0;
 
         //!!! it's "OR", NOT "AND"
         while (i >= 0 || j >= 0) {
-            int sum = remainder;
+            int sum = carry; //!!!
 
             //!!! don't forget to move the pointers
             if (i >= 0) {
@@ -34,10 +34,10 @@ public class LE_67_Add_Binary {
                 j--;
             }
             sb.append(sum % 2);
-            remainder = sum / 2;
+            carry = sum / 2;
         }
 
-        if (remainder != 0) sb.append("1");
+        if (carry != 0) sb.append("1");
 
         return sb.reverse().toString();
     }
