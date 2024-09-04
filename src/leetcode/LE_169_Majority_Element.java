@@ -15,6 +15,10 @@ public class LE_169_Majority_Element {
         Possible follow up:
         If we don't know if there's majority element in array?
         See Majority_Element
+
+        Easy
+
+        https://leetcode.com/problems/majority-element
      */
 
     //Time : O(n), Space : O(1)
@@ -41,7 +45,7 @@ public class LE_169_Majority_Element {
     //Time : O(nlogn), Space : O(1)
      public int majorityElement(int[] nums) {
          Arrays.sort(nums);
-         int mid = (nums.length-1)/2;
+         int mid = (nums.length - 1)/2;
          return nums[mid];
      }
 }

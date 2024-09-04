@@ -16,15 +16,32 @@ LE_33_Search_In_Rotated_Sorted_Array (Binary Search)
 LE_34_Search_For_A_Range          (Binary Search)
 LE_35_Search_For_Insertion_Point  (Binary Search)
 LE_36_Valid_Sudoku
+LE_39_Combination_Sum             (DFS, Backtracking)
 LE_42_Trapping_Rain_Water         (Two Pointers)                             ***
+LE_44_Wildcards_Matching          (Backtracking)                             ###
+LE_46_Permutation                 (DFS, Backtracking)
 LE_48_Rotate_Image
-LE_49_Group_Anagrams              (HashMap + sorting)
-LE_53_Maximum_Subarray            (DP)
+LE_49_Group_Anagrams              (HashMap + Sorting)
 LE_54_Spiral_Matrix               (Matrix)
 LE_55_Jump_Game                   (Greedy)
 LE_56_Merge_Intervals             (Intervals)
 LE_57_Insert_Interval             (Intervals)
+LE_61_Rotate_List                 (Linked List)
 LE_67_Add_Binary                  (Two Pointers)
 LE_69_Sqrt                        (Binary Search)
+LE_70_Climbing_Stairs             (Recursion + Mem)
 LE_71_Simplify_Path               (Stack)
 LE_73_Set_Matrix_Zero             (Matrix)
+LE_79_Word_Search                 (DFS)
+LE_88_Merge_Sorted_Array          (Array + Two Pointers)
+LE_92_Reverse_LinkedList_II       (Linked List)
+LE_101_Symmetric_Tree             (Tree)
+LE_102_Binary_Tree_Level_Order_Traversal     (Tree, BFS, pre-order DFS)
+LE_104_Max_Depth_Of_Binary_Tree   (Tree)
+LE_169_Majority_Element           (Array)
+
+
+
+# DP
+LE_53_Maximum_Subarray
+LE_97_Interleaving_String

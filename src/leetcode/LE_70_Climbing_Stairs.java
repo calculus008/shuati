@@ -5,7 +5,7 @@ package leetcode;
  */
 public class LE_70_Climbing_Stairs {
     /**
-        You are climbing a stair case. It takes n steps to reach to the top.
+        You are climbing a staircase. It takes n steps to reach to the top.
 
         Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
@@ -53,9 +53,14 @@ public class LE_70_Climbing_Stairs {
          return res;
      }
 
-    //Solution 2 : 递归 with memorization
-    //n = 5
-    //(4) + (3) = (3) + (2) + (2) + (1) = (2) + (1) + (2) + (2) + (1) = 2 + 1 + 2 + 2 + 1 = 8
+    /**
+     * Solution 2 : 递归 with memorization
+     * n = 5
+     * (4) + (3) = (3) + (2) + (2) + (1) = (2) + (1) + (2) + (2) + (1) = 2 + 1 + 2 + 2 + 1 = 8
+     *
+     * Time : O(2 ^ n)
+     */
+
     public int climbStairs2(int n) {
         //!!! n+1
         int[] mem = new int[n+1];

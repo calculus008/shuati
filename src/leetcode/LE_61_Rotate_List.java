@@ -13,6 +13,26 @@ public class LE_61_Rotate_List {
 
         return 4->5->1->2->3->NULL.
      */
+    public ListNode rotateRight_clean(ListNode head, int k) {
+        if (head == null || k == 0) return head;
+
+        ListNode runner = head;
+        int len = 1;
+        while (runner.next != null) {
+            runner = runner.next;
+            len++;
+        }
+
+        runner.next = head;
+
+        for (int i = 1; i < len - k % len; i++) {
+            head = head.next;
+        }
+
+        ListNode res = head.next;
+        head.next = null;
+        return res;
+    }
 
     public static ListNode rotateRight(ListNode head, int k) {
         if (head == null || k == 0 ) return head;

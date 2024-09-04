@@ -4,9 +4,13 @@ package leetcode;
  * Created by yuank on 3/8/18.
  */
 public class LE_206_Reverse_LinkedList {
-    /*
-    Reverse a singly linked list.
+    /**
+     * Reverse a singly linked list.
+     * Easy
+     *
+     * https://leetcode.com/problems/reverse-linked-list
      */
+
 
     /*           h
         null     3 -> 4 -> 5
@@ -61,6 +65,23 @@ public class LE_206_Reverse_LinkedList {
                 |         |
                  ---------
      */
+
+    /**
+     * variation:
+     * LE_92_Reverse_LinkedList_II
+     */
+    public ListNode reverseList_easy_understand(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+
+        while (cur != null) {
+            ListNode nextTemp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = nextTemp;
+        }
+        return pre;
+    }
 
     public ListNode reverseList(ListNode head) {
         if (head == null || head.next == null) return head;

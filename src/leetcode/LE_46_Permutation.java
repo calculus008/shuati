@@ -24,6 +24,36 @@ public class LE_46_Permutation {
         Parity_Permutation
      **/
 
+
+    class Solution_DFS_clean {
+        /**
+         * Time : O(n * n!)
+         * Given a set of length n, the number of permutations is n! (n factorial).
+         * There are n options for the first number, n−1 for the second, and so on.
+         * For each of the n! permutations, we need O(n) work to copy curr into the answer.
+         */
+        public List<List<Integer>> permute(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>();
+            helper(nums, res, new ArrayList<>());
+            return res;
+        }
+
+        public void helper(int[] nums, List<List<Integer>> res, List<Integer> cur) {
+            if (cur.size() == nums.length) {
+                res.add(new ArrayList<>(cur));
+                return;
+            }
+
+            for (int i = 0; i < nums.length; i++) {
+                if (cur.contains(nums[i])) continue;
+                cur.add(nums[i]);
+                helper(nums, res, cur);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
+
+
     /**
         Solution 1 : use visited[] to tell if current number is in the sequence.
      */
