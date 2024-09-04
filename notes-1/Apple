@@ -8,6 +8,8 @@ LE_11_Container_With_Most_Water   (Two Pointers)
 LE_14_Longest_Common_Prefix       (Trie)
 LE_15_3Sum                        (Two Pointers)
 LE_20_Valid_Parentheses           (Stack)
+LE_21_Merge_Two_Sorted_Lists      (Linked List, recursive and iterative)
+LE_22_Generate_Parentheses        (Recursion, Backtracking)
 LE_23_Merge_k_Sorted_Lists        (Heap)                                     ***
 LE_26_Remove_Dup_From_Sorted_Array
 LE_28_Implementing_Strstr         ###
