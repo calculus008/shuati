@@ -25,10 +25,22 @@ public class LE_90_Subsets_II {
           [1,2],
           []
         ]
+
+        Medium
+
+        https://leetcode.com/problems/subsets-ii
+
+        LE_78_Subsets
      */
 
     /**
-     * Time  : O(2 ^ n),
+     * Time  : O(n * 2 ^ n)
+     * As we can see in the diagram above, this approach does not generate any duplicate subsets. Thus, in the worst
+     * case (array consists of n distinct elements), the total number of recursive function calls will be 2 ^ n.
+     * Also, at each function call, a deep copy of the subset currentSubset generated so far is created and added to
+     * the subsets list. This will incur an additional O(n) time.
+     * Hence : O(n * 2 ^ n)
+     *
      * Space : O(n)
      **/
     public static List<List<Integer>> subsetsWithDup(int[] nums) {
@@ -43,7 +55,7 @@ public class LE_90_Subsets_II {
     public static void helper(List<List<Integer>> res, int[] nums, int idx, List<Integer> temp) {
         res.add(new ArrayList<Integer>(temp));
         for (int i = idx; i < nums.length; i++) {
-            //!!! "i != col", because i starts from col
+            //!!! "i != idx", because i starts from col
             if (i != idx && nums[i] == nums[i - 1]) continue;
 
             temp.add(nums[i]);

@@ -26,7 +26,9 @@ public class LE_394_Decode_String {
          s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
          s = 3[2[ad]3[pf]]xyz, return adadpfpfpfadadpfpfpfadadpfpfpfxyz
 
-         Mediumo
+         Medium
+
+         https://leetcode.com/problems/decode-string
      */
 
     /**

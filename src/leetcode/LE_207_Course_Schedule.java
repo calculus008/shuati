@@ -25,6 +25,10 @@ public class LE_207_Course_Schedule {
         Note:
         The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
         You may assume that there are no duplicate edges in the input prerequisites.
+
+        Medium
+
+        https://leetcode.com/problems/course-schedule
      **/
 
     /**
@@ -42,7 +46,7 @@ public class LE_207_Course_Schedule {
      * This solution is modified from solution for LE_1136_Parallel_Courses.
      *
      * The advantages:
-     * This solution uses HashMap to store graph and node indegree info (instead of 2D array), it is clearer. Using 2D
+     * This solution uses HashMap to store graph and node in-degree info (instead of 2D array), it is clearer. Using 2D
      * array has to deal with using course number as index, so it could be 0 or 1 based. If the course number is random,
      * then 2d array won't work.
      *

@@ -33,8 +33,13 @@ public class LE_146_LRU_Cache {
             cache.get(4);       // returns 4
 
         Hard
+
+        https://leetcode.com/problems/lru-cache
      **/
 
+    /**
+     * Design, Double LinkedList + HashMap
+     */
     class LRUCache_Practice {
         class Node {
             int key, val;
@@ -82,7 +87,7 @@ public class LE_146_LRU_Cache {
         }
 
         public void put(int key, int val) {
-            if (map.containsKey(key)) {
+            if (map.containsKey(key)) {//no item number increase, so no need to worry about capacity
                 Node node = map.get(key);
                 /**
                  * !!!
@@ -93,9 +98,10 @@ public class LE_146_LRU_Cache {
                 return;
             }
 
-            if (capacity <= 0) return;
+            if (capacity <= 0) return; //double check capacity if it is 0
 
             /**
+             * Now deal with the case for item number increase
              * !!!
              * ">=", NOT ">"
              */

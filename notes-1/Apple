@@ -36,14 +36,25 @@ LE_71_Simplify_Path               (Stack)
 LE_73_Set_Matrix_Zero             (Matrix)
 LE_79_Word_Search                 (DFS)
 LE_88_Merge_Sorted_Array          (Array + Two Pointers)
+LE_90_Subsets_II                  (Backtracking)
 LE_92_Reverse_LinkedList_II       (Linked List)
 LE_101_Symmetric_Tree             (Tree)
 LE_102_Binary_Tree_Level_Order_Traversal     (Tree, BFS, pre-order DFS)
 LE_104_Max_Depth_Of_Binary_Tree   (Tree)
+LE_155_Min_Stack                  (Stack)
 LE_169_Majority_Element           (Array)
 
+# Fast go-over
+LE_118_Pascal_Triangle
+LE_146_LRU_Cache                  (Design, Double-LinkedList + HashMap)
+LE_191_Number_Of_1_Bits           (Bit)
+LE_202_Happy_Number               (Math, HastSet)
+LE_207_Course_Schedule            (Topological Sort)
+LE_238_Product_Of_Array_Except_Self (Array, Prefix Multiplication)
+LE_242_Valid_Anagram              (Array, HashTable/CharArray count)
+LE_394_Decode_String              (Queue + Recursion)
 
 
-# DP
+# DP (For later)
 LE_53_Maximum_Subarray
 LE_97_Interleaving_String

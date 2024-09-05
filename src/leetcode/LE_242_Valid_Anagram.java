@@ -18,6 +18,10 @@ public class LE_242_Valid_Anagram {
 
         Follow up:
         What if the inputs contain unicode characters? How would you adapt your solution to such case?
+
+        Easy
+
+        https://leetcode.com/problems/valid-anagram
      */
 
     class Solution_Practice {

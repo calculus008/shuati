@@ -7,20 +7,26 @@ import java.util.List;
  * Created by yuank on 3/13/18.
  */
 public class LE_118_Pascal_Triangle {
-    /*
-        Given numRows, generate the first numRows of Pascal's triangle.
-
-        For example, given numRows = 5,
-        Return
-
-        [
-             [1],
-            [1,1],
-           [1,2,1],
-          [1,3,3,1],
-         [1,4,6,4,1]
-        ]
+    /**
+     *         Given numRows, generate the first numRows of Pascal's triangle.
+     *
+     *         For example, given numRows = 5,
+     *         Return
+     *
+     *         [
+     *              [1],
+     *             [1,1],
+     *            [1,2,1],
+     *           [1,3,3,1],
+     *          [1,4,6,4,1]
+     *         ]
+     *
+     *         Easy
+     *
+     *         https://leetcode.com/problems/pascals-triangle
      */
+
+
 
     /*
         row :

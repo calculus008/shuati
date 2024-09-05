@@ -21,16 +21,22 @@ public class LE_202_Happy_Number {
         8^2 + 2^2 = 68
         6^2 + 8^2 = 100
         1^2 + 0^2 + 0^2 = 1
+
+        Easy
+
+        https://leetcode.com/problems/happy-number
      */
 
     /**
+     * Math + HashSet
+     *
      * Time and Space : O(log(n))
      */
     public boolean isHappy(int n) {
         //"it loops endlessly in a cycle which does not include 1.", hence, use HashSet to detect the loop in cycles
         HashSet<Integer> set = new HashSet<>();
 
-        int squareSum = 0;//!!! must delcare here for the next line
+        int squareSum = 0;//!!! must declare here for the next line
 
         while (set.add(squareSum)) {//!!!
             squareSum = 0;//!!!
