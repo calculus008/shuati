@@ -9,6 +9,10 @@ public class LE_208_Implement_Trie {
 
         Note:
         You may assume that all inputs are consist of lowercase letters a-z.
+
+        Medium
+
+        https://leetcode.com/problems/implement-trie-prefix-tree
      */
 
     //A simplified version of LE_208

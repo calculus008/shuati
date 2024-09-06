@@ -68,9 +68,12 @@ LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
 LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
 LE_621_Task_Scheduler             (Priority Queue)                           ### ***
 LE_706_Design_HashMap             (Design)
+LE_953_Verifying_An_Alien_Dictionary    (String, Comparison)
 LE_994_Rotting_Oranges            (BFS)
+LE_1657_Determine_If_Two_Strings_Are_Close  (HashMap, Set, Frequency)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
-
+LE_2625_Flatten_Deeply_Nested_Array (BFS)
+LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency   (Sliding Window)
 
 
 # DP (For later)
@@ -89,3 +92,4 @@ LE_909_Snakes_And_Ladders
 
 # SQL
 1148. Article Views I
+1174. Immediate Food Delivery II

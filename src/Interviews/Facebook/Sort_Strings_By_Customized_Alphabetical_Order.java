@@ -33,7 +33,7 @@ public class Sort_Strings_By_Customized_Alphabetical_Order {
      * https://www.geeksforgeeks.org/sort-the-array-of-strings-according-to-alphabetical-order-defined-by-another-string/
      */
     public class Solution2 {
-        private static void sort(String[] strArr, String str) {
+        private void sort(String[] strArr, String str) {
             Comparator<String> myComp = new Comparator<String>() {
                 @Override
                 public int compare(String a, String b) {
