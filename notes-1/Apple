@@ -51,6 +51,7 @@ LE_146_LRU_Cache                  (Design, Double-LinkedList + HashMap)
 LE_167_Two_Sum_II_Array_Is_Sorted (Two Pointers)
 LE_189_Rotate_Array               (String, Swap)
 LE_191_Number_Of_1_Bits           (Bit)
+LE_200_Number_Of_Islands
 LE_202_Happy_Number               (Math, HastSet)
 LE_207_Course_Schedule            (Topological Sort)
 LE_208_Implement_Trie             (Trie)
@@ -68,13 +69,14 @@ LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
 LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
 LE_621_Task_Scheduler             (Priority Queue)                           ### ***
 LE_706_Design_HashMap             (Design)
+LE_713_Subarray_Product_Less_Than_K     (Sliding Window)
 LE_953_Verifying_An_Alien_Dictionary    (String, Comparison)
 LE_994_Rotting_Oranges            (BFS)
 LE_1657_Determine_If_Two_Strings_Are_Close  (HashMap, Set, Frequency)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
 LE_2625_Flatten_Deeply_Nested_Array (BFS)
 LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency   (Sliding Window)
-
+LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
 # DP (For later)
 LE_53_Maximum_Subarray
@@ -82,12 +84,13 @@ LE_97_Interleaving_String
 LE_120_Triangle
 LE_198_House_Robber
 LE_221_Maximal_Square
-
+LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
 # Hard (for later)
 LE_218_The_Sky_Line_Problem
 768. Max Chunks To Make Sorted II (https://leetcode.com/problems/max-chunks-to-make-sorted-ii)
 LE_909_Snakes_And_Ladders
+2972. Count the Number of Incremovable Subarrays II
 
 
 # SQL
