@@ -28,6 +28,8 @@ public class LE_621_Task_Scheduler {
      * The integer n is in the range [0, 100].
      *
      * Medium
+     *
+     * https://leetcode.com/problems/task-scheduler
      */
 
     /**
@@ -61,6 +63,9 @@ public class LE_621_Task_Scheduler {
                 int worktime = 0;
                 List<Integer> tmp = new ArrayList<Integer>();
 
+                // Run tasks:
+                // Tasks with the highest frequency are popped from the max heap.
+                // In the case of frequency ties, any tied task can be chosen
                 for (int i = 0; i < cycle; i++) {
                     if (!pq.isEmpty()) {
                         tmp.add(pq.poll());
@@ -68,11 +73,16 @@ public class LE_621_Task_Scheduler {
                     }
                 }
 
+                //After completion of the cycle:
+                //The chosen task's frequency is reduced by 1. If remaining occurrences exist,
+                //they are added to a temporary array. The temporary array is used to rebuild
+                //the heap with updated frequencies of tasks encountered during the cycle
                 for (int cnt : tmp) {
                     if (--cnt > 0) {
                         pq.offer(cnt);
                     }
                 }
+
                 alltime += !pq.isEmpty() ? cycle : worktime;
             }
 

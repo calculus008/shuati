@@ -23,6 +23,15 @@ public class LE_112_Path_Sum {
                  /  \      \
                 7    2      1
         return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+
+        Easy
+
+        https://leetcode.com/problems/path-sum
+
+        Related:
+            LE_112_Path_Sum
+            LE_113_Path_Sum_II
+            LE_437_Path_Sum_III
      **/
 
     //Time and Space : O(n)
@@ -38,8 +47,16 @@ public class LE_112_Path_Sum {
         return hasPathSum1(root.left, sum - root.val) || hasPathSum1(root.right, sum - root.val);
     }
 
-    //Solution 2 : preorder and stack
     public boolean hasPathSum2(TreeNode root, int sum) {
+        if (root == null) return false;
+
+        sum -= root.val;
+        if ((root.left == null) && (root.right == null)) return (sum == 0);
+        return hasPathSum2(root.left, sum) || hasPathSum2(root.right, sum);
+    }
+
+    //Solution 2 : preorder and stack
+    public boolean hasPathSum3(TreeNode root, int sum) {
         if (root == null) return false;
 
         Stack<TreeNode> stack = new Stack<>();

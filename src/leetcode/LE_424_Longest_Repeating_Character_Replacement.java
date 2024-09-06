@@ -37,6 +37,8 @@ public class LE_424_Longest_Repeating_Character_Replacement {
      * The substring "BBBB" has the longest repeating letters, which is 4.
      *
      * Medium
+     *
+     * https://leetcode.com/problems/longest-repeating-character-replacement
      */
 
     /**
@@ -74,7 +76,7 @@ public class LE_424_Longest_Repeating_Character_Replacement {
                 count[chs[i] - 'A']++;
                 max = Math.max(max, count[chs[i] - 'A']);
 
-                while (i - j + 1 > max + k) {
+                while (i - j + 1 > max + k) {//move start of the sliding window to right by one
                     count[chs[j] - 'A']--;
                     j++;
                 }

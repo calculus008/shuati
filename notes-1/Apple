@@ -41,20 +41,51 @@ LE_92_Reverse_LinkedList_II       (Linked List)
 LE_101_Symmetric_Tree             (Tree)
 LE_102_Binary_Tree_Level_Order_Traversal     (Tree, BFS, pre-order DFS)
 LE_104_Max_Depth_Of_Binary_Tree   (Tree)
+LE_153_Find_Min_In_Rotated_Sorted_Array   (Binary Search)
 LE_155_Min_Stack                  (Stack)
 LE_169_Majority_Element           (Array)
 
 # Fast go-over
 LE_118_Pascal_Triangle
 LE_146_LRU_Cache                  (Design, Double-LinkedList + HashMap)
+LE_167_Two_Sum_II_Array_Is_Sorted (Two Pointers)
+LE_189_Rotate_Array               (String, Swap)
 LE_191_Number_Of_1_Bits           (Bit)
 LE_202_Happy_Number               (Math, HastSet)
 LE_207_Course_Schedule            (Topological Sort)
+LE_208_Implement_Trie             (Trie)
+LE_236_Lowest_Common_Ancestor_Of_BT   (Tree)
 LE_238_Product_Of_Array_Except_Self (Array, Prefix Multiplication)
+LE_240_Search_2D_Matrix_II        (Two Pointers in 2D arrays)
 LE_242_Valid_Anagram              (Array, HashTable/CharArray count)
+LE_253_Meeting_Rooms_II           (Intervals(MeetingRoom))
+LE_362_Design_Hit_Counter         (Design)
 LE_394_Decode_String              (Queue + Recursion)
+LE_424_Longest_Repeating_Character_Replacement    (Sliding Window)           ***
+LE_437_Path_Sum_III               (Tree, Prefix Sum, Backtracking)           ***
+LE_443_String_Compression         (String, Two Pointers)
+LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
+LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
+LE_621_Task_Scheduler             (Priority Queue)                           ### ***
+LE_706_Design_HashMap             (Design)
+LE_994_Rotting_Oranges            (BFS)
+LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
+
 
 
 # DP (For later)
 LE_53_Maximum_Subarray
 LE_97_Interleaving_String
+LE_120_Triangle
+LE_198_House_Robber
+LE_221_Maximal_Square
+
+
+# Hard (for later)
+LE_218_The_Sky_Line_Problem
+768. Max Chunks To Make Sorted II (https://leetcode.com/problems/max-chunks-to-make-sorted-ii)
+LE_909_Snakes_And_Ladders
+
+
+# SQL
+1148. Article Views I

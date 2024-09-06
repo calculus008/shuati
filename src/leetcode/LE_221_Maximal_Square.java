@@ -16,6 +16,9 @@ public class LE_221_Maximal_Square {
         1 0 0 1 0
         Return 4.
 
+        Medium
+
+        https://leetcode.com/problems/maximal-square
      */
 
     //DP, Time and Space : O(m * n)

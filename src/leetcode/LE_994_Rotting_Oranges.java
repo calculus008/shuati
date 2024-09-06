@@ -35,7 +35,9 @@ public class LE_994_Rotting_Oranges {
      * 1 <= grid[0].length <= 10
      * grid[i][j] is only 0, 1, or 2.
      *
-     * Easy
+     * Medium
+     *
+     * https://leetcode.com/problems/rotting-oranges
      */
 
     /**

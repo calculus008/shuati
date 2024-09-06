@@ -1,14 +1,14 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class LE_706_Design_HashMap {
     /**
      * Design a HashMap without using any built-in hash table libraries
      *
      * Easy
+     *
+     * https://leetcode.com/problems/design-hashmap
      */
 
     /**
@@ -31,6 +31,71 @@ public class LE_706_Design_HashMap {
      *
      */
 
+    class HashMap_with_hash{
+        class ListNode {
+            int key, val;
+            ListNode next;
+            public ListNode(int key, int val, ListNode next) {
+                this.key = key;
+                this.val = val;
+                this.next = next;
+            }
+        }
+        class MyHashMap {
+            static final int size = 19997;
+            static final int mult = 12582917;
+            ListNode[] data;
+            public MyHashMap() {
+                this.data = new ListNode[size];
+            }
+
+            private int hash(int key) {
+                return (int)((long)key * mult % size);
+            }
+
+            public void put(int key, int val) {
+                remove(key);
+                int h = hash(key);
+                ListNode node = new ListNode(key, val, data[h]);
+                data[h] = node;
+            }
+
+            public int get(int key) {
+                int h = hash(key);
+                ListNode node = data[h];
+
+                while(node != null) {
+                    if (node.key == key) {
+                        return node.val;
+                    }
+                    node = node.next;
+                }
+                return -1;
+            }
+
+            public void remove(int key) {
+                int h = hash(key);
+                ListNode node = data[h];
+                if (node == null) return;
+
+                if (node.key == key) {
+                    data[h] = node.next;
+                }else {
+                    while (node.next != null) {
+                        if (node.next.key == key) {
+                            node.next = node.next.next;
+                            return;
+                        }
+                        node = node.next;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * ******************************
+     */
 
     class Pair<U, V> {
         public U first;
@@ -190,4 +255,25 @@ public class LE_706_Design_HashMap {
         }
 
     }
+
+    class MyHashMap_with_array {
+        int[] data;
+        public MyHashMap_with_array() {
+            data = new int[1000001];
+            Arrays.fill(data, -1);
+        }
+
+        public void put(int key, int val) {
+            data[key] = val;
+        }
+
+        public int get(int key) {
+            return data[key];
+        }
+
+        public void remove(int key) {
+            data[key] = -1;
+        }
+    }
+
 }

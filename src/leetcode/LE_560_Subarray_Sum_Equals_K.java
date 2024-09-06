@@ -20,6 +20,11 @@ public class LE_560_Subarray_Sum_Equals_K {
          The range of numbers in the array is [-1000, 1000] and the range of the integer k is [-1e7, 1e7].
 
          Medium
+
+         https://leetcode.com/problems/subarray-sum-equals-k
+
+         Related:
+            LE_437_Path_Sum_III
      */
 
     /**
@@ -27,7 +32,7 @@ public class LE_560_Subarray_Sum_Equals_K {
      *
      * Prefix Sum + HashMap
      *
-     * HashMap : To answer how many subarrays have sum of a given value.
+     * HashMap : To answer how many sub-arrays have sum of a given value.
      * key - num
      * number - Frequency of num
      *
@@ -52,10 +57,10 @@ public class LE_560_Subarray_Sum_Equals_K {
                 result++;
             }
 
-            if (map.containsKey(sum - k)) {
+            if (map.containsKey(sum - k)) { //x = sum - k, so k = sum - x
                 /**
                  * !!!
-                 * current index i can form multiple subarrays whose
+                 * current index i can form multiple sub-arrays whose
                  * sum is K
                  */
                 result += map.get(sum - k);

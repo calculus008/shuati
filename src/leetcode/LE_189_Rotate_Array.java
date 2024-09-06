@@ -14,7 +14,14 @@ public class LE_189_Rotate_Array {
 
          Hint:
          Could you do it in-place with O(1) extra space?
-         Related problem: Reverse Words in a String II
+         Related problem:
+            LE_151_Reverse_Words_In_A_String
+            LE_186_Reverse_Words_In_String_II
+            LE_557_Reverse_Words_In_A_String_III
+
+        Medium
+
+        https://leetcode.com/problems/rotate-array
      */
 
     /**

@@ -58,7 +58,65 @@ public class LE_443_String_Compression {
      * 1 <= len(chars) <= 1000.
      *
      * Easy
+     *
+     * https://leetcode.com/problems/string-compression
      */
+
+    /**
+     * String + Two Pointers
+     */
+    class Solution3 {
+        public int compress(char[] chars) {
+            int i = 0, j = 0;
+
+            while(i < chars.length){
+                char cur = chars[i];
+                int count = 0;
+
+                while(i < chars.length && chars[i] == cur){
+                    i++;
+                    count++;
+                }
+
+                chars[j++] = cur;
+
+                if(count != 1) {
+                    for (char c : Integer.toString(count).toCharArray()) {
+                        chars[j++] = c;
+                    }
+                }
+            }
+            return j;
+        }
+    }
+
+    class Solution2 {
+        public int compress(char[] chars) {
+            int k = 0; // also a pointer to modify array in-place
+
+            for (int i = 0; i < chars.length; ) {
+                chars[k] = chars[i];
+                int j = i + 1;
+
+                while (j < chars.length && chars[j] == chars[i]) {
+                    j++;
+                }
+
+                if (j - i > 1) { // need compression
+                    String freq = j - i + "";
+
+                    for (char c : freq.toCharArray()) {
+                        chars[++k] = c;
+                    }
+                }
+
+                k++;
+                i = j;
+            }
+
+            return k;
+        }
+    }
 
     class Solution1 {
         public int compress(char[] chars) {
@@ -89,34 +147,6 @@ public class LE_443_String_Compression {
             }
 
             return j;
-        }
-    }
-
-    class Solution2 {
-        public int compress(char[] chars) {
-            int len = 0; // also a pointer to modify array in-place
-
-            for (int i = 0; i < chars.length; ) {
-                chars[len] = chars[i];
-                int j = i + 1;
-
-                while (j < chars.length && chars[j] == chars[i]) {
-                    j++;
-                }
-
-                if (j - i > 1) { // need compression
-                    String freq = j - i + "";
-
-                    for (char c : freq.toCharArray()) {
-                        chars[++len] = c;
-                    }
-                }
-
-                len++;
-                i = j;
-            }
-
-            return len;
         }
     }
 }

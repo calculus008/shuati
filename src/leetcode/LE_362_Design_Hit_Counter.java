@@ -41,6 +41,8 @@ public class LE_362_Design_Hit_Counter {
      * What if the number of hits per second could be very large? Does your design scale?
      *
      * Medium
+     *
+     * https://leetcode.com/problems/design-hit-counter
      */
 
     public class HitCounter {

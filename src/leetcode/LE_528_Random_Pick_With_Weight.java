@@ -36,6 +36,8 @@ public class LE_528_Random_Pick_With_Weight {
      * 大致是给你一些城市和城市的人口，请写出一个函数，该函数可以根据人口比重随机地输出城市名。
      *
      * Medium
+     *
+     * https://leetcode.com/problems/random-pick-with-weight
      */
 
     /**

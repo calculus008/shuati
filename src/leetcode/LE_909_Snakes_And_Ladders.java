@@ -59,6 +59,8 @@ public class LE_909_Snakes_And_Ladders {
      * The board square with number N*N has no snake or ladder.
      *
      * Medium
+     *
+     * https://leetcode.com/problems/snakes-and-ladders
      */
 
     /**

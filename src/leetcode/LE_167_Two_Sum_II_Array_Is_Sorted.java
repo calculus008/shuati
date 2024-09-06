@@ -16,6 +16,10 @@ public class LE_167_Two_Sum_II_Array_Is_Sorted {
 
         Input: numbers={2, 7, 11, 15}, target=9
         Output: index1=1, index2=2
+
+        Medium
+
+        https://leetcode.com/problems/two-sum-ii-input-array-is-sorted
      */
 
     public int[] twoSum(int[] numbers, int target) {
