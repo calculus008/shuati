@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class LE_532_K_Diff_Pairs_In_An_Array {
     /**
@@ -34,6 +33,31 @@ public class LE_532_K_Diff_Pairs_In_An_Array {
      * Easy
      */
 
+    /**
+     *  HashMap
+     *  Time and Space : O(n)
+     */
+    public int findPairs_clean(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int n : nums) {
+            map.put(n, map.getOrDefault(n, 0) + 1);
+        }
+
+        int res = 0;
+        for (int key : map.keySet()) {
+            if (k == 0) {
+                if (map.get(key) >= 2) res++;
+            } else {
+                if (map.containsKey(key + k)) {
+                    res++;
+                }
+            }
+        }
+
+        return res;
+    }
+
     public int findPairs(int[] nums, int k) {
         if (nums == null || nums.length == 0 || k < 0)   return 0;
 
@@ -44,9 +68,13 @@ public class LE_532_K_Diff_Pairs_In_An_Array {
         }
 
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            /**
+             * !!! this is the key point or tricky part of this question, must deal with k as 0 separately.
+             * If not for this special case, we can only use a set, no need to use HashMap to count the frequency.
+             */
             if (k == 0) {
                 //count how many elements in the array that appear more than twice.
-                if (entry.getValue() >= 2) {
+                if (entry.getValue() >= 2) {//!!! ">=", not "=="
                     count++;
                 }
             } else {
@@ -57,5 +85,36 @@ public class LE_532_K_Diff_Pairs_In_An_Array {
         }
 
         return count;
+    }
+
+    /**
+     * Sort and two pointers
+     *
+     * Time : O(nlogn)
+     * Space : O(1)
+     */
+    public int findPairs_sort_tow_pointers(int[] nums, int k) {
+        Arrays.sort(nums);
+        int n = nums.length;
+
+        int l = 0;
+        int r = 1;
+        int res = 0;
+
+        while (l < n && r < n) {
+            if (l == r || nums[r] - nums[l] < k) {  //!!! "||", not "&&"
+                r++;
+            } else if (nums[r] - nums[l] > k) {
+                l++;
+            } else {
+                l++;
+                res++;
+                while(l < n && nums[l] == nums[l - 1]) {
+                    l++;
+                }
+            }
+        }
+
+        return res;
     }
 }

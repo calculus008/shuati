@@ -43,9 +43,9 @@ public class LE_540_Single_Element_In_A_Sorted_Array {
          **/
         while (l < r) {
             int m = l + (r - l) / 2;
-            //int n = m % 2 == 0 ? m + 1 : m - 1;
-            int n = m ^ 1;
-            if (n < nums.length && nums[m] == nums[n]) {
+            int n = m % 2 == 0 ? m + 1 : m - 1;
+//            int n = m ^ 1;
+            if (n < nums.length && nums[m] == nums[n]) { //!!! if m is on the left side (before) the single value
                 l = m + 1;
             } else {
                 r = m;
@@ -53,5 +53,16 @@ public class LE_540_Single_Element_In_A_Sorted_Array {
         }
 
         return nums[l];
+    }
+
+    /**
+     * Time : O(n)
+     */
+    public int singleNonDuplicate_exclusieve_or(int[] nums) {
+        int res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            res ^= nums[i];
+        }
+        return res;
     }
 }

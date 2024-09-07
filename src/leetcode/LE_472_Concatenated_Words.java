@@ -24,7 +24,45 @@ public class LE_472_Concatenated_Words {
      * The returned elements order does not matter.
      *
      * Hard
+     *
+     * https://leetcode.com/problems/concatenated-words
      */
+
+
+    class Solution_standard_dfs_answer {
+        public List<String> findAllConcatenatedWordsInADict(String[] words) {
+            Set<String> set = new HashSet<>(Arrays.asList(words));
+            List<String> res = new ArrayList<>();
+
+            for (String word : words) {
+                int len = word.length();
+                if (dfs(word, 0, new boolean[len], set)) {
+                    res.add(word);
+                }
+            }
+            return res;
+        }
+
+        private boolean dfs(final String word, int cur, final boolean[] visited, final Set<String> set) {
+            if (cur == word.length()) {
+                return true;
+            }
+
+            if (visited[cur]) {
+                return false;
+            }
+
+            visited[cur] = true;
+            for (int i = word.length() - (cur == 0 ? 1 : 0); i > cur; --i) {
+                if (set.contains(word.substring(cur, i)) && dfs(word, i, visited, set)) {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+    }
+
 
     /**
      * 24ms 99.85# solution from leetocde
@@ -64,7 +102,7 @@ public class LE_472_Concatenated_Words {
             for (int i = start + min; i <= word.length() - min; i++) {
                 /**
                  * !!!
-                 * 类似余word break, break the word into left and right.
+                 * 类似于word break, break the word into left and right.
                  * if left is contained in set
                  * AND
                  * right is also contained in set OR calling check() on right returns true
