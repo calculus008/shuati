@@ -46,3 +46,6 @@ LE_81_Search_In_Rotated_Sorted_Array_II
 #
 LI_447_Search_In_A_Big_Sorted_Array
 LE_702_Search_In_A_Sorted_Array_Of_Unknown_Size
+
+# Use a canDo function with BinarySearch
+LE_1552_Magnetic_Force_Between_Two_Balls

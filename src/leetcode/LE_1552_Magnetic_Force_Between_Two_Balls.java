@@ -30,7 +30,9 @@ public class LE_1552_Magnetic_Force_Between_Two_Balls {
      * All integers in position are distinct.
      * 2 <= m <= position.length
      *
-     * Hard
+     * Medium
+     *
+     * https://leetcode.com/problems/magnetic-force-between-two-balls
      */
 
     /**
@@ -45,6 +47,44 @@ public class LE_1552_Magnetic_Force_Between_Two_Balls {
      *
      * Now, we need to find last occurrence of true in above array.
      */
+
+    class Solution_clean {
+        public int maxDistance(int[] position, int m) {
+            Arrays.sort(position); //!!!
+
+            int l = 1;
+            int r = position[position.length - 1];
+            int res = 0;
+
+            while (l <= r) { //!!!
+                int mid = l + (r - l) / 2;
+                if (canPlace(position, m, mid)) {
+                    res = mid;
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+
+            return res;
+        }
+
+        public boolean canPlace(int[] position, int m, int mid) {
+            int last = position[0];
+            int count = 1;
+
+            for (int i = 1; i < position.length; i++) {
+                int cur = position[i];
+                if (cur - last >= mid ) {
+                    last = cur;
+                    count++;
+                }
+            }
+
+            return count >= m; //!!!
+        }
+    }
+
     class Solution {
         public int maxDistance(int[] position, int m) {
             /**

@@ -24,7 +24,7 @@ public class LE_739_Daily_Temperatures {
      * 1.For "next bigger element" - for a given element in an array, find the element that is bigger than it in the elements come after.
      * 2.Then get the distance between current element and the next bigger element.
      *
-     * Action of calculating distance happens when we popping out element when we run into a bigger element.
+     * Action of calculating distance happens at popping out element when we run into a bigger element.
      * Therefore, we use mono-decreasing stack and it saves index of the element, not element itself (for calculating distance).
      *
      * O(n)

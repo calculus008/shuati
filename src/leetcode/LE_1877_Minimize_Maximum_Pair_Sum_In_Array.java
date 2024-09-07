@@ -59,4 +59,7 @@ public class LE_1877_Minimize_Maximum_Pair_Sum_In_Array {
             return res;
         }
     }
+
+    public static class LE_1768_Merge_Strings_Alternately {
+    }
 }

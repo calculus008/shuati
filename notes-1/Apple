@@ -56,7 +56,7 @@ LE_202_Happy_Number               (Math, HastSet)
 LE_207_Course_Schedule            (Topological Sort)
 LE_208_Implement_Trie             (Trie)
 LE_236_Lowest_Common_Ancestor_Of_BT   (Tree)
-LE_238_Product_Of_Array_Except_Self (Array, Prefix Multiplication)
+LE_238_Product_Of_Array_Except_Self   (Array, Prefix Multiplication)
 LE_240_Search_2D_Matrix_II        (Two Pointers in 2D arrays)
 LE_242_Valid_Anagram              (Array, HashTable/CharArray count)
 LE_253_Meeting_Rooms_II           (Intervals(MeetingRoom))
@@ -65,19 +65,30 @@ LE_394_Decode_String              (Queue + Recursion)
 LE_424_Longest_Repeating_Character_Replacement    (Sliding Window)           ***
 LE_437_Path_Sum_III               (Tree, Prefix Sum, Backtracking)           ***
 LE_443_String_Compression         (String, Two Pointers)
+LE_509_Fibonacci_Number
 LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
 LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
+LE_565_Array_Nesting              (DFS, Array)                               ***
 LE_621_Task_Scheduler             (Priority Queue)                           ### ***
+LE_628_Maximum_Product_Of_Three_Numbers       (Array)
 LE_706_Design_HashMap             (Design)
-LE_713_Subarray_Product_Less_Than_K     (Sliding Window)
-LE_953_Verifying_An_Alien_Dictionary    (String, Comparison)
+LE_713_Subarray_Product_Less_Than_K                                        (Sliding Window)
+LE_735_Asteroid_Collision         (Stack)                                  ****
+LE_771_Jewels_And_Stones          (HashMap)
+LE_846_Hand_Of_Straights          (TreeMap, PriorityQueue)                 3 different solutions, need to come back later ***
+LE_867_Transpose_Matrix           (Matrix)
+LE_953_Verifying_An_Alien_Dictionary                                       (String, Comparison)
 LE_994_Rotting_Oranges            (BFS)
-LE_1657_Determine_If_Two_Strings_Are_Close  (HashMap, Set, Frequency)
+LE_1344_Angle_Between_Hands_Of_A_Clock
+LE_1552_Magnetic_Force_Between_Two_Balls                                   (Binary Search with canDo())
+LE_1657_Determine_If_Two_Strings_Are_Close                                 (HashMap, Set, Frequency)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
 LE_2625_Flatten_Deeply_Nested_Array (BFS)
-LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency   (Sliding Window)
+LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency                (Sliding Window)
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
+
+==================
 # DP (For later)
 LE_53_Maximum_Subarray
 LE_97_Interleaving_String
@@ -91,7 +102,6 @@ LE_218_The_Sky_Line_Problem
 768. Max Chunks To Make Sorted II (https://leetcode.com/problems/max-chunks-to-make-sorted-ii)
 LE_909_Snakes_And_Ladders
 2972. Count the Number of Incremovable Subarrays II
-
 
 # SQL
 1148. Article Views I

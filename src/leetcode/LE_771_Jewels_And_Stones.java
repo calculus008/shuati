@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.*;
+
 /**
  * Created by yuank on 11/30/18.
  */
@@ -45,4 +47,23 @@ public class LE_771_Jewels_And_Stones {
 
         return res;
     }
+
+
+    public int numJewelsInStones_hashmap(String jewels, String stones) {
+        if (jewels == null || stones == null) return 0;
+
+        Map<Character, Integer> count = new HashMap<>();
+
+        for (char c : stones.toCharArray()) {
+            count.put(c, count.getOrDefault(c, 0) + 1);
+        }
+
+        int res = 0;
+        for (char c : jewels.toCharArray()) {
+            res += count.getOrDefault(c, 0);
+        }
+
+        return res;
+    }
+
 }

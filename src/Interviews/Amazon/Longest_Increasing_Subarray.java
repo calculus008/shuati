@@ -19,7 +19,7 @@ public class Longest_Increasing_Subarray {
      * The subarray is {4, 7, 8, 10}
      */
 
-    // function to find the length of longest
+    // function to find the length of the longest
     // increasing contiguous subarray
     public static int lenOfLongIncSubArr(int arr[],
                                          int n) {
@@ -32,7 +32,7 @@ public class Longest_Increasing_Subarray {
 
         // traverse the array from the 2nd element
         for (int i = 1; i < n; i++) {
-            // if current element if greater than
+            // if current element is greater than
             // previous element, then this element
             // helps in building up the previous
             // increasing subarray encountered

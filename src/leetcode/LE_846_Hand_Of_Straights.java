@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-import java.util.TreeMap;
+import java.util.*;
 
 public class LE_846_Hand_Of_Straights {
     /**
@@ -33,7 +30,96 @@ public class LE_846_Hand_Of_Straights {
      * 1 <= W <= hand.length
      *
      * Medium
+     *
+     * https://leetcode.com/problems/hand-of-straights
      */
+
+    class Solution_PriorityQueue {
+        public boolean isNStraightHand(int[] hand, int groupSize) {
+            if (hand.length % groupSize != 0) return false;
+
+            PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+            for (int h : hand) {
+                pq.offer(h);
+            }
+
+            while (!pq.isEmpty()) {
+                int start = pq.poll();
+
+                for (int i = start + 1; i < start + groupSize; i++) {
+                    if (!pq.remove(i)) return false;
+                }
+            }
+
+            return true;
+        }
+    }
+
+    /**
+     * Time : O(n)
+     * Space : O(n)
+     */
+    class Solution_map {
+        public boolean isNStraightHand(int[] hand, int groupSize) {
+            if (hand.length % groupSize != 0) return false;
+
+            Map<Integer, Integer> count = new HashMap<>();
+            for (int h : hand) {
+                count.put(h, count.getOrDefault(h, 0) + 1);
+            }
+
+            for (int card : hand) {
+                int start = card;
+                while (count.getOrDefault(start - 1, 0) > 0) {//!!! if use count.containsKey(), it will be much slower
+                    start--;
+                }
+
+                while(start <= card) {
+                    while(count.getOrDefault(start, 0) > 0) {
+                        for (int i = start; i < start + groupSize; i++) {
+                            if (count.getOrDefault(i, 0) == 0) {
+                                return false;
+                            }
+                            count.put(i, count.get(i) - 1);
+                        }
+                    }
+                    start++;
+                }
+            }
+
+            return true;
+        }
+    }
+
+
+    class Solution_treemap_clean {
+        public boolean isNStraightHand(int[] hand, int groupSize) {
+            if (hand.length % groupSize != 0) return false;
+
+            TreeMap<Integer, Integer> count = new TreeMap<>();
+            for (int h : hand) {
+                count.put(h, count.getOrDefault(h, 0) + 1);
+            }
+
+            while (!count.isEmpty()) {
+                int first = count.firstKey();
+
+                for (int i = first; i < first + groupSize; i++) {
+                    if (!count.containsKey(i)) return false;
+
+                    int c= count.get(i);
+                    if (c == 1) {
+                        count.remove(i);
+                    } else {
+                        count.put(i, c - 1);
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
 
     /**
      * Best Solution
@@ -79,6 +165,22 @@ public class LE_846_Hand_Of_Straights {
      * 8 -> 1
      *
      * First key = 6, 3rd group [6,7,8]
+     *
+     * Time complexity: O(n⋅logn + n⋅k)
+     *     Populating the cardCount map takes O(nlogn) time.
+     *
+     *     The outer loop processes the cardCount map until it is empty. In the worst case, it iterates n times.
+     *
+     *     Inside the outer loop, getting the smallest card value from the cardCount map takes O(logn) time due to the map implementation.
+     *
+     *     Checking for the presence of a consecutive sequence of k cards takes O(k) time. k is limited to the size of
+     *     the hand array because we can't have groups larger than the hand.
+     *
+     *     Each card will be processed exactly once because the more cards we process in each group, the fewer groups
+     *     we process. Processing each card can take up to O(logn) due to the map or heap insertion and removal.
+     *
+     *     herefore, the overall time complexity is O(nlogn+n⋅k).
+     *
      */
     class Solution1 {
         public boolean isNStraightHand(int[] hand, int W) {
