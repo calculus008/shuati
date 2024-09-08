@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class LE_435_Non_Overlapping_Intervals {
     /**
-     * Given an array of intervals intervals where intervals[i] = [starti, endi], return the minimum number of intervals
+     * Given an array of intervals where intervals[i] = [starti, endi], return the minimum number of intervals
      * you need to remove to make the rest of the intervals non-overlapping.
      *
      * Example 1:
@@ -24,7 +24,7 @@ public class LE_435_Non_Overlapping_Intervals {
      *
      * Constraints:
      * 1 <= intervals.length <= 2 * 104
-     * intervals[i].length == 2
+     * intervals[i].length == 2 (!!!)
      * -2 * 104 <= starti < endi <= 2 * 104
      *
      * Medium
@@ -35,7 +35,7 @@ public class LE_435_Non_Overlapping_Intervals {
      * Almost the exact problem as LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons.
      *
      * The conditions "intervals[i].length == 2" is set so that each interval is 2 unit long and hence you only need to
-     * consider that the case that each interval can only have 1 overlapped interval.
+     * consider that the case that each interval can only have 1 overlapped interval.(!!!)
      *   |__|
      * |__||__|
      *

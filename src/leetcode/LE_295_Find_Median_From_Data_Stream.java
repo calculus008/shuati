@@ -28,8 +28,33 @@ public class LE_295_Find_Median_From_Data_Stream {
          addNum(3)
          findMedian() -> 2
 
-        Hard
+         Hard
+
+         https://leetcode.com/problems/find-median-from-data-stream
      */
+
+    class MedianFinder_two_pq_clean {
+        PriorityQueue<Long> lo;
+        PriorityQueue<Long> hi;
+
+        public MedianFinder_two_pq_clean() {
+            lo = new PriorityQueue<>();
+            hi = new PriorityQueue<>((a, b) -> Long.compare(b, a));
+        }
+
+        public void addNum(int num) {
+            lo.offer((long)num);
+            hi.offer(lo.poll());
+
+            if (hi.size() > lo.size()) {
+                lo.offer(hi.poll());
+            }
+        }
+
+        public double findMedian() {
+            return lo.size() != hi.size() ? lo.peek() : (lo.peek() + hi.peek()) / 2.0;
+        }
+    }
 
 
     /**
@@ -136,6 +161,8 @@ public class LE_295_Find_Median_From_Data_Stream {
              * so the compiler is confused and return error. If we use Integer for heap, it works.
              *
              * Must use "(a, b) -> Long.compare(b, a)"
+             *
+             * This defines a MAX queue, by default, PriorityQueue is a MIN queue
              * **/
             small = new PriorityQueue<>((a, b) -> Long.compare(b, a));
             large = new PriorityQueue<>();

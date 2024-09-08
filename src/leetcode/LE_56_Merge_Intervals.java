@@ -20,13 +20,16 @@ public class LE_56_Merge_Intervals {
         public int[][] merge(int[][] intervals) {
             if (intervals == null || intervals.length <= 1) return intervals;
 
-            Arrays.sort(intervals, (i1, i2) -> i1[0] - i2[0]);
+            /**
+             * Must use Integer.compare() to prevent integer overflow
+             */
+            Arrays.sort(intervals, (i1, i2) ->Integer.compare(i1[0], i2[0]));
 
             List<int[]> res = new ArrayList<>();
             int[] last = null;
 
             for (int[] cur : intervals) {
-                if (last == null || last[1] < cur[0]) {
+                if (last == null || last[1] < cur[0]) { //The logic : first adding an interval, then its end may be changed based on future steps
                     res.add(cur);
                     last = cur;
                 } else {

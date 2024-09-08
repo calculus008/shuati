@@ -60,12 +60,16 @@ LE_238_Product_Of_Array_Except_Self   (Array, Prefix Multiplication)
 LE_240_Search_2D_Matrix_II        (Two Pointers in 2D arrays)
 LE_242_Valid_Anagram              (Array, HashTable/CharArray count)
 LE_253_Meeting_Rooms_II           (Intervals(MeetingRoom))
+LE_295_Find_Median_From_Data_Stream   (Heap,PriorityQueue)``
+LE_339_Nested_List_Weight_Sum     (DFS, BFS)
 LE_362_Design_Hit_Counter         (Design)
 LE_394_Decode_String              (Queue + Recursion)
+LE_412_Fizz_Buzz
 LE_424_Longest_Repeating_Character_Replacement    (Sliding Window)           ***
 LE_437_Path_Sum_III               (Tree, Prefix Sum, Backtracking)           ***
 LE_443_String_Compression         (String, Two Pointers)
-LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons
+LE_448_Find_All_Numbers_Disappeared_In_An_Array                             (String)
+LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons                           (Interval)
 LE_509_Fibonacci_Number
 LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
 LE_532_K_Diff_Pairs_In_An_Array   (HashMap, Sort + Two Pointers)
@@ -98,6 +102,7 @@ LE_97_Interleaving_String
 LE_120_Triangle
 LE_198_House_Robber
 LE_221_Maximal_Square
+LE_322_Coin_Change
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
 # Hard (for later)

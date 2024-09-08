@@ -18,6 +18,59 @@ public class LE_339_Nested_List_Weight_Sum {
          Given the list [1,[4,[6]]], return 27. (one 1 at depth 1, one 4 at depth 2, and one 6 at depth 3; 1 + 4*2 + 6*3 = 27)
 
          Easy
+
+        https://leetcode.com/problems/nested-list-weight-sum
+     */
+
+    class Solution_dfs_best {
+        /**
+         * DFS
+         * Space and time : O(n)
+         */
+        public int depthSum(List<NestedInteger> nestedList) {
+            return dfs(nestedList, 1);
+        }
+
+        private int dfs(List<NestedInteger> list, int depth) {
+            int sum = 0;
+            for (NestedInteger nested : list) {
+                if (nested.isInteger()) {
+                    sum += nested.getInteger() * depth;
+                } else {
+                    sum += dfs(nested.getList(), depth + 1);
+                }
+            }
+            return sum;
+        }
+    }
+
+
+    class Solution_bfs_best {
+        public int depthSum(List<NestedInteger> nestedList) {
+            Queue<NestedInteger> queue = new LinkedList<>();
+            queue.addAll(nestedList);
+
+            int depth = 1;
+            int total = 0;
+
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                for (int i = 0; i < size; i++) {
+                    NestedInteger cur = queue.poll();
+                    if (cur.isInteger()) {
+                        total += cur.getInteger() * depth;
+                    } else {
+                        queue.addAll(cur.getList());
+                    }
+                }
+                depth++;
+            }
+            return total;
+        }
+    }
+
+    /**
+     * ************************************
      */
 
     /**

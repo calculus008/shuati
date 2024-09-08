@@ -1,6 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons {
     /**
@@ -61,7 +61,7 @@ public class LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons {
      *             1
      *  It will be merged as one interval, you can think of its projection on the x axle is one interval.
      *
-     *  But for this problem, for a group of balloons to be shot together, they must have overlap over a common section
+     *  But for this one, for a group of balloons to be shot together, they must have overlap over a common section
      *  or sub-interval range. In the example above, interval 3 has no common overlap section with both 1 and 2.
      *
      *  变形题
@@ -71,7 +71,7 @@ public class LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons {
         public int findMinArrowShots(int[][] points) {
             if (points == null || points.length == 0) return 0;
 
-            int count = 1;
+            int count = 1; //!!!
             int minEnd = Integer.MAX_VALUE;
             Arrays.sort(points, (a,b) -> (Integer.compare(a[0], b[0])));   // Sorting the intervals/pairs in ascending order of its starting point
 
@@ -100,7 +100,7 @@ public class LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons {
      * following balloons as possible.
      *
      * So what position should we pick each time? We should shoot as to the right as possible, because since balloons are
-     * sorted, this gives you the best chance to take down more balloons. Therefore the position should always be balloon[i][1]
+     * sorted, this gives you the best chance to take down more balloons. Therefore, the position should always be balloon[i][1]
      * for the ith balloon.
      *
      * This is exactly what I do in the for loop: check how many balloons I can shoot down with one shot aiming at the
@@ -139,4 +139,32 @@ public class LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons {
         }
     }
 
+    class Solution3 {
+        public int findMinArrowShots(int[][] points) {
+            /**
+             * Use similar structure as LE_56_Merge_Intervals
+             * !!! Must use Integer.compare(), otherwise using "a[0] - b[0] may cause integer overflow"
+             */
+            Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));
+            List<int[]> res = new ArrayList<>();
+
+            int[] last = null;
+            for (int[] cur : points) {
+                if (last == null) {
+                    last = cur;
+                } else {
+                    if (cur[0] > last[1]) {
+                        res.add(last);
+                        last = cur;
+                    } else { //"<="
+                        last = new int[]{Math.max(cur[0], last[0]), Math.min(cur[1], last[1])};
+                    }
+                }
+            }
+
+            res.add(last);//!!!
+
+            return res.size();
+        }
+    }
 }

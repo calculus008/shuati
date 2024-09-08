@@ -24,10 +24,17 @@ public class LE_448_Find_All_Numbers_Disappeared_In_An_Array {
      * Easy
      */
 
+    /**
+     * Time : O(n)
+     * Space : O(1)
+     */
     public List<Integer> findDisappearedNumbers(int[] nums) {
         List<Integer> res = new ArrayList();
 
         for(int num : nums){
+            /**
+             * !!! Use Math.abs() because the value is set as negative in the next step, we need to change it back to positive.
+             */
             int index = Math.abs(num) - 1;
             if(nums[index] > 0) {
                 nums[index] = -nums[index];
