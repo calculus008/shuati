@@ -48,8 +48,8 @@ public class LE_102_Binary_Tree_Level_Order_Traversal {
                 for (int i = 0; i < size; i++) {
                     TreeNode cur = q.poll();
                     list.add(cur.val);
-                    if (cur.left != null) q.offer(cur.left);
-                    if (cur.right != null) q.offer(cur.right);
+                    if (cur.left != null) q.offer(cur.left);   //!!! check if left node is empty before adding to q!!!
+                    if (cur.right != null) q.offer(cur.right); //!!! check if right node is empty before adding to q!!!
                 }
                 res.add(list);
             }

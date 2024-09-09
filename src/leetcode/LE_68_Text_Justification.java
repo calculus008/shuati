@@ -63,6 +63,61 @@ public class LE_68_Text_Justification {
      * 调节字体使得这个常单词能在一行放下？是否能保证最长的字体在最小的字体下 <= maxWidth?
      */
 
+    class Solution_Practice {
+        public List<String> fullJustify(String[] words, int maxWidth) {
+            List<String> res = new ArrayList<>();
+            if (null == words || words.length == 0 || maxWidth <= 0) {
+                return res;
+            }
+
+            /**
+             * pay attention to how those for loops are written
+             */
+            for (int i = 0, w = 0; i < words.length; i = w) {
+                int len = -1;
+                for (w = i; w < words.length && len + words[w].length() + 1 <= maxWidth; w++) {
+                    len += words[w].length() + 1;
+                }
+
+                int numberOfWords = w - i - 1 + 1;
+                int numberOfGaps =  numberOfWords - 1;
+                int numberOfSpaces = maxWidth - len;
+
+                int evenlyDistSpaces = 1;
+                int extraSpaces = 0;
+
+                if (w != words.length && i + 1 != w) {
+                    evenlyDistSpaces = numberOfSpaces / numberOfGaps + 1;
+                    extraSpaces = numberOfSpaces % numberOfGaps;
+                }
+
+                StringBuilder sb = new StringBuilder(words[i]);
+                for (int j = i + 1; j < w; j++) {
+                    for (int k = 0; k < evenlyDistSpaces; k++) {
+                        sb.append(" ");
+                    }
+
+                    if (extraSpaces > 0) {
+                        sb.append(" ");
+                        extraSpaces--;
+                    }
+
+                    sb.append(words[j]);
+                }
+
+                int remains = maxWidth - sb.length();
+                while (remains > 0) {
+                    sb.append(" ");
+                    remains--;
+                }
+
+                res.add(sb.toString());
+            }
+
+            return res;
+        }
+    }
+
     /**
      * Also refer to Text_Wrap
      *
@@ -179,58 +234,61 @@ public class LE_68_Text_Justification {
 
     }
 
-    class Solution_Practice {
-        public List<String> fullJustify(String[] words, int maxWidth) {
-            List<String> res = new ArrayList<>();
-            if (null == words || words.length == 0 || maxWidth <= 0) {
-                return res;
+    class Solution_official {
+        class Solution {
+            public List<String> fullJustify(String[] words, int maxWidth) {
+                List<String> ans = new ArrayList<>();
+                int i = 0;
+
+                while (i < words.length) {
+                    List<String> currentLine = getWords(i, words, maxWidth);
+                    i += currentLine.size();
+                    ans.add(createLine(currentLine, i, words, maxWidth));
+                }
+
+                return ans;
             }
 
-            /**
-             * pay attention to how those for loops are written
-             */
-            for (int i = 0, w = 0; i < words.length; i = w) {
-                int len = -1;
-                for (w = i; w < words.length && len + words[w].length() + 1 <= maxWidth; w++) {
-                    len += words[w].length() + 1;
+            private List<String> getWords(int i, String[] words, int maxWidth) {
+                List<String> currentLine = new ArrayList<>();
+                int currLength = 0;
+
+                while (i < words.length && currLength + words[i].length() <= maxWidth) {
+                    currentLine.add(words[i]);
+                    currLength += words[i].length() + 1;
+                    i++;
                 }
 
-                int numberOfWords = w - i - 1 + 1;
-                int numberOfGaps =  numberOfWords - 1;
-                int numberOfSpaces = maxWidth - len;
-
-                int evenlyDistSpaces = 1;
-                int extraSpaces = 0;
-
-                if (w != words.length && i + 1 != w) {
-                    evenlyDistSpaces = numberOfSpaces / numberOfGaps + 1;
-                    extraSpaces = numberOfSpaces % numberOfGaps;
-                }
-
-                StringBuilder sb = new StringBuilder(words[i]);
-                for (int j = i + 1; j < w; j++) {
-                    for (int k = 0; k < evenlyDistSpaces; k++) {
-                        sb.append(" ");
-                    }
-
-                    if (extraSpaces > 0) {
-                        sb.append(" ");
-                        extraSpaces--;
-                    }
-
-                    sb.append(words[j]);
-                }
-
-                int remains = maxWidth - sb.length();
-                while (remains > 0) {
-                    sb.append(" ");
-                    remains--;
-                }
-
-                res.add(sb.toString());
+                return currentLine;
             }
 
-            return res;
+            private String createLine(List<String> line, int i, String[] words, int maxWidth) {
+                int baseLength = -1;
+                for (String word : line) {
+                    baseLength += word.length() + 1;
+                }
+
+                int extraSpaces = maxWidth - baseLength;
+
+                if (line.size() == 1 || i == words.length) {
+                    return String.join(" ", line) + " ".repeat(extraSpaces);
+                }
+
+                int wordCount = line.size() - 1;
+                int spacesPerWord = extraSpaces / wordCount;
+                int needsExtraSpace = extraSpaces % wordCount;
+
+                for (int j = 0; j < needsExtraSpace; j++) {
+                    line.set(j, line.get(j) + " ");
+                }
+
+                for (int j = 0; j < wordCount; j++) {
+                    line.set(j, line.get(j) + " ".repeat(spacesPerWord));
+                }
+
+                return String.join(" ", line);
+            }
         }
     }
+
 }

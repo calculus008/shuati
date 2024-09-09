@@ -7,9 +7,13 @@ import java.util.Map;
  * Created by yuank on 3/28/18.
  */
 public class LE_219_Contains_Duplicates_II {
-    /*
-        Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j]
-        and the absolute difference between i and j is at most k.
+    /**
+     * Given an array of integers and an integer k, find out whether there are two distinct indices i and j in
+     * the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
+     *
+     * Easy
+     *
+     * https://leetcode.com/problems/contains-duplicate-ii
      */
 
     public boolean containsNearbyDuplicate(int[] nums, int k) {

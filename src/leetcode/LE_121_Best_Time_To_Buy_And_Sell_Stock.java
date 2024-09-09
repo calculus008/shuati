@@ -20,6 +20,10 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
         Output: 0
 
         In this case, no transaction is done, i.e. max profit = 0.
+
+        Easy
+
+        https://leetcode.com/problems/best-time-to-buy-and-sell-stock
      */
 
     public static int maxProfit(int[] prices) {

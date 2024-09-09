@@ -67,7 +67,7 @@ public class LE_85_Maximal_Rectangle {
         https://leetcode.com/problems/maximal-rectangle/discuss/29054/Share-my-DP-solution
 
         Let the maximal rectangle area at row i and column j be computed by
-        [right(i,j) - left(i,j)]*height(i,j).All the 3 variables left, right, and height can be determined
+        [right(i,j) - left(i,j)] * height(i,j). All the 3 variables left, right, and height can be determined
         by the information from previous row, and also information from the current row
 
         Transition equations:

@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Created by yuank on 3/19/18.
@@ -114,6 +113,41 @@ public class LE_151_Reverse_Words_In_A_String {
          Collections.reverse(Arrays.asList(words));
          return String.join(" ", words);
      }
+
+
+    class Solution_with_deque {
+        public String reverseWords(String s) {
+            int left = 0, right = s.length() - 1;
+            // remove leading spaces
+            while (left <= right && s.charAt(left) == ' ') ++left;
+
+            // remove trailing spaces
+            while (left <= right && s.charAt(right) == ' ') --right;
+
+            Deque<String> d = new ArrayDeque();
+            StringBuilder word = new StringBuilder();
+            // push word by word in front of deque
+            while (left <= right) {
+                char c = s.charAt(left);
+
+                if ((word.length() != 0) && (c == ' ')) {
+                    d.offerFirst(word.toString());
+                    word.setLength(0);
+                } else if (c != ' ') {
+                    word.append(c);
+                }
+                ++left;
+            }
+            d.offerFirst(word.toString());
+
+            return String.join(" ", d);
+        }
+    }
+
+
+    /**
+     * ******************************
+      */
 
     /**
      * Time  : O(n),

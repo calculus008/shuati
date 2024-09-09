@@ -13,6 +13,14 @@ public class LE_198_House_Robber {
 
         Given a list of non-negative integers representing the amount of money of each house,
         determine the maximum amount of money you can rob tonight without alerting the police.
+
+        Medium
+
+        https://leetcode.com/problems/house-robber
+
+        LE_198_House_Robber
+        LE_213_House_Robber_II
+        LE_337_House_Robber_III
      */
 
 

@@ -62,6 +62,8 @@ public class LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game {
      * moves follow the rules of tic tac toe.
      *
      * Easy
+     *
+     * https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game
      */
 
     /**
@@ -74,9 +76,12 @@ public class LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game {
     /**
      * Counting
      *
-     * For each player, there are 8 possible winning pattern, we cound them on each step.
+     * For each player, there are 8 possible winning pattern, we count them on each step.
      *
      * 8 winning pattern : 3 rows, 3 cols, 2 diagonals
+     *
+     * Time: O(m)
+     * Space: O(n)
      */
     class Solution {
         public String tictactoe(int[][] moves) {

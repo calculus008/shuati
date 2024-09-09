@@ -66,6 +66,10 @@ public class LE_04_Median_Of_Two_Sorted_Arrays {
             throw new IllegalArgumentException();
         }
     }
+
+    /**
+     * ***************************************************************
+     */
     class Solution_clean__huahua {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
             if (nums1 == null && nums2 == null) return 0.0;

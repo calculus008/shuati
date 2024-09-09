@@ -16,6 +16,10 @@ public class LE_165_Compare_Version_Number {
         Here is an example of version numbers ordering:
 
         0.1 < 1.1 < 1.2 < 13.37
+
+        Medium
+
+        https://leetcode.com/problems/compare-version-numbers
      */
     /**
        there are 12 characters with special meanings:
@@ -70,13 +74,13 @@ public class LE_165_Compare_Version_Number {
 
         int len = Math.max(n.length, m.length);
 
-        for(int i=0; i<len; i++) {
-            Integer v1 = i<n.length? Integer.parseInt(n[i]):0;
-            Integer v2 = i<m.length? Integer.parseInt(m[i]):0;
+        for (int i = 0; i < len; i++) {
+            Integer v1 = i < n.length ? Integer.parseInt(n[i]) : 0;
+            Integer v2 = i < m.length ? Integer.parseInt(m[i]) : 0;
 
             //!!!the method is compareTo, not compare
             int res = v1.compareTo(v2);
-            if(res!=0) return res;
+            if (res != 0) return res;
         }
 
         return 0;

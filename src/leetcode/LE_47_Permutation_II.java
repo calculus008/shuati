@@ -16,6 +16,8 @@ public class LE_47_Permutation_II {
           [1,2,1],
           [2,1,1]
         ]
+
+
      */
 
     class Solution1 {
@@ -51,7 +53,7 @@ public class LE_47_Permutation_II {
                  *                          now with identical char at i and i - 1, the previous one is not used,
                  *                          therefore it is invalid case, just continue.
                  */
-                if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
+                if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) { //!!! !visited[i - 1] !!!
                     continue;
                 }
 

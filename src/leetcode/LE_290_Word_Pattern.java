@@ -1,6 +1,6 @@
 package leetcode;
 
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by yuank on 4/20/18.
@@ -24,6 +24,24 @@ public class LE_290_Word_Pattern {
 
         Easy
      */
+
+    class Solution_two_maps_clean {
+        public boolean wordPattern(String pattern, String s) {
+            String[] words = s.split(" ");
+            if (pattern.length() != words.length) return false;
+
+            Map<Character, Integer> map1 = new HashMap<>();
+            Map<String, Integer> map2 = new HashMap<>();
+
+            for (Integer i = 0; i < pattern.length(); i++) {
+                Integer a = map1.put(pattern.charAt(i), i);
+                Integer b = map2.put(words[i], i);
+                if (a != b) return false;
+            }
+
+            return true;
+        }
+    }
 
     /**
      * Difference from LE_291_Word_Pattern_II : words are separated by space.

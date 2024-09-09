@@ -32,6 +32,12 @@ public class LE_337_House_Robber_III {
          Maximum amount of money the thief can rob = 4 + 5 = 9.
 
          Medium
+
+         https://leetcode.com/problems/house-robber-iii
+
+         LE_198_House_Robber
+         LE_213_House_Robber_II
+         LE_337_House_Robber_III
      */
 
 

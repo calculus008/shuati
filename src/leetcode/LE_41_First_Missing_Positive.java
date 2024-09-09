@@ -16,9 +16,198 @@ public class LE_41_First_Missing_Positive {
         Your algorithm should run in O(n) time and uses constant space.
 
         Hard
+
+        https://leetcode.com/problems/first-missing-positive
      */
 
+    class Solution_cycle_sort_clean {
+        public int firstMissingPositive(int[] nums) {
+            int n = nums.length;
+            int i = 0;
+            while (i < n) {
+                int idx = nums[i] - 1;
+                if (nums[i] > 0 && nums[i] <= n && nums[i] != nums[idx]) { //!!! the most tricky part, i does not move after swap
+                    swap(nums, i, idx);
+                } else {
+                    i++;
+                }
+            }
+
+            for (int j = 0; j < n; j++) { // i is defined, use a different variable name
+                if (nums[j] != j + 1) return j + 1;
+            }
+
+            return n + 1;
+        }
+
+        public void swap(int[] nums, int i1, int i2) {
+            int temp = nums[i1];
+            nums[i1] = nums[i2];
+            nums[i2] = temp;
+        }
+    }
+
+    class Solution_circle_sort {
+        public int firstMissingPositive(int[] nums) {
+            int n = nums.length;
+
+            // Use cycle sort to place positive elements smaller than n
+            // at the correct index
+            int i = 0;
+            while (i < n) {
+                int correctIdx = nums[i] - 1;
+                if (nums[i] > 0 && nums[i] <= n && nums[i] != nums[correctIdx]) {
+                    swap(nums, i, correctIdx);
+                } else {
+                    i++;
+                }
+            }
+
+            // Iterate through nums
+            // return smallest missing positive integer
+            for (i = 0; i < n; i++) {
+                if (nums[i] != i + 1) {
+                    return i + 1;
+                }
+            }
+
+            // If all elements are at the correct index
+            // the smallest missing positive number is n + 1
+            return n + 1;
+        }
+
+        // Swaps two elements in nums
+        private void swap(int[] nums, int index1, int index2) {
+            int temp = nums[index1];
+            nums[index1] = nums[index2];
+            nums[index2] = temp;
+        }
+    }
+
+    class Solution_idx_as_hash_key_clean {
+        class Solution {
+            public int firstMissingPositive(int[] nums) {
+                int n = nums.length;
+                boolean hasOne = false;
+
+                for (int i = 0; i < n; i++) {
+                    if (nums[i] == 1) hasOne = true;
+                    if (nums[i] <= 0 || nums[i] > n)  nums[i] = 1;
+                }
+
+                if (!hasOne) return 1;
+
+                for (int i = 0; i < n; i++) {
+                    int val = Math.abs(nums[i]);
+                    if (val == n) {
+                        nums[0] = -Math.abs(nums[0]);
+                    } else {
+                        nums[val] = -Math.abs(nums[val]);
+                    }
+                }
+
+                for (int i = 1; i < n; i++) {
+                    if (nums[i] > 0) return i;
+                }
+
+                if (nums[0] > 0) return n;
+
+                return n + 1;
+            }
+        }
+    }
+
+    class Solution_idx_as_hash_key {
+        /**
+         * Time : O(n)
+         * Space : O(1)
+         *
+         * Key is using index ad hash key and sign as presence indicator
+         */
+        class Solution {
+
+            public int firstMissingPositive(int[] nums) {
+                int n = nums.length;
+                boolean contains1 = false;
+
+                // Replace negative numbers, zeros,
+                // and numbers larger than n with 1s.
+                // After this nums contains only positive numbers.
+                for (int i = 0; i < n; i++) {
+                    // Check whether 1 is in the original array
+                    if (nums[i] == 1) {
+                        contains1 = true;
+                    }
+                    if (nums[i] <= 0 || nums[i] > n) {
+                        nums[i] = 1;
+                    }
+                }
+
+                if (!contains1) return 1;
+
+                // Mark whether integers 1 to n are in nums
+                // Use index as a hash key and negative sign as a presence detector.
+                for (int i = 0; i < n; i++) {
+                    int value = Math.abs(nums[i]); //!!! abs
+                    if (value == n) { // The largest index is n - 1, so for value n, we put it at index 0
+                        nums[0] = -Math.abs(nums[0]); //!!! abs
+                    } else {
+                        nums[value] = -Math.abs(nums[value]);//!!! abs
+                    }
+                }
+
+                // First positive in nums is the smallest missing positive integer
+                for (int i = 1; i < n; i++) {
+                    if (nums[i] > 0) return i; //!!! ">"
+                }
+
+                // nums[0] stores whether n is in nums
+                if (nums[0] > 0) { //!!! ">"
+                    return n;
+                }
+
+                // If nums contains all elements 1 to n
+                // the smallest missing positive number is n + 1
+                return n + 1;
+            }
+        }
+    }
+
+    class Solution_boolean_array{
+        /**
+         * Time and Space O(n)
+         * Not meeting requirement using constant space, just here for reference.
+         */
+        class Solution {
+            public int firstMissingPositive(int[] nums) {
+                int n = nums.length;
+                boolean[] seen = new boolean[n + 1]; // Array for lookup
+
+                // Mark the elements from nums in the lookup array
+                for (int num : nums) {
+                    if (num > 0 && num <= n) {
+                        seen[num] = true;
+                    }
+                }
+
+                // Iterate through integers 1 to n
+                // return smallest missing positive integer
+                for (int i = 1; i <= n; i++) {
+                    if (!seen[i]) {
+                        return i;
+                    }
+                }
+
+                // If seen contains all elements 1 to n
+                // the smallest missing positive number is n + 1
+                return n + 1;
+            }
+        }
+    }
+
     /**
+     * Variations
+     *
      * 然后开始做题。第一题三哥出的，给了一堆server，然后让找出first available server，
      * 我想这不是first missing positive吗，leetcode原题，但L家面试题里从来没见过，
      * 但方法是记得的，但开始还是假装说最intuitive的办法就说sort，但肯定有更好的办法，
@@ -28,6 +217,10 @@ public class LE_41_First_Missing_Positive {
      *
      * 给出一个大小为n的无序数组。这些元素与1～n的全排列相比缺少了一个数字，并有一个数字
      * 出现了两次。找出这两个数。
+     */
+
+    /**
+     * *******************************************
      */
 
     /**

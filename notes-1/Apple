@@ -3,6 +3,7 @@ LE_01_Two_Sum                     (HashMap)
 LE_02_Add_Two_Numbers             (Linked List)
 LE_03_Longest_Substring_Without_Repeating_Characters (Sliding Window)
 LE_04_Median_Of_Two_Sorted_Arrays (Binary Search)                            ***
+
 LE_07_Reverse_Integer
 LE_11_Container_With_Most_Water   (Two Pointers)
 LE_14_Longest_Common_Prefix       (Trie)
@@ -17,12 +18,12 @@ LE_29_Divide_Two_Integers         ###
 LE_33_Search_In_Rotated_Sorted_Array (Binary Search)
 LE_34_Search_For_A_Range          (Binary Search)
 LE_35_Search_For_Insertion_Point  (Binary Search)
-LE_36_Valid_Sudoku
+LE_36_Valid_Sudoku                (Matrix, 2D Array)
 LE_39_Combination_Sum             (DFS, Backtracking)
 LE_42_Trapping_Rain_Water         (Two Pointers)                             ***
 LE_44_Wildcards_Matching          (Backtracking)                             ###
 LE_46_Permutation                 (DFS, Backtracking)
-LE_48_Rotate_Image
+LE_48_Rotate_Image                (Matrix, 2D Array)
 LE_49_Group_Anagrams              (HashMap + Sorting)
 LE_54_Spiral_Matrix               (Matrix)
 LE_55_Jump_Game                   (Greedy)
@@ -42,28 +43,42 @@ LE_101_Symmetric_Tree             (Tree)
 LE_102_Binary_Tree_Level_Order_Traversal     (Tree, BFS, pre-order DFS)
 LE_104_Max_Depth_Of_Binary_Tree   (Tree)
 LE_153_Find_Min_In_Rotated_Sorted_Array   (Binary Search)
+LE_151_Reverse_Words_In_A_String  (String)
 LE_155_Min_Stack                  (Stack)
+LE_165_Compare_Version_Number     (String)
 LE_169_Majority_Element           (Array)
+LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
+
 
 # Fast go-over
 LE_118_Pascal_Triangle
 LE_146_LRU_Cache                  (Design, Double-LinkedList + HashMap)
 LE_167_Two_Sum_II_Array_Is_Sorted (Two Pointers)
 LE_189_Rotate_Array               (String, Swap)
+LE_190_Reverse_Bits               (Bit)
 LE_191_Number_Of_1_Bits           (Bit)
 LE_200_Number_Of_Islands
 LE_202_Happy_Number               (Math, HastSet)
 LE_207_Course_Schedule            (Topological Sort)
 LE_208_Implement_Trie             (Trie)
+LE_215_Kth_Largest_Element_In_Array   (PriorityQueue, Counting Sort, Quick Sort)
+LE_232_Implement_Queue_Using_Stacks   (Stack)
+LE_235_Lowest_Common_Ancestor_Of_BST  (Tree)
 LE_236_Lowest_Common_Ancestor_Of_BT   (Tree)
+LE_237_Delete_Node_In_Linked_List     (LinkedList)
 LE_238_Product_Of_Array_Except_Self   (Array, Prefix Multiplication)
 LE_240_Search_2D_Matrix_II        (Two Pointers in 2D arrays)
 LE_242_Valid_Anagram              (Array, HashTable/CharArray count)
+LE_252_Meeting_Rooms              (Intervals(MeetingRoom))
 LE_253_Meeting_Rooms_II           (Intervals(MeetingRoom))
-LE_295_Find_Median_From_Data_Stream   (Heap,PriorityQueue)``
+LE_274_H_Index                    (Counting Sort)
+LE_283_Move_Zeroes                (Array)
+LE_284_Peeking_Iterator           (Iterator)
+LE_290_Word_Pattern               (HashMap)
+LE_295_Find_Median_From_Data_Stream   (Heap,PriorityQueue)
 LE_339_Nested_List_Weight_Sum     (DFS, BFS)
 LE_362_Design_Hit_Counter         (Design)
-LE_394_Decode_String              (Queue + Recursion)
+LE_394_Decode_String              (Queue + Recursion)                        ***
 LE_412_Fizz_Buzz
 LE_424_Longest_Repeating_Character_Replacement    (Sliding Window)           ***
 LE_437_Path_Sum_III               (Tree, Prefix Sum, Backtracking)           ***
@@ -78,6 +93,7 @@ LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
 LE_565_Array_Nesting              (DFS, Array)                               ***
 LE_621_Task_Scheduler             (Priority Queue)                           ### ***
 LE_628_Maximum_Product_Of_Three_Numbers       (Array)
+LE_680_Valid_Palindrome_II        (Two Pointers)
 LE_706_Design_HashMap             (Design)
 LE_713_Subarray_Product_Less_Than_K                                        (Sliding Window)
 LE_735_Asteroid_Collision         (Stack)                                  ****
@@ -89,15 +105,18 @@ LE_994_Rotting_Oranges            (BFS)
 LE_1344_Angle_Between_Hands_Of_A_Clock
 LE_1552_Magnetic_Force_Between_Two_Balls                                   (Binary Search with canDo())
 LE_1657_Determine_If_Two_Strings_Are_Close                                 (HashMap, Set, Frequency)
+LE_1768_Merge_Strings_Alternately                                          (String)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
+LE_2397_Maximum_Rows_Covered_By_Columns                                    (Recursion, Backtracking)         *****
 LE_2625_Flatten_Deeply_Nested_Array (BFS)
 LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency                (Sliding Window)
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
-
 ==================
 # DP (For later)
 LE_53_Maximum_Subarray
+LE_85_Maximal_Rectangle
+LE_91_Decode_Ways              ***
 LE_97_Interleaving_String
 LE_120_Triangle
 LE_198_House_Robber
@@ -106,12 +125,42 @@ LE_322_Coin_Change
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
 # Hard (for later)
+LE_05_Longest_Palindromic_Substring
+LE_41_First_Missing_Positive                                         (Array, in-place marker, Circle Sort)  ***
+LE_68_Text_Justification
+LE_213_House_Robber_II
 LE_218_The_Sky_Line_Problem
+LE_273_Integer_To_English_Words
 LE_472_Concatenated_Words
 768. Max Chunks To Make Sorted II (https://leetcode.com/problems/max-chunks-to-make-sorted-ii)
 LE_909_Snakes_And_Ladders
+LE_996_N_umber_Of_Squareful_Arrays                                   (DFS, Backtracking)
 2972. Count the Number of Incremovable Subarrays II
 
 # SQL
 1148. Article Views I
 1174. Immediate Food Delivery II
+
+
+=================
+LE_39_Combination_Sum
+LE_59_Spiral_Matrix_II
+LE_122_Best_Time_To_Buy_And_Sell_Stock_II
+LE_207_Course_Schedule
+LE_297_Serialize_And_Deserialize_Binary_Tree
+LE_329_Longest_Increasing_Path_In_A_Matrix
+LE_417_Pacific_Atlantic_Water_Flow
+LE_419_Battleships_In_A_Board
+LE_485_Max_Consecutive_Ones
+LE_362_Design_Hit_Counter  (https://leetcode.com/company/apple/discuss/5457845/Apple-and-Coupang-Phone-Screen-Rate-Limiter-or-Hit-Counter)
+https://leetcode.com/company/apple/discuss/5531432/Apple-or-Online-or-Ignore-Sections-in-Array
+https://leetcode.com/company/apple/discuss/5709113/Tech-Screening-Round
+https://leetcode.com/company/apple/discuss/4188668/Apple-240-Problem
+https://leetcode.com/company/apple/discuss/2737677/Apple-Syncing-Array-Question
+https://leetcode.com/company/apple/discuss/2256688/Battleships-on-Board-or-Apply-Interview-Question
+https://leetcode.com/company/apple/discuss/2256688/Battleships-on-Board-or-Apply-Interview-Question
+
+https://leetcode.com/company/apple/discuss/1746870/Apple-or-Phone-or-Basic-sorting:  list.sort(Comparator.comparingInt(o -> (Integer) o.get(1)));
+
+https://leetcode.com/company/apple/discuss/1734481/Apple-top-100-questions
+

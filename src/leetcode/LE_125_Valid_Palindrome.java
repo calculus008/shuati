@@ -15,12 +15,18 @@ public class LE_125_Valid_Palindrome {
         Have you consider that the string might be empty? This is a good question to ask during an interview.
 
         For the purpose of this problem, we define empty string as valid palindrome.
+
+        Easy
+
+        https://leetcode.com/problems/valid-palindrome
      */
 
     /**
      * Two pointers
      *
      * Character.isLetterOrDigit()
+     *
+     * Only compare none space chars
      */
     public static  boolean isPalindrome(String s) {
         if (s == null ||s.length() == 0) return true;

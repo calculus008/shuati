@@ -20,8 +20,13 @@ public class LE_46_Permutation {
           [3,2,1]
         ]
 
+        Medium
+
+        https://leetcode.com/problems/permutations
+
         Variation :
         Parity_Permutation
+        LE_996_N_umber_Of_Squareful_Arrays
      **/
 
 
@@ -62,7 +67,6 @@ public class LE_46_Permutation {
         if (nums == null) {
             return res;
         }
-
 
         helper(nums, res, new ArrayList<>(), new boolean[nums.length]);
         return res;

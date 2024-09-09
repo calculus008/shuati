@@ -21,8 +21,32 @@ public class LE_680_Valid_Palindrome_II {
 
          Easy
 
+         https://leetcode.com/problems/valid-palindrome-ii
+
          Related : LE_125_Valid_Palindrome
      */
+
+    //Time : O(n), Space : O(1)
+    public boolean validPalindrome(String s) {
+        int l = 0, h = s.length() - 1;
+        while (l < h) {
+            if (s.charAt(l) != s.charAt(h)) {
+                return isPalindrome(s, l, h - 1) || isPalindrome(s, l + 1, h);
+            }
+            l++;
+            h--;
+        }
+        return true;
+    }
+
+    private boolean isPalindrome(String s, int l, int h) {
+        while (l < h) {
+            if (s.charAt(l) != s.charAt(h)) return false;
+            l++;
+            h--;
+        }
+        return true;
+    }
 
     /**
      http://zxi.mytechroad.com/blog/string/leetcode-680-valid-palindrome-ii/
@@ -68,25 +92,4 @@ public class LE_680_Valid_Palindrome_II {
 
      */
 
-    //Time : O(n), Space : O(1)
-    public boolean validPalindrome(String s) {
-        int l = 0, h = s.length() - 1;
-        while (l < h) {
-            if (s.charAt(l) != s.charAt(h)) {
-                return isPalindrome(s, l, h - 1) || isPalindrome(s, l + 1, h);
-            }
-            l++;
-            h--;
-        }
-        return true;
-    }
-
-    private boolean isPalindrome(String s, int l, int h) {
-        while (l < h) {
-            if (s.charAt(l) != s.charAt(h)) return false;
-            l++;
-            h--;
-        }
-        return true;
-    }
 }

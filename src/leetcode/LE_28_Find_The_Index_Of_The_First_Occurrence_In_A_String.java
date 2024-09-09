@@ -3,31 +3,39 @@ package leetcode;
 /**
  * Created by yuank on 6/11/18.
  */
-public class LE_28_Implementing_Strstr {
+public class LE_28_Find_The_Index_Of_The_First_Occurrence_In_A_String {
     /**
-         Implement strStr().
+     Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 
-         Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+     Example 1:
+     Input: haystack = "sadbutsad", needle = "sad"
+     Output: 0
+     Explanation: "sad" occurs at index 0 and 6.
+     The first occurrence is at index 0, so we return 0.
 
-         Example 1:
+     Example 2:
+     Input: haystack = "leetcode", needle = "leeto"
+     Output: -1
+     Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
-         Input: haystack = "hello", needle = "ll"
-         Output: 2
-         Example 2:
 
-         Input: haystack = "aaaaa", needle = "bba"
-         Output: -1
-         Clarification:
+     Constraints:
 
-         What should we return when needle is an empty string? This is a great question to ask during an interview.
+     1 <= haystack.length, needle.length <= 104
+     haystack and needle consist of only lowercase English characters.
 
-         For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
+     Easy
 
-         https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/?envType=company&envId=apple&favoriteSlug=apple-six-months
-
-         Easy
+     https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string
      */
 
+    /**
+     * Brutal Force
+     * Time : O(mn)
+     * Space : O(1)
+     *
+     * O(n) solution with RK and KMP algorithm, details in Editorial
+     */
     public int strStr1(String haystack, String needle) {
         // empty needle appears everywhere, first appears at 0 index
         if (needle.length() == 0)
@@ -43,7 +51,7 @@ public class LE_28_Implementing_Strstr {
             for (int j = 0; j < needle.length(); j++) {
                 if (haystack.charAt(i+j) != needle.charAt(j)) break;
 
-                if (j == needle.length()-1) {
+                if (j == needle.length() - 1) {
                     return i;
                 }
             }

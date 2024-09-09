@@ -22,6 +22,8 @@ public class LE_284_Peeking_Iterator {
          ??Follow up: How would you extend your design to be generic and work with all types, not just integer?
 
          Medium
+
+         https://leetcode.com/problems/peeking-iterator
      */
 
     class PeekingIterator implements Iterator<Integer> {

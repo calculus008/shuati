@@ -17,7 +17,31 @@ public class LE_274_H_Index {
          two with no more than 3 citations each, his h-index is 3.
 
          Note: If there are several possible values for h, the maximum one is taken as the h-index.
+
+         Medium
+
+         https://leetcode.com/problems/h-index
      */
+
+    class Solution_sorting {
+        /**
+         * Time : O(nlogn)
+         * Space : O(1)
+         */
+        public int hIndex(int[] citations) {
+            Arrays.sort(citations);
+            int res = 0;
+            int i = citations.length - 1;
+
+            while (i >= 0 && citations[i] > res) {
+                i--;
+                res += 1;
+            }
+
+            return res;
+        }
+    }
+
 
 
     /**

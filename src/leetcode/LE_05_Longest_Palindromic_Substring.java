@@ -22,6 +22,10 @@ public class LE_05_Longest_Palindromic_Substring {
         Input: "cbbd
 
         Output: "bb"
+
+        Easy
+
+        https://leetcode.com/problems/longest-palindromic-substring
      */
 
     /**
