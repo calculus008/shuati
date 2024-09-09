@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.*;
+
 public class LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I {
     /**
      * You are given a 0-indexed array of positive integers nums.
@@ -42,45 +44,85 @@ public class LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I {
      * 1 <= nums.length <= 50
      * 1 <= nums[i] <= 50
      *
-     * Easy
+     * Hard
      *
      * https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-i
      */
 
-    class Solution {
-        /**
-         * Time : O(n ^ 3)
-         *
-         * Loop k: Checks each element in the array, skipping elements within the current subarray range
-         * (defined by indices i and j). For each element, it verifies if it's strictly greater than the last
-         * element seen outside the current subarray.
-         *
-         * 'lst' Variable: Keeps track of the last element seen outside the current subarray range
-         */
-        public int incremovableSubarrayCount(int[] nums) {
-            int ans = 0;
-            int n = nums.length;
-
-            for (int i = 0; i < n; i++) {
-                for (int j = i; j < n; j++) {
-                    boolean ok = true;
-                    int lst = -1;
-
-                    for (int k = 0; k < n; k++) {
-                        if (k >= i && k <= j) {
-                            continue;
-                        } else {
-                            ok &= (lst < nums[k]);
-                            lst = nums[k];
-                        }
-                    }
-
-                    ans += ok ? 1 : 0;
+    /**
+     * https://www.bilibili.com/video/BV1jg4y1y7PA/?spm_id_from=333.337.search-card.all.click
+     * 04:31 - 23:10
+     *
+     * Time and Space O(n)
+     *
+     * 时间复杂度： O(n)，其中  n 为  nums 的长度。注意二重循环中的下标  i 和 j 都只会减小，不会变大。
+     *            由于下标只会减小 O(n) 次，所以二重循环的总循环次数是O(n) 的。
+     * 空间复杂度： O(1)。
+     */
+    class Solution_O_N {
+        class Solution {
+            public int incremovableSubarrayCount(int[] a) {
+                int n = a.length;
+                int i = 0;
+                while (i < n - 1 && a[i] < a[i + 1]) {
+                    i++;
                 }
+                if (i == n - 1) { // 每个非空子数组都可以移除
+                    return n * (n + 1) / 2;
+                }
+
+                int ans = i + 2; // 不保留后缀的情况 - 移除的数组的右端点的下标是 n-1，左端点从 i+1 开始， i, i-1, i-1...., 0, 1, 一共 i+2 个
+
+                // 枚举保留的后缀为 a[j:]
+                for (int j = n - 1; j == n - 1 || a[j] < a[j + 1]; j--) {
+                    while (i >= 0 && a[i] >= a[j]) {
+                        i--;
+                    }
+                    // 可以保留前缀 a[:i+1], a[:i], ..., a[:0] 一共 i+2 个
+                    ans += i + 2;
+                }
+                return ans;
             }
-            return ans;
+        }
+
+        class Solution_brutal_force {
+
+
+            /**
+             * Time : O(n ^ 3)
+             *
+             * Loop k: Checks each element in the array, skipping elements within the current subarray range
+             * (defined by indices i and j). For each element, it verifies if it's strictly greater than the last
+             * element seen outside the current subarray.
+             *
+             * 'lst' Variable: Keeps track of the last element seen outside the current subarray range
+             */
+            public int incremovableSubarrayCount(int[] nums) {
+                int ans = 0;
+                int n = nums.length;
+
+                for (int i = 0; i < n; i++) {
+                    for (int j = i; j < n; j++) {
+                        boolean ok = true;
+                        int last = -1;
+
+                        for (int k = 0; k < n; k++) {
+                            if (k >= i && k <= j) {
+                                continue;
+                            } else {
+                                if (last >= nums[k]) {
+                                    ok = false;
+                                    break;
+                                }
+                                last = nums[k];
+                            }
+                        }
+
+                        ans += ok ? 1 : 0;
+                    }
+                }
+                return ans;
+            }
         }
     }
-
-
 }
