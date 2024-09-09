@@ -17,6 +17,10 @@ public class LE_91_Decode_Ways {
         Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
 
         The number of ways decoding "12" is 2.
+
+        Medium
+
+        https://leetcode.com/problems/decode-ways
      */
 
     //!!! Very Very Important !!!
@@ -25,6 +29,14 @@ public class LE_91_Decode_Ways {
      * http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-91-decode-ways/
      *
      * DP
+     *
+     * dp[i] : number of decoding ways of the first i chars
+     *         dp[i] =
+     *             dp[i - 1] : if ith char (s.charAt(i - 1)) is not '0'
+     *               +
+     *             dp[i - 2] : if number formed by ith char and (i - 1)the char is within [10, 26] (!!!NOT [1, 26])
+     *
+     *
      *
         s : "1231"
 
@@ -48,7 +60,7 @@ public class LE_91_Decode_Ways {
         !!!
         这里，要注意的是，dp[i] = dp[i - 1] + dp[i - 2]的实际意思是：
            dp[i - 1] : 把当前的字符（ith char) 作为单独的一个字符解码，隐含的意思是，我们遵从的是前 i - 1 个字符解码的方式，
-                       他们有多少中方式，我现在就有多少种方式。
+                       他们有多少种方式，我现在就有多少种方式。
            dp[i - 2] : 把当前的字符（ith char) 和前一个字符 ( (i - 1) th char ) 合并作为的一个字符解码，隐含的意思是，
                        我们遵从的是前 i - 2 个字符解码的方式，他们有多少中方式，我现在就有多少种方式。
         当然，这两种方式都是有条件的， 也就是在什么条件下，才能做这种解码 （ith char is not '0', value of ith and (i - 1) th

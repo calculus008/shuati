@@ -59,6 +59,7 @@ public class LE_424_Longest_Repeating_Character_Replacement {
      * Calculate res when i - j + 1 <= max + k, whenever i - j + 1 >= max + k, move j in while loop
      * to bring it back to valid condition.
      *
+     * !!!
      * The key here is that we only care max count itself, as for which char has the max count, we
      * don't care.
      *

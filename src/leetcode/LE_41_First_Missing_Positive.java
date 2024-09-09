@@ -28,7 +28,7 @@ public class LE_41_First_Missing_Positive {
                 int idx = nums[i] - 1;
                 if (nums[i] > 0 && nums[i] <= n && nums[i] != nums[idx]) { //!!! the most tricky part, i does not move after swap
                     swap(nums, i, idx);
-                } else {
+                } else { //!!!
                     i++;
                 }
             }

@@ -10,6 +10,10 @@ public class LE_53_Maximum_Subarray {
 
         For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
         the contiguous subarray [4,-1,2,1] has the largest sum = 6.
+
+        Medium
+
+        https://leetcode.com/problems/maximum-subarray
      */
 
     /**
@@ -23,9 +27,8 @@ public class LE_53_Maximum_Subarray {
         /**
          * dp[i] means the maximum subarray ending with A[i];
          */
-        dp[0] = nums[0];
-        //!!!! 不是 res = 0 !!!
-        int res = nums[0];
+        dp[0] = nums[0];   //!!!
+        int res = nums[0]; //!!!
 
         for (int i = 1; i < nums.length; i++) {
             /**

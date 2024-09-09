@@ -14,11 +14,15 @@ public class LE_97_Interleaving_String {
 
         When s3 = "aadbbcbcac", return true.
         When s3 = "aadbbbaccc", return false.
+
+        Medium
+
+        https://leetcode.com/problems/interleaving-string
      */
 
     /**
         DP, Time and Space : O(m * n)
-        dp[i][j] : if first i elements in s2 and first j elements in s1 can interleave to form the first i + j elemets in s3.
+        dp[i][j] : if first i elements in s2 and first j elements in s1 can interleave to form the first i + j elements in s3.
 
         Example:  1 for TURE, 0 for FALSE
          s2
@@ -67,20 +71,20 @@ public class LE_97_Interleaving_String {
         if (k != m + n) return false;
 
         boolean[][] dp = new boolean[m + 1][n + 1];
-        dp[0][0] = true;
+        dp[0][0] = true; //!!!
 
-        for (int i = 1; i <= m; i++) {
+        for (int i = 1; i <= m; i++) { //!!! "<="
             dp[i][0] = (s1.charAt(i - 1) == s3.charAt(i - 1));
         }
 
-        for (int i = 1; i <= n; i++) {
+        for (int i = 1; i <= n; i++) { //!!! "<="
             dp[0][i] = (s2.charAt(i - 1) == s3.charAt(i - 1));
         }
 
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
+        for (int i = 1; i <= m; i++) {//!!! "<="
+            for (int j = 1; j <= n; j++) {//!!! "<="
                 dp[i][j] = (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1))
-                        || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));
+                        || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));  //!!! s3.charAt(i + j - 1)
             }
         }
 

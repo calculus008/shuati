@@ -47,8 +47,8 @@ LE_151_Reverse_Words_In_A_String  (String)
 LE_155_Min_Stack                  (Stack)
 LE_165_Compare_Version_Number     (String)
 LE_169_Majority_Element           (Array)
-LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
-
+LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game                        (Matrix)
+LE_1963_Minimum_Number_Of_Swaps_To_Make_The_String_Balanced      (Two Pointers or Two Counters)
 
 # Fast go-over
 LE_118_Pascal_Triangle
@@ -116,8 +116,8 @@ LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 ==================
 # DP (For later)
 LE_53_Maximum_Subarray
-LE_85_Maximal_Rectangle
-LE_91_Decode_Ways              ***
+LE_85_Maximal_Rectangle        Hard, can use histogram calculation to simplify ###
+LE_91_Decode_Ways              ******* very important!
 LE_97_Interleaving_String
 LE_120_Triangle
 LE_198_House_Robber
@@ -137,7 +137,9 @@ LE_472_Concatenated_Words
 LE_909_Snakes_And_Ladders
 LE_996_N_umber_Of_Squareful_Arrays                                   (DFS, Backtracking)
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I
-2972. Count the Number of Incremovable Subarrays II
+2972. Count the Number of Incremovable Subarrays II (Duplicate of 2970??)
+LE_3030_Find_The_Grid_Of_Region_Average
+
 
 # SQL
 1148. Article Views I

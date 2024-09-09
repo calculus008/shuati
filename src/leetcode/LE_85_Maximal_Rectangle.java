@@ -18,9 +18,20 @@ public class LE_85_Maximal_Rectangle {
         1 1 1 1 1
         1 0 0 1 0
         Return 6.
+
+        Hard
+
+        https://leetcode.com/problems/maximal-rectangle
      */
 
-    //Solution 1: Use histogram from LE_84
+    /**
+     * Solution 1: Use histogram from LE_84_Largest_Rectangle_In_Histogram
+     *
+     *  https://www.youtube.com/watch?v=Psd_SSYxuYM
+     *
+     *  Time : O(nm)
+     *  Space : O(m)
+     */
     public static int maximalRectangle1(char[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return 0;
 
@@ -62,9 +73,11 @@ public class LE_85_Maximal_Rectangle {
 
     /**
         Solution 2 : DP
-        Time: O(m *n), Space : O(n)
+        Time: O(m * n), Space : O(n)
 
         https://leetcode.com/problems/maximal-rectangle/discuss/29054/Share-my-DP-solution
+
+        https://www.youtube.com/watch?v=5CEBM_174e0
 
         Let the maximal rectangle area at row i and column j be computed by
         [right(i,j) - left(i,j)] * height(i,j). All the 3 variables left, right, and height can be determined
