@@ -119,6 +119,7 @@ LE_53_Maximum_Subarray
 LE_85_Maximal_Rectangle        Hard, can use histogram calculation to simplify ###
 LE_91_Decode_Ways              ******* very important!
 LE_97_Interleaving_String
+LE_118_Pascal_Triangle
 LE_120_Triangle
 LE_198_House_Robber
 LE_221_Maximal_Square

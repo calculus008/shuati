@@ -36,6 +36,36 @@ public class LE_97_Interleaving_String {
 
        s3  a a d b b c b c a c
      */
+    public boolean isInterleave_my_version(String s1, String s2, String s3) {
+        if (s1 == null || s2 == null || s3 == null) return false;
+
+        int m = s1.length();
+        int n = s2.length();
+        int k = s3.length();
+        if (k != m + n) return false;
+
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true; //!!!
+
+        for (int i = 1; i <= m; i++) { //!!! "<="
+            dp[i][0] = dp[i - 1][0] && (s1.charAt(i - 1) == s3.charAt(i - 1)); //!!! dp[i - 1][0]
+        }
+
+        for (int j = 1; j <= n; j++) { //!!! "<="
+            dp[0][j] = dp[0][j - 1] && (s2.charAt(j - 1) == s3.charAt(j - 1)); //!!! dp[0][j - 1]
+        }
+
+        for (int i = 1; i <= m; i++) {//!!! "<="
+            for (int j = 1; j <= n; j++) {//!!! "<="
+                dp[i][j] = (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1))
+                        || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));  //!!! s3.charAt(i + j - 1)
+            }
+        }
+
+        return dp[m][n];
+    }
+
+
     public static boolean isInterleave(String s1, String s2, String s3) {
         if (s1.length() + s2.length() != s3.length()) return false;
 
@@ -62,32 +92,4 @@ public class LE_97_Interleaving_String {
         return dp[s2.length()][s1.length()];
     }
 
-    public boolean isInterleave_my_version(String s1, String s2, String s3) {
-        if (s1 == null || s2 == null || s3 == null) return false;
-
-        int m = s1.length();
-        int n = s2.length();
-        int k = s3.length();
-        if (k != m + n) return false;
-
-        boolean[][] dp = new boolean[m + 1][n + 1];
-        dp[0][0] = true; //!!!
-
-        for (int i = 1; i <= m; i++) { //!!! "<="
-            dp[i][0] = (s1.charAt(i - 1) == s3.charAt(i - 1));
-        }
-
-        for (int i = 1; i <= n; i++) { //!!! "<="
-            dp[0][i] = (s2.charAt(i - 1) == s3.charAt(i - 1));
-        }
-
-        for (int i = 1; i <= m; i++) {//!!! "<="
-            for (int j = 1; j <= n; j++) {//!!! "<="
-                dp[i][j] = (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1))
-                        || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));  //!!! s3.charAt(i + j - 1)
-            }
-        }
-
-        return dp[m][n];
-    }
 }

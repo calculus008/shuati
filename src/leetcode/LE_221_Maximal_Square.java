@@ -23,8 +23,9 @@ public class LE_221_Maximal_Square {
 
     //DP, Time and Space : O(m * n)
 
-    //Similar and more difficult problem at LE_85
+    //Similar and more difficult problem at LE_85_Maximal_Rectangle
     //https://www.youtube.com/watch?v=vkFUB--OYy0&t=186s
+
     public int maximalSquare(char[][] matrix) {
         if (matrix == null || matrix.length == 0) return 0;
 
