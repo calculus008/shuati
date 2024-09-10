@@ -35,6 +35,9 @@ public class LE_769_Max_Chunks_To_Make_Sorted {
      * Space : O(1)
      *
      * https://zxi.mytechroad.com/blog/difficulty/medium/leetcode-769-max-chunks-to-make-sorted/
+     *
+     * 因为数组arr 的元素在区间[0,n−1] 之间且互不相同，所以数组排序后有arr[i]=i。如果数组arr 的某个长为i+1 的前缀块[a0,ai] 的最大值等于i，
+     * 那么说明它排序后与原数组排序后的结果一致(!!!)。统计这些前缀块的数目，就可以得到最大分割块数目。
      */
     public int maxChunksToSorted(int[] arr) {
         int max = 0;

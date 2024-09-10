@@ -28,36 +28,33 @@ public class LE_472_Concatenated_Words {
      * https://leetcode.com/problems/concatenated-words
      */
 
-
-    class Solution_standard_dfs_answer {
+    class Solution_clean {
         public List<String> findAllConcatenatedWordsInADict(String[] words) {
-            Set<String> set = new HashSet<>(Arrays.asList(words));
-            List<String> res = new ArrayList<>();
+            Set<String> set = new HashSet<>(10000);
+            List<String> ans = new ArrayList<>();
+            int min = Integer.MAX_VALUE;
 
             for (String word : words) {
-                int len = word.length();
-                if (dfs(word, 0, new boolean[len], set)) {
-                    res.add(word);
+                if (word.length() == 0) continue;
+                set.add(word);
+                min = Math.min(min, word.length()); //use min to optimize runtime
+            }
+
+            for (String word : words) {
+                if (check(set, word, 0, min)) {
+                    ans.add(word);
                 }
             }
-            return res;
+
+            return ans;
         }
 
-        private boolean dfs(final String word, int cur, final boolean[] visited, final Set<String> set) {
-            if (cur == word.length()) {
-                return true;
-            }
-
-            if (visited[cur]) {
-                return false;
-            }
-
-            visited[cur] = true;
-            for (int i = word.length() - (cur == 0 ? 1 : 0); i > cur; --i) {
-                if (set.contains(word.substring(cur, i)) && dfs(word, i, visited, set)) {
+        private boolean check(Set<String> set, String word, int start, int min) {
+            for (int i = start + min; i <= word.length() - min; i++) {
+                if (set.contains(word.substring(start, i)) &&
+                        (set.contains(word.substring(i)) || check(set, word, i, min))) {
                     return true;
                 }
-
             }
             return false;
         }
@@ -65,7 +62,7 @@ public class LE_472_Concatenated_Words {
 
 
     /**
-     * 24ms 99.85# solution from leetocde
+     * 24ms 99.85# solution from leetcode
      *
      * Optimized from Solution_lc_2:
      * Detect min length of the words, use it to minimize for loop times.

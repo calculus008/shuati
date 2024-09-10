@@ -69,7 +69,7 @@ public class LE_909_Snakes_And_Ladders {
      * Each cell by default has "-1", if it's not, it "has a snake ladder", the value is the destination cell.
      * You can just take one snake ladder in each move.
      *
-     * For each move, you have 6 possible destinations, should be be cur + 1 to cur +_ 6 without snake ladder.
+     * For each move, you have 6 possible destinations, should be cur + 1 to cur +_ 6 without snake ladder.
      * With snake ladder, there are other destinations.
      *
      * Key points:
@@ -119,7 +119,7 @@ public class LE_909_Snakes_And_Ladders {
                         int next = cur + j;
 
                         /**
-                         * With the constrain of using ladder,
+                         * With the constraints of using ladder,
                          * the branching factor in BFS is still 6.
                          */
                         int val = getBoardValue(board, next);

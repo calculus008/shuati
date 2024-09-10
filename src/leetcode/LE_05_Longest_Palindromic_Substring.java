@@ -23,10 +23,66 @@ public class LE_05_Longest_Palindromic_Substring {
 
         Output: "bb"
 
-        Easy
+        Medium
 
         https://leetcode.com/problems/longest-palindromic-substring
      */
+
+    class Solution__two_pointers_clean{
+        String res = "";
+        public String longestPalindrome1(String s) {
+            if (s == null || s.length() == 0) return s;
+
+            for (int i = 0; i < s.length(); i++) {
+                helper(s, i, i);
+                helper(s, i, i + 1);
+            }
+
+            return res;
+        }
+
+        private void helper(String s, int left, int right) {
+            while (left >= 0 && right < s.length()
+                    && s.charAt(left) == s.charAt(right)) {
+                left--;
+                right++;
+            }
+
+            left++;
+            right--;
+
+            if (right - left + 1 > res.length()) {
+                res = s.substring(left, right + 1);
+            }
+        }
+    }
+
+    class Solution_dp {
+        public String longestPalindrome2(String s) {
+            if (s == null || s.length() == 0) return s;
+
+            int n = s.length();
+            boolean dp[][] = new boolean[n][n];
+            String res = "";
+
+            for (int j = 0; j < n; j++) {
+                for (int i = 0; i <= j; i++) {
+                    dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i <= 2 || dp[i + 1][j - 1]);
+
+                    if (dp[i][j] && j - i + 1 > res.length()) {
+                        res = s.substring(i, j + 1);
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
+    /**
+     * ****************************
+     */
+
 
     /**
      * Time : O(n ^ 2), Space : O(n ^ 2)

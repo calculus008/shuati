@@ -24,7 +24,33 @@ public class LE_213_House_Robber_II {
         LE_213_House_Robber_II
         LE_337_House_Robber_III
      */
+    class Solution_clean {
+        class Solution {
+            public int rob(int[] nums) {
+                if (nums.length == 0) return 0;
 
+                if (nums.length == 1) return nums[0];
+
+                int max1 = rob_simple(nums, 0, nums.length - 2);
+                int max2 = rob_simple(nums, 1, nums.length - 1);
+
+                return Math.max(max1, max2);
+            }
+
+            public int rob_simple(int[] nums, int start, int end) {
+                int t1 = 0;
+                int t2 = 0;
+
+                for (int i = start; i <= end; i++) {
+                    int temp = Math.max(nums[i] + t2, t1);
+                    t2 = t1;
+                    t1 = temp;
+                }
+
+                return t1;
+            }
+        }
+    }
     /**
      * rob 0, not rob n-1 || rob 0, not rob n-1     ==>rob(0, nums.length-2, nums)
      * not rob 0, rob n-1 || not rob 0,not rob n-1  ==>rob(1, nums.length-1, nums)
@@ -51,7 +77,7 @@ public class LE_213_House_Robber_II {
 
         for (int i = lo; i <= hi; i++) {
             int dp = Math.max((i < 2 ? 0 : dp1) + nums[i],
-                    i < 1 ? 0 : dp2);
+                               i < 1 ? 0 : dp2);
             dp1 = dp2;
             dp2 = dp;
         }

@@ -3,7 +3,6 @@ LE_01_Two_Sum                     (HashMap)
 LE_02_Add_Two_Numbers             (Linked List)
 LE_03_Longest_Substring_Without_Repeating_Characters (Sliding Window)
 LE_04_Median_Of_Two_Sorted_Arrays (Binary Search)                            ***
-
 LE_07_Reverse_Integer
 LE_11_Container_With_Most_Water   (Two Pointers)
 LE_14_Longest_Common_Prefix       (Trie)
@@ -114,7 +113,8 @@ LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I                       (Arra
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
 ==================
-# DP (For later)
+# DP (Done)
+LE_05_Longest_Palindromic_Substring                             *** very important
 LE_53_Maximum_Subarray
 LE_85_Maximal_Rectangle        Hard, can use histogram calculation to simplify ###
 LE_91_Decode_Ways              ******* very important!
@@ -122,24 +122,22 @@ LE_97_Interleaving_String
 LE_118_Pascal_Triangle
 LE_120_Triangle
 LE_198_House_Robber
+LE_213_House_Robber_II
 LE_221_Maximal_Square
-LE_322_Coin_Change
-LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
+LE_322_Coin_Change                                               ***
+LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II      ***
 
 # Hard (for later)
-LE_05_Longest_Palindromic_Substring
 LE_41_First_Missing_Positive                                         (Array, in-place marker, Circle Sort)  ***
 LE_68_Text_Justification
-LE_213_House_Robber_II
-LE_218_The_Sky_Line_Problem
+LE_218_The_Sky_Line_Problem                                      ###
 LE_273_Integer_To_English_Words
-LE_472_Concatenated_Words
-768. Max Chunks To Make Sorted II (https://leetcode.com/problems/max-chunks-to-make-sorted-ii)
-LE_909_Snakes_And_Ladders
+LE_472_Concatenated_Words                                            (DFS)
+LE_768_Max_Chunks_To_Make_Sorted_II
+LE_909_Snakes_And_Ladders                                            (BFS)
 LE_996_N_umber_Of_Squareful_Arrays                                   (DFS, Backtracking)
-LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I
-2972. Count the Number of Incremovable Subarrays II (Duplicate of 2970??)
-LE_3030_Find_The_Grid_Of_Region_Average
+LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I             ###
+LE_3030_Find_The_Grid_Of_Region_Average                          not important
 
 
 # SQL
@@ -148,7 +146,6 @@ LE_3030_Find_The_Grid_Of_Region_Average
 
 
 =================
-LE_39_Combination_Sum
 LE_59_Spiral_Matrix_II
 LE_122_Best_Time_To_Buy_And_Sell_Stock_II
 LE_207_Course_Schedule
@@ -163,9 +160,9 @@ https://leetcode.com/company/apple/discuss/5709113/Tech-Screening-Round
 https://leetcode.com/company/apple/discuss/4188668/Apple-240-Problem
 https://leetcode.com/company/apple/discuss/2737677/Apple-Syncing-Array-Question
 https://leetcode.com/company/apple/discuss/2256688/Battleships-on-Board-or-Apply-Interview-Question
-https://leetcode.com/company/apple/discuss/2256688/Battleships-on-Board-or-Apply-Interview-Question
 
 https://leetcode.com/company/apple/discuss/1746870/Apple-or-Phone-or-Basic-sorting:  list.sort(Comparator.comparingInt(o -> (Integer) o.get(1)));
 
 https://leetcode.com/company/apple/discuss/1734481/Apple-top-100-questions
 
+https://leetcode.com/discuss/interview-question/5345416/50-frequently-asked-questions-in-Apple-interview.

@@ -22,6 +22,10 @@ public class LE_155_Min_Stack {
         minStack.pop();
         minStack.top();      --> Returns 0.
         minStack.getMin();   --> Returns -2.
+
+        Medium
+
+        https://leetcode.com/problems/min-stack
      */
 
     //Solution 2 : one stack

@@ -56,10 +56,6 @@ public class LE_996_N_umber_Of_Squareful_Arrays {
 
                 if (last != -1 && !isSquare(last, nums[i])) continue;
 
-                if (last != -1) {
-                    if (isSquare(last, nums[i]) == false) continue;
-                }
-
                 visited[i] = true;
                 cur.add(nums[i]);
                 helper(nums, cur, visited, nums[i]);
