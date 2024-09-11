@@ -38,6 +38,29 @@ public class LE_03_Longest_Substring_Without_Repeating_Characters {
          相当于开一个start和end的窗口，每次遍历s的字母，如果set里没有，加进去并把当前的end定在这个字母位置，得到长度。
          如果set里有了这个字母，则要移动窗口头指针，不断提出移出窗口的字母，直到i位置的字母不在set里出现，得到新窗口。
      */
+
+    class Solution_Practice {
+        public int lengthOfLongestSubstring(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            int[] map = new int[256];
+            int res = 0;
+
+            char[] chars = s.toCharArray();
+            for (int i = 0, j = 0; i < chars.length; i++) {
+                map[chars[i]]++;
+
+                while (map[chars[i]] > 1) {
+                    map[chars[j]]--;
+                    j++;
+                }
+                res = Math.max(res, i - j + 1);
+            }
+
+            return res;
+        }
+    }
+
     public int lengthOfLongestSubstring1(String s) {
         if (s == null || s.length() == 0) return 0;
 
@@ -87,27 +110,5 @@ public class LE_03_Longest_Substring_Without_Repeating_Characters {
         }
 
         return res;
-    }
-
-    class Solution_Practice {
-        public int lengthOfLongestSubstring(String s) {
-            if (s == null || s.length() == 0) return 0;
-
-            int[] map = new int[256];
-            int res = 0;
-
-            char[] chars = s.toCharArray();
-            for (int i = 0, j = 0; i < chars.length; i++) {
-                map[chars[i]]++;
-
-                while (map[chars[i]] > 1) {
-                    map[chars[j]]--;
-                    j++;
-                }
-                res = Math.max(res, i - j + 1);
-            }
-
-            return res;
-        }
     }
 }

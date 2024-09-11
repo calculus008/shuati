@@ -8,19 +8,48 @@ import java.util.Stack;
  * Created by yuank on 3/29/18.
  */
 public class LE_224_Basic_Calculator {
-    /**
-        Implement a basic calculator to evaluate a simple expression string.
+    class Solution_Recursion_clean {
+        public int calculate(String s) {
+            if (null == s || s.length() == 0) {
+                return 0;
+            }
 
-        The expression string may contain open ( and closing parentheses ),
-        the plus + or minus sign -, non-negative integers and empty spaces .
+            Deque<Character> q = new ArrayDeque<>();
+            for (char c : s.toCharArray()) {
+                if (c != ' ') {
+                    q.offer(c);
+                }
+            }
+            q.offer('#');
+            return helper(q);
+        }
 
-        You may assume that the given expression is always valid.
+        private int helper(Deque<Character> q) {
+            int sum = 0, pre = 0, cur = 0;
+            char preOp = '+';
 
-        Some examples:
-        "1 + 1" = 2
-        " 2-1 + 2 " = 3
-        "(1+(4+5+2)-3)+(6+8)" = 23
-     */
+            while (!q.isEmpty()) {
+                char c = q.poll();
+
+                if (c >= '0' && c <= '9') {
+                    cur = cur * 10 + c - '0';
+                } else if (c == '(') {
+                    cur = helper(q);
+                } else {
+                    if (preOp == '+') {
+                        sum += cur;
+                    } else if (preOp == '-') {
+                        sum -= cur;
+                    }
+                    if (c == ')') break;
+                    preOp = c;
+                    cur = 0;
+                }
+            }
+
+            return sum;
+        }
+    }
 
 
     /**

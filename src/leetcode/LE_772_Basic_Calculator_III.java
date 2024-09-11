@@ -29,7 +29,69 @@ public class LE_772_Basic_Calculator_III {
          "(2+6* 3+5- (3*14/7+2)*5)+3"=-12
 
          Hard
+
+         Related:
+         LE_224_Basic_Calculator
      */
+
+    class Solution_Recursion_clean {
+        public int calculate(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            Deque<Character> q = new ArrayDeque<>();
+            for (char c : s.toCharArray()) {
+                if (c != ' ') {
+                    q.offer(c);
+                }
+            }
+
+            /**
+             * !!!
+             */
+            q.offer('#');
+
+            return helper(q);
+        }
+
+        private int helper(Deque<Character> q) {
+            int pre = 0, cur = 0, sum = 0;
+            char preop = '+';
+
+            while (!q.isEmpty()) {
+                char c = q.poll();
+
+                if (c >= '0' && c <= '9') {
+                    cur = cur * 10 + c - '0';
+                } else if (c == '(') {
+                    cur = helper(q);
+                }else {//not number and not '(', could be operator or ')'
+                    switch (preop) {
+                        case '+':
+                            sum += pre;
+                            pre = cur;
+                            break;
+                        case '-':
+                            sum += pre;
+                            pre = -cur;
+                            break;
+                        case '*':
+                            pre *= cur;
+                            break;
+                        case '/':
+                            pre /= cur;
+                            break;
+                    }
+
+                    if (c == ')') break;
+                    preop = c;
+                    cur = 0;
+                }
+            }
+
+            return sum + pre;
+        }
+    }
+
 
     /**
      * Queue + Recursion

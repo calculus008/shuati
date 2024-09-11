@@ -15,6 +15,8 @@ public class LE_485_Max_Consecutive_Ones {
      * The length of input array is a positive integer and will not exceed 10,000
      *
      * Easy
+     *
+     * https://leetcode.com/problems/max-consecutive-ones
      */
 
     /**
@@ -63,7 +65,7 @@ public class LE_485_Max_Consecutive_Ones {
                 }
             }
 
-            return Math.max(maxCount, count);
+            return Math.max(maxCount, count); //!!!
         }
     }
 }

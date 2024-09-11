@@ -71,7 +71,7 @@ public class LE_71_Simplify_Path {
         if (null == path || path.length() == 0) return path;
 
         Stack<String> stack = new Stack<>();
-        for (String token : path.split("/+")) {
+        for (String token : path.split("/+")) {//split by multiple "/"
             if (token.equals("") || token.equals(".")) continue;
 
             /**

@@ -29,6 +29,9 @@ public class LE_394_Decode_String {
          Medium
 
          https://leetcode.com/problems/decode-string
+
+         Related:
+         LE_772_Basic_Calculator_III
      */
 
     /**
@@ -37,8 +40,10 @@ public class LE_394_Decode_String {
      * Queue + Recursion
      *
      * Same algorithm as LE_772_Basic_Calculator_III
+     *
+     * It needs to deal with nested coded string
      */
-    class Solution {
+    class Solution_best {
         public String decodeString(String s) {
             Deque<Character> queue = new LinkedList<>();
             for (char c : s.toCharArray()) queue.offer(c);
@@ -50,6 +55,7 @@ public class LE_394_Decode_String {
             int num = 0;
             while (!queue.isEmpty()) {
                 char c= queue.poll();
+
                 if (Character.isDigit(c)) {
                     num = num * 10 + c - '0';
                 } else if (c == '[') {
@@ -68,6 +74,9 @@ public class LE_394_Decode_String {
         }
     }
 
+    /**
+     * ******************************************
+     */
 
     /**
      * Solution 1 : Stack

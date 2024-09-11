@@ -59,8 +59,8 @@ public class LE_419_Battleships_In_A_Board {
                     /**
                      * if we reach here, board[i][j] == 'X'.
                      */
-                    if (i > 0 && board[i - 1][j] == 'X') continue;
-                    if (j > 0 && board[i][j - 1] == 'X') continue;
+                    if (i > 0 && board[i - 1][j] == 'X') continue; // no X at the top
+                    if (j > 0 && board[i][j - 1] == 'X') continue; // no X to the left
 
                     count++;
                 }

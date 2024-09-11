@@ -43,6 +43,8 @@ public class LE_417_Pacific_Atlantic_Water_Flow {
     /**
      * Time  : O(m + n + m * n)
      * Space : O(m * n)
+     *
+     * 从海洋反向向里推
      */
     class Solution {
         public List<int[]> pacificAtlantic(int[][] matrix) {

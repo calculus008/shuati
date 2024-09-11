@@ -27,6 +27,26 @@ public class LE_560_Subarray_Sum_Equals_K {
             LE_437_Path_Sum_III
      */
 
+    public int subarraySum1_clean(int[] nums, int k) {
+        int sum = 0;
+        int res = 0;
+
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
+
+        for (int num : nums) {
+            sum += num;
+
+            if (map.containsKey(sum - k)) {
+                res += map.get(sum -k);
+            }
+
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+
+        return res;
+    }
+
     /**
      * http://zxi.mytechroad.com/blog/hashtable/leetcode-560-subarray-sum-equals-k/
      *
@@ -79,7 +99,7 @@ public class LE_560_Subarray_Sum_Equals_K {
 
         Map<Integer, Integer> map = new HashMap<>();
         /**
-         * deal with case the subarray starting from 0, with this entry in dist,
+         * deal with case the subarray starting from 0, with this entry in map,
          * no need to do "if (sum == k)", that is, if sum - k == 0,  res = res + 1
          */
         map.put(0, 1);

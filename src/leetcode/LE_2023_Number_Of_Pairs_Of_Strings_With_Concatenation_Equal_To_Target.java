@@ -49,25 +49,29 @@ public class LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Targ
      */
 
     /**
-     * time : O(N * T), N - length of nums, T - average length of each num
+     * Time : O(N * T), N - length of nums, T - average length of each num
+     *
+     * Use HashMap as count map, then iterate target by separting it into two parts, check if the
+     * two parts exist in count map. Then calculate the result.
      */
     public int numOfPairs(String[] nums, String target) {
-        //key: string in nums, value : frequency
+        //key: string in nums,
+        //value : frequency
         HashMap<String, Integer> map = new HashMap<>();
 
-        for (int i = 0; i<nums.length; i++){
-            map.put(nums[i], map.getOrDefault(nums[i],0)+1);
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
 
         int res = 0;
         int n = target.length();
-        String a = "", b= "";
+        String a = "", b = "";
 
         for (int i = 1; i < n; i++) {//partition target string
-            a = target.substring(0,i);
-            b = target.substring(i,n);
+            a = target.substring(0, i);
+            b = target.substring(i, n);
 
-            if (map.containsKey(a) && map.containsKey(b)){
+            if (map.containsKey(a) && map.containsKey(b)) {
                 if (a.equals(b)) {
                     res += (map.get(a) * (map.get(a) - 1)); //!!!
                 } else {

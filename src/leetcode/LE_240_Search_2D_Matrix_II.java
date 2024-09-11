@@ -23,6 +23,10 @@ public class LE_240_Search_2D_Matrix_II {
         Given target = 5, return true.
 
         Given target = 20, return false.
+
+        Medium
+
+        https://leetcode.com/problems/search-a-2d-matrix-ii
      */
 
     //Time : O(m + n), Space : O(1);

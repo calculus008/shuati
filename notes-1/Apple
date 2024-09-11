@@ -75,11 +75,12 @@ LE_283_Move_Zeroes                (Array)
 LE_284_Peeking_Iterator           (Iterator)
 LE_290_Word_Pattern               (HashMap)
 LE_295_Find_Median_From_Data_Stream   (Heap,PriorityQueue)
+LE_325_Maximum_Size_Subarray_Sum_Equals_k          (PrefixSum, HashMap)     ***          @@@
 LE_339_Nested_List_Weight_Sum     (DFS, BFS)
 LE_362_Design_Hit_Counter         (Design)
 LE_394_Decode_String              (Queue + Recursion)                        ***
 LE_412_Fizz_Buzz
-LE_424_Longest_Repeating_Character_Replacement    (Sliding Window)           ***
+LE_424_Longest_Repeating_Character_Replacement    (Sliding Window)           ***          @@@
 LE_437_Path_Sum_III               (Tree, Prefix Sum, Backtracking)           ***
 LE_443_String_Compression         (String, Two Pointers)
 LE_448_Find_All_Numbers_Disappeared_In_An_Array                             (String)
@@ -89,7 +90,7 @@ LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
 LE_532_K_Diff_Pairs_In_An_Array   (HashMap, Sort + Two Pointers)
 LE_540_Single_Element_In_A_Sorted_Array       (Binary Search)
 LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
-LE_565_Array_Nesting              (DFS, Array)                               ***
+LE_565_Array_Nesting              (DFS, Array)                               ***         @@@
 LE_621_Task_Scheduler             (Priority Queue)                           ### ***
 LE_628_Maximum_Product_Of_Three_Numbers       (Array)
 LE_680_Valid_Palindrome_II        (Two Pointers)
@@ -106,8 +107,8 @@ LE_1552_Magnetic_Force_Between_Two_Balls                                   (Bina
 LE_1657_Determine_If_Two_Strings_Are_Close                                 (HashMap, Set, Frequency)
 LE_1768_Merge_Strings_Alternately                                          (String)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
-LE_2397_Maximum_Rows_Covered_By_Columns                                    (Recursion, Backtracking)         *****
-LE_2625_Flatten_Deeply_Nested_Array (BFS)
+LE_2397_Maximum_Rows_Covered_By_Columns                                    (Recursion, Backtracking)         *****  @@@
+LE_2625_Flatten_Deeply_Nested_Array (BFS)                                                                           @@@
 LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency                (Sliding Window)
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I                       (Array)
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
@@ -130,11 +131,13 @@ LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II      ***
 # Hard (for later)
 LE_41_First_Missing_Positive                                         (Array, in-place marker, Circle Sort)  ***
 LE_68_Text_Justification
-LE_218_The_Sky_Line_Problem                                      ###
+LE_149_Max_Points_On_A_Line                                          (Math)                         ###
+LE_218_The_Sky_Line_Problem                                          (PriorityQueue, TreeMap)       ###
+LE_233_Number_Of_Digit_One                                           (Math)                         ###
 LE_273_Integer_To_English_Words
 LE_472_Concatenated_Words                                            (DFS)
-LE_768_Max_Chunks_To_Make_Sorted_II
-LE_909_Snakes_And_Ladders                                            (BFS)
+LE_768_Max_Chunks_To_Make_Sorted_II                                  (Mono Stack)
+LE_909_Snakes_And_Ladders                                            (BFS)                          @@@
 LE_996_N_umber_Of_Squareful_Arrays                                   (DFS, Backtracking)
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I             ###
 LE_3030_Find_The_Grid_Of_Region_Average                          not important
@@ -146,14 +149,18 @@ LE_3030_Find_The_Grid_Of_Region_Average                          not important
 
 
 =================
-LE_59_Spiral_Matrix_II
+LE_59_Spiral_Matrix_II                               (Matrix)
+LE_121_Best_Time_To_Buy_And_Sell_Stock
 LE_122_Best_Time_To_Buy_And_Sell_Stock_II
-LE_207_Course_Schedule
-LE_297_Serialize_And_Deserialize_Binary_Tree
-LE_329_Longest_Increasing_Path_In_A_Matrix
-LE_417_Pacific_Atlantic_Water_Flow
-LE_419_Battleships_In_A_Board
-LE_485_Max_Consecutive_Ones
+LE_207_Course_Schedule                               (Topological Sort)
+LE_297_Serialize_And_Deserialize_Binary_Tree         (Tree, BFS and DFS)
+LE_329_Longest_Increasing_Path_In_A_Matrix           (DFS)
+LE_417_Pacific_Atlantic_Water_Flow                   (DFS)
+LE_419_Battleships_In_A_Board                        (Matrix)
+LE_485_Max_Consecutive_Ones                          (Sliding Window)
+LE_487_Max_Consecutive_Ones_II
+LE_1004_Max_Consecutive_Ones_III
+
 LE_362_Design_Hit_Counter  (https://leetcode.com/company/apple/discuss/5457845/Apple-and-Coupang-Phone-Screen-Rate-Limiter-or-Hit-Counter)
 https://leetcode.com/company/apple/discuss/5531432/Apple-or-Online-or-Ignore-Sections-in-Array
 https://leetcode.com/company/apple/discuss/5709113/Tech-Screening-Round

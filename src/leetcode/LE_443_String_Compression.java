@@ -64,6 +64,8 @@ public class LE_443_String_Compression {
 
     /**
      * String + Two Pointers
+     *
+     * Key : it requires in-place!!!
      */
     class Solution3 {
         public int compress(char[] chars) {

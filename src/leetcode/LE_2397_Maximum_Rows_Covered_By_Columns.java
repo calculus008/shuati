@@ -4,7 +4,7 @@ import java.util.*;
 
 public class LE_2397_Maximum_Rows_Covered_By_Columns {
     /**
-     * You are given an m x n binary matrix matrix and an integer numSelect.
+     * You are given an m x n binary matrix and an integer numSelect.
      *
      * Your goal is to select exactly numSelect distinct columns from matrix such that you cover as many rows as possible.
      *
@@ -96,7 +96,7 @@ public class LE_2397_Maximum_Rows_Covered_By_Columns {
     }
 
     /**
-     * Approach - if you look at problem in little deep , you can directly see that for each column we have two option
+     * Approach - if you look at problem in little deep , you can directly see that for each column we have two options
      *
      * pick that column (if picked then, go to next index and increased the count of total picked column)
      * Not pick that column (if not picked, got to next step in this case since we have not picked it total count is not

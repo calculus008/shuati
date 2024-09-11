@@ -25,7 +25,7 @@ public class LE_33_Search_In_Rotated_Sorted_Array {
             while (l <= r) {
                 int mid = (r - l) / 2 + l;
                 if (nums[mid] == target) {
-                    return mid;
+                    return mid;//!!!
                 } else if (nums[l] > nums[mid]) {//left side has the rotation, right side is fully sorted
                     if (nums[mid] < target && target <= nums[r]) {
                         l = mid + 1;

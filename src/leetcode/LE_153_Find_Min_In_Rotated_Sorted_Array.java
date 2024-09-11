@@ -14,6 +14,37 @@ public class LE_153_Find_Min_In_Rotated_Sorted_Array {
         You may assume no duplicate exists in the array.
      */
 
+    class Solution_editorial {
+        public int findMin(int[] nums) {
+            if (nums.length == 1) return nums[0];
+
+            int l = 0, r = nums.length - 1;
+            if (nums[r] > nums[0]) {// no rotation
+                return nums[0];
+            }
+
+            while (l <= r) {
+                int mid = l + (r - l) / 2;
+
+                if (nums[mid] > nums[mid + 1]) {// if the mid element is greater than its next element then mid+1 element is the smallest one
+                    return nums[mid + 1];
+                }
+
+                if (nums[mid - 1] > nums[mid]) {// if the mid element is lesser than its previous element then mid element is the smallest one
+                    return nums[mid];
+                }
+
+                if (nums[mid] > nums[0]) {
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
+                }
+            }
+            return Integer.MAX_VALUE;
+        }
+    }
+
+
     /**
      * Best solution, from Huahua
      * http://zxi.mytechroad.com/blog/divide-and-conquer/leetcode-153-find-minimum-in-rotated-sorted-array/

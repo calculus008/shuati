@@ -63,10 +63,9 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
 
         for (int i = 1; i < prices.length; i++) {
             min = Math.min(min, prices[i]);
-
-            diff = Math.max(diff, prices[i] - prices[i - 1]);//!!!
-
             res = Math.max(res, prices[i] - min);
+
+            diff = Math.max(diff, prices[i] - prices[i - 1]);//!!! Because the loss is negative number, so we want the Max
         }
 
         if (res == 0 && diff != 0) {
@@ -79,7 +78,7 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
     /**
      * DoorDash phone interview version
      *
-     * 1.Input and ouput is double type
+     * 1.Input and output is double type
      * 2.Throw exception for invalid input
      * 3.Must buy and sell at least once - need to deal with the corner
      *   case that the price is strictly decreasing, try to lose the min
@@ -105,8 +104,8 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
             }
 
             min = Math.min(min, prices[i]);
-            diff = Math.max(diff, prices[i] - prices[i - 1]);
             res = Math.max(res, prices[i] - min);
+            diff = Math.max(diff, prices[i] - prices[i - 1]);
         }
 
         if (res == 0 && diff != 0) {
