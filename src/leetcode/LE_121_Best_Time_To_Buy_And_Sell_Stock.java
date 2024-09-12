@@ -29,10 +29,9 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
     public static int maxProfit(int[] prices) {
         if (prices == null || prices.length < 2) return 0;
 
-        int res = 0;
-
         //!!! min 不能是等于0，必须是prices[0]
         int min = prices[0];
+        int res = 0;
 
         for (int price : prices) {
             min = Math.min(min, price);
@@ -58,8 +57,8 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
         }
 
         int min = prices[0];
-        int res = Integer.MIN_VALUE;
-        int diff = Integer.MIN_VALUE;
+        int res = 0;
+        int diff = 0;
 
         for (int i = 1; i < prices.length; i++) {
             min = Math.min(min, prices[i]);
@@ -68,7 +67,7 @@ public class LE_121_Best_Time_To_Buy_And_Sell_Stock {
             diff = Math.max(diff, prices[i] - prices[i - 1]);//!!! Because the loss is negative number, so we want the Max
         }
 
-        if (res == 0 && diff != 0) {
+        if (res == 0 && diff < 0) {
             return diff;
         } else {
             return res;

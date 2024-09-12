@@ -124,7 +124,7 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
 
             /**
              * !!!
-             * "Collections.min(dist.keySet())"
+             * "Collections.min(map.keySet())"
              */
             for (int i = Collections.min(map.keySet()); i <= Collections.max(map.keySet()); i++) {
                 res.add(map.get(i));

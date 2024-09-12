@@ -34,6 +34,31 @@ public class LE_846_Hand_Of_Straights {
      * https://leetcode.com/problems/hand-of-straights
      */
 
+    class Solution1_treemap_clean {
+        public boolean isNStraightHand(int[] hand, int W) {
+            TreeMap<Integer, Integer> count = new TreeMap();
+            for (int card: hand) {
+                count.put(card, count.getOrDefault(card, 0) + 1);
+            }
+
+            while (count.size() > 0) {
+                int first = count.firstKey();
+                for (int i = first; i < first + W; ++i) {
+                    if (!count.containsKey(i)) return false;
+
+                    int c = count.get(i);
+                    if (c == 1) {
+                        count.remove(i);
+                    } else {
+                        count.put(i, c - 1);
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
+
     class Solution_PriorityQueue {
         public boolean isNStraightHand(int[] hand, int groupSize) {
             if (hand.length % groupSize != 0) return false;

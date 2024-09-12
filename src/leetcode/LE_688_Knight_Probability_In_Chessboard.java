@@ -36,6 +36,8 @@ public class LE_688_Knight_Probability_In_Chessboard {
          The knight always initially starts on the board.
 
          Medium
+
+         https://leetcode.com/problems/knight-probability-in-chessboard
      */
 
     /**

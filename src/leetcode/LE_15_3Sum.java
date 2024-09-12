@@ -23,6 +23,10 @@ public class LE_15_3Sum {
         ]
 
         LE_259
+
+        Medium
+
+        https://leetcode.com/problems/3sum
      */
 
 

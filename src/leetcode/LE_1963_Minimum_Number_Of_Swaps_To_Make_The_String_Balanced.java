@@ -2,7 +2,8 @@ package leetcode;
 
 public class LE_1963_Minimum_Number_Of_Swaps_To_Make_The_String_Balanced {
     /**
-     * You are given a 0-indexed string s of even length n. The string consists of exactly n / 2 opening brackets '[' and n / 2 closing brackets ']'.
+     * You are given a 0-indexed string s of even length n. The string consists of exactly n / 2 opening brackets '['
+     * and n / 2 closing brackets ']'.
      *
      * A string is called balanced if and only if:
      *
@@ -60,7 +61,7 @@ public class LE_1963_Minimum_Number_Of_Swaps_To_Make_The_String_Balanced {
 
             if (l < r) {
                 res++;
-                l++; //!!1
+                l++; //!!!
                 r--; //!!!
             }
         }

@@ -90,10 +90,10 @@ public class LE_91_Decode_Ways {
                 int two = Integer.parseInt(s.substring(i - 2, i));
 
                 if (one != 0) {
-                    dp[i] += dp[i - 1];
+                    dp[i] += dp[i - 1]; //"+="
                 }
                 if (two >= 10 && two <= 26) {
-                    dp[i] += dp[i - 2];
+                    dp[i] += dp[i - 2]; //"+="
                 }
             }
 

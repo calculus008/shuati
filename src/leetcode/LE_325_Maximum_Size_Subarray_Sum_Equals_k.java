@@ -28,6 +28,28 @@ public class LE_325_Maximum_Size_Subarray_Sum_Equals_k {
          Medium
      */
 
+    public int maxSubArrayLen_clean(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return 0;
+
+        int res = 0;
+        int sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>(); //map key: prefix sum at idx i, value: index i
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (sum == k) {//从nums[0]开始的和是
+                res = i + 1;
+            } else if(map.containsKey(sum - k)) {
+                res = Math.max(res, i - map.get(sum - k));
+            }
+
+            if (!map.containsKey(sum)) {
+                map.put(sum, i);
+            }
+        }
+        return res;
+    }
+
     /**
      Time and Space : O(n)
      */

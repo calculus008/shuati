@@ -41,7 +41,7 @@ public class LE_621_Task_Scheduler {
      * cooling down frequently at the end, it is critical the keep the diversity of
      * the task pool for as long as possible.
      *
-     * In order to do that, we should try to schedule the CPU to always try round robin
+     * In order to do that, we should try to schedule the CPU to always try round-robin
      * between the most popular tasks at any time.
      *
      *

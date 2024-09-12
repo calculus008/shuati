@@ -12,6 +12,10 @@ public class LE_33_Search_In_Rotated_Sorted_Array {
         You are given a target value to search. If found in the array return its index, otherwise return -1.
 
         You may assume NO DUPLICATE exists in the array.
+
+        Medium
+
+        https://leetcode.com/problems/search-in-rotated-sorted-array
      */
 
     class Solution_best {

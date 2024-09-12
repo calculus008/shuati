@@ -19,6 +19,10 @@ public class  LE_23_Merge_k_Sorted_Lists {
          ]
          Output: 1->1->2->3->4->4->5->6
 
+         Medium
+
+         https://leetcode.com/problems/merge-k-sorted-lists
+
      * Interviews.Linkedin question and follow up
      *
      * 合并K个有序数组 - LI_486_Merge_K_Sorted_Arrays

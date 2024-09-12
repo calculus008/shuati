@@ -31,6 +31,39 @@ public class LE_207_Course_Schedule {
         https://leetcode.com/problems/course-schedule
      **/
 
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] indegree = new int[numCourses];
+        int res = numCourses;
+
+        //Get indegree for all nodes
+        for (int[] pair : prerequisites) {
+            indegree[pair[0]]++;
+        }
+
+        //Find starting nodes which have 0 indegree
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (indegree[i] == 0) {
+                queue.offer(i);
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            int cur = queue.poll();
+            res--;
+            for (int[] pair : prerequisites) {
+                if (pair[1] == cur) {
+                    indegree[pair[0]]--;
+                    if (indegree[pair[0]] == 0) {
+                        queue.offer(pair[0]);
+                    }
+                }
+            }
+        }
+
+        return res == 0;
+    }
+
     /**
     Topological sorting, https://www.geeksforgeeks.org/topological-sorting/
     Time : O(V + E), Space : O(n)
@@ -78,7 +111,7 @@ public class LE_207_Course_Schedule {
             Deque<Integer> queue = new ArrayDeque<>();
             // Add all courses with no prerequisites. These are all the courses that can be done in the first semester.
             for (int key : graph.keySet()) {
-                if (inDegree.get(key) == 0) queue.addLast(key);
+                if (inDegree.get(key) == 0) queue.addLast(key);// addLast
             }
 
 //            int result = 0;
@@ -90,11 +123,11 @@ public class LE_207_Course_Schedule {
 //                result++;
 
                 for (int i = queue.size(); i > 0; --i) {
-                    int currCourse = queue.removeFirst();
+                    int currCourse = queue.removeFirst();// removeFirst
                     // Finish currCourse and remove it as a prerequisite. Add courses that now have 0 prerequisites to the queue.
                     for (int adjacentNode : graph.get(currCourse)) {
                         inDegree.put(adjacentNode, inDegree.get(adjacentNode) - 1);
-                        if (inDegree.get(adjacentNode) == 0) queue.addLast(adjacentNode);
+                        if (inDegree.get(adjacentNode) == 0) queue.addLast(adjacentNode); //!!!
                     }
                 }
             }
@@ -103,40 +136,6 @@ public class LE_207_Course_Schedule {
         }
     }
 
-
-
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int[] indegree = new int[numCourses];
-        int res = numCourses;
-
-        //Get indegree for all nodes
-        for (int[] pair : prerequisites) {
-            indegree[pair[0]]++;
-        }
-
-        //Find starting nodes which have 0 indegree
-        Queue<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < numCourses; i++) {
-            if (indegree[i] == 0) {
-                queue.offer(i);
-            }
-        }
-
-        while (!queue.isEmpty()) {
-            int cur = queue.poll();
-            res--;
-            for (int[] pair : prerequisites) {
-                if (pair[1] == cur) {
-                    indegree[pair[0]]--;
-                    if (indegree[pair[0]] == 0) {
-                        queue.offer(pair[0]);
-                    }
-                }
-            }
-        }
-
-        return res == 0;
-    }
 
     /**
      * The 1st Solution TLE on lintcode for a test case with extreme large data set.

@@ -1,6 +1,5 @@
 package leetcode;
 
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -34,25 +33,25 @@ public class LE_295_Find_Median_From_Data_Stream {
      */
 
     class MedianFinder_two_pq_clean {
-        PriorityQueue<Long> lo;
-        PriorityQueue<Long> hi;
+        PriorityQueue<Long> big;
+        PriorityQueue<Long> small;
 
         public MedianFinder_two_pq_clean() {
-            lo = new PriorityQueue<>();
-            hi = new PriorityQueue<>((a, b) -> Long.compare(b, a));
+            big = new PriorityQueue<>();
+            small = new PriorityQueue<>((a, b) -> Long.compare(b, a));
         }
 
         public void addNum(int num) {
-            lo.offer((long)num);
-            hi.offer(lo.poll());
+            big.offer((long)num);
+            small.offer(big.poll());
 
-            if (hi.size() > lo.size()) {
-                lo.offer(hi.poll());
+            if (small.size() > big.size()) {
+                big.offer(small.poll());
             }
         }
 
         public double findMedian() {
-            return lo.size() != hi.size() ? lo.peek() : (lo.peek() + hi.peek()) / 2.0;
+            return big.size() != small.size() ? big.peek() : (big.peek() + small.peek()) / 2.0;
         }
     }
 
