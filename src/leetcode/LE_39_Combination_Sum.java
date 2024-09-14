@@ -24,6 +24,13 @@ public class LE_39_Combination_Sum {
           [2, 2, 3]
         ]
 
+         Constraints:
+
+         1 <= candidates.length <= 30
+         2 <= candidates[i] <= 40    (!!!)
+         All elements of candidates are distinct.
+         1 <= target <= 40
+
         Medium
 
         https://leetcode.com/problems/combination-sum

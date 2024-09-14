@@ -10,7 +10,7 @@ public class LE_282_Expression_Add_Operators {
     /**
      * Given a string that contains only digits 0-9 and a target value,
      * return all possibilities to add binary operators (not unary) +, -, or *
-     * between the digits so they evaluate to the target value.
+     * between the digits so that they evaluate to the target value.
 
          Examples:
          "123", 6 -> ["1+2+3", "1*2*3"]

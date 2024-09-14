@@ -14,7 +14,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
          and this positive number represents the tree's height.
 
          You are asked to cut off all the trees in this forest in the order of tree's height -
-         always cut off the tree with lowest height first. And after cutting, the original place
+         always cut off the tree with the lowest height first. And after cutting, the original place
          has the tree will become a grass (value 1).
 
          You will start from the point (0, 0) and you should output the minimum steps you need
@@ -94,7 +94,7 @@ public class LE_675_Cut_Off_Trees_For_Golf_Event {
 
             for(int i=0; i<n; i++) {
                 for(int j=0; j<m; j++) {
-                    //!!! how to add a new int array this way, no dimention here!!!
+                    //!!! how to add a new int array this way, no dimension here!!!
                     //heights.add(new int[3]{forest.get(i).get(j), i, j});
                     if(forest.get(i).get(j)>1) {//only add trees
                         heights.add( new int[]{forest.get(i).get(j), i, j} );

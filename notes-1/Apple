@@ -1,3 +1,19 @@
+# Plan
+Collect all Apple problems (last 6 months)
+Problem Categories deep dive:
+  Search (DFS, BFS)
+  Sliding Window
+  Big Data
+  Design
+  Intervals
+  Prefix Sum
+  Stack
+  Trie
+  TreeMap
+
+
+
+
 # Last 6 Months
 LE_01_Two_Sum                     (HashMap)
 LE_02_Add_Two_Numbers             (Linked List)
@@ -162,6 +178,11 @@ LE_485_Max_Consecutive_Ones                          (Sliding Window)
 LE_487_Max_Consecutive_Ones_II
 LE_1004_Max_Consecutive_Ones_III
 
+LE_688_Knight_Probability_In_Chessboard
+LE_1249_Minimum_Remove_To_Make_Valid_Parentheses
+LE_1207_Unique_Number_Of_Occurrences
+LE_300_Longest_Increasing_Subsequence
+
 LE_362_Design_Hit_Counter  (https://leetcode.com/company/apple/discuss/5457845/Apple-and-Coupang-Phone-Screen-Rate-Limiter-or-Hit-Counter)
 https://leetcode.com/company/apple/discuss/5531432/Apple-or-Online-or-Ignore-Sections-in-Array
 https://leetcode.com/company/apple/discuss/5709113/Tech-Screening-Round
@@ -175,8 +196,87 @@ https://leetcode.com/company/apple/discuss/1734481/Apple-top-100-questions
 
 https://leetcode.com/discuss/interview-question/5345416/50-frequently-asked-questions-in-Apple-interview.
 
+LE_387_First_Unique_Character_In_A_String
+LE_139_Word_Break
+478. Generate Random Point in a Circle   https://leetcode.com/problems/generate-random-point-in-a-circle
+LE_390_Elimination_Game
+468. Validate IP Address   https://leetcode.com/problems/validate-ip-address
+LE_10_Regular_Expression_Matching
+https://leetcode.com/problems/course-schedule-iv
 
+
+求求大家给我点大米我 我点数不够都看不了其他人的面经。。。
+1. 现场手搓一个thread pool 然后分析优化
+有问一些系统内存相关的问题 followup
+2. 给一堆代码做review和优化
+基本就是看看细节什么的
+3. 不用任何库写一个‍‌‍‍‍‍‌‌‌‍‌‌‍‌‍‌‌‌‌string class 外加iterator function
+4. LRU cache
+所有的都要求自己写test case 然后跑过。。。
+
+
+两轮店面一道检查是否huiwen字符串，一道throttle变形
+6轮欧尼斯特：
+1. 自己做一个linklist能够添加，删除，追踪head，之后一道电梯design口述
+2. 一道类似给了不同城市和K Stop你需要用完所有的stop从开始到结束，用BFS 解了
+3. 设计自己的redux store, action 之类的需要写code，已经有template了，理解后不难‍‌‍‍‍‍‌‌‌‍‌‌‍‌‍‌‌‌‌
+4.类似parse的一道记不太清le
+5.记不清了
+6.behavior加一道find anagram
+
+
+大概就是给了一堆startup resources, resources之间有dependencies，比如要启动DB需要hard disk先ready，启动hard disk不用depen on anything
+给list of resources和他们的depenencies，返回一个valid的启动顺序
+有可能有loop，需要自己detect 并返回error
+
+
+
+类似LC300加了一个gap requirement 不能超过一定的数字，应该是用DP做但当时没想起来，更好的的方法是 patience sorting
+list of versions (int) of models [1,423,567,2467,8546]
+get sub list of models by ver num,
+1. ver num strickly increasing
+2. diff bwt the adjacent version num meet rules
+ 2.a diff <= fixed gap number
+to find
+longest sub list of models meet the crit, for eval work
+input = [1,423,567,888, 351, 743, 2467,8546], gap_num= 1000
+output = [1, 423, 567]
+cand1: 1,423
+cand2: 1,423,567
+cand3: 423,567,888
+cand4: 1, 567, 8546
+
+LE_23_Merge_k_Sorted_Lists
+电面是一轮coding 问题是merge k iterator, input是List<Iterator<Integer>> output是Integer 要求按照数字大小merge 打印下一个数字
+ 比如两个Iterator it1 it2 it1.next() = 2. it2.next() = 3 打印2和3 所以很像利口二三 但是input output变了
+因为output一个Integer divide&conquer不适用了 要用解法三 存一个PQ<Iterator>
+follow-up问怎么productionize这个算法 我说production的时候这个List<Iterator<Integer>>会存在多个机器上 这样我们需要在每台机器‍‌上存这样
+的heap 运行这个算法 每次要找下一个数的时候 再用一台机器去把每个机器里面的heap里的最小值拿出来比较 最后我说就是map reduce的原理
+然后面试官又让我讲一下shuffle
+
+最近我朋友面试了 Uber 的 Staff+ sde岗，碰到了一道挺难的系统设计题。题目是设计一个Event Lifecycle Management System（事件生命周期管理系统），系统需要从不同的服务中接收大量消息并进行分析。难点在于，数据量非常大，单一的磁盘或服务器根本装不下，而且事件的顺序可能是乱的（比如 endEvent 先到，而 startEvent 后到），甚至有时候事件会在实际发生几天后才到达系统。
+刚开始，题目看起来还挺直观的：
+1. startEvent(event_id, timestamp)：记录事件开始，
+2. endEvent(event_id, timestamp)：记录事件结束，
+3. getOngoingEvents(timestamp)：查询某个时间点的进行中事件。
+但是在问了一些澄清问题后，他发现真实的需求其实有点不同。比如，他们特别指出 getOngoingEvents(timestamp) 只能查询 24小时以前的数据。而且，事件最长只持续一个小时。
+这个细节其实非常关键，因为它意味着我们不需要支持实时查询！我们有一天的缓冲时间，所以问题变得相对简单了。我们可以用 批处理 来解决问题，而不是实时更新，设计也因此简化了不少。
+一开始，他考虑用常见的实时系统解决方案，比如bucketing time series data。但在更深入了解了面试官的真正要求后，他意识到批处理才是更合理的选择。
+所以他提出了这样一个方案：
+* 先将事件数据接收到一个分布式系统中（比如 Kafka），因为数据量太大，单台服务器无法处理。
+* 然后，利用批处理来整理那些乱序到达的事件，并在执行查询前预先聚合数据。
+* 因为查询只需要查询至少 24 小时前的数据，所以批处理不需要实时进行，定期运行即可满足需求。
+关键的经验是：一开始问题看上去很复杂，因为他以为需要实时解决方案。但在真正理解需求后，发现设计一个高效的批处理系统就够了。所以，千万别忘了在面试时多问问题，搞清楚需求，避免把问题想得太复杂！
+我请他把他的答案写在了codemia上，Design an event lifecycle management system , 大家可以看看写的怎么样
+Leetcode也讨论过这道题，但是大部‍‌分人都没有弄清requirements是什么:
+https://codemia.io/system-design/design-an-event-lifecycle-management-system/submissions/sijcdu
+
+https://leetcode.com/company/apple/discuss/5531432/Apple-or-Online-or-Ignore-Sections-in-Array
+https://leetcode.com/company/apple/discuss/5457845/Apple-and-Coupang-Phone-Screen-Rate-Limiter-or-Hit-Counter
 *****
+
+
+
 
 Review
 LE_146_LRU_Cache
@@ -189,3 +289,4 @@ LE_325_Maximum_Size_Subarray_Sum_Equals_k
 LE_437_Path_Sum_III
 LE_953_Verifying_An_Alien_Dictionary
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I
+LE_565_Array_Nesting

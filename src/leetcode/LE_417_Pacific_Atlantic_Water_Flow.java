@@ -40,6 +40,60 @@ public class LE_417_Pacific_Atlantic_Water_Flow {
      * Medium
      */
 
+    public class Solution_DFS_Practice {
+        public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (matrix == null || matrix.length == 0) return res;
+
+            int m = matrix.length;
+            int n = matrix[0].length;
+            boolean[][] visited1 = new boolean[m][n];
+            boolean[][] visited2 = new boolean[m][n];
+
+            for (int i = 0; i < m; i++) {
+                dfs(matrix, visited1, i, 0);
+                dfs(matrix, visited2, i, n - 1);
+            }
+
+            for (int i = 0; i < n; i++) {
+                dfs(matrix, visited1, 0, i);
+                dfs(matrix, visited2, m - 1, i);
+            }
+
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (visited1[i][j] && visited2[i][j]) {
+                        List<Integer> elm = new ArrayList<>();
+                        elm.add(i);
+                        elm.add(j);
+                        res.add(elm);
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        public void dfs(int[][] matrix, boolean[][] visited, int x, int y) {
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+            visited[x][y] = true;
+            int m = matrix.length;
+            int n = matrix[0].length;
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dirs[i][0];
+                int ny = y + dirs[i][1];
+
+                if (nx < 0 || nx >= m || ny < 0 || ny >= n || matrix[x][y] > matrix[nx][ny] || visited[nx][ny]) {
+                    continue;
+                }
+
+                dfs(matrix, visited, nx, ny);
+            }
+        }
+    }
+
     /**
      * Time  : O(m + n + m * n)
      * Space : O(m * n)
@@ -236,59 +290,4 @@ public class LE_417_Pacific_Atlantic_Water_Flow {
             }
         }
     }
-
-    public class Solution_DFS_Practice {
-        public List<List<Integer>> pacificAtlantic(int[][] matrix) {
-            List<List<Integer>> res = new ArrayList<>();
-            if (matrix == null || matrix.length == 0) return res;
-
-            int m = matrix.length;
-            int n = matrix[0].length;
-            boolean[][] visited1 = new boolean[m][n];
-            boolean[][] visited2 = new boolean[m][n];
-
-            for (int i = 0; i < m; i++) {
-                dfs(matrix, visited1, i, 0);
-                dfs(matrix, visited2, i, n - 1);
-            }
-
-            for (int i = 0; i < n; i++) {
-                dfs(matrix, visited1, 0, i);
-                dfs(matrix, visited2, m - 1, i);
-            }
-
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    if (visited1[i][j] && visited2[i][j]) {
-                        List<Integer> elm = new ArrayList<>();
-                        elm.add(i);
-                        elm.add(j);
-                        res.add(elm);
-                    }
-                }
-            }
-
-            return res;
-        }
-
-        public void dfs(int[][] matrix, boolean[][] visited, int x, int y) {
-            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-
-            visited[x][y] = true;
-            int m = matrix.length;
-            int n = matrix[0].length;
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dirs[i][0];
-                int ny = y + dirs[i][1];
-
-                if (nx < 0 || nx >= m || ny < 0 || ny >= n || matrix[x][y] > matrix[nx][ny] || visited[nx][ny]) {
-                    continue;
-                }
-
-                dfs(matrix, visited, nx, ny);
-            }
-        }
-    }
-
 }

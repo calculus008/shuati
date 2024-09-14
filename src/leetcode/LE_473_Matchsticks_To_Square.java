@@ -9,8 +9,8 @@ public class LE_473_Matchsticks_To_Square {
      * up all those matchsticks. You should not break any stick, but you can link them up,
      * and each matchstick must be used exactly one time.
      *
-     * Your input will be several matchsticks the girl has, represented with their stick l
-     * ength. Your output will either be true or false, to represent whether you could make
+     * Your input will be several matchsticks the girl has, represented with their stick
+     * length. Your output will either be true or false, to represent whether you could make
      * one square using all the matchsticks the little match girl has.
      *
      * Example 1:

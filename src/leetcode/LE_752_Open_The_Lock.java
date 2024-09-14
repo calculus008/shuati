@@ -12,7 +12,7 @@ public class LE_752_Open_The_Lock {
 
          The lock initially starts at '0000', a string representing the state of the 4 wheels.
 
-         You are given a list of deadends dead ends, meaning if the lock displays any of these codes,
+         You are given a list of dead ends, meaning if the lock displays any of these codes,
          the wheels of the lock will stop turning and you will be unable to open it.
 
          Given a target representing the value of the wheels that will unlock the lock, return the
@@ -130,8 +130,8 @@ public class LE_752_Open_The_Lock {
                              * 坑3：
                              * 模拟开关向上和向下旋转一位。
                              *
-                             * 9 + 1 = 10 -> dist to 0
-                             * 0 - 1 = -1 -> dist to 9 : "+ 10" ： 0 - 1 = -1, 所以， 0 - 1 + 10 = 9
+                             * 9 + 1 = 10 -> map to 0
+                             * 0 - 1 = -1 -> map to 9 : "+ 10" ： 0 - 1 = -1, 所以， 0 - 1 + 10 = 9
                              *
                              * ((chars[i] - '0') + 10) % 10 + '0'
                              *

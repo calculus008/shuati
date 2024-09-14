@@ -41,7 +41,9 @@ public class LE_17_Letter_Combinations_Of_A_Phone_Number {
      * 2.No need for visited[] since looping set for each level is different
      *
      * Time : O(4 ^ n), n is length of given string. 4 - total number of string one char can generate.
-     * for example, 2 -> 2, a, b, c.
+     * Note that 4 in this expression is referring to the maximum value length (7 -> "pqrs") in the hash map,
+     * and not to the length of the input.
+     *
      *
      * Space : O(4 ^ n + n)
      **/

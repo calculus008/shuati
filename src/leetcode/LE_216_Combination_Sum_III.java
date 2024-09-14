@@ -26,6 +26,14 @@ public class LE_216_Combination_Sum_III {
         Output:
 
         [[1,2,6], [1,3,5], [2,3,4]]
+
+
+        Constraints:
+        2 <= k <= 9
+        1 <= n <= 60
+        Medium
+
+        https://leetcode.com/problems/combination-sum-iii
      */
 
     /**

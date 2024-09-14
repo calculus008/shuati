@@ -17,7 +17,9 @@ public class LE_47_Permutation_II {
           [2,1,1]
         ]
 
+        Medium
 
+        https://leetcode.com/problems/permutations-ii/
      */
 
     class Solution1 {

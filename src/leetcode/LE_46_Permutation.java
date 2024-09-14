@@ -29,6 +29,38 @@ public class LE_46_Permutation {
         LE_996_N_umber_Of_Squareful_Arrays
      **/
 
+    /**
+     Solution 1 : use visited[] to tell if current number is in the sequence.
+     */
+    public List<List<Integer>> permute_JiuZhang(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums == null) {
+            return res;
+        }
+
+        helper(nums, res, new ArrayList<>(), new boolean[nums.length]);
+        return res;
+    }
+
+    private void helper(int[] nums, List<List<Integer>> res, List<Integer> temp, boolean[] visited) {
+        if (temp.size() == nums.length) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (visited[i])  {
+                continue;
+            }
+
+            temp.add(nums[i]);
+            visited[i] = true;
+            helper(nums, res, temp, visited);
+            temp.remove(temp.size() - 1);
+            visited[i] = false;
+        }
+    }
+
 
     class Solution_DFS_clean {
         /**
@@ -57,42 +89,6 @@ public class LE_46_Permutation {
             }
         }
     }
-
-
-    /**
-        Solution 1 : use visited[] to tell if current number is in the sequence.
-     */
-    public List<List<Integer>> permute_JiuZhang(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (nums == null) {
-            return res;
-        }
-
-        helper(nums, res, new ArrayList<>(), new boolean[nums.length]);
-        return res;
-    }
-
-    private void helper(int[] nums, List<List<Integer>> res, List<Integer> temp, boolean[] visited) {
-        if (temp.size() == nums.length) {
-            res.add(new ArrayList<>(temp));
-            return;
-        }
-
-        //!!! start from 0
-        for (int i = 0; i < nums.length; i++) {
-            //!!! use visited[]
-            if (visited[i])  {
-                continue;
-            }
-
-            temp.add(nums[i]);
-            visited[i] = true;
-            helper(nums, res, temp, visited);
-            temp.remove(temp.size() - 1);
-            visited[i] = false;
-        }
-    }
-
 
     //Solution 2, Time : O(n!), Space : O(n)
     public static List<List<Integer>> permute(int[] nums) {

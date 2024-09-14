@@ -46,6 +46,39 @@ public class LE_547_Friend_Circles {
         Same as LE_323 Number of Connected Components in Undirected Graph
      */
 
+    class Solution_DFS {
+        /**
+         * Solution 2 : DFS
+         *
+         * Time : O(n ^ 2)
+         * Space : O(n)
+         */
+
+        public int findCircleNumDFS(int[][] M) {
+            int n = M.length;
+            int[] visited = new int[n];
+            int res = 0;
+
+            for (int i = 0; i < n; i++) {
+                if (visited[i] != 0) continue;
+                dfs(M, visited, i, n);
+                res++;
+            }
+
+            return res;
+        }
+
+        public void dfs(int[][] M, int[] visited, int cur, int n) {
+            if (visited[cur] == 1) return;
+            visited[cur] = 1;
+
+            for (int j = 0; j < n; j++) {
+                if (M[cur][j] == 1 && visited[j] == 0) {
+                    dfs(M, visited, j, n);
+                }
+            }
+        }
+    }
 
     /**
      * Solution 1
@@ -77,39 +110,6 @@ public class LE_547_Friend_Circles {
         }
 
         return set.size();
-    }
-
-
-    /**
-     * Solution 2 : DFS
-     *
-     * Time : O(n ^ 2)
-     * Space : O(n)
-     */
-
-    public int findCircleNumDFS(int[][] M) {
-        int n = M.length;
-        int[] visited = new int[n];
-        int res = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (visited[i] != 0) continue;
-            dfs(M, visited, i, n);
-            res++;
-        }
-
-        return res;
-    }
-
-    public void dfs(int[][] M, int[] visited, int cur, int n) {
-        if (visited[cur] == 1) return;
-        visited[cur] = 1;
-
-        for (int j = 0; j < n; j++) {
-            if (M[cur][j] == 1 && visited[j] == 0) {
-                dfs(M, visited, j, n);
-            }
-        }
     }
 
     /**
