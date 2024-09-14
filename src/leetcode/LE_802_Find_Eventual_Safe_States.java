@@ -32,7 +32,68 @@ public class LE_802_Find_Eventual_Safe_States {
          Each graph[i] will be a sorted list of different integers, chosen within the range [0, graph.length - 1].
 
          Medium
+
+         https://leetcode.com/problems/find-eventual-safe-states
      */
+
+    class Solution_Practice {
+        final int UNKOWN = 0;
+        final int VISITING = 1;
+        final int UNSAFE = 2;
+        final int SAFE = 3;
+
+        public List<Integer> eventualSafeNodes(int[][] graph) {
+            List<Integer> res = new ArrayList<>();
+            if (graph == null || graph.length == 0) return res;
+
+            /**
+             * !!!
+             * why use status array?
+             * What the problem asks as return is a list of node id which are SAFE, in sorted order.
+             * It's not asking to return status for all nodes. So we use status[] to record the status
+             * of all nodes during dfs(), only when it is SAFE,we add the id into result.
+             *
+             * Also the for loop guaranteed the ids will be in sorted order in result list.
+             *
+             */
+            int[] status = new int[graph.length];
+
+            for (int i = 0; i < graph.length; i++) {
+                if (dfs(graph, status, i) == SAFE) {
+                    res.add(i);
+                }
+            }
+
+            return res;
+        }
+
+        private int dfs(int[][] graph, int[] status, int id) {
+            if (status[id] == VISITING) {
+                status[id] = UNSAFE;
+                return UNSAFE;
+            }
+
+            if (status[id] != UNKOWN) {// find value in mem
+                return status[id];
+            }
+
+            /**
+             * !!! !!!
+             * Don't forget to set visiting status
+             * otherwise, it will stack overflow
+             */
+            status[id] = VISITING;
+            for (int n : graph[id]) {
+                if (dfs(graph, status, n) == UNSAFE) {
+                    status[n] = UNSAFE;
+                    return UNSAFE;
+                }
+            }
+
+            status[id] = SAFE;
+            return SAFE;
+        }
+    }
 
     /**
      * http://zxi.mytechroad.com/blog/graph/leetcode-802-find-eventual-safe-states/
@@ -72,14 +133,14 @@ public class LE_802_Find_Eventual_Safe_States {
             /**
              * If we run into a node in VISITING state, meaning we see
              * a node that is seen previously in current DFS traversal,
-             * we are in a cycle.
+             * we are in a cycle.!!!
              *
              * Based on problem def, all nodes that can go into a cycle
              * is in UNSAFE state.
              */
             if (status[id] == 1) {//1
                 /**
-                 * !!! Don't for get to set the state before return
+                 * !!! Don't forget to set the state before return
                  */
                 status[id] = 3;
                 return 3;
@@ -94,7 +155,7 @@ public class LE_802_Find_Eventual_Safe_States {
             for (int next : graph[id]) {
                 if (dfs(graph, status, next) == 3) {
                     /**
-                     * !!! Don't for get to set the state before return
+                     * !!! Don't forget to set the state before return
                      */
                     status[id] = 3;
                     return 3;
@@ -109,62 +170,5 @@ public class LE_802_Find_Eventual_Safe_States {
         }
     }
 
-    class Solution_Practice {
-        final int UNKOWN = 0;
-        final int VISITING = 1;
-        final int UNSAFE = 2;
-        final int SAFE = 3;
 
-        public List<Integer> eventualSafeNodes(int[][] graph) {
-            List<Integer> res = new ArrayList<>();
-            if (graph == null || graph.length == 0) return res;
-
-            /**
-             * !!!
-             * why use status array?
-             * What the problem asks as return is a list of node id which are SAFE, in sorted order.
-             * It's not asking to return status for all nodes. So we use status[] to record the status
-             * of all nodes during dfs(), only when it is SAFE,we add the id into result.
-             *
-             * Also the for loop guaranteed the ids will be in sorted order in result list.
-             *
-             */
-            int[] status = new int[graph.length];
-
-            for (int i = 0; i < graph.length; i++) {
-                if (dfs(graph, status, i) == SAFE) {
-                    res.add(i);
-                }
-            }
-
-            return res;
-        }
-
-        private int dfs(int[][] graph, int[] status, int id) {
-            if (status[id] == VISITING) {
-                status[id] = UNSAFE;
-                return UNSAFE;
-            }
-
-            if (status[id] != UNKOWN) {
-                return status[id];
-            }
-
-            /**
-             * !!! !!!
-             * Don't forget to set visiting status
-             * otherwise, it will stack overflow
-             */
-            status[id] = VISITING;
-            for (int n : graph[id]) {
-                if (dfs(graph, status, n) == UNSAFE) {
-                    status[n] = UNSAFE;
-                    return UNSAFE;
-                }
-            }
-
-            status[id] = SAFE;
-            return SAFE;
-        }
-    }
 }

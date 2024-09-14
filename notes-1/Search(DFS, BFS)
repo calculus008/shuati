@@ -92,19 +92,19 @@ LE_787_Cheapest_Flights_Within_K_Stops  (Dijskra)
 ## New Problems
 LE_967_Numbers_With_Same_Consecutive_Differences                      DFS or BFS
 LE_863_All_Nodes_Distance_K_In_Binary_Tree                            DFS + BFS
-LE_329_Longest_Increasing_Path_In_A_Matrix                  (hard)    DFS or DP
+LE_329_Longest_Increasing_Path_In_A_Matrix                  (hard)    DFS or DP                 *****
 LE_801_Minimum_Swaps_To_Make_Sequences_Increasing           (hard)    DFS or DP
 
 
 ## Graph DFS
-LE_332_Reconstruct_Itinerary
-LE_690_Employee_Importance
+LE_332_Reconstruct_Itinerary                                DFS + Heap                           *****
+LE_690_Employee_Importance                                  DFS + hashmap                        *****
 
 ## Construct weighed directed graph and DFS
-LE_399_Evaluate_Division
+LE_399_Evaluate_Division                                    Graph + DFS                          *****
 
 ## Detect loop in graph
-LE_802_Find_Eventual_Safe_States
+LE_802_Find_Eventual_Safe_States                            Graph + DFS                          *****
 
 * 488 Zuma Game
 * 818 Race Car

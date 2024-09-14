@@ -30,7 +30,91 @@ public class LE_399_Evaluate_Division {
          in no division by zero and there is no contradiction.
 
          Medium
+
+         https://leetcode.com/problems/evaluate-division
      */
+
+
+    /**
+     * Huahua's DFS version
+     *
+     * a / b = 2.0, b / c = 3.0
+     *
+     * Graph:
+     * a -> (b -> 2.0)
+     * b -> (c -> 3.0)
+     *
+     * a / c :
+     * divide(a / c) => divide(b / c) => divide(c / c)
+     *  2.0 * 3.0    <-   3.0 * 1.0   <-    1.0
+     *
+     *  Time : O(e + q * e)  e: number of equations, q: number of queries
+     *  Space : O(e)
+     */
+    class Solution_best {
+        /**
+         * !!! value is another HashMap:  start node -> (end node -> weight(equation value))
+         */
+        Map<String, HashMap<String, Double>> g = new HashMap<>();
+
+        public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
+            for (int i = 0; i < equations.length; ++i) {
+                String x = equations[i][0];
+                String y = equations[i][1];
+                double k = values[i];
+                /**
+                 * computeIfAbsent : concise, but very expensive
+                 */
+                g.computeIfAbsent(x, l -> new HashMap<String, Double>()).put(y, k);
+                g.computeIfAbsent(y, l -> new HashMap<String, Double>()).put(x, 1.0 / k);
+            }
+
+            double[] ans = new double[queries.length];
+
+            for (int i = 0; i < queries.length; ++i) {
+                String x = queries[i][0];
+                String y = queries[i][1];
+                if (!g.containsKey(x) || !g.containsKey(y)) {
+                    ans[i] = -1.0;
+                } else {
+                    ans[i] = divide(x, y, new HashSet<String>());
+                }
+            }
+
+            return ans;
+        }
+
+        private double divide(String x, String y, Set<String> visited) {
+            if (x.equals(y)) {
+                return 1.0;
+            }
+
+            visited.add(x);
+
+            if (!g.containsKey(x)) {
+                return -1.0;
+            }
+
+            for (String n : g.get(x).keySet()) {
+                if (visited.contains(n)) {
+                    continue;
+                }
+
+                visited.add(n);
+                double d = divide(n, y, visited); //find if a pth between n and y exists
+                if (d > 0) {// n -> y path exists
+                    /**
+                     * !!!
+                     * d = n / y, x / y = (n / y) * (x / n) = d * (x / n)
+                     */
+                    return d * g.get(x).get(n);
+                }
+            }
+
+            return -1.0;
+        }
+    }
+
 
     /**
      * http://zxi.mytechroad.com/blog/graph/leetcode-399-evaluate-division/
@@ -127,82 +211,7 @@ public class LE_399_Evaluate_Division {
         }
     }
 
-    /**
-     * Huahua's DFS version
-     *
-     * a / b = 2.0, b / c = 3.0
-     *
-     * Graph:
-     * a -> (b -> 2.0)
-     * b -> (c -> 3.0)
-     *
-     * a / c :
-     * divide(a / c) => divide(b / c) => divide(c / c)
-     *  2.0 * 3.0    <-   3.0 * 1.0   <-    1.0
-     */
-    class Solution2 {
-        /**
-         * !!! value is another HashMap
-         */
-        Map<String, HashMap<String, Double>> g = new HashMap<>();
 
-        public double[] calcEquation(String[][] equations, double[] values, String[][] queries) {
-            for (int i = 0; i < equations.length; ++i) {
-                String x = equations[i][0];
-                String y = equations[i][1];
-                double k = values[i];
-                /**
-                 * computeIfAbsent : concise, but very expensive
-                 */
-                g.computeIfAbsent(x, l -> new HashMap<String, Double>()).put(y, k);
-                g.computeIfAbsent(y, l -> new HashMap<String, Double>()).put(x, 1.0 / k);
-            }
-
-            double[] ans = new double[queries.length];
-
-            for (int i = 0; i < queries.length; ++i) {
-                String x = queries[i][0];
-                String y = queries[i][1];
-                if (!g.containsKey(x) || !g.containsKey(y)) {
-                    ans[i] = -1.0;
-                } else {
-                    ans[i] = divide(x, y, new HashSet<String>());
-                }
-            }
-
-            return ans;
-        }
-
-        private double divide(String x, String y, Set<String> visited) {
-            if (x.equals(y)) {
-                return 1.0;
-            }
-
-            visited.add(x);
-
-            if (!g.containsKey(x)) {
-                return -1.0;
-            }
-
-            for (String n : g.get(x).keySet()) {
-                if (visited.contains(n)) {
-                    continue;
-                }
-
-                visited.add(n);
-                double d = divide(n, y, visited);
-                if (d > 0) {
-                    /**
-                     * !!!
-                     * d * (x / n)
-                     */
-                    return d * g.get(x).get(n);
-                }
-            }
-
-            return -1.0;
-        }
-    }
 
     /**
      * Huahua's UnionFind version

@@ -47,7 +47,7 @@ public class LE_332_Reconstruct_Itinerary {
      * If we always choose the airport with the smallest lexical order, this
      * would lead to a perfectly lexical-ordered itinerary, but pay attention
      * that when doing so, there can be a "dead end" somewhere in the tickets
-     * such that we are not able visit all airports (or we can't use all our
+     * such that we are not able to visit all airports (or we can't use all our
      * tickets), which is bad because it fails to satisfy requirement 1 of
      * this problem. Thus we need to take a step back and try other possible
      * airports, which might not give us a perfectly ordered solution, but
@@ -102,7 +102,7 @@ public class LE_332_Reconstruct_Itinerary {
             while (map.containsKey(s) && !map.get(s).isEmpty()) {
                 /**
                  * "poll()", try all destinations that can be reached from s,
-                 * pq in dist guaranteed lexicon order.
+                 * pq in map guaranteed lexicon order.
                  */
                 helper(map.get(s).poll());
             }
