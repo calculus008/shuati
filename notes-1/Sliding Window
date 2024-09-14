@@ -1,13 +1,13 @@
-#Sliding Window
+# Sliding Window
 
-#Min or Max length of sliding window
-LE_03_Longest_Substring_Without_Repeating_Characters      (**)
+## Min or Max length of sliding window
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_76_Min_Window_Substring                                      *****
 LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars
 LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
-LE_76_Min_Window_Substring
 LE_727_Minimum_Window_Subsequence
 
-#Number of subarrays
+## Number of subarrays
 LE_992_Subarrays_With_K_Different_Integers
 LE_1248_Count_Number_Of_Nice_Subarrays
 
@@ -34,3 +34,10 @@ LE_904_Fruit_Into_Baskets
 1234
 1358
 
+
+## Apple *****
+LE_03_Longest_Substring_Without_Repeating_Characters
+LE_485_Max_Consecutive_Ones
+LE_424_Longest_Repeating_Character_Replacement
+LE_713_Subarray_Product_Less_Than_K
+LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency

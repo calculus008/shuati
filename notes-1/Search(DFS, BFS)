@@ -13,9 +13,9 @@ LE_17_Letter_Combinations_Of_A_Phone_Number  (a special case of permutation, ele
 
 ## DFS subset
 * No base case for return, add elements in each recursion call
-* need to pass in cur idx, then iterate from that idx to end
+* need to pass in cur idx (or start), then iterate from that idx to end
 * for each iteration, add element, recursion, then remove element
-* if there's duplicates -> dedup: sorting => "if (i != idx && nums[i] == nums[i - 1]) continue"
+* if there's duplicates -> dedup: sorting => "if (i != start && nums[i] == nums[i - 1]) continue"
 * Time : O(n * 2 ^ n), Space : O(n)
 LE_78_Subsets                    distinct
 LE_90_Subsets_II                 duplicate
@@ -24,6 +24,7 @@ LE_39_Combination_Sum            distinct, same number can be used multiple time
                                  base case: target < 0 or sum == target
                                  use sorting to do pruning, idx not increase when calling recusion
 LE_40_Combination_SUM_II         duplicate, all positive numbers, dedup -> sorting, then "if (i != start_idx && nums[i] == nums[i - 1]) continue"
+                                 sorting can also prune, return early - "if (candidates[i] > target) return;" in branching loop
 LE_216_Combination_Sum_III       use 1 - 9, no duplicate, only use k of them, and no duplicate number can be used in the result.
                                  base case : target == 0 or all k numbers are used: k == 0 && n == 0
                                  idx increases by 1 when calling recursion
@@ -34,8 +35,9 @@ LE_377_Combination_Sum_IV        can use DFS, but better use recursion or DP
 ## Backtracking in Matrix
 * Use a 2D array as visited
 * Base case: mem or visited is already set
-* move 4 directions, get return value, get min or max, then return 1+ret
-LE_329_Longest_Increasing_Path_In_A_Matrix
+* branching into 4 directions, check if new coordinate is valid (within matrix and meet requirement)
+* get return value, get min or max, then return 1+ret
+LE_329_Longest_Increasing_Path_In_A_Matrix                                                  *****
 
 
 # BFS find shorted path to a final state
@@ -52,14 +54,14 @@ LE_864_Shortest_Path_To_Get_All_Keys
 LE_417_Pacific_Atlantic_Water_Flow      Set status in a matrix based on conditions in DFS    *****
 LE_301_Remove_Invalid_Parentheses       (hard)
 LE_282_Expression_Add_Operators         (hard)
-LE_494_Target_Sum                       (***)  Simpler version of LE_282_Expression_Add_Operators, use fixed numbers in a list
+LE_494_Target_Sum                       *****  Simpler version of LE_282_Expression_Add_Operators, use fixed numbers in a list
                                                no '*', only '+' and '-'. Can use DFS, better one is DP
 
 
-## DFS for grouping (islands, friends etc)
+## DFS for grouping (islands, friends etc), can also be solved by UnionFind
 LE_200_Number_Of_Islands                count number
-LE_547_Friend_Circles                   count number   ***
-LE_695_Max_Area_Of_Island               get area size, so set val = 1 and keep adding from recursion calls and return val.
+LE_547_Friend_Circles                   count number   *****
+LE_695_Max_Area_Of_Island               get area size, so set val = 1 and keep adding from recursion calls and return val.  *****
                     (hard)
 LE_733_Flood_Fill
 
@@ -92,7 +94,7 @@ LE_787_Cheapest_Flights_Within_K_Stops  (Dijskra)
 ## New Problems
 LE_967_Numbers_With_Same_Consecutive_Differences                      DFS or BFS
 LE_863_All_Nodes_Distance_K_In_Binary_Tree                            DFS + BFS
-LE_329_Longest_Increasing_Path_In_A_Matrix                  (hard)    DFS or DP                 *****
+LE_329_Longest_Increasing_Path_In_A_Matrix                  (hard)    DFS or DP                  *****
 LE_801_Minimum_Swaps_To_Make_Sequences_Increasing           (hard)    DFS or DP
 
 

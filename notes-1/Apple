@@ -1,7 +1,7 @@
 # Plan
 Collect all Apple problems (last 6 months)
 Problem Categories deep dive:
-  Search (DFS, BFS)
+  Search (DFS, BFS)       done
   Sliding Window
   Big Data
   Design
@@ -10,7 +10,13 @@ Problem Categories deep dive:
   Stack
   Trie
   TreeMap
+Java Multi-threading
 
+Level of proficiency:
+***** can write bug free code and analyse complexity
+****  can tell algo and key steps
+***   can tell the overall algo
+**    can look at code and understand the algo
 
 
 

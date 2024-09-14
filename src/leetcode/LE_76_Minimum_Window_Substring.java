@@ -17,9 +17,54 @@ public class LE_76_Minimum_Window_Substring
         If there is no such window in S that covers all characters in T, return the empty string "".
 
         If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.
+
+        Medium
+
+        https://leetcode.com/problems/minimum-window-substring
      */
 
     //Very Important
+
+    class Solution_clean {
+        public String minWindow(String s, String t) {
+            if (s == null || t == null) return "";
+
+            int[] count = new int[128];
+            int len = Integer.MAX_VALUE;
+            int l = 0;
+            int r = 0;
+            int total = t.length();
+
+            for (char c : t.toCharArray()) {
+                count[c]++;
+            }
+
+            char[] chars = s.toCharArray();
+            for (int i = 0, j = 0; i < chars.length; i++) {
+                char c = chars[i];
+                if (count[c] > 0) {
+                    total--;
+                }
+                count[c]--;
+
+                while (total == 0) {
+                    if (i - j + 1 < len) {
+                        l = j;
+                        r = i;
+                        len = i - j + 1;
+                    }
+
+                    count[chars[j]]++;
+                    if (count[chars[j]] > 0) {//!!!
+                        total++;
+                    }
+                    j++; //!!!
+                }
+            }
+
+            return len == Integer.MAX_VALUE ? "" : s.substring(l, r + 1);
+        }
+    }
 
     /**
          Sliding Window :
