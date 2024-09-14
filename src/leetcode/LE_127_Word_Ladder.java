@@ -8,7 +8,7 @@ import java.util.*;
 public class LE_127_Word_Ladder {
     /**
          Given two words (beginWord and endWord), and a dictionary's word list, find the length
-         of shortest transformation sequence from beginWord to endWord, such that:
+         of the 'shortest transformation sequence from beginWord to endWord, such that:
 
          Only one letter can be changed at a time.
          Each transformed word must exist in the word list. Note that beginWord is not a transformed word.
@@ -44,6 +44,8 @@ public class LE_127_Word_Ladder {
          Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
 
          Medium
+
+         https://leetcode.com/problems/word-ladder
      */
 
     /**
@@ -75,109 +77,139 @@ public class LE_127_Word_Ladder {
 
      Also it seems that Leetcode requires that endWord must be in the given dictionary (or wordList),
      */
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        if (wordList == null || wordList.size() == 0 || beginWord == null || endWord == null) {
-            return 0;
-        }
+    class Solution_BFS_2 {
+        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            if (wordList == null || wordList.size() == 0 || beginWord == null || endWord == null) {
+                return 0;
+            }
 
-        if (beginWord.equals(endWord)) {
-            return 1;
-        }
+            if (beginWord.equals(endWord)) {
+                return 1;
+            }
 
-        HashSet<String> dict = new HashSet<>();
-        for (String word : wordList) {
-            dict.add(word);
-        }
+            HashSet<String> dict = new HashSet<>();
+            for (String word : wordList) {
+                dict.add(word);
+            }
 
-        /**
-         * Need to clarify if endWord exists in the given dictionary, here it must exist.
-         */
-        if (!dict.contains(endWord)) {
-            return 0;
-        }
+            /**
+             * Need to clarify if endWord exists in the given dictionary, here it must exist.
+             */
+            if (!dict.contains(endWord)) {
+                return 0;
+            }
 
-        Queue<String> queue = new LinkedList<>();
-        queue.offer(beginWord);
+            Queue<String> queue = new LinkedList<>();
+            queue.offer(beginWord);
 
-        int res = 1;
+            int res = 1;
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            res++;
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                res++;
 
-            for (int i = 0; i < size; i++) {
-                String cur = queue.poll();
-                List<String> neighbors = findNeighbors(cur, dict);
+                for (int i = 0; i < size; i++) {
+                    String cur = queue.poll();
+                    List<String> neighbors = findNeighbors(cur, dict);
 
-                for (String neighbor : neighbors) {
-                    if (endWord.equals(neighbor)) {
-                        return res;
+                    for (String neighbor : neighbors) {
+                        if (endWord.equals(neighbor)) {
+                            return res;
+                        }
+
+                        queue.offer(neighbor);
                     }
-
-                    queue.offer(neighbor);
                 }
             }
+
+            return 0;
         }
 
-        return 0;
+        public List<String> findNeighbors(String s, HashSet<String> dict) {
+            char[] chars = s.toCharArray();
+            List<String> neighbors = new ArrayList<>();
+
+            for (int i = 0; i < s.length(); i++) {
+                char original = chars[i];
+                for (char c = 'a'; c <= 'z'; c++) {
+                    if (original == c) {
+                        continue;
+                    }
+
+                    chars[i] = c;
+                    String next = new String(chars);
+
+                    if (dict.contains(next)) {//!!!"dict.contains() -> O(l), l is word length !!!
+                        neighbors.add(next);
+                        dict.remove(next);//!!!
+                    }
+                }
+                chars[i] = original;
+            }
+
+            return neighbors;
+        }
     }
 
-    /**
-     * Solution 1 : BFS, 83ms
-     *
-     * Time  : O(n * (26 ^ l))
-     * Space : O(n)
-     */
-    public int ladderLength_1(String beginWord, String endWord, List<String> wordList) {
-        HashSet<String> dict = new HashSet<>();
-        for (String word : wordList) {
-            dict.add(word);
-        }
 
-        HashSet<String> visited = new HashSet<>();
-        Queue<String> queue = new LinkedList<>();
-        visited.add(beginWord);
-        queue.offer(beginWord);
+    class Solution_BFS_1 {
+        /**
+         * Solution 1 : BFS, 83ms
+         * <p>
+         * Time  : O(n * (26 ^ l))
+         * Space : O(n)
+         */
+        public int ladderLength_1(String beginWord, String endWord, List<String> wordList) {
+            HashSet<String> dict = new HashSet<>();
+            for (String word : wordList) {
+                dict.add(word);
+            }
 
-        int res = 1;
+            HashSet<String> visited = new HashSet<>();
+            Queue<String> queue = new LinkedList<>();
+            visited.add(beginWord);
+            queue.offer(beginWord);
 
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            res++;
+            int res = 1;
 
-            for (int i = 0; i < size; i++) {
-                String cur = queue.poll();
-                char[] chars = cur.toCharArray();
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                res++;
 
-                for (int j = 0; j < cur.length(); j++) {
-                    char original = chars[j];
-                    for (char c = 'a'; c <= 'z'; c++) {
-                        if (original == c) {
-                            continue;
-                        }
-                        chars[j] = c;
-                        String s = new String(chars);
+                for (int i = 0; i < size; i++) {
+                    String cur = queue.poll();
+                    char[] chars = cur.toCharArray();
 
-                        if (dict.contains(s)) {
-                            if (visited.contains(s)) {
+                    for (int j = 0; j < cur.length(); j++) {
+                        char original = chars[j];
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            if (original == c) {
                                 continue;
                             }
+                            chars[j] = c;
+                            String s = new String(chars);
 
-                            if (endWord.equals(s)) {
-                                return res;
+                            if (dict.contains(s)) {
+                                if (visited.contains(s)) {
+                                    continue;
+                                }
+
+                                if (endWord.equals(s)) {
+                                    return res;
+                                }
+
+                                visited.add(s);
+                                queue.offer(s);
                             }
 
-                            visited.add(s);
-                            queue.offer(s);
                         }
-
+                        chars[j] = original;
                     }
-                    chars[j] = original;
                 }
             }
-        }
 
-        return 0;
+            return 0;
+        }
     }
 
     /**
@@ -218,74 +250,76 @@ public class LE_127_Word_Ladder {
      * Time  : O(n*26^l/2), l = len(word), n=|wordList|
      * Space : O(n)
      */
-    public int ladderLength_3(String beginWord, String endWord, List<String> wordAsList) {
-        if (!wordAsList.contains(endWord)) return 0;
+    class Solution_bi_direction_DFS {
+        public int ladderLength_3(String beginWord, String endWord, List<String> wordAsList) {
+            if (!wordAsList.contains(endWord)) return 0;
 
-        int l = beginWord.length();
-        Set<String> wordList = new HashSet<String>(wordAsList);
-        Set<String> start = new HashSet<String>();
-        Set<String> end = new HashSet<String>();
-        int length = 0;
+            int l = beginWord.length();
+            Set<String> wordList = new HashSet<String>(wordAsList);
+            Set<String> start = new HashSet<String>();
+            Set<String> end = new HashSet<String>();
+            int length = 0;
 
-        start.add(beginWord);
-        end.add(endWord);
-
-        /**
-         * !!!
-         * In Bi-direction BFS, we no longer use Queue !!!
-         * Use two sets start and end. While condition checks if both are empty.
-         */
-        while (!start.isEmpty() && !end.isEmpty()) {//!!!
-            length++;
-
-            //use the samller set, balance the sets on 2 ends
-            if (start.size() > end.size()) {
-                Set<String> temp = new HashSet<>();
-                temp = start;
-                start = end;
-                end = temp;
-            }
+            start.add(beginWord);
+            end.add(endWord);
 
             /**
              * !!!
-             * Must create a new set to record the new strings generated in each level,
-             * then use it as the set for comparison in the next level. Can't add new
-             * word to start or end.
+             * In Bi-direction BFS, we no longer use Queue !!!
+             * Use two sets start and end. While condition checks if both are empty.
              */
-            Set<String> next = new HashSet<String>();
+            while (!start.isEmpty() && !end.isEmpty()) {//!!!
+                length++;
 
-            for (String word : start) {
-                char[] wordArray = word.toCharArray();
-                for (int i = 0; i < l; i++) {
-                    char old = wordArray[i];
-                    for (char c = 'a'; c <= 'z'; c++) {
-                        wordArray[i] = c;
-                        String str = String.valueOf(wordArray);
-
-                        if (end.contains(str)) {
-                            return length + 1;
-                        }
-
-                        if (wordList.contains(str)) {
-                            next.add(str);
-                            /**
-                             * !!!
-                             * remove from dictionary, serve the purpose of marking it as visited
-                             */
-                            wordList.remove(str);
-                        }
-                    }
-                    wordArray[i] = old;
+                //use the smaller set, balance the sets on 2 ends
+                if (start.size() > end.size()) {
+                    Set<String> temp = new HashSet<>();
+                    temp = start;
+                    start = end;
+                    end = temp;
                 }
-            }
 
-            start = next;//!!!
-            // Set<String> temp1 = new HashSet<>();
-            // temp1 = start;
-            // start = next;
-            // next = temp1;
+                /**
+                 * !!!
+                 * Must create a new set to record the new strings generated in each level,
+                 * then use it as the set for comparison in the next level. Can't add new
+                 * word to start or end.
+                 */
+                Set<String> next = new HashSet<String>();
+
+                for (String word : start) {
+                    char[] wordArray = word.toCharArray();
+                    for (int i = 0; i < l; i++) {
+                        char old = wordArray[i];
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            wordArray[i] = c;
+                            String str = String.valueOf(wordArray);
+
+                            if (end.contains(str)) {
+                                return length + 1;
+                            }
+
+                            if (wordList.contains(str)) {
+                                next.add(str);
+                                /**
+                                 * !!!
+                                 * remove from dictionary, serve the purpose of marking it as visited
+                                 */
+                                wordList.remove(str);
+                            }
+                        }
+                        wordArray[i] = old;
+                    }
+                }
+
+                start = next;//!!!
+                // Set<String> temp1 = new HashSet<>();
+                // temp1 = start;
+                // start = next;
+                // next = temp1;
+            }
+            return 0;
         }
-        return 0;
     }
 
     class Solution {

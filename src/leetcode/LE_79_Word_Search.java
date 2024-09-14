@@ -27,6 +27,8 @@ public class LE_79_Word_Search {
         word = "ABCB", -> returns false.
 
         Medium
+
+        https://leetcode.com/problems/word-search
      **/
 
     class Solution {

@@ -23,6 +23,10 @@ public class LE_212_Word_Search_II {
           ['i','f','l','v']
         ]
         Return ["eat","oath"].
+
+        Hard
+
+        https://leetcode.com/problems/word-search-ii
      */
 
     /**
@@ -78,7 +82,7 @@ public class LE_212_Word_Search_II {
      * From buildTrieTree(), we know that root itself does not contain char in a world,
      * it is just a dummy node pointing to the start of the words.
      *
-     * Therefore in helper(),
+     * Hence, in helper(),
      * 1.we check if p.next[idx] is null
      * 2.move p to p.next[idx]
      * 3.Then check if p.word exists

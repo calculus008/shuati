@@ -30,6 +30,10 @@ public class LE_801_Minimum_Swaps_To_Make_Sequences_Increasing {
 
          A, B are arrays with the same length, and that length will be in the range [1, 1000].
          A[i], B[i] are integer values in the range [0, 2000].
+
+         Hard
+
+         https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing
      **/
 
     /**

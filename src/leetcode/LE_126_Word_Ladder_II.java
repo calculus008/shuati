@@ -51,10 +51,10 @@ public class LE_126_Word_Ladder_II {
      *
          The basic idea is:
 
-         1). Use BFS to find the shortest dirs between start and end, tracing the dirs of crossing nodes
+         1). Use BFS to find the shortest dirs between start and end, tracing the map of crossing nodes
              from start node to end node, and store node's next level neighbors to HashMap;
 
-         2). Use DFS to output paths with the same dirs as the shortest dirs from dirs HashMap: compare if
+         2). Use DFS to output paths with the same map as the shortest dirs from dirs HashMap: compare if
              the dirs of the next level node equals the dirs of the current node + 1.
 
          Since we need to construct the complete graph from start to end, we can't remove word from dict, as we did in 127

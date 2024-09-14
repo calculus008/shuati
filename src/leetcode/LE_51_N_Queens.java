@@ -28,6 +28,10 @@ public class LE_51_N_Queens {
           "...Q",
           ".Q.."]
         ]
+
+        Hard
+
+        https://leetcode.com/problems/n-queens
      **/
 
     //Backtracking
@@ -106,16 +110,16 @@ class Solution {
 
     public List<List<String>> solveNQueens(int n) {
         board = new char[n][n];
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 board[i][j] = '.';
             }
         }
 
         List<List<String>> res = new ArrayList<List<String>>();
         cols = new boolean[n];
-        diag1 = new boolean[2*n-1];
-        diag2 = new boolean[2*n-1];
+        diag1 = new boolean[2 * n - 1];
+        diag2 = new boolean[2 * n - 1];
         helper(res, n, 0);
         return res;
     }
@@ -126,23 +130,23 @@ class Solution {
             return;
         }
 
-        for(int y = 0; y < n; y++) {
+        for (int y = 0; y < n; y++) {
             if (!available(row, y, n)) continue;
             updateBoard(row, y, n, true);
-            helper(res, n, row+1);
+            helper(res, n, row + 1);
             updateBoard(row, y, n, false);
         }
     }
 
     private boolean available(int x, int y, int n) {
-        return !cols[y] && !diag1[x+y] && !diag2[x-y+n-1];
+        return !cols[y] && !diag1[x + y] && !diag2[x - y + n - 1];
     }
 
     private void updateBoard(int x, int y, int n, boolean isPut) {
         cols[y] = isPut;
-        diag1[x+y] = isPut;
-        diag2[x-y+n-1] = isPut;
-        board[x][y] = isPut? 'Q':'.';
+        diag1[x + y] = isPut;
+        diag2[x - y + n - 1] = isPut;
+        board[x][y] = isPut ? 'Q' : '.';
     }
 
     private void buildRes(List<List<String>> res) {

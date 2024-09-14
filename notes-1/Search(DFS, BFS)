@@ -73,27 +73,27 @@ LE_841_Keys_And_Rooms                  Graph + DFS            *****
 
 ## DFS: find out if a group of numbers can be divided into
 LE_473_Matchsticks_To_Square               (hard)
-LE_698_Partition_To_K_Equal_Sum_Subsets    *****
+LE_698_Partition_To_K_Equal_Sum_Subsets                       *****
+
+
+## BFS/DFS  Word problems
+LE_127_Word_Ladder                    (hard)                BFS only, find the shortest transformation path, emphasis on branching function (replace one char in word)       *****
+LE_126_Word_Ladder_II                 (hard)                BFS first, then DFS
+LE_79_Word_Search                                           DFS                     *****
+LE_212_Word_Search_II                 (hard)                Trie or HashMap + DFS
+LE_51_N_Queens                        (hard)
+
 
 
 ## Dijskra
 LE_787_Cheapest_Flights_Within_K_Stops  (Dijskra)
 
 
-LE_79_Word_Search (***)
-LE_212_Word_Search_II
-LE_127_Word_Ladder
-LE_126_Word_Ladder_II
-LE_51_N_Queens
-
-
-
-
-#New Problems
-LE_967_Numbers_With_Same_Consecutive_Differences
-LE_801_Minimum_Swaps_To_Make_Sequences_Increasing
-LE_863_All_Nodes_Distance_K_In_Binary_Tree
-LE_329_Longest_Increasing_Path_In_A_Matrix
+## New Problems
+LE_967_Numbers_With_Same_Consecutive_Differences                      DFS or BFS
+LE_863_All_Nodes_Distance_K_In_Binary_Tree                            DFS + BFS
+LE_329_Longest_Increasing_Path_In_A_Matrix                  (hard)    DFS or DP
+LE_801_Minimum_Swaps_To_Make_Sequences_Increasing           (hard)    DFS or DP
 
 
 ## Graph DFS
