@@ -110,3 +110,10 @@ LE_802_Find_Eventual_Safe_States                            Graph + DFS         
 
 * 488 Zuma Game
 * 818 Race Car
+
+## Apple
+LE_200_Number_Of_Islands
+LE_207_Course_Schedule
+LE_339_Nested_List_Weight_Sum
+LE_472_Concatenated_Words
+LE_565_Array_Nesting

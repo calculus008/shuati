@@ -8,16 +8,16 @@ LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
 LE_727_Minimum_Window_Subsequence
 
 ## Number of subarrays
-LE_992_Subarrays_With_K_Different_Integers
-LE_1248_Count_Number_Of_Nice_Subarrays
+LE_992_Subarrays_With_K_Different_Integers                      (hard)
+LE_1248_Count_Number_Of_Nice_Subarrays                                   *****
+LE_30_SubstrConactWords                                         (hard)   ***
 
-LE_30_SubstrConactWords                                   (***)
-
+## -----------------------
 LE_209_Minimum_Size_Subarray_Sum
 LE_239_Sliding_Window_Maximum
 LE_480_Sliding_Window_Median                              (lint 360)   (***) Revisit
 LE_346_Moving_Average_From_Data_Stream
-LE_438_Find_All_Anagrams_In_A_String
+
 LI_647_Find_All_Anagrams_In_A_String
 LE_567_Permutation_In_String
 LE_643_Maximum_Average_Subarray_I
@@ -37,7 +37,9 @@ LE_904_Fruit_Into_Baskets
 
 ## Apple *****
 LE_03_Longest_Substring_Without_Repeating_Characters
+LE_219_Contains_Duplicates_II
 LE_485_Max_Consecutive_Ones
-LE_424_Longest_Repeating_Character_Replacement
-LE_713_Subarray_Product_Less_Than_K
+LE_424_Longest_Repeating_Character_Replacement                  *****
+LE_438_Find_All_Anagrams_In_A_String                            *****
+LE_713_Subarray_Product_Less_Than_K                             *****
 LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency

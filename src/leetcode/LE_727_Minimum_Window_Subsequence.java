@@ -28,6 +28,8 @@ public class LE_727_Minimum_Window_Subsequence {
      * The length of T will be in the range [1, 100].
      *
      * Hard
+     *
+     * https://leetcode.com/problems/minimum-window-subsequence
      */
 
     /**
@@ -39,12 +41,14 @@ public class LE_727_Minimum_Window_Subsequence {
      * 本质上是sliding window, 先找到一个满足要求的window， 然后优化。
      * 特殊的是，这里的优化不是移动左边界，而是往回扫描。
      *
-     * 要注意两个坐标的调整。每当完成扫描是，当前坐标值已经越界，要调整回来。
+     * 要注意两个坐标的调整。每当完成扫描时，当前坐标值已经越界，要调整回来。
      *
      * 扫描的过程就是判断是否是，这里，sIdx always move, tIdx only moves if a match happens.
      *
      * Time  : O(mn)
      * Space : O(1)
+     *
+     * 和 LE_76_Minimum_Window_Substring 不同的是，这里要求的是subsequence, 所以字符出现的先后顺序是要考虑的。
      */
     class Solution1 {
         public String minWindow(String S, String T) {
@@ -64,11 +68,11 @@ public class LE_727_Minimum_Window_Subsequence {
                 if (s[sIdx] == t[tIdx]) {
                     tIdx++;
 
-                    if (tIdx == tLen) {
+                    if (tIdx == tLen) { //找到了一个合乎要求的window
                         int end = sIdx;
                         tIdx--;
 
-                        while (tIdx >= 0) {
+                        while (tIdx >= 0) {//然后往回扫描，找到最小的window长度
                             if (s[sIdx] == t[tIdx]) {
                                 tIdx--;
                             }

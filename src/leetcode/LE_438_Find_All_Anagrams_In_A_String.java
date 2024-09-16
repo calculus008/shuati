@@ -44,7 +44,89 @@ public class LE_438_Find_All_Anagrams_In_A_String {
          Medium
 
          Same as LE_567_Permutation_In_String
+
+         https://leetcode.com/problems/find-all-anagrams-in-a-string
      */
+
+    class Solution_sliding_window {
+        /**
+         * Modified from solution for LE_76_Minimum_Window_Substring
+         */
+        public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> res = new ArrayList<>();
+            if (s == null || p == null) return res;
+
+            int total = p.length();
+            int[] count = new int[26];
+            for (char c : p.toCharArray()) {
+                count[c - 'a']++;
+            }
+
+            char[] chars = s.toCharArray();
+            for (int i = 0, j = 0; i < chars.length; i++) {
+                char c = chars[i];
+                if (count[c - 'a'] > 0) {
+                    total--;
+                }
+                count[c - 'a']--;
+
+                while (total == 0) {
+                    if (j == i - p.length() + 1) {// !!! we find the window, check if left side index is the valid one
+                        res.add(j);
+                    }
+
+                    count[chars[j] - 'a']++;
+                    if (count[chars[j] - 'a'] > 0) total++;
+                    j++;
+                }
+            }
+
+            return res;
+        }
+    }
+
+    class Solution_Practice {
+        public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> res = new ArrayList<>();
+            if (null == s || null == p || s.length() < p.length()) return res;
+
+            int[] count = new int[256];
+            int sl = s.length();
+            int pl = p.length();
+            int sum = 0;
+            for (int i = 0; i < pl; i++) {
+                count[p.charAt(i)]--;
+                count[s.charAt(i)]++;
+            }
+
+            for (int num : count) {
+                sum += Math.abs(num);
+            }
+
+            if (sum == 0) {
+                res.add(0);
+            }
+
+            for (int i = 1; i <= sl - pl; i++) {
+                int l = i - 1;
+                int r = i + pl - 1;
+
+                sum -= (Math.abs(count[s.charAt(l)]) + Math.abs(count[s.charAt(r)]));
+
+                count[s.charAt(l)]--;
+                count[s.charAt(r)]++;
+
+                sum += (Math.abs(count[s.charAt(l)]) + Math.abs(count[s.charAt(r)]));
+
+                if (sum == 0) {
+                    res.add(i);
+                }
+            }
+
+            return res;
+        }
+    }
+
 
     /**
      * Best solution, just use 1 count array
@@ -237,46 +319,4 @@ public class LE_438_Find_All_Anagrams_In_A_String {
         }
     }
 
-
-    class Solution_Practice {
-        public List<Integer> findAnagrams(String s, String p) {
-            List<Integer> res = new ArrayList<>();
-            if (null == s || null == p || s.length() < p.length()) return res;
-
-            int[] count = new int[256];
-            int sl = s.length();
-            int pl = p.length();
-            int sum = 0;
-            for (int i = 0; i < pl; i++) {
-                count[p.charAt(i)]--;
-                count[s.charAt(i)]++;
-            }
-
-            for (int num : count) {
-                sum += Math.abs(num);
-            }
-
-            if (sum == 0) {
-                res.add(0);
-            }
-
-            for (int i = 1; i <= sl - pl; i++) {
-                int l = i - 1;
-                int r = i + pl - 1;
-
-                sum -= (Math.abs(count[s.charAt(l)]) + Math.abs(count[s.charAt(r)]));
-
-                count[s.charAt(l)]--;
-                count[s.charAt(r)]++;
-
-                sum += (Math.abs(count[s.charAt(l)]) + Math.abs(count[s.charAt(r)]));
-
-                if (sum == 0) {
-                    res.add(i);
-                }
-            }
-
-            return res;
-        }
-    }
 }

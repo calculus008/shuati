@@ -12,6 +12,10 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
         For example, Given s = “eceba” and k = 2,
 
         T is "ece" which its length is 3.
+
+        Medium
+
+        https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters
      */
 
     /**
@@ -23,20 +27,20 @@ public class LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars {
         if (s == null || s.length() == 0) return 0;
 
         int res = Integer.MIN_VALUE;
-        int[] map = new int[256];
-        int count = 0;
+        int[] count = new int[256];
+        int total = 0;
         char[] chars = s.toCharArray();
 
         for (int i = 0, j = 0; i < chars.length; i++) {
-            if (map[chars[i]] == 0) {
-                count++;
+            if (count[chars[i]] == 0) {
+                total++;
             }
-            map[chars[i]]++;
+            count[chars[i]]++;
 
-            while (count > k) {
-                map[chars[j]]--;
-                if (map[chars[j]] == 0) {
-                    count--;
+            while (total > k) {
+                count[chars[j]]--;
+                if (count[chars[j]] == 0) {
+                    total--;
                 }
                 /**
                  * !!!

@@ -19,6 +19,24 @@ public class LE_485_Max_Consecutive_Ones {
      * https://leetcode.com/problems/max-consecutive-ones
      */
 
+    class Solution2 {
+        public int findMaxConsecutiveOnes(int[] nums) {
+            int count = 0;
+            int maxCount = 0;
+
+            for(int i = 0; i < nums.length; i++) {
+                if(nums[i] == 1) {
+                    count += 1; // Increment the count of 1's by one.
+                } else {
+                    maxCount = Math.max(maxCount, count); // Find the maximum till now.
+                    count = 0;
+                }
+            }
+
+            return Math.max(maxCount, count); //!!!
+        }
+    }
+
     /**
      * Directly use sliding window solution for LE_1004_Max_Consecutive_Ones_III, set K to 0.
      */
@@ -45,27 +63,6 @@ public class LE_485_Max_Consecutive_Ones {
             }
 
             return res;
-        }
-    }
-
-    class Solution2 {
-        public int findMaxConsecutiveOnes(int[] nums) {
-            int count = 0;
-            int maxCount = 0;
-
-            for(int i = 0; i < nums.length; i++) {
-                if(nums[i] == 1) {
-                    // Increment the count of 1's by one.
-                    count += 1;
-                } else {
-                    // Find the maximum till now.
-                    maxCount = Math.max(maxCount, count);
-                    // Reset count of 1.
-                    count = 0;
-                }
-            }
-
-            return Math.max(maxCount, count); //!!!
         }
     }
 }

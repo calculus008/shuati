@@ -16,6 +16,18 @@ public class LE_219_Contains_Duplicates_II {
      * https://leetcode.com/problems/contains-duplicate-ii
      */
 
+    public boolean containsNearbyDuplicate_1(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(nums[i])) {
+                if (i - map.get(nums[i]) <= k) return true;
+            }
+            map.put(nums[i], i);
+        }
+        return false;
+    }
+
     public boolean containsNearbyDuplicate(int[] nums, int k) {
         if (nums == null || nums.length == 0) return false;
 

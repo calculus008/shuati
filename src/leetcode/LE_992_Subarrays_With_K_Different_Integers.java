@@ -14,14 +14,11 @@ public class LE_992_Subarrays_With_K_Different_Integers {
      *
      * Return the number of good subarrays of A.
      *
-     *
-     *
      * Example 1:
      * Input: A = [1,2,1,2,3], K = 2
      * Output: 7
      * Explanation: Subarrays formed with exactly 2 different integers:
      * [1,2], [2,1], [1,2], [2,3], [1,2,1], [2,1,2], [1,2,1,2].
-     *
      *
      * Example 2:
      * Input: A = [1,2,1,3,4], K = 3
@@ -30,11 +27,48 @@ public class LE_992_Subarrays_With_K_Different_Integers {
      *
      * Note:
      * 1 <= A.length <= 20000
-     * 1 <= A[i] <= A.length
+     * 1 <= A[i] <= A.length (!!!)
      * 1 <= K <= A.length
      *
      * Hard
+     *
+     * https://leetcode.com/problems/subarrays-with-k-different-integers
      */
+
+    class Solution_sliding_window_editorial {
+        class Solution {
+            public int subarraysWithKDistinct(int[] nums, int k) {
+                int[] count = new int[nums.length + 1];  // Array to store the count of distinct values encountered, because "1 <= A[i] <= A.length"
+                int total = 0;
+                int curCount = 0;
+
+                for(int i = 0, j = 0; i < nums.length; i++) {
+                    if (count[nums[i]] == 0){ //Run into a new unique number
+                        k--;
+                    }
+                    count[nums[i]]++;
+
+                    if (k < 0) { //have more than k unique numbers in window, move left side
+                        count[nums[j]]--;
+                        j++;
+                        k++;     //!!! the while loop below makes sure that there's no duplicate for the element at j
+                        curCount = 0;
+                    }
+
+                    if (k == 0) {
+                        while (count[nums[j]] > 1) {
+                            count[nums[j]]--;
+                            j++;
+                            curCount++;
+                        }
+                        total += (curCount + 1);
+                    }
+                }
+
+                return total;
+            }
+        }
+    }
 
     /**
      * Sliding Window
@@ -45,7 +79,7 @@ public class LE_992_Subarrays_With_K_Different_Integers {
      *
      * Intuition
      * If the subarray [j, i] contains K unique numbers, and first prefix numbers also appear in [j + prefix, i] subarray,
-     * we have total 1 + prefix good subarrays. For example, there are 3 unique numers in [1, 2, 1, 2, 3]. First two numbers
+     * we have total 1 + prefix good subarrays. For example, there are 3 unique numbers in [1, 2, 1, 2, 3]. First two numbers
      * also appear in the remaining subarray [1, 2, 3], so we have 1 + 2 good subarrays: [1, 2, 1, 2, 3], [2, 1, 2, 3] and
      * [1, 2, 3].
      *

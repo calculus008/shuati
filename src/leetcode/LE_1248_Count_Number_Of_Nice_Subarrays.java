@@ -27,8 +27,39 @@ public class LE_1248_Count_Number_Of_Nice_Subarrays {
      * 1 <= k <= nums.length
      *
      * Medium
+     *
+     * https://leetcode.com/problems/count-number-of-nice-subarrays
      */
 
+    class Solution_clean {
+        public int numberOfSubarrays_Mine(int[] nums, int k) {
+            if (nums == null || nums.length == 0 || k < 1) return 0;
+
+            int target = 0;
+            int count = 0;
+            int res = 0;
+            int n = nums.length;
+
+            for (int i = 0, j = 0; i < n; i++) {
+                if (nums[i] % 2 == 1) {
+                    target++;
+                    count = 0;
+                }
+
+                while (target == k) {
+                    count++;
+                    if (nums[j] % 2 == 1) {
+                        target--;
+                    }
+                    j++;
+                }
+
+                res += count;
+            }
+
+            return res;
+        }
+    }
     /**
      * Optimal Solution
      *
@@ -211,7 +242,6 @@ public class LE_1248_Count_Number_Of_Nice_Subarrays {
             }
 
             while (target == k) {
-                System.out.println("j=" + j + ", i=" + i + ", count=" + count);
                 if (nums[j] % 2 == 1) {
                     target--;
                 }
@@ -220,8 +250,6 @@ public class LE_1248_Count_Number_Of_Nice_Subarrays {
             }
 
             res += count;
-
-            System.out.println("res="+res);
         }
 
         return res;

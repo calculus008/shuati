@@ -14,12 +14,43 @@ public class LE_159_Longest_Substring_With_At_Most_Two_Distinct_Chars {
 
         T is "ece" which its length is 3.
 
+        Medium
+
+        https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters
 
         LE_340_Longest_Substring_With_At_Most_K_Distinct_Chars
         LE_904_Fruit_Into_Baskets
      */
 
+
     //Time and Space : O(n)
+
+    class Solution_clean {
+        public int lengthOfLongestSubstringTwoDistinct(String s) {
+            if (s == null || s.length() == 0) return 0;
+
+            char[] chars = s.toCharArray();
+            int[] count = new int[128];
+            int res = 0;
+            int total = 0;
+
+            for (int i = 0, j = 0; i < chars.length; i++) {
+                char c = chars[i];
+                if (count[c] == 0) total++; //!!! use "total"
+                count[c]++;
+
+                while (total > 2) {
+                    count[chars[j]]--;
+                    if (count[chars[j]] == 0) total--; //!!!
+                    j++;
+                }
+
+                res = Math.max(res, i - j + 1);
+            }
+
+            return res;
+        }
+    }
 
     public int lengthOfLongestSubstringTwoDistinct(String s) {
         if (s == null || s.length() == 0) return 0;
