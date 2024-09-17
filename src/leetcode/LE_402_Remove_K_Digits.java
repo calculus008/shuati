@@ -27,6 +27,40 @@ public class LE_402_Remove_K_Digits {
      * Explanation: Remove all the digits from the number and it is left with nothing which is 0.
      */
 
+    class Solution_clean {
+        public String removeKdigits(String num, int k) {
+            if (null == num || num.length() == 0) return "";
+
+            int n = num.length();
+            Stack<Character> stack = new Stack<>();
+            char[] s = num.toCharArray();
+
+            int j = 0;
+            for (int i = 0; i < n; i++) {
+                while (!stack.isEmpty() && k > 0 && s[i] < stack.peek()) {
+                    stack.pop();
+                    k--;
+                }
+
+                stack.push(s[i]);
+            }
+
+            while (k > 0) {
+                stack.pop();
+                k--;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            for (Character c : stack) {
+                sb.append(c);
+            }
+
+            while (sb.length() > 0 && sb.charAt(0) == '0') {
+                sb.deleteCharAt(0);
+            }
+            return sb.length() == 0 ? "0" : sb.toString();
+        }
+    }
     /**
      * https://mp.weixin.qq.com/s/4pK5MLMkcuX_1RK_2Pth9g
      *

@@ -15,6 +15,8 @@ public class LE_739_Daily_Temperatures {
      * be an integer in the range [30, 100].
      *
      * Medium
+     *
+     * https://leetcode.com/problems/daily-temperatures
      */
 
     /**

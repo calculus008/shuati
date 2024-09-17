@@ -1,26 +1,26 @@
-#Mono Stack
+## Mono Stack
 https://leetcode.com/problems/sum-of-subarray-minimums/discuss/178876/stack-solution-with-very-detailed-explanation-step-by-step
-
 LE_496_Next_Greater_Element_I
 LE_503_Next_Greater_Element_II
-LE_735_Asteroid_Collision
 LE_739_Daily_Temperatures
 RunningTemperature
-LE_239_Sliding_Window_Maximum
-LE_456_132_Pattern
-LE_1130_Minimum_Cost_Tree_From_Leaf_Values    (***)
-
-
-LE_42_Trapping_Rain_Water
-LE_84_Largest_Rectangle_In_Histogram
-LE_85_Max_Rectangle
-
-856 Score of Parentheses
-LE_901_Online_Stock_Span
-LE_907_Sum_Of_Subarray_Minimums
-
-LE_316_Remove_Duplicate_Letters
-LE_321_Create_Maximum_Number
+LE_456_132_Pattern                            *****
+LE_239_Sliding_Window_Maximum                 *****
+LE_768_Max_Chunks_To_Make_Sorted_II
+LE_1130_Minimum_Cost_Tree_From_Leaf_Values
+LE_901_Online_Stock_Span                      *****
+LE_316_Remove_Duplicate_Letters               (hard)
+LE_907_Sum_Of_Subarray_Minimums               *****
+LE_321_Create_Maximum_Number                  (hard, visit later)
 LE_402_Remove_K_Digits
-LE_769_Max_Chunks_To_Make_Sorted
-LE_921_Minimum_Add_To_Make_Parentheses_Valid
+LE_768_Max_Chunks_To_Make_Sorted_II
+LE_769_Max_Chunks_To_Make_Sorted              can use the same stack solution as in 768
+LE_84_Largest_Rectangle_In_Histogram          *****
+LE_85_Max_Rectangle                           Can use histogram stack solution in 84
+
+## None mono stack
+LE_856_Score_Of_Parentheses                   *****
+LE_42_Trapping_Rain_Water
+LE_921_Minimum_Add_To_Make_Parentheses_Valid  *****
+LE_735_Asteroid_Collision                     *****
+

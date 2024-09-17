@@ -30,7 +30,40 @@ public class LE_239_Sliding_Window_Maximum {
 
         Follow up:
         Could you solve it in linear time?
+
+        Hard
+
+        https://leetcode.com/problems/sliding-window-maximum
      */
+
+    class Solution_clean {
+        /**
+         * Mono queue, O(n), use deque, which can operation on both ends
+         */
+        public List<Integer> maxSlidingWindow4(int[] nums, int k) {
+            List<Integer> res = new ArrayList<>();
+            if (nums == null || nums.length == 0 || k == 0) return res;
+
+            Deque<Integer> dq = new LinkedList<>();
+
+            for (int i = 0; i < nums.length; i++) {
+                while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) {// 保证最左端元素最大
+                    dq.pollLast();
+                }
+                dq.offerLast(i);
+
+                if (i >= k - 1) {//we have a full window
+                    res.add(nums[dq.peekFirst()]);
+                    if ((i - k + 1) == dq.peekFirst()) {// 移动窗口左边界，如果那个idx还在dq中。
+                        dq.pollFirst();
+                    }
+                }
+            }
+
+            return res;
+        }
+    }
+
 
     class Solution_Practice {
         public int[] maxSlidingWindow(int[] nums, int k) {

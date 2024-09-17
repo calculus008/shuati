@@ -36,11 +36,11 @@ public class RunningTemperature {
 
             Stack<Integer> stack = new Stack<>();
             for (int i = 0; i < n; i++) {
-                while (!stack.isEmpty() && temperature[i] >= temperature[stack.peek()]) {
+                while (!stack.isEmpty() && temperature[i] >= temperature[stack.peek()]) { //!!! "<=
                     stack.pop();
                 }
 
-                if (stack.isEmpty()) {
+                if (stack.isEmpty()) {//!!!
                     res[i] = i + 1;
                 } else {
                     res[i] = i - stack.peek();

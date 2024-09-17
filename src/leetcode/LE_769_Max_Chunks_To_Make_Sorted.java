@@ -27,6 +27,8 @@ public class LE_769_Max_Chunks_To_Make_Sorted {
      * arr[i] will be a permutation of [0, 1, ..., arr.length - 1].
      *
      * Medium
+     *
+     * https://leetcode.com/problems/max-chunks-to-make-sorted
      */
 
     /**

@@ -48,7 +48,7 @@ public class LE_921_Minimum_Add_To_Make_Parentheses_Valid {
                 }
             }
 
-            return count + stack.size();
+            return count + stack.size();//!!!
         }
     }
 

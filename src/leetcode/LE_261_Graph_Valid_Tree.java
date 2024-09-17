@@ -139,7 +139,7 @@ public class LE_261_Graph_Valid_Tree {
          * !!!
          * check if an undirected graph has cycle started from vertex u
          *
-         * Important, will be in follow up questions.
+         * Important, will be in followup questions.
          * **/
         boolean hasCycle(List<List<Integer>> adjList, int u, boolean[] visited, int parent) {
             visited[u] = true;

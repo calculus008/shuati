@@ -252,6 +252,7 @@ cand2: 1,423,567
 cand3: 423,567,888
 cand4: 1, 567, 8546
 
+
 LE_23_Merge_k_Sorted_Lists
 电面是一轮coding 问题是merge k iterator, input是List<Iterator<Integer>> output是Integer 要求按照数字大小merge 打印下一个数字
  比如两个Iterator it1 it2 it1.next() = 2. it2.next() = 3 打印2和3 所以很像利口二三 但是input output变了
@@ -259,6 +260,8 @@ LE_23_Merge_k_Sorted_Lists
 follow-up问怎么productionize这个算法 我说production的时候这个List<Iterator<Integer>>会存在多个机器上 这样我们需要在每台机器‍‌上存这样
 的heap 运行这个算法 每次要找下一个数的时候 再用一台机器去把每个机器里面的heap里的最小值拿出来比较 最后我说就是map reduce的原理
 然后面试官又让我讲一下shuffle
+
+
 
 最近我朋友面试了 Uber 的 Staff+ sde岗，碰到了一道挺难的系统设计题。题目是设计一个Event Lifecycle Management System（事件生命周期管理系统），系统需要从不同的服务中接收大量消息并进行分析。难点在于，数据量非常大，单一的磁盘或服务器根本装不下，而且事件的顺序可能是乱的（比如 endEvent 先到，而 startEvent 后到），甚至有时候事件会在实际发生几天后才到达系统。
 刚开始，题目看起来还挺直观的：
@@ -296,3 +299,12 @@ LE_437_Path_Sum_III
 LE_953_Verifying_An_Alien_Dictionary
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I
 LE_565_Array_Nesting
+LE_986_Interval_List_Intersections
+
+LE_1074_Number_Of_Submatrices_That_Sum_To_Target          (hard)
+
+LE_2348_Number_Of_Zero_Filled_Subarrays
+Find_Cycle
+LE_261_Graph_Valid_Tree
+Merge_K_Sorted_Stream
+LI_577_Merge_K_Sorted_Interval_Lists

@@ -33,6 +33,8 @@ public class LE_456_132_Pattern {
      * Explanation: There are three 132 patterns in the sequence: [-1, 3, 2], [-1, 3, 0] and [-1, 2, 0].
      *
      * Medium
+     *
+     * https://leetcode.com/problems/132-pattern/description/
      */
 
     /**
@@ -41,26 +43,25 @@ public class LE_456_132_Pattern {
      * Time and Space : O(n)
      *
      * https://leetcode.com/problems/132-pattern/discuss/94071/Single-pass-C%2B%2B-O(n)-space-and-time-solution-(8-lines)-with-detailed-explanation.
+     *
+     * 从右往左遍历，pop出所有比当前值大的元素，这些元素是132中"2"的候选人，记住他(as "min")，push当前元素("3"的候选人).然后看后面的元素是否小于min.
+     * 如果是，则找到了"1"。
      */
     public boolean find132pattern(int[] nums) {
         if (nums == null || nums.length < 3) return false;
 
         Stack<Integer> stack = new Stack<>();
 
-        int k = Integer.MIN_VALUE;
+        int min = Integer.MIN_VALUE;
 
         for (int i = nums.length - 1; i >= 0; i--) {
-            if (nums[i] < k) {
+            if (nums[i] < min) {
                 return true;
             }
 
             while (!stack.isEmpty() && nums[i] > stack.peek()) {
-                k = stack.pop();
+                min = stack.pop();
             }
-
-            /**
-             * !!!
-             */
             stack.push(nums[i]);
         }
 

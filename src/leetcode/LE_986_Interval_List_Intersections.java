@@ -56,7 +56,7 @@ public class LE_986_Interval_List_Intersections {
 
                 /**
                  * !!!
-                 * move the one with the less end time
+                 * move the pointer with the less end time
                  */
                 if (A[p1][1] == endMin) {
                     p1++;

@@ -54,6 +54,26 @@ public class LE_856_Score_Of_Parentheses {
      *
      *
      */
+
+    class Solution1_clean {
+        public int scoreOfParentheses(String S) {
+            int cur = 0;
+            Stack<Integer> stack = new Stack<>();
+
+            for (char c : S.toCharArray()) {
+                if (c == '(') {
+                    stack.push(cur);
+                    cur = 0;
+                } else if (c == ')') {
+                    int n = cur == 0 ? 1 : cur * 2;
+                    cur = stack.pop() + n;
+                }
+            }
+
+            return cur;
+        }
+    }
+
     class Solution1 {
         public int scoreOfParentheses(String S) {
             int cur = 0;
@@ -62,7 +82,7 @@ public class LE_856_Score_Of_Parentheses {
             for (char c : S.toCharArray()) {
                 if (c == '(') {
                     /**
-                     * '(' represents the start of a prenthese entity, push cur to stack,
+                     * '(' represents the start of a parentheses entity, push cur to stack,
                      * reset cur to 0.
                      */
                     stack.push(cur);

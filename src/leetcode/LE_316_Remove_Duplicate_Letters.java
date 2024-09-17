@@ -19,7 +19,39 @@ public class LE_316_Remove_Duplicate_Letters {
          Return "acdb"
 
          Hard
+
+         https://leetcode.com/problems/remove-duplicate-letters
      */
+
+    class Solution_stack_clean {
+        public String removeDuplicateLetters(String s) {
+            if (null == s || s.length() == 0) return s;
+
+            StringBuilder sb = new StringBuilder();
+            int[] count = new int[26];
+            boolean[] used = new boolean[26];
+
+            char[] chs = s.toCharArray();
+            for (char c : chs) {
+                count[c - 'a']++;
+            }
+
+            for (char c : chs) {
+                count[c - 'a']--;
+                if (used[c - 'a']) continue;
+
+                while (sb.length() > 0 && sb.charAt(sb.length() - 1) > c && count[sb.charAt(sb.length() - 1) - 'a'] > 0) {
+                    used[sb.charAt(sb.length() - 1) - 'a'] = false;
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+
+                sb.append(c);
+                used[c - 'a'] = true;
+            }
+
+            return sb.toString();
+        }
+    }
 
     /**
      * https://stackoverflow.com/questions/34531748/how-to-get-the-smallest-in-lexicographical-order

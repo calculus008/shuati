@@ -43,7 +43,31 @@ public class LE_901_Online_Stock_Span {
          The total time limit for this problem has been reduced by 75% for C++, and 50% for all other languages.
 
          Medium
+
+         https://leetcode.com/problems/online-stock-span
      */
+
+    class StockSpanner_with_array {
+        Stack<int[]> stack;//two elements in array: price and its span
+
+        public StockSpanner_with_array() {
+            stack = new Stack<>();
+        }
+
+        public int next(int price) {
+            if (stack.isEmpty()) {
+                stack.push(new int[]{price, 1});
+                return 1;
+            }
+
+            int count = 1;
+            while (!stack.isEmpty() && stack.peek()[0] <= price) {
+                count += stack.pop()[1];
+            }
+            stack.push(new int[]{price, count});
+            return count;
+        }
+    }
 
     /**
      * key insight : in next(), only the last element matters in terms of its value and span, so
@@ -72,13 +96,13 @@ public class LE_901_Online_Stock_Span {
                 return 1;
             }
 
-            int s = 1;
+            int count = 1;
             while (!stack.isEmpty() && stack.peek().price <= price) {
-                s += stack.pop().span;
+                count += stack.pop().span;
             }
 
-            stack.push(new Element(price, s));
-            return s;
+            stack.push(new Element(price, count));
+            return count;
         }
     }
 }

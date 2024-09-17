@@ -39,6 +39,8 @@ public class LE_907_Sum_Of_Subarray_Minimums {
      *
      * Medium
      *
+     * https://leetcode.com/problems/sum-of-subarray-minimums
+     *
      * Similar problem (monotone (increase/decrease) stack):
      * LE_503_Next_Greater_Element_II
      * LE_84_Largest_Rectangle_In_Histogram
@@ -51,6 +53,69 @@ public class LE_907_Sum_Of_Subarray_Minimums {
      * LE_239_Sliding_Window_Maximum
      * LE_769_Max_Chunks_To_Make_Sorted
      */
+
+
+    class Solution_editorial_clean {
+        public int sumSubarrayMins(int[] arr) {
+            int MOD = 1000000007;
+
+            Stack<Integer> stack = new Stack<>();
+            long sumOfMinimums = 0;
+
+            for (int i = 0; i <= arr.length; i++) {// building monotonically increasing stack
+                while (!stack.empty() && (i == arr.length || arr[stack.peek()] >= arr[i])) {//">="
+                    int mid = stack.pop(); // next smaller item for arr[item] is arr[i], previous smaller item for item at idx mid is the one at the idx of stack.peek() now.
+                    int leftBoundary = stack.empty() ? -1 : stack.peek(); // previous smaller item for arr[mid] is arr[stack.peek()]
+                    int rightBoundary = i;
+                    long count = (mid - leftBoundary) * (rightBoundary - mid) % MOD;
+
+                    sumOfMinimums += (count * arr[mid]) % MOD;
+                    sumOfMinimums %= MOD;
+                }
+                stack.push(i);
+            }
+
+            return (int) (sumOfMinimums);
+        }
+    }
+
+
+    class Solution_2_clean {
+        public int sumSubarrayMins(int[] arr) {
+            int len = arr.length;
+            int mod = (int) 1e9 + 7;
+            long sum = 0;//!!! long
+
+            Stack<Integer> s1 = new Stack<>();
+            Stack<Integer> s2 = new Stack<>();
+            int[] A = new int[len];
+            int[] B = new int[len];
+
+            for (int i = 0; i < len; i++) {
+                B[i] = len - i;
+            }
+
+            for (int i = 0; i < len; i++) {
+                while (!s1.isEmpty() && arr[s1.peek()] > arr[i]) {
+                    s1.pop();
+                }
+                A[i] = s1.isEmpty() ? i + 1 : i - s1.peek();
+                s1.push(i);
+
+                while (!s2.isEmpty() && arr[s2.peek()] > arr[i]) {
+                    B[s2.peek()] = i - s2.peek();
+                    s2.pop();
+                }
+                s2.push(i);
+            }
+
+            for (int i = 0; i < len; i++) {
+                sum = (sum + (long) A[i] * B[i] * arr[i]) % mod;
+            }
+
+            return (int) sum;
+        }
+    }
 
     class Demo {
         /**

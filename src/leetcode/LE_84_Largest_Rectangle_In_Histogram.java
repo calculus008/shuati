@@ -15,6 +15,31 @@ public class LE_84_Largest_Rectangle_In_Histogram {
         return 10
      */
 
+    // https://www.youtube.com/watch?v=XwUb7x6YDeA
+    public int largestRectangleArea2(int[] height) {
+        if (height == null || height.length == 0) return 0;
+
+        Stack<Integer> stack = new Stack<>();
+        int n = height.length;
+        int max = 0;
+
+        for (int i = 0; i <= n; i++) {
+            int h = i == n ? 0 : height[i];
+
+            while (!stack.isEmpty() && h < height[stack.peek()]) {//!!! "height[stack.peek()]", NOT "stack.peek()"
+                int x = height[stack.pop()];
+                int right = i - 1;
+                int left = stack.isEmpty() ? 0 : stack.peek() + 1;
+                int area = x * (right - left + 1);
+                max = Math.max(max, area);
+            }
+
+            stack.push(i);//!!!
+        }
+
+        return max;
+    }
+
     //Important
 
     //Use every bar as the min bar to calculate area, track max
@@ -57,27 +82,5 @@ public class LE_84_Largest_Rectangle_In_Histogram {
         return res;
     }
 
-    public int largestRectangleArea2(int[] height) {
-        if (height == null || height.length == 0) return 0;
 
-        Stack<Integer> stack = new Stack<>();
-        int n = height.length;
-        int max = 0;
-
-        for (int i = 0; i <= n; i++) {
-            int h = i == n ? 0 : height[i];
-
-            while (!stack.isEmpty() && h < height[stack.peek()]) {//!!! "height[stack.peek()]", NOT "stack.peek()"
-                int x = height[stack.pop()];
-                int right = i - 1;
-                int left = stack.isEmpty() ? 0 : stack.peek() + 1;
-                int area = x * (right - left + 1);
-                max = Math.max(max, area);
-            }
-
-            stack.push(i);//!!!
-        }
-
-        return max;
-    }
 }

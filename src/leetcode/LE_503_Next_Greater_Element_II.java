@@ -19,6 +19,10 @@ public class LE_503_Next_Greater_Element_II {
      * The second 1's next greater number needs to search circularly, which is also 2.
      *
      * Note: The length of given array won't exceed 10000.
+     *
+     * Medium
+     *
+     * https://leetcode.com/problems/next-greater-element-ii
      */
 
     /**
