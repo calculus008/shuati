@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Simple Scheduler to kick off Runnable Tasks.
  * Scheduler kicks off the immediate next task and looks for any other task to schedule.
  * If nothing else, sleeps.
- * Taskes schedules with past time are run immediately.
+ * Tasks schedules with past time are run immediately.
  * Clients can schedule new tasks at anytime by calling schedule(Long, Runable)
  *
  */

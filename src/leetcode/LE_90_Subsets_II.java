@@ -47,7 +47,7 @@ public class LE_90_Subsets_II {
         List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length == 0) return res;
 
-        Arrays.sort(nums);
+        Arrays.sort(nums);//!!!
         helper(res, nums, 0, new ArrayList<Integer>());
         return res;
     }
@@ -56,7 +56,7 @@ public class LE_90_Subsets_II {
         res.add(new ArrayList<Integer>(temp));
         for (int i = idx; i < nums.length; i++) {
             //!!! "i != idx", because i starts from col
-            if (i != idx && nums[i] == nums[i - 1]) continue;
+            if (i != idx && nums[i] == nums[i - 1]) continue;//!!!
 
             temp.add(nums[i]);
             //!!! "i + 1"

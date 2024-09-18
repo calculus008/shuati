@@ -32,7 +32,7 @@ public class LE_34_Search_For_A_Range {
 
         public int findFirst(int[] nums, int target) {
             int l = 0, r = nums.length - 1;
-            while (l < r) {//!!! Must be "<", not "<=="
+            while (l < r) {//!!! Must be "<", not "<="
                 int mid = (r - l) / 2 + l;
                 if (nums[mid] >= target) {
                     r = mid;

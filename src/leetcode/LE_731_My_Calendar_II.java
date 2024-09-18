@@ -88,13 +88,13 @@ public class LE_731_My_Calendar_II {
             for (int key : map.keySet()) {
                 count += map.get(key);
 
-                if (count > 2) {
-                    map.put(start, map.get(start) - 1);
+                if (count > 2) {// there's triple booking
+                    map.put(start, map.get(start) - 1); //undo put for start
                     if (map.get(start) == 0) {
                         map.remove(start);
                     }
 
-                    map.put(end, map.get(end) + 1);
+                    map.put(end, map.get(end) + 1);    //undo put fo end
                     if (map.get(end) == 0) {
                         map.remove(end);
                     }

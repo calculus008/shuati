@@ -43,7 +43,7 @@ public class LE_325_Maximum_Size_Subarray_Sum_Equals_k {
                 res = Math.max(res, i - map.get(sum - k));
             }
 
-            if (!map.containsKey(sum)) {
+            if (!map.containsKey(sum)) {//!!! not overwriting existing one so we keep the min index for sum
                 map.put(sum, i);
             }
         }

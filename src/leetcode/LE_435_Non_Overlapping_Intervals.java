@@ -40,7 +40,7 @@ public class LE_435_Non_Overlapping_Intervals {
      * |__||__|
      *
      * Therefore, we use the exact same logic as LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons to count how many
-     * intervals have overlap, then the answer is the total number of intervals minus the overlap count.
+     * intervals  does not have overlap, then the answer is the total number of intervals minus the none-overlap count.
      */
     class Solution {
         public int eraseOverlapIntervals(int[][] intervals) {
@@ -59,7 +59,7 @@ public class LE_435_Non_Overlapping_Intervals {
                 }
             }
 
-            return intervals.length - count;
+            return intervals.length - count;//!!!
         }
     }
 }

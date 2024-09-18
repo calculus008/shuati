@@ -38,6 +38,37 @@ public class LE_729_My_Calendar_I {
          Medium
      */
 
+
+    /**
+     * TreeMap + Binary Search
+     * Time  : O(nlogn)
+     * Space : O(n)
+     *
+     * Classic usage of TreeMap - floorKey and ceilingKey
+     */
+    class MyCalendar2 {
+        TreeMap<Integer, Integer> map;
+
+        public MyCalendar2() {
+            map = new TreeMap<>();
+        }
+
+        public boolean book(int start, int end) {
+            Integer floor = map.floorKey(start);    // !!! Integer check overlap on start side
+            if (floor != null && map.get(floor) > start) {//floor != null
+                return false;
+            }
+
+            Integer ceiling = map.ceilingKey(start);// !!! Integer check overlap on end side
+            if (ceiling != null && ceiling < end) {//floor != null
+                return false;
+            }
+
+            map.put(start, end);
+            return true;
+        }
+    }
+
     /**
      * Similar Problems:
      *
@@ -81,41 +112,6 @@ public class LE_729_My_Calendar_I {
                 if (Math.max(start, start1) < Math.min(end, end1)) {
                     return false;
                 }
-            }
-
-            map.put(start, end);
-            return true;
-        }
-    }
-
-    /**
-     * TreeMap + Binary Search
-     * Time  : O(nlogn)
-     * Space : O(n)
-     *
-     * Classic usage of TreeMap - floorKey and ceilingKey
-     */
-    class MyCalendar2 {
-        TreeMap<Integer, Integer> map;
-
-        public MyCalendar2() {
-            map = new TreeMap<>();
-        }
-
-        public boolean book(int start, int end) {
-            Integer floor = map.floorKey(start);
-            /**
-             * !!!
-             * "dist.get(floor) > start" : 以floor为start的time slot, its end is bigger than start,
-             * there's overlap.
-             */
-            if (floor != null && map.get(floor) > start) {
-                return false;
-            }
-
-            Integer ceiling = map.ceilingKey(start);
-            if (ceiling != null && ceiling < end) {
-                return false;
             }
 
             map.put(start, end);

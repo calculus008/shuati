@@ -33,7 +33,7 @@ public class LE_249_Group_Shifted_Strings {
             实际上就是扫一遍strings,把同一类的string放在一起。关键是如何产生map中的key, 这里的方法：
             把shifted的string映射到以‘a'为开头的base状态。比如：
 
-            “def", "dcd" : 映射到key "abc"
+            “def", "bcd" : 映射到key "abc"
             "cd", "za" :  映射到key "ab"
 
             以这种映射，string中的char不必是相邻的。比如：

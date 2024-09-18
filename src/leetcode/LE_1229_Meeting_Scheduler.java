@@ -5,7 +5,7 @@ import java.util.*;
 public class LE_1229_Meeting_Scheduler {
     /**
      * Given the availability time slots arrays slots1 and slots2 of two people
-     * and a meeting duration duration, return the earliest time slot that works
+     * and a meeting duration, return the earliest time slot that works
      * for both of them and is of duration.
      *
      * If there is no common time slot that satisfies the requirements, return

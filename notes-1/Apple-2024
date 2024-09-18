@@ -32,12 +32,12 @@ LE_15_3Sum                        (Two Pointers)
 LE_20_Valid_Parentheses           (Stack)
 LE_21_Merge_Two_Sorted_Lists      (Linked List, recursive and iterative)
 LE_22_Generate_Parentheses        (Recursion, Backtracking)
-LE_23_Merge_k_Sorted_Lists        (Heap)                                     ***
+LE_23_Merge_k_Sorted_Lists        (Heap)                                     *****
 LE_26_Remove_Dup_From_Sorted_Array
 LE_28_Implementing_Strstr         ###
 LE_29_Divide_Two_Integers         ###
 LE_33_Search_In_Rotated_Sorted_Array (Binary Search)
-LE_34_Search_For_A_Range          (Binary Search)                           ***
+LE_34_Search_For_A_Range          (Binary Search)                           *****
 LE_35_Search_For_Insertion_Point  (Binary Search)
 LE_36_Valid_Sudoku                (Matrix, 2D Array)
 LE_39_Combination_Sum             (DFS, Backtracking)
@@ -108,7 +108,7 @@ LE_443_String_Compression         (String, Two Pointers)
 LE_448_Find_All_Numbers_Disappeared_In_An_Array                             (String)
 LE_452_Minimum_Number_Of_Arrows_To_Burst_Balloons                           (Interval)
 LE_509_Fibonacci_Number
-LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)
+LE_528_Random_Pick_With_Weight    (Prefix Sum + Binary Search)              *****
 LE_532_K_Diff_Pairs_In_An_Array   (HashMap, Sort + Two Pointers)
 LE_540_Single_Element_In_A_Sorted_Array       (Binary Search)
 LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***

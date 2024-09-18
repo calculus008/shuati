@@ -35,7 +35,7 @@ public class LE_215_Kth_Largest_Element_In_Array {
          https://www.jiuzhang.com/qa/4260/
 
          Use default PriorityQueue, which is a min-heap, the top one is the min value.
-         We keep the size of the heap as k (keep adding elemenet to heap, once heap size is bigger than k, remove top one
+         We keep the size of the heap as k (keep adding elements to heap, once heap size is bigger than k, remove top one
          after adding new element). Hence, in the end, in a heap that has size k, the top one is the min of the k elements,
          it is the kth largest value in nums.
          **/

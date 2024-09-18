@@ -83,23 +83,14 @@ public class LE_36_Valid_Sudoku {
         HashSet<Character> subsquare = new HashSet<>();
 
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                /**
-                 * Row
-                 */
+            for (int j = 0; j < 9; j++) {// row
                 if (board[i][j] != '.' && !row.add(board[i][j]))//!!! "add", Not "contains"
                     return false;
 
-                /**
-                 * Column
-                 */
-                if (board[j][i] != '.' && !column.add(board[j][i]))
+                if (board[j][i] != '.' && !column.add(board[j][i])) //column
                     return false;
 
-                /**
-                 * Sub-square
-                 */
-                int r = 3 * (i / 3) + j / 3;//!!! i, j
+                int r = 3 * (i / 3) + j / 3;//!!! i, j  // sub-squre
                 int c = 3 * (i % 3) + j % 3;//!!! i, j
                 if (board[r][c] != '.' && !subsquare.add(board[r][c]))
                     return false;

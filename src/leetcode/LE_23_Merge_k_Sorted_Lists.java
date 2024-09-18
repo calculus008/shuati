@@ -46,6 +46,32 @@ public class  LE_23_Merge_k_Sorted_Lists {
      * 答曰：因为两两merge时不会相互影响，可以并行着处理
      */
 
+    class Solution1 {
+        public ListNode mergeKLists(ListNode[] lists) {
+            if (lists == null || lists.length == 0) return null;
+            PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a, b) -> a.val - b.val); //!!! PriorityQueue<ListNode>
+
+            ListNode dummy = new ListNode(0);//!!! use a dummy node
+            ListNode cur = dummy;
+
+            for (ListNode list : lists) {
+                if (list != null) { //list != null
+                    pq.add(list);
+                }
+            }
+
+            while (!pq.isEmpty()) {//!!!
+                cur.next = pq.poll();
+                cur = cur.next;
+                if (cur.next != null) {
+                    pq.add(cur.next);
+                }
+            }
+
+            return dummy.next;
+        }
+    }
+
     /**
      * A distributed sort/merge is very similar to a sort/merge on a single host.
      * The basic idea is to split the files among the separate hosts. Have each
@@ -82,14 +108,65 @@ public class  LE_23_Merge_k_Sorted_Lists {
      *
      *  Total data n is divided into k files. Now k files is further divided into
      *  l hosts. For each host, number of files : k / l, pq size : k / l,
-     *  total data : n/k * k/l = n/l, total time : O(n/l * log(k/l)).
      *
-     *  For l hosts, total Time complexity : O(l * n/l * log(k/l)) = O(n * log(k / l)),
-     *  but they are processing in parallel.
+     * ----------------------------
+     * Time Complexity
+     * 1.Merge on each host:
+     * For each host, merging k/l sorted lists requires a priority queue of size at most k/l
+     * (since we're merging multiple lists). The time complexity of merging k/l lists using a priority queue is:
+     * O((n / l) * log(k / l))
      *
-     *  On master, pq size is l, time : O(n * log(l))
+     * Since there are l hosts, the total time for merging on all hosts is:
      *
-     *  Total : O(n * log(l) + n * log(k / l)) = O(n * (log(l) + log(k / l)))
+     * O(l * (n / l) * log(k / l)) = O(n * log(k/l))
+     *
+     * 2.Merging on the Master Host
+     * The master host uses a priority queue of size l to merge these lists.
+     * The total number of elements to merge on the master is n.
+     * The time complexity for merging these l sorted lists at the master host is:
+     *
+     * O(n * log(l))
+     *
+     * Total Time Complexity:
+     * The overall time complexity is the sum of the time taken on the hosts and on the master:
+     *
+     * O(n * log(k/l)) + O(n * log(l))
+     *
+     * This can be simplified to:
+     *
+     * O(n * log(k))
+     *
+     * Space Complexity:
+     * 1. Space on Each Host:
+     * Each host holds k/l lists and uses a priority queue of size k/l for the merging process.
+     * Therefore, the space complexity on each host is:
+     *
+     * 𝑂(𝑘 / 𝑙)
+     *
+     * In addition to the priority queue, each host needs to store the n/l elements of the lists it's responsible for.
+     * So, the total space on each host is:
+     *
+     * O(n / l + k / l) -> O(n / l)
+     *
+     * 2. Space on the Master Host:
+     * The master host uses a priority queue of size l to merge the results from the l hosts. Thus, the space complexity
+     * on the master host is:
+     *
+     * O(l)
+     *
+     * 3. Total Space Complexity:
+     * The overall space complexity is dominated by the space used on the hosts to store the data, which is:
+     *
+     * O(n / l)
+     *
+     * Since each host handles a portion of the total data, the space requirement for each individual host is reduced
+     * compared to having all data on a single machine.
+     *
+     * Summary:
+     * Time complexity:  O(nlogk)
+     *
+     * Space complexity: O( n / l) on each host, and O(l) on the master host.
+     * ----------------------------
      *
      * Now, it's highly inefficient to be requesting a single item at a time from
      * the individual hosts. The primary host could request, say, 1,000 items from
@@ -120,38 +197,7 @@ public class  LE_23_Merge_k_Sorted_Lists {
      *       And the priority queue (often implemented with heaps) costs O(k) space
      *       (it's far less than NN in most situations).
      * **/
-    class Solution1 {
-        public ListNode mergeKLists(ListNode[] lists) {
-            if (lists == null || lists.length == 0) return null;
-            PriorityQueue<ListNode> pq = new PriorityQueue<>(lists.length, (a, b) -> a.val - b.val); //!!!"<>"
 
-            /**
-             * !!!
-             */
-            ListNode dummy = new ListNode(0);
-            ListNode cur = dummy;
-
-            for (ListNode list : lists) {
-                /**
-                 * !!!
-                 * list != null
-                 */
-                if (list != null) {
-                    pq.add(list);
-                }
-            }
-
-            while (!pq.isEmpty()) {//!!!
-                cur.next = pq.poll();
-                cur = cur.next;
-                if (cur.next != null) {
-                    pq.add(cur.next);
-                }
-            }
-
-            return dummy.next;
-        }
-    }
 
     /**
      * Time : O(kn)

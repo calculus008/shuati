@@ -49,6 +49,7 @@ public class LE_771_Jewels_And_Stones {
     }
 
 
+    // first count stone, then use the map to go over jewels, sum up the values.
     public int numJewelsInStones_hashmap(String jewels, String stones) {
         if (jewels == null || stones == null) return 0;
 

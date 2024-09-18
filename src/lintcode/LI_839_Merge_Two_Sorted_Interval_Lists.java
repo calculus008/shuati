@@ -49,59 +49,47 @@ public class LI_839_Merge_Two_Sorted_Interval_Lists {
      * If pre has overlap with current interval, need to update its end value.
      */
     public class Solution3 {
-        /**
-         * @param list1: one of the given list
-         * @param list2: another list
-         * @return: the new sorted list of interval
-         */
         public List<Interval> mergeTwoInterval(List<Interval> list1, List<Interval> list2) {
             List<Interval> res = new ArrayList<>();
             if (list1 == null && list2 == null) return res;
             if (list1 == null || list1.size() == 0) return list2;
             if (list2 == null || list2.size() == 0) return list1;
 
-            int l1 = 0;
-            int l2 = 0;
+            int p1 = 0;
+            int p2 = 0;
             int m = list1.size();
             int n = list2.size();
 
-            Interval pre = null;
+            Interval last = null;
             if (list1.get(0).start < list2.get(0).start) {
-                pre = list1.get(0);
-                l1++;
+                last = list1.get(0);
+                p1++;
             } else {
-                pre = list2.get(0);
-                l2++;
+                last = list2.get(0);
+                p2++;
             }
 
-            while (l1 < m || l2 < n) {
-                /**
-                 * "l2 == n": when list2 already runs out.
-                 */
-                if (l2 == n || (l1 < m && list1.get(l1).start < list2.get(l2).start)) {
-                    if (pre.end < list1.get(l1).start) {
-                        res.add(pre);
-                        pre = list1.get(l1);
+            while (p1 < m || p2 < n) {
+                if (p2 == n || (p1 < m && list1.get(p1).start < list2.get(p2).start)) {//"p2 == n": when list2 runs out
+                    if (last.end < list1.get(p1).start) {
+                        res.add(last);
+                        last = list1.get(p1);
                     } else {
-                        pre.end = Math.max(pre.end, list1.get(l1).end);
+                        last.end = Math.max(last.end, list1.get(p1).end);
                     }
-                    l1++;
+                    p1++;
                 } else {
-                    if (pre.end < list2.get(l2).start) {
-                        res.add(pre);
-                        pre = list2.get(l2);
+                    if (last.end < list2.get(p2).start) {
+                        res.add(last);
+                        last = list2.get(p2);
                     } else {
-                        pre.end = Math.max(pre.end, list2.get(l2).end);
+                        last.end = Math.max(last.end, list2.get(p2).end);
                     }
-                    l2++;
+                    p2++;
                 }
             }
 
-            /**
-             * !!!
-             * Don't forget
-             */
-            res.add(pre);
+            res.add(last);//!!!
 
             return res;
         }

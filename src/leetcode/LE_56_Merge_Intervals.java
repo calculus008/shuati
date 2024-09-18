@@ -23,7 +23,7 @@ public class LE_56_Merge_Intervals {
             /**
              * Must use Integer.compare() to prevent integer overflow
              */
-            Arrays.sort(intervals, (i1, i2) ->Integer.compare(i1[0], i2[0]));
+            Arrays.sort(intervals, (i1, i2) ->Integer.compare(i1[0], i2[0]));//!!!
 
             List<int[]> res = new ArrayList<>();
             int[] last = null;

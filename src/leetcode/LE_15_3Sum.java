@@ -47,10 +47,10 @@ public class LE_15_3Sum {
                     if (nums[l] + nums[r] == - nums[i]) {
                         res.add(Arrays.asList(nums[i], nums[l], nums[r]));
 
-                        while (l < r && nums[l] == nums[l + 1]) {
+                        while (l < r && nums[l] == nums[l + 1]) {//find next position on left
                             l++;
                         }
-                        while(l < r && nums[r] == nums[r - 1]) {
+                        while(l < r && nums[r] == nums[r - 1]) {//find next position on right
                             r--;
                         }
                         l++;
