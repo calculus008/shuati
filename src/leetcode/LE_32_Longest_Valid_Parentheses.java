@@ -14,6 +14,52 @@ public class LE_32_Longest_Valid_Parentheses {
 
          Another example is ")()())", where the longest valid parentheses substring is "()()", which has length = 4.
      */
+    class Solution_Practice {
+        // Time : O(n), Space : O(1)
+        public int longestValidParentheses(String s) {
+            if (null == s || s.length() == 0) {
+                return 0;
+            }
+
+            char[] chars = s.toCharArray();
+
+            int l = 0;
+            int r = 0;
+            int res = 0;
+
+            for (int i = 0; i < chars.length; i++) {
+                if (chars[i] == '(') {
+                    l++;
+                } else {
+                    r++;
+                }
+
+                if (r == l) {
+                    res = Math.max(res, 2 * l);
+                } else if (r > l) {
+                    l = r = 0;
+                }
+            }
+
+            l = r = 0;
+
+            for (int i = chars.length - 1; i >= 0; i--) {
+                if (chars[i] == '(') {
+                    l++;
+                } else {
+                    r++;
+                }
+
+                if (r == l) {
+                    res = Math.max(res, 2 * l);
+                } else if (l > r) {
+                    l = r = 0;
+                }
+            }
+
+            return res;
+        }
+    }
 
     /**
      * Stack
@@ -134,49 +180,5 @@ public class LE_32_Longest_Valid_Parentheses {
         }
     }
 
-    class Solution_Practice {
-        public int longestValidParentheses(String s) {
-            if (null == s || s.length() == 0) {
-                return 0;
-            }
 
-            char[] chars = s.toCharArray();
-
-            int l = 0;
-            int r = 0;
-            int res = 0;
-
-            for (int i = 0; i < chars.length; i++) {
-                if (chars[i] == '(') {
-                    l++;
-                } else {
-                    r++;
-                }
-
-                if (r == l) {
-                    res = Math.max(res, 2 * l);
-                } else if (r > l) {
-                    l = r = 0;
-                }
-            }
-
-            l = r = 0;
-
-            for (int i = chars.length - 1; i >= 0; i--) {
-                if (chars[i] == '(') {
-                    l++;
-                } else {
-                    r++;
-                }
-
-                if (r == l) {
-                    res = Math.max(res, 2 * l);
-                } else if (l > r) {
-                    l = r = 0;
-                }
-            }
-
-            return res;
-        }
-    }
 }

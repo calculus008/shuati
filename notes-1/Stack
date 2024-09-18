@@ -1,4 +1,11 @@
 ## Mono Stack
+
+mono increase stack can find 左边第一个比当前出栈元素小（等于）的元素。
+mono increase => while (!stack.isEmpty() && stack.peek() > cur) stack.pop(), then stack.push(cur), 就是说只留下比要如栈的元素小的。
+
+mono decrease stack can find 左边第一个比当前出栈元素大（等于）的元素。
+mono decrease => while (!stack.isEmpty() && stack.peek() < cur) stack.pop(), then stack.push(cur)，就是说只留下比要如栈的元素大的。
+
 https://leetcode.com/problems/sum-of-subarray-minimums/discuss/178876/stack-solution-with-very-detailed-explanation-step-by-step
 LE_496_Next_Greater_Element_I
 LE_503_Next_Greater_Element_II
@@ -19,6 +26,7 @@ LE_84_Largest_Rectangle_In_Histogram          *****
 LE_85_Max_Rectangle                           Can use histogram stack solution in 84
 
 ## None mono stack
+LE_32_Longest_Valid_Parentheses
 LE_856_Score_Of_Parentheses                   *****
 LE_42_Trapping_Rain_Water
 LE_921_Minimum_Add_To_Make_Parentheses_Valid  *****

@@ -49,6 +49,10 @@ public class LE_269_Alien_Dictionary {
          You may assume that if a is a prefix of b, then a must appear before b in the given dictionary.
          If the order is invalid, return an empty string.
          There may be multiple valid order of letters, return any one of them is fine.
+
+         Hard
+
+         https://leetcode.com/problems/alien-dictionary
      */
 
     /**

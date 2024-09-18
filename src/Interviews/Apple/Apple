@@ -31,6 +31,8 @@ LE_33_Search_In_Rotated_Sorted_Array
 扩展问题是，数组特别大怎么办？大到内存放不下，一台机器放不下怎么办？
 我给的方法是存成固定size的2G大小文件，记录每个文件的起始数值，就能判断到底要把哪个文件load进内存，然后用二分法找了
 
+https://docs.google.com/document/d/1HaMmtTymXSbnOavnovAGseCMcycEmX291sIHOFH4s_c/edit#heading=h.txm276npyzwp
+
 LE_49_Group_Anagrams
 LE_146_LRU_Cache
 LE_284_Peeking_Iterator
@@ -64,9 +66,8 @@ LE_339_Nested_List_Weight_Sum
 给你一个段落，放进一个固定宽度的doc，问需要多少行，利口原题。秒了之后问，如果这个段落非常大，放不进memory怎么办。
 需要知道每个字符占多少内存，给定一台机器的内存，问需要多少台机器，如果需要多台，怎么load balance
 LE_68_Text_Justification
-418. Sentence Screen Fitting
+LE_418_Sentence_Screen_Fitting
 Text_Wrap_Number_Of_Lines
-
 LE_151_Reverse_Words_In_A_String
 
 #
@@ -146,6 +147,7 @@ subarray这里注意是连续的。对于每个长度为k的全零array，最终
 sliding window 走一遍就行。
 
 Count_Zero_Subarray
+LE_2348_Number_Of_Zero_Filled_Subarrays
 
 follow up:
 2D array ？

@@ -46,19 +46,11 @@ public class LE_986_Interval_List_Intersections {
                 int startMax = Math.max(A[p1][0], B[p2][0]);
                 int endMin = Math.min(A[p1][1], B[p2][1]);
 
-                /**
-                 * !!!
-                 * startMax <= endMin : there's intersection
-                 */
-                if (startMax <= endMin) {
+                if (startMax <= endMin) {// startMax <= endMin : there's intersection
                     res.add(new int[]{startMax, endMin});
                 }
 
-                /**
-                 * !!!
-                 * move the pointer with the less end time
-                 */
-                if (A[p1][1] == endMin) {
+                if (A[p1][1] == endMin) {// move the pointer with the less end time
                     p1++;
                 } else {
                     p2++;

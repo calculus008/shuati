@@ -25,6 +25,33 @@ public class LE_49_Group_Anagrams {
          输出[cat, taco, tac, tcoa, tca] //cat和tac和tca为anagram，taco和tcoa为anagram
      */
 
+    class Solution {
+        public List<List<String>> groupAnagrams(String[] strs) {
+            Map<String, List<String>> map = new HashMap<>();
+
+            StringBuilder sb = new StringBuilder();
+            for (String str : strs) {
+                int[] count = new int[26];
+                for (char c : str.toCharArray()) {
+                    count[c - 'a']++;
+                }
+
+                sb.setLength(0);
+                for (int a : count) {
+                    sb.append("#").append(a);
+                }
+
+                String key = sb.toString();
+                if (!map.containsKey(key)) {
+                    map.put(key, new ArrayList<>());
+                }
+                map.get(key).add(str);
+            }
+
+            return new ArrayList(map.values());
+        }
+    }
+
     /**
      * example:
      * ["abc", "cba"]

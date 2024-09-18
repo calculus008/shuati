@@ -16,6 +16,8 @@ public class LE_33_Search_In_Rotated_Sorted_Array {
         Medium
 
         https://leetcode.com/problems/search-in-rotated-sorted-array
+
+        For duplicates case, see Search_In_Rotated_Sorted_Array_With_Duplicates
      */
 
     class Solution_best {
