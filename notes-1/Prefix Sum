@@ -16,7 +16,8 @@ LE_560_Subarray_Sum_Equals_K               Sum of subarray equals k
 LE_974_Subarray_Sums_Divisible_By_K        Condition : Subarrays that have a sum divisible by k.
                                            Negative values ALLOWED in Input
 LE_930_Binary_Subarrays_With_Sum           Condition : (Binary)Subarrays with given Sum
-                                           Negative values are not allowed in input. Because of this reason, we can also solve this problem using Sliding window too.
+                                           Negative values are not allowed in input.
+                                           Because of this reason, we can also solve this problem using Sliding window too.
 
 
 ## 2.Maximum length Subarray with given condition
@@ -28,7 +29,7 @@ Data Structures needed :
 LE_525_Contiguous_Array                   Binary Subarray with an equal number of 0 and 1
 LE_325_Maximum_Size_Subarray_Sum_Equals_k subarray that sums to k
                                           Negative values ALLOWED in Input
-1658. Minimum Operations to Reduce X to Zero  Problem Reduced to Above problem of Maximum size subarray sum
+LE_1658_Minimum_Operations_To_Reduce_X_To_Zero  Problem Reduced to Above problem of Maximum size subarray sum
 
 ## 3. Check if a subarray exists with given condition
 LE_523_Continuous_Subarray_Sum            Given an integer array nums and an integer k, return true if nums has a good
@@ -39,6 +40,6 @@ LE_523_Continuous_Subarray_Sum            Given an integer array nums and an int
 
                                           Why sliding window not applicable here despite positive input?
                                           We need to check if the sum of the subarray is a multiple of k, which adds
-                                          complexity to he problem. We can't determine this condition by simply adjusting t
-                                          he window size. if instead of modulo the sum was asked to be compared then we can
+                                          complexity to the problem. We can't determine this condition by simply adjusting
+                                          the window size. if instead of modulo the sum was asked to be compared then we can
                                           form a logic to decrement or increment window size

@@ -37,7 +37,7 @@ public class LE_930_Binary_Subarrays_With_Sum {
             for (int i = 0, j = 0; i < nums.length; i++) {
                 sum += nums[i];
 
-                if(nums[i] == 1) {//!!!
+                if(nums[i] == 1) {//!!!  ??
                     count = 0;
                 }
 
