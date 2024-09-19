@@ -23,6 +23,63 @@ public class LE_644_Maximum_Average_Subarray_II {
 
          Hard
      */
+    /**
+     * Binary Search
+     * Complete code without comments
+     */
+    class Solution {
+        public double findMaxAverage(int[] nums, int k) {
+            if(nums == null || k > nums.length) {//!!! "k > nums.length"
+                return 0;
+            }
+
+            double start = Double.MAX_VALUE;//!!! Double
+            double end = Double.MIN_VALUE;//!!!Double
+
+            for(int i = 0; i < nums.length; i++) {
+                start = Math.min(start, (double)nums[i]);
+                end = Math.max(end, (double)nums[i]);
+            }
+
+            double eps = 1e-6;
+            double avg = 0;
+
+            while(start + eps < end) {
+                avg = start + (end - start) / 2;
+                if(checkAvg(nums, k, avg)) {
+                    start = avg;
+                } else {
+                    end = avg;
+                }
+            }
+
+            return start;
+        }
+
+        private boolean checkAvg(int[] nums, int k, double avg) {
+            double sum = 0;
+            double prevSum = 0;
+            double prevMin = 0;
+
+            for(int i = 0; i < nums.length; i++) {
+                sum += (double)nums[i] - avg;
+
+                if(i >= k - 1 && sum >= 0) {//!!! "i >= k - 1"
+                    return true;
+                }
+
+                if(i >= k) {//!!! "i >= k"
+                    prevSum += (double)nums[i - k] - avg;
+                    prevMin = Math.min(prevMin, prevSum);
+                    if(sum - prevMin >= 0) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+    }
 
     /**
      * Time : O(nlogm), m = max - min
@@ -214,62 +271,5 @@ public class LE_644_Maximum_Average_Subarray_II {
             }
         }
         return false;
-    }
-
-    /**
-     * Complete code without comments
-     */
-    class Solution {
-        public double findMaxAverage(int[] nums, int k) {
-            if(nums == null || k > nums.length) {//!!! "k > nums.length"
-                return 0;
-            }
-
-            double start = Double.MAX_VALUE;//!!! Double
-            double end = Double.MIN_VALUE;//!!!Double
-
-            for(int i = 0; i < nums.length; i++) {
-                start = Math.min(start, (double)nums[i]);
-                end = Math.max(end, (double)nums[i]);
-            }
-
-            double eps = 1e-6;
-            double avg = 0;
-
-            while(start + eps < end) {
-                avg = start + (end - start) / 2;
-                if(checkAvg(nums, k, avg)) {
-                    start = avg;
-                } else {
-                    end = avg;
-                }
-            }
-
-            return start;
-        }
-
-        private boolean checkAvg(int[] nums, int k, double avg) {
-            double sum = 0;
-            double prevSum = 0;
-            double prevMin = 0;
-
-            for(int i = 0; i < nums.length; i++) {
-                sum += (double)nums[i] - avg;
-
-                if(i >= k - 1 && sum >= 0) {//!!! "i >= k - 1"
-                    return true;
-                }
-
-                if(i >= k) {//!!! "i >= k"
-                    prevSum += (double)nums[i - k] - avg;
-                    prevMin = Math.min(prevMin, prevSum);
-                    if(sum - prevMin >= 0) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
     }
 }

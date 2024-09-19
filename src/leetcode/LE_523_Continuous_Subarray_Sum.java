@@ -25,7 +25,37 @@ public class LE_523_Continuous_Subarray_Sum {
      * You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
      *
      * Medium
+     *
+     * https://leetcode.com/problems/continuous-subarray-sum
      */
+    class Solution_clean {
+        public boolean checkSubarraySum(int[] nums, int k) {
+            if (nums == null || nums.length == 0) return false;
+
+            int n = nums.length;
+            int sums = 0;
+
+            Map<Integer, Integer> map = new HashMap<>();
+            map.put(0, -1);
+
+            for (int i = 0; i < n; i++) {
+                sums += nums[i];
+                if (k != 0) {
+                    sums %= k;
+                }
+
+                if (map.containsKey(sums)) {
+                    if (i - map.get(sums) > 1) {
+                        return true;
+                    }
+                } else {
+                    map.put(sums, i);
+                }
+            }
+
+            return false;
+        }
+    }
 
     /**
      * We iterate through the input array exactly once, keeping track of the running sum mod k

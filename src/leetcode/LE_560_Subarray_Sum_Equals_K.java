@@ -19,6 +19,8 @@ public class LE_560_Subarray_Sum_Equals_K {
          The length of the array is in range [1, 20,000].
          The range of numbers in the array is [-1000, 1000] and the range of the integer k is [-1e7, 1e7].
 
+         !!!Negative values ALLOWED in Input
+
          Medium
 
          https://leetcode.com/problems/subarray-sum-equals-k
@@ -32,7 +34,7 @@ public class LE_560_Subarray_Sum_Equals_K {
         int res = 0;
 
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
+        map.put(0, 1);//!!!
 
         for (int num : nums) {
             sum += num;

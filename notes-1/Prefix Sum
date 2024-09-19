@@ -1,6 +1,44 @@
 # Prefix Sum
 LI_139_Subarray_Sum_Closest
 LE_644_Maximum_Average_Subarray_II
-LE_560_Subarray_Sum_Equals_K
-LE_523_Continuous_Subarray_Sum
-LE_974_Subarray_Sums_Divisible_By_K
+
+https://leetcode.com/problems/continuous-subarray-sum/solutions/5276981/prefix-sum-hashmap-patterns-7-problems/
+
+
+## 1.Count Subarrays with some given condition
+Data Structures needed :
+* Integer Variable for cumulative sum
+* Unordered Map
+* Map Initialisation : mp[0]=1
+
+LE_560_Subarray_Sum_Equals_K               Sum of subarray equals k
+                                           Negative values ALLOWED in Input
+LE_974_Subarray_Sums_Divisible_By_K        Condition : Subarrays that have a sum divisible by k.
+                                           Negative values ALLOWED in Input
+LE_930_Binary_Subarrays_With_Sum           Condition : (Binary)Subarrays with given Sum
+                                           Negative values are not allowed in input. Because of this reason, we can also solve this problem using Sliding window too.
+
+
+## 2.Maximum length Subarray with given condition
+Data Structures needed :
+* Integer Variable for cumulative sum
+* Unordered Map
+* Map Initialisation : mp[0]=-1 Here we are dealing with index that's why we initialize it to -1
+
+LE_525_Contiguous_Array                   Binary Subarray with an equal number of 0 and 1
+LE_325_Maximum_Size_Subarray_Sum_Equals_k subarray that sums to k
+                                          Negative values ALLOWED in Input
+1658. Minimum Operations to Reduce X to Zero  Problem Reduced to Above problem of Maximum size subarray sum
+
+## 3. Check if a subarray exists with given condition
+LE_523_Continuous_Subarray_Sum            Given an integer array nums and an integer k, return true if nums has a good
+                                          subarray or false otherwise.
+
+                                          Conditions: Length of subarray is at least two
+                                          The sum of the elements of the subarray is a multiple of k
+
+                                          Why sliding window not applicable here despite positive input?
+                                          We need to check if the sum of the subarray is a multiple of k, which adds
+                                          complexity to he problem. We can't determine this condition by simply adjusting t
+                                          he window size. if instead of modulo the sum was asked to be compared then we can
+                                          form a logic to decrement or increment window size

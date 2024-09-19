@@ -27,6 +27,57 @@ public class LE_930_Binary_Subarrays_With_Sum {
      * Medium
      */
 
+    class Solution_sliding_window {
+        // Time: O(n), Space: O(1)
+        public int numSubarraysWithSum(int[] nums, int goal) {
+            int sum = 0;
+            int res = 0;
+            int count = 0;
+
+            for (int i = 0, j = 0; i < nums.length; i++) {
+                sum += nums[i];
+
+                if(nums[i] == 1) {//!!!
+                    count = 0;
+                }
+
+                if(sum > goal) {//must shrink the window to get smaller sum
+                    sum -= nums[j];
+                    j++;
+                }
+
+                while(j <= i && sum == goal) {// count number of subarrays that sums up to goal
+                    sum -= nums[j];
+                    j++;
+                    count++;
+                }
+
+                res += count;
+            }
+            return res;
+        }
+    }
+
+    // Time and Space O(n)
+    class Solution_prefixsum_hashmap_clean {
+        public int numSubarraysWithSum(int[] nums, int goal) {
+            Map<Integer, Integer> map = new HashMap<>();
+            map.put(0, 1);
+            int sum = 0;
+            int res = 0;
+
+            for (int num : nums) {
+                sum += num;
+                if (map.containsKey(sum - goal)) {
+                    res += map.get(sum - goal);
+                }
+                map.put(sum, map.getOrDefault(sum, 0) + 1);
+            }
+            return res;
+        }
+    }
+
+
     /**
      * Optimal Solution
      *

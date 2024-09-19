@@ -24,6 +24,58 @@ public class LI_139_Subarray_Sum_Closest {
      */
 
     /**
+     * Solution 2
+     * 利用TreeMap 进行查询，如果之前出现过，那么必定为0。否则，找最近的一个数，
+     * 大的或小的，然后求他们他们之间的差值，即为最小的subarray的sum值
+     *
+     * TreeMap provides guaranteed log(n) time cost for the containsKey,
+     * get, put and remove operations
+     *
+     * Time : O(nlogn)
+     */
+    public int[] subarraySumClosest(int[] nums) {
+        int[] res = new int[2];
+        if (nums.length == 0) return res;
+
+        int closest = Integer.MAX_VALUE, sum = 0;
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+
+        //!!!
+        map.put(0, -1);
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (map.containsKey(sum)) {
+                res[0] = map.get(sum) + 1;
+                res[1] = i;
+                return res;
+            }
+
+            /**
+             * map.higtherKey and map.lowerKey
+             *
+             * For current prefix sum - "sum", we look back, get the
+             * closet higher and lower value, 打擂台， find answer.
+             */
+            Integer greater = map.higherKey(sum);
+            if (greater != null && Math.abs(sum - greater) < closest) {
+                closest = Math.abs(sum - greater);
+                res[0] = map.get(greater) + 1;
+                res[1] = i;
+            }
+            Integer lower = map.lowerKey(sum);
+            if (lower != null && Math.abs(sum - lower) < closest) {
+                closest = Math.abs(sum - lower);
+                res[0] = map.get(lower) + 1;
+                res[1] = i;
+            }
+            map.put(sum, i);
+        }
+        return res;
+    }
+
+
+    /**
      * Solution 1
      * 不使用 pair，不使用 TreeMap，只使用 HashMap + Array + Sort 的方法.
      * 用 HashMap 记录之前的位置，用 Array 来打擂台找最小差距
@@ -88,56 +140,6 @@ public class LI_139_Subarray_Sum_Closest {
         return results;
     }
 
-    /**
-     * Solution 2
-     * 利用TreeMap 进行查询，如果之前出现过，那么必定为0。否则，找最近的一个数，
-     * 大的或小的，然后求他们他们之间的差值，即为最小的subarray的sum值
-     *
-     * TreeMap provides guaranteed log(n) time cost for the containsKey,
-     * get, put and remove operations
-     *
-     * Time : O(nlogn)
-     */
-    public int[] subarraySumClosest(int[] nums) {
-        int[] res = new int[2];
-        if (nums.length == 0) return res;
-
-        int closest = Integer.MAX_VALUE, sum = 0;
-        TreeMap<Integer, Integer> map = new TreeMap<>();
-
-        //!!!
-        map.put(0, -1);
-
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (map.containsKey(sum)) {
-                res[0] = map.get(sum) + 1;
-                res[1] = i;
-                return res;
-            }
-
-            /**
-             * map.higtherKey and map.lowerKey
-             *
-             * For current prefix sum - "sum", we look back, get the
-             * closet higher and lower value, 打擂台， find answer.
-             */
-            Integer greater = map.higherKey(sum);
-            if (greater != null && Math.abs(sum - greater) < closest) {
-                closest = Math.abs(sum - greater);
-                res[0] = map.get(greater) + 1;
-                res[1] = i;
-            }
-            Integer lower = map.lowerKey(sum);
-            if (lower != null && Math.abs(sum - lower) < closest) {
-                closest = Math.abs(sum - lower);
-                res[0] = map.get(lower) + 1;
-                res[1] = i;
-            }
-            map.put(sum, i);
-        }
-        return res;
-    }
 
     /**
         问：为什么需要一个 (0,0) 的初始 Pair?

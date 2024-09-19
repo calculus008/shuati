@@ -2,15 +2,16 @@
 Collect all Apple problems (last 6 months)
 Problem Categories deep dive:
   Search (DFS, BFS)       done
-  Sliding Window
+  Sliding Window          done
+  Stack                   done
+  Intervals               done
+
   Big Data
   Design
-  Intervals
   Prefix Sum
-  Stack
   Trie
   TreeMap
-Java Multi-threading
+Java Multi-thread
 
 Level of proficiency:
 ***** can write bug free code and analyse complexity
@@ -130,7 +131,7 @@ LE_1657_Determine_If_Two_Strings_Are_Close                                 (Hash
 LE_1768_Merge_Strings_Alternately                                          (String)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
 LE_2397_Maximum_Rows_Covered_By_Columns                                    (Recursion, Backtracking)         *****  @@@
-LE_2625_Flatten_Deeply_Nested_Array (BFS)                                                                           @@@
+leetcode.LE_2625_Flatten_Deeply_Nested_Array (BFS)                                                                           @@@
 LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency                (Sliding Window)
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I                       (Array)
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II

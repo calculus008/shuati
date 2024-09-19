@@ -1,4 +1,7 @@
 # Sliding Window
+Some sliding window problem can also be solved by prefixum + hashmap. Sliding window is only applicable when we know
+for sure if the prefixsum is an increasing or decreasing function(i.e. Monotonous in nature).
+
 
 ## Min or Max length of sliding window
 LE_03_Longest_Substring_Without_Repeating_Characters
@@ -33,6 +36,10 @@ LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency
 LE_904_Fruit_Into_Baskets
 1234
 1358
+
+## New problems
+LE_1838_Frequency_Of_The_Most_Frequent_Element
+
 
 
 ## Apple *****

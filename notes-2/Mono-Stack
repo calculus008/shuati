@@ -39,7 +39,7 @@ LE_907_Sum_Of_Subarray_Minimums
         }
 
         /**
-         * Mono Decrease Stack is used for:
+         * Mono Increase Stack is used for:
          * Find the Next Less Element (NLE) of each element in a list (or array) with O(n) time:
          * What is the next less element of an element?
          * For example:
@@ -65,7 +65,7 @@ LE_907_Sum_Of_Subarray_Minimums
             for (int i = 0; i < A.length; i++) {
                 while (!stack.isEmpty() && A[stack.peek()] > A[i]) {
                     int top = stack.pop();
-                    res[top] = A[i];
+                    res[top] = A[i]; //!!!
                 }
                 stack.push(i);
             }

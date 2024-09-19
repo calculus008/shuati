@@ -67,9 +67,7 @@ public class LE_974_Subarray_Sums_Divisible_By_K {
     class Solution {
         public int subarraysDivByK(int[] A, int K) {
             Map<Integer, Integer> map = new HashMap<>();
-            /**
-             * !!!
-             */
+
             map.put(0, 1);
 
             int sum = 0;
@@ -78,10 +76,7 @@ public class LE_974_Subarray_Sums_Divisible_By_K {
             for (int a : A) {
                 sum = (sum + a) % K;
 
-                /**
-                 * !!!
-                 */
-                if (sum < 0) {
+                if (sum < 0) {// !!!
                     sum += K;
                 }
 

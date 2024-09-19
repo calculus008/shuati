@@ -26,6 +26,30 @@ public class LE_525_Contiguous_Array {
          Medium
      */
 
+    class Solution_prefixsum_hashmap {
+        public int findMaxLength(int[] nums) {
+            if (nums == null || nums.length == 0) return 0;
+
+            int n = nums.length;
+            Map<Integer, Integer> map = new HashMap<>();
+            map.put(0, -1);
+
+            int res = 0;
+            int sum = 0;
+            for (int i = 0; i < n; i++) {
+                sum += (nums[i] == 0 ? -1 : 1); //!!! 1 or -1
+
+                if(map.containsKey(sum)) {
+                    res = Math.max(i - map.get(sum), res);
+                } else {
+                    map.put(sum, i);
+                }
+            }
+
+            return res;
+        }
+    }
+
     /**
      * http://zxi.mytechroad.com/blog/hashtable/leetcode-525-contiguous-array/
      *

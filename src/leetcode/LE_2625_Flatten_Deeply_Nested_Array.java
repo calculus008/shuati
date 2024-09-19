@@ -1,3 +1,5 @@
+package leetcode;
+
 import java.util.*;
 
 public class LE_2625_Flatten_Deeply_Nested_Array {
