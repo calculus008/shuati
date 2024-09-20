@@ -5,13 +5,18 @@ Problem Categories deep dive:
   Sliding Window          done
   Stack                   done
   Intervals               done
+  Prefix Sum              done
+  Trie                    done
 
+
+  Tree and Graph
   Big Data
   Design
-  Prefix Sum
-  Trie
   TreeMap
+
 Java Multi-thread
+
+
 
 Level of proficiency:
 ***** can write bug free code and analyse complexity
