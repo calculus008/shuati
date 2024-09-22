@@ -46,8 +46,8 @@ public class LE_226_Invert_Binary_Tree {
         TreeNode right = invertTreeDFS(root.right);
         TreeNode left = invertTreeDFS(root.left);
 
-        root.right = left;
-        root.left = right;
+        root.right = left; //right points to left
+        root.left = right; //left points to right
 
         return root;
     }

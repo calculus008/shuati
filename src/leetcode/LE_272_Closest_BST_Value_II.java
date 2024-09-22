@@ -26,6 +26,65 @@ public class LE_272_Closest_BST_Value_II {
          Hard
      */
 
+    class Solution4_Practice {
+        public List<Integer> closestKValues(TreeNode root, double target, int k) {
+            List<Integer> res = new ArrayList<>();
+            if (root == null || k == 0) {
+                return res;
+            }
+
+            Stack<TreeNode> pre = new Stack<>();
+            Stack<TreeNode> suc = new Stack<>();
+
+            while (root != null) {
+                if (root.val < target) {
+                    pre.push(root);
+                    root = root.right;
+                } else {
+                    suc.push(root);
+                    root = root.left;
+                }
+            }
+
+            while (res.size() < k) {
+                double d1 = pre.isEmpty() ? Double.MAX_VALUE : Math.abs(pre.peek().val - target);//!!!peek()
+                double d2 = suc.isEmpty() ? Double.MAX_VALUE : Math.abs(suc.peek().val - target);//!!!peek()
+
+                int next = 0;
+                if (d1 > d2) {
+                    next = suc.peek().val;
+                    goSuc(suc);
+                    res.add(next);
+                } else {
+                    next = pre.peek().val;
+                    goPre(pre);
+                    res.add(0, next);
+                }
+
+                // res.add(next);
+            }
+
+            return res;
+        }
+
+        private void goSuc(Stack<TreeNode> stack) {
+            TreeNode node = stack.pop().right;//!!!pop().right
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        private void goPre(Stack<TreeNode> stack) {//!!!pop().left
+            TreeNode node = stack.pop().left;
+            while (node != null) {
+                stack.push(node);
+                node = node.right;
+            }
+        }
+    }
+
+
     /**
      * BST + 2 pointers
      *
@@ -282,7 +341,7 @@ public class LE_272_Closest_BST_Value_II {
      * 最优算法，时间复杂度 O(logn + k)，空间复杂度 O(logn)  (assume the BST is balanced).
      *
      * In essence, it is the same idea of solution 1, first find the element that is the closet to
-     * given target , then use two pointers to find k closet elements. In stead of first traversing
+     * given target , then use two pointers to find k closet elements. Instead of first traversing
      * BST inorder to output all elements into a list(which takes o(n)), we do it using BST properties
      * and don't need to traverse the whole BST.
      *
@@ -381,65 +440,6 @@ public class LE_272_Closest_BST_Value_II {
             while (l != null) {
                 st.push(l);
                 l = l.right;
-            }
-        }
-    }
-
-
-    class Solution_Practice {
-        public List<Integer> closestKValues(TreeNode root, double target, int k) {
-            List<Integer> res = new ArrayList<>();
-            if (root == null || k == 0) {
-                return res;
-            }
-
-            Stack<TreeNode> pre = new Stack<>();
-            Stack<TreeNode> suc = new Stack<>();
-
-            while (root != null) {
-                if (root.val < target) {
-                    pre.push(root);
-                    root = root.right;
-                } else {
-                    suc.push(root);
-                    root = root.left;
-                }
-            }
-
-            while (res.size() < k) {
-                double d1 = pre.isEmpty() ? Double.MAX_VALUE : Math.abs(pre.peek().val - target);//!!!peek()
-                double d2 = suc.isEmpty() ? Double.MAX_VALUE : Math.abs(suc.peek().val - target);//!!!peek()
-
-                int next = 0;
-                if (d1 > d2) {
-                    next = suc.peek().val;
-                    goSuc(suc);
-                    res.add(next);
-                } else {
-                    next = pre.peek().val;
-                    goPre(pre);
-                    res.add(0, next);
-                }
-
-                // res.add(next);
-            }
-
-            return res;
-        }
-
-        private void goSuc(Stack<TreeNode> stack) {
-            TreeNode node = stack.pop().right;//!!!pop().right
-            while (node != null) {
-                stack.push(node);
-                node = node.left;
-            }
-        }
-
-        private void goPre(Stack<TreeNode> stack) {//!!!pop().left
-            TreeNode node = stack.pop().left;
-            while (node != null) {
-                stack.push(node);
-                node = node.right;
             }
         }
     }

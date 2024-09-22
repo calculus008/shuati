@@ -18,7 +18,7 @@ LE_677_Map_Sum_Pairs
 LE_409_Longest_Palindrome
 LE_771_Jewels_And_Stones
 
-#Design with HashMap
+## Design with HashMap
 LE_146_LRU_Cache
 LE_460_LFU_Cache
 LE_380_Insert_Delete_GetRandom_O1

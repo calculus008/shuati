@@ -93,7 +93,7 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
             List<List<Integer>> res = new ArrayList<>();
             if (root == null) return res;
 
-            Map<Integer, List<Integer>> map = new HashMap<>();
+            Map<Integer, List<Integer>> map = new HashMap<>(); //keep the node values grouped by the column index
 
             Queue<Integer> colQ = new LinkedList<>();
             Queue<TreeNode> nodeQ = new LinkedList<>();
@@ -133,6 +133,45 @@ public class LE_314_Binary_Tree_Vertical_Order_Traversal {
             return res;
         }
     }
+
+    class Solution_DFS {// adapt from solution for LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree, preorder
+        public List<List<Integer>> verticalOrder(TreeNode root) {
+            TreeMap<Integer, TreeMap<Integer, List<Integer>>> map = new TreeMap<>();
+
+            dfs(root, 0, 0, map);
+
+            List<List<Integer>> list = new ArrayList<>();
+            for (TreeMap<Integer, List<Integer>> ys : map.values()) {
+                list.add(new ArrayList<>());
+                for (List<Integer> nodes : ys.values()) {
+                    for (int i : nodes) {
+                        list.get(list.size() - 1).add(i);
+                    }
+                }
+            }
+            return list;
+        }
+
+        private void dfs(TreeNode root, int x, int y, TreeMap<Integer, TreeMap<Integer, List<Integer>>> map){
+            if (root == null) {
+                return;
+            }
+
+            if (!map.containsKey(x)) {
+                map.put(x, new TreeMap<>());
+            }
+            if (!map.get(x).containsKey(y)) {
+                map.get(x).put(y, new ArrayList<>());
+            }
+
+            map.get(x).get(y).add(root.val);
+
+            dfs(root.left, x - 1, y + 1, map);
+            dfs(root.right, x + 1, y + 1, map);
+        }
+    }
+
+
 
     /**
      * Only difference from Solution_JiuZhang_2

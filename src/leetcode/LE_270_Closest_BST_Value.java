@@ -19,7 +19,7 @@ public class LE_270_Closest_BST_Value {
      * Time : O(logn) or O(h)
      * Space : O(1)
      *
-     * Use BST property,no need to traverse the whole tree.
+     * Use BST property, no need to traverse the whole tree.
      * Based on target value and root.val comparison, move to left or right side.
      */
 

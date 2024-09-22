@@ -17,6 +17,12 @@ public class LE_230_Kth_Smallest_Element_In_BST {
         Follow up:
         What if the BST is modified (insert/delete operations) often and you need to find
         the kth smallest frequently? How would you optimize the kthSmallest() routine?
+
+        Medium
+
+        https://leetcode.com/problems/kth-smallest-element-in-a-bst
+
+        https://leetcode.com/problems/kth-smallest-element-in-a-bst/editorial/
      */
 
     /**
@@ -29,37 +35,31 @@ public class LE_230_Kth_Smallest_Element_In_BST {
        smaller than the kth element.
      */
 
-    /**
-     * Variation , Kth largest element in BST
-     * 只需要做reverse inorder traversal再带一个global counter）
-     */
 
     /**
-     * Recursive Inorder
-     * Time : O(n)
-     */
-    class Solution3_Practice {
-        List<Integer> list;
+     Solution 1 : DFS inorder traversal
+     Time and Space : O(n)
+     **/
+    class Solution1_DFS_inorder {
+        private int count;
+        private int res;
+
         public int kthSmallest(TreeNode root, int k) {
-            list = new ArrayList<>();
-            helper(root, k);
-
-            /**
-             * !!!
-             * return "list.get(k-1)", not "list(list.size() - 1)"
-             * The answer is not necessarily the last one in the list.
-             */
-            return list.get(k - 1);
+            if (root == null) return 0;
+            count = k;
+            helper(root);
+            return res;
         }
 
-        private void helper(TreeNode root, int k) {
+        private void helper(TreeNode root) {
             if (root == null) return;
 
-            if (list.size() >= k) return;
-
-            helper(root.left, k);
-            list.add(root.val);
-            helper(root.right, k);
+            helper(root.left);
+            count--;
+            if (count == 0) {
+                res = root.val;
+            }
+            helper(root.right);
         }
     }
 
@@ -67,7 +67,7 @@ public class LE_230_Kth_Smallest_Element_In_BST {
      * Iterative inorder
      * Time : O(n)
      */
-    class Solution2_Practice {
+    class Solution_Iterative_inorder_Practice {
         public int kthSmallest(TreeNode root, int k) {
             Stack<TreeNode> stack = new Stack<>();
             TreeNode cur = root;
@@ -83,7 +83,7 @@ public class LE_230_Kth_Smallest_Element_In_BST {
                 k--;
                 if (k == 0) return cur.val;
 
-                cur = cur.right;
+                cur = cur.right; //!!!
             }
 
             return -1;
@@ -137,32 +137,7 @@ public class LE_230_Kth_Smallest_Element_In_BST {
         }
     }
 
-    /**
-        Solution 1 : DFS inorder traversal
-        Time and Space : O(n)
-     **/
-    class Solution1 {
-        private int count;
-        private int res;
 
-        public int kthSmallest(TreeNode root, int k) {
-            if (root == null) return 0;
-            count = k;
-            helper(root);
-            return res;
-        }
-
-        private void helper(TreeNode root) {
-            if (root == null) return;
-
-            helper(root.left);
-            count--;
-            if (count == 0) {
-                res = root.val;
-            }
-            helper(root.right);
-        }
-    }
 
     /**
         Solution 2 : DFS inorder iterative
@@ -306,6 +281,40 @@ public class LE_230_Kth_Smallest_Element_In_BST {
             }
 
             return stack.peek().val;
+        }
+    }
+
+    /**
+     * Variation , Kth largest element in BST
+     * 只需要做reverse inorder traversal再带一个global counter）
+     */
+
+    /**
+     * Recursive Inorder
+     * Time : O(n)
+     */
+    class Solution3_Practice {
+        List<Integer> list;
+        public int kthSmallest(TreeNode root, int k) {
+            list = new ArrayList<>();
+            helper(root, k);
+
+            /**
+             * !!!
+             * return "list.get(k-1)", not "list(list.size() - 1)"
+             * The answer is not necessarily the last one in the list.
+             */
+            return list.get(k - 1);
+        }
+
+        private void helper(TreeNode root, int k) {
+            if (root == null) return;
+
+            if (list.size() >= k) return;
+
+            helper(root.left, k);
+            list.add(root.val);
+            helper(root.right, k);
         }
     }
 

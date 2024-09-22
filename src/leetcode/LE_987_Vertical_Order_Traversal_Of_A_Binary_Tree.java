@@ -44,7 +44,9 @@ public class LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree {
      * The tree will have between 1 and 1000 nodes.
      * Each node's value will be between 0 and 1000.
      *
-     * Medium
+     * Hard
+     *
+     * https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/description/
      */
 
     /**

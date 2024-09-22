@@ -49,6 +49,37 @@ public class LE_687_Longest_Univalue_Path {
      * LE_124_Binary_Tree_Max_Path_Sum
      */
 
+    class Solution_clean {
+        int res;
+        public int longestUnivaluePath(TreeNode root) {
+            if (root == null) return 0;
+
+            res = Integer.MIN_VALUE;
+            helper(root);
+
+            return res;
+        }
+
+        private int helper(TreeNode root) {
+            if (root == null) return 0;
+
+            int l = helper(root.left);
+            int r = helper(root.right);
+
+            int pl = 0;
+            int pr = 0;
+            if (root.left != null && root.left.val == root.val) {
+                pl = l + 1;
+            }
+            if (root.right != null && root.right.val == root.val) {
+                pr = r + 1;
+            }
+            res = Math.max(res, pl + pr);
+
+            return Math.max(pl, pr);
+        }
+    }
+
     class Solution {
         int res;
         public int longestUnivaluePath(TreeNode root) {

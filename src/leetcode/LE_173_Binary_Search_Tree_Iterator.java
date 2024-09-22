@@ -32,12 +32,10 @@ public class  LE_173_Binary_Search_Tree_Iterator {
      * We need that complexity on average and that is what we get.
      */
     class BSTIterator_Official_Solution {
-        TreeNode cur;
         Stack<TreeNode> stack;
 
         public BSTIterator_Official_Solution(TreeNode root) {
             stack = new Stack<>();
-            cur = root;
             goLeft(root);
         }
 

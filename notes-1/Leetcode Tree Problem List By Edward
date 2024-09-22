@@ -4,7 +4,7 @@ LE_144_Binary_Tree_Preorder_Traversal -- done
 LE_145_Binary_Tree_Postorder_Traversal  -- done
 LE_102_Binary_Tree_Level_Order_Traversal -- done
 LE_314_Binary_Tree_Vertical_Order_Traversal  -- done
-LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree  - same as 314 but sort on the same level
+LE_987_Vertical_Order_Traversal_Of_A_Binary_Tree  - same as LE_314_Binary_Tree_Vertical_Order_Traversal but sort on the same level   Hard
 
 Preorder
 LE_100_Same_Tree  -- done
@@ -21,36 +21,36 @@ LE_111_Min_Depth_Of_Binary_Tree  -- done
 Postorder
 LE_104_Max_Depth_Of_Binary_Tree         -- done
 LE_110_Balanced_Binary_Tree    -- done
-LE_124_Binary_Tree_Max_Path_Sum                          (***)  -- done
-LE_687_Longest_Univalue_Path                             (***)(***)  -- done
-LE_250_Count_Univalue_Subtrees                      -- done
-LE_366_Find_Leaves_Of_Binary_Tree                        (***)  -- revisit
+LE_124_Binary_Tree_Max_Path_Sum                          *****
+LE_687_Longest_Univalue_Path                             *****
+LE_250_Count_Univalue_Subtrees
+LE_366_Find_Leaves_Of_Binary_Tree                        *****
 LE_337_House_Robber_III
 
 BFS
-LE_107_Binary_Tree_Level_Order_Traversal_II   -- done
-LE_103_Binary_Tree_Zigzag_Level_Order_Traversal    -- done
+LE_107_Binary_Tree_Level_Order_Traversal_II              *****
+LE_103_Binary_Tree_Zigzag_Level_Order_Traversal          *****
 LE_199_Binary_Tree_Right_Side_View                       (***)  --- done
 
 BST
-LE_98_Validate_BST  -- done
-LE_235_Lowest_Common_Ancestor_Of_BST                -- done
+LE_98_Validate_BST
+LE_235_Lowest_Common_Ancestor_Of_BST                     *****
 LE_236_Lowest_Common_Ancestor_Of_BT                 -- done
 LE_108_Convert_Sorted_Array_To_BST                       (***, similar problem LE_654_Maximum_Binary_Tree)  -- done
 LE_109_Convert_Sorted_List_To_BST                        (***)  - done
-LE_173_Binary_Search_Tree_Iterator                       (***)  -- done
-LE_230_Kth_Smallest_Element_In_BST                       (****) (****)   -- done
-LE_285_Inorder_Successor_In_BST                          (***)   -- done
-LE_510_Inorder_Successor_In_BST_II                              -- done
+LE_173_Binary_Search_Tree_Iterator                       *****
+LE_230_Kth_Smallest_Element_In_BST                       *****
+LE_285_Inorder_Successor_In_BST                          access to root, but not to p    *****
+LE_510_Inorder_Successor_In_BST_II                       access to p, but not to root    *****
 LE_270_Closest_BST_Value                                        -- done
-LE_272_Closest_BST_Value_II                              (****) (****)  --- done
-LE_99_Recover_BST                                   -- revisit
-LE_701_Insert_Into_A_Binary_Search_Tree                 -- done
+LE_272_Closest_BST_Value_II                              *****
+LE_99_Recover_BST                                        *****
+LE_701_Insert_Into_A_Binary_Search_Tree                  *****
 
 Hard By Importance
 1.Very Important
-LE_116_Populating_Next_Right_Pointers_In_Each_Node  -- done
-LE_117_Populating_Next_Right_Pointers_In_Each_Node_II  -- done (BFS can solve both problems)
+LE_116_Populating_Next_Right_Pointers_In_Each_Node       perfect binary tree           *****
+LE_117_Populating_Next_Right_Pointers_In_Each_Node_II    any binary tree               *****
 LE_314_Binary_Tree_Vertical_Order_Traversal              (lint 651, 高频班题） -- done, dup
 LE_96_Unique_BST                                         (DP)
 

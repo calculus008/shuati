@@ -26,6 +26,25 @@ public class LE_98_Validate_BST {
         Binary tree [1,2,3], return false.
      */
 
+    class Solution_clean {
+        public boolean isValidBST(TreeNode root) {
+            if (root == null) return true;
+            return helper(root, null, null);
+        }
+
+        public boolean helper(TreeNode root, Integer min, Integer max) {
+            if (root == null) return true;
+
+            if (min != null && root.val <= min) return false;
+
+            if (max != null && root.val >= max) return false;
+
+            return (helper(root.left, min, root.val) && helper(root.right, root.val, max));
+        }
+    }
+
+
+
     /**
      * Solution
      * Divide and Conquer

@@ -40,6 +40,42 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
          Medium
      */
 
+    class Solution_Practice {
+        public List<List<Integer>> findLeaves(TreeNode root) {
+            List<List<Integer>> res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+
+            helper(root, res);
+            return res;
+        }
+
+        /**
+         * 这个helper()实际上就是用来找tree的 reversed(!!!) height, compare with LE_102_Binary_Tree_Level_Order_Traversal
+         */
+        private int helper(TreeNode root, List<List<Integer>> res) {
+            if (root == null) {
+                return -1;//!!!
+            }
+
+            int left = helper(root.left, res);
+            int right = helper(root.right, res);
+
+            int level = Math.max(left, right) + 1;
+
+            if (res.size() == level) {
+                res.add(new ArrayList<>());
+            }
+            res.get(level).add(root.val);
+
+            root.left = null;
+            root.right = null;
+
+            return level;
+        }
+    }
+
     class Solution1 {
         public List<List<Integer>> findLeaves(TreeNode root) {
             List<List<Integer>> res = new ArrayList<>();
@@ -146,38 +182,6 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
         }
     }
 
-    class Solution_Practice {
-        public List<List<Integer>> findLeaves(TreeNode root) {
-            List<List<Integer>> res = new ArrayList<>();
-            if (root == null) {
-                return res;
-            }
-
-            helper(root, res);
-            return res;
-        }
-
-        /**
-         * 这个helper()实际上就是用来找tree的reversed height。
-         */
-        private int helper(TreeNode root, List<List<Integer>> res) {
-            if (root == null) {
-                return -1;//!!!
-            }
-
-            int left = helper(root.left, res);
-            int right = helper(root.right, res);
-
-            int level = Math.max(left, right) + 1;
-
-            if (res.size() == level) {
-                res.add(new ArrayList<>());
-            }
-            res.get(level).add(root.val);
-
-            return level;
-        }
-    }
 
     /**
      * 变形题，把Tree变成Graph, 求同样的叶子按层输出 - Find_Leaves
@@ -203,7 +207,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
 
     private int helper(List<List<Integer>> res, Map<TreeNode, Integer> map, TreeNode node) {
         if (node == null) {
-            return 0;
+            return 0; //1 ??
         }
 
         if (map.containsKey(node)) {
@@ -215,7 +219,7 @@ public class LE_366_Find_Leaves_Of_Binary_Tree {
 
         /**
          * !!!
-         * -1 : Seen this node, but not finalized yet, it is still too high
+         * -1 : Seen this node, but not finalized yet, it is still too high (visiting)
          */
         map.put(node, -1);
 

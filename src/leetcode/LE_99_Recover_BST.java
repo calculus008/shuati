@@ -18,9 +18,42 @@ public class LE_99_Recover_BST {
         A solution using O(n) space is pretty straight forward. Could you devise a constant space solution?
 
      */
+    class Solution1_clean {// inorder traversal, find the two elements that are not sorted, then swap
+        TreeNode first = null;
+        TreeNode second = null;
+        TreeNode pre = null;
+
+        public void recoverTree1(TreeNode root) {
+            if (root == null) return;
+
+            helper(root);
+            int temp = first.val;
+            first.val = second.val;
+            second.val = temp;
+        }
+
+        public void helper(TreeNode root) {
+            if (root == null) return;
+
+            helper(root.left);
+
+            if (pre != null && root.val <= pre.val) {
+                if (first == null) {
+                    first = pre;
+                }
+                if (first != null) {
+                    second = root;
+                }
+            }
+
+            pre = root;
+
+            helper(root.right);
+        }
+    }
 
     /**
-     * Solution 1 : Recurrsion
+     * Solution 1 : Recursion
      *
      * Time : O(n)
      * Space : O(h), h - height of the tree

@@ -36,6 +36,31 @@ public class LE_124_Binary_Tree_Max_Path_Sum {
          Hard
      */
 
+    class solution_clean {
+        int res;
+
+        public int maxPathSum(TreeNode root) {
+            if (root == null) return 0;
+
+            res = Integer.MIN_VALUE;
+
+            helper(root);
+            return res;
+        }
+
+        public int helper(TreeNode root) {
+            if (root == null) return 0;
+
+            int l = Math.max(0, helper(root.left));//!!!
+            int r = Math.max(0, helper(root.right));
+
+            res = Math.max(res, l + root.val + r);
+
+            return Math.max(l, r) + root.val;
+        }
+    }
+
+
 
     /**
         Postorder
