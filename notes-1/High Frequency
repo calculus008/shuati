@@ -1,4 +1,4 @@
-#1.Interview style of Google/FB:
+## 1.Interview style of Google/FB:
 LE_937_Reorder_Log_Files   --- done
 LE_408_Valid_Word_Abbreviation       Same kind of problem : LE_809_Expressive_Words, LE_925_Long_Pressed_Name    -- done
 LE_56_Merge_Intervals   -- done
@@ -22,7 +22,7 @@ K_Closest_Points_To_A_Given_Point
 LE_138_Copy_List_With_Random_Pointer   -- done
 LI_629_Minimum_Spanning_Tree           (UnionFind)
 
-##related
+### related
 LI_1784_Decrease_To_Be_Palindrome
 LI_837_Palindromic_Substrings
 LI_1075_Subarray_Product_Less_Than_K
@@ -36,7 +36,7 @@ LE_1024_Video_Stitching                 -- done (can use DP. But I used PQ)
 
 LE_44_Wildcards_Matching               (backtrack)  -- dup
 
-#2.Basic algorithm and data structure I
+## 2.Basic algorithm and data structure I
 LE_65_Valid_Number              -- done
 LE_311_Sparse_Matrix_Multiplication
 LE_277_Find_The_Celebrity    -- done
@@ -60,7 +60,7 @@ LE_150_Evaluate_Reverse_Polish_Notation     -- dup
 LI_206_Interval_Sum
 LE_155_Min_Stack
 
-#3.Basic algorithm and data structure II
+## 3.Basic algorithm and data structure II
 LE_438_Find_All_Anagrams_In_A_String   -- done
 LE_242_Valid_Anagram   -- done
 LE_288_Unique_Word_Abbreviation   -- done
@@ -77,7 +77,7 @@ LE_49_Group_Anagrams    - dup
 LE_300_Longest_Increasing_Subsequence   - revisit
 LE_336_Palindrome_Pairs                      (***)  -- done
 
-#4.Search BFS
+## 4.Search BFS
 LE_286_Walls_And_Gates   -- dup
 LI_598_Zombie_In_Matrix
 LE_130_Surrounded_Regions  -- done
@@ -96,7 +96,7 @@ LE_314_Binary_Tree_Vertical_Order_Traversal   (***)
 LE_133_Clone_Graph
 LE_103_Binary_Tree_Zigzag_Level_Order_Traversal
 
-#5.Tree & Divide and Conquer
+## 5.Tree & Divide and Conquer
 LI_661_Convert_BST_To_Greater_Tree (LE 538)  -- done
 LE_366_Find_Leaves_Of_Binary_Tree  -- done
 LE_156_Binary_Tree_Upside_Down   -- done
@@ -113,7 +113,7 @@ LE_278_First_Bad_Version
 LE_34_Search_For_A_Range
 LE_74_Search_In_2D_Matrix
 
-#6.Search DFS
+## 6.Search DFS
 LE_254_Factor_Combinations   -- done
 LE_282_Expression_Add_Operators   -- done
 LE_425_Word_Squares                           (***)  -- done
@@ -128,7 +128,7 @@ LE_37_Sudoku_Solver    -- done
 LE_320_Generalized_Abbreviation   -- done
 
 
-#Abbreviation
+## 7.Abbreviation
 LE_288_Unique_Word_Abbreviation
 LE_527_Word_Abbreviation               LI_639_Word_Abbreviation
 LE_320_Generalized_Abbreviation

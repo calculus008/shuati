@@ -26,7 +26,7 @@ public class LE_272_Closest_BST_Value_II {
          Hard
      */
 
-    class Solution4_Practice {
+    class Solution4_Practice { // two stacks, two pointers, Time : O(log(n) + k)
         public List<Integer> closestKValues(TreeNode root, double target, int k) {
             List<Integer> res = new ArrayList<>();
             if (root == null || k == 0) {
@@ -84,6 +84,35 @@ public class LE_272_Closest_BST_Value_II {
         }
     }
 
+    /**
+     * Solution 1_1, same logic as Solution 1, use generic list method
+     * 中序遍历暴力解法简单易懂。队列没满(< k), 遇到一个node就塞进去；满了就把距离远的删了，距离近的塞进去。
+     */
+    class Solution1_1 {
+        public List<Integer> closestKValues1_1(TreeNode root, double target, int k) {
+            List<Integer> ret = new LinkedList<Integer>();
+
+            dfs(root, target, k, ret);
+            return ret;
+        }
+
+        private void dfs(TreeNode root, double target, int k, List<Integer> ret) {
+            if (root == null) {
+                return;
+            }
+
+            dfs(root.left, target, k, ret);
+
+            if (ret.size() < k) {
+                ret.add(root.val);
+            } else if (Math.abs(root.val - target) < Math.abs(ret.get(0) - target)) {
+                ret.remove(0);
+                ret.add(root.val);
+            }
+
+            dfs(root.right, target, k, ret);
+        }
+    }
 
     /**
      * BST + 2 pointers
@@ -124,35 +153,6 @@ public class LE_272_Closest_BST_Value_II {
         }
     }
 
-    /**
-     * Solution 1_1, same logic as Solution 1, use generic list method
-     * 中序遍历暴力解法简单易懂。队列没满(< k), 遇到一个node就塞进去；满了就把距离远的删了，距离近的塞进去。
-     */
-    class Solution1_1 {
-        public List<Integer> closestKValues1_1(TreeNode root, double target, int k) {
-            List<Integer> ret = new LinkedList<Integer>();
-
-            dfs(root, target, k, ret);
-            return ret;
-        }
-
-        private void dfs(TreeNode root, double target, int k, List<Integer> ret) {
-            if (root == null) {
-                return;
-            }
-
-            dfs(root.left, target, k, ret);
-
-            if (ret.size() < k) {
-                ret.add(root.val);
-            } else if (Math.abs(root.val - target) < Math.abs(ret.get(0) - target)) {
-                ret.remove(0);
-                ret.add(root.val);
-            }
-
-            dfs(root.right, target, k, ret);
-        }
-    }
 
     /**
      Solution 2
