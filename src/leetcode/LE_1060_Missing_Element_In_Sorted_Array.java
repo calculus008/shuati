@@ -68,7 +68,19 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
      */
 
 
+    public int findKthMissing_iteration(int[] arr, int k) {
+        int n = arr.length;
 
+        for (int i = 0; i < n - 1; i++) { // Go through the array and count missing numbers
+            int missingBetween = arr[i + 1] - arr[i] - 1;            // Calculate the number of missing numbers between arr[i] and arr[i + 1]
+            if (k <= missingBetween) { // If the k-th missing number is between arr[i] and arr[i + 1]
+                return arr[i] + k;
+            }
+            k -= missingBetween; // Otherwise, move on to the next pair and reduce k by the number of missing numbers found
+        }
+
+        return arr[n - 1] + k;// If the k-th missing number is greater than all elements in the array
+    }
     /**
      * Binary Search
      * O(logn)

@@ -51,9 +51,18 @@ LE_743_Network_Delay_Time
 LE_787_Cheapest_Flights_Within_K_Stops
 
 
-
-
-
 LeetCode 964. Least Operators to Express Number
 LeetCode 959. Regions Cut By Slashes
 LeetCode 882. Reachable Nodes In Subdivided Graph
+
+1. Cycle Detection in Directed Graph (using DFS):
+Use Depth-First Search (DFS) with a recursion stack.
+If a node is visited twice during the recursion (i.e., it's in the recursion stack), a cycle is detected.
+Algorithm:
+Mark each node with 3 states: not visited, visiting, and visited.
+If you reach a node that's visiting, a cycle exists.
+
+
+2. Cycle Detection in Undirected Graph (using DFS or Union-Find):
+DFS: If you revisit a node that is not the parent of the current node, a cycle exists.
+Union-Find: Check if two nodes being connected are already part of the same set.
