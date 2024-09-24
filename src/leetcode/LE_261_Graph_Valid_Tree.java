@@ -2,9 +2,7 @@ package leetcode;
 
 import common.UnionFindSet;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yuank on 4/23/18.
@@ -25,6 +23,111 @@ public class LE_261_Graph_Valid_Tree {
 
         Medium
      */
+
+    class Solution_editorial_DFS_with_cycle_detection {
+
+        private List<List<Integer>> adjacencyList = new ArrayList<>();
+        private Set<Integer> visited = new HashSet<>();
+
+        public boolean validTree(int n, int[][] edges) {
+            if (edges.length != n - 1) return false;
+
+            for (int i = 0; i < n; i++) {
+                adjacencyList.add(new ArrayList<>());
+            }
+            for (int[] edge : edges) {
+                adjacencyList.get(edge[0]).add(edge[1]);
+                adjacencyList.get(edge[1]).add(edge[0]);
+            }
+
+            // We return true iff no cycles were detected,
+            // AND the entire graph has been reached.
+            return dfs(0, -1) && visited.size() == n;
+        }
+
+        public boolean dfs(int node, int parent) {
+            if (visited.contains(node)) return false; //has been visited, cycle detected, return false
+            visited.add(node);
+            for (int neighbour : adjacencyList.get(node)) {
+                if (parent != neighbour) { // avoid "trivial cycle"
+                    boolean result = dfs(neighbour, node);
+                    if (!result) return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    class Solution_editorial_DFS {
+        private List<List<Integer>> adjacencyList = new ArrayList<>();
+        private Set<Integer> visited = new HashSet<>();
+
+        public boolean validTree(int n, int[][] edges) {
+            if (edges.length != n - 1) return false; //!!!For the graph to be a valid tree, it must have exactly n - 1 edges
+
+            for (int i = 0; i < n; i++) {// Make the adjacency list.
+                adjacencyList.add(new ArrayList<>());
+            }
+            for (int[] edge : edges) {
+                adjacencyList.get(edge[0]).add(edge[1]);
+                adjacencyList.get(edge[1]).add(edge[0]);
+            }
+
+            dfs(0);
+
+            return visited.size() == n;// Inspect result and return the verdict.
+        }
+
+        public void dfs(int node) {
+            if (visited.contains(node)) return;
+            visited.add(node);
+            for (int neighbour : adjacencyList.get(node)) {
+                dfs(neighbour);
+            }
+        }
+    }
+
+    public class Solution_DFS_detect_cycle {
+        public boolean validTree(int n, int[][] edges) {
+            List<List<Integer>> adjList = new ArrayList<List<Integer>>(n);  // initialize adjacency list
+
+            for (int i = 0; i < n; i++) {
+                adjList.add(i, new ArrayList<Integer>());
+            }
+
+            for (int i = 0; i < edges.length; i++) {// add edges, undirected, so add two ways
+                int u = edges[i][0], v = edges[i][1];
+                adjList.get(u).add(v);
+                adjList.get(v).add(u);
+            }
+
+            boolean[] visited = new boolean[n];
+
+            if (hasCycle(adjList, 0, visited, -1)) { // make sure there's no cycle, DFS, starting from node 0
+                return false;
+            }
+
+            for (int i = 0; i < n; i++) {// make sure all vertices are connected
+                if (!visited[i])
+                    return false;
+            }
+
+            return true;
+        }
+
+        boolean hasCycle(List<List<Integer>> adjList, int u, boolean[] visited, int parent) {
+            visited[u] = true;
+
+            for (int i = 0; i < adjList.get(u).size(); i++) {
+                int v = adjList.get(u).get(i);
+
+                if ((visited[v] && parent != v) || (!visited[v] && hasCycle(adjList, v, visited, u)))
+                    return true;
+            }
+
+            return false;
+        }
+    }
 
     /**
      * Uion Find

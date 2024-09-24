@@ -36,6 +36,30 @@ public class LE_281_Zigzag_Iterator {
          Median
      */
 
+    public class ZigzagIterator_with_queue {
+        Queue<Iterator> q;
+
+        public ZigzagIterator_with_queue(List<Integer> v1, List<Integer> v2) {
+            q = new LinkedList<>();
+            if (!v1.isEmpty()) q.add(v1.iterator());
+            if (!v2.isEmpty()) q.add(v2.iterator());
+        }
+
+        public int next() {
+            Iterator<Integer> i = q.poll();
+            int res = i.next();
+
+            if (i.hasNext()) {
+                q.add(i);
+            }
+            return res;
+        }
+
+        public boolean hasNext() {
+            return !q.isEmpty();
+        }
+    }
+
     /**
      Time and Space : O(n)
 
@@ -90,30 +114,6 @@ public class LE_281_Zigzag_Iterator {
          */
         public boolean hasNext() {
             return !list.isEmpty();
-        }
-    }
-
-    public class ZigzagIterator1 {
-        Queue<Iterator> q;
-
-        public ZigzagIterator1(List<Integer> v1, List<Integer> v2) {
-            q = new LinkedList<>();
-            if (!v1.isEmpty()) q.add(v1.iterator());
-            if (!v2.isEmpty()) q.add(v2.iterator());
-        }
-
-        public int next() {
-            Iterator<Integer> i = q.poll();
-            int res = i.next();
-
-            if (i.hasNext()) {
-                q.add(i);
-            }
-            return res;
-        }
-
-        public boolean hasNext() {
-            return !q.isEmpty();
         }
     }
 

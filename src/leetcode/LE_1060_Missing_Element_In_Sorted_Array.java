@@ -34,6 +34,41 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
      * https://www.geeksforgeeks.org/find-missing-element-in-a-sorted-array-of-consecutive-numbers/
      */
 
+    public int missingElement_clean(int[] arr, int k) {
+        int left = 0, right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int missingUntilMid = arr[mid] - arr[0] - mid;
+
+            if (missingUntilMid < k) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return arr[0] + k + right; //!!! The result is arr[right] + (k - missingUntilRight)
+    }
+
+    /**
+     * The formula arr[0] + k + right comes from the result of the binary search. Here's why:
+     *
+     * right: After binary search, right points to the last index where the number of missing elements is less than k.
+     * Missing elements before arr[right]: There are arr[right] - arr[0] - right missing numbers before arr[right].
+     * Final result:
+     * The K-th missing number is the offset from the beginning (arr[0]) plus the difference between k and missing
+     * elements up to right. Thus, arr[0] + k + right gives the correct result.
+     *
+     * missingUntilRight = arr[right] − arr[0] − right
+     * remainingMissing = k - (arr[right] - arr[0] - right) = k -arr[right] + arr[0] + right
+     * result = arr[right] + remainingMissing
+     *        = arr[right] + k -arr[right] + arr[0] + right
+     *        = k + arr[0] + right
+     */
+
+
+
     /**
      * Binary Search
      * O(logn)
@@ -62,15 +97,9 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
             int l = 0;
             int h = n - 1;
 
-            /**
-             * get total missing number in the nums
-             */
             int missingNum = getMissingNum(nums, n - 1);
 
-            /**
-             * !!!
-             */
-            if (missingNum < k) {
+            if (missingNum < k) {//!!!
                 return nums[n - 1] + k - missingNum;
             }
 
@@ -88,7 +117,8 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
         }
 
         /**
-         * get the number of missing numbers between index 0 and idx
+         * get the number of missing numbers between index 0 and idx:
+         * (nums[i] - nums[0] + 1) - (i + 1) = nums[i] - nums[0] - i
          */
         private int getMissingNum(int[] nums, int idx) {
             return nums[idx] - nums[0] - idx;

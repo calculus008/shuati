@@ -34,6 +34,71 @@ public class LE_772_Basic_Calculator_III {
          LE_224_Basic_Calculator
      */
 
+    class Solution_clean {
+        public int calculate(String s) {
+            if (null == s || s.length() == 0) {
+                return 0;
+            }
+
+            Deque<Long> nums = new ArrayDeque<>();
+            Deque<Character> ops = new ArrayDeque<>();
+
+            int num = 0;
+            char op = '+';
+            int len = s.length();
+            int res = 0;
+
+            char[] chars = s.toCharArray();
+            for (int i = 0; i < len; i++) {
+                if (Character.isDigit(chars[i])) {
+                    while (i < len && Character.isDigit(chars[i])) {
+                        num = num * 10 + chars[i] - '0';
+                        i++;//!!!
+                    }
+                    i--;
+
+                    process(nums, num, op);
+                    num = 0;
+                } else if (chars[i] == '+' || chars[i] == '-' || chars[i] == '*' || chars[i] == '/') {
+                    op = chars[i];
+                } else if (chars[i] == '(') {
+                    nums.push(Long.MAX_VALUE);
+                    ops.push(op);
+                    op = '+'; //!!!
+                } else if (chars[i] == ')') {
+                    int temp = 0;
+                    while (nums.peek() != Long.MAX_VALUE) {
+                        temp += nums.pop();
+                    }
+                    nums.pop(); //!!! pop Long.MAX_VALUE marker
+                    process(nums, temp, ops.pop());
+                }
+            }
+
+            while (!nums.isEmpty()) {
+                res += nums.pop();
+            }
+
+            return res;
+        }
+
+        private void process(Deque<Long> nums, int num, char op) {
+            long val = 0;
+            if (op == '+') {
+                val = num;
+            } else if (op == '-') {
+                val = -num;
+            } else if (op == '*') {
+                val = nums.pop() * num;
+            } else if (op == '/') {
+                val = nums.pop() / num;
+            }
+
+            nums.push(val);
+        }
+    }
+
+
     class Solution_Recursion_clean {
         public int calculate(String s) {
             if (s == null || s.length() == 0) return 0;
@@ -345,74 +410,6 @@ public class LE_772_Basic_Calculator_III {
 
             String regex = "\\d+";
             return s.matches(regex);
-        }
-    }
-
-    class Solution_Practice {
-        public int calculate(String s) {
-            if (null == s || s.length() == 0) {
-                return 0;
-            }
-
-            Deque<Long> nums = new ArrayDeque<>();
-            Deque<Character> ops = new ArrayDeque<>();
-
-            int num = 0;
-            char op = '+';
-            int len = s.length();
-            int res = 0;
-
-            char[] chars = s.toCharArray();
-            for (int i = 0; i < len; i++) {
-                if (Character.isDigit(chars[i])) {
-                    while (i < len && Character.isDigit(chars[i])) {
-                        num = num * 10 + chars[i] - '0';
-                        i++;//!!!
-                    }
-                    i--;
-
-                    process(nums, num, op);
-                    num = 0;
-                } else if (chars[i] == '+' || chars[i] == '-' || chars[i] == '*' || chars[i] == '/') {
-                    op = chars[i];
-                } else if (chars[i] == '(') {
-                    nums.push(Long.MAX_VALUE);
-                    ops.push(op);
-
-                    /**
-                     * !!!
-                     */
-                    op = '+';
-                } else if (chars[i] == ')') {
-                    int temp = 0;
-                    while (nums.peek() != Long.MAX_VALUE) {
-                        temp += nums.pop();
-                    }
-                    nums.pop();
-                    process(nums, temp, ops.pop());
-                }
-            }
-
-            while (!nums.isEmpty()) {
-                res += nums.pop();
-            }
-
-            return res;
-        }
-
-        private void process(Deque<Long> nums, int num, char op) {
-            long val = 0;
-            if (op == '+') {
-                val = num;
-            } else if (op == '-') {
-                val = -num;
-            } else if (op == '*') {
-                val = nums.pop() * num;
-            } else if (op == '/') {
-                val = nums.pop() / num;
-            }
-
-            nums.push(val);
         }
     }
 }

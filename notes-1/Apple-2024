@@ -351,7 +351,11 @@ Original key: user_id
 Salted key: salt + user_id (e.g., random(0-9)_user_id)
 This spreads the same key across different reducers and reduces bottlenecks.
 
-In MapReduce, a combiner function is an optional, mini-reducer that runs on the map node before the data is shuffled to the reducers. Its purpose is to perform a local reduction on the mapper output to minimize the amount of data transferred across the network. The combiner reduces data volume by merging or aggregating intermediate key-value pairs that share the same key, similar to what a reducer does, but on a smaller, localized scale. This improves efficiency by reducing network traffic and speeding up the overall job execution.
+In MapReduce, a combiner function is an optional, mini-reducer that runs on the map node before the data is shuffled to
+the reducers. Its purpose is to perform a local reduction on the mapper output to minimize the amount of data transferred
+across the network. The combiner reduces data volume by merging or aggregating intermediate key-value pairs that share
+the same key, similar to what a reducer does, but on a smaller, localized scale. This improves efficiency by reducing
+traffic and speeding up the overall job execution.
 
 
 
@@ -366,15 +370,18 @@ LE_274_H_Index
 LE_325_Maximum_Size_Subarray_Sum_Equals_k
 LE_437_Path_Sum_III
 LE_953_Verifying_An_Alien_Dictionary
-LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I
+LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I      *****
 LE_565_Array_Nesting
 LE_986_Interval_List_Intersections
 
 LE_1074_Number_Of_Submatrices_That_Sum_To_Target          (hard)
 
 LE_2348_Number_Of_Zero_Filled_Subarrays
+
 Find_Cycle
-LE_261_Graph_Valid_Tree
+LE_261_Graph_Valid_Tree                                  Detect cycle in undirected graph  *****
+
+## Merge K sorted list/stream
 Merge_K_Sorted_Stream
 LI_577_Merge_K_Sorted_Interval_Lists
 
@@ -385,5 +392,10 @@ LE_281_Zigzag_Iterator
 LI_541_Zigzag_Iterator_II
 
 LE_894_All_Possible_Full_Binary_Trees
-LE_1060_Missing_Element_In_Sorted_Array
-LE_212_Word_Search_II
+LE_1060_Missing_Element_In_Sorted_Array                   Binary Search  *****
+LE_212_Word_Search_II                                     Trie
+
+2024-09-24 Plan:
+1.Go over the LE problems shown in mianjing
+2.Java Concurrency (book and LE/interview problems)
+3.System Design

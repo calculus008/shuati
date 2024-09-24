@@ -37,10 +37,49 @@ public class LE_894_All_Possible_Full_Binary_Trees {
      *
      * O(N ^ 2) ??
      */
+    /**
+     * Solution 2
+     * Recursion with memization
+     * 4 ms
+     */
+    class Solution2 {
+        HashMap<Integer, List<TreeNode>> mem = new HashMap<>();
+
+        public List<TreeNode> allPossibleFBT(int N) {
+            List<TreeNode> res = new ArrayList<>();
+            if (N % 2 == 0) {
+                return res;
+            }
+
+            if (N == 1) {
+                res.add(new TreeNode(0));
+                return res;
+            }
+
+            if (mem.containsKey(N)) {
+                return mem.get(N);
+            }
+
+            for (int i = 1; i < N; i += 2) {
+                for (TreeNode l : allPossibleFBT(i)) {
+                    for (TreeNode r : allPossibleFBT(N - i - 1)) {
+                        TreeNode root = new TreeNode(0);
+                        root.left = l;
+                        root.right = r;
+                        res.add(root);
+                    }
+                }
+            }
+
+            mem.put(N, res);
+
+            return res;
+        }
+    }
 
     /**
      * Solution 1
-     * Recursion without memization
+     * Recursion without memorization
      * 7 ms
      */
     class Solution1 {
@@ -78,46 +117,6 @@ public class LE_894_All_Possible_Full_Binary_Trees {
                     }
                 }
             }
-
-            return res;
-        }
-    }
-
-    /**
-     * Solution 2
-     * Recursion with memization
-     * 4 ms
-     */
-    class Solution2 {
-        HashMap<Integer, List<TreeNode>> mem = new HashMap<>();
-
-        public List<TreeNode> allPossibleFBT(int N) {
-            List<TreeNode> res = new ArrayList<>();
-            if (N % 2 == 0) {
-                return res;
-            }
-
-            if (N == 1) {
-                res.add(new TreeNode(0));
-                return res;
-            }
-
-            if (mem.containsKey(N)) {
-                return mem.get(N);
-            }
-
-            for (int i = 1; i < N; i += 2) {
-                for (TreeNode l : allPossibleFBT(i)) {
-                    for (TreeNode r : allPossibleFBT(N - i - 1)) {
-                        TreeNode root = new TreeNode(0);
-                        root.left = l;
-                        root.right = r;
-                        res.add(root);
-                    }
-                }
-            }
-
-            mem.put(N, res);
 
             return res;
         }

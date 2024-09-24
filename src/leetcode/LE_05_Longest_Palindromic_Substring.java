@@ -29,6 +29,7 @@ public class LE_05_Longest_Palindromic_Substring {
      */
 
     class Solution__two_pointers_clean{
+        // Time : O(n ^ 2), Space : O(n ^ 2)
         String res = "";
         public String longestPalindrome1(String s) {
             if (s == null || s.length() == 0) return s;
