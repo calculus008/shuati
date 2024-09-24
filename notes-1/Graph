@@ -12,8 +12,8 @@ LE_684_Redundant_Connection              Union Find
 LE_685_Redundant_Connection_II           Union Find
 LE_547_Friend_Circles                    ******
 LE_733_Flood_Fill
-LE_261_Graph_Valid_Tree                 Detect cycle in undirected graph  *****
-
+LE_261_Graph_Valid_Tree                  Detect cycle in undirected graph  *****
+Find_Cycle_For_Graph                     ******
 
 # Convert binary tree into graph
 LE_863_All_Nodes_Distance_K_In_Binary_Tree
