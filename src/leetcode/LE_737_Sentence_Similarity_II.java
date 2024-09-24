@@ -2,10 +2,7 @@ package leetcode;
 
 import common.UnionFindSetString;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by yuank on 4/23/18.
@@ -39,6 +36,46 @@ public class LE_737_Sentence_Similarity_II {
         Medium
      */
 
+
+    class Solution_clean {
+        public boolean areSentencesSimilarTwo(String[] sentence1, String[] sentence2, List<List<String>> similarPairs) {
+            int m = sentence1.length;
+            int n = sentence2.length;
+
+            if (m != n) return false;
+
+            Map<String, Set<String>> map = new HashMap<>();
+            for (List<String> list : similarPairs) {
+                if (!map.containsKey(list.get(0))) map.put(list.get(0), new HashSet<>());
+                map.get(list.get(0)).add(list.get(1));
+                if (!map.containsKey(list.get(1))) map.put(list.get(1), new HashSet<>());
+                map.get(list.get(1)).add(list.get(0));
+            }
+
+            Set<String> visited = new HashSet<>();
+            for (int i = 0; i < m ; i++) {
+                if (sentence1[i].equals(sentence2[i])) continue;
+
+                Set<String> set = map.get(sentence1[i]);
+                if (set == null) return false;
+
+                visited.clear();
+                if (!helper(sentence1[i], sentence2[i], map, visited)) return false;
+            }
+            return true;
+        }
+
+        public boolean helper(String s1, String s2, Map<String, Set<String>> map, Set<String> visited) {
+            if (s1.equals(s2)) return true;
+
+            visited.add(s1);
+            for (String s : map.get(s1)) {
+                if (visited.contains(s)) continue;
+                if (helper(s, s2, map, visited)) return true;
+            }
+            return false;
+        }
+    }
 
     /**
      * Difference from LE_734 - "the similarity relation is transitive"

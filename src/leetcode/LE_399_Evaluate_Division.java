@@ -101,7 +101,7 @@ public class LE_399_Evaluate_Division {
                 }
 
                 visited.add(n);
-                double d = divide(n, y, visited); //find if a pth between n and y exists
+                double d = divide(n, y, visited); //find if a path between n and y exists
                 if (d > 0) {// n -> y path exists
                     /**
                      * !!!

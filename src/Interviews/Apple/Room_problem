@@ -1,0 +1,55 @@
+Given a list of intervals, each interval represents one unique person intended staying time (start and end),
+we only have one room, return as most how many people can live in this room.
+
+To solve the problem of determining how many people can stay in a room given a list of intervals, you can approach it by calculating the maximum number of overlapping intervals. The most people that can stay in the room at the same time corresponds to the maximum overlap of these intervals.
+
+Approach:
+Treat each start and end of an interval as an event.
+Sort all events.
+Traverse the events and maintain a count of how many people are in the room at each point in time. Track the maximum count.
+
+
+You’re right! Using a TreeMap and line sweep technique can solve this problem efficiently.
+
+Key Idea:
+TreeMap is used to keep track of events (start and end times) in sorted order.
+A line sweep involves iterating through the sorted time points, updating the current number of people in the room, and keeping track of the maximum number of people.
+Java Solution using TreeMap:
+java
+Copy code
+import java.util.*;
+
+public class MaxPeopleInRoom {
+
+    public int maxPeopleInRoom(int[][] intervals) {
+        // TreeMap to track time points and the number of people entering/exiting
+        TreeMap<Integer, Integer> timeMap = new TreeMap<>();
+
+        // Add all start times as +1 (people entering) and end times as -1 (people exiting)
+        for (int[] interval : intervals) {
+            timeMap.put(interval[0], timeMap.getOrDefault(interval[0], 0) + 1); // +1 for start
+            timeMap.put(interval[1], timeMap.getOrDefault(interval[1], 0) - 1); // -1 for end
+        }
+
+        int currentPeople = 0;
+        int maxPeople = 0;
+
+        // Line sweep: iterate over all time points in sorted order
+        for (int count : timeMap.values()) {
+            currentPeople += count;
+            maxPeople = Math.max(maxPeople, currentPeople);
+        }
+
+        return maxPeople;
+    }
+ }
+
+ If a single person can have multiple intervals (i.e., they leave and return later), you need to treat their intervals
+ individually when calculating overlaps. However, to ensure that no person stays in the room more than once simultaneously,
+ you need to add a constraint to disallow overlaps between intervals for the same person.
+
+ Modified Approach:
+ Sort and merge any overlapping intervals for each person first.
+ Then, apply the same logic to find the maximum number of people in the room at the same time using the merged interval
+
+

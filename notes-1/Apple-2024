@@ -290,6 +290,69 @@ https://leetcode.com/company/apple/discuss/5531432/Apple-or-Online-or-Ignore-Sec
 https://leetcode.com/company/apple/discuss/5457845/Apple-and-Coupang-Phone-Screen-Rate-Limiter-or-Hit-Counter
 *****
 
+面的是个cloud的team，一开镜头是个abc小哥，问想先介绍组还是做题，无脑先做题，考是的job scheduler，给了两个function
+add_task(job, priority, Set dependency)
+run_task()
+第一个是可以添加一个job A，每个job有Int prioity（小的job有high priority），dependency是一个set，如果要run task A之前必须保证他的
+dependency都在他之前run，第二个function就是return一个valid的所有job的scheduler。第一个问题问怎么解决dependency，
+答用一个topological sorting，再对每个job的dependency按照priority排序，小哥觉得ok。第二个followup是怎么解决priority的，
+比如add_task(a, 0, [b,c]), add_task(e, 1, [f, g])，答用一个min heap保存所有job的（job， priory）pair，创建一个这样的data structure，
+比如第一个[(b, p_b), (c, p_c), (a,0)], 第二个[(f,p_f), (g, p_g), (e,1)]，这样heap就有两个，key为每个element的第0个index，
+就能做到按照priority排序。第三个followup是怎么解决不同job之间有dependency，我说的是可以创建一个neighbor count的map存有多少dependency（每次pop的时候给上面list最末尾的-1 index decrement），
+再用一个middle list去存那些pop出来inde 0的neighbor count不是0的list，直到pop出是0的（同时再保存一个visited的set防止repeat），
+最后再把所有middle list的pop进heap里，思路应该是正确的，看小哥表情是有些疑惑，但是因为没见过这道题也没想到更好的解法，
+最后让我simulate了下算法，说了个visible就完了。时间也到了，也没有聊更多。
+
+感觉有点无语，出题前给我说了算法题会非常easy（个人并不觉得，可能我太菜了。。），而且题更偏system方面也练得很少，能把思路非常清楚得讲出来更重要吧。
+
+
+hm直接面试第一轮，问我有没有做过hadoop或者是map reduce，我说没有，我主要做kafka和flink相关的。于是hm口述了下map reduce的工作原理，说你做没做过不重要，这是cs fundamental。 面试的组是一个T1 team，负责apple media service 相关的big data platfrom（比如itune，apple tv...），组里主要管5个data pipeline，计划要再expand 1-2条。
+题目场景：需要处理很多file，总共1 TB
+each file 128GB
+所以有8000 files ，目前存在HDFS里，想要把这1 TB data放入map reduce处理。
+mapper的数量就是file split的数量，也就是8000 map(),
+map()的数量，是reduce()的4倍。(我不懂为什么，就是给我的条件)，所以2000 reduce().
+map ()： 主要就是把data拆成key value pair，比如 “i am a student”, 拆成
+i， 1
+am， 1
+a， 1
+student， 1
+reduce():还有两个步骤，
+1. shuffle - 保证同样的key，一定会留到同样的partition；
+2. sort & merge- 把同样的key的value merge起来， 使用merge sort算法
+根据这个，他问了我几个问题：
+1. 怎么保证shuffle时候，同样的key一定会流到同样的partition?
+答案是在key value那里，加salt （我没有完全懂）
+2. 为什么会出现reduce() job会非常非常长的时间，还没有做好？
+前提是，map()一定需要全部做完‍‌，才能开始reduce()。并且一些reduce()已经做完了
+答案是，因为reduce()是用water count （也就是count one by one for each key)， 所以如果key非常多，salt加的不好， sort & merge就会花费很久 （我没有完全懂）
+
+In the shuffle phase of MapReduce, the partitioner is responsible for assigning keys to partitions. The partitioner
+typically uses the hash of the key (e.g., hash(key) % numPartitions) to ensure that all values with the same key are sent
+to the same partition. This guarantees that the reducer processing the partition will receive all values associated with
+a particular key.
+
+Why some reduce jobs may take a long time:
+Skewed Data: If the distribution of keys is uneven, some reducers may receive significantly more data, causing data skew.
+Stragglers: Some reducers may process more complex or larger datasets, causing them to take longer (often referred to as straggler tasks).
+I/O Bottleneck: Disk I/O, network latency during shuffling, or heavy reads/writes can slow down reduce tasks.
+Resource Contention: Limited CPU or memory resources may slow down specific reduce tasks when multiple jobs compete for the same resources.
+
+Adding salt to the key in MapReduce involves appending or prepending a random or calculated value (the salt) to the key
+during the mapping phase. This is done to reduce data skew when certain keys are disproportionately frequent.
+
+Why Use Salt?
+In cases where many records share the same key, these keys will all be sent to the same reducer, leading to a potential
+bottleneck. By adding a salt (like a random number or hash), the keys are distributed across multiple partitions,
+thus balancing the load among reducers.
+
+Example:
+Original key: user_id
+Salted key: salt + user_id (e.g., random(0-9)_user_id)
+This spreads the same key across different reducers and reduces bottlenecks.
+
+In MapReduce, a combiner function is an optional, mini-reducer that runs on the map node before the data is shuffled to the reducers. Its purpose is to perform a local reduction on the mapper output to minimize the amount of data transferred across the network. The combiner reduces data volume by merging or aggregating intermediate key-value pairs that share the same key, similar to what a reducer does, but on a smaller, localized scale. This improves efficiency by reducing network traffic and speeding up the overall job execution.
+
 
 
 
@@ -314,3 +377,13 @@ Find_Cycle
 LE_261_Graph_Valid_Tree
 Merge_K_Sorted_Stream
 LI_577_Merge_K_Sorted_Interval_Lists
+
+LE_297_Serialize_And_Deserialize_Binary_Tree              *****
+LE_428_Serialize_And_Deserialize_Nary_Tree                *****
+
+LE_281_Zigzag_Iterator
+LI_541_Zigzag_Iterator_II
+
+LE_894_All_Possible_Full_Binary_Trees
+LE_1060_Missing_Element_In_Sorted_Array
+LE_212_Word_Search_II

@@ -1,6 +1,22 @@
-LeetCode 964. Least Operators to Express Number
-LeetCode 959. Regions Cut By Slashes
-LeetCode 882. Reachable Nodes In Subdivided Graph
+LE_133_Clone_Graph                        *****
+
+# Topological Sort
+LE_207_Course_Schedule
+LE_332_Reconstruct_Itinerary             *****
+
+# DFS/Union Find
+LE_399_Evaluate_Division                 *****
+LE_734_Sentence_Similarity               *****
+LE_737_Sentence_Similarity_II            *****    similarity relation is transitive
+LE_684_Redundant_Connection              Union Find
+LE_685_Redundant_Connection_II           Union Find
+LE_547_Friend_Circles                    ******
+LE_733_Flood_Fill
+
+# Convert binary tree into graph
+LE_863_All_Nodes_Distance_K_In_Binary_Tree
+LE_742_Closest_Leaf_In_A_Binary_Tree
+
 
 LE_943_Find_The_Shortest_Superstring
 LE_886_Possible_Bipartition
@@ -22,9 +38,7 @@ LE_675_Cut_Off_Trees_For_Golf_Event
 LE_126_Word_Ladder_II
 LE_815_Bus_Routes
 
-#Convert binary tree into graph
-LE_863_All_Nodes_Distance_K_In_Binary_Tree
-LE_742_Closest_Leaf_In_A_Binary_Tree
+
 
 #Bellman-Ford (DP)
 LE_787_Cheapest_Flights_Within_K_Stops
@@ -34,19 +48,10 @@ LE_743_Network_Delay_Time
 LE_743_Network_Delay_Time
 LE_787_Cheapest_Flights_Within_K_Stops
 
-#DFS/Union Find
-LE_399_Evaluate_Division (***)
-LE_734_Sentence_Similarity
-LE_737_Sentence_Similarity_II
-LE_684_Redundant_Connection
-LE_685_Redundant_Connection_II
-LE_547_Friend_Circles                     ******
 
-LE_733_Flood_Fill
 
-#Topological Sort
-LE_207_Course_Schedule
 
-LE_332_Reconstruct_Itinerary
 
-LE_133_Clone_Graph
+LeetCode 964. Least Operators to Express Number
+LeetCode 959. Regions Cut By Slashes
+LeetCode 882. Reachable Nodes In Subdivided Graph
