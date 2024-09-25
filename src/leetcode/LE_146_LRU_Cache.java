@@ -89,10 +89,6 @@ public class LE_146_LRU_Cache {
         public void put(int key, int val) {
             if (map.containsKey(key)) {//no item number increase, so no need to worry about capacity
                 Node node = map.get(key);
-                /**
-                 * !!!
-                 * Don't forget
-                 */
                 node.val = val;//!!!
                 moveToTail(node);
                 return;
@@ -106,7 +102,7 @@ public class LE_146_LRU_Cache {
              * ">=", NOT ">"
              */
             if (map.size() >= capacity) {
-                map.remove(head.next.key);
+                map.remove(head.next.key);// most recent visited is at tail, so remove from head
                 removeNode(head.next);
             }
 

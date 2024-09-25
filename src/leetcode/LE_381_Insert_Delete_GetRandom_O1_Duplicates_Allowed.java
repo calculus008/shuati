@@ -7,15 +7,18 @@ import java.util.*;
  */
 public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
     /**
-     Design a data structure that supports all following operations in average O(1) time.
+     RandomizedCollection is a data structure that contains a collection of numbers, possibly duplicates (i.e., a multiset).
+     It should support inserting and removing specific elements and also reporting a random element.
 
-     Note: Duplicate elements are allowed.(!!!)
+     Implement the RandomizedCollection class:
 
-     insert(val): Inserts an item val to the collection.
-     remove(val): Removes an item val from the collection if present.
-     getKthSmallest: Returns a random element from current collection of elements.
-                The probability of each element being returned is linearly related to
-                the number of same value the collection contains.
+     RandomizedCollection() Initializes the empty RandomizedCollection object.
+     bool insert(int val) Inserts an item val into the multiset, even if the item is already present. Returns true if the item is not present, false otherwise.
+     bool remove(int val) Removes an item val from the multiset if present. Returns true if the item is present, false otherwise. Note that if val has multiple occurrences in the multiset, we only remove one of them.
+     int getRandom() Returns a random element from the current multiset of elements. The probability of each element being returned is linearly related to the number of the same values the multiset contains.
+     You must implement the functions of the class such that each function works on average O(1) time complexity.
+
+     Note: The test cases are generated such that getRandom will only be called if there is at least one item in the RandomizedCollection.
      Example:
 
      // Init an empty collection.
@@ -38,6 +41,10 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
 
      // getKthSmallest should return 1 and 2 both equally likely.
      collection.getKthSmallest();
+
+     Hard
+
+     https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed
      */
 
     /**
@@ -46,14 +53,14 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
 
         Modified from LE_380_Insert_Delete_GetRandom_O1:
         Instead of using Map<Integer, Integer>, use Map<Integer, LinkedHashSet<>>, because now we may have duplicates,
-        so, for each inserted value, need to save its index in list in LinkedHashSet.
+        so, for each inserted value, need to save its INDEX(!!!) in list in LinkedHashSet.
 
         1.To start, we know HashMap satisfies insert/remove in O(1), but not random retrieval.
           So we need another data structure.
         2.ArrayList "list" is the data structure satisfies random retrieval requirements.
-        3.HashMap uses the input val as key, the value is set, which stores the indexes of the key value
+        3.HashMap uses the input val as key, the value is Set, which stores the indexes of the key value
           in ArrayList "nums"
-        4.So that remove can trace the it back to "list" and remove it in O(1) by using copy and remove trick
+        4.So that remove can trace it back to "list" and remove it in O(1) by using copy and remove trick
         5.In HashMap, why use LinkedHashSet, not list?
           Remove()
           For list, we can remove by index or remove an object from list.
@@ -105,7 +112,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
 
             /**
              * 1.Get the first element in LinkedHashSet, remove it from the set in HashMap.
-             *   Remove the first element from LinkedHashSet is O(1)
+             *   Remove the first element from LinkedHashSet is O(1) (!!!)
              **/
             int idx = map.get(val).iterator().next();//Use iterator to get the first element in set
             map.get(val).remove(idx);//remove the value from set
@@ -230,7 +237,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
 
     /**
      * Solution 3
-     * Same as Solutin 2, my version
+     * Same as Solution 2, my version
      *
      * 比较LE_380_Insert_Delete_GetRandom_O1，我们需要存储相同value在list中出现的所有的indexes。
      * 问题的焦点是，如何保证remove()是O(1)。这里，remove()要有两个操作：
@@ -255,7 +262,7 @@ public class LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed {
         class Element {
             int idx, val;
             public Element(int idx, int val) {
-                this.idx = idx;
+                this.idx = idx;//val 在 HashMap 的 indices 列表中是第几个数
                 this.val = val;
             }
         }

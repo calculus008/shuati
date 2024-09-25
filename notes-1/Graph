@@ -55,6 +55,11 @@ LeetCode 964. Least Operators to Express Number
 LeetCode 959. Regions Cut By Slashes
 LeetCode 882. Reachable Nodes In Subdivided Graph
 
+
+# Finding Cycle
+Find_Cycle
+Find_Cycle_For_Graph
+
 1. Cycle Detection in Directed Graph (using DFS):
 Use Depth-First Search (DFS) with a recursion stack.
 If a node is visited twice during the recursion (i.e., it's in the recursion stack), a cycle is detected.

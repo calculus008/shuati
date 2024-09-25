@@ -9,6 +9,9 @@ import java.util.Map;
  * Question Description
  * Say I'm typing on a phone. Given a prefix String,and a dictionary.
  * Find all auto-complete word for the given prefix string
+ *
+ * Compare with LE_642_Design_Search_Autocomplete_System, here we don't have the requirement to output based on
+ * "hotness" of the prefix.
  */
 
 /**
@@ -56,7 +59,7 @@ class TrieNode {
     TrieNode[] children;
     boolean isWord;
     String word;
-    List<String> startWith;
+    List<String> startWith;//!!!
 
     public TrieNode() {
         children = new TrieNode[26];
@@ -79,16 +82,10 @@ class Trie {
         TrieNode cur = root;
         for (char c : w.toCharArray()) {
             int idx = c - 'a';
-
             if (cur.children[idx] == null) {
                 cur.children[idx] = new TrieNode();
             }
-
-            /**
-             * !!!
-             * We start from root, root has no value, set startWith for the next level, move to that level
-             */
-            cur.children[idx].startWith.add(w);
+            cur.children[idx].startWith.add(w); //We start from root, root has no value, set startWith for the next level, move to that level
             cur = cur.children[idx];
         }
         cur.isWord = true;
@@ -108,7 +105,6 @@ class Trie {
             if (cur.children[idx] == null) {
                 return res;
             }
-
             cur = cur.children[idx];
         }
 

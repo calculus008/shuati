@@ -75,7 +75,6 @@ public class LE_642_Design_Search_Autocomplete_System_Mine {
                     if (next == null) {
                         return res;
                     }
-
                     cur = next;
                 }
 
@@ -101,9 +100,6 @@ public class LE_642_Design_Search_Autocomplete_System_Mine {
         }
 
         public List<String> input(char c) {
-            /**
-             *
-             */
             if (c == '#') {
                 /**
                  * "the previously typed sentence should be recorded in your system."

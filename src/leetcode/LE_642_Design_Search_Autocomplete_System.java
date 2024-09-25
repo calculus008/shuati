@@ -90,10 +90,7 @@ public class LE_642_Design_Search_Autocomplete_System {
     public class AutocompleteSystem {
         class TrieNode {
             Map<Character, TrieNode> children;
-            /**
-             * remember the frequency of each word that goes through this TrieNode
-             */
-            Map<String, Integer> counts;
+            Map<String, Integer> counts;//remember the frequency of each word that goes through this TrieNode
             boolean isWord;
 
             public TrieNode() {
@@ -134,17 +131,13 @@ public class LE_642_Design_Search_Autocomplete_System {
                     curr.children.put(c, next);
                 }
                 curr = next;
-
-                /**
-                 * Update count
-                 */
-                curr.counts.put(s, curr.counts.getOrDefault(s, 0) + count);
+                curr.counts.put(s, curr.counts.getOrDefault(s, 0) + count); //update count
             }
             curr.isWord = true;
         }
 
         public List<String> input(char c) {
-            if (c == '#') {
+            if (c == '#') { //"When the input is a special character, it means the sentence ends, and in this case, you need to return an empty list."
                 add(prefix, 1);
                 prefix = "";
                 return new ArrayList<String>();
@@ -155,7 +148,7 @@ public class LE_642_Design_Search_Autocomplete_System {
             for (char cc : prefix.toCharArray()) {
                 TrieNode next = curr.children.get(cc);
                 if (next == null) {
-                    return new ArrayList<String>();
+                    return new ArrayList<String>(); //not able to find the sentences with existing prefix
                 }
                 curr = next;
             }

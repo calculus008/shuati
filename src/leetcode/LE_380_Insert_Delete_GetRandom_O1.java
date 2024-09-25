@@ -76,7 +76,7 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
             boolean contain = locs.containsKey(val);
             if(contain) return false;
 
-            locs.put(val, nums.size());
+            locs.put(val, nums.size());//!!!
             nums.add(val);
             return true ;
         }
@@ -139,16 +139,10 @@ public class LE_380_Insert_Delete_GetRandom_O1 {
             if (idx < list.size() - 1) {
                 int lastVal = list.get(list.size() - 1);
                 list.set(idx, lastVal);
-                /**
-                 * !!!
-                 */
-                map.put(lastVal, idx);
+                map.put(lastVal, idx); //!!!
             }
             list.remove(list.size() - 1);
-            /**
-             * !!!
-             */
-            map.remove(val);
+            map.remove(val);//!!!
 
             return true;
         }

@@ -1,0 +1,118 @@
+# OOP
+Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which are instances of
+classes. OOP has four main characteristics:
+
+Encapsulation: Bundling data (attributes) and methods (functions) that operate on the data into a single unit,
+               and restricting access to some of the object's components.
+Inheritance: Mechanism by which one class can inherit fields and methods from another class.
+Polymorphism: Ability for objects of different types to be accessed through the same interface, especially via
+               method overriding.
+Abstraction: Hiding complex implementation details and exposing only essential features.
+
+
+# RuntimeException
+In Java, a RuntimeException is an exception that occurs during the execution of the program, indicating a problem that
+could have been avoided by proper checks in the code. These exceptions are unchecked exceptions, meaning they do not
+need to be declared in the method signature or caught explicitly. Common examples include NullPointerException,
+ArrayIndexOutOfBoundsException, and ArithmeticException. Runtime exceptions often signal programming errors, like illegal
+arguments, or situations where the logic of the program does not correctly handle a given case.
+
+# Class Visibility
+In Java, access modifiers determine the visibility of classes, methods, and fields:
+
+public: Accessible from any class, within or outside the package.
+private: Accessible only within the class where it's defined.
+default (no keyword): Accessible only within the same package.
+protected: Accessible within the same package and subclasses, even if they are in different packages.
+These modifiers control how other parts of the code can access or modify certain variables and methods.
+
+# Polymorphism
+Polymorphism in Java is a core concept of object-oriented programming that allows objects of different types to be treated
+as objects of a common superclass. It occurs in two main forms:
+
+1.Compile-time polymorphism (Method Overloading): This is when multiple methods have the same name but different parameter lists.
+2.Runtime polymorphism (Method Overriding): This is when a subclass provides a specific implementation of a method already defined in its superclass.
+
+Polymorphism enables flexibility and reusability by allowing methods to operate on objects of various types through dynamic method dispatch.
+
+## Overloading Example:
+class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Calculator calc = new Calculator();
+        System.out.println(calc.add(2, 3));      // Output: 5 (int version)
+        System.out.println(calc.add(2.5, 3.5));  // Output: 6.0 (double version)
+    }
+}
+
+## Overriding Example:
+class Animal {
+    public void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Cat meows");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Dog();
+        myAnimal.sound();  // Output: Dog barks
+
+        myAnimal = new Cat();
+        myAnimal.sound();  // Output: Cat meows
+    }
+}
+
+# Difference between Interface and Abstract class
+1.Purpose:
+Interface: Defines a contract (set of methods) that implementing classes must follow. It supports multiple inheritance.
+Abstract Class: Meant for sharing common functionality and behavior between related classes. It provides a base structure.
+
+2.Methods:
+Interface: Methods are abstract by default (no body, until Java 8 introduced default methods).
+Abstract Class: Can have both abstract methods (without body) and concrete methods (with body).
+
+3.Inheritance:
+Interface: A class can implement multiple interfaces.
+Abstract Class: A class can only extend one abstract class (single inheritance).
+
+4.Fields:
+Interface: Can only have static and final variables (constants).
+Abstract Class: Can have non-final fields and instance variables.
+
+5.Use Case:
+Interface: Best used for defining capabilities (e.g., Runnable, Serializable).
+Abstract Class: Used for defining a base class with shared behavior, while leaving some methods to be implemented by
+                subclasses.
+
+
+# What is Java String
+In Java, a String is an object that represents a sequence of characters. Strings in Java are immutable, meaning once
+a string is created, it cannot be changed. If modifications are made (e.g., concatenation), a new string is created in
+memory. Java provides a String class with methods for manipulating and processing string data, such as concatenation,
+comparison, substring extraction, and more. Strings are commonly used and treated as objects but can be created using
+string literals as well ("text").
+
+
