@@ -151,4 +151,40 @@ public class LE_1114_Print_In_Order {
             printThird.run();
         }
     }
+
+    class Foo1_Semaphore_multiple_rounds {
+        Semaphore run2, run3, run1;
+        int n;
+        public Foo1_Semaphore_multiple_rounds(int n) {
+            this.n = n;
+            run1 = new Semaphore(1);  // Start the first method initially
+            run2 = new Semaphore(0);
+            run3 = new Semaphore(0);
+        }
+
+        public void first(Runnable printFirst) throws InterruptedException {
+            for (int i = 0; i < n; i++) {
+                run1.acquire();  // Wait for the signal to start the next round
+                printFirst.run();
+                run2.release();  // Allow second() to run
+            }
+        }
+
+        public void second(Runnable printSecond) throws InterruptedException {
+            for (int i = 0; i < n; i++) {
+                run2.acquire();  // Wait for first() to complete
+                printSecond.run();
+                run3.release();  // Allow third() to run
+            }
+        }
+
+        public void third(Runnable printThird) throws InterruptedException {
+            for (int i = 0; i < n; i++) {
+                run3.acquire();  // Wait for second() to complete
+                printThird.run();
+                run1.release();  // Allow the next round of first() to run
+            }
+        }
+    }
+
 }
