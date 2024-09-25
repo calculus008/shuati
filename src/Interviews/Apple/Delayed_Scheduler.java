@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Simple Scheduler to kick off Runnable Tasks.
  * Scheduler kicks off the immediate next task and looks for any other task to schedule.
  * If nothing else, sleeps.
- * Tasks schedules with past time are run immediately.
+ * Tasks are schedules with past time are run immediately.
  * Clients can schedule new tasks at anytime by calling schedule(Long, Runable)
  *
  */
@@ -58,7 +58,7 @@ class Delayed_Scheduler {
         public DelayedScheduler() {
             tasks = new PriorityQueue<>((a, b) -> Long.compare(a.timeToRun, b.timeToRun));
             taskRunnerThread = new Thread(new TaskRunner());
-            id = new AtomicInteger(0); // this id for?
+            id = new AtomicInteger(0); // just for init id field
             taskRunnerThread.start();
         }
 

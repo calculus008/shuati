@@ -143,6 +143,14 @@ public class CustomizedHashMap<K, V> {
         return null;
     }
 
+    /**
+     * remove() operation will require a write lock for the entry, since it modifies the HashMap by removing
+     * an entry.
+     *
+     * Additionally, after removing the entry from the HashMap, you should also remove the associated
+     * ReentrantReadWriteLock for that entry, as it is no longer needed. Failing to do so may cause memory leaks,
+     * as the lock would remain in memory even though the corresponding entry has been deleted.
+     */
     public boolean remove(K key) {
         if (isEmpty()) {
             throw new RuntimeException("Map is empty");

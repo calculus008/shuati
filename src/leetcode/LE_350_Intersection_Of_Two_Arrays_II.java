@@ -102,16 +102,15 @@ public class LE_350_Intersection_Of_Two_Arrays_II {
     /**
      !!!Follow up:
      1.What if the given array is already sorted? How would you optimize your algorithm?
-       Use solution 2 (without sorting), Time : O(m + n).
-
-       Even though both Solution1 and Solution2 are both O(m + n), Solution2 has the following
-       advantages:
-         a.Avoid the hashmap related maintaining cost (both space and time)
-         b.For cases that one array is much smaller than the other, while loop can terminate
-           early so that we don't have to go through the full length of n + m.
+       Use solution 2 (without sorting), Time : O(Max(m + n)).
 
      2.What if nums1's size is small compared to nums2's size? Which algorithm is better?
-       Solution2, see #a and #b above.
+     This one is a bit tricky. Let's say nums1 is K size. Then we should do binary search for every element in nums1.
+     Each lookup is O(log N), and if we do K times, we have O(K log N).
+     If K this is small enough, O(K log N) < O(max(N, M)). Otherwise, we have to use the previous two pointers method.
+     let's say A = [1, 2, 2, 2, 2, 2, 2, 2, 1], B = [2, 2]. For each element in B, we start a binary search in A. To deal with duplicate entry, once you find an entry, all the duplicate element is around that that index, so you can do linear search scan afterward.
+
+     Time complexity, O(K(logN) + N). Plus N is worst case scenario which you have to linear scan every element in A. But on average, that shouldn't be the case. so I'd say the Time complexity is O(K(logN) + c), c (constant) is number of linear scan you did.
 
      3.What if elements of nums2 are stored on disk, and the memory is limited such that you
        cannot load all elements into the memory at once?

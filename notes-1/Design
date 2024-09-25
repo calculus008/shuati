@@ -1,0 +1,20 @@
+#Design
+LE_642_Design_Search_Autocomplete_System
+LE_642_Design_Search_Autocomplete_System_Mine
+LE_380_Insert_Delete_GetRandom_O1         设计和实现随机播放功能。
+                                          我用双重循环生成随机序列O(n^2)，面试官问用单循环从ArrayList里随机往外拿是否能快，
+                                          我指出拿的过程本身也是O(n)，但是我们可以优化，然后默写了一个蠡口三八零，获得了面试官的肯定
+LE_381_Insert_Delete_GetRandom_O1_Duplicates_Allowed  (***)
+LE_460_LFU_Cache
+LE_146_LRU_Cache                          LRU写的双链表，follow up我也不知道咋改进，就随口答了个可以用java的linkedhashmap，
+                                          她说好。
+                                          套了个实际问题，但是本身就是LRU
+                                          follow up with time to leave and if infinity memory how to optimize
+LE_348_Design_Tic_Tac_Toe                 写完之后问怎么拓展成五子棋一类的，没让写代码，就说了下思路
+LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
+LE_1236_Web_Crawler                       后来延展了一下 system design要怎么弄，哪里会是bottle neck
+                                          https://code.dennyzhang.com/web-crawler
+LE_1242_Web_Crawler_Multithreaded
+LE_353_Design_Snake_Game
+Moving_Average
+Moving_Average_MultiThread_1

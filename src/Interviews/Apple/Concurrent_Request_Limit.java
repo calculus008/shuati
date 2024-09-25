@@ -39,17 +39,13 @@ public class Concurrent_Request_Limit {
         }
 
         public void handleRequest(String userId, Runnable requestTask) throws InterruptedException {
-            // Get or create a semaphore for the user
-            Semaphore semaphore = userLimitMap.computeIfAbsent(userId, id -> new Semaphore(maxConcurrentRequests));
+            Semaphore semaphore = userLimitMap.computeIfAbsent(userId, id -> new Semaphore(maxConcurrentRequests)); // Get or create a semaphore for the user
 
-            // Try acquiring a permit
-            if (semaphore.tryAcquire()) {
+            if (semaphore.tryAcquire()) {// Try acquiring a permit
                 try {
-                    // Process the request
-                    requestTask.run();
+                    requestTask.run();// Process the request
                 } finally {
-                    // Release the permit after the request is done
-                    semaphore.release();
+                    semaphore.release();// Release the permit after the request is done
                 }
             } else {
                 System.out.println("Request limit reached for user: " + userId);

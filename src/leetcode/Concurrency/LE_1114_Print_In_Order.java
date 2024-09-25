@@ -95,6 +95,10 @@ public class LE_1114_Print_In_Order {
      *
      * Parameters: permits - the initial number of permits available. This value may be negative,
      * in which case releases must occur before any acquires will be granted.
+     *
+     * When a semaphore is created with new Semaphore(0), it starts in an acquired state. This means that no permits are
+     * initially available, and any thread attempting to acquire a permit will block until another thread releases one by
+     * calling release(). In this state, the semaphore requires a release() before any thread can proceed.
      */
     class Foo1 {
         Semaphore run2, run3;
@@ -123,6 +127,9 @@ public class LE_1114_Print_In_Order {
 
     /**
      * CountDownLatch
+     * In Java, CountDownLatch is a synchronization aid that allows one or more threads to wait until a set of operations
+     * in other threads complete. It is initialized with a count, and each time a thread finishes its work, it calls countDown(),
+     * reducing the count by 1. Once the count reaches zero, all waiting threads can proceed.
      */
     class Foo2 {
         private CountDownLatch latch2 = new CountDownLatch(1);

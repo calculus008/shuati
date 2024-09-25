@@ -1,0 +1,41 @@
+# Concept
+## Deadlock:
+A deadlock occurs when two or more processes or threads are waiting for each other to release resources,
+creating a circular dependency. As a result, none of the processes can proceed. This situation is common
+in concurrent systems.
+
+DeadlockExample
+AvoidDeadlockExample
+
+## Race Condition:
+A race condition happens when two or more threads or processes access shared data concurrently, and the
+outcome depends on the order of execution. If not managed properly, it can lead to inconsistent results
+or unexpected behavior. Proper synchronization is needed to avoid race conditions.
+
+## Difference between Thread and Runnable
+1. Subclassing Thread:
+How: Extend the Thread class and override the run() method.
+Pros: Easier to implement if no other superclass is needed.
+Cons: Restricts inheritance since Java supports single inheritance.
+
+2. Implementing Runnable:
+How: Implement the Runnable interface and pass it to a Thread object.
+Pros: More flexible, separates task from thread management, allows for multiple inheritance
+      (can extend another class).
+Cons: Slightly more complex to implement.
+Preferred: Use Runnable for better flexibility and design separation.
+
+
+
+Scheduler
+Delayed_Scheduler                   ***********
+Concurrent_Request_Limit
+AppleTVSystemUpdater_thread_safe
+BlockQueue (with syncronize and locks)
+Bounded_Blocking_Queue
+Bounded_Blocking_Queue_With_Lock
+CustomizedHashMap
+H2O
+Producer_Consumer
+Expiring_Map_Practice
+

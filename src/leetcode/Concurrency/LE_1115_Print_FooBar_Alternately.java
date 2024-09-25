@@ -43,6 +43,16 @@ public class LE_1115_Print_FooBar_Alternately {
 
     class FooBar_Semaphore {
         private int n;
+
+        /**
+         * When a semaphore is initialized with 0 (new Semaphore(0)), it means that no permits are initially available.
+         * In this state:
+         *
+         * Any thread calling acquire() will block until another thread calls release() to add a permit.
+         * The semaphore starts off in a "locked" state, requiring one or more releases to allow any acquiring threads
+         * to proceed. This is typically used in scenarios where a thread must wait for a specific signal or event before
+         * proceeding.
+         */
         Semaphore foo = new Semaphore(0);
         Semaphore bar = new Semaphore(1);
 
