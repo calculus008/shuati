@@ -24,7 +24,7 @@ public class LE_19_Remove_Nth_Node_From_End_Of_List {
      */
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        //!!! Must use dummy, bcasue the input may have only one node and we try to delete it
+        //!!! Must use dummy, bcause the input may have only one node and we try to delete it
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode slow = dummy;

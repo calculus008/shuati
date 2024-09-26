@@ -7,6 +7,13 @@ in concurrent systems.
 DeadlockExample
 AvoidDeadlockExample
 
+### A deadlock occurs when the following four conditions are simultaneously present:
+Mutual Exclusion: Resources involved must be non-shareable, meaning only one process can use a resource at a time.
+Hold and Wait: A process holding a resource is waiting for additional resources that are held by other processes.
+No Preemption: Resources cannot be forcibly taken from a process; they must be released voluntarily.
+Circular Wait: A closed chain of processes exists where each process is waiting for a resource held by the next
+               process in the chain.
+
 ## Race Condition:
 A race condition happens when two or more threads or processes access shared data concurrently, and the
 outcome depends on the order of execution. If not managed properly, it can lead to inconsistent results
@@ -29,7 +36,7 @@ Preferred: Use Runnable for better flexibility and design separation.
 
 Scheduler
 Delayed_Scheduler                      ***********
-Concurrent_Request_Limit
+Concurrent_Request_Limit               ******
 AppleTVSystemUpdater_thread_safe
 BlockQueue (with syncronize and locks)
 Bounded_Blocking_Queue
