@@ -395,7 +395,7 @@ LE_894_All_Possible_Full_Binary_Trees
 LE_1060_Missing_Element_In_Sorted_Array                   Binary Search  *****
 LE_212_Word_Search_II                                     Trie
 
-2024-09-24 Plan:
-1.Go over the LE problems shown in mianjing
-2.Java Concurrency (book and LE/interview problems)
-3.System Design
+LE_317_Shortest_Distance_From_All_Buildings               Hard
+
+LE_1146_Snapshot_Array                                    *****
+LE_907_Sum_Of_Subarray_Minimums                           *****

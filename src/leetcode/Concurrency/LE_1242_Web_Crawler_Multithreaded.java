@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.Concurrency;
 
 import java.util.*;
 import java.util.concurrent.*;

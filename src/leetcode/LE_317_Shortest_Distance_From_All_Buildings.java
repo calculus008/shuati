@@ -62,7 +62,7 @@ public class LE_317_Shortest_Distance_From_All_Buildings {
 
             int m = grid.length;
             int n = grid[0].length;
-            int[][] dist = new int[m][n]; //For empty land, sum of dirs to all buildings it can reach
+            int[][] dist = new int[m][n]; //For empty land, sum of distances to all buildings it can reach
             int[][] nums = new int[m][n]; //For empty land, how many builds it can reach
             int buildingCount = 0;
 

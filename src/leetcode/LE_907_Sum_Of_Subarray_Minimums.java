@@ -60,22 +60,22 @@ public class LE_907_Sum_Of_Subarray_Minimums {
             int MOD = 1000000007;
 
             Stack<Integer> stack = new Stack<>();
-            long sumOfMinimums = 0;
+            long sum = 0;
 
             for (int i = 0; i <= arr.length; i++) {// building monotonically increasing stack
                 while (!stack.empty() && (i == arr.length || arr[stack.peek()] >= arr[i])) {//">="
-                    int mid = stack.pop(); // next smaller item for arr[item] is arr[i], previous smaller item for item at idx mid is the one at the idx of stack.peek() now.
-                    int leftBoundary = stack.empty() ? -1 : stack.peek(); // previous smaller item for arr[mid] is arr[stack.peek()]
-                    int rightBoundary = i;
-                    long count = (mid - leftBoundary) * (rightBoundary - mid) % MOD;
+                    int cur = stack.pop();
+                    int l = stack.empty() ? -1 : stack.peek(); // previous smaller item for arr[cur] is arr[stack.peek()]
+                    int r = i;
+                    long count = (cur - l) * (r - cur) % MOD;
 
-                    sumOfMinimums += (count * arr[mid]) % MOD;
-                    sumOfMinimums %= MOD;
+                    sum += (count * arr[cur]) % MOD; //!!! arr[cur]
+                    sum %= MOD;
                 }
                 stack.push(i);
             }
 
-            return (int) (sumOfMinimums);
+            return (int) (sum);
         }
     }
 
