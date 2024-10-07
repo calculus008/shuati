@@ -399,3 +399,27 @@ LE_317_Shortest_Distance_From_All_Buildings               Hard
 
 LE_1146_Snapshot_Array                                    *****
 LE_907_Sum_Of_Subarray_Minimums                           *****
+
+
+LE_622_Design_Circular_Queue
+
+
+Plan
+# Coding
+Media/Hard in last 3 months
+Design
+Java Concurrency
+Mono Stack
+TreepMap
+Trie
+Topological Sort
+
+# System Design
+Go over
+DB
+Cassandra
+
+# Yahoo Project ***
+Metrics
+DB and storage usage, connection, query etc
+

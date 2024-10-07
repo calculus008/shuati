@@ -36,13 +36,18 @@ Preferred: Use Runnable for better flexibility and design separation.
 
 Scheduler
 Delayed_Scheduler                      ***********
+SimpleSchedulerWithSync
+SimpleSchedulerWithLock
+SimpleScheduler
 Concurrent_Request_Limit               ******
 AppleTVSystemUpdater_thread_safe
 BlockQueue (with syncronize and locks)
 Bounded_Blocking_Queue
 Bounded_Blocking_Queue_With_Lock
+LE_1188_Design_Bounded_Blocking_Queue
 CustomizedHashMap
 H2O
+LE_1117_Building_H2O
 Producer_Consumer
 Expiring_Map_Practice
 LE_1242_Web_Crawler_Multithreaded      *****

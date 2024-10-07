@@ -63,41 +63,36 @@ public class LE_10_Regular_Expression_Matching {
     /**
      * Time and Space : O(mn)
      */
-    class Solution_Bottom_Up_Practice {
+    class Solution_practice {
         public boolean isMatch(String s, String p) {
             if (s == null || p == null) return false;
 
-            int m = s.length();
-            int n = p.length();
-            boolean[][] dp = new boolean[m + 1][n + 1];
-            dp[0][0] = true;
+            boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+            dp[0][0] = true;//!!!
 
-            for (int j = 2; j <= n; j++) {
+            for (int j = 1; j < dp[0].length; j++) {
                 if (p.charAt(j - 1) == '*') {
-                    dp[0][j] = dp[0][j - 2];
+                    if (dp[0][j - 1] || (j > 1 && dp[0][j - 2])) {// * or a* as empty string
+                        dp[0][j] = true;
+                    }
                 }
             }
 
-            for (int i = 1; i <= m; i++) {
-                for (int j = 1; j <= n; j++) {
-                    char curS = s.charAt(i - 1);
-                    char curP = p.charAt(j - 1);
-
-                    if (curS == curP || curP == '.') {
+            for (int i = 1; i < dp.length; i++) {
+                for (int j = 1; j < dp[0].length; j++) {
+                    if(s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.') {
                         dp[i][j] = dp[i - 1][j - 1];
-                    } else if (curP == '*') {
-                        char preP = p.charAt(j - 2);
-
-                        if (preP != curS && preP != '.') {
-                            dp[i][j] = dp[i][j - 2];
+                    } else if(p.charAt(j - 1) == '*') {
+                        if(s.charAt(i - 1) != p.charAt(j - 2) && p.charAt(j - 2) != '.') {
+                            dp[i][j] = dp[i][j - 2];  // 'a*' is taken as empty string
                         } else {
-                            dp[i][j] = dp[i][j - 2] || dp[i - 1][j] || dp[i - 1][j - 2];
+                            dp[i][j] = dp[i][j - 1] || dp[i][j - 2] || dp[i - 1][j]; // dp[i][j - 1]: a* matches as single a, dp[i][j - 2]: a* matches empty string, dp[i - 1][j]: a* matches as multiple a
                         }
                     }
                 }
             }
 
-            return dp[m][n];
+            return dp[s.length()][p.length()];
         }
     }
 

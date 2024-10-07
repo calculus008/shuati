@@ -27,15 +27,15 @@ public class LE_19_Remove_Nth_Node_From_End_Of_List {
         //!!! Must use dummy, bcause the input may have only one node and we try to delete it
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode slow = dummy;
-        ListNode fast = dummy;
+        ListNode slow = dummy; //dummy
+        ListNode fast = dummy; //dummy
 
         //!!! 要check fast是否为NUll
         for (int i = 0; i <= n && fast != null; i++) {
             fast = fast.next;
         }
 
-        //!!!"fast != null", NOT "fast.next != null),becasue you need to do "fast = fast.next".
+        //!!!"fast != null", NOT "fast.next != null),because you need to do "fast = fast.next".
         //   If fast is null, "fast = fast.next" will throw null pointer exception
         while (fast != null) {
             fast = fast.next;

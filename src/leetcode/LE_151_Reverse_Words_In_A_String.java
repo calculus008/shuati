@@ -52,16 +52,10 @@ public class LE_151_Reverse_Words_In_A_String {
 
             int l = 0, r = 0;
             while (l < n && r < n) {
-                /**
-                 * find left side of a word
-                 */
-                while (l < n && ch[l] == ' ') l++;
+                while (l < n && ch[l] == ' ') l++; //find left
                 r = l + 1;
 
-                /**
-                 * find right side of a word
-                 */
-                while (r < n && ch[r] != ' ') r++;
+                while (r < n && ch[r] != ' ') r++; //find right
 
                 reverse(ch, l, r - 1);
                 l = r;

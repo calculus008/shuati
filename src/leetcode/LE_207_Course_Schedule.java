@@ -35,7 +35,7 @@ public class LE_207_Course_Schedule {
         int[] indegree = new int[numCourses];
         int res = numCourses;
 
-        //Get indegree for all nodes
+        //Get indegree for all nodes, pair[0] is the course id, pair[1] is its rerequisite course id
         for (int[] pair : prerequisites) {
             indegree[pair[0]]++;
         }

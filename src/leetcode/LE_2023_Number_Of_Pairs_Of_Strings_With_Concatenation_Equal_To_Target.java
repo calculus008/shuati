@@ -51,7 +51,7 @@ public class LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Targ
     /**
      * Time : O(N * T), N - length of nums, T - average length of each num
      *
-     * Use HashMap as count map, then iterate target by separting it into two parts, check if the
+     * Use HashMap as count map, then iterate target by separating it into two parts, check if the
      * two parts exist in count map. Then calculate the result.
      */
     public int numOfPairs(String[] nums, String target) {
