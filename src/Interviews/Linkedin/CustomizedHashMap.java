@@ -34,10 +34,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *
  */
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 public class CustomizedHashMap<K, V> {
-    /**
-     * !!!
-     */
+
     static class Entry<K, V> {
         Entry<K, V> next;
         K key;
@@ -49,21 +52,18 @@ public class CustomizedHashMap<K, V> {
         }
     }
 
-    Entry<K, V>[] arr = null;
-    int capacity = 0;
-    List<ReentrantReadWriteLock> locks = null;
+    Entry<K, V>[] arr;
+    int capacity;
+    List<ReentrantReadWriteLock> locks;
     AtomicInteger count;
 
+    @SuppressWarnings("unchecked") // for creating generic array
     public CustomizedHashMap(int capacity) {
-        /**
-         * !!!
-         */
-        arr = (Entry<K, V>[])new Object[capacity];
-
-        // arr = new Entry<K, V>[capacity]; In java, we couldnt create generic array
+        arr = (Entry<K, V>[]) new Entry[capacity];  // Generic array creation
         this.capacity = capacity;
+        count = new AtomicInteger(0);
+        locks = new ArrayList<>(capacity);
 
-        locks = new ArrayList<ReentrantReadWriteLock>(capacity);
         for (int i = 0; i < capacity; i++) {
             locks.add(new ReentrantReadWriteLock());
         }
@@ -82,32 +82,28 @@ public class CustomizedHashMap<K, V> {
             throw new RuntimeException("Map is full");
         }
 
-        int index = key.hashCode() % capacity;
-        Entry<K, V> newEntry = new Entry<K, V>(key, val);
+        int index = Math.abs(key.hashCode()) % capacity;  //Use Math.abs to prevent negative hashcode
+        Entry<K, V> newEntry = new Entry<>(key, val);
 
         try {
             locks.get(index).writeLock().lock();
             if (arr[index] == null) {
                 arr[index] = newEntry;
+                count.incrementAndGet();  // !!! Only increment count for new entries
             } else {
                 Entry<K, V> curEntry = arr[index];
-                Entry<K, V> preEntry = null;
-
                 while (curEntry != null) {
                     if (curEntry.key.equals(key)) {
-                        curEntry.val = val;
-                        return;
+                        curEntry.val = val;  // Update the value if the key exists
+                        return;  //!!! Return early
                     }
-                    preEntry = curEntry;
+                    if (curEntry.next == null) {
+                        curEntry.next = newEntry;
+                        return; //!!!
+                    }
                     curEntry = curEntry.next;
                 }
-
-                preEntry.next = newEntry;
             }
-
-            count.incrementAndGet();
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             locks.get(index).writeLock().unlock();
         }
@@ -118,7 +114,7 @@ public class CustomizedHashMap<K, V> {
             throw new RuntimeException("Map is empty");
         }
 
-        int index = key.hashCode() % capacity;
+        int index = Math.abs(key.hashCode()) % capacity;
 
         try {
             locks.get(index).readLock().lock();
@@ -126,7 +122,6 @@ public class CustomizedHashMap<K, V> {
                 return null;
             } else {
                 Entry<K, V> curEntry = arr[index];
-
                 while (curEntry != null) {
                     if (curEntry.key.equals(key)) {
                         return curEntry.val;
@@ -134,8 +129,6 @@ public class CustomizedHashMap<K, V> {
                     curEntry = curEntry.next;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             locks.get(index).readLock().unlock();
         }
@@ -144,64 +137,213 @@ public class CustomizedHashMap<K, V> {
     }
 
     /**
-     * remove() operation will require a write lock for the entry, since it modifies the HashMap by removing
-     * an entry.
-     *
-     * Additionally, after removing the entry from the HashMap, you should also remove the associated
-     * ReentrantReadWriteLock for that entry, as it is no longer needed. Failing to do so may cause memory leaks,
-     * as the lock would remain in memory even though the corresponding entry has been deleted.
+     * no need to remove lock from locks if entry is already empty. If it sets to null, get and put may
+     * see nullPointerException. Memory leak is not a concern since a lock takes very little space, it's nothing
+     * compared the potential errors that could arise from missing locks. We can reuse the lock in the future.
      */
     public boolean remove(K key) {
         if (isEmpty()) {
             throw new RuntimeException("Map is empty");
         }
 
-        int index = key.hashCode() % capacity;
+        int index = Math.abs(key.hashCode()) % capacity;
 
-        if (arr[index] == null) {
-            return false;
-        } else {
-            Entry<K, V> curEntry = arr[index];
-            Entry<K, V> preEntry = null;
+        try {
+            locks.get(index).writeLock().lock();
+            if (arr[index] == null) {
+                return false;
+            } else {
+                Entry<K, V> curEntry = arr[index];
+                Entry<K, V> preEntry = null;
 
-            while (curEntry != null) {
-                if (curEntry.key.equals(key)) {
-                    if (preEntry == null) {
-                        arr[index] = curEntry.next;
-                    } else {
-                        preEntry.next = curEntry.next;
+                while (curEntry != null) {
+                    if (curEntry.key.equals(key)) {
+                        if (preEntry == null) {
+                            arr[index] = curEntry.next;
+                        } else {
+                            preEntry.next = curEntry.next;
+                        }
+
+                        count.decrementAndGet(); //!!!
+                        return true;
                     }
 
-                    count.decrementAndGet();
-                    return true;
+                    preEntry = curEntry;
+                    curEntry = curEntry.next;
                 }
-
-                preEntry = curEntry;
-                curEntry = curEntry.next;
             }
+        } finally {
+            locks.get(index).writeLock().unlock();
         }
 
         return false;
     }
+}
 
-//    void resize() {
-//        int oldSize = this.capacity;
-//        this.capacity = this.capacity * 2;
-//        Entry<K, V>[] oldArr = copyFromOld();
-//        this.arr = (Entry<K, V>[])new Object[this.capacity];
+//public class CustomizedHashMap<K, V> {
+//    /**
+//     * !!!
+//     */
+//    static class Entry<K, V> {
+//        Entry<K, V> next;
+//        K key;
+//        V val;
 //
-//        // Rehash
-//        for (int i = 0; i < oldSize; i++) {
-//            Entry<K, V> entry = oldArr[i];
-//
-//            while (entry != null) {
-//                K key = entry.key;
-//                V val = entry.val;
-//
-//                put(key, val); // Set to a new position
-//                entry = entry.next;
-//            }
+//        Entry(K key, V val) {
+//            this.key = key;
+//            this.val = val;
 //        }
 //    }
-}
+//
+//    Entry<K, V>[] arr = null;
+//    int capacity = 0;
+//    List<ReentrantReadWriteLock> locks = null;
+//    AtomicInteger count;
+//
+//    public CustomizedHashMap(int capacity) {
+//        /**
+//         * !!!
+//         */
+//        arr = (Entry<K, V>[])new Object[capacity];
+//
+//        // arr = new Entry<K, V>[capacity]; In java, we couldnt create generic array
+//        this.capacity = capacity;
+//
+//        locks = new ArrayList<ReentrantReadWriteLock>(capacity);
+//        for (int i = 0; i < capacity; i++) {
+//            locks.add(new ReentrantReadWriteLock());
+//        }
+//    }
+//
+//    public boolean isEmpty() {
+//        return count.intValue() == 0;
+//    }
+//
+//    public boolean isFull() {
+//        return count.intValue() == capacity;
+//    }
+//
+//    public void put(K key, V val) {
+//        if (isFull()) {
+//            throw new RuntimeException("Map is full");
+//        }
+//
+//        int index = key.hashCode() % capacity;
+//        Entry<K, V> newEntry = new Entry<K, V>(key, val);
+//
+//        try {
+//            locks.get(index).writeLock().lock();
+//            if (arr[index] == null) {
+//                arr[index] = newEntry;
+//            } else {
+//                Entry<K, V> curEntry = arr[index];
+//                Entry<K, V> preEntry = null;
+//
+//                while (curEntry != null) {
+//                    if (curEntry.key.equals(key)) {
+//                        curEntry.val = val;
+//                        return;
+//                    }
+//                    preEntry = curEntry;
+//                    curEntry = curEntry.next;
+//                }
+//
+//                preEntry.next = newEntry;
+//            }
+//
+//            count.incrementAndGet();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            locks.get(index).writeLock().unlock();
+//        }
+//    }
+//
+//    public V get(K key) {
+//        if (isEmpty()) {
+//            throw new RuntimeException("Map is empty");
+//        }
+//
+//        int index = key.hashCode() % capacity;
+//
+//        try {
+//            locks.get(index).readLock().lock();
+//            if (arr[index] == null) {
+//                return null;
+//            } else {
+//                Entry<K, V> curEntry = arr[index];
+//
+//                while (curEntry != null) {
+//                    if (curEntry.key.equals(key)) {
+//                        return curEntry.val;
+//                    }
+//                    curEntry = curEntry.next;
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            locks.get(index).readLock().unlock();
+//        }
+//
+//        return null;
+//    }
+//
+//    /**
+//     * remove() operation will require a write lock for the entry, since it modifies the HashMap by removing
+//     * an entry.
+//     */
+//    public boolean remove(K key) {
+//        if (isEmpty()) {
+//            throw new RuntimeException("Map is empty");
+//        }
+//
+//        int index = key.hashCode() % capacity;
+//
+//        if (arr[index] == null) {
+//            return false;
+//        } else {
+//            Entry<K, V> curEntry = arr[index];
+//            Entry<K, V> preEntry = null;
+//
+//            while (curEntry != null) {
+//                if (curEntry.key.equals(key)) {
+//                    if (preEntry == null) {
+//                        arr[index] = curEntry.next;
+//                    } else {
+//                        preEntry.next = curEntry.next;
+//                    }
+//
+//                    count.decrementAndGet();
+//                    return true;
+//                }
+//
+//                preEntry = curEntry;
+//                curEntry = curEntry.next;
+//            }
+//        }
+//
+//        return false;
+//    }
+//
+////    void resize() {
+////        int oldSize = this.capacity;
+////        this.capacity = this.capacity * 2;
+////        Entry<K, V>[] oldArr = copyFromOld();
+////        this.arr = (Entry<K, V>[])new Object[this.capacity];
+////
+////        // Rehash
+////        for (int i = 0; i < oldSize; i++) {
+////            Entry<K, V> entry = oldArr[i];
+////
+////            while (entry != null) {
+////                K key = entry.key;
+////                V val = entry.val;
+////
+////                put(key, val); // Set to a new position
+////                entry = entry.next;
+////            }
+////        }
+////    }
+//}
 

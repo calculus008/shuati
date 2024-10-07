@@ -10,8 +10,6 @@ public class Concurrent_Request_Limit {
 
     /**
      * To design a system where each user can only send out n concurrent requests, you can implement the following approach:
-     *
-     * Approach:
      * Rate Limiting with Semaphores:
      *
      * Use a semaphore to limit the number of concurrent requests per user. Each user has a unique semaphore initialized
