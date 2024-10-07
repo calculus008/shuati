@@ -2,7 +2,7 @@ package Interviews.Apple;
 
 import java.util.*;
 
-public class MySchedulerPracticeSync {
+public class SimpleSchedulerWithSyncPractice {
     static class Task {
         long scheduledTime;
         Runnable task;
@@ -14,8 +14,9 @@ public class MySchedulerPracticeSync {
     }
 
     PriorityQueue<Task> q = new PriorityQueue<>((a, b) -> Long.compare(a.scheduledTime, b.scheduledTime));
+    private boolean isRunning = true;
 
-    public MySchedulerPracticeSync() {
+    public SimpleSchedulerWithSyncPractice() {
         Thread thread = new Thread(this::runScheduler);
         thread.start(); //!!!
     }
@@ -25,14 +26,19 @@ public class MySchedulerPracticeSync {
         notify();  //!!!
     }
 
+    public synchronized void stop() {
+        isRunning = false;
+        notify();
+    }
+
     private void executeTask(Task task) {//synchronized!!!
         new Thread(task.task).start();
     }
 
     private synchronized void runScheduler() {
-        while (true) { //!!1
+        while (isRunning) { //!!1
             try { //!!!
-                if (q.isEmpty()) {
+                if (q.isEmpty() && isRunning) {
                     wait();
                 }
 
@@ -43,19 +49,22 @@ public class MySchedulerPracticeSync {
                     q.poll();
                     executeTask(next);
                 } else {
-                    long waitTime = next.scheduledTime - curTime;
-                    if (waitTime > 0) {
-                        wait(waitTime);
+                    if (next != null) {//!!!!
+                        long waitTime = next.scheduledTime - curTime;
+                        if (waitTime > 0) {
+                            wait(waitTime);
+                        }
                     }
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
+        System.out.println("Scheduler stopped");
     }
 
     public static void main(String[] args) {
-        MySchedulerPracticeSync scheduler = new MySchedulerPracticeSync();
+        SimpleSchedulerWithSyncPractice scheduler = new SimpleSchedulerWithSyncPractice();
 
         scheduler.schedule(System.currentTimeMillis() + 2000, () -> System.out.println("Task 1 executed"));
         scheduler.schedule(System.currentTimeMillis() + 1000, () -> System.out.println("Task 2 executed"));
@@ -67,5 +76,7 @@ public class MySchedulerPracticeSync {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+
+        scheduler.stop();
     }
 }

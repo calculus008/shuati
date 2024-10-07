@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 public class SimpleSchedulerWithSync {
 
     private final PriorityQueue<ScheduledTask> taskQueue = new PriorityQueue<>((a, b) -> Long.compare(a.scheduledTime, b.scheduledTime)); // A priority queue to store scheduled tasks (sorted by time)
+    private volatile boolean isRunning = true;
 
     public SimpleSchedulerWithSync() {   // Constructor starts the scheduler thread
         Thread schedulerThread = new Thread(this::runScheduler);
@@ -16,10 +17,15 @@ public class SimpleSchedulerWithSync {
         notify();  // Notify the scheduler thread that a new task is available
     }
 
+    public synchronized void stop() {
+        isRunning = false;
+        notify();
+    }
+
     private synchronized void runScheduler() {  // The scheduler's main loop to check and run tasks
-        while (true) {
+        while (isRunning) {
             try {
-                while (taskQueue.isEmpty()) { // Wait until a new task is scheduled
+                while (taskQueue.isEmpty() && isRunning) { // Wait until a new task is scheduled
                     wait();
                 }
 
@@ -41,6 +47,7 @@ public class SimpleSchedulerWithSync {
                 Thread.currentThread().interrupt();  // Handle the interrupt
             }
         }
+        System.out.println("Scheduler stopped.");
     }
 
     private void executeTask(ScheduledTask task) {
@@ -79,6 +86,8 @@ public class SimpleSchedulerWithSync {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+
+        scheduler.stop();
     }
 }
 

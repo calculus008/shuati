@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  */
 
-class Delayed_Scheduler {
+class SimpleSchedulerOriginal {
 
     static class Task {
         private long timeToRun;

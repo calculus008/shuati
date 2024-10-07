@@ -5,6 +5,7 @@ import java.util.PriorityQueue;
 public class SimpleSchedulerWithLock  {
     private final PriorityQueue<ScheduledTask> taskQueue = new PriorityQueue<>((a, b) -> Long.compare(a.scheduledTime, b.scheduledTime));
     private final Object lock = new Object();    // Lock object for synchronization
+    private volatile boolean isRunning = true;
 
     public SimpleSchedulerWithLock() {
         Thread schedulerThread = new Thread(this::runScheduler);
@@ -18,11 +19,19 @@ public class SimpleSchedulerWithLock  {
         }
     }
 
+    public void stop() {
+        synchronized (lock) {
+            isRunning = false; // Set the flag to false to stop the scheduler
+            System.out.println(isRunning);
+            lock.notify(); // Notify the scheduler thread to wake up and check the stop flag
+        }
+    }
+
     private void runScheduler() {
-        while (true) {
+        while (isRunning) {
             synchronized (lock) {//!!!
                 try {
-                    while (taskQueue.isEmpty()) {
+                    while (taskQueue.isEmpty() && isRunning) { //!!! Check isRunning
                         lock.wait();
                     }
 
@@ -42,6 +51,7 @@ public class SimpleSchedulerWithLock  {
                 }
             }
         }
+        System.out.println("Scheduler stopped.");
     }
 
     // Method to execute the task
@@ -75,6 +85,8 @@ public class SimpleSchedulerWithLock  {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
+
+        scheduler.stop();
     }
 }
 
