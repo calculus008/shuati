@@ -232,8 +232,8 @@ public class LE_907_Sum_Of_Subarray_Minimums {
      *
      * Then for [3 4 6], substring starts with 3:
      * 3 4 6
-     *   4 6
-     *     6
+     * 3 4
+     * 3
      *
      * All those 3 substring can append to the 4 substring in the first group to form a substring from [9 7 8 3 4 6]
      * that contains element 3, therefore 4 * 3.

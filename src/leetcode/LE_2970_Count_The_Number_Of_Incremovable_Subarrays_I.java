@@ -50,6 +50,60 @@ public class LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I {
      */
 
     /**
+     * https://leetcode.com/problems/count-the-number-of-incremovable-subarrays-ii/solutions/4454192/best-solution-o-n-with-0ms-in-java-c-c-c-python-3-javascript-typescript/
+     *
+     * [1,2,5,2,9,2,4,7,8,9]
+     *  l         r
+     * [2,5,2,9,2,4,7,8,9]
+     */
+    class Solution_1 {
+        public long incremovableSubarrayCount(int[] nums) {
+            int n = nums.length;
+            int leftIdx = 0;
+
+            for (int i = 1; i < n; i++) {
+                if (nums[i - 1] < nums[i]) {
+                    leftIdx++;
+                } else {
+                    break;
+                }
+            }
+
+            if (leftIdx == n - 1) {
+                long ans = (long) n * (n + 1) / 2;
+                return ans;
+            }
+
+            int rightIdx = n - 1;
+
+            for (int i = n - 1; i > 0; i--) {
+                if (nums[i - 1] < nums[i]) {
+                    rightIdx--;
+                } else {
+                    break;
+                }
+            }
+
+            long totalIncremovableSubarrays = 0;
+            totalIncremovableSubarrays += (n - rightIdx) + 1; //keep right side, remove left to each of the right one.
+
+            int l = 0, r = rightIdx;
+
+            while (l <= leftIdx) {
+                while (r < n && nums[l] >= nums[r]) {
+                    r++;
+                }
+                totalIncremovableSubarrays += (n - r + 1); //keep left and remove right
+                l++;
+            }
+
+            return totalIncremovableSubarrays;
+        }
+    }
+
+
+
+    /**
      * https://www.bilibili.com/video/BV1jg4y1y7PA/?spm_id_from=333.337.search-card.all.click
      * 04:31 - 23:10
      *
@@ -64,22 +118,24 @@ public class LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I {
             public int incremovableSubarrayCount(int[] a) {
                 int n = a.length;
                 int i = 0;
-                while (i < n - 1 && a[i] < a[i + 1]) {
+                while (i < n - 1 && a[i] < a[i + 1]) { //找最长递增前缀
                     i++;
                 }
-                if (i == n - 1) { // 每个非空子数组都可以移除
+                if (i == n - 1) { // 整个数组严格递增，每个非空子数组都可以移除
                     return n * (n + 1) / 2;
                 }
 
                 int ans = i + 2; // 不保留后缀的情况 - 移除的数组的右端点的下标是 n-1，左端点从 i+1 开始， i, i-1, i-1...., 0, 1, 一共 i+2 个
 
                 // 枚举保留的后缀为 a[j:]
-                for (int j = n - 1; j == n - 1 || a[j] < a[j + 1]; j--) {
+               int j = n - 1;
+               while ( j == n - 1 || a[j] < a[j + 1]) {
                     while (i >= 0 && a[i] >= a[j]) {
                         i--;
                     }
                     // 可以保留前缀 a[:i+1], a[:i], ..., a[:0] 一共 i+2 个
                     ans += i + 2;
+                    j--;
                 }
                 return ans;
             }

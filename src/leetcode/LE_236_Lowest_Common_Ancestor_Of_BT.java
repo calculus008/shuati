@@ -40,6 +40,9 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
         Medium
 
         https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree
+
+        Related:
+        LE_1650_Lowest_Common_Ancestor_Of_A_Binary_Tree_III
      */
 
     /**
@@ -74,6 +77,7 @@ public class LE_236_Lowest_Common_Ancestor_Of_BT {
     }
 
     /**
+     * p and q may not exist
      * Solution for LI_578_Lowest_Common_Ancestor_III
      */
     class Solution1_A_B_May_Not_Exit {

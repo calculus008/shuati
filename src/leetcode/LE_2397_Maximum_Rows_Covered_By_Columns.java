@@ -57,6 +57,8 @@ public class LE_2397_Maximum_Rows_Covered_By_Columns {
 
     /**
      * Recursion: pick or not pick
+     *      Time:  O(N * M * 2^M)
+     *      Space: O(M * 2 ^ M)
      */
     public int maximumRows(int[][] mat, int cols) {
         return helper(0, cols, mat);

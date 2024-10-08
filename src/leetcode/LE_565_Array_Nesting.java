@@ -85,8 +85,8 @@ public class LE_565_Array_Nesting {
                         visited[k] = true;
                         k = nums[idx];
                         count++;
-                        max = Math.max(max, count);
                     }
+                    max = Math.max(max, count);
                 }
             }
 

@@ -29,7 +29,7 @@ public class LE_284_Peeking_Iterator {
     class PeekingIterator implements Iterator<Integer> {
 
         Iterator<Integer> iter;
-        Integer next = null;
+        Integer next = null; //!!! Integer
 
         public PeekingIterator(Iterator<Integer> iterator) {
             // initialize any member here.

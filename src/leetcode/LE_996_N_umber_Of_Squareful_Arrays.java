@@ -33,12 +33,13 @@ public class LE_996_N_umber_Of_Squareful_Arrays {
 
     /**
      * DFS, BackTracking
+     * A variation of Permutation with duplicates - LE_47_Permutation_II
      */
     class Solution_practice {
         int res = 0;
 
         public int numSquarefulPerms(int[] nums) {
-            Arrays.sort(nums);
+            Arrays.sort(nums); //!!!
             helper(nums, new ArrayList<>(), new boolean[nums.length], -1);
             return res;
         }
@@ -103,10 +104,16 @@ public class LE_996_N_umber_Of_Squareful_Arrays {
             }
         }
 
-        private boolean isSquare(int a, int b) {
-            double sqr = Math.sqrt(a + b); //!!! a + b
-            boolean res = (sqr - Math.floor(sqr)) == 0;  //!!! (sqrt - Math.floor(sqrt)
-            return res;
+        public boolean isSquare(int a, int b) {
+            int sum = a + b;
+            int sqrt = (int) Math.sqrt(sum);  // Compute the square root of the sum
+            return (sqrt * sqrt == sum);
         }
+
+//        private boolean isSquare(int a, int b) {
+//            double sqr = Math.sqrt(a + b); //!!! a + b
+//            boolean res = (sqr - Math.floor(sqr)) == 0;  //!!! (sqrt - Math.floor(sqrt)
+//            return res;
+//        }
     }
 }

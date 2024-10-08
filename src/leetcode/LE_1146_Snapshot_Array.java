@@ -40,6 +40,8 @@ public class LE_1146_Snapshot_Array {
      */
 
     /**
+     *  HashMap + Binary Search => TreeMap
+     *
      *  按照题意，最直接或者"brutal force"的解法是用hashmap, snap ID -> 每次set后的array.
      *  但是，如果array size很大,set的次数也很大，很浪费空间, O(k * n), k : number of set()
      *  is called, n : size of the array.
@@ -83,7 +85,7 @@ public class LE_1146_Snapshot_Array {
      * And this is the minimum space that we need to record all information.
      *
      * For each A[i], we will record its history.
-     * With a snap_id and a its value.
+     * With a snap_id and its value.
      *
      * When we want to get the value in history, just binary search the time point.
      *

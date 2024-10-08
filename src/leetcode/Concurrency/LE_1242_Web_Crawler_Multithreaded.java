@@ -67,6 +67,88 @@ public class LE_1242_Web_Crawler_Multithreaded {
      * LE_1236_Web_Crawler
      */
 
+    class Solution_concurrenthashmap {
+        public List<String> crawl(String startUrl, HtmlParser htmlParser) {
+            String hostname = getHostName(startUrl);
+            Set<String> visited = ConcurrentHashMap.newKeySet();  // A thread-safe set to keep track of visited URLs
+            visited.add(startUrl); // Add the start URL to the visited set
+
+            ExecutorService executorService = Executors.newFixedThreadPool(10); // You can adjust the number of threads
+            Queue<Future<?>> futures = new LinkedList<>(); // Queue to hold tasks (URLs to crawl)
+
+            // Start the crawling process from the start URL
+            futures.offer(executorService.submit(() -> crawlUrl(startUrl, htmlParser, visited, hostname, futures, executorService)));
+
+            while (!futures.isEmpty()) { // Wait for all tasks to complete
+                try {// Block until the next task is finished
+                    futures.poll().get();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            executorService.shutdown(); // Shut down the executor service
+
+            return new ArrayList<>(visited); // Return the list of visited URLs
+        }
+
+        // Method to crawl a specific URL
+        private void crawlUrl(String url, HtmlParser htmlParser, Set<String> visited, String hostname, Queue<Future<?>> futures, ExecutorService executorService) {
+            List<String> urls = htmlParser.getUrls(url);  // Get all the URLs from the current page
+
+            for (String newUrl : urls) {
+                if (getHostName(newUrl).equals(hostname) && visited.add(newUrl)) { // Check if the new URL has the same hostname and hasn't been visited
+                    // Submit a new task for the new URL
+                    futures.offer(executorService.submit(() -> crawlUrl(newUrl, htmlParser, visited, hostname, futures, executorService)));
+                }
+            }
+        }
+
+        private String getHostName(String url) {
+            url = url.substring(7);
+            String[] parts = url.split("/");
+            return parts[0];
+        }
+    }
+
+    //Executor + BlockingQueue
+    class Solution {
+        ExecutorService es;
+        public List<String> crawl(String startUrl, HtmlParser htmlParser)  {
+            es = Executors.newFixedThreadPool( 10, r -> {
+                Thread t = new Thread(r);
+                t.setDaemon(true);
+                return t;
+            });
+
+
+            Set<String> visited = ConcurrentHashMap.newKeySet();
+            Queue<Future<List<String>>> q = new LinkedList();
+            String url = startUrl.split("/")[2];
+            q.add(es.submit(() -> htmlParser.getUrls(startUrl)));
+            visited.add(startUrl);
+            try {
+                while(true) {
+                    if (q.isEmpty())
+                        break;
+                    List<String> l = q.poll().get().stream().filter(x -> x.contains(url))
+                            .collect(Collectors.toList());
+
+                    for (String s : l) {
+                        if (visited.contains(s))
+                            continue;
+                        visited.add(s);
+                        q.add(es.submit(() -> htmlParser.getUrls(s)));
+                    }
+                }
+            }
+            catch (InterruptedException | ExecutionException e) {
+
+            }
+
+            return new ArrayList<String>(visited);
+        }
+    }
 
     /**
      * https://leetcode.com/problems/web-crawler-multithreaded/solutions/699006/java-blockingqueue-executorservice/
@@ -80,7 +162,7 @@ public class LE_1242_Web_Crawler_Multithreaded {
      *
      * Other objects are only modified by the main thread, so no synchronization is needed.
      */
-    class Solution {
+    class Solution_2 {
         public List<String> crawl(String startUrl, HtmlParser htmlParser) {
             String hostName = getHostName(startUrl);
 
