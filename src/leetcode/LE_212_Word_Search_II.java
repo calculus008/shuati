@@ -99,7 +99,7 @@ public class LE_212_Word_Search_II {
 
             if (p.word != null) {
                 res.add(p.word);
-                p.word = null;
+                p.word = null; //!!!
                 /**
                  * !!!
                  * 不能return, for example, find "fight", another word is "fighter", need to continue to search
@@ -107,14 +107,12 @@ public class LE_212_Word_Search_II {
                 // return
             }
 
-            //!!! mark current cell as visited, so the DFS below won't come back to current cell
-            board[i][j] = '#';
+            board[i][j] = '#'; //!!! mark current cell as visited, so the DFS below won't come back to current cell
             helper(board, res, p, i + 1, j);
             helper(board, res, p, i - 1, j);
             helper(board, res, p, i, j + 1);
             helper(board, res, p, i, j - 1);
-            //DFS, recover
-            board[i][j] = c;
+            board[i][j] = c;  //!!!DFS, recover
         }
     }
 

@@ -23,10 +23,10 @@ public class LE_84_Largest_Rectangle_In_Histogram {
         int n = height.length;
         int max = 0;
 
-        for (int i = 0; i <= n; i++) {
+        for (int i = 0; i <= n; i++) { //!!! "<= n"
             int h = i == n ? 0 : height[i];
 
-            while (!stack.isEmpty() && h < height[stack.peek()]) {//!!! "height[stack.peek()]", NOT "stack.peek()"
+            while (!stack.isEmpty() && height[stack.peek()] > h) {//!!! "height[stack.peek()]", NOT "stack.peek()"
                 int x = height[stack.pop()];
                 int right = i - 1;
                 int left = stack.isEmpty() ? 0 : stack.peek() + 1;

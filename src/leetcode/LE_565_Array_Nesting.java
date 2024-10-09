@@ -11,6 +11,7 @@ public class LE_565_Array_Nesting {
      * The first element in s[k] starts with the selection of the element nums[k] of index = k.
      * The next element in s[k] should be nums[nums[k]], and then nums[nums[nums[k]]], and so on.
      * We stop adding right before a duplicate element occurs in s[k].
+     *
      * Return the longest length of a set s[k].
      *
      *

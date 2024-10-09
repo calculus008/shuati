@@ -120,6 +120,10 @@ public class LE_622_Design_Circular_Queue {
         }
     }
 
+    /**
+     * **********************************
+     */
+
     class Node {
         public int value;
         public Node nextNode;
@@ -208,26 +212,20 @@ public class LE_622_Design_Circular_Queue {
      * For example, here is an execution sequence where we exceed the designed capacity of the queue and
      * overwrite the tail element undesirably.
      */
-    class MyCircularQueue {
-
+    class MyCircularQueue_With_Lock {
         private Node head, tail;
         private int count;
         private int capacity;
-        // Additional variable to secure the access of our queue
-        private ReentrantLock queueLock = new ReentrantLock();
+        private final ReentrantLock lock = new ReentrantLock();  // Lock object for thread-safety
 
-        /** Initialize your data structure here. Set the size of the queue to be k. */
-        public MyCircularQueue(int k) {
+        public MyCircularQueue_With_Lock(int k) {
             this.capacity = k;
         }
 
-        /** Insert an element into the circular queue. Return true if the operation is successful. */
         public boolean enQueue(int value) {
-            // ensure the exclusive access for the following block.
-            queueLock.lock();
+            lock.lock();  // Acquire the lock
             try {
-                if (this.count == this.capacity)
-                    return false;
+                if (this.count == this.capacity) return false;
 
                 Node newNode = new Node(value);
                 if (this.count == 0) {
@@ -236,13 +234,70 @@ public class LE_622_Design_Circular_Queue {
                     tail.nextNode = newNode;
                     tail = newNode;
                 }
-                this.count += 1;
 
+                this.count++;
+                return true;
             } finally {
-                queueLock.unlock();
+                lock.unlock();  // Always release the lock
             }
+        }
 
-            return true;
+        public boolean deQueue() {
+            lock.lock();
+            try {
+                if (this.count == 0) return false;
+
+                this.head = this.head.nextNode;
+                this.count--;
+                return true;
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        public int Front() {
+            lock.lock();
+            try {
+                if (this.count == 0) {
+                    throw new NoSuchElementException();
+                } else {
+                    return this.head.value;
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        public int Rear() {
+            lock.lock();
+            try {
+                if (this.count == 0) {
+                    throw new NoSuchElementException();
+                } else {
+                    return this.tail.value;
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        public boolean isEmpty() {
+            lock.lock();
+            try {
+                return (this.count == 0);
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        public boolean isFull() {
+            lock.lock();
+            try {
+                return (this.count == this.capacity);
+            } finally {
+                lock.unlock();
+            }
         }
     }
+
 }

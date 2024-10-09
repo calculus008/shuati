@@ -80,8 +80,8 @@ public class LE_1242_Web_Crawler_Multithreaded {
             futures.offer(executorService.submit(() -> crawlUrl(startUrl, htmlParser, visited, hostname, futures, executorService)));
 
             while (!futures.isEmpty()) { // Wait for all tasks to complete
-                try {// Block until the next task is finished
-                    futures.poll().get();
+                try {
+                    futures.poll().get(); //retrieving the next task (Future) from the queue, waiting for that task to complete if necessary, and then getting the result of that task.
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

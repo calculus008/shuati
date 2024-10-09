@@ -61,7 +61,7 @@ public class LE_1963_Minimum_Number_Of_Swaps_To_Make_The_String_Balanced {
 
             if (l < r) {
                 res++; // a swap is required
-                l++; //!!! after swap, we have a left
+                l++; //!!! after swap, we have a new left
                 r--; //!!! after swap, we remove a right
             }
         }

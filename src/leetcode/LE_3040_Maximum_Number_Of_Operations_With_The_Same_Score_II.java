@@ -63,7 +63,7 @@ public class LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II {
         }
 
         public int helper(int i, int j, int target) {
-            for (int k = 0; k < nums.length; k++) {
+            for (int k = 0; k < nums.length; k++) {//init mem
                 Arrays.fill(memo[k], -1);
             }
             return dfs(i, j, target);

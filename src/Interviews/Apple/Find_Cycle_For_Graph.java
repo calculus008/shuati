@@ -65,40 +65,39 @@ public class Find_Cycle_For_Graph {
      */
 
     public class CycleInUndirectedGraph {
-
-        private static final int NOT_VISITED = 0;
-        private static final int VISITING = 1;
-        private static final int VISITED = 2;
-
         public boolean hasCycle(int n, List<List<Integer>> graph) {
-            int[] status = new int[n];  // Status of each node (0: not visited, 1: visiting, 2: visited)
+            boolean[] visited = new boolean[n];
 
+            // Loop through all nodes, as the graph might be disconnected
             for (int i = 0; i < n; i++) {
-                if (status[i] == NOT_VISITED) {
-                    if (dfs(i, -1, graph, status)) {
-                        return true;  // Cycle detected
+                if (!visited[i]) {
+                    // Start DFS from node `i`
+                    if (dfs(i, -1, visited, graph)) {
+                        return true;
                     }
                 }
             }
-            return false;  // No cycle detected
+
+            return false;  // No cycle found
         }
 
-        // Helper DFS method
-        private boolean dfs(int node, int parent, List<List<Integer>> graph, int[] status) {
-            status[node] = VISITING; // Mark this node as visiting
+        // DFS to detect cycle in an undirected graph
+        private boolean dfs(int current, int parent, boolean[] visited, List<List<Integer>> graph) {
+            visited[current] = true;  // Mark current node as visited
 
-            for (int neighbor : graph.get(node)) {// Visit all neighbors
-                if (status[neighbor] == NOT_VISITED) {
-                    if (dfs(neighbor, node, graph, status)) {
-                        return true;
+            for (int neighbor : graph.get(current)) {
+                if (!visited[neighbor]) {
+                    // Recur for the unvisited neighbor
+                    if (dfs(neighbor, current, visited, graph)) {
+                        return true;  // Cycle detected
                     }
-                } else if (neighbor != parent && status[neighbor] == VISITING) {// If the neighbor is visiting and not the parent, a cycle is detected
+                } else if (neighbor != parent) {
+                    // If the neighbor is visited and isn't the parent, it's a cycle
                     return true;
                 }
             }
-            status[node] = VISITED;// Mark this node as visited
 
-            return false;
+            return false;  // No cycle found
         }
     }
 

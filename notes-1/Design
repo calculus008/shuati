@@ -21,8 +21,12 @@ LE_1275_Find_Winner_On_A_Tic_Tac_Toe_Game
 LE_1236_Web_Crawler                       后来延展了一下 system design要怎么弄，哪里会是bottle neck
                                           https://code.dennyzhang.com/web-crawler
 LE_1242_Web_Crawler_Multithreaded         ********
+
 LE_353_Design_Snake_Game
 Moving_Average
 Moving_Average_MultiThread_1
 
 LE_1146_Snapshot_Array                    *****
+
+LE_622_Design_Circular_Queue
+LE_706_Design_HashMap

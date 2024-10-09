@@ -2,7 +2,7 @@ package Interviews.Indeed;
 
 import java.util.*;
 
-public class Merge_K_Sorted_Stream {
+public class K_Frequency_Elements_In_Stream {
     /**
      * Given n sorted stream, and a constant number k. The stream type is like iterator
      * and it has two functions, move() and getValue(), find a list of numbers that each
@@ -115,7 +115,7 @@ public class Merge_K_Sorted_Stream {
         source1.add(s3);
         source1.add(s4);
 
-        Merge_K_Sorted_Stream mkss = new Merge_K_Sorted_Stream();
+        K_Frequency_Elements_In_Stream mkss = new K_Frequency_Elements_In_Stream();
 
         List<Integer> res = mkss.getElementsWithKFrequence(source1, 2);
         System.out.println(Arrays.toString(res.toArray()));

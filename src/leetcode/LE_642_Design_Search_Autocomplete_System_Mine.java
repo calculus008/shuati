@@ -25,7 +25,7 @@ public class LE_642_Design_Search_Autocomplete_System_Mine {
              * key : sentence
              * val : number of time this sentence that has appeared
              *
-             * This HashMap also functions as "startWith" list in Auto_Commit, it saves the list of
+             * This HashMap also functions as "startWith" list in auto type, it saves the list of
              * sentences that have appeared.
              */
             Map<String, Integer> count;

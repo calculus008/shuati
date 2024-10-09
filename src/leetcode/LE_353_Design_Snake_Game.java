@@ -10,7 +10,7 @@ public class LE_353_Design_Snake_Game {
      * The snake is initially positioned at the top left corner (0,0) with length = 1 unit.
      *
      * You are given a list of food's positions in row-column order. When a snake eats the
-     * food, its length and the game's score both increase by 1.
+     * food, its length and the game's score both (!!!) increase by 1.
      *
      * Each food appears one by one on the screen. For example, the second food will not
      * appear until the first food was eaten by the snake.

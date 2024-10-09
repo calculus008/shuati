@@ -76,7 +76,7 @@ public class LE_735_Asteroid_Collision {
 
             for (int num : asteroids) {
                 if (num > 0) {
-                    stack.add(num);
+                    stack.push(num);
                 } else {
                     while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -num) {
                         stack.pop();

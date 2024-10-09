@@ -75,7 +75,7 @@ public class LE_424_Longest_Repeating_Character_Replacement {
 
             for (int i = 0, j = 0; i < chs.length; i++) {
                 count[chs[i] - 'A']++;
-                max = Math.max(max, count[chs[i] - 'A']);
+                max = Math.max(max, count[chs[i] - 'A']); //cur max appeared char
 
                 while (i - j + 1 > max + k) {//move start of the sliding window to right by one
                     count[chs[j] - 'A']--;

@@ -119,25 +119,26 @@ LE_532_K_Diff_Pairs_In_An_Array   (HashMap, Sort + Two Pointers)
 LE_540_Single_Element_In_A_Sorted_Array       (Binary Search)
 LE_560_Subarray_Sum_Equals_K      (Prefix Sum + HashMap)                     ***
 LE_565_Array_Nesting              (DFS, Array)                               ***         @@@
-LE_621_Task_Scheduler             (Priority Queue)                           ### ***
+LE_621_Task_Scheduler             (HashMap + Priority Queue)                 ******
 LE_628_Maximum_Product_Of_Three_Numbers       (Array)
-LE_680_Valid_Palindrome_II        (Two Pointers)
-LE_706_Design_HashMap             (Design)
+LE_680_Valid_Palindrome_II                                                 (Two Pointers)
+LE_706_Design_HashMap                                                      (Design)
 LE_713_Subarray_Product_Less_Than_K                                        (Sliding Window)
-LE_735_Asteroid_Collision         (Stack)                                  ****
-LE_771_Jewels_And_Stones          (HashMap)
+LE_735_Asteroid_Collision                                                  (Stack)                                  ****
+LE_771_Jewels_And_Stones                                                   (HashMap)
+-------------
 LE_846_Hand_Of_Straights          (TreeMap, PriorityQueue)                 3 different solutions, need to come back later ***
 LE_867_Transpose_Matrix           (Matrix)
 LE_953_Verifying_An_Alien_Dictionary                                       (String, Comparison)
-LE_994_Rotting_Oranges            (BFS)
+LE_994_Rotting_Oranges                                                     (BFS)
 LE_1344_Angle_Between_Hands_Of_A_Clock
 LE_1552_Magnetic_Force_Between_Two_Balls                                   (Binary Search with canDo())
 LE_1657_Determine_If_Two_Strings_Are_Close                                 (HashMap, Set, Frequency)
 LE_1768_Merge_Strings_Alternately                                          (String)
 LE_2023_Number_Of_Pairs_Of_Strings_With_Concatenation_Equal_To_Target      (HashMap + string partition)
 LE_2397_Maximum_Rows_Covered_By_Columns                                    (Recursion, Backtracking)         *****  @@@
-leetcode.LE_2625_Flatten_Deeply_Nested_Array (BFS)                                                                           @@@
-LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency                (Sliding Window)
+LE_2625_Flatten_Deeply_Nested_Array                                        (BFS)                                                                           @@@
+LE_2958_Length_Of_Longest_Subarray_With_At_Most_K_Frequency                (Sliding Window) ***
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I                       (Array)
 LE_3040_Maximum_Number_Of_Operations_With_The_Same_Score_II
 
@@ -165,7 +166,7 @@ LE_218_The_Sky_Line_Problem                                          (PriorityQu
 LE_233_Number_Of_Digit_One                                           (Math)                         ###
 LE_273_Integer_To_English_Words
 LE_472_Concatenated_Words                                            (DFS)
-LE_768_Max_Chunks_To_Make_Sorted_II                                  (Mono Stack)
+LE_768_Max_Chunks_To_Make_Sorted_II                                  (Mono Stack)                   ***
 LE_909_Snakes_And_Ladders                                            (BFS)                          @@@
 LE_996_N_umber_Of_Squareful_Arrays                                   (DFS, Backtracking)
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I             ###
@@ -191,9 +192,10 @@ LE_487_Max_Consecutive_Ones_II
 LE_1004_Max_Consecutive_Ones_III
 
 LE_688_Knight_Probability_In_Chessboard
-LE_1249_Minimum_Remove_To_Make_Valid_Parentheses
+LE_1249_Minimum_Remove_To_Make_Valid_Parentheses     (Stack) ***
 LE_1207_Unique_Number_Of_Occurrences
 LE_300_Longest_Increasing_Subsequence
+
 
 LE_362_Design_Hit_Counter  (https://leetcode.com/company/apple/discuss/5457845/Apple-and-Coupang-Phone-Screen-Rate-Limiter-or-Hit-Counter)
 https://leetcode.com/company/apple/discuss/5531432/Apple-or-Online-or-Ignore-Sections-in-Array
@@ -211,7 +213,7 @@ https://leetcode.com/discuss/interview-question/5345416/50-frequently-asked-ques
 LE_387_First_Unique_Character_In_A_String
 LE_139_Word_Break
 478. Generate Random Point in a Circle   https://leetcode.com/problems/generate-random-point-in-a-circle
-LE_390_Elimination_Game
+LE_390_Elimination_Game     ***
 468. Validate IP Address   https://leetcode.com/problems/validate-ip-address
 LE_10_Regular_Expression_Matching
 https://leetcode.com/problems/course-schedule-iv
@@ -366,26 +368,32 @@ LE_153_Find_Min_In_Rotated_Sorted_Array
 LE_207_Course_Schedule
 LE_253_Meeting_Rooms_II
 LE_688_Knight_Probability_In_Chessboard   (DP)
-LE_274_H_Index
+
+LE_274_H_Index                            #####
+
 LE_325_Maximum_Size_Subarray_Sum_Equals_k
 LE_437_Path_Sum_III
 LE_953_Verifying_An_Alien_Dictionary
+
+
 LE_2970_Count_The_Number_Of_Incremovable_Subarrays_I      *****
 LE_565_Array_Nesting
 LE_986_Interval_List_Intersections
 
-LE_1074_Number_Of_Submatrices_That_Sum_To_Target          (hard)
+LE_1074_Number_Of_Submatrices_That_Sum_To_Target          (hard) ***
 
 LE_2348_Number_Of_Zero_Filled_Subarrays
 
-Find_Cycle
+Find_Cycle_For_Graph
 LE_261_Graph_Valid_Tree                                  Detect cycle in undirected graph  *****
 
+K_Frequency_Elements_In_Stream
+
 ## Merge K sorted list/stream
-Merge_K_Sorted_Stream
+LE_23_Merge_k_Sorted_Lists
 LI_577_Merge_K_Sorted_Interval_Lists
 
-LE_297_Serialize_And_Deserialize_Binary_Tree              *****
+LE_297_Serialize_And_Deserialize_Binary_Tree
 LE_428_Serialize_And_Deserialize_Nary_Tree                *****
 
 LE_281_Zigzag_Iterator

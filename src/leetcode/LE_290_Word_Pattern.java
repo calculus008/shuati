@@ -33,7 +33,7 @@ public class LE_290_Word_Pattern {
             Map<Character, Integer> map1 = new HashMap<>();
             Map<String, Integer> map2 = new HashMap<>();
 
-            for (Integer i = 0; i < pattern.length(); i++) {
+            for (Integer i = 0; i < pattern.length(); i++) {//!!! Integer
                 Integer a = map1.put(pattern.charAt(i), i);
                 Integer b = map2.put(words[i], i);
                 if (a != b) return false;

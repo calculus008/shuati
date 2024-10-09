@@ -64,7 +64,7 @@ public class LE_437_Path_Sum_III {
             helper(node.left, currSum);
             helper(node.right, currSum);
 
-            map.put(currSum, map.get(currSum) - 1);
+            map.put(currSum, map.get(currSum) - 1); //!!! backtrack
         }
     }
 
