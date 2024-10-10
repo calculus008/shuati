@@ -34,53 +34,6 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
      * https://www.geeksforgeeks.org/find-missing-element-in-a-sorted-array-of-consecutive-numbers/
      */
 
-    public int missingElement_clean(int[] arr, int k) {
-        int left = 0, right = arr.length - 1;
-
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            int missingUntilMid = arr[mid] - arr[0] - mid;
-
-            if (missingUntilMid < k) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-
-        return arr[0] + k + right; //!!! The result is arr[right] + (k - missingUntilRight)
-    }
-
-    /**
-     * The formula arr[0] + k + right comes from the result of the binary search. Here's why:
-     *
-     * right: After binary search, right points to the last index where the number of missing elements is less than k.
-     * Missing elements before arr[right]: There are arr[right] - arr[0] - right missing numbers before arr[right].
-     * Final result:
-     * The K-th missing number is the offset from the beginning (arr[0]) plus the difference between k and missing
-     * elements up to right. Thus, arr[0] + k + right gives the correct result.
-     *
-     * missingUntilRight = arr[right] − arr[0] − right
-     * remainingMissing = k - (arr[right] - arr[0] - right) = k -arr[right] + arr[0] + right
-     * result = arr[right] + remainingMissing
-     *        = arr[right] + k -arr[right] + arr[0] + right
-     *        = k + arr[0] + right
-     */
-
-
-    public int findKthMissing_iteration(int[] arr, int k) {
-        int n = arr.length;
-
-        for (int i = 0; i < n - 1; i++) { // Go through the array and count missing numbers
-            int missingBetween = arr[i + 1] - arr[i] - 1;            // Calculate the number of missing numbers between arr[i] and arr[i + 1]
-            if (k <= missingBetween) { // If the k-th missing number is between arr[i] and arr[i + 1]
-                return arr[i] + k;
-            }
-            k -= missingBetween; // Otherwise, move on to the next pair and reduce k by the number of missing numbers found
-        }
-
-        return arr[n - 1] + k;// If the k-th missing number is greater than all elements in the array
-    }
     /**
      * Binary Search
      * O(logn)
@@ -135,5 +88,55 @@ public class LE_1060_Missing_Element_In_Sorted_Array {
         private int getMissingNum(int[] nums, int idx) {
             return nums[idx] - nums[0] - idx;
         }
+    }
+
+
+
+    public int missingElement_clean(int[] arr, int k) {
+        int left = 0, right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int missingUntilMid = arr[mid] - arr[0] - mid;
+
+            if (missingUntilMid < k) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return arr[0] + k + right; //!!! The result is arr[right] + (k - missingUntilRight)
+    }
+
+    /**
+     * The formula arr[0] + k + right comes from the result of the binary search. Here's why:
+     *
+     * right: After binary search, right points to the last index where the number of missing elements is less than k.
+     * Missing elements before arr[right]: There are arr[right] - arr[0] - right missing numbers before arr[right].
+     * Final result:
+     * The K-th missing number is the offset from the beginning (arr[0]) plus the difference between k and missing
+     * elements up to right. Thus, arr[0] + k + right gives the correct result.
+     *
+     * missingUntilRight = arr[right] − arr[0] − right
+     * remainingMissing = k - (arr[right] - arr[0] - right) = k -arr[right] + arr[0] + right
+     * result = arr[right] + remainingMissing
+     *        = arr[right] + k -arr[right] + arr[0] + right
+     *        = k + arr[0] + right
+     */
+
+
+    public int findKthMissing_iteration(int[] arr, int k) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) { // Go through the array and count missing numbers
+            int missingBetween = arr[i + 1] - arr[i] - 1;            // Calculate the number of missing numbers between arr[i] and arr[i + 1]
+            if (k <= missingBetween) { // If the k-th missing number is between arr[i] and arr[i + 1]
+                return arr[i] + k;
+            }
+            k -= missingBetween; // Otherwise, move on to the next pair and reduce k by the number of missing numbers found
+        }
+
+        return arr[n - 1] + k;// If the k-th missing number is greater than all elements in the array
     }
 }
